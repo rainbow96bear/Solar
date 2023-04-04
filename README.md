@@ -2,14 +2,11 @@
 
 SolarDesignProject
 
-## firstSolar
+## Members
 
 - 원겸
 - 상목
 - 정현
-
-## secondSolar
-
 - 성진
 - 재혁
 - 우석
