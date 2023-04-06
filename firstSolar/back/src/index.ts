@@ -21,7 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 //   });
 
 app.use("/api", routes);
-
 app.listen(8080, () => {
   console.log("Server Opened");
 });
