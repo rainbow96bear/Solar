@@ -26,26 +26,10 @@ const APICon = () => {
       //   );
       //   console.log("apiData", apiData);
 
-      let tokensData = await axios.get("https://api.beefy.finance/tokens");
-      let TVLData = await axios.get("https://api.beefy.finance/tvl");
-      let pool = await axios.get("https://api.beefy.finance/boosts");
-
-      // const options = {
-      //   method: "GET",
-      //   headers: {
-      //     accept: "application/json",
-      //     authorization: "Basic amFlaHl1azoxUVcyM0VSNDVU",
-      //   },
-      // };
-
-      // fetch("https://api.zerion.io/v1/chains/", options)
-      //   .then((response) => response.json())
-      //   .then((response) => console.log(response))
-      //   .catch((err) => console.error(err));
-
-      console.log("transfersData", tokensData);
-      console.log("TVL", TVLData);
-      console.log("boosts", pool);
+      let transfersData = await axios.post(
+        "http://localhost:8080/api/sync/apiUse"
+      );
+      console.log("transfersData", transfersData);
     } catch (error) {
       console.log(error);
     }
