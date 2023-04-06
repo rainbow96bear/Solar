@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import routes from "./routes/index";
 
 const app: Express = express();
 
@@ -19,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 //     console.error(err);
 //   });
 
-// app.use("/api", routes);
+app.use("/api", routes);
 
 app.listen(8080, () => {
   console.log("Server Opened");
