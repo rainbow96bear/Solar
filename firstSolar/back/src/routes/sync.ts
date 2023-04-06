@@ -1,38 +1,30 @@
 import express from "express";
-import axios from "axios";
-import Moralis from "moralis";
-import { EvmChain } from "@moralisweb3/common-evm-utils";
 const router = express.Router();
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-
-router.get("/", (req, res) => {
-  const runApp = async () => {
-    await Moralis.start({
-      apiKey:
-        "uYftfj0EOyThUZbG9TGDyuFa52N3Y9IS0177QWrIWTNI8wMWxJlyRGLCu7oQIS1f",
-    });
-
-    const historicalPrice = [];
-
-    const address = "0x6b175474e89094c44da98b954eedeac495271d0f";
-
-    const chain = EvmChain.ETHEREUM;
-    let response;
-    for (let toBlock = 16323500; toBlock < 16323550; toBlock += 10) {
-      response = await Moralis.EvmApi.token.getTokenPrice({
-        address,
-        chain,
-        toBlock,
-      });
-
-      historicalPrice.push(response?.toJSON());
-      console.log(response.toJSON());
-    }
-
-    res.send(response);
-  };
-  runApp();
+router.post("/apiUse", async (req, res) => {
+  try {
+    
+  } catch (error) {
+    console.error(error);
+    res.send("실패");
+  }
 });
 export default router;
+
+// import { BlockVisionProvider, BvNetwork } from "blockvision.js";
+
+// Optional parameters, but default to eth-mainnet and default api-key.
+// const bv = new BlockVisionProvider(BvNetwork.ETH_MAINNET);
+
+// Access standard Ethers.js JSON-RPC node request
+// bv.getBalance('0x407d73d8a49eeb85d32cf465507dd71d507100c1').then(console.log)
+
+// import { BlockVisionProvider, BvNetwork } from 'blockvision.js'
+
+// // Optional parameters, but default to eth-mainnet and default api-key.
+// const bv = new BlockVisionProvider(BvNetwork.POL_MAINNET)
+
+// // Access standard Ethers.js JSON-RPC node request
+// bv.getBalance('0x407d73d8a49eeb85d32cf465507dd71d507100c1').then(console.log)
