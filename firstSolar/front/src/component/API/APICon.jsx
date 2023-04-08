@@ -28,6 +28,7 @@ const APICon = () => {
 
       let tokensData = await axios.get("https://api.beefy.finance/tokens");
       let TVLData = await axios.get("https://api.beefy.finance/tvl");
+      let pool = await axios.get("https://api.beefy.finance/boosts");
 
       // const options = {
       //   method: "GET",
@@ -44,6 +45,7 @@ const APICon = () => {
 
       console.log("transfersData", tokensData);
       console.log("TVL", TVLData);
+      console.log("boosts", pool);
     } catch (error) {
       console.log(error);
     }
