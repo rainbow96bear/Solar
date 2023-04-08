@@ -7,8 +7,6 @@ const APICon = () => {
 
   const APIClick = async () => {
     try {
-   
-
     } catch (error) {
       console.log(error);
     }
