@@ -1,16 +1,54 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import DefiComponent from "./Component";
 
+const DATA_STATUS = {
+  WAIT: 0,
+  LOADING: 1,
+  SUCCESS: 2,
+};
+
 const DefiContainer = () => {
-  const [defi0x, setDefi0x] = useState([]);
-  const testing = async () => {
-    const result = (await axios.post("http://localhost:8080/api/defi")).data;
-    console.log(result);
-    setDefi0x(result.accountDefi.data);
+  const [defi0x, setDefi0x] = useState([{}]);
+  const [status, setStatus] = useState(DATA_STATUS.WAIT);
+
+  const totalLpListUp = async () => {
+    try {
+      setStatus(DATA_STATUS.LOADING);
+      const result = (await axios.get("http://localhost:8080/api/defi")).data;
+      console.log(result);
+      setDefi0x(result);
+      setStatus(DATA_STATUS.SUCCESS);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  return <DefiComponent testing={testing} defi0x={defi0x} />;
+  const testFunc = async () => {
+    try {
+      setStatus(DATA_STATUS.LOADING);
+      const result = (await axios.get("http://localhost:8080/api/defi/testing"))
+        .data;
+      console.log(result.data);
+      setDefi0x(result.data.liquidityPools);
+      setStatus(DATA_STATUS.SUCCESS);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // useEffect(() => {
+  //   testFunc();
+  // }, []);
+
+  return (
+    <DefiComponent
+      totalLpListUp={totalLpListUp}
+      defi0x={defi0x}
+      status={status}
+      testFunc={testFunc}
+    />
+  );
 };
 export default DefiContainer;

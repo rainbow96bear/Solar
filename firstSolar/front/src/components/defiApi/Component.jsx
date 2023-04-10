@@ -1,39 +1,41 @@
-const DefiComponent = ({ testing, defi0x }) => {
+const DefiComponent = ({ totalLpListUp, defi0x, status, testFunc }) => {
   return (
     <>
       <div>defi API testing</div>
-      {/* {defi0x.length && (
-        <>
-          <div>{defi0x[0].websiteUrl}</div>
-          <div>{defi0x[0].positionInfos[0].logo}</div>
-          <div>{defi0x[0].positionInfos[0].contractAddress}</div>
-          <div>{defi0x[0].positionInfos[0].section}</div>
-          <div>{defi0x[0].positionInfos[0].symbol}</div>
-        </>
-      )} */}
-      {defi0x &&
-        defi0x.map((item, index) => (
-          <>
-            <div>해당 계정 : {item.owned}</div>
-            <div>MainNET : {item.chain}</div>
-            <div>Defi Protocol : {item.protocol}</div>
-            <div key={`defiAPI-websiteUrl-${index}`}>
-              SwapSite :{item.websiteUrl}
-            </div>
-            <div key={`defiAPI-logo-${index}`}>Defi Logo 주소 :{item.logo}</div>
-            <img src={item.logo} alt="" />
-            <div key={`defiAPI-contractAddress-${index}`}>
-              해당 Pool CA: {item.positionInfos[0].contractAddress}
-            </div>
-            <div key={`defiAPI-section-${index}`}>
-              상태 : {item.positionInfos[0].section}
-            </div>
-            <div key={`defiAPI-symbol-${index}`}>
-              TokenSymbol : {item.positionInfos[0].symbol}
-            </div>
-          </>
-        ))}
-      <button onClick={testing}>defi</button>
+
+      {status ? (
+        status == 2 ? (
+          <div>
+            데이터가져오기 성공
+            {defi0x?.map((item, index) => (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  LP Id: {item.id.slice(0, 4) + "..." + item.id.slice(-4)}{" "}
+                </div>
+                <div>LP 이름 :{item.symbol} </div>
+                <div>LP Token1 :{item.inputTokens[0]?.symbol} </div>
+                <div>LP Token2 :{item.inputTokens[1]?.symbol} </div>
+                <div>Platform : {item.name.split(" ")[0]}</div>
+                <div>LP TotalSupply : {item.cumulativeVolumeUSD}</div>
+                <div>MainNet(메인넷) : {item.name.split(" ")[0]}</div>
+                <div>APY : {item.apy || 0}%</div>
+                <div>TVL : ${item.totalValueLockedUSD}</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>로딩중</div>
+        )
+      ) : (
+        <div>버튼을 눌러주세요</div>
+      )}
+      <button onClick={testFunc}>defi</button>
     </>
   );
 };
