@@ -25,29 +25,24 @@ const DefiContainer = () => {
     }
   };
 
-  const testFunc = async () => {
-    try {
-      setStatus(DATA_STATUS.LOADING);
-      const result = (await axios.get("http://localhost:8080/api/defi/testing"))
-        .data;
-      console.log(result.data);
-      setDefi0x(result.data.liquidityPools);
-      setStatus(DATA_STATUS.SUCCESS);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // useEffect(() => {
-  //   testFunc();
-  // }, []);
+  // const selectMainNet = async () => {
+  //   try {
+  //     setStatus(DATA_STATUS.LOADING);
+  //     const result = (await axios.get("http://localhost:8080/api/defi")).data;
+  //     console.log(result);
+  //     setDefi0x(result);
+  //     setStatus(DATA_STATUS.SUCCESS);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <DefiComponent
       totalLpListUp={totalLpListUp}
       defi0x={defi0x}
       status={status}
-      testFunc={testFunc}
+      // selectMainNet={selectMainNet}
     />
   );
 };

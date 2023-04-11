@@ -1,4 +1,4 @@
-const DefiComponent = ({ totalLpListUp, defi0x, status, testFunc }) => {
+const DefiComponent = ({ totalLpListUp, defi0x, status, selectMainNet }) => {
   return (
     <>
       <div>defi API testing</div>
@@ -15,17 +15,13 @@ const DefiComponent = ({ totalLpListUp, defi0x, status, testFunc }) => {
                   alignItems: "center",
                 }}
               >
-                <div>
-                  LP Id: {item.id.slice(0, 4) + "..." + item.id.slice(-4)}{" "}
-                </div>
-                <div>LP 이름 :{item.symbol} </div>
-                <div>LP Token1 :{item.inputTokens[0]?.symbol} </div>
-                <div>LP Token2 :{item.inputTokens[1]?.symbol} </div>
-                <div>Platform : {item.name.split(" ")[0]}</div>
-                <div>LP TotalSupply : {item.cumulativeVolumeUSD}</div>
-                <div>MainNet(메인넷) : {item.name.split(" ")[0]}</div>
-                <div>APY : {item.apy || 0}%</div>
-                <div>TVL : ${item.totalValueLockedUSD}</div>
+                <div>LP Id: {item.id}</div>
+                <div>LP 이름 :{item.name} </div>
+
+                <div>Platform : {item.platformId}</div>
+                <div>MainNet(메인넷) : {item.network}</div>
+                <div>APY : {parseInt(item.apy * 100) || 0}%</div>
+                <div>TVL : ${item.tvl}</div>
               </div>
             ))}
           </div>
@@ -35,7 +31,14 @@ const DefiComponent = ({ totalLpListUp, defi0x, status, testFunc }) => {
       ) : (
         <div>버튼을 눌러주세요</div>
       )}
-      <button onClick={testFunc}>defi</button>
+      <button
+        onClick={() => {
+          totalLpListUp();
+        }}
+      >
+        totalListUp
+      </button>
+      {/* <button onClick={()=>{selectMainNet();}}>selectMainNet</button> */}
     </>
   );
 };
