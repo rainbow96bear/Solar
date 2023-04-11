@@ -1,6 +1,20 @@
 import { Router, Request, Response } from "express";
 import axios from "axios";
 
+interface LPData {
+  id: string;
+  chain: number;
+  name: string;
+  oracleId: string;
+  status: string;
+  platform: string;
+  symbol: string;
+  tvl: number;
+  apy: number;
+  dailyTvlRate?: number;
+  network: string;
+}
+
 const router = Router();
 
 export const MAIN_NET = {
@@ -15,7 +29,7 @@ export const MAIN_NET = {
   fantom: 250,
   fuse: 122,
   heco: 128,
-  kava: 0x63,
+  kava: 99,
   moonbeam: 1285,
   moonriver: 1285,
   optimism: 10,
@@ -23,61 +37,80 @@ export const MAIN_NET = {
   metis: 43,
   arbitrum: 42161,
 };
+const ONE_DAY_MS: number = 24 * 60 * 60 * 1000;
+const MAX_RETRIES: number = 3;
+const RETRY_DELAY: number = 1000;
 
-interface LPData {
-  id: string;
-  chain: number;
-  name: string;
-  oracleId: string;
-  address?: string;
-  status: string;
-  platform?: string;
-  symbol: string;
-  decimals?: number;
-  vaultSymbol?: string;
-  vaultDecimals?: number;
-  tvl: number;
-  apy: number;
-  dailyTvlRate: number;
-}
-
+const getTvlData = async (
+  lpId: string,
+  oracleId: string,
+  lpChain: number,
+  date?: number
+) => {
+  const url = date
+    ? `https://api.beefy.finance/tvl?${encodeURIComponent(
+        oracleId
+      )}&date=${date}`
+    : `https://api.beefy.finance/tvl?${encodeURIComponent(oracleId)}`;
+  return (await axios.get(url)).data[lpChain]?.[lpId] ?? 0;
+  // return response.data[lpChain]?.[lpId] ?? 0;
+};
 router.get("/", async (req: Request, res: Response<LPData[]>) => {
-  try {
-    const vaultsData = (await axios.get(`https://api.beefy.finance/vaults`))
-      .data;
-    const activeLpList = vaultsData.filter((lp) => lp.status === "active");
+  let retries: number = 0;
 
-    const data = await Promise.all(
-      activeLpList.map(async (lp) => {
-        const lpId = lp.id;
-        const oracleId = lp.oracleId;
-        let lpChain = MAIN_NET[lp.chain];
+  const fetchData = async () => {
+    try {
+      const now = new Date();
+      const yesterday = new Date(now.getTime() - ONE_DAY_MS);
 
-        const [tvlData, apyData, yesterdayTVL] = await Promise.all([
-          axios
-            .get(`https://api.beefy.finance/tvl?${oracleId}`)
-            .then((res) => res.data[lpChain]?.[lpId] ?? 0),
-          axios
-            .get(`https://api.beefy.finance/apy?${oracleId}`)
-            .then((res) => res.data[lpId] ?? 0),
-          axios
-            .get(`https://api.beefy.finance/tvl?${oracleId}&day=1`)
-            .then((res) => res.data[lpChain]?.[lpId] ?? 0),
-        ]);
+      const activeLpList = (
+        await axios.get(`https://api.beefy.finance/vaults`)
+      ).data.filter((lp: any) => lp.status === "active");
 
-        return {
-          ...lp,
-          tvl: tvlData,
-          apy: apyData,
-          dailyTvlRate: (tvlData / yesterdayTVL - 1) * 100,
-        };
-      })
-    );
-    res.send(data);
-  } catch (error) {
-    console.error(error);
-    res.send();
-  }
+      const data = await Promise.all(
+        activeLpList.map(async (lp: any) => {
+          const lpId = lp.id;
+          const oracleId = lp.oracleId;
+          const lpChain = MAIN_NET[lp.chain];
+
+          const [tvlNow, tvlYesterday] = await Promise.all([
+            getTvlData(lpId, oracleId, lpChain),
+            getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+          ]);
+
+          const dailyTvlRate = ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+
+          return {
+            id: lpId,
+            name: lp.name,
+            platformId: lp.platformId,
+            network: lp.network,
+            oracleId: oracleId,
+            status: lp.status,
+            symbol: lp.symbol,
+            tvl: tvlNow,
+            apy:
+              (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                .data[lpId] ?? 0,
+            dailyTvlRate,
+          };
+        })
+      );
+
+      res.send(data);
+    } catch (error) {
+      if (retries < MAX_RETRIES) {
+        retries++;
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await fetchData();
+      } else {
+        console.error(error);
+        res.send();
+      }
+    }
+  };
+
+  await fetchData();
 });
 
 export default router;
