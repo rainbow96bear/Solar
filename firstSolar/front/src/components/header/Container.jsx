@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
-  const connect = useSelector(state => state.connect.connect.connect);
-  const account = useSelector(state => state.account.account.account);
+  const connect = useSelector((state) => state.connect.connect.connect);
+  const account = useSelector((state) => state.account.account.account);
   const navigate = useNavigate();
 
   const logoutMethod = () => {
@@ -23,11 +23,11 @@ const HeaderContainer = () => {
     logoutMethod();
   };
 
-  window.ethereum?.on("accountsChanged", accounts => {
+  window.ethereum?.on("accountsChanged", (accounts) => {
     logoutMethod();
   });
 
-  window.klaytn?.on("accountsChanged", accounts => {
+  window.klaytn?.on("accountsChanged", (accounts) => {
     logoutMethod();
   });
 
