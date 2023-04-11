@@ -1,4 +1,10 @@
-const DefiComponent = ({ totalLpListUp, defi0x, status, selectMainNet }) => {
+const DefiComponent = ({
+  totalLpListUp,
+  defiList,
+  status,
+  selectMainNet,
+  formatNumber,
+}) => {
   return (
     <>
       <div>defi API testing</div>
@@ -7,7 +13,7 @@ const DefiComponent = ({ totalLpListUp, defi0x, status, selectMainNet }) => {
         status == 2 ? (
           <div>
             데이터가져오기 성공
-            {defi0x?.map((item, index) => (
+            {defiList?.map((item, index) => (
               <div
                 style={{
                   display: "flex",
@@ -15,13 +21,22 @@ const DefiComponent = ({ totalLpListUp, defi0x, status, selectMainNet }) => {
                   alignItems: "center",
                 }}
               >
-                <div>LP Id: {item.id}</div>
-                <div>LP 이름 :{item.name} </div>
-
-                <div>Platform : {item.platformId}</div>
-                <div>MainNet(메인넷) : {item.network}</div>
-                <div>APY : {parseInt(item.apy * 100) || 0}%</div>
-                <div>TVL : ${item.tvl}</div>
+                <div style={{ width: "10%" }}>LP Id: {item.id}</div>
+                <div style={{ width: "10%" }}>LP 이름 :{item.name} </div>
+                <div style={{ width: "10%" }}>Platform : {item.platformId}</div>
+                <div style={{ width: "10%" }}>
+                  MainNet(메인넷) : {item.network}
+                </div>
+                <div style={{ width: "10%" }}>
+                  APY : {parseInt(item.apy * 100) || 0}%
+                </div>
+                <div style={{ width: "10%" }}>
+                  TVL : ${formatNumber(item.tvl)}
+                </div>
+                <div style={{ width: "10%" }}>
+                  {" "}
+                  daily : {Math.round(item.dailyTvlRate * 10000) / 10000 || 0}%
+                </div>
               </div>
             ))}
           </div>
