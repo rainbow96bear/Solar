@@ -4,11 +4,30 @@ const DefiComponent = ({
   status,
   selectMainNet,
   formatNumber,
+  mainNetList,
 }) => {
   return (
     <>
       <div>defi API testing</div>
+      <button
+        onClick={() => {
+          totalLpListUp();
+        }}
+      >
+        totalListUp
+      </button>
 
+      {mainNetList?.map((item, index) => (
+        <>
+          <button
+            onClick={() => {
+              selectMainNet(item);
+            }}
+          >
+            {item}
+          </button>
+        </>
+      ))}
       {status ? (
         status == 2 ? (
           <div>
@@ -21,11 +40,32 @@ const DefiComponent = ({
                   alignItems: "center",
                 }}
               >
-                <div style={{ width: "10%" }}>LP Id: {item.id}</div>
+                {item.tokens?.length == 2 ? (
+                  <div
+                    style={{
+                      width: "10%",
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                    }}
+                  >
+                    Tokens
+                    <div>{item.tokens[0]}</div>
+                    <div>{item.tokens[1]}</div>
+                  </div>
+                ) : (
+                  <>No Pair Tokens</>
+                )}
                 <div style={{ width: "10%" }}>LP 이름 :{item.name} </div>
                 <div style={{ width: "10%" }}>Platform : {item.platformId}</div>
                 <div style={{ width: "10%" }}>
+                  <img src={item.platformLogo} alt="" />
+                </div>
+                <div style={{ width: "10%" }}>
                   MainNet(메인넷) : {item.network}
+                </div>
+                <div style={{ width: "10%" }}>
+                  <img src={item.mainNetLogo} alt="" />
                 </div>
                 <div style={{ width: "10%" }}>
                   APY : {parseInt(item.apy * 100) || 0}%
@@ -46,14 +86,6 @@ const DefiComponent = ({
       ) : (
         <div>버튼을 눌러주세요</div>
       )}
-      <button
-        onClick={() => {
-          totalLpListUp();
-        }}
-      >
-        totalListUp
-      </button>
-      {/* <button onClick={()=>{selectMainNet();}}>selectMainNet</button> */}
     </>
   );
 };

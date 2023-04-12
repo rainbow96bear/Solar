@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { mainNet } from "../../mainNet";
 import DefiComponent from "./Component";
 
 const DATA_STATUS = {
@@ -12,6 +13,7 @@ const DATA_STATUS = {
 const DefiContainer = () => {
   const [defiList, setDefiList] = useState([{}]);
   const [status, setStatus] = useState(DATA_STATUS.WAIT);
+  const [mainNetList, setMainNetList] = useState([]);
 
   const totalLpListUp = async () => {
     try {
@@ -25,17 +27,25 @@ const DefiContainer = () => {
     }
   };
 
-  // const selectMainNet = async () => {
-  //   try {
-  //     setStatus(DATA_STATUS.LOADING);
-  //     const result = (await axios.get("http://localhost:8080/api/defi")).data;
-  //     console.log(result);
-  //     setDefi0x(result);
-  //     setStatus(DATA_STATUS.SUCCESS);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const selectMainNet = async (_mainNet) => {
+    try {
+      setStatus(DATA_STATUS.LOADING);
+      let result;
+      if (!_mainNet) totalLpListUp();
+
+      result = (
+        await axios.get(
+          `http://localhost:8080/api/defi?mainNetName=${_mainNet}`
+        )
+      ).data;
+
+      console.log(result);
+      setDefiList(result);
+      setStatus(DATA_STATUS.SUCCESS);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const formatNumber = (num) => {
     if (num >= 1000000) {
@@ -47,13 +57,18 @@ const DefiContainer = () => {
     }
   };
 
+  useEffect(() => {
+    setMainNetList(Object.keys(mainNet));
+  }, []);
+
   return (
     <DefiComponent
       totalLpListUp={totalLpListUp}
       defiList={defiList}
       status={status}
       formatNumber={formatNumber}
-      // selectMainNet={selectMainNet}
+      mainNetList={mainNetList}
+      selectMainNet={selectMainNet}
     />
   );
 };
