@@ -23,7 +23,7 @@ export default function ConnectButton(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      padding="20px 10px 20px 10px"
+      padding="10px 10px 10px 10px"
       {...getOverrideProps(overrides, "ConnectButton")}
       {...rest}
       onClick={() => {
@@ -33,16 +33,16 @@ export default function ConnectButton(props) {
       <Flex
         gap="10px"
         direction="row"
-        width="unset"
-        height="unset"
-        justifyContent="flex-start"
+        width="220px"
+        height="40px"
+        justifyContent="center"
         alignItems="flex-start"
         overflow="hidden"
         shrink="0"
         position="relative"
         borderRadius="20px"
         padding="10px 25px 10px 25px"
-        backgroundColor="rgba(255,165,0,1)"
+        backgroundColor=" )"
         {...getOverrideProps(overrides, "Frame 7")}
       >
         <Text
@@ -50,7 +50,7 @@ export default function ConnectButton(props) {
           fontSize="18px"
           fontWeight="400"
           color="rgba(255,255,255,1)"
-          lineHeight="26.90999984741211px"
+          lineHeight="20px"
           textAlign="center"
           display="block"
           direction="column"

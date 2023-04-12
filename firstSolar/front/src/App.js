@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { accountThunk } from "./modules/account.js";
+import { useWeb3 } from "./modules/useWeb3";
+import { useWeb3K } from "./modules/useWeb3Kaikas";
 
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
@@ -15,12 +17,21 @@ import { useEffect } from "react";
 function App() {
   const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
   const connect = useSelector((state) => state.connect.connect.connect);
-  const account = useSelector((state) => state.account.account.account);
+  const accountAddress = useSelector((state) => state.account.account.account);
   const dispatch = useDispatch();
 
+  const { web3, account, chainId, login } = useWeb3();
+  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
+
   useEffect(() => {
-    if (account) {
-      dispatch(accountThunk({ account: account }));
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+        dispatch(accountThunk({ account: account }));
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        loginK();
+        dispatch(accountThunk({ account: accountK }));
+      }
     }
   }, [account]);
 

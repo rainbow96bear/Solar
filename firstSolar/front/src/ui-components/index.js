@@ -4,39 +4,17 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-export { default as Ampligram } from "./Ampligram";
-export { default as FeaturesText2x2 } from "./FeaturesText2x2";
-export { default as HeroLayout4 } from "./HeroLayout4";
 export { default as LogoTitle } from "./LogoTitle";
-export { default as FAQItem } from "./FAQItem";
-export { default as ActionCard } from "./ActionCard";
-export { default as HeroLayout1 } from "./HeroLayout1";
 export { default as ChainChange } from "./ChainChange";
-export { default as HeroLayout3 } from "./HeroLayout3";
 export { default as ConnectButton } from "./ConnectButton";
-export { default as FormCheckout } from "./FormCheckout";
-export { default as StandardCard } from "./StandardCard";
 export { default as Menu1 } from "./Menu1";
-export { default as ProfileCard } from "./ProfileCard";
-export { default as MarketingFooter } from "./MarketingFooter";
-export { default as SocialPost } from "./SocialPost";
-export { default as ItemCard } from "./ItemCard";
-export { default as TallCard } from "./TallCard";
 export { default as ChainIcon } from "./ChainIcon";
-export { default as NavBar } from "./NavBar";
-export { default as ContactUs } from "./ContactUs";
-export { default as Features2x2 } from "./Features2x2";
-export { default as Features4x1 } from "./Features4x1";
-export { default as ProductDetail } from "./ProductDetail";
-export { default as CommentCard } from "./CommentCard";
 export { default as ConnectModal } from "./ConnectModal";
-export { default as SideBar } from "./SideBar";
-export { default as MarketingPricing } from "./MarketingPricing";
-export { default as MyIcon } from "./MyIcon";
+export { default as BeforeHeadCom320px } from "./BeforeHeadCom320px";
+export { default as BeforeHeadCom768px } from "./BeforeHeadCom768px";
+export { default as BeforeHeadCom1440px } from "./BeforeHeadCom1440px";
+export { default as PooListCom320px } from "./PooListCom320px";
+export { default as PooListCom768px } from "./PooListCom768px";
+export { default as PoolListCom1440px } from "./PoolListCom1440px";
 export { default as LoginAccount } from "./LoginAccount";
-export { default as EditProfile } from "./EditProfile";
-export { default as ReviewCard } from "./ReviewCard";
-export { default as HeroLayout2 } from "./HeroLayout2";
-export { default as Features2x3 } from "./Features2x3";
-export { default as ProductCard } from "./ProductCard";
 export { default as studioTheme } from "./studioTheme";

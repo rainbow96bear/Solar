@@ -42,28 +42,30 @@ export default function LoginAccount(props) {
           className="LoginAccountCover_accountBox"
           {...getOverrideProps(overrides, "Frame 15")}
         >
-          <Text
-            fontFamily="Kanit"
-            fontSize="18px"
-            fontWeight="400"
-            color="rgba(0,0,0,1)"
-            lineHeight="20px"
-            textAlign="center"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            letterSpacing="1.65px"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children={account}
-            {...getOverrideProps(overrides, "account")}
-          ></Text>
+          <AccountCover>
+            <Text
+              fontFamily="Kanit"
+              fontSize="18px"
+              fontWeight="400"
+              color="rgba(0,0,0,1)"
+              lineHeight="20px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              letterSpacing="1.65px"
+              width="165px  "
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={account}
+              {...getOverrideProps(overrides, "account")}
+            ></Text>
+          </AccountCover>
           <Flex
             padding="0px 0px 0px 0px"
             width="20px"
@@ -107,8 +109,18 @@ export default function LoginAccount(props) {
 
 const LoginAccountCover = styled.div`
   .LoginAccountCover_accountBox {
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    // white-space: nowrap;
+  }
+`;
+
+const AccountCover = styled.div`
+  width: 165px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  p {
     text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
   }
 `;

@@ -1,11 +1,36 @@
 import { useEffect } from "react";
 import HeaderComponent from "./Component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { connectThunk } from "../../modules/connect.js";
 import { accountThunk } from "../../modules/account.js";
+import { useNavigate } from "react-router-dom";
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
+  const connect = useSelector((state) => state.connect.connect.connect);
+  const account = useSelector((state) => state.account.account.account);
+  const navigate = useNavigate();
+
+  const logoutMethod = () => {
+    document.cookie =
+      document.cookie.split(":")[0] +
+      account +
+      "=; expires=Thu, 01 Jan 1999 00:00:10 GMT";
+    dispatch(connectThunk({ connect: false }));
+    navigate("/");
+  };
+  const logout = () => {
+    logoutMethod();
+  };
+
+  window.ethereum.on("accountsChanged", (accounts) => {
+    logoutMethod();
+  });
+
+  window.klaytn.on("accountsChanged", (accounts) => {
+    logoutMethod();
+  });
+
   useEffect(() => {
     // header는 어디에나 있다. 새로고침해도 로그인한 상태를 유지시키도록 하기 위해 최초에 mount될 때 실행하도록 하였다.
     console.log("mount 되었다. 쿠키로 로그인 여부 판정 실시");
@@ -34,6 +59,6 @@ const HeaderContainer = () => {
       // 이렇게 지갑을 나눌 이유가 현재로서는 없으나 추후에 지갑 종류에 따라 다르게 나타날 수도 있으니 나눈다.
     })();
   }, []);
-  return <HeaderComponent></HeaderComponent>;
+  return <HeaderComponent logout={logout}></HeaderComponent>;
 };
 export default HeaderContainer;

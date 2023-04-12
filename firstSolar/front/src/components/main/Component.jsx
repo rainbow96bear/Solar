@@ -1,5 +1,24 @@
+import styled from "styled-components";
+import {
+  PooListCom320px,
+  PooListCom768px,
+  PoolListCom1440px,
+} from "../../ui-components";
+
 const MainComponent = () => {
-  return <div></div>;
+  return (
+    <Main>
+      <PooListCom320px></PooListCom320px>
+      <PooListCom768px></PooListCom768px>
+      <PoolListCom1440px></PoolListCom1440px>
+    </Main>
+  );
 };
 
 export default MainComponent;
+
+const Main = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+`;

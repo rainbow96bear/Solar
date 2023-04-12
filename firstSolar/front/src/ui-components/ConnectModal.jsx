@@ -48,15 +48,25 @@ export default function ConnectModal(props) {
 
   const kaikasLogin = async () => {
     try {
-      const kaikasWallet = (await window.klaytn.enable())[0];
-      const data = await axios.post("http://localhost:8080/api/user/login", {
-        account: kaikasWallet,
-        walletKind: "kaikas",
-      });
-      dispatch(accountThunk({ account: kaikasWallet }));
-      // dispatch(connectThunk({ connect: false }));
+      console.log("kaikas 로그인 버튼 클릭");
+      if (!window.klaytn) {
+        console.log(window.klaytn, "kaikas가 없어.");
+        return;
+      }
+      console.log(window.klaytn, "kaikas가 있다.");
+      if (window.klaytn.isKaikas) {
+        const kaikasWallet = (await window.klaytn.enable())[0];
 
-      console.log(data.data.msg);
+        console.log("kaikas : ", kaikasWallet);
+        const data = await axios.post("http://localhost:8080/api/user/login", {
+          account: kaikasWallet,
+          walletKind: "kaikas",
+        });
+        dispatch(accountThunk({ account: kaikasWallet }));
+        // dispatch(connectThunk({ connect: false }));
+
+        console.log(data.data.msg);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -77,6 +87,7 @@ export default function ConnectModal(props) {
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
+        margin="0px 10px 0px 10px"
         borderRadius="10px"
         padding="20px 20px 30px 20px"
         backgroundColor="rgba(255,255,255,1)"
