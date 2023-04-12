@@ -8,19 +8,20 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, SearchField, Text } from "@aws-amplify/ui-react";
-import { connectThunk } from "../modules/connect";
+import { connectThunk } from "../modules/connect.js";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "./images/logo_new.png";
 import LoginAccount from "./LoginAccount.jsx";
 import ConnectModal from "./ConnectModal.jsx";
 import ConnectButton from "./ConnectButton.jsx";
+import LoadingButton from "./LoadingButton.jsx";
 
 export default function BeforeHeadCom1440px(props) {
   const { overrides, ...rest } = props;
-
   const dispatch = useDispatch();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const navigate = useNavigate();
 
   const logout = () => {
@@ -122,7 +123,7 @@ export default function BeforeHeadCom1440px(props) {
         variation="quiet"
         {...getOverrideProps(overrides, "SearchField")}
       ></SearchField>
-
+      {/* </div> */}
       <div className="Header_right">
         {connect ? (
           document.cookie ? (

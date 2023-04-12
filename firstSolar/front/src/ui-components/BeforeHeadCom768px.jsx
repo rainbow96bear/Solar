@@ -7,18 +7,27 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, SearchField, useTheme } from "@aws-amplify/ui-react";
+import {
+  Flex,
+  Image,
+  Loader,
+  SearchField,
+  useTheme,
+} from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import LoginAccount from "./LoginAccount";
 import ConnectModal from "./ConnectModal";
+import ConnectButton from "./ConnectButton";
+import LoadingButton from "./LoadingButton";
 import LoggedinUser from "./LoggedinUser";
 import LoginButton from "./LoginButton";
-
 export default function BeforeHeadCom768px(props) {
-  const { tokens } = useTheme();
-  const connect = useSelector(state => state.connect.connect.connect);
   const { overrides, ...rest } = props;
+  const { tokens } = useTheme();
+  const connect = useSelector((state) => state.connect.connect.connect);
+
   return (
     <Cover>
       <Flex
@@ -70,13 +79,16 @@ export default function BeforeHeadCom768px(props) {
           >
             <Image
               src={logo}
-              width="37.56px"
-              height="38px"
+              width="unset"
+              height="unset"
               display="block"
               gap="unset"
               alignItems="unset"
               justifyContent="unset"
-              shrink="0"
+              grow="1"
+              shrink="1"
+              basis="0"
+              alignSelf="stretch"
               position="relative"
               borderRadius="50px"
               padding="0px 0px 0px 0px"
@@ -89,31 +101,27 @@ export default function BeforeHeadCom768px(props) {
             direction="row"
             width="57.56px"
             height="58px"
-            justifyContent="flex-start"
+            justifyContent="center"
             alignItems="flex-start"
             shrink="0"
             position="relative"
+            // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             padding="10px 10px 10px 10px"
             {...getOverrideProps(overrides, "Frame 45")}
           >
-            <Image
-              width="37.56px"
-              height="38px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="50px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "unsplash:PfBvNnGIhmQ39433251")}
-            ></Image>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              width="30px"
+            >
+              <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+            </svg>
           </Flex>
         </Flex>
         <SearchField
-          width="305px"
+          className="searchInput"
+          // maxWidth="305px"
+          width="50%"
           height="unset"
           placeholder="Search"
           justifyContent="center"
@@ -126,7 +134,6 @@ export default function BeforeHeadCom768px(props) {
           variation="quiet"
           {...getOverrideProps(overrides, "SearchField")}
         ></SearchField>
-
         <div className="header_right">
           {connect ? (
             document.cookie ? (

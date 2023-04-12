@@ -27,27 +27,6 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   border-bottom: 1px solid gainsboro;
-
-  .Header_innerBox {
-    width: 1400px;
-    display: flex;
-    justify-content: space-between;
-
-    .Header_left {
-      display: flex;
-      a {
-        text-decoration-line: none;
-      }
-    }
-
-    .Header_right {
-      display: flex;
-
-      .Header_right_chain {
-        display: flex;
-      }
-    }
-  }
 `;
 
 const Menu = styled.div`

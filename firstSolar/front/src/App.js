@@ -8,7 +8,6 @@ import styled from "styled-components";
 import { accountThunk } from "./modules/account.js";
 import { useWeb3 } from "./modules/useWeb3";
 import { useWeb3K } from "./modules/useWeb3Kaikas";
-import { Example } from "./components/side/Example";
 
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
@@ -53,7 +52,6 @@ function App() {
       ) : (
         <></>
       )}
-      {/* <Example /> */}
     </div>
   );
 }
