@@ -13,29 +13,31 @@ interface LPData {
   apy: number;
   dailyTvlRate?: number;
   network: string;
+  mainNetLogo?: string;
+  platformLogo?: string;
 }
 
 const router = Router();
 
-export const MAIN_NET = {
-  aurora: 53,
-  avax: 43114,
-  bsc: 56,
-  canto: 3030,
-  celo: 42220,
-  cronos: 36661,
-  emerald: 246529,
+export const mainNet = {
   ethereum: 1,
-  fantom: 250,
+  optimism: 10,
+  metis: 43,
+  aurora: 53,
+  bsc: 56,
+  kava: 99,
   fuse: 122,
   heco: 128,
-  kava: 99,
+  polygon: 137,
+  fantom: 250,
   moonbeam: 1285,
   moonriver: 1285,
-  optimism: 10,
-  polygon: 137,
-  metis: 43,
+  canto: 3030,
+  cronos: 36661,
   arbitrum: 42161,
+  celo: 42220,
+  avax: 43114,
+  emerald: 246529,
 };
 const ONE_DAY_MS: number = 24 * 60 * 60 * 1000;
 const MAX_RETRIES: number = 3;
@@ -53,25 +55,31 @@ const getTvlData = async (
       )}&date=${date}`
     : `https://api.beefy.finance/tvl?${encodeURIComponent(oracleId)}`;
   return (await axios.get(url)).data[lpChain]?.[lpId] ?? 0;
-  // return response.data[lpChain]?.[lpId] ?? 0;
 };
+
 router.get("/", async (req: Request, res: Response<LPData[]>) => {
   let retries: number = 0;
 
   const fetchData = async () => {
     try {
+      const { mainNetName } = req.query;
       const now = new Date();
       const yesterday = new Date(now.getTime() - ONE_DAY_MS);
 
       const activeLpList = (
         await axios.get(`https://api.beefy.finance/vaults`)
-      ).data.filter((lp: any) => lp.status === "active");
+      ).data.filter((lp: any) =>
+        mainNetName
+          ? lp.status === "active" && lp.chain === mainNetName
+          : lp.status === "active"
+      );
 
       const data = await Promise.all(
         activeLpList.map(async (lp: any) => {
-          const lpId = lp.id;
-          const oracleId = lp.oracleId;
-          const lpChain = MAIN_NET[lp.chain];
+          const lpId: string = lp.id;
+          const oracleId: string = lp.oracleId;
+          const lpChain: number = mainNet[lp.chain];
+          const tokens: Array<string> = lp.assets;
 
           const [tvlNow, tvlYesterday] = await Promise.all([
             getTvlData(lpId, oracleId, lpChain),
@@ -93,6 +101,9 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
               (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
                 .data[lpId] ?? 0,
             dailyTvlRate,
+            mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+            platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+            tokens,
           };
         })
       );
