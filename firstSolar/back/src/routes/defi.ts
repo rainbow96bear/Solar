@@ -65,14 +65,14 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
 
   const totalLplListUp = async () => {
     try {
-      const now = new Date();
-      const yesterday = new Date(now.getTime() - ONE_DAY_MS);
+      const now: Date = new Date();
+      const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
 
       const activeLpList = (
         await axios.get(`https://api.beefy.finance/vaults`)
       ).data.filter((lp: any) => lp.status === "active");
 
-      const data = await Promise.all(
+      const data: Array<LPData> = await Promise.all(
         activeLpList.map(async (lp: any) => {
           const lpId: string = lp.id;
           const oracleId: string = lp.oracleId;
@@ -84,7 +84,8 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
             getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
           ]);
 
-          const dailyTvlRate = ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+          const dailyTvlRate: number =
+            ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
 
           return {
             id: lpId,
@@ -128,8 +129,8 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
   const networkListUp = async () => {
     try {
       const { network, dex } = req.body;
-      const now = new Date();
-      const yesterday = new Date(now.getTime() - ONE_DAY_MS);
+      const now: Date = new Date();
+      const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
 
       const activeLpList = (
         await axios.get(`https://api.beefy.finance/vaults`)
@@ -141,7 +142,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
           : lp.status === "active"
       );
 
-      const data = await Promise.all(
+      const data: Array<LPData> = await Promise.all(
         activeLpList.map(async (lp: any) => {
           const lpId: string = lp.id;
           const oracleId: string = lp.oracleId;
@@ -153,7 +154,8 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
             getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
           ]);
 
-          const dailyTvlRate = ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+          const dailyTvlRate: number =
+            ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
 
           return {
             id: lpId,
@@ -190,6 +192,17 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
   };
 
   await networkListUp();
+});
+
+router.post("/check", async (req: Request, res: Response) => {
+  const { inputAPI } = req.body;
+  try {
+    if (!inputAPI) return res.status(403).send({ msg: "No Message" });
+    (await axios.get(`https://api.beefy.finance/${inputAPI}`)).data;
+    res.status(200).send({ msg: `${inputAPI} is Exist API` });
+  } catch (err) {
+    res.status(201).send({ msg: `${inputAPI} is No Exist API` });
+  }
 });
 
 export default router;
