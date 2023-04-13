@@ -5,6 +5,8 @@ const DefiComponent = ({
   selectMainNet,
   formatNumber,
   mainNetList,
+  dexList,
+  selectDex,
 }) => {
   return (
     <>
@@ -16,18 +18,32 @@ const DefiComponent = ({
       >
         totalListUp
       </button>
-
-      {mainNetList?.map((item, index) => (
-        <>
-          <button
-            onClick={() => {
-              selectMainNet(item);
-            }}
-          >
-            {item}
-          </button>
-        </>
-      ))}
+      <div>
+        {mainNetList?.map((item, index) => (
+          <>
+            <button
+              onClick={() => {
+                selectMainNet(item);
+              }}
+            >
+              {item}
+            </button>
+          </>
+        ))}
+      </div>
+      <div>
+        {dexList?.map((item, index) => (
+          <>
+            <button
+              onClick={() => {
+                selectDex(item);
+              }}
+            >
+              {item}
+            </button>
+          </>
+        ))}
+      </div>
       {status ? (
         status == 2 ? (
           <div>
