@@ -3,13 +3,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const APICon = () => {
-  const [apiData, setApiData] = useState([]);
+  const [priceData, setPriceData] = useState([]);
 
   const APIClick = async () => {
     try {
       let tempMoralisData = (await axios.get("http://localhost:8080/api/sync"))
         .data;
-
       console.log("tempMoralisData", tempMoralisData);
     } catch (error) {
       console.log(error);
