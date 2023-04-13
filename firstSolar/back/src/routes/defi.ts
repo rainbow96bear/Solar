@@ -232,7 +232,6 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
 
   await networkListUp();
 });
-
 router.post("/check", async (req: Request, res: Response) => {
   const { inputAPI } = req.body;
   try {

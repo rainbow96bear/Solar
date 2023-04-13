@@ -15,6 +15,8 @@ const DefiContainer = () => {
   const [status, setStatus] = useState(DATA_STATUS.WAIT);
   const [mainNetList, setMainNetList] = useState([]);
   const [dexList, setDexList] = useState([]);
+  const [inputValue, setInput] = useState("");
+  const [isAPI, setIsAPI] = useState("");
 
   const totalLpListUp = async () => {
     try {
@@ -51,6 +53,19 @@ const DefiContainer = () => {
       return (num / 1000).toFixed(2) + "K";
     } else {
       return num.toString();
+    }
+  };
+
+  const checkAPI = async (_inputValue) => {
+    try {
+      const result = (
+        await axios.post(`http://localhost:8080/api/defi/check`, {
+          inputAPI: _inputValue,
+        })
+      ).data;
+      setIsAPI(result.msg);
+    } catch (err) {
+      console.log(err);
     }
   };
 
