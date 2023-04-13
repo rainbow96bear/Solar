@@ -15,6 +15,8 @@ const DefiContainer = () => {
   const [status, setStatus] = useState(DATA_STATUS.WAIT);
   const [mainNetList, setMainNetList] = useState([]);
   const [dexList, setDexList] = useState([]);
+  const [inputValue, setInput] = useState("");
+  const [isAPI, setIsAPI] = useState("");
 
   const totalLpListUp = async () => {
     try {
@@ -28,29 +30,14 @@ const DefiContainer = () => {
   };
   console.log(defiList);
 
-  const selectMainNet = async (_mainNet) => {
+  const filterNetworkAndDex = async (_network, _dex) => {
     try {
       setStatus(DATA_STATUS.LOADING);
-      if (!_mainNet) return;
       const result = (
         await axios.post(`http://localhost:8080/api/defi/filter`, {
-          network: _mainNet,
+          network: _network,
+          dex: _dex,
         })
-      ).data;
-      console.log(result);
-      setDefiList(result);
-      setStatus(DATA_STATUS.SUCCESS);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const selectDex = async (_dex) => {
-    try {
-      setStatus(DATA_STATUS.LOADING);
-      if (!_dex) return;
-      console.log(_dex);
-      const result = (
-        await axios.post(`http://localhost:8080/api/defi/filter`, { dex: _dex })
       ).data;
       console.log(result);
       setDefiList(result);
@@ -70,6 +57,19 @@ const DefiContainer = () => {
     }
   };
 
+  const checkAPI = async (_inputValue) => {
+    try {
+      const result = (
+        await axios.post(`http://localhost:8080/api/defi/check`, {
+          inputAPI: _inputValue,
+        })
+      ).data;
+      setIsAPI(result.msg);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     setMainNetList(Object.keys(mainNet));
     setDexList(Object.values(platform));
@@ -82,9 +82,13 @@ const DefiContainer = () => {
       status={status}
       formatNumber={formatNumber}
       mainNetList={mainNetList}
-      selectMainNet={selectMainNet}
       dexList={dexList}
-      selectDex={selectDex}
+      filterNetworkAndDex={filterNetworkAndDex}
+      checkAPI={checkAPI}
+      isAPI={isAPI}
+      setIsAPI={setIsAPI}
+      inputValue={inputValue}
+      setInput={setInput}
     />
   );
 };

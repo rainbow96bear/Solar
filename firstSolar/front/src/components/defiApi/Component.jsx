@@ -2,11 +2,14 @@ const DefiComponent = ({
   totalLpListUp,
   defiList,
   status,
-  selectMainNet,
   formatNumber,
   mainNetList,
   dexList,
-  selectDex,
+  filterNetworkAndDex,
+  checkAPI,
+  isAPI,
+  inputValue,
+  setInput,
 }) => {
   return (
     <>
@@ -23,7 +26,7 @@ const DefiComponent = ({
           <>
             <button
               onClick={() => {
-                selectMainNet(item);
+                filterNetworkAndDex(item, "");
               }}
             >
               {item}
@@ -36,13 +39,33 @@ const DefiComponent = ({
           <>
             <button
               onClick={() => {
-                selectDex(item);
+                filterNetworkAndDex("", item);
               }}
             >
               {item}
             </button>
           </>
         ))}
+      </div>
+      <div>
+        <input
+          style={{ width: "270px", padding: "10px" }}
+          type={"text"}
+          placeholder={"확인하고 싶은 엔드포인트를 입력하세요"}
+          value={inputValue}
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
+        />
+        <button
+          style={{ width: "100px", padding: "10px" }}
+          onClick={() => {
+            checkAPI(inputValue);
+          }}
+        >
+          확인해보기
+        </button>
+        {isAPI && <div>{isAPI}</div>}
       </div>
       {status ? (
         status == 2 ? (
