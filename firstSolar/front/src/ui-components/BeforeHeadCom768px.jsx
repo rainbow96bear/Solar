@@ -8,9 +8,12 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
+  Divider,
   Flex,
   Image,
   Loader,
+  Menu,
+  MenuItem,
   SearchField,
   useTheme,
 } from "@aws-amplify/ui-react";
@@ -109,18 +112,31 @@ export default function BeforeHeadCom768px(props) {
             padding="10px 10px 10px 10px"
             {...getOverrideProps(overrides, "Frame 45")}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-              width="30px"
+            <Menu
+              menuAlign="start"
+              size="large"
+              className="my-menu-content"
+              triggerClassName="my-menu-trigger"
             >
-              <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-            </svg>
+              <MenuItem onClick={() => alert("Download")}>Download</MenuItem>
+              <MenuItem onClick={() => alert("Create a Copy")}>
+                Create a Copy
+              </MenuItem>
+              <MenuItem onClick={() => alert("Mark as Draft")}>
+                Mark as Draft
+              </MenuItem>
+              <Divider />
+              <MenuItem isDisabled onClick={() => alert("Delete")}>
+                Delete
+              </MenuItem>
+              <MenuItem onClick={() => alert("Attend a workshop")}>
+                Attend a workshop
+              </MenuItem>
+            </Menu>
           </Flex>
         </Flex>
         <SearchField
           className="searchInput"
-          // maxWidth="305px"
           width="50%"
           height="unset"
           placeholder="Search"
@@ -163,5 +179,12 @@ export default function BeforeHeadCom768px(props) {
 const Cover = styled.div`
   input::placeholder {
     width: 60px;
+  }
+  .my-menu-content.amplify-menu-content {
+    --amplify-components-button-border: none;
+  }
+
+  .my-menu-trigger.amplify-menu-trigger {
+    --amplify-components-button-border-color: transparent;
   }
 `;

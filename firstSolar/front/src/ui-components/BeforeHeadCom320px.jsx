@@ -17,6 +17,7 @@ import LoggedinUser from "./LoggedinUser";
 export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
+  const { tokens } = useTheme();
   const connect = useSelector((state) => state.connect.connect.connect);
   return (
     <Flex

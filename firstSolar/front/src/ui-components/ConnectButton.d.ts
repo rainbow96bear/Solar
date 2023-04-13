@@ -6,11 +6,13 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { FlexProps, TextProps } from "@aws-amplify/ui-react";
+import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ConnectButtonOverridesProps = {
     ConnectButton?: PrimitiveOverrideProps<FlexProps>;
     "Frame 7"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 17"?: PrimitiveOverrideProps<FlexProps>;
+    "walletConnectLogo 1"?: PrimitiveOverrideProps<ImageProps>;
     Connect?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type ConnectButtonProps = React.PropsWithChildren<Partial<FlexProps> & {
