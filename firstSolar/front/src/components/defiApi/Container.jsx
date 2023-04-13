@@ -36,6 +36,7 @@ const DefiContainer = () => {
           network: _mainNet,
         })
       ).data;
+      console.log(result);
       setDefiList(result);
       setStatus(DATA_STATUS.SUCCESS);
     } catch (error) {
