@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import { mainNet } from "../../mainNet";
+import { mainNet, platform } from "../../mainNet";
 import DefiComponent from "./Component";
 
 const DATA_STATUS = {
@@ -14,12 +14,12 @@ const DefiContainer = () => {
   const [defiList, setDefiList] = useState([{}]);
   const [status, setStatus] = useState(DATA_STATUS.WAIT);
   const [mainNetList, setMainNetList] = useState([]);
+  const [dexList, setDexList] = useState([]);
 
   const totalLpListUp = async () => {
     try {
       setStatus(DATA_STATUS.LOADING);
       const result = (await axios.get("http://localhost:8080/api/defi")).data;
-      console.log(result);
       setDefiList(result);
       setStatus(DATA_STATUS.SUCCESS);
     } catch (error) {
@@ -30,15 +30,26 @@ const DefiContainer = () => {
   const selectMainNet = async (_mainNet) => {
     try {
       setStatus(DATA_STATUS.LOADING);
-      let result;
-      if (!_mainNet) totalLpListUp();
-
-      result = (
-        await axios.get(
-          `http://localhost:8080/api/defi?mainNetName=${_mainNet}`
-        )
+      if (!_mainNet) return;
+      const result = (
+        await axios.post(`http://localhost:8080/api/defi/filter`, {
+          network: _mainNet,
+        })
       ).data;
-
+      setDefiList(result);
+      setStatus(DATA_STATUS.SUCCESS);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const selectDex = async (_dex) => {
+    try {
+      setStatus(DATA_STATUS.LOADING);
+      if (!_dex) return;
+      console.log(_dex);
+      const result = (
+        await axios.post(`http://localhost:8080/api/defi/filter`, { dex: _dex })
+      ).data;
       console.log(result);
       setDefiList(result);
       setStatus(DATA_STATUS.SUCCESS);
@@ -59,6 +70,7 @@ const DefiContainer = () => {
 
   useEffect(() => {
     setMainNetList(Object.keys(mainNet));
+    setDexList(Object.values(platform));
   }, []);
 
   return (
@@ -69,6 +81,8 @@ const DefiContainer = () => {
       formatNumber={formatNumber}
       mainNetList={mainNetList}
       selectMainNet={selectMainNet}
+      dexList={dexList}
+      selectDex={selectDex}
     />
   );
 };

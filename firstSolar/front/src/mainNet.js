@@ -18,3 +18,16 @@ export const mainNet = {
   avax: 43114,
   emerald: 246529,
 };
+
+export const platform = {
+  uniswap: "uniswap",
+  pancakeswap: "pancakeswap",
+  sushi: "sushi",
+  quickswap: "quickswap",
+  oneInch: "1inch",
+  curve: "curve",
+  bnt: "bnt",
+  knc: "knc",
+  matcha: "matcha",
+  bal: "bal",
+};
