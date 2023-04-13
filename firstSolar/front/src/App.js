@@ -1,5 +1,5 @@
 import DefiContainer from "./components/defiApi/Container";
-import APICon from "../src/component/API/APICon";
+import APICon from "../src/components/API/APICon";
 
 function App() {
   return (
