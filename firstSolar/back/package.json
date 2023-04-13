@@ -12,8 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@balancer-labs/sdk": "^1.0.4",
-    "@moralisweb3/common-evm-utils": "^2.18.2",
+    "@ethersproject/bignumber": "^5.7.0",
     "@openzeppelin/contracts": "^4.8.2",
     "@pinata/sdk": "^2.1.0",
     "@remix-project/remixd": "^0.6.13",
@@ -27,7 +26,8 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.2.3",
     "sequelize": "^6.31.0",
-    "web3": "^1.9.0"
+    "web3": "^1.9.0",
+    "web3-utils": "^1.9.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
