@@ -16,6 +16,7 @@ interface LPData {
   mainNetLogo?: string;
   platformLogo?: string;
   tokens?: Array<string>;
+  tokenAddress?: string;
 }
 
 const router = Router();
@@ -101,6 +102,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
             mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
             platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
             tokens,
+            tokenAddress: lp.tokenAddress,
           };
         })
       );
@@ -169,6 +171,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
             mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
             platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
             tokens,
+            tokenAddress: lp.tokenAddress,
           };
         })
       );
