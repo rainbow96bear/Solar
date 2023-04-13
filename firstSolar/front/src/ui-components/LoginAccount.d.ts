@@ -11,6 +11,7 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type LoginAccountOverridesProps = {
     LoginAccount?: PrimitiveOverrideProps<FlexProps>;
     "Frame 15"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 16"?: PrimitiveOverrideProps<FlexProps>;
     account?: PrimitiveOverrideProps<TextProps>;
     dropdownIcon?: PrimitiveOverrideProps<FlexProps>;
     Vector?: PrimitiveOverrideProps<IconProps>;

@@ -3,7 +3,6 @@
  * Please refrain from making any modifications to this file.              *
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
-
 export { default as LogoTitle } from "./LogoTitle";
 export { default as ChainChange } from "./ChainChange";
 export { default as ConnectButton } from "./ConnectButton";

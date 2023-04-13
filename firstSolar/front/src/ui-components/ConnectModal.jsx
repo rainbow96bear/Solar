@@ -14,11 +14,15 @@ import { connectThunk } from "../modules/connect.js";
 import { accountThunk } from "../modules/account.js";
 import metamaskLogo from "./images/metamaskLogo.jpg";
 import kaikasLogo from "./images/kaikasLogo.jpg";
+import walletConnectLogo from "./images/walletConnectLogo.png";
 import { useWeb3 } from "../modules/useWeb3.js";
+import { Web3Button, Web3Modal, useWeb3Modal } from "@web3modal/react";
+import { projectId, ethereumClient } from "../App.js";
 import axios from "axios";
 
 export default function ConnectModal(props) {
   const { overrides, ...rest } = props;
+  const { open } = useWeb3Modal();
   const [isOpen, setIsOpen] = React.useState(false);
   const connect = useSelector((state) => state.connect.connect.connect);
   const accountAddress = useSelector((state) => state.account.account.account);
@@ -36,11 +40,6 @@ export default function ConnectModal(props) {
         walletKind: "metamask",
       });
       dispatch(accountThunk({ account: _account }));
-      // redux-toolkit으로 상태관리하는 이 코드가 axios.post보다 아래에 있고 서버에 넣는 지갑 주소가 _account인 이유는
-      // dispatch(connectThunk({ connect: false }));
-      // 이 connect를 false로 만드는 dispatch는 나중에 로그아웃 기능을 만들면 다시 쓸 수 있다.
-
-      console.log(data.data.msg);
     } catch (error) {
       console.error(error);
     }
@@ -48,30 +47,31 @@ export default function ConnectModal(props) {
 
   const kaikasLogin = async () => {
     try {
-      console.log("kaikas 로그인 버튼 클릭");
       if (!window.klaytn) {
-        console.log(window.klaytn, "kaikas가 없어.");
         return;
       }
-      console.log(window.klaytn, "kaikas가 있다.");
       if (window.klaytn.isKaikas) {
         const kaikasWallet = (await window.klaytn.enable())[0];
 
-        console.log("kaikas : ", kaikasWallet);
         const data = await axios.post("http://localhost:8080/api/user/login", {
           account: kaikasWallet,
           walletKind: "kaikas",
         });
         dispatch(accountThunk({ account: kaikasWallet }));
-        // dispatch(connectThunk({ connect: false }));
-
-        console.log(data.data.msg);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  const walletConnect = async () => {
+    try {
+      console.log("나오나?");
+      await open({ option: "Help" });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <ModalCover
       onClick={(e) => {
@@ -289,6 +289,62 @@ export default function ConnectModal(props) {
               {...getOverrideProps(overrides, "Kaikas")}
             ></Text>
           </Flex>
+          <Flex
+            gap="10px"
+            direction="row"
+            width="300px"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            shrink="0"
+            position="relative"
+            border="1px SOLID rgba(220,220,220,1)"
+            borderRadius="10px"
+            padding="9px 33px 9px 9px"
+            className="cursorPointer"
+            onClick={() => {
+              walletConnect();
+            }}
+            {...getOverrideProps(overrides, "ConnectModalKaikas37532689")}
+          >
+            <Image
+              src={walletConnectLogo}
+              width="40px"
+              height="40px"
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              objectFit="cover"
+              {...getOverrideProps(overrides, "kaikasLogo 137532690")}
+            ></Image>
+
+            {/* <Web3Button className="Web3Button"></Web3Button> */}
+            <Text
+              fontFamily="Do Hyeon"
+              fontSize="24px"
+              fontWeight="400"
+              color="rgba(0,0,0,1)"
+              lineHeight="40px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Wallet Connect"
+              {...getOverrideProps(overrides, "WalletConnect")}
+            ></Text>
+          </Flex>
         </Flex>
       </Flex>
     </ModalCover>
@@ -307,7 +363,7 @@ const ModalCover = styled.div`
   // bottom: 0%;
   justify-content: center;
   align-items: center;
-  z-index: 999999;
+  z-index: 88;
 
   .ConnectModal {
     display: flex;
@@ -315,6 +371,11 @@ const ModalCover = styled.div`
 
     .cursorPointer {
       cursor: pointer;
+    }
+  }
+  .Web3Button {
+    button {
+      background-color: orange !import;
     }
   }
 `;

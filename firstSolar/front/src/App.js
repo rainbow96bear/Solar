@@ -9,10 +9,31 @@ import { accountThunk } from "./modules/account.js";
 import { useWeb3 } from "./modules/useWeb3";
 import { useWeb3K } from "./modules/useWeb3Kaikas";
 
+// walletConenct import
+import {
+  EthereumClient,
+  w3mConnectors,
+  w3mProvider,
+} from "@web3modal/ethereum";
+import { Web3Modal } from "@web3modal/react";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { arbitrum, klaytn, mainnet, polygon } from "wagmi/chains";
+
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import { useEffect } from "react";
+
+const chains = [arbitrum, mainnet, polygon, klaytn];
+export const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
+
+const { provider } = configureChains(chains, [w3mProvider({ projectId })]);
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: w3mConnectors({ projectId, version: 1, chains }),
+  provider,
+});
+export const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
@@ -37,7 +58,9 @@ function App() {
 
   return (
     <div className="App">
-      <HeaderContainer></HeaderContainer>
+      <WagmiConfig client={wagmiClient}>
+        <HeaderContainer></HeaderContainer>
+      </WagmiConfig>
       <Routes>
         <Route path="/" element={<MainContainer />}></Route>
       </Routes>
@@ -51,6 +74,7 @@ function App() {
       ) : (
         <></>
       )}
+      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </div>
   );
 }

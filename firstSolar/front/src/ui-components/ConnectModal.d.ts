@@ -18,9 +18,12 @@ export declare type ConnectModalOverridesProps = {
     ConnectModalMetamask?: PrimitiveOverrideProps<FlexProps>;
     "metamaskLogo 1"?: PrimitiveOverrideProps<ImageProps>;
     Metamask?: PrimitiveOverrideProps<TextProps>;
-    ConnectModalKaikas?: PrimitiveOverrideProps<FlexProps>;
-    "kaikasLogo 1"?: PrimitiveOverrideProps<ImageProps>;
+    ConnectModalKaikas36802705?: PrimitiveOverrideProps<FlexProps>;
+    "kaikasLogo 136802707"?: PrimitiveOverrideProps<ImageProps>;
     Kaikas?: PrimitiveOverrideProps<TextProps>;
+    ConnectModalKaikas37532689?: PrimitiveOverrideProps<FlexProps>;
+    "kaikasLogo 137532690"?: PrimitiveOverrideProps<ImageProps>;
+    WalletConnect?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type ConnectModalProps = React.PropsWithChildren<Partial<FlexProps> & {
     overrides?: ConnectModalOverridesProps | undefined | null;
