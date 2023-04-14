@@ -36,3 +36,4 @@ export { default as ConnectButton } from "./ConnectButton";
 export { default as ChainIcon } from "./ChainIcon";
 export { default as ConnectModal } from "./ConnectModal";
 export { default as LoginAccount } from "./LoginAccount";
+export { default as Footer } from "./Footer";

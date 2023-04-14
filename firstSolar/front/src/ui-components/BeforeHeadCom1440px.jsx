@@ -134,7 +134,9 @@ export default function BeforeHeadCom1440px(props) {
             <MenuDropDown>
               <ul>
                 <li>
-                  <div>메뉴1</div>
+                  <Link to="/swap">
+                    <div>Swap</div>
+                  </Link>
                 </li>
                 <li>
                   <div>메뉴2</div>
@@ -158,7 +160,6 @@ export default function BeforeHeadCom1440px(props) {
         shrink="1"
         basis="0"
         size="small"
-        s
         isDisabled={false}
         labelHidden={false}
         variation="quiet"
@@ -166,18 +167,21 @@ export default function BeforeHeadCom1440px(props) {
       ></SearchField>
       {/* </div> */}
       <div className="Header_right">
-        {/* {isOpen ? ( */}
-        {/* // document.cookie ? ( */}
-        {/* <LoginAccount></LoginAccount> */}
-        {/* ) : ( */}
-        {/* // ) : ( */}
-        {/* //   <>
-          //     <ConnectModal></ConnectModal>
-          //     <LoadingButton></LoadingButton>
-          //   </>
-          // ) */}
-        {/* // )} */}
-        <Web3Button label="&nbsp;&nbsp;&nbsp;&nbsp;Connect Wallet&nbsp;&nbsp;&nbsp;&nbsp;"></Web3Button>
+        {connect ? (
+          document.cookie ? (
+            <LoginAccount></LoginAccount>
+          ) : (
+            <>
+              <ConnectModal></ConnectModal>
+              <LoadingButton></LoadingButton>
+            </>
+          )
+        ) : (
+          <div className="Header_connect">
+            <ConnectButton></ConnectButton>
+          </div>
+        )}
+        {/* <Web3Button label="&nbsp;&nbsp;&nbsp;&nbsp;Connect Wallet&nbsp;&nbsp;&nbsp;&nbsp;"></Web3Button> */}
       </div>
     </Flex>
   );

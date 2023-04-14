@@ -139,6 +139,33 @@ export default function BeforeHeadCom320px(props) {
             >
               <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
             </svg>
+            {/* <SwitchField
+              className="my-custom-switchfield"
+              onChange={() => {
+                setSearchView(!searchView);
+              }}
+            ></SwitchField>
+            <div className="header_right">
+              {connect ? (
+                document.cookie ? (
+                  <LoggedinUser></LoggedinUser>
+                ) : (
+                  <>
+                    <ConnectModal></ConnectModal>
+                    <Loader
+                      width="30px"
+                      height="30px"
+                      emptyColor={tokens.colors.red}
+                      filledColor={tokens.colors.red[40]}
+                    />
+                  </>
+                )
+              ) : (
+                <div className="header_conenct">
+                  <LoginButton></LoginButton>
+                </div>
+              )}
+            </div> */}
           </Flex>
         </Flex>
         <Flex
@@ -175,3 +202,17 @@ export default function BeforeHeadCom320px(props) {
     </Flex>
   );
 }
+
+const Cover = styled.div`
+  .my-menu-content.amplify-menu-content {
+    --amplify-components-button-border: none;
+  }
+
+  .my-menu-trigger.amplify-menu-trigger {
+    --amplify-components-button-border-color: transparent;
+  }
+
+  .my-custom-switchfield {
+    --amplify-components-switchfield-track-checked-background-color: #ffa500;
+  }
+`;

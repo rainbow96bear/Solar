@@ -21,6 +21,7 @@ export default function ConnectButton(props) {
 
   const walletConnect = async () => {
     try {
+      console.log("나오나?");
       await open({ option: "Help" });
     } catch (error) {
       console.error(error);
@@ -38,8 +39,7 @@ export default function ConnectButton(props) {
       position="relative"
       padding="10px 10px 10px 10px"
       onClick={() => {
-        walletConnect();
-        // dispatch(connectThunk({ connect: true }));
+        dispatch(connectThunk({ connect: true }));
       }}
       {...getOverrideProps(overrides, "ConnectButton")}
       {...rest}
