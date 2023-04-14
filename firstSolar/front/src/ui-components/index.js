@@ -16,4 +16,5 @@ export { default as PooListCom320px } from "./PooListCom320px";
 export { default as PooListCom768px } from "./PooListCom768px";
 export { default as PoolListCom1440px } from "./PoolListCom1440px";
 export { default as LoginAccount } from "./LoginAccount";
+export { default as Footer } from "./Footer";
 export { default as studioTheme } from "./studioTheme";

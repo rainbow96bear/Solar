@@ -22,6 +22,7 @@ import { arbitrum, klaytn, mainnet, polygon } from "wagmi/chains";
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
+import FooterContainer from "./components/footer/Container";
 import { useEffect } from "react";
 
 const chains = [arbitrum, mainnet, polygon, klaytn];
@@ -61,9 +62,13 @@ function App() {
       <WagmiConfig client={wagmiClient}>
         <HeaderContainer></HeaderContainer>
       </WagmiConfig>
-      <Routes>
-        <Route path="/" element={<MainContainer />}></Route>
-      </Routes>
+      <MainContent>
+        <Routes>
+          <Route path="/" element={<MainContainer />}></Route>
+          <Route path="/swap" element={<></>}></Route>
+        </Routes>
+      </MainContent>
+      <FooterContainer></FooterContainer>
 
       {/* 로딩 중에는 로딩 창이 뜨도록 할 것입니다. */}
       {isLoading ? (
@@ -80,6 +85,12 @@ function App() {
 }
 
 export default App;
+
+const MainContent = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+`;
 
 const LoadingModal = styled.div`
   width: 100vmaxx;

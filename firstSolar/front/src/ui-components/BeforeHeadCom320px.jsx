@@ -184,6 +184,7 @@ export default function BeforeHeadCom320px(props) {
             {...getOverrideProps(overrides, "Frame 47")}
           >
             <SwitchField
+              className="my-custom-switchfield"
               onChange={() => {
                 setSearchView(!searchView);
               }}
@@ -223,5 +224,9 @@ const Cover = styled.div`
 
   .my-menu-trigger.amplify-menu-trigger {
     --amplify-components-button-border-color: transparent;
+  }
+
+  .my-custom-switchfield {
+    --amplify-components-switchfield-track-checked-background-color: #ffa500;
   }
 `;
