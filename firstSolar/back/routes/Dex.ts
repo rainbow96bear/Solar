@@ -14,6 +14,7 @@ const web3 = new Web3(
 
 import { abi as DexAbi } from "../artifacts/Dex.json";
 import { abi as LiquiditypoolAbi } from "../artifacts/LiquidityPool.json";
+import { abi as testAbi } from "../artifacts/test.json";
 
 dotenv.config();
 
@@ -22,9 +23,15 @@ const router = Router();
 router.post("/", async (req: Request, res: Response) => {
   // console.log(typeof req.body.token1);
   const deployed = new web3.eth.Contract(
-    DexAbi as AbiItem[],
-    process.env.Dex_CA
+    testAbi as AbiItem[],
+    process.env.Wmatic_CA
   );
+  const tokenamount1 = BigNumber.from(Math.floor(0.09 * 10 ** 18).toString());
+
+  let getpoolInfo = await deployed.methods.withdraw(tokenamount1).encodeABI();
+
+  console.log(deployed);
+
   // const lpDeployed = new web3.eth.Contract(
   //   LiquiditypoolAbi as AbiItem[],
   //   process.env.DFSLP_CA
@@ -57,7 +64,7 @@ router.post("/", async (req: Request, res: Response) => {
   // let DFS = await deployed.methods.owner().call();
   // console.log(DFS);
   // res.send(getpoolInfo);
-  res.end();
+  res.send(getpoolInfo);
 });
 
 router.post("/approve", async (req: Request, res: Response) => {

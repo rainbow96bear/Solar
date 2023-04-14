@@ -64,13 +64,19 @@ contract Dex {
     );
 
     _lpToken = ERC20(new LiquidityPool("DFS-LP", "DFS-LP", _token1, _token2));
+    // ERC20 타입으로 넣겠다
     //ERC20을 상속받은 LiquidityPool 컨트랙트의 인스턴스를 생성
     //DFS-LP가 name,symbol
     getLiquidityPool[_token1][_token2] = address(_lpToken);
+    // address타입으로 형변환
     //위 코드는 _token1과 _token2 주소를 이용해 매핑된 getLiquidityPool 맵에 유동성 풀 컨트랙트 주소를 저장
 
     poolInfo.push(PoolInfo({ lpToken: _lpToken }));
-    // lp토큰 정보 객체로넣음?
+    ///IERC20 lpToken; 의 구조체 타입 lpToken이 키
+    // IERC20 타입으로 lpToken
+    //   struct PoolInfo {
+    //   IERC20 lpToken;
+    // }
     emit LiquidityPoolCreted(_token1, _token2, address(_lpToken));
   }
 
