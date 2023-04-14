@@ -34,12 +34,13 @@ function App() {
         token2: 2,
       })
     ).data;
-    // let transactionResult = await web3.eth.sendTransaction({
-    //   from: "0xb18fbad70a07d4cab5510e2f87fae20ee22cf2b4",
-    //   to: "0x0d9136ee935B3990b00476897beaB6f7C1AC1581",
-    //   data: result,
-    // });
-    // console.log(transactionResult);
+    console.log(result);
+    let transactionResult = await web3.eth.sendTransaction({
+      from: "0xb18fbad70a07d4cab5510e2f87fae20ee22cf2b4",
+      to: "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+      data: result,
+    });
+    console.log(transactionResult);
   };
   return (
     <div>

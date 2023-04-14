@@ -6,8 +6,11 @@ import "./contracts/LiqudityPool.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
+// import "./contracts/DFSToken.sol";
+
 contract Dex {
   using SafeMath for uint256;
+  address immutable DFSTokenA;
 
   event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
   event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
@@ -38,8 +41,9 @@ contract Dex {
     address indexed _addressLiquidityPool
   );
 
-  constructor() {
+  constructor(address _DFSTokenA) {
     owner = msg.sender;
+    DFSTokenA = _DFSTokenA;
   }
 
   function createLiquidityPool(address _tokenA, address _tokenB) external {
@@ -63,7 +67,9 @@ contract Dex {
       "Pool Already Exists"
     );
 
-    _lpToken = ERC20(new LiquidityPool("DFS-LP", "DFS-LP", _token1, _token2));
+    _lpToken = ERC20(
+      new LiquidityPool("DFS-LP", "DFS-LP", _token1, _token2, DFSTokenA)
+    );
     //ERC20을 상속받은 LiquidityPool 컨트랙트의 인스턴스를 생성
     //DFS-LP가 name,symbol
     getLiquidityPool[_token1][_token2] = address(_lpToken);
