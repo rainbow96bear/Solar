@@ -1,4 +1,4 @@
-const APIComp = ({ APIClick }) => {
+const APIComp = ({ APIClick, APIClick2 }) => {
   return (
     <div>
       <button
@@ -7,6 +7,13 @@ const APIComp = ({ APIClick }) => {
         }}
       >
         두과자
+      </button>
+      <button
+        onClick={() => {
+          APIClick2();
+        }}
+      >
+        두과자2
       </button>
     </div>
   );
