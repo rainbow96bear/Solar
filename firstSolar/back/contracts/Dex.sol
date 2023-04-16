@@ -15,7 +15,7 @@ contract Dex {
   event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
   event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
   ERC20 _lpToken;
-  // 이건뭐?
+  //  ERC20타입
 
   struct UserInfo {
     uint256 amount;
@@ -76,7 +76,12 @@ contract Dex {
     //위 코드는 _token1과 _token2 주소를 이용해 매핑된 getLiquidityPool 맵에 유동성 풀 컨트랙트 주소를 저장
 
     poolInfo.push(PoolInfo({ lpToken: _lpToken }));
-    // lp토큰 정보 객체로넣음?
+    ///IERC20 lpToken; 의 구조체 타입 lpToken이 키
+    // IERC20 타입으로 lpToken
+    //   struct PoolInfo {
+    //   IERC20 lpToken;
+    // }
+
     emit LiquidityPoolCreted(_token1, _token2, address(_lpToken));
   }
 
