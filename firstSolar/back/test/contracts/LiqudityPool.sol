@@ -4,12 +4,18 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "../contracts/DFSToken.sol";
 
 contract LiquidityPool is ERC20 {
+  uint DFSPrice = 100;
+  DFSToken immutable DFS;
+  //immutable 한번설정되면 변경불가능
   using SafeMath for uint256;
   // 오버플로우 언더플로우 방지 라이브러리사용
+
   // ERC20 token state variables
   ERC20 public immutable token1;
+  // ERC20타입의 token1
   ERC20 public immutable token2;
   // State variables for token reserves
   uint256 public reserve1;
@@ -20,6 +26,7 @@ contract LiquidityPool is ERC20 {
 
   // Events
   event MintLpToken(address indexed _liquidityProvider, uint256 _sharesMinted);
+  // sharesMinted는 lp토큰의 수
 
   event BurnLpToken(address indexed _liquidityProvider, uint256 _sharesBurned);
 
@@ -27,11 +34,18 @@ contract LiquidityPool is ERC20 {
     string memory _name,
     string memory _symbol,
     address _token1,
-    address _token2
-  ) ERC20(_name, _symbol) {
-    // ERC20(_name,_symbol) 적어준이유?
+    address _token2,
+    address DFSTokenA
+  )
+    // uint256 rwdToken1Amount,
+    // uint256 rwdToken2Amount
+    ERC20(_name, _symbol)
+  {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
+    DFS = DFSToken(DFSTokenA);
+    // rwdToken1Amount=0;
+    // rwdToken2Amount=0;
   }
 
   // Function to get reserves
@@ -50,10 +64,9 @@ contract LiquidityPool is ERC20 {
 
   // Internal function to mint liquidity shares
   // lp토큰추가 _to는 lp토큰 받을 사용자의 주소
-  // Internal function to mint liquidity shares
+
   function mint(address _to, uint256 _amount) private {
     _mint(_to, _amount);
-    //이함수 주석해서 필요없나?
     userLiquidity[_to] = balanceOf(_to);
     totalLiquidity = totalSupply();
   }
@@ -64,6 +77,8 @@ contract LiquidityPool is ERC20 {
   // }
 
   // Internal function to burn liquidity shares
+  // from은 lp토큰 소유한 사용자 주소
+
   function burn(address _from, uint256 _amount) private {
     _burn(_from, _amount);
     userLiquidity[_from] = balanceOf(_from);
@@ -90,6 +105,7 @@ contract LiquidityPool is ERC20 {
     uint256 _amountIn
   ) external returns (uint256 _amountOut) {
     //_tokenIn의 erc20토큰주소 _amountIn은 ERC20의 토큰의 양
+
     require(
       _tokenIn == address(token1) || _tokenIn == address(token2),
       "Invalid Token Address"
@@ -112,10 +128,8 @@ contract LiquidityPool is ERC20 {
     ) = isToken1
         ? (token1, token2, _reserve1, _reserve2)
         : (token2, token1, _reserve2, _reserve1);
-
     //  할당 과정에서, isToken1이 true이면 tokenIn에 token1을, tokenOut에 token2를, reserveIn에 _reserve1을, reserveOut에 _reserve2를 할당합니다. isToken1이 false인 경우는 반대로 할당됩니다.
     // 변수들은 이후 코드에서 유동성 교환을 위해 사용됩니다. tokenIn과 tokenOut은 교환에 참여하는 두 자산을 나타내고, reserveIn과 reserveOut은 교환 직전의 유동성 풀 상태를 나타냅니다.
-
     // Transfer tokenIn to the liquity pool
     require(_amountIn > 0, "Insufficient Amount");
     //_amountIn 교환하려는 자산의양
@@ -127,6 +141,7 @@ contract LiquidityPool is ERC20 {
 
     // Calculate tokenIn with fee of 0.3%
     uint256 _amountInWithFee = (_amountIn * 997) / 1000;
+    // rwdToken1Amount = rwdToken1Amount+(_amountIn * 3) / 1000;
     // _amountInWithFee는 유동성 교환에 참여하는 실제 자산의 양이며, 이후 코드에서 유동성 풀의 상태를 업데이트하고, 교환할 자산의 양을 계산하는 데 사용된다
 
     /*
@@ -150,9 +165,11 @@ contract LiquidityPool is ERC20 {
 
     // Transfer tokenOut to the user
     tokenOut.transfer(msg.sender, _amountOut);
+    //유동성 교환 결과로 받게 되는 tokenOut 토큰을 msg.sender 계정으로 전송하는 데 사용됩니다.
 
     // Update the reserves
-    _update(token1.balanceOf(address(this)), token2.balanceOf(address(this)));
+    _update(token1.balanceOf(address(this)), token2.balanceOf(address(this))); // token1과 token2는 각각 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수입니다.
+    // balanceOf() 함수는 해당 계약의 잔액 정보를 반환합니다. 따라서, 이 코드에서는 계약의 토큰 잔액 정보를 가져와서 유동성 풀의 상태를 업데이트
   }
 
   // Function for user to add liquidity
@@ -169,6 +186,8 @@ contract LiquidityPool is ERC20 {
       token2.transferFrom(msg.sender, address(this), _amountToken2),
       "Token Transfer Failed"
     );
+    // _amountToken1이나 _amountToken2 만큼의 "token1" "token2" 토큰을 이 스마트 계약으로 전송할 수 있습니다
+
     /*
         Check if the ratio of tokens supplied is proportional
         to reserve ratio to satisfy x * y = k for price to not
@@ -178,18 +197,25 @@ contract LiquidityPool is ERC20 {
     //getReserves" 함수를 호출하여 "_reserve1" 변수와 "_reserve2" 변수에 해당 함수에서 반환된 두 개의 uint256 타입의 값을 할당하는 코드
 
     if (_reserve1 > 0 || _reserve2 > 0) {
+      uint256 amountToken1;
+      uint256 amountToken2;
       if (
         min(_amountToken1.mul(_reserve2), _amountToken2.mul(_reserve1)) ==
         _amountToken1.mul(_reserve2)
       ) {
-        uint amountToken2 = _amountToken1.mul(_reserve2).div(_reserve1);
+        amountToken2 = _amountToken1.mul(_reserve2).div(_reserve1);
         token2.transfer(msg.sender, _amountToken2.sub(amountToken2));
+        _amountToken2 = amountToken2;
       } else {
-        uint amountToken1 = _amountToken2.mul(_reserve1).div(_reserve2);
+        amountToken1 = _amountToken2.mul(_reserve1).div(_reserve2);
         token1.transfer(msg.sender, _amountToken1.sub(amountToken1));
+        _amountToken1 = amountToken1;
       }
+      DFSPairAirDrop(
+        _amountToken1.mul(3).div(1000),
+        _amountToken2.mul(3).div(1000)
+      );
     }
-
     /*
         Calculate number of liquidity shares to mint using
         the geometric mean as a measure of liquidity. Increase
@@ -209,6 +235,7 @@ contract LiquidityPool is ERC20 {
 
     if (_totalLiquidity == 0) {
       _liquidityShares = sqrt(_amountToken1 * _amountToken2);
+      //이는 두 토큰 간의 상대적인 가치를 기준으로 초기 유동성을 할당하는 것입니다.
     } else {
       _liquidityShares = min(
         ((_amountToken1 * _totalLiquidity) / _reserve1),
@@ -225,6 +252,7 @@ contract LiquidityPool is ERC20 {
 
     // Update the reserves
     _update(token1.balanceOf(address(this)), token2.balanceOf(address(this)));
+    // 유동성 풀의 현재 상태를 최신 정보로 업데이트
 
     emit MintLpToken(msg.sender, _liquidityShares);
   }
@@ -275,6 +303,7 @@ contract LiquidityPool is ERC20 {
   // Internal function to square root a value from Uniswap V2
   // uint256 제곱급 계산 반환함수
 
+  // Internal function to square root a value from Uniswap V2
   function sqrt(uint256 y) internal pure returns (uint256 z) {
     if (y > 3) {
       z = y;
@@ -289,7 +318,42 @@ contract LiquidityPool is ERC20 {
   }
 
   // Internal function to find minimum value from Uniswap V2
+  // 두개의 값중 작은거 반환
+
   function min(uint256 x, uint256 y) internal pure returns (uint256 z) {
     z = x < y ? x : y;
+  }
+
+  // function rewardClaim (address _to, uint _rewardRate){
+  //   transfer(_to,rwdToken1Amount.mul(_rewardRate))
+  //   transfer(_to,rwdToken2Amount.mul(_rewardRate))
+  //   rwdToken1Amount=0;
+  //   rwdToken2Amount=0;
+  // }
+  // function airDrop(
+  //   uint _amountToken1,
+  //   uint _amountToken2,
+  //   uint _token1Price,
+  //   uint _token2Price,
+  //   uint DFSPrice
+  // ) {
+  //   uint fee1 = _amountToken1.mul(_token1Price);
+  //   uint fee2 = _amountToken2.mul(_token2Price);
+  //   uint total = fee1.add(fee2);
+  //   uint totalreward = (total / 3) * 4;
+  //   uint amountDFS = totalreward.div(DFSPrice);
+  //   DFS.reward(msg.sender, amountDFS);
+  // }
+
+  function DFSPairAirDrop(uint256 _amountToken1, uint256 _amountToken2) public {
+    (uint256 _reserve1, uint256 _reserve2) = getReserves();
+
+    uint256 rewardOfToken1 = _amountToken1.div(3).mul(4);
+    uint256 rewardOfToken2 = _amountToken2.div(3).mul(4);
+    uint256 totalDFS = rewardOfToken1.add(
+      (rewardOfToken2.mul(_reserve1)).div(_reserve2)
+    );
+
+    DFS.reward(msg.sender, totalDFS);
   }
 }

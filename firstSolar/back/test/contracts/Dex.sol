@@ -2,17 +2,20 @@
 
 pragma solidity ^0.8.0;
 
-import "./LiqudityPool.sol";
+import "../contracts/LiqudityPool.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
+// import "./contracts/DFSToken.sol";
+
 contract Dex {
   using SafeMath for uint256;
+  address immutable DFSTokenA;
 
   event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
   event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
   ERC20 _lpToken;
-  // 이건뭐?
+  //  ERC20타입
 
   struct UserInfo {
     uint256 amount;
@@ -38,8 +41,9 @@ contract Dex {
     address indexed _addressLiquidityPool
   );
 
-  constructor() {
+  constructor(address _DFSTokenA) {
     owner = msg.sender;
+    DFSTokenA = _DFSTokenA;
   }
 
   function createLiquidityPool(address _tokenA, address _tokenB) external {
@@ -63,12 +67,12 @@ contract Dex {
       "Pool Already Exists"
     );
 
-    _lpToken = ERC20(new LiquidityPool("DFS-LP", "DFS-LP", _token1, _token2));
-    // ERC20 타입으로 넣겠다
+    _lpToken = ERC20(
+      new LiquidityPool("DFS-LP", "DFS-LP", _token1, _token2, DFSTokenA)
+    );
     //ERC20을 상속받은 LiquidityPool 컨트랙트의 인스턴스를 생성
     //DFS-LP가 name,symbol
     getLiquidityPool[_token1][_token2] = address(_lpToken);
-    // address타입으로 형변환
     //위 코드는 _token1과 _token2 주소를 이용해 매핑된 getLiquidityPool 맵에 유동성 풀 컨트랙트 주소를 저장
 
     poolInfo.push(PoolInfo({ lpToken: _lpToken }));
@@ -77,6 +81,7 @@ contract Dex {
     //   struct PoolInfo {
     //   IERC20 lpToken;
     // }
+
     emit LiquidityPoolCreted(_token1, _token2, address(_lpToken));
   }
 

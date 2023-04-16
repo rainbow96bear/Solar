@@ -75,21 +75,22 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           mnemonic,
-          `https://data-seed-prebsc-1-s1.binance.org:8545`
+          // `https://data-seed-prebsc-1-s1.binance.org:8545`
+          `https://rpc-mumbai.maticvigil.com`
         ),
-      network_id: 97,
-      confirmations: 10,
+      network_id: 80001,
+      confirmations: 2,
       timeoutBlocks: 200,
       skipDryRun: true,
     },
-    bsc: {
-      provider: () =>
-        new HDWalletProvider(mnemonic, `https://bsc-dataseed1.binance.org`),
-      network_id: 56,
-      confirmations: 10,
-      timeoutBlocks: 200,
-      skipDryRun: true,
-    },
+    // bsc: {
+    //   provider: () =>
+    //     new HDWalletProvider(mnemonic, `https://bsc-dataseed1.binance.org`),
+    //   network_id: 56,
+    //   confirmations: 10,
+    //   timeoutBlocks: 200,
+    //   skipDryRun: true,
+    // },
     //
     // An additional network, but with some advanced options…
     // advanced: {
