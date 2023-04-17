@@ -7,8 +7,10 @@ const APICon = () => {
 
   const APIClick = async () => {
     try {
-      let tempMoralisData = await axios.get("http://localhost:8080/api/sync");
-      console.log("tempMoralisData", tempMoralisData);
+      let tempMoralisData = (await axios.get("http://localhost:8080/api/sync"))
+        .data;
+
+      setPriceData(tempMoralisData);
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +31,11 @@ const APICon = () => {
 
   return (
     <div>
-      <APIComp APIClick={APIClick} APIClick2={APIClick2} />
+      <APIComp
+        APIClick={APIClick}
+        APIClick2={APIClick2}
+        priceData={priceData}
+      />
     </div>
   );
 };
