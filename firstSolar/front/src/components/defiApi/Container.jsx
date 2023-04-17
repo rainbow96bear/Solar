@@ -69,6 +69,34 @@ const DefiContainer = () => {
     }
   };
 
+  const lpDetail = async (_id) => {
+    try {
+      setStatus(DATA_STATUS.LOADING);
+      const result = (
+        await axios.post("http://localhost:8080/api/defi/detail", { id: _id })
+      ).data;
+      console.log(result);
+      setDefiList(result);
+      setStatus(DATA_STATUS.SUCCESS);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const testing = async (_token1, _token2) => {
+    try {
+      const result = (
+        await axios.post("http://localhost:8080/api/defi/price", {
+          token1: _token1,
+          token2: _token2,
+        })
+      ).data;
+      console.log(Object.values(result));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     setMainNetList(Object.keys(mainNet));
     setDexList(Object.values(platform));

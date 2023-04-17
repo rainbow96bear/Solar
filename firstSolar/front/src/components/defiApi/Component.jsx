@@ -93,6 +93,16 @@ const DefiComponent = ({
                 )}
                 <div style={{ width: "10%" }}>LP 이름 :{item.name} </div>
                 <div style={{ width: "10%" }}>Platform : {item.platformId}</div>
+                <div>
+                  <button
+                    onClick={() => {
+                      console.log(item.tokens[0], item.tokens[1]);
+                      testing(item.tokens[0], item.tokens[1]);
+                    }}
+                  >
+                    가격추출 테스팅
+                  </button>
+                </div>
                 <div style={{ width: "10%" }}>
                   <img src={item.platformLogo} alt="" />
                 </div>
