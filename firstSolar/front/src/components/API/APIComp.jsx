@@ -1,4 +1,4 @@
-const APIComp = ({ APIClick, APIClick2 }) => {
+const APIComp = ({ APIClick, APIClick2, priceData }) => {
   return (
     <div>
       <button
@@ -15,6 +15,11 @@ const APIComp = ({ APIClick, APIClick2 }) => {
       >
         두과자2
       </button>
+      <div>{priceData.map((item) => item.dltId)}</div>
+      <div>
+        {priceData.map((item) => item.rate[("bnt", "usd", "eur", "eth")])}
+      </div>
+      <div>{priceData.map((item) => item.symbol)}</div>
     </div>
   );
 };
