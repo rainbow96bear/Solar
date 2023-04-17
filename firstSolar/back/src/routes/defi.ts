@@ -19,6 +19,40 @@ interface LPData {
   tokenAddress?: string;
 }
 
+interface detailLp {
+  addLiquidityUrl: string;
+  apy: number;
+  assets: Array<string>;
+  buyTokenUrl: string;
+  chain: string;
+  createdAt: number;
+  dailyTvlRate: number | null;
+  earnContractAddress: string;
+  earnedToken: string;
+  earnedTokenAddress: string;
+  id: string;
+  lastHarvest: number;
+  mainNetLogo: string;
+  name: string;
+  network: string;
+  oracle: string;
+  oracleId: string;
+  platformId: string;
+  platformLogo: string;
+  pricePerFullShare: string;
+  removeLiquidityUrl: string;
+  risks: Array<string>;
+  status: string;
+  strategy: string;
+  strategyTypeId: string;
+  token: string;
+  tokenAddress: string;
+  tokenAmmId: string;
+  tokenDecimals: number;
+  tokenProviderId: string;
+  tvl: number;
+}
+
 const router = Router();
 
 export const mainNet = {
@@ -41,6 +75,70 @@ export const mainNet = {
   avax: 43114,
   emerald: 246529,
 };
+
+export const coinPoint = [
+  "btc",
+  "eth",
+  "ltc",
+  "bch",
+  "bnb",
+  "eos",
+  "xrp",
+  "xlm",
+  "link",
+  "dot",
+  "yfi",
+  "usd",
+  "aed",
+  "ars",
+  "aud",
+  "bdt",
+  "bhd",
+  "bmd",
+  "brl",
+  "cad",
+  "chf",
+  "clp",
+  "cny",
+  "czk",
+  "dkk",
+  "eur",
+  "gbp",
+  "hkd",
+  "huf",
+  "idr",
+  "ils",
+  "inr",
+  "jpy",
+  "krw",
+  "kwd",
+  "lkr",
+  "mmk",
+  "mxn",
+  "myr",
+  "ngn",
+  "nok",
+  "nzd",
+  "php",
+  "pkr",
+  "pln",
+  "rub",
+  "sar",
+  "sek",
+  "sgd",
+  "thb",
+  "try",
+  "twd",
+  "uah",
+  "vef",
+  "vnd",
+  "zar",
+  "xdr",
+  "xag",
+  "xau",
+  "bits",
+  "sats",
+];
 const ONE_DAY_MS: number = 24 * 60 * 60 * 1000;
 const MAX_RETRIES: number = 3;
 const RETRY_DELAY: number = 1000;
@@ -202,6 +300,87 @@ router.post("/check", async (req: Request, res: Response) => {
     res.status(200).send({ msg: `${inputAPI} is Exist API` });
   } catch (err) {
     res.status(201).send({ msg: `${inputAPI} is No Exist API` });
+  }
+});
+
+router.post("/detail", async (req: Request, res: Response<detailLp[]>) => {
+  const { id } = req.body;
+  try {
+    const now: Date = new Date();
+    const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
+    const detailList = (
+      await axios.get(`https://api.beefy.finance/vaults`)
+    ).data.filter((lp: any) => lp.status == "active" && lp.oracleId == id);
+
+    const data: Array<detailLp> = await Promise.all(
+      detailList.map(async (lp: any) => {
+        const lpId: string = lp.id;
+        const oracleId: string = lp.oracleId;
+        const lpChain: number = mainNet[lp.chain];
+
+        const [tvlNow, tvlYesterday] = await Promise.all([
+          getTvlData(lpId, oracleId, lpChain),
+          getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+        ]);
+
+        const dailyTvlRate: number =
+          ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+
+        return {
+          ...lp,
+          tvl: tvlNow,
+          apy:
+            (await axios.get(`https://api.beefy.finance/apy?${oracleId}`)).data[
+              lpId
+            ] ?? 0,
+          dailyTvlRate,
+          mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+          platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+        };
+      })
+    );
+
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
+router.post("/price", async (req: Request, res: Response) => {
+  const { token1, token2 } = req.body;
+  try {
+    const tokenList = (await axios.get(`https://api.beefy.finance/tokens`))
+      .data;
+    // const totalCoinList = (
+    //   await axios.get(`https://api.coingecko.com/api/v3/coins/list`)
+    // ).data.filter(
+    //   (token) =>
+    //     token.symbol == token1?.toLowerCase() ||
+    //     token.symbol == token2?.toLowerCase()
+    // );
+
+    // const ids = totalCoinList.map((token) => token.id).join(",");
+
+    // const { data } = await axios.get(
+    //   `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,eth,bnb,usdt`
+    // );
+
+    // const tokenPrices = totalCoinList.map((token) => {
+    //   const { id, symbol, name } = token;
+
+    //   const usd: number = data[id].usd;
+    //   const eth: number = data[id].eth;
+    //   const bnb: number = data[id].bnb;
+    //   const usdt: number = data[id].usdt;
+
+    //   return { id, symbol, name, usd, eth, bnb, usdt };
+    // });
+
+    // res.send({ tokenPrices, tokenList });
+    res.send(tokenList);
+  } catch (error) {
+    console.error(error);
   }
 });
 
