@@ -85,7 +85,6 @@ function App() {
       <WagmiConfig client={wagmiClient}>
         <div className="App">
           <HeaderContainer></HeaderContainer>
-          <ApICon />
           <MainContent>
             <Routes>
               <Route path="/" element={<MainContainer />}></Route>
