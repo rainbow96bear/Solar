@@ -8,10 +8,57 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, SearchField, Text, View } from "@aws-amplify/ui-react";
+import { connectThunk } from "../modules/connect.js";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "./images/logo_new.png";
+
+import LoginAccount from "./LoginAccount.jsx";
+import ConnectModal from "./ConnectModal.jsx";
+import LoadingButton from "./LoadingButton.jsx";
+import ConnectButton from "./ConnectButton.jsx";
+import { Web3Button } from "@web3modal/react";
+import { useWeb3Modal } from "@web3modal/react";
+import { useAccount } from "wagmi";
 
 export default function BeforeHeadCom1024px(props) {
   const { overrides, ...rest } = props;
+  const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
+  const login = useSelector((state) => state.login.login.login);
+  const [view, setView] = React.useState(false);
+  const dispatch = useDispatch();
+  const connect = useSelector((state) => state.connect.connect.connect);
+  const navigate = useNavigate();
+  const { address, isConnecting, isDisconnected } = useAccount();
+  const { pathname } = useLocation();
+  const ref = React.useRef();
+
+  React.useEffect(() => {
+    setView(false);
+  }, [pathname]);
+
+  React.useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (view && ref.current && !ref.current.contains(e.target)) {
+        setView(false);
+      }
+    };
+    document.addEventListener("click", checkIfClickedOutside);
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [view]);
+  const logout = () => {
+    document.cookie =
+      document.cookie.split(":")[0] +
+      account +
+      "=; expires=Thu, 01 Jan 1999 00:00:10 GMT";
+    dispatch(connectThunk({ connect: false }));
+    navigate("/");
+  };
+
   return (
     <View
       width="90vw"
@@ -24,73 +71,14 @@ export default function BeforeHeadCom1024px(props) {
         xl: "none",
         xxl: "none",
       }}
-      gap="unset"
+      gap="250px"
       alignItems="unset"
-      justifyContent="unset"
+      justifyContent="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
       {...getOverrideProps(overrides, "BeforeHeadCom1024px")}
       {...rest}
     >
-      <Flex
-        gap="10px"
-        direction="row"
-        width="133px"
-        height="35px"
-        justifyContent="flex-end"
-        alignItems="center"
-        position="absolute"
-        top="21.67%"
-        bottom="20%"
-        left="85.64%"
-        right="1.37%"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        borderRadius="45px"
-        padding="19px 11px 19px 11px"
-        backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-        {...getOverrideProps(overrides, "Connect39912872")}
-      >
-        <Text
-          fontFamily="Inter"
-          fontSize="18px"
-          fontWeight="700"
-          color="rgba(239,239,239,1)"
-          lineHeight="21.784090042114258px"
-          textAlign="center"
-          display="block"
-          direction="column"
-          justifyContent="unset"
-          width="unset"
-          height="29px"
-          gap="unset"
-          alignItems="unset"
-          grow="1"
-          shrink="1"
-          basis="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Connect"
-          {...getOverrideProps(overrides, "Connect39912873")}
-        ></Text>
-      </Flex>
-      <SearchField
-        width="264px"
-        height="unset"
-        placeholder="Search"
-        justifyContent="center"
-        alignItems="center"
-        position="absolute"
-        top="23.33%"
-        bottom="21.67%"
-        left="40.04%"
-        right="34.18%"
-        size="small"
-        isDisabled={false}
-        labelHidden={false}
-        variation="quiet"
-        {...getOverrideProps(overrides, "SearchField")}
-      ></SearchField>
       <Flex
         gap="24px"
         direction="row"
@@ -98,7 +86,7 @@ export default function BeforeHeadCom1024px(props) {
         height="unset"
         justifyContent="flex-start"
         alignItems="center"
-        position="absolute"
+        // position="absolute"
         top="13.33%"
         bottom="11.67%"
         left="0%"
@@ -146,6 +134,99 @@ export default function BeforeHeadCom1024px(props) {
           {...getOverrideProps(overrides, "Menu39912870")}
         ></Text>
       </Flex>
+      <SearchField
+        width="264px"
+        height="unset"
+        placeholder="Search"
+        justifyContent="center"
+        alignItems="center"
+        // position="absolute"
+        top="23.33%"
+        bottom="21.67%"
+        left="40.04%"
+        right="34.18%"
+        size="small"
+        isDisabled={false}
+        labelHidden={false}
+        variation="quiet"
+        {...getOverrideProps(overrides, "SearchField")}
+      ></SearchField>
+      <Cover>
+        <div className="Header_right">
+          {connect ? (
+            login ? (
+              <LoginAccount></LoginAccount>
+            ) : address ? (
+              <Web3Button></Web3Button>
+            ) : (
+              <>
+                <ConnectModal></ConnectModal>
+                <LoadingButton></LoadingButton>
+              </>
+            )
+          ) : (
+            <div className="Header_connect">
+              <Flex
+                gap="10px"
+                direction="row"
+                width="133px"
+                height="35px"
+                justifyContent="flex-end"
+                alignItems="center"
+                // position="absolute"
+                top="21.67%"
+                bottom="20%"
+                left="85.64%"
+                right="1.37%"
+                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                borderRadius="45px"
+                padding="19px 11px 19px 11px"
+                backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
+                onClick={() => {
+                  dispatch(connectThunk({ connect: true }));
+                }}
+                {...getOverrideProps(overrides, "Connect39912872")}
+              >
+                <Text
+                  fontFamily="Inter"
+                  fontSize="18px"
+                  fontWeight="700"
+                  color="rgba(239,239,239,1)"
+                  lineHeight="21.784090042114258px"
+                  textAlign="center"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="29px"
+                  gap="unset"
+                  alignItems="unset"
+                  grow="1"
+                  shrink="1"
+                  basis="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children="Connect"
+                  {...getOverrideProps(overrides, "Connect39912873")}
+                ></Text>
+              </Flex>
+            </div>
+          )}
+        </div>
+      </Cover>
     </View>
   );
 }
+
+const Cover = styled.div`
+  display: flex;
+  align-items: center;
+
+  .Header_connect {
+    cursor: pointer;
+  }
+  .Header_connect:hover {
+    transform: scale(1.01);
+  }
+`;

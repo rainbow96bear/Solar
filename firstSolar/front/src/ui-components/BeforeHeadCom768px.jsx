@@ -26,11 +26,14 @@ import ConnectButton from "./ConnectButton";
 import LoadingButton from "./LoadingButton";
 import LoggedinUser from "./LoggedinUser";
 import LoginButton from "./LoginButton";
+import { useAccount } from "wagmi";
+import { Web3Button } from "@web3modal/react";
+import LoadingButton768 from "./LoadingButton768";
 export default function BeforeHeadCom768px(props) {
   const { overrides, ...rest } = props;
-  const { tokens } = useTheme();
+  const login = useSelector((state) => state.login.login.login);
   const connect = useSelector((state) => state.connect.connect.connect);
-
+  const { address, isConnecting, isDisconnected } = useAccount();
   return (
     <Cover>
       <Flex
@@ -46,7 +49,7 @@ export default function BeforeHeadCom768px(props) {
         direction="row"
         width="90vw"
         height="unset"
-        justifyContent="center"
+        justifyContent="flex-start"
         alignItems="center"
         position="relative"
         padding="0px 0px 0px 0px"
@@ -56,7 +59,7 @@ export default function BeforeHeadCom768px(props) {
         <Flex
           gap="24px"
           direction="row"
-          width="unset"
+          width="20%"
           height="unset"
           justifyContent="flex-start"
           alignItems="center"
@@ -152,17 +155,14 @@ export default function BeforeHeadCom768px(props) {
         ></SearchField>
         <div className="header_right">
           {connect ? (
-            document.cookie ? (
+            login ? (
               <LoggedinUser></LoggedinUser>
+            ) : address ? (
+              <Web3Button></Web3Button>
             ) : (
               <>
                 <ConnectModal></ConnectModal>
-                <Loader
-                  width="30px"
-                  height="30px"
-                  emptyColor={tokens.colors.red}
-                  filledColor={tokens.colors.red[40]}
-                />
+                <LoadingButton768></LoadingButton768>
               </>
             )
           ) : (
