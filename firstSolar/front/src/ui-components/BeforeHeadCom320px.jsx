@@ -27,11 +27,15 @@ import LoginButton from "./LoginButton";
 import LoginAccount from "./LoginAccount";
 import ConnectModal from "./ConnectModal";
 import LoggedinUser from "./LoggedinUser";
+import { useAccount } from "wagmi";
+import LoadingButton768 from "./LoadingButton768";
+import { Web3Button } from "@web3modal/react";
 export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
-  const { tokens } = useTheme();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const login = useSelector((state) => state.login.login.login);
+  const { address, isConnecting, isDisconnected } = useAccount();
+  const connect = useSelector((state) => state.connect.connect.connect);
   return (
     <Cover>
       <Flex>
@@ -187,13 +191,13 @@ export default function BeforeHeadCom320px(props) {
               padding="10px 10px 10px 10px"
               {...getOverrideProps(overrides, "Frame 49")}
             >
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 448 512"
                 width="30px"
               >
                 <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-              </svg>
+              </svg> */}
               {/* <SwitchField
             width="unset"
             height="unset"
@@ -256,15 +260,24 @@ export default function BeforeHeadCom320px(props) {
                 setSearchView(!searchView);
               }}
             ></SwitchField>
-            {connect ? (
-              document.cookie ? (
-                <LoggedinUser></LoggedinUser>
+            <div className="header_right">
+              {connect ? (
+                login ? (
+                  <LoggedinUser></LoggedinUser>
+                ) : address ? (
+                  <Web3Button></Web3Button>
+                ) : (
+                  <>
+                    <ConnectModal></ConnectModal>
+                    <LoadingButton768></LoadingButton768>
+                  </>
+                )
               ) : (
-                <ConnectModal></ConnectModal>
-              )
-            ) : (
-              <LoginButton></LoginButton>
-            )}
+                <div className="Header_connect">
+                  <LoginButton></LoginButton>
+                </div>
+              )}
+            </div>
           </Flex>
         </Flex>
       </Flex>

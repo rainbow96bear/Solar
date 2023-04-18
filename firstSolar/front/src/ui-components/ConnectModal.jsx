@@ -12,12 +12,14 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { connectThunk } from "../modules/connect.js";
 import { accountThunk } from "../modules/account.js";
+import { loginThunk } from "../modules/login.js";
 import metamaskLogo from "./images/metamaskLogo.jpg";
 import kaikasLogo from "./images/kaikasLogo.jpg";
 import walletConnectLogo from "./images/walletConnectLogo.png";
 import { useWeb3 } from "../modules/useWeb3.js";
 import axios from "axios";
 import { Web3Button } from "@web3modal/react";
+import { useWeb3K } from "../modules/useWeb3Kaikas.js";
 
 export default function ConnectModal(props) {
   const { overrides, ...rest } = props;
@@ -25,19 +27,25 @@ export default function ConnectModal(props) {
   const accountAddress = useSelector((state) => state.account.account.account);
   const dispatch = useDispatch();
   const { account, login } = useWeb3();
+  const { accountK, loginK } = useWeb3K();
   const [signClient, setSignClient] = React.useState();
 
   const metamaskLogin = async () => {
     try {
-      login();
+      if (!window.ethereum) {
+        return;
+      }
+      await login();
       const [_account] = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
+      console.log(_account);
       const data = await axios.post("http://localhost:8080/api/user/login", {
         account: _account,
         walletKind: "metamask",
       });
       dispatch(accountThunk({ account: _account }));
+      dispatch(loginThunk({ login: true }));
     } catch (error) {
       console.error(error);
     }
@@ -48,15 +56,15 @@ export default function ConnectModal(props) {
       if (!window.klaytn) {
         return;
       }
-      if (window.klaytn.isKaikas) {
-        const kaikasWallet = (await window.klaytn.enable())[0];
-
-        const data = await axios.post("http://localhost:8080/api/user/login", {
-          account: kaikasWallet,
-          walletKind: "kaikas",
-        });
-        dispatch(accountThunk({ account: kaikasWallet }));
-      }
+      await loginK();
+      const [_account] = await window.klaytn.enable();
+      console.log(_account);
+      const data = await axios.post("http://localhost:8080/api/user/login", {
+        account: _account,
+        walletKind: "kaikas",
+      });
+      dispatch(accountThunk({ account: _account }));
+      dispatch(loginThunk({ login: true }));
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +85,7 @@ export default function ConnectModal(props) {
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
-        margin="0px 10px 0px 10px"
+        margin="0px 23px 0px 10px"
         borderRadius="10px"
         padding="20px 20px 30px 20px"
         backgroundColor="rgba(255,255,255,1)"
