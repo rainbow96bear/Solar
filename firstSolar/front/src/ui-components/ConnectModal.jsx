@@ -16,20 +16,16 @@ import metamaskLogo from "./images/metamaskLogo.jpg";
 import kaikasLogo from "./images/kaikasLogo.jpg";
 import walletConnectLogo from "./images/walletConnectLogo.png";
 import { useWeb3 } from "../modules/useWeb3.js";
-import { Web3Button, Web3Modal, useWeb3Modal } from "@web3modal/react";
-import { projectId, ethereumClient } from "../App.js";
 import axios from "axios";
-import WalletConnectClient from "@walletconnect/client";
+import { Web3Button } from "@web3modal/react";
 
 export default function ConnectModal(props) {
   const { overrides, ...rest } = props;
-  const { open } = useWeb3Modal();
-  const [qrCodeModalOpen, setQrCodeModalOpen] = React.useState(false);
-  const [qrcodeSrc, setQrcodeSrc] = React.useState();
   const connect = useSelector((state) => state.connect.connect.connect);
   const accountAddress = useSelector((state) => state.account.account.account);
   const dispatch = useDispatch();
   const { account, login } = useWeb3();
+  const [signClient, setSignClient] = React.useState();
 
   const metamaskLogin = async () => {
     try {
@@ -64,45 +60,6 @@ export default function ConnectModal(props) {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const openQrCodeModal = async () => {
-    const client = new WalletConnectClient({
-      bridge: "https://bridge.walletconnect.org", // WalletConnect bridge URL
-      qrcodeModal: true, // QR 코드 모달 사용 여부
-    });
-
-    await client.connect();
-
-    // QR 코드 모달을 열기 위한 로직 (예시)
-    setQrCodeModalOpen(true);
-
-    // QR 코드 모달이 열린 후, QR 코드를 출력
-    const uri = client.uri;
-    // QR 코드를 출력하는 로직 (예시)
-    console.log(uri);
-
-    client.qrcodeModal.open();
-
-    client.qrcodeModal.on("scan", async (error, payload) => {
-      if (error) {
-        // 스캔 실패 시 처리
-        console.error(error);
-      } else {
-        // 스캔 성공 시 처리
-        console.log(payload);
-        // payload를 사용하여 세션을 연결하거나 다른 로직 수행
-
-        // 세션 생성
-        try {
-          await client.createSession(payload); // payload를 사용하여 세션 생성
-          console.log("WalletConnect 세션 생성 완료");
-          // 세션 생성 이후에 원하는 로직을 수행
-        } catch (error) {
-          console.error("WalletConnect 세션 생성 실패", error);
-        }
-      }
-    });
   };
 
   return (
@@ -322,7 +279,7 @@ export default function ConnectModal(props) {
               {...getOverrideProps(overrides, "Kaikas")}
             ></Text>
           </Flex>
-          <Flex
+          {/* <Flex
             gap="10px"
             direction="row"
             width="300px"
@@ -336,8 +293,9 @@ export default function ConnectModal(props) {
             padding="9px 33px 9px 9px"
             className="cursorPointer"
             onClick={() => {
-              openQrCodeModal();
+              handleConnect();
             }}
+            disbaled={!signClient}
             {...getOverrideProps(overrides, "ConnectModalKaikas37532689")}
           >
             <Image
@@ -353,10 +311,13 @@ export default function ConnectModal(props) {
               padding="0px 0px 0px 0px"
               objectFit="cover"
               {...getOverrideProps(overrides, "kaikasLogo 137532690")}
-            ></Image>
+            ></Image> */}
 
-            {/* <Web3Button className="Web3Button"></Web3Button> */}
-            <Text
+          <Web3Button
+            className="Web3Button"
+            label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connect Wallet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+          ></Web3Button>
+          {/* <Text
               fontFamily="Do Hyeon"
               fontSize="24px"
               fontWeight="400"
@@ -377,17 +338,9 @@ export default function ConnectModal(props) {
               children="Wallet Connect"
               {...getOverrideProps(overrides, "WalletConnect")}
             ></Text>
-          </Flex>
+          </Flex> */}
         </Flex>
       </Flex>
-      {qrCodeModalOpen && (
-        // QR 코드 모달을 구현하는 로직 (예시)
-        <div>
-          <div>WalletConnect QR Code</div>
-          {/* QR 코드 출력 */}
-          {/* QR 코드를 스마트폰으로 스캔하는 로직 (예시) */}
-        </div>
-      )}
     </ModalCover>
   );
 }
@@ -420,17 +373,17 @@ const ModalCover = styled.div`
     }
   }
 `;
-const QRCodeModal = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  position: fixed;
-  left: 0%;
-  top: 0%;
-  right: 0%;
-  // bottom: 0%;
-  justify-content: center;
-  align-items: center;
-  z-index: 89;
-`;
+// const QRCodeModal = styled.div`
+//   width: 100vw;
+//   height: 100vh;
+//   background-color: rgba(0, 0, 0, 0.4);
+//   display: flex;
+//   position: fixed;
+//   left: 0%;
+//   top: 0%;
+//   right: 0%;
+//   // bottom: 0%;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 89;
+// `;

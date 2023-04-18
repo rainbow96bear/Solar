@@ -11,22 +11,11 @@ import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useDispatch } from "react-redux";
 import { connectThunk } from "../modules/connect";
 import walletConnectLogo from "./images/walletConnectLogo.png";
-import { useWeb3Modal } from "@web3modal/react";
 
 export default function ConnectButton(props) {
   const { overrides, ...rest } = props;
 
-  const { open } = useWeb3Modal();
   const dispatch = useDispatch();
-
-  const walletConnect = async () => {
-    try {
-      console.log("나오나?");
-      await open({ option: "Help" });
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <Flex
