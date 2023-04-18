@@ -2,6 +2,7 @@
 
 artifacts/
 
+
 # compiled output
 /tmp
 /out-tsc
@@ -89,3 +90,4 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+firstSolar/back/contracts/DEX.sol
