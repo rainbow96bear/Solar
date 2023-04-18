@@ -23,4 +23,10 @@ const LoginButton = () => {
 
 export default LoginButton;
 
-const WalletIcon = styled.div``;
+const WalletIcon = styled.div`
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+`;
