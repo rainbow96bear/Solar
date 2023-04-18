@@ -1,5 +1,8 @@
 import express from "express";
 import axios from "axios";
+
+import db from "../../models/index";
+
 const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -145,21 +148,40 @@ router.get("/", (req, res) => {
         )
       ).data;
 
-      // USDT , ETH , BNB price
+      // USDT
+
       let USDT = Object.values(USDTPrice.data);
       let USDTdata = USDT[0];
       let USDTprice = Object.values(USDTdata[0]["quote"]);
       let NowUSDTprice = USDTprice[0]["price"];
 
+      // USDT DB
+
+      let USDTIdData = USDTdata[0]["id"];
+      let USDTSymbolData = USDTdata[0]["symbol"];
+      let USDTSlugData = USDTdata[0]["slug"];
+
+      // ETH
       let ETH = Object.values(ETHPrice.data);
       let ETHdata = ETH[0];
       let ETHprice = Object.values(ETHdata[0]["quote"]);
       let NowETHprice = ETHprice[0]["price"];
 
+      // ETH DB
+      let ETHIdData = ETHdata[0]["id"];
+      let ETHSymbolData = ETHdata[0]["symbol"];
+      let ETHSlugData = ETHdata[0]["slug"];
+
+      // BNB
       let BNB = Object.values(BNBPrice.data);
       let BNBdata = BNB[0];
       let BNBprice = Object.values(BNBdata[0]["quote"]);
       let NowBNBprice = BNBprice[0]["price"];
+
+      // BNB DB
+      let BNBIdData = BNBdata[0]["id"];
+      let BNBSymbolData = BNBdata[0]["symbol"];
+      let BNBSlugData = BNBdata[0]["slug"];
 
       // swap
       const BNBSwapUSDT: any = Object.values(bnbPriceToUSDT)[1];
@@ -179,6 +201,43 @@ router.get("/", (req, res) => {
 
       const USDTwapBNB: any = Object.values(usdtPriceToBNB)[1];
       const USDTtoBNB = USDTwapBNB[0].quote.BNB.price;
+
+      const DBConnet = [];
+      DBConnet.push({
+        USDTIdData,
+        USDTSymbolData,
+        USDTSlugData,
+        USDTtoETH,
+        USDTtoBNB,
+        NowUSDTprice,
+      });
+      DBConnet.push({
+        ETHIdData,
+        ETHSymbolData,
+        ETHSlugData,
+        ETHtoUSDT,
+        ETHtoBNB,
+        NowETHprice,
+      });
+      DBConnet.push({
+        BNBIdData,
+        BNBSymbolData,
+        BNBSlugData,
+        BNBtoUSDT,
+        BNBtoETH,
+        NowBNBprice,
+      });
+      console.log(DBConnet);
+
+      // await db.Price.create({
+      //   tokenSymbol: USDTTokenId,
+      //   tokenId: USDTTokenId,
+      //   tokenSlug: USDTTokenId,
+      //   ConvertToUSDT: NowUSDTprice,
+      //   ConvertToETH:,
+      //   ConvertToBNB:,
+      //   tokenPrice:
+      // });
 
       res.send({
         NowUSDTprice,
