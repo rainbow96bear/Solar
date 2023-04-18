@@ -9,17 +9,29 @@ export default class Price extends Model {
   public static initModel(sequelize: Sequelize) {
     return Price.init(
       {
-        tokenId: {
-          type: DataTypes.STRING(255),
-          allowNull: false,
-        },
         tokenSymbol: {
           type: DataTypes.STRING(255),
           allowNull: false,
         },
-        tokenName: {
+        tokenId: {
           type: DataTypes.STRING(255),
           allowNull: false,
+        },
+        tokenSlug: {
+          type: DataTypes.STRING(255),
+          allowNull: false,
+        },
+        ConvertToUSDT: {
+          type: DataTypes.STRING(255),
+          allowNull: true,
+        },
+        ConvertToETH: {
+          type: DataTypes.STRING(255),
+          allowNull: true,
+        },
+        ConvertToBNB: {
+          type: DataTypes.STRING(255),
+          allowNull: true,
         },
         tokenPrice: {
           type: DataTypes.STRING(255),
