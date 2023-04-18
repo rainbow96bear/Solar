@@ -1,0 +1,90 @@
+/***************************************************************************
+ * The contents of this file were generated with Amplify Studio.           *
+ * Please refrain from making any modifications to this file.              *
+ * Any changes to this file will be overwritten when running amplify pull. *
+ **************************************************************************/
+
+import * as React from "react";
+import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
+import { FlexProps, ImageProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type Swap320pxOverridesProps = {
+    Swap320px?: PrimitiveOverrideProps<ViewProps>;
+    Swap39752848?: PrimitiveOverrideProps<FlexProps>;
+    Top?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 58"?: PrimitiveOverrideProps<FlexProps>;
+    Swap39742722?: PrimitiveOverrideProps<TextProps>;
+    "Frame 57"?: PrimitiveOverrideProps<FlexProps>;
+    "Trade tokens in an instant"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 59"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 60"?: PrimitiveOverrideProps<FlexProps>;
+    "ghrgclzzd 4"?: PrimitiveOverrideProps<ImageProps>;
+    "ghrgclzzd 6"?: PrimitiveOverrideProps<ImageProps>;
+    Line?: PrimitiveOverrideProps<FlexProps>;
+    Bottom?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 74"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 7139752864"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 7039752862"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 7239752875"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 6939752861"?: PrimitiveOverrideProps<FlexProps>;
+    "ghrgclzzd 739752855"?: PrimitiveOverrideProps<ImageProps>;
+    DexName39752856?: PrimitiveOverrideProps<TextProps>;
+    "ghrgclzzd 839752857"?: PrimitiveOverrideProps<ImageProps>;
+    "Frame 7339752882"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 6839752860"?: PrimitiveOverrideProps<FlexProps>;
+    "ghrgclzzd 939752858"?: PrimitiveOverrideProps<ImageProps>;
+    "ghrgclzzd 1039752859"?: PrimitiveOverrideProps<ImageProps>;
+    "Balance : 039752863"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 6539752830"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 6439752829"?: PrimitiveOverrideProps<FlexProps>;
+    "12312312312312312339752827"?: PrimitiveOverrideProps<TextProps>;
+    "~12312312312312312339752828"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 6539814034"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 8039814040"?: PrimitiveOverrideProps<FlexProps>;
+    "25%39814035"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 8139814043"?: PrimitiveOverrideProps<FlexProps>;
+    "50%39814044"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 8239814045"?: PrimitiveOverrideProps<FlexProps>;
+    "75%39814046"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 8339814047"?: PrimitiveOverrideProps<FlexProps>;
+    Max39814048?: PrimitiveOverrideProps<TextProps>;
+    "Frame 67"?: PrimitiveOverrideProps<FlexProps>;
+    "ghrgclzzd 839752853"?: PrimitiveOverrideProps<ImageProps>;
+    "Frame 75"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 7139752904"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 7039752905"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 7239752906"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 6939752907"?: PrimitiveOverrideProps<FlexProps>;
+    "ghrgclzzd 739752908"?: PrimitiveOverrideProps<ImageProps>;
+    DexName39752909?: PrimitiveOverrideProps<TextProps>;
+    "ghrgclzzd 839752910"?: PrimitiveOverrideProps<ImageProps>;
+    "Frame 7339752911"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 6839752912"?: PrimitiveOverrideProps<FlexProps>;
+    "ghrgclzzd 939752913"?: PrimitiveOverrideProps<ImageProps>;
+    "ghrgclzzd 1039752914"?: PrimitiveOverrideProps<ImageProps>;
+    "Balance : 039752915"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 6539752916"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 6439752917"?: PrimitiveOverrideProps<FlexProps>;
+    "12312312312312312339752918"?: PrimitiveOverrideProps<TextProps>;
+    "~12312312312312312339752919"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 66"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 8039814050"?: PrimitiveOverrideProps<FlexProps>;
+    "25%39814051"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 8139814052"?: PrimitiveOverrideProps<FlexProps>;
+    "50%39814053"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 8239814054"?: PrimitiveOverrideProps<FlexProps>;
+    "75%39814055"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 8339814056"?: PrimitiveOverrideProps<FlexProps>;
+    Max39814057?: PrimitiveOverrideProps<TextProps>;
+    "Frame 62"?: PrimitiveOverrideProps<FlexProps>;
+    "99.9%"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 61"?: PrimitiveOverrideProps<FlexProps>;
+    "ghrgclzzd 739742802"?: PrimitiveOverrideProps<ImageProps>;
+    "Slippage Tolerance"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 63"?: PrimitiveOverrideProps<FlexProps>;
+    "Enter an Amount"?: PrimitiveOverrideProps<TextProps>;
+} & EscapeHatchProps;
+export declare type Swap320pxProps = React.PropsWithChildren<Partial<ViewProps> & {
+    overrides?: Swap320pxOverridesProps | undefined | null;
+}>;
+export default function Swap320px(props: Swap320pxProps): React.ReactElement;
