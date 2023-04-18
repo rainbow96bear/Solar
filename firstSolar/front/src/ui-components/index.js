@@ -17,7 +17,6 @@ export { default as SwapCompo768px } from "./SwapCompo768px";
 export { default as SwapCompo320px } from "./SwapCompo320px";
 export { default as ConnectCompo320px } from "./ConnectCompo320px";
 export { default as SetNetwork1024px } from "./SetNetwork1024px";
-export { default as FormCheckout } from "./FormCheckout";
 export { default as AddLiquidityBottom320px } from "./AddLiquidityBottom320px";
 export { default as PoolListCom1024px } from "./PoolListCom1024px";
 export { default as ContactUs } from "./ContactUs";
