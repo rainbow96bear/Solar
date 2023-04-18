@@ -8,7 +8,7 @@ const app: Express = express();
 
 dotenv.config();
 
-app.use(cors({ origin: true, credential: true }));
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
