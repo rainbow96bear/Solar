@@ -4,10 +4,9 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "DFSToken.sol";
-import "Ownable.sol";
+import "../contracts/DFSToken.sol";
 
-contract LiquidityPool is ERC20, Ownable {
+contract LiquidityPool is ERC20 {
   uint DFSPrice = 100;
   DFSToken immutable DFS;
   //immutable 한번설정되면 변경불가능
@@ -66,7 +65,7 @@ contract LiquidityPool is ERC20, Ownable {
   // Internal function to mint liquidity shares
   // lp토큰추가 _to는 lp토큰 받을 사용자의 주소
 
-  function mint(address _to, uint256 _amount) private onlyOwner {
+  function mint(address _to, uint256 _amount) private {
     _mint(_to, _amount);
     userLiquidity[_to] = balanceOf(_to);
     totalLiquidity = totalSupply();

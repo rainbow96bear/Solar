@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.0;
 
-import "LiqudityPool.sol";
-import "DFSToken.sol";
+import "../contracts/LiqudityPool.sol";
+import "../contracts/DFSToken.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
