@@ -5,11 +5,13 @@ import {
   BeforeHeadCom320px,
   BeforeHeadCom768px,
 } from "../../ui-components";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const HeaderComponent = () => {
-  const connect = useSelector(state => state.connect.connect.connect);
-  const account = useSelector(state => state.account.account.account);
+  // 변수
+  const connect = useSelector((state) => state.connect.connect.connect);
+  const account = useSelector((state) => state.account.account.account);
 
   return (
     <Header>
