@@ -13,21 +13,23 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "./images/logo_new.png";
+
 import LoginAccount from "./LoginAccount.jsx";
 import ConnectModal from "./ConnectModal.jsx";
-import ConnectButton from "./ConnectButton.jsx";
 import LoadingButton from "./LoadingButton.jsx";
-import { Web3Button, Web3Modal, useWeb3Modal } from "@web3modal/react";
-import { projectId, ethereumClient } from "../App.js";
+import ConnectButton from "./ConnectButton.jsx";
+import { Web3Button } from "@web3modal/react";
+import { useWeb3Modal } from "@web3modal/react";
+import { useAccount } from "wagmi";
+
 export default function BeforeHeadCom1440px(props) {
   const { overrides, ...rest } = props;
-  const { isOpen } = useWeb3Modal();
-
+  const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
   const connect = useSelector((state) => state.connect.connect.connect);
   const navigate = useNavigate();
-
+  const { address, isConnecting, isDisconnected } = useAccount();
   const { pathname } = useLocation();
   const ref = React.useRef();
 
@@ -170,6 +172,8 @@ export default function BeforeHeadCom1440px(props) {
         {connect ? (
           document.cookie ? (
             <LoginAccount></LoginAccount>
+          ) : address ? (
+            <Web3Button></Web3Button>
           ) : (
             <>
               <ConnectModal></ConnectModal>
@@ -181,7 +185,6 @@ export default function BeforeHeadCom1440px(props) {
             <ConnectButton></ConnectButton>
           </div>
         )}
-        {/* <Web3Button label="&nbsp;&nbsp;&nbsp;&nbsp;Connect Wallet&nbsp;&nbsp;&nbsp;&nbsp;"></Web3Button> */}
       </div>
     </Flex>
   );
