@@ -21,6 +21,8 @@ db.sequelize
     console.error(err);
   });
 
+// 1.Express를 열 때 createLiquidityPool하는 코드
+
 app.use("/api", routes);
 app.listen(8080, () => {
   console.log("Server Opened");
