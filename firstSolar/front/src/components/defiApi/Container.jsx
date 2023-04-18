@@ -26,6 +26,7 @@ const DefiContainer = () => {
       console.error(error);
     }
   };
+  console.log(defiList);
 
   const selectMainNet = async (_mainNet) => {
     try {

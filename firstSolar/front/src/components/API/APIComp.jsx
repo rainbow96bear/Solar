@@ -1,25 +1,35 @@
-const APIComp = ({ APIClick, APIClick2, priceData }) => {
+const APIComp = ({
+  APIClick,
+  NowUSDTprice,
+  NowETHprice,
+  NowBNBprice,
+  BNBtoUSDT,
+  BNBtoETH,
+  ETHtoBNB,
+  ETHtoUSDT,
+  USDTtoETH,
+  USDTtoBNB,
+}) => {
   return (
     <div>
       <button
         onClick={() => {
           APIClick();
+          console.log({
+            NowUSDTprice,
+            NowETHprice,
+            NowBNBprice,
+            BNBtoUSDT,
+            BNBtoETH,
+            ETHtoBNB,
+            ETHtoUSDT,
+            USDTtoETH,
+            USDTtoBNB,
+          });
         }}
       >
         두과자
       </button>
-      <button
-        onClick={() => {
-          APIClick2();
-        }}
-      >
-        두과자2
-      </button>
-      <div>{priceData.map((item) => item.dltId)}</div>
-      <div>
-        {priceData.map((item) => item.rate[("bnt", "usd", "eur", "eth")])}
-      </div>
-      <div>{priceData.map((item) => item.symbol)}</div>
     </div>
   );
 };
