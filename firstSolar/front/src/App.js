@@ -26,7 +26,6 @@ import { useWeb3Modal } from "@web3modal/react";
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
-import { useEffect } from "react";
 import { Swap320px } from "./ui-components";
 import { connectThunk } from "./modules/connect";
 
