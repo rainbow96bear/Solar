@@ -59,6 +59,7 @@ const connectToDB = async () => {
 connectToDB();
 
 app.use("/api", routes);
+
 app.listen(8080, () => {
   console.log("Server Opened");
 });

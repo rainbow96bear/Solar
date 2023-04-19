@@ -202,42 +202,48 @@ router.get("/", (req, res) => {
       const USDTwapBNB: any = Object.values(usdtPriceToBNB)[1];
       const USDTtoBNB = USDTwapBNB[0].quote.BNB.price;
 
-      const DBConnet = [];
+      const DBConnet: any = [];
       DBConnet.push({
-        USDTIdData,
-        USDTSymbolData,
-        USDTSlugData,
-        USDTtoETH,
-        USDTtoBNB,
-        NowUSDTprice,
+        IdData: USDTIdData,
+        symbolData: USDTSymbolData,
+        slugData: USDTSlugData,
+        convertUSDT: 1,
+        convertETH: USDTtoETH,
+        convertBNB: USDTtoBNB,
+        tokenPrice: NowUSDTprice,
       });
       DBConnet.push({
-        ETHIdData,
-        ETHSymbolData,
-        ETHSlugData,
-        ETHtoUSDT,
-        ETHtoBNB,
-        NowETHprice,
+        IdData: ETHIdData,
+        symbolData: ETHSymbolData,
+        slugData: ETHSlugData,
+        convertUSDT: ETHtoUSDT,
+        convertETH: 1,
+        convertBNB: ETHtoBNB,
+        tokenPrice: NowETHprice,
       });
       DBConnet.push({
-        BNBIdData,
-        BNBSymbolData,
-        BNBSlugData,
-        BNBtoUSDT,
-        BNBtoETH,
-        NowBNBprice,
+        IdData: BNBIdData,
+        symbolData: BNBSymbolData,
+        slugData: BNBSlugData,
+        convertUSDT: BNBtoUSDT,
+        convertETH: BNBtoETH,
+        convertBNB: 1,
+        tokenPrice: NowBNBprice,
       });
-      console.log(DBConnet);
 
-      // await db.Price.create({
-      //   tokenSymbol: USDTTokenId,
-      //   tokenId: USDTTokenId,
-      //   tokenSlug: USDTTokenId,
-      //   ConvertToUSDT: NowUSDTprice,
-      //   ConvertToETH:,
-      //   ConvertToBNB:,
-      //   tokenPrice:
-      // });
+      if (db.Price.length <= 0) {
+        for (let i = 0; i < DBConnet.length; i++) {
+          await db.Price.create({
+            tokenSymbol: DBConnet[i].symbolData,
+            tokenId: DBConnet[i].IdData,
+            tokenSlug: DBConnet[i].slugData,
+            ConvertToUSDT: DBConnet[i].convertUSDT,
+            ConvertToETH: DBConnet[i].convertETH,
+            ConvertToBNB: DBConnet[i].convertBNB,
+            tokenPrice: DBConnet[i].tokenPrice,
+          });
+        }
+      }
 
       res.send({
         NowUSDTprice,
@@ -256,5 +262,33 @@ router.get("/", (req, res) => {
     }
   };
   runApp();
+});
+router.post("/swap", (req, res) => {
+  const swapApp = async () => {
+    const BtnUSDT = await db.Price.findOne({
+      where: {
+        tokenSymbol: req.body.data,
+      },
+    });
+    res.send(BtnUSDT);
+  };
+  swapApp();
+});
+router.post("/filterSwap", (req, res) => {
+  const filterSwapApp = async () => {
+    console.log(req.body);
+    const BtnUSDT = await db.Price.findOne({
+      where: {
+        tokenSymbol: req.body.data,
+      },
+    });
+    res.send(BtnUSDT.tokenPrice);
+    // const BtnEth = await db.Price.findone({ tokenPrice });
+    // const BtnBnB = await db.Price.findone({});
+    // const swapEth = await db.Price.findone({
+    //   where: {},
+    // });
+  };
+  filterSwapApp();
 });
 export default router;
