@@ -7,9 +7,50 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import {
+  Flex,
+  Image,
+  Text,
+  Pagination,
+  usePagination,
+} from "@aws-amplify/ui-react";
+import { getMainPoolList } from "../api/index.js";
 export default function PoolListCom1440px(props) {
   const { overrides, ...rest } = props;
+  const [poolList, setPoolList] = React.useState([]);
+  const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
+  const [pageIndex, setPageIndex] = React.useState(1);
+  const pageSize = 10;
+  const [resultLength, setResultLength] = React.useState(1);
+  const [totalPages, setTotalPages] = React.useState(1);
+
+  React.useEffect(() => {
+    (async () => {
+      const { result, resultLength, resultTotalPages } = await getMainPoolList(
+        pageIndex
+      );
+      setPoolList(result);
+
+      setCurrentPagePoolList(
+        result.slice((pageIndex - 1) * 10, pageIndex * 10)
+      );
+      setResultLength(resultLength);
+      setTotalPages(resultTotalPages);
+    })();
+  }, []);
+
+  React.useEffect(() => {
+    setCurrentPagePoolList(
+      poolList.slice((pageIndex - 1) * 10, pageIndex * 10)
+    );
+  }, [pageIndex]);
+
+  const paginationProps = usePagination({
+    totalPages: totalPages,
+    currentPage: pageIndex,
+    siblingCount: 2,
+  });
+
   return (
     <Flex
       display={{
@@ -775,6 +816,7 @@ export default function PoolListCom1440px(props) {
           </Flex>
         </Flex>
       </Flex>
+
       <Flex
         gap="17px"
         direction="column"
@@ -1062,444 +1104,468 @@ export default function PoolListCom1440px(props) {
             ></Text>
           </Flex>
         </Flex>
-        <Flex
-          gap="7px"
-          direction="row"
-          width="unset"
-          height="unset"
-          justifyContent="flex-start"
-          alignItems="center"
-          shrink="0"
-          alignSelf="stretch"
-          position="relative"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-          borderRadius="18px"
-          padding="30px 15px 30px 15px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-          {...getOverrideProps(overrides, "List")}
-        >
+        {currentPagePoolList.map((item, idx) => (
           <Flex
-            gap="10px"
+            gap="7px"
             direction="row"
             width="unset"
             height="unset"
             justifyContent="flex-start"
             alignItems="center"
             shrink="0"
+            alignSelf="stretch"
             position="relative"
-            padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 11")}
+            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+            borderRadius="18px"
+            padding="30px 15px 30px 15px"
+            backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+            key={`poolList${idx}item`}
+            {...getOverrideProps(overrides, "List")}
           >
             <Flex
-              gap="-6px"
+              gap="10px"
               direction="row"
               width="unset"
-              height="48px"
-              justifyContent="center"
+              height="unset"
+              justifyContent="flex-start"
               alignItems="center"
               shrink="0"
               position="relative"
-              padding="5px 5px 5px 5px"
-              {...getOverrideProps(overrides, "PoolImg")}
-            >
-              <Image
-                width="15px"
-                height="15px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="15px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                {...getOverrideProps(overrides, "unsplash:AYOloXgqjzo39313162")}
-              ></Image>
-              <Image
-                width="38px"
-                height="38px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                borderRadius="20px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                {...getOverrideProps(overrides, "unsplash:em1OiomfG3g39313163")}
-              ></Image>
-            </Flex>
-            <Flex
-              gap="13px"
-              direction="column"
-              width="338px"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              shrink="0"
-              position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "LogoTitle")}
+              {...getOverrideProps(overrides, "Frame 11")}
             >
-              <Text
-                fontFamily="Inter"
-                fontSize="21px"
-                fontWeight="700"
-                lineHeight="25.414772033691406px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="25px"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children="Overnight Pulse Act ll"
-                {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
-              ></Text>
               <Flex
-                gap="15px"
+                gap="-6px"
                 direction="row"
                 width="unset"
+                height="48px"
+                justifyContent="center"
+                alignItems="center"
+                shrink="0"
+                position="relative"
+                padding="5px 5px 5px 5px"
+                {...getOverrideProps(overrides, "PoolImg")}
+              >
+                <Image
+                  width="15px"
+                  height="15px"
+                  display="block"
+                  gap="unset"
+                  alignItems="unset"
+                  justifyContent="unset"
+                  shrink="0"
+                  position="relative"
+                  borderRadius="15px"
+                  padding="0px 0px 0px 0px"
+                  objectFit="cover"
+                  {...getOverrideProps(
+                    overrides,
+                    "unsplash:AYOloXgqjzo39313162"
+                  )}
+                ></Image>
+                <Image
+                  width="38px"
+                  height="38px"
+                  display="block"
+                  gap="unset"
+                  alignItems="unset"
+                  justifyContent="unset"
+                  shrink="0"
+                  position="relative"
+                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                  borderRadius="20px"
+                  padding="0px 0px 0px 0px"
+                  objectFit="cover"
+                  {...getOverrideProps(
+                    overrides,
+                    "unsplash:em1OiomfG3g39313163"
+                  )}
+                ></Image>
+              </Flex>
+              <Flex
+                gap="13px"
+                direction="column"
+                width="338px"
                 height="unset"
                 justifyContent="flex-start"
                 alignItems="flex-start"
                 shrink="0"
-                alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 10")}
+                {...getOverrideProps(overrides, "LogoTitle")}
               >
-                <Flex
-                  gap="10px"
+                <Text
+                  fontFamily="Inter"
+                  fontSize="21px"
+                  fontWeight="700"
+                  lineHeight="25.414772033691406px"
+                  textAlign="left"
+                  display="block"
                   direction="column"
+                  justifyContent="unset"
                   width="unset"
-                  height="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
+                  height="25px"
+                  gap="unset"
+                  alignItems="unset"
+                  shrink="0"
+                  alignSelf="stretch"
                   position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="19px"
-                  padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(234,0,50,0.55)"
-                  {...getOverrideProps(overrides, "Frame 9")}
-                >
-                  <Text
-                    fontFamily="Inter"
-                    fontSize="12px"
-                    fontWeight="600"
-                    color="rgba(239,239,239,1)"
-                    lineHeight="14.522727012634277px"
-                    textAlign="center"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="15px"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="VELOCIMETER"
-                    {...getOverrideProps(overrides, "VELOCIMETER")}
-                  ></Text>
-                </Flex>
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children={item?.name}
+                  {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
+                ></Text>
                 <Flex
-                  gap="0"
+                  gap="15px"
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
+                  justifyContent="flex-start"
+                  alignItems="flex-start"
+                  shrink="0"
+                  alignSelf="stretch"
                   position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="19px"
-                  padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,226,0,0.55)"
-                  {...getOverrideProps(overrides, "Frame 8")}
+                  padding="0px 0px 0px 0px"
+                  {...getOverrideProps(overrides, "Frame 10")}
                 >
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="15px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(
-                      overrides,
-                      "unsplash:AYOloXgqjzo39313160"
-                    )}
-                  ></Image>
-                  <Text
-                    fontFamily="Inter"
-                    fontSize="12px"
-                    fontWeight="600"
-                    lineHeight="14.522727012634277px"
-                    textAlign="center"
-                    display="block"
+                  <Flex
+                    gap="10px"
                     direction="column"
-                    justifyContent="unset"
-                    width="105px"
-                    height="15px"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="center"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
                     position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="STADER BOOST"
-                    {...getOverrideProps(overrides, "STADER BOOST")}
-                  ></Text>
+                    boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                    borderRadius="19px"
+                    padding="10px 10px 10px 10px"
+                    backgroundColor="rgba(234,0,50,0.55)"
+                    {...getOverrideProps(overrides, "Frame 9")}
+                  >
+                    <Text
+                      fontFamily="Inter"
+                      fontSize="12px"
+                      fontWeight="600"
+                      color="rgba(239,239,239,1)"
+                      lineHeight="14.522727012634277px"
+                      textAlign="center"
+                      display="block"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="15px"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="VELOCIMETER"
+                      {...getOverrideProps(overrides, "VELOCIMETER")}
+                    ></Text>
+                  </Flex>
+                  <Flex
+                    gap="0"
+                    direction="row"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="center"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                    borderRadius="19px"
+                    padding="10px 10px 10px 10px"
+                    backgroundColor="rgba(255,226,0,0.55)"
+                    {...getOverrideProps(overrides, "Frame 8")}
+                  >
+                    <Image
+                      width="15px"
+                      height="15px"
+                      display="block"
+                      gap="unset"
+                      alignItems="unset"
+                      justifyContent="unset"
+                      shrink="0"
+                      position="relative"
+                      borderRadius="15px"
+                      padding="0px 0px 0px 0px"
+                      objectFit="cover"
+                      {...getOverrideProps(
+                        overrides,
+                        "unsplash:AYOloXgqjzo39313160"
+                      )}
+                    ></Image>
+                    <Text
+                      fontFamily="Inter"
+                      fontSize="12px"
+                      fontWeight="600"
+                      lineHeight="14.522727012634277px"
+                      textAlign="center"
+                      display="block"
+                      direction="column"
+                      justifyContent="unset"
+                      width="105px"
+                      height="15px"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="STADER BOOST"
+                      {...getOverrideProps(overrides, "STADER BOOST")}
+                    ></Text>
+                  </Flex>
                 </Flex>
               </Flex>
             </Flex>
-          </Flex>
-          <Flex
-            gap="10px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="10px 10px 10px 10px"
-            {...getOverrideProps(overrides, "Frame 1539313290")}
-          >
-            <Text
-              fontFamily="Inter"
-              fontSize="14px"
-              fontWeight="500"
-              lineHeight="16.94318199157715px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="17px"
-              gap="unset"
-              alignItems="unset"
-              grow="1"
-              shrink="1"
-              basis="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="0"
-              {...getOverrideProps(overrides, "039313291")}
-            ></Text>
-          </Flex>
-          <Flex
-            gap="10px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="10px 10px 10px 10px"
-            {...getOverrideProps(overrides, "Frame 18")}
-          >
-            <Text
-              fontFamily="Inter"
-              fontSize="14px"
-              fontWeight="500"
-              lineHeight="16.94318199157715px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
+            <Flex
+              gap="10px"
+              direction="row"
               width="unset"
               height="unset"
-              gap="unset"
-              alignItems="unset"
+              justifyContent="center"
+              alignItems="center"
               grow="1"
               shrink="1"
               basis="0"
               position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="0"
-              {...getOverrideProps(overrides, "039573871")}
-            ></Text>
-          </Flex>
-          <Flex
-            gap="10px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="10px 10px 10px 10px"
-            {...getOverrideProps(overrides, "Frame 19")}
-          >
-            <Text
-              fontFamily="Inter"
-              fontSize="14px"
-              fontWeight="500"
-              lineHeight="16.94318199157715px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
+              padding="10px 10px 10px 10px"
+              {...getOverrideProps(overrides, "Frame 1539313290")}
+            >
+              <Text
+                fontFamily="Inter"
+                fontSize="14px"
+                fontWeight="500"
+                lineHeight="16.94318199157715px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="17px"
+                gap="unset"
+                alignItems="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="wallet자리"
+                {...getOverrideProps(overrides, "039313291")}
+              ></Text>
+            </Flex>
+            <Flex
+              gap="10px"
+              direction="row"
               width="unset"
-              height="17px"
-              gap="unset"
-              alignItems="unset"
+              height="unset"
+              justifyContent="center"
+              alignItems="center"
               grow="1"
               shrink="1"
               basis="0"
               position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="99.99%"
-              {...getOverrideProps(overrides, "99.99%")}
-            ></Text>
-          </Flex>
-          <Flex
-            gap="10px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="10px 10px 10px 10px"
-            {...getOverrideProps(overrides, "Frame 16")}
-          >
-            <Text
-              fontFamily="Inter"
-              fontSize="14px"
-              fontWeight="500"
-              lineHeight="16.94318199157715px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
+              padding="10px 10px 10px 10px"
+              {...getOverrideProps(overrides, "Frame 18")}
+            >
+              <Text
+                fontFamily="Inter"
+                fontSize="14px"
+                fontWeight="500"
+                lineHeight="16.94318199157715px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="unset"
+                gap="unset"
+                alignItems="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="Deposit자리"
+                {...getOverrideProps(overrides, "039573871")}
+              ></Text>
+            </Flex>
+            <Flex
+              gap="10px"
+              direction="row"
               width="unset"
-              height="17px"
-              gap="unset"
-              alignItems="unset"
+              height="unset"
+              justifyContent="center"
+              alignItems="center"
               grow="1"
               shrink="1"
               basis="0"
               position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="$999,999"
-              {...getOverrideProps(overrides, "$999,99939313294")}
-            ></Text>
-          </Flex>
-          <Flex
-            gap="10px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="10px 10px 10px 10px"
-            {...getOverrideProps(overrides, "Frame 20")}
-          >
-            <Text
-              fontFamily="Inter"
-              fontSize="14px"
-              fontWeight="500"
-              lineHeight="16.94318199157715px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
+              padding="10px 10px 10px 10px"
+              {...getOverrideProps(overrides, "Frame 19")}
+            >
+              <Text
+                fontFamily="Inter"
+                fontSize="14px"
+                fontWeight="500"
+                lineHeight="16.94318199157715px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="17px"
+                gap="unset"
+                alignItems="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children={`${Math.round(item?.apy * 10000) / 10000} %`}
+                {...getOverrideProps(overrides, "99.99%")}
+              ></Text>
+            </Flex>
+            <Flex
+              gap="10px"
+              direction="row"
               width="unset"
-              height="17px"
-              gap="unset"
-              alignItems="unset"
+              height="unset"
+              justifyContent="center"
+              alignItems="center"
               grow="1"
               shrink="1"
               basis="0"
               position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="$999,999"
-              {...getOverrideProps(overrides, "$999,99939574041")}
-            ></Text>
-          </Flex>
-          <Flex
-            gap="10px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="10px 10px 10px 10px"
-            {...getOverrideProps(overrides, "Frame 17")}
-          >
-            <Text
-              fontFamily="Inter"
-              fontSize="14px"
-              fontWeight="500"
-              lineHeight="16.94318199157715px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
+              padding="10px 10px 10px 10px"
+              {...getOverrideProps(overrides, "Frame 16")}
+            >
+              <Text
+                fontFamily="Inter"
+                fontSize="14px"
+                fontWeight="500"
+                lineHeight="16.94318199157715px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="17px"
+                gap="unset"
+                alignItems="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children={`$${item?.tvl}`}
+                {...getOverrideProps(overrides, "$999,99939313294")}
+              ></Text>
+            </Flex>
+            <Flex
+              gap="10px"
+              direction="row"
               width="unset"
-              height="17px"
-              gap="unset"
-              alignItems="unset"
+              height="unset"
+              justifyContent="center"
+              alignItems="center"
               grow="1"
               shrink="1"
               basis="0"
               position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="Add Liquidity"
-              {...getOverrideProps(overrides, "Add Liquidity")}
-            ></Text>
+              padding="10px 10px 10px 10px"
+              {...getOverrideProps(overrides, "Frame 20")}
+            >
+              <Text
+                fontFamily="Inter"
+                fontSize="14px"
+                fontWeight="500"
+                lineHeight="16.94318199157715px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="17px"
+                gap="unset"
+                alignItems="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children={`$${
+                  item?.dailyTvlRate == null ? 0 : item?.dailyTvlRate
+                }`}
+                {...getOverrideProps(overrides, "$999,99939574041")}
+              ></Text>
+            </Flex>
+            <Flex
+              gap="10px"
+              direction="row"
+              width="unset"
+              height="unset"
+              justifyContent="center"
+              alignItems="center"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="10px 10px 10px 10px"
+              {...getOverrideProps(overrides, "Frame 17")}
+            >
+              <Text
+                fontFamily="Inter"
+                fontSize="14px"
+                fontWeight="500"
+                lineHeight="16.94318199157715px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="17px"
+                gap="unset"
+                alignItems="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="Add Liquidity"
+                {...getOverrideProps(overrides, "Add Liquidity")}
+              ></Text>
+            </Flex>
           </Flex>
-        </Flex>
+        ))}
       </Flex>
+
+      <Pagination
+        {...paginationProps}
+        onChange={(pageNum) => {
+          setPageIndex(pageNum);
+        }}
+        onNext={() => {
+          setPageIndex(pageIndex + 1);
+        }}
+        onPrevious={() => {
+          setPageIndex(pageIndex - 1);
+        }}
+      />
     </Flex>
   );
 }
