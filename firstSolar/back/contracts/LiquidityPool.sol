@@ -35,11 +35,7 @@ contract LiquidityPool is ERC20 {
     address _token1,
     address _token2,
     address DFSTokenA
-  )
-    // uint256 rwdToken1Amount,
-    // uint256 rwdToken2Amount
-    ERC20(_name, _symbol)
-  {
+  ) ERC20(_name, _symbol) {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = IDFS(DFSTokenA);

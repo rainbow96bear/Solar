@@ -26,6 +26,7 @@ import { useWeb3Modal } from "@web3modal/react";
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
+import TestDefiContainer from "./components/testdefi/Container";
 import { Swap320px } from "./ui-components";
 import { connectThunk } from "./modules/connect";
 import UserLoading from "./ui-components/UserLoading";
@@ -82,6 +83,7 @@ function App() {
       <WagmiConfig client={wagmiClient}>
         <div className="App">
           <HeaderContainer></HeaderContainer>
+          <TestDefiContainer />
           <MainContent>
             <Routes>
               <Route path="/" element={<MainContainer />}></Route>

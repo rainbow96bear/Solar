@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.19;
 
-import "../contracts/LiqudityPool.sol";
-import "../contracts/DFSToken.sol";
+import "LiquidityPool.sol";
+import "DFSToken.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Dex {
@@ -65,9 +66,11 @@ contract Dex {
       getLiquidityPool[_token1][_token2] == address(0),
       "Pool Already Exists"
     );
-
+    string memory symbol1 = ERC20(_token1).symbol();
+    string memory symbol2 = ERC20(_token2).symbol();
+    string memory name = string(abi.encodePacked(symbol1, "-", symbol2));
     _lpToken = ERC20(
-      new LiquidityPool("DFS-LP", "DFS-LP", _token1, _token2, DFSTokenA)
+      new LiquidityPool(name, name, _token1, _token2, DFSTokenA)
     );
     //ERC20을 상속받은 LiquidityPool 컨트랙트의 인스턴스를 생성
     //DFS-LP가 name,symbol
