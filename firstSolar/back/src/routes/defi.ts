@@ -1,5 +1,17 @@
 import { Router, Request, Response } from "express";
 import axios from "axios";
+import dotenv from "dotenv";
+import Web3 from "web3";
+import { AbiItem } from "web3-utils";
+import db from "../../models/index";
+
+import { mainNet } from "../setting";
+import { abi as DexAbi } from "../../contracts/artifacts/Dex.json";
+
+const web3 = new Web3(
+  "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
+);
+dotenv.config();
 
 interface LPData {
   id: string;
@@ -55,90 +67,6 @@ interface detailLp {
 
 const router = Router();
 
-export const mainNet = {
-  ethereum: 1,
-  optimism: 10,
-  metis: 43,
-  aurora: 53,
-  bsc: 56,
-  kava: 99,
-  fuse: 122,
-  heco: 128,
-  polygon: 137,
-  fantom: 250,
-  moonbeam: 1285,
-  moonriver: 1285,
-  canto: 3030,
-  cronos: 36661,
-  arbitrum: 42161,
-  celo: 42220,
-  avax: 43114,
-  emerald: 246529,
-};
-
-export const coinPoint = [
-  "btc",
-  "eth",
-  "ltc",
-  "bch",
-  "bnb",
-  "eos",
-  "xrp",
-  "xlm",
-  "link",
-  "dot",
-  "yfi",
-  "usd",
-  "aed",
-  "ars",
-  "aud",
-  "bdt",
-  "bhd",
-  "bmd",
-  "brl",
-  "cad",
-  "chf",
-  "clp",
-  "cny",
-  "czk",
-  "dkk",
-  "eur",
-  "gbp",
-  "hkd",
-  "huf",
-  "idr",
-  "ils",
-  "inr",
-  "jpy",
-  "krw",
-  "kwd",
-  "lkr",
-  "mmk",
-  "mxn",
-  "myr",
-  "ngn",
-  "nok",
-  "nzd",
-  "php",
-  "pkr",
-  "pln",
-  "rub",
-  "sar",
-  "sek",
-  "sgd",
-  "thb",
-  "try",
-  "twd",
-  "uah",
-  "vef",
-  "vnd",
-  "zar",
-  "xdr",
-  "xag",
-  "xau",
-  "bits",
-  "sats",
-];
 const ONE_DAY_MS: number = 24 * 60 * 60 * 1000;
 const MAX_RETRIES: number = 3;
 const RETRY_DELAY: number = 1000;
@@ -158,6 +86,14 @@ const getTvlData = async (
   return (await axios.get(url)).data[lpChain]?.[lpId] ?? 0;
 };
 
+let obj: { from?: string; to?: string; data?: string } = {
+  from: "",
+  to: "",
+  data: "",
+};
+
+const deployed = new web3.eth.Contract(DexAbi as AbiItem[], process.env.DEX);
+
 router.get("/", async (req: Request, res: Response<LPData[]>) => {
   retries = 0;
 
@@ -165,6 +101,8 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     try {
       const now: Date = new Date();
       const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
+
+      const getPool = await db.Pool.findAll();
 
       const activeLpList = (
         await axios.get(`https://api.beefy.finance/vaults`)
@@ -205,8 +143,8 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
           };
         })
       );
-
-      res.send(data);
+      const dataWithPool = [...data, ...getPool];
+      res.send(dataWithPool);
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
@@ -384,4 +322,32 @@ router.post("/price", async (req: Request, res: Response) => {
   }
 });
 
+router.post("/test", async (req: Request, res: Response) => {
+  try {
+    const { account }: { account: string } = req.body;
+
+    obj.from = account;
+    obj.to = process.env.DEX;
+    obj.data = await deployed.methods
+      .createLiquidityPool(process.env.DFS, process.env.ETH)
+      .encodeABI();
+    res.send(obj);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
+router.post("/lp", async (req: Request, res: Response) => {
+  try {
+    const result = await deployed.methods
+      .getLiquidityPool(process.env.DFS, process.env.ETH)
+      .call();
+    console.log(result);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
 export default router;
