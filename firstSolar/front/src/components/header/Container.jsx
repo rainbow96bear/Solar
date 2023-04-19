@@ -24,11 +24,12 @@ const HeaderContainer = () => {
   };
 
   window.ethereum?.on("accountsChanged", (accounts) => {
-    logoutMethod();
+    // logoutMethod();
+    // 로그인, 계정 변경, 로그아웃 모두 감지해버려서 일단 지워뒀다.
   });
 
   window.klaytn?.on("accountsChanged", (accounts) => {
-    logoutMethod();
+    // logoutMethod();
   });
 
   useEffect(() => {
@@ -45,20 +46,20 @@ const HeaderContainer = () => {
         const [_account] = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        dispatch(connectThunk({ connect: true }));
         dispatch(accountThunk({ account: _account }));
+        dispatch(connectThunk({ connect: true }));
         console.log("메타마스크였다.");
       } else if (document.cookie.split(":")[0] == "kaikas") {
         // 쿠키를 :으로 잘라 첫번째가 kaikas라면
 
         const kaikasWallet = (await window.klaytn.enable())[0];
-        dispatch(connectThunk({ connect: true }));
         dispatch(accountThunk({ account: kaikasWallet }));
+        dispatch(connectThunk({ connect: true }));
         console.log("카이카스였다.");
       }
       // 이렇게 지갑을 나눌 이유가 현재로서는 없으나 추후에 지갑 종류에 따라 다르게 나타날 수도 있으니 나눈다.
     })();
   }, []);
-  return <HeaderComponent logout={logout}></HeaderComponent>;
+  return <HeaderComponent></HeaderComponent>;
 };
 export default HeaderContainer;

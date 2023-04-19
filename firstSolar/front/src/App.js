@@ -31,32 +31,7 @@ import { connectThunk } from "./modules/connect";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
-const desktopWallets = [
-  {
-    id: "c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96",
-    name: "Metamask",
-    links: {
-      native: "https://metamask.io/",
-      universal:
-        "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn",
-    },
-  },
-  {
-    id: "Kaikas",
-    name: "Kaikas",
-    links: {
-      native: "https://medium.com/klaytn/",
-      universal:
-        "https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi",
-    },
-  },
-];
-const walletImages = {
-  c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96:
-    "https://lh3.googleusercontent.com/QW0gZ3yugzXDvTANa5-cc1EpabQ2MGnl6enW11O6kIerEaBQGOhgyUOvhRedndD9io8RJMmJZfIXq1rMxUsFHS2Ttw=w128-h128-e365-rj-sc0x00ffffff",
-  Kaikas:
-    "https://lh3.googleusercontent.com/vQ4txSWDboUlo0L9Q0VBl-vx7lEkiphTm9W6eFZxmleN3JkZ9TEkvmtFdsSvMGVNXXaW3ofeZAh5r7bNfH4L2fHq1G4=w128-h128-e365-rj-sc0x00ffffff",
-};
+
 const explorerExcludedWalletIds = "ALL";
 const { provider } = configureChains(chains, [
   w3mProvider({
@@ -127,8 +102,6 @@ function App() {
       <Web3Modal
         projectId={projectId}
         ethereumClient={ethereumClient}
-        desktopWallets={desktopWallets}
-        walletImages={walletImages}
         explorerExcludedWalletIds={explorerExcludedWalletIds}
       ></Web3Modal>
     </>

@@ -25,6 +25,7 @@ import { useAccount } from "wagmi";
 export default function BeforeHeadCom1440px(props) {
   const { overrides, ...rest } = props;
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
+  const login = useSelector((state) => state.login.login.login);
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
   const connect = useSelector((state) => state.connect.connect.connect);
@@ -174,7 +175,7 @@ export default function BeforeHeadCom1440px(props) {
       {/* </div> */}
       <div className="Header_right">
         {connect ? (
-          document.cookie ? (
+          login ? (
             <LoginAccount></LoginAccount>
           ) : address ? (
             <Web3Button></Web3Button>
