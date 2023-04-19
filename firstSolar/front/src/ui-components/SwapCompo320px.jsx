@@ -22,7 +22,7 @@ export default function SwapCompo320px(props) {
       }}
       gap="33px"
       direction="column"
-      width="100vw"
+      width="80vw"
       height="unset"
       justifyContent="center"
       alignItems="flex-start"
@@ -86,7 +86,7 @@ export default function SwapCompo320px(props) {
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="45px"
         padding="19px 25px 19px 25px"
-        backgroundColor="rgba(255,226,0,0.55)"
+        backgroundColor="rgba(255,226,0,0.35)"
         {...getOverrideProps(overrides, "Connect40052839")}
       >
         <Text

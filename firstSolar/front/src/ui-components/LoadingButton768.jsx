@@ -1,6 +1,6 @@
 import { Loader, useTheme } from "@aws-amplify/ui-react";
 import styled from "styled-components";
-const LoadingButton = () => {
+const LoadingButton768 = () => {
   const { tokens } = useTheme();
 
   return (
@@ -17,14 +17,14 @@ const LoadingButton = () => {
   );
 };
 
-export default LoadingButton;
+export default LoadingButton768;
 
 const Loading = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
 
   .Loading_innerBox {
-    width: 220px;
+    width: 80px;
     max-width: 220px;
     height: 40px;
     display: flex;

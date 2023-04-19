@@ -15,6 +15,7 @@ export default function LoginAccount(props) {
   const { overrides, ...rest } = props;
   const [view, setView] = React.useState(false);
   const account = useSelector((state) => state.account.account.account);
+
   const { pathname } = useLocation();
   const ref = React.useRef();
 

@@ -22,7 +22,6 @@ export default LoadingButton;
 const Loading = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
-
   .Loading_innerBox {
     width: 220px;
     max-width: 220px;
