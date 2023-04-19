@@ -5,9 +5,8 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "DFSToken.sol";
-import "Ownable.sol";
 
-contract LiquidityPool is ERC20, Ownable {
+contract LiquidityPool is ERC20 {
   uint DFSPrice = 100;
   DFSToken immutable DFS;
   //immutable 한번설정되면 변경불가능
@@ -37,11 +36,7 @@ contract LiquidityPool is ERC20, Ownable {
     address _token1,
     address _token2,
     address DFSTokenA
-  )
-    // uint256 rwdToken1Amount,
-    // uint256 rwdToken2Amount
-    ERC20(_name, _symbol)
-  {
+  ) ERC20(_name, _symbol) {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = DFSToken(DFSTokenA);
@@ -66,7 +61,7 @@ contract LiquidityPool is ERC20, Ownable {
   // Internal function to mint liquidity shares
   // lp토큰추가 _to는 lp토큰 받을 사용자의 주소
 
-  function mint(address _to, uint256 _amount) private onlyOwner {
+  function mint(address _to, uint256 _amount) private {
     _mint(_to, _amount);
     userLiquidity[_to] = balanceOf(_to);
     totalLiquidity = totalSupply();
@@ -80,7 +75,7 @@ contract LiquidityPool is ERC20, Ownable {
   // Internal function to burn liquidity shares
   // from은 lp토큰 소유한 사용자 주소
 
-  function burn(address _from, uint256 _amount) private onlyOwner {
+  function burn(address _from, uint256 _amount) private {
     _burn(_from, _amount);
     userLiquidity[_from] = balanceOf(_from);
     totalLiquidity = totalSupply();
@@ -177,7 +172,7 @@ contract LiquidityPool is ERC20, Ownable {
   function addLiquidity(
     uint256 _amountToken1,
     uint256 _amountToken2
-  ) external returns (uint256 _liquidityShares) {
+  ) external  returns (uint256 _liquidityShares) {
     // User sends both tokens to liquidity pool
     require(
       token1.transferFrom(msg.sender, address(this), _amountToken1),
