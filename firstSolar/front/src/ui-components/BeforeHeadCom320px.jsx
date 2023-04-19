@@ -20,7 +20,7 @@ export default function BeforeHeadCom320px(props) {
   const connect = useSelector(state => state.connect.connect.connect);
   return (
     <Flex
-      width="320px"
+      width="90vw"
       height={searchView ? "96px" : "48px"}
       display={{
         base: "flex",

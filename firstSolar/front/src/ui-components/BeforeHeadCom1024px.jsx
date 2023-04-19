@@ -116,7 +116,6 @@ export default function BeforeHeadCom1024px(props) {
           justifyContent="unset"
           shrink="0"
           position="relative"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="50px"
           padding="0px 0px 0px 0px"
           objectFit="cover"
