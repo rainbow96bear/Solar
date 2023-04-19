@@ -8,31 +8,56 @@
 import * as React from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import {
+  Flex,
+  Image,
+  Text,
+  Pagination,
+  usePagination,
+} from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { ConnectCompo1440px, SwapCompo1440px } from "../ui-components";
+import { getMainPoolList } from "../api/index.js";
 
 export default function PoolListCom1440px(props) {
   const { overrides, ...rest } = props;
 
+  const [poolList, setPoolList] = React.useState([]);
+  const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
+  const [pageIndex, setPageIndex] = React.useState(1);
+  const pageSize = 10;
+  const [resultLength, setResultLength] = React.useState(1);
+  const [totalPages, setTotalPages] = React.useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  const items = [
-    {
-      id: "0",
-      title: "1",
-    },
-    {
-      id: "1",
-      title: "2",
-    },
-    {
-      id: "2",
-      title: "3",
-    },
-  ];
+  React.useEffect(() => {
+    (async () => {
+      const { result, resultLength, resultTotalPages } = await getMainPoolList(
+        pageIndex
+      );
+      setPoolList(result);
+
+      setCurrentPagePoolList(
+        result.slice((pageIndex - 1) * 10, pageIndex * 10)
+      );
+      setResultLength(resultLength);
+      setTotalPages(resultTotalPages);
+    })();
+  }, []);
+
+  React.useEffect(() => {
+    setCurrentPagePoolList(
+      poolList.slice((pageIndex - 1) * 10, pageIndex * 10)
+    );
+  }, [pageIndex]);
+
+  const paginationProps = usePagination({
+    totalPages: totalPages,
+    currentPage: pageIndex,
+    siblingCount: 2,
+  });
 
   return (
     <Flex
@@ -1117,7 +1142,7 @@ export default function PoolListCom1440px(props) {
           initial={{ borderRadius: 25 }}
           transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
         >
-          {items.map((item, idx) => (
+          {currentPagePoolList.map((item, idx) => (
             <Flex
               key={`lpList-1440-${idx}`}
               gap="17px"
@@ -1617,22 +1642,18 @@ export default function PoolListCom1440px(props) {
           ))}
         </motion.div>
       </LayoutGroup>
-
-      {/* <Flex
-        gap="17px"
-        direction="column"
-        width="unset"
-        height="unset"
-        justifyContent="center"
-        alignItems="center"
-        shrink="0"
-        alignSelf="stretch"
-        position="relative"
-        padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "PoolItem")}
-      >
-        <Accordion />
-      </Flex> */}
+      <Pagination
+        {...paginationProps}
+        onChange={(pageNum) => {
+          setPageIndex(pageNum);
+        }}
+        onNext={() => {
+          setPageIndex(pageIndex + 1);
+        }}
+        onPrevious={() => {
+          setPageIndex(pageIndex - 1);
+        }}
+      />
     </Flex>
   );
 }
