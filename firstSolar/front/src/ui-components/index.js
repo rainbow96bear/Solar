@@ -32,7 +32,6 @@ export { default as PooListCom768px } from "./PooListCom768px";
 export { default as LogoTitle } from "./LogoTitle";
 export { default as ChainChange } from "./ChainChange";
 export { default as ConnectButton } from "./ConnectButton";
-export { default as Menu1 } from "./Menu1";
 export { default as ChainIcon } from "./ChainIcon";
 export { default as ConnectModal } from "./ConnectModal";
 
