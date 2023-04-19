@@ -1142,7 +1142,7 @@ export default function PoolListCom1440px(props) {
           initial={{ borderRadius: 25 }}
           transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
         >
-          {currentPagePoolList.map((item, idx) => (
+          {currentPagePoolList?.map((item, idx) => (
             <Flex
               key={`lpList-1440-${idx}`}
               gap="17px"
@@ -1213,6 +1213,7 @@ export default function PoolListCom1440px(props) {
                         {...getOverrideProps(overrides, "PoolImg")}
                       >
                         <Image
+                          src={item.mainNetLogo}
                           width="15px"
                           height="15px"
                           display="block"
@@ -1230,6 +1231,7 @@ export default function PoolListCom1440px(props) {
                           )}
                         ></Image>
                         <Image
+                          src={item.platformLogo}
                           width="38px"
                           height="38px"
                           display="block"
@@ -1278,7 +1280,7 @@ export default function PoolListCom1440px(props) {
                           position="relative"
                           padding="0px 0px 0px 0px"
                           whiteSpace="pre-wrap"
-                          children="Overnight Pulse Act ll"
+                          children={item.name}
                           {...getOverrideProps(
                             overrides,
                             "Overnight Pulse Act ll"
@@ -1428,7 +1430,7 @@ export default function PoolListCom1440px(props) {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="0"
+                        children="wallet자리"
                         {...getOverrideProps(overrides, "039313291")}
                       ></Text>
                     </Flex>
@@ -1465,7 +1467,7 @@ export default function PoolListCom1440px(props) {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="0"
+                        children="deposit자리"
                         {...getOverrideProps(overrides, "039573871")}
                       ></Text>
                     </Flex>
@@ -1502,7 +1504,7 @@ export default function PoolListCom1440px(props) {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="99.99%"
+                        children={`${Math.round(item?.apy * 10000) / 10000} %`}
                         {...getOverrideProps(overrides, "99.99%")}
                       ></Text>
                     </Flex>
@@ -1539,7 +1541,7 @@ export default function PoolListCom1440px(props) {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="$999,999"
+                        children={`$${item.tvl}`}
                         {...getOverrideProps(overrides, "$999,99939313294")}
                       ></Text>
                     </Flex>
@@ -1576,7 +1578,11 @@ export default function PoolListCom1440px(props) {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="$999,999"
+                        children={`$${
+                          item.dailyTvlRate == null
+                            ? 0
+                            : Math.round(item.dailyTvlRate * 10000) / 10000
+                        }`}
                         {...getOverrideProps(overrides, "$999,99939574041")}
                       ></Text>
                     </Flex>
@@ -1642,18 +1648,20 @@ export default function PoolListCom1440px(props) {
           ))}
         </motion.div>
       </LayoutGroup>
-      <Pagination
-        {...paginationProps}
-        onChange={(pageNum) => {
-          setPageIndex(pageNum);
-        }}
-        onNext={() => {
-          setPageIndex(pageIndex + 1);
-        }}
-        onPrevious={() => {
-          setPageIndex(pageIndex - 1);
-        }}
-      />
+      <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
+        <Pagination
+          {...paginationProps}
+          onChange={(pageNum) => {
+            setPageIndex(pageNum);
+          }}
+          onNext={() => {
+            setPageIndex(pageIndex + 1);
+          }}
+          onPrevious={() => {
+            setPageIndex(pageIndex - 1);
+          }}
+        />
+      </Flex>
     </Flex>
   );
 }
