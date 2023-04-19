@@ -31,12 +31,12 @@ export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
   const { tokens } = useTheme();
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const connect = useSelector(state => state.connect.connect.connect);
   return (
     <Cover>
       <Flex>
         <Flex
-          width="320px"
+          width="90vw"
           height={searchView ? "96px" : "48px"}
           display={{
             base: "flex",
