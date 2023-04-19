@@ -8,6 +8,8 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 export default function SwapCompo1440px(props) {
   const { overrides, ...rest } = props;
   return (
@@ -15,14 +17,14 @@ export default function SwapCompo1440px(props) {
       display={{
         base: "none",
         small: "none",
-        medium: "none",
-        large: "none",
+        medium: "flex",
+        large: "flex",
         xl: "flex",
         xxl: "flex",
       }}
       gap="30px"
       direction="row"
-      width="100vw"
+      width="80vw"
       height="unset"
       justifyContent="flex-start"
       alignItems="center"
@@ -33,87 +35,104 @@ export default function SwapCompo1440px(props) {
       {...getOverrideProps(overrides, "SwapCompo1440px")}
       {...rest}
     >
-      <Flex
-        gap="10px"
-        direction="row"
-        width="unset"
-        height="50px"
-        justifyContent="flex-end"
-        alignItems="center"
-        grow="1"
-        shrink="1"
-        basis="0"
-        position="relative"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        borderRadius="45px"
-        padding="19px 25px 19px 25px"
-        backgroundColor="rgba(234,0,50,0.55)"
-        {...getOverrideProps(overrides, "Connect40052819")}
+      <motion.div
+        style={{
+          width: "45vw",
+          height: "unset",
+          borderRadius: "35px",
+          backgroundColor: "rgba(234,0,50,0.55)",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        }}
+        whileHover={{ borderRadius: "13px", scale: 1.1 }}
       >
-        <Text
-          fontFamily="Inter"
-          fontSize="24px"
-          fontWeight="700"
-          color="rgba(239,239,239,1)"
-          lineHeight="29.045454025268555px"
-          textAlign="center"
-          display="block"
-          direction="column"
-          justifyContent="unset"
+        <Flex
+          gap="10px"
+          direction="row"
           width="unset"
-          height="29px"
-          gap="unset"
-          alignItems="unset"
+          height="50px"
+          justifyContent="flex-end"
+          alignItems="center"
           grow="1"
           shrink="1"
           basis="0"
           position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Swap"
-          {...getOverrideProps(overrides, "Swap")}
-        ></Text>
-      </Flex>
-      <Flex
-        gap="10px"
-        direction="row"
-        width="unset"
-        height="50px"
-        justifyContent="flex-end"
-        alignItems="center"
-        grow="1"
-        shrink="1"
-        basis="0"
-        position="relative"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        borderRadius="45px"
-        padding="19px 25px 19px 25px"
-        backgroundColor="rgba(255,226,0,0.55)"
-        {...getOverrideProps(overrides, "Connect40052821")}
+          padding="19px 25px 19px 25px"
+          {...getOverrideProps(overrides, "Connect40052819")}
+        >
+          <Text
+            fontFamily="Inter"
+            fontSize="24px"
+            fontWeight="700"
+            color="rgba(239,239,239,1)"
+            lineHeight="29.045454025268555px"
+            textAlign="center"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="29px"
+            gap="unset"
+            alignItems="unset"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="Swap"
+            {...getOverrideProps(overrides, "Swap")}
+          ></Text>
+        </Flex>
+      </motion.div>
+
+      <motion.div
+        style={{
+          width: "45vw",
+          height: "unset",
+          borderRadius: "35px",
+          backgroundColor: "rgba(255,226,0,0.35)",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        }}
+        whileHover={{ borderRadius: "13px", scale: 1.1 }}
       >
-        <Text
-          fontFamily="Inter"
-          fontSize="24px"
-          fontWeight="700"
-          lineHeight="29.045454025268555px"
-          textAlign="center"
-          display="block"
-          direction="column"
-          justifyContent="unset"
+        <Flex
+          gap="10px"
+          direction="row"
           width="unset"
-          height="29px"
-          gap="unset"
-          alignItems="unset"
+          height="50px"
+          justifyContent="flex-end"
+          alignItems="center"
           grow="1"
           shrink="1"
           basis="0"
           position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Add Liquidity"
-          {...getOverrideProps(overrides, "Add Liquidity")}
-        ></Text>
-      </Flex>
+          padding="19px 25px 19px 25px"
+          {...getOverrideProps(overrides, "Connect40052821")}
+        >
+          <Text
+            fontFamily="Inter"
+            fontSize="24px"
+            fontWeight="700"
+            lineHeight="29.045454025268555px"
+            textAlign="center"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="29px"
+            gap="unset"
+            alignItems="unset"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="Add Liquidity"
+            {...getOverrideProps(overrides, "Add Liquidity")}
+          ></Text>
+        </Flex>
+      </motion.div>
     </Flex>
   );
 }
