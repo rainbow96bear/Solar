@@ -69,6 +69,7 @@ const APICon = () => {
     setReturnSwapConvertPrice(+volum * +secondSelectTokenPrice);
   }, [volum, secondSelectTokenPrice, secondKeyWord, selectedSecondSwapToken]);
 
+  console.log("firstSelectTokenPrice", secondSelectTokenPrice);
   return (
     <div>
       <APIComp

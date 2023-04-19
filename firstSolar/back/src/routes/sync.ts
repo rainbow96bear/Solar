@@ -309,4 +309,32 @@ router.get("/mypage", async (req, res) => {
   }
 });
 
+router.post("/swap", (req, res) => {
+  const swapApp = async () => {
+    const BtnUSDT = await db.Price.findOne({
+      where: {
+        tokenSymbol: req.body.data,
+      },
+    });
+    res.send(BtnUSDT);
+  };
+  swapApp();
+});
+router.post("/filterSwap", (req, res) => {
+  const filterSwapApp = async () => {
+    console.log(req.body);
+    const BtnUSDT = await db.Price.findOne({
+      where: {
+        tokenSymbol: req.body.data,
+      },
+    });
+    res.send(BtnUSDT.tokenPrice);
+    // const BtnEth = await db.Price.findone({ tokenPrice });
+    // const BtnBnB = await db.Price.findone({});
+    // const swapEth = await db.Price.findone({
+    //   where: {},
+    // });
+  };
+  filterSwapApp();
+});
 export default router;
