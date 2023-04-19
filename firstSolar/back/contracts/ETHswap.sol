@@ -29,9 +29,8 @@ contract EthSwap {
       token.balanceOf(address(this)) >= tokenAmount,
       "Insufficient token balance in EthSwap contract"
     );
-    //EthSwap 컨트랙트가 충분한 토큰을 보유하고 있는지 확인
+    // EthSwap 컨트랙트가 충분한 토큰을 보유하고 있는지 확인
     // 토큰잔액확인
-
     // Transfer tokens to the user
     token.transfer(msg.sender, tokenAmount);
     // 사용자에게 토큰전송
@@ -48,11 +47,9 @@ contract EthSwap {
       "Insufficient token balance"
     );
     // 사용자가 충분한 토큰을 보유하고있는지 확인
-
     // Calculate the amount of Ether to redeem
     uint etherAmount = _amount / rate;
     // 판매할 토큰의 Ether 가치 계산
-
     // Require that EthSwap has enough Ether
     require(
       address(this).balance >= etherAmount,
@@ -60,15 +57,14 @@ contract EthSwap {
     );
     // EthSwap 컨트랙트가 충분한 Ether를 보유하고 있는지 확인
     // 이더잔액확인
-
     // Perform sale
     token.transferFrom(msg.sender, address(this), _amount);
     // 사용자가 토큰을 EthSwap 컨트랙트로 전송
     payable(msg.sender).transfer(etherAmount);
     // 사용자에게 Ether 전송
     // msg.sender address가 transfer함수쓰려면 payalble로 형변환해야한다
-
     // Emit an event
+
     emit TokensSold(msg.sender, address(token), _amount, rate);
   }
 }

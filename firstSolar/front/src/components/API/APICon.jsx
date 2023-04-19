@@ -3,59 +3,59 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const APICon = () => {
-  const [NowUSDTprice, setNowUSDTprice] = useState([]);
-  const [NowETHprice, setNowETHprice] = useState([]);
-  const [NowBNBprice, setNowBNBprice] = useState([]);
-  const [BNBtoUSDT, setBNBtoUSDT] = useState([]);
-  const [BNBtoETH, setBNBtoETH] = useState([]);
-  const [ETHtoBNB, setETHtoBNB] = useState([]);
-  const [ETHtoUSDT, setETHtoUSDT] = useState([]);
-  const [USDTtoETH, setUSDTtoETH] = useState([]);
-  const [USDTtoBNB, setUSDTtoBNB] = useState([]);
-
-  const APIClick = async () => {
+  // swap 정보
+  const [keyWord, setKeyWord] = useState("");
+  const [secondKeyWord, setSecondkeyWord] = useState("");
+  const [firstSelectTokenPrice, setselectTokenPrice] = useState(0);
+  const [firstSelectTokenToConvert, setselectTokenToConvert] = useState(0);
+  const [convertPrice, setConvertPrice] = useState({
+    bnb: "",
+    eth: "",
+    usdt: "",
+  });
+  const [secondSelectTokenPrice, setSecondSelectTokenPrice] = useState("");
+  // swap Select
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const handleChange = (e) => {
+    setSelectedOptions(e.target.value);
+  };
+  const SwapToken = async () => {
     try {
-      const {
-        NowUSDTprice,
-        NowETHprice,
-        NowBNBprice,
-        BNBtoUSDT,
-        BNBtoETH,
-        ETHtoBNB,
-        ETHtoUSDT,
-        USDTtoETH,
-        USDTtoBNB,
-      } = (await axios.get("http://localhost:8080/api/sync")).data;
-
-      setNowUSDTprice(NowUSDTprice);
-      setNowETHprice(NowETHprice);
-      setNowBNBprice(NowBNBprice);
-      setBNBtoUSDT(BNBtoUSDT);
-      setBNBtoETH(BNBtoETH);
-      setETHtoBNB(ETHtoBNB);
-      setETHtoUSDT(ETHtoUSDT);
-      setUSDTtoETH(USDTtoETH);
-      setUSDTtoBNB(USDTtoBNB);
+      const selectTokenPrice = (
+        await axios.post("http://localhost:8080/api/sync/swap", {
+          data: keyWord,
+        })
+      ).data;
+      setselectTokenPrice(selectTokenPrice.tokenPrice);
+      setConvertPrice({
+        bnb: selectTokenPrice.ConvertToBNB,
+        eth: selectTokenPrice.ConvertToETH,
+        usdt: selectTokenPrice.ConvertToUSDT,
+      });
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(NowUSDTprice);
-  console.log(BNBtoETH);
+  const convertToken = () => {
+    setSecondSelectTokenPrice(convertPrice[secondKeyWord]);
+  };
 
+  console.log("firstSelectTokenPrice", secondSelectTokenPrice);
   return (
     <div>
       <APIComp
-        APIClick={APIClick}
-        NowUSDTprice={NowUSDTprice}
-        NowETHprice={NowETHprice}
-        NowBNBprice={NowBNBprice}
-        BNBtoUSDT={BNBtoUSDT}
-        BNBtoETH={BNBtoETH}
-        ETHtoBNB={ETHtoBNB}
-        ETHtoUSDT={ETHtoUSDT}
-        USDTtoETH={USDTtoETH}
-        USDTtoBNB={USDTtoBNB}
+        SwapToken={SwapToken}
+        keyWord={keyWord}
+        setKeyWord={setKeyWord}
+        secondKeyWord={secondKeyWord}
+        setSecondkeyWord={setSecondkeyWord}
+        setSecondSelectTokenPrice={setSecondSelectTokenPrice}
+        convertPrice={convertPrice}
+        firstSelectTokenPrice={firstSelectTokenPrice}
+        secondSelectTokenPrice={secondSelectTokenPrice}
+        convertToken={convertToken}
+        selectedOptions={selectedOptions}
+        handleChange={handleChange}
       />
     </div>
   );
