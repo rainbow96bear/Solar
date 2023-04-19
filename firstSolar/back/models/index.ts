@@ -2,10 +2,11 @@ import { Sequelize } from "sequelize";
 import Config from "../config/config.json";
 
 import Price from "./price";
+import Pool from "./pool";
 
 const env = process.env.NODE_ENV || "development";
 const config = Config[env];
-const db: any = { Price };
+const db: any = { Price, Pool };
 
 let sequelize: any = new Sequelize(
   config.database,
@@ -21,6 +22,7 @@ Object.keys(db).forEach((modelName) => {
 });
 
 db.Price = Price.initModel(sequelize);
+db.Pool = Pool.initModel(sequelize);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
