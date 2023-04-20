@@ -173,7 +173,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
         poolListData: await Promise.all(
           activeLpList
             .slice((pageIndex - 1) * 10, pageIndex * 10)
-            .map(async (lp: any, idx: number) => {
+            .map(async (lp: any) => {
               const lpId: string = lp.id;
               const oracleId: string = lp.oracleId;
               const lpChain: number = mainNet[lp.chain];
