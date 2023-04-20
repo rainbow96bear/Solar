@@ -13,7 +13,7 @@ const MainComponent = () => {
         <PooListCom320px></PooListCom320px>
         <PooListCom768px></PooListCom768px>
         <PoolListCom1024px></PoolListCom1024px>
-        <PoolListCom1440px></PoolListCom1440px>
+        {/* <PoolListCom1440px></PoolListCom1440px> */}
       </Main>
     </>
   );
