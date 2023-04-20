@@ -29,7 +29,7 @@ import FooterContainer from "./components/footer/Container";
 import { Swap320px } from "./ui-components";
 import { connectThunk } from "./modules/connect";
 import UserLoading from "./ui-components/UserLoading";
-import SwapContainer from "./components/swap/container";
+import SwapContainer from "./components/swap/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -48,9 +48,9 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
-  const connect = useSelector(state => state.connect.connect.connect);
-  const accountAddress = useSelector(state => state.account.account.account);
+  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
+  const connect = useSelector((state) => state.connect.connect.connect);
+  const accountAddress = useSelector((state) => state.account.account.account);
   const dispatch = useDispatch();
 
   const { web3, account, chainId, login } = useWeb3();
@@ -126,6 +126,7 @@ const LoadingModal = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
+  align-items: center;
   left: 0%;
   top: 0%;
   right: 0%;

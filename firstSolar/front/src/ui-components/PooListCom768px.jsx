@@ -20,6 +20,8 @@ import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { ConnectCompo768px, SwapCompo768px } from "../ui-components";
 import { getMainPoolList } from "../api/index.js";
 import { useMediaQuery } from "react-responsive";
+import { useDispatch } from "react-redux";
+import { isLoadingThunk } from "../modules/isLoading.js";
 
 export default function PooListCom768px(props) {
   const { overrides, ...rest } = props;
@@ -29,11 +31,21 @@ export default function PooListCom768px(props) {
   const [totalPages, setTotalPages] = React.useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
+  const dispatch = useDispatch();
 
   const getPoolList = async () => {
-    const { poolListData, resultTotalPages } = await getMainPoolList(pageIndex);
-    setCurrentPagePoolList(poolListData);
-    setTotalPages(resultTotalPages);
+    try {
+      dispatch(isLoadingThunk({ isLoading: true }));
+      const { poolListData, resultTotalPages } = await getMainPoolList(
+        pageIndex
+      );
+      setCurrentPagePoolList(poolListData);
+      setTotalPages(resultTotalPages);
+      dispatch(isLoadingThunk({ isLoading: false }));
+    } catch (error) {
+      dispatch(isLoadingThunk({ isLoading: false }));
+      console.error(error);
+    }
   };
   React.useEffect(() => {
     getPoolList();
@@ -1805,7 +1817,7 @@ export default function PooListCom768px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={pageNum => {
+                onChange={(pageNum) => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {

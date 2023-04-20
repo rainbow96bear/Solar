@@ -71,9 +71,8 @@ export default function BeforeHeadCom1024px(props) {
           width="90vw"
           height="60px"
           display="flex"
-          gap="250px"
           alignItems="unset"
-          justifyContent="flex-start"
+          justifyContent="space-between"
           position="relative"
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "BeforeHeadCom1024px")}
