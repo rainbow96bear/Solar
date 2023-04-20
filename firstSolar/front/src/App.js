@@ -28,6 +28,8 @@ import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
 import { Swap320px } from "./ui-components";
 import { connectThunk } from "./modules/connect";
+import UserLoading from "./ui-components/UserLoading";
+import SwapContainer from "./components/swap/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -83,7 +85,10 @@ function App() {
           <MainContent>
             <Routes>
               <Route path="/" element={<MainContainer />}></Route>
-              <Route path="/swap" element={<></>}></Route>
+              <Route
+                path="/swap"
+                element={<SwapContainer></SwapContainer>}
+              ></Route>
             </Routes>
           </MainContent>
           <FooterContainer></FooterContainer>
@@ -91,8 +96,7 @@ function App() {
           {/* 로딩 중에는 로딩 창이 뜨도록 할 것입니다. */}
           {isLoading ? (
             <LoadingModal>
-              {/* <UserLoading /> 
-          이 자리에는 로딩 도중의 모달 창이 들어갈 예정입니다.*/}
+              <UserLoading />
             </LoadingModal>
           ) : (
             <></>
@@ -122,6 +126,7 @@ const LoadingModal = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
+  align-items: center;
   left: 0%;
   top: 0%;
   right: 0%;

@@ -7,17 +7,21 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Icon, Text } from "@aws-amplify/ui-react";
-import { useSelector } from "react-redux";
+import { Divider, Flex, Icon, Text } from "@aws-amplify/ui-react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { connectThunk } from "../modules/connect";
+import { accountThunk } from "../modules/account";
+import { loginThunk } from "../modules/login";
 export default function LoginAccount(props) {
   const { overrides, ...rest } = props;
   const [view, setView] = React.useState(false);
   const account = useSelector((state) => state.account.account.account);
-
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const ref = React.useRef();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     setView(false);
@@ -36,6 +40,16 @@ export default function LoginAccount(props) {
     };
   }, [view]);
 
+  const logout = () => {
+    document.cookie =
+      document.cookie.split(":")[0] +
+      account +
+      "=; expires=Thu, 01 Jan 1999 00:00:10 GMT";
+    dispatch(connectThunk({ connect: false }));
+    dispatch(loginThunk({ false: false }));
+    dispatch(accountThunk({ account: "" }));
+    navigate("/");
+  };
   return (
     <LoginAccountCover className="LoginAccountCover" ref={ref}>
       <Flex
@@ -120,13 +134,20 @@ export default function LoginAccount(props) {
         <MenuDropDown>
           <ul>
             <li>
-              <div>메뉴1</div>
+              <div>내 정보</div>
             </li>
             <li>
               <div>메뉴2</div>
             </li>
+            <Divider></Divider>
             <li>
-              <div>메뉴3</div>
+              <div
+                onClick={() => {
+                  logout();
+                }}
+              >
+                Logout
+              </div>
             </li>
           </ul>
         </MenuDropDown>

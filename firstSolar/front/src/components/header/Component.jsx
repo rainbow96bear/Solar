@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import {
-  BeforeHeadCom1440px,
   BeforeHeadCom1024px,
   BeforeHeadCom320px,
   BeforeHeadCom768px,
@@ -10,12 +9,11 @@ import { useSelector } from "react-redux";
 
 const HeaderComponent = () => {
   // 변수
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const account = useSelector((state) => state.account.account.account);
+  const connect = useSelector(state => state.connect.connect.connect);
+  const account = useSelector(state => state.account.account.account);
 
   return (
     <Header>
-      <BeforeHeadCom1440px></BeforeHeadCom1440px>
       <BeforeHeadCom1024px></BeforeHeadCom1024px>
       <BeforeHeadCom768px></BeforeHeadCom768px>
       <BeforeHeadCom320px></BeforeHeadCom320px>
