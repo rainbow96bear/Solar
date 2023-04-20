@@ -70,13 +70,13 @@ const DefiContainer = () => {
     }
   };
 
-  const testing = async () => {
+  const createLiquidityPoolFunc = async () => {
     try {
       let web3;
       if (window.ethereum) web3 = new Web3(window.ethereum);
 
       const result = (
-        await axios.post("http://localhost:8080/api/defi/test", {
+        await axios.post("http://localhost:8080/api/defi/createLiquidityPool", {
           account: "0xCB8775C5943Dc32ed8C1A8182Ce9A53E5b87383a",
         })
       ).data;
@@ -91,8 +91,21 @@ const DefiContainer = () => {
   };
 
   const getPool = async () => {
-    const info = await axios.post("http://localhost:8080/api/defi/lp");
+    const info = await axios.post(
+      "http://localhost:8080/api/defi/insertLpToDB"
+    );
     console.log(info);
+  };
+
+  const lpStaking = async () => {
+    try {
+      const result = (
+        await axios.post(`http://localhost:8080/api/defi/approve`)
+      ).data;
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -114,7 +127,7 @@ const DefiContainer = () => {
       setIsAPI={setIsAPI}
       inputValue={inputValue}
       setInput={setInput}
-      testing={testing}
+      createLiquidityPoolFunc={createLiquidityPoolFunc}
       getPool={getPool}
     />
   );
