@@ -5,8 +5,8 @@ const FooterComponent = () => {
   return (
     <FooterCompo>
       <Footer></Footer>
-      {/* <div className="Footer_innerBox"></div>
-      <p className="footer-text">This is the footer.</p> */}
+      <div className="Footer_innerBox"></div>
+      <p className="footer-text">This is the footer.</p>
     </FooterCompo>
   );
 };
