@@ -28,7 +28,6 @@ import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
 import { Swap320px } from "./ui-components";
 import { connectThunk } from "./modules/connect";
-import DefiContainer from "./components/defiApi/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -106,7 +105,6 @@ function App() {
       <WagmiConfig client={wagmiClient}>
         <div className="App">
           <HeaderContainer></HeaderContainer>
-          <DefiContainer />
           <MainContent>
             <Routes>
               <Route path="/" element={<MainContainer />}></Route>

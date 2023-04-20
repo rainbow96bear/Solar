@@ -6,12 +6,6 @@ const DefiComponent = ({
   mainNetList,
   dexList,
   filterNetworkAndDex,
-  checkAPI,
-  isAPI,
-  inputValue,
-  setInput,
-  createLiquidityPoolFunc,
-  getPool,
 }) => {
   return (
     <>
@@ -49,44 +43,6 @@ const DefiComponent = ({
           </>
         ))}
       </div>
-      <div>
-        <input
-          style={{ width: "270px", padding: "10px" }}
-          type={"text"}
-          placeholder={"확인하고 싶은 엔드포인트를 입력하세요"}
-          value={inputValue}
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-        />
-        <button
-          style={{ width: "100px", padding: "10px" }}
-          onClick={() => {
-            checkAPI(inputValue);
-          }}
-        >
-          확인해보기
-        </button>
-        <div>
-          <button
-            onClick={() => {
-              createLiquidityPoolFunc();
-            }}
-          >
-            자체 발행 풀 생성
-          </button>
-        </div>
-        <div>
-          <button
-            onClick={() => {
-              getPool();
-            }}
-          >
-            자체 발행 확인
-          </button>
-        </div>
-        {isAPI && <div>{isAPI}</div>}
-      </div>
       {status ? (
         status == 2 ? (
           <div>
@@ -117,15 +73,6 @@ const DefiComponent = ({
                 )}
                 <div style={{ width: "10%" }}>LP 이름 :{item.name} </div>
                 <div style={{ width: "10%" }}>Platform : {item.platformId}</div>
-                <div>
-                  <button
-                    onClick={() => {
-                      testing();
-                    }}
-                  >
-                    가격추출 테스팅
-                  </button>
-                </div>
                 <div style={{ width: "10%" }}>
                   <img src={item.platformLogo} alt="" />
                 </div>
