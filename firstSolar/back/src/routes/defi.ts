@@ -112,41 +112,43 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
       ).data.filter((lp: any) => lp.status === "active");
 
       const data: Array<LPData> = await Promise.all(
-        activeLpList..slice((pageIndex - 1) * 10, pageIndex * 10).map(async (lp: any) => {
-          const lpId: string = lp.id;
-          const oracleId: string = lp.oracleId;
-          const lpChain: number = mainNet[lp.chain];
-          const tokens: Array<string> = lp.assets;
+        activeLpList
+          .slice((pageIndex - 1) * 10, pageIndex * 10)
+          .map(async (lp: any) => {
+            const lpId: string = lp.id;
+            const oracleId: string = lp.oracleId;
+            const lpChain: number = mainNet[lp.chain];
+            const tokens: Array<string> = lp.assets;
 
-          const [tvlNow, tvlYesterday] = await Promise.all([
-            getTvlData(lpId, oracleId, lpChain),
-            getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
-          ]);
+            const [tvlNow, tvlYesterday] = await Promise.all([
+              getTvlData(lpId, oracleId, lpChain),
+              getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+            ]);
 
-          const dailyTvlRate: number =
-            ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+            const dailyTvlRate: number =
+              ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
 
-          return {
-            id: lpId,
-            name: lp.name,
-            platformId: lp.platformId,
-            network: lp.network,
-            oracleId: oracleId,
-            status: lp.status,
-            symbol: lp.symbol,
-            tvl: tvlNow,
-            apy:
-              (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
-                .data[lpId] ?? 0,
-            dailyTvlRate,
-            mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
-            platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
-            tokens,
-            tokenAddress: lp.tokenAddress,
-          };
-        })
+            return {
+              id: lpId,
+              name: lp.name,
+              platformId: lp.platformId,
+              network: lp.network,
+              oracleId: oracleId,
+              status: lp.status,
+              symbol: lp.symbol,
+              tvl: tvlNow,
+              apy:
+                (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                  .data[lpId] ?? 0,
+              dailyTvlRate,
+              mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+              platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+              tokens,
+              tokenAddress: lp.tokenAddress,
+            };
+          })
       );
-      const dataWithPool = [...data,...getPool]
+      const dataWithPool = [...data, ...getPool];
       res.send(dataWithPool);
     } catch (error) {
       if (retries < MAX_RETRIES) {
