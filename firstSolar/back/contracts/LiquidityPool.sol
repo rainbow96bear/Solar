@@ -4,11 +4,11 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "DFSToken.sol";
+import "IDFS.sol";
 
 contract LiquidityPool is ERC20 {
   uint DFSPrice = 100;
-  DFSToken immutable DFS;
+  IDFS immutable DFS;
   //immutable 한번설정되면 변경불가능
   using SafeMath for uint256;
   // 오버플로우 언더플로우 방지 라이브러리사용
@@ -22,6 +22,8 @@ contract LiquidityPool is ERC20 {
   uint256 public reserve2;
   // State variables for liquidity shares
   uint256 public totalLiquidity;
+  address public DexA;
+  // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
 
   // Events
@@ -30,16 +32,26 @@ contract LiquidityPool is ERC20 {
 
   event BurnLpToken(address indexed _liquidityProvider, uint256 _sharesBurned);
 
+   uint private unlocked = 1;
+    modifier lock() {
+        require(unlocked == 1, 'LOCKED');
+        unlocked = 0;
+        _;
+        unlocked = 1;
+    }
+
   constructor(
     string memory _name,
     string memory _symbol,
     address _token1,
     address _token2,
-    address DFSTokenA
+    address DFSTokenA,
+    address DexA
   ) ERC20(_name, _symbol) {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
-    DFS = DFSToken(DFSTokenA);
+    DFS = IDFS(DFSTokenA);
+    DexA = DexA;
     // rwdToken1Amount=0;
     // rwdToken2Amount=0;
   }
@@ -139,6 +151,7 @@ contract LiquidityPool is ERC20 {
     uint256 _amountInWithFee = (_amountIn * 997) / 1000;
     // rwdToken1Amount = rwdToken1Amount+(_amountIn * 3) / 1000;
     // _amountInWithFee는 유동성 교환에 참여하는 실제 자산의 양이며, 이후 코드에서 유동성 풀의 상태를 업데이트하고, 교환할 자산의 양을 계산하는 데 사용된다
+    
 
     /*
         Calculate tokenOut amount using x * y = k
@@ -152,13 +165,14 @@ contract LiquidityPool is ERC20 {
         */
     //유동성 교환 시 교환할 자산의 양을 계산
 
+
     _amountOut =
       (reserveOut * _amountInWithFee) /
       (reserveIn + _amountInWithFee);
 
     require(_amountOut < reserveOut, "Insufficient Liquidity");
     //유동성 교환에 참여하는 자산의 양과 유동성 풀의 잔액을 고려하여, 교환 예상 tokenOut의 양을 계산
-
+    transferFrom(address(this), DexA ,_amountInWithFee);
     // Transfer tokenOut to the user
     tokenOut.transfer(msg.sender, _amountOut);
     //유동성 교환 결과로 받게 되는 tokenOut 토큰을 msg.sender 계정으로 전송하는 데 사용됩니다.
@@ -172,7 +186,7 @@ contract LiquidityPool is ERC20 {
   function addLiquidity(
     uint256 _amountToken1,
     uint256 _amountToken2
-  ) external  returns (uint256 _liquidityShares) {
+  ) external lock  returns (uint256 _liquidityShares) {
     // User sends both tokens to liquidity pool
     require(
       token1.transferFrom(msg.sender, address(this), _amountToken1),

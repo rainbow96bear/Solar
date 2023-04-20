@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.19;
 
-import "../contracts/LiqudityPool.sol";
+import "LiquidityPool.sol";
+
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "Ownable.sol";
 
-// import "./contracts/DFSToken.sol";
-
-contract Dex {
+contract Dex is Ownable {
   using SafeMath for uint256;
   address immutable DFSTokenA;
 
@@ -19,16 +20,19 @@ contract Dex {
 
   struct UserInfo {
     uint256 amount;
+    
   }
 
   mapping(uint256 => mapping(address => UserInfo)) public userInfo;
 
   struct PoolInfo {
-    IERC20 lpToken;
+    ERC20 lpToken;
+    string symbol;
+    uint256 total;
   }
   PoolInfo[] public poolInfo;
   // Owner's address of DEX
-  address public immutable owner;
+  address public immutable _owner;
   // Array of liquidity pool addresses
 
   // Mapping to get address of liquidity pool with token addresses
@@ -42,11 +46,14 @@ contract Dex {
   );
 
   constructor(address _DFSTokenA) {
-    owner = msg.sender;
+    _owner = msg.sender;
     DFSTokenA = _DFSTokenA;
   }
 
-  function createLiquidityPool(address _tokenA, address _tokenB) external {
+  function createLiquidityPool(
+    address _tokenA,
+    address _tokenB
+  ) external onlyOwner {
     (address _token1, address _token2) = _tokenA < _tokenB
       ? (_tokenA, _tokenB)
       : (_tokenB, _tokenA);
@@ -66,16 +73,18 @@ contract Dex {
       getLiquidityPool[_token1][_token2] == address(0),
       "Pool Already Exists"
     );
-
+    // string memory symbol1 = ERC20(_token1).symbol();
+    // string memory symbol2 = ERC20(_token2).symbol();
+    // string memory name = string(abi.encodePacked(symbol1, "-", symbol2));
     _lpToken = ERC20(
-      new LiquidityPool("DFS-LP", "DFS-LP", _token1, _token2, DFSTokenA)
+      new LiquidityPool("DFSLP", "DFSLP", _token1, _token2, DFSTokenA)
     );
     //ERC20을 상속받은 LiquidityPool 컨트랙트의 인스턴스를 생성
     //DFS-LP가 name,symbol
     getLiquidityPool[_token1][_token2] = address(_lpToken);
     //위 코드는 _token1과 _token2 주소를 이용해 매핑된 getLiquidityPool 맵에 유동성 풀 컨트랙트 주소를 저장
 
-    poolInfo.push(PoolInfo({ lpToken: _lpToken }));
+    poolInfo.push(PoolInfo({ lpToken: _lpToken, symbol: "DFSLP", total: 0 }));
     ///IERC20 lpToken; 의 구조체 타입 lpToken이 키
     // IERC20 타입으로 lpToken
     //   struct PoolInfo {
@@ -91,6 +100,7 @@ contract Dex {
 
     pool.lpToken.transferFrom(address(msg.sender), address(this), _amount);
     // msg.sender가 이계약 주소 lp ca한테 amount만큼 보낸다
+    pool.total = pool.total.add(_amount);
     user.amount = user.amount.add(_amount);
 
     emit Deposit(msg.sender, _pid, _amount);
@@ -110,6 +120,7 @@ contract Dex {
 
     pool.lpToken.transfer(address(msg.sender), _amount);
     // 승인돼있으니 msg.sender에게 amount만큼
+    pool.total = pool.total.sub(_amount);
     emit Withdraw(msg.sender, _pid, _amount);
   }
 
