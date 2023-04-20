@@ -24,7 +24,7 @@ export default function SwapCompo1440px(props) {
       }}
       gap="30px"
       direction="row"
-      width="80vw"
+      width="90vw"
       height="unset"
       justifyContent="flex-start"
       alignItems="center"
@@ -43,7 +43,7 @@ export default function SwapCompo1440px(props) {
           backgroundColor: "rgba(234,0,50,0.55)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.1 }}
+        whileHover={{ borderRadius: "13px", scale: 1.03 }}
       >
         <Flex
           gap="10px"
@@ -93,7 +93,7 @@ export default function SwapCompo1440px(props) {
           backgroundColor: "rgba(255,226,0,0.35)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.1 }}
+        whileHover={{ borderRadius: "13px", scale: 1.03 }}
       >
         <Flex
           gap="10px"
