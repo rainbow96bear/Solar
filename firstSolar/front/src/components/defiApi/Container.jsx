@@ -21,38 +21,22 @@ const DefiContainer = () => {
       setStatus(DATA_STATUS.LOADING);
       const result = (await axios.get("http://localhost:8080/api/defi")).data;
       setDefiList(result);
+      console.log(result);
       setStatus(DATA_STATUS.SUCCESS);
     } catch (error) {
       console.error(error);
     }
   };
-  console.log(defiList);
 
-  const selectMainNet = async (_mainNet) => {
+  const filterNetworkAndDex = async (_network, _dex) => {
     try {
       setStatus(DATA_STATUS.LOADING);
-      if (!_mainNet) return;
       const result = (
         await axios.post(`http://localhost:8080/api/defi/filter`, {
-          network: _mainNet,
+          network: _network,
+          dex: _dex,
         })
       ).data;
-      console.log(result);
-      setDefiList(result);
-      setStatus(DATA_STATUS.SUCCESS);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const selectDex = async (_dex) => {
-    try {
-      setStatus(DATA_STATUS.LOADING);
-      if (!_dex) return;
-      console.log(_dex);
-      const result = (
-        await axios.post(`http://localhost:8080/api/defi/filter`, { dex: _dex })
-      ).data;
-      console.log(result);
       setDefiList(result);
       setStatus(DATA_STATUS.SUCCESS);
     } catch (error) {
@@ -82,9 +66,8 @@ const DefiContainer = () => {
       status={status}
       formatNumber={formatNumber}
       mainNetList={mainNetList}
-      selectMainNet={selectMainNet}
       dexList={dexList}
-      selectDex={selectDex}
+      filterNetworkAndDex={filterNetworkAndDex}
     />
   );
 };

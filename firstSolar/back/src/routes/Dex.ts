@@ -12,8 +12,8 @@ const web3 = new Web3(
   "wss://polygon-mumbai.infura.io/ws/v3/2ca09ab04a7c44dcb6f886deeba97502"
 );
 
-import { abi as DexAbi } from "../contracts/artifacts/Dex.json";
-import { abi as LiquiditypoolAbi } from "../contracts/artifacts/LiquidityPool.json";
+import { abi as DexAbi } from "../../contracts/artifacts/Dex.json";
+import { abi as LiquiditypoolAbi } from "../../contracts/artifacts/LiquidityPool.json";
 // import { abi as testAbi } from "../contracts/artifacts/test.json";
 
 dotenv.config();

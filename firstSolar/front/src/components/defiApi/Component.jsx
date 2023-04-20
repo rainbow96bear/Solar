@@ -2,11 +2,10 @@ const DefiComponent = ({
   totalLpListUp,
   defiList,
   status,
-  selectMainNet,
   formatNumber,
   mainNetList,
   dexList,
-  selectDex,
+  filterNetworkAndDex,
 }) => {
   return (
     <>
@@ -23,7 +22,7 @@ const DefiComponent = ({
           <>
             <button
               onClick={() => {
-                selectMainNet(item);
+                filterNetworkAndDex(item, "");
               }}
             >
               {item}
@@ -36,7 +35,7 @@ const DefiComponent = ({
           <>
             <button
               onClick={() => {
-                selectDex(item);
+                filterNetworkAndDex("", item);
               }}
             >
               {item}
