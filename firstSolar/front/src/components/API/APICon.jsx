@@ -69,7 +69,23 @@ const APICon = () => {
     setReturnSwapConvertPrice(+volum * +secondSelectTokenPrice);
   }, [volum, secondSelectTokenPrice, secondKeyWord, selectedSecondSwapToken]);
 
-  console.log("firstSelectTokenPrice", secondSelectTokenPrice);
+  useEffect(() => {
+    const firstSync = axios.get("http://localhost:8080/api/sync");
+    if (firstSync) {
+      return;
+    } else {
+      firstSync();
+    }
+  }, []);
+
+  useEffect(() => {
+    setSwapConvertPrice(+volum * +firstSelectTokenPrice);
+  }, [selectSwapToken, volum, secondKeyWord, firstSelectTokenPrice]);
+
+  useEffect(() => {
+    setReturnSwapConvertPrice(+volum * +secondSelectTokenPrice);
+  }, [volum, secondSelectTokenPrice, secondKeyWord, selectedSecondSwapToken]);
+
   return (
     <div>
       <APIComp
