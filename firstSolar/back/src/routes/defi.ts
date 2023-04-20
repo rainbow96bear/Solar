@@ -1,17 +1,20 @@
 import { Router, Request, Response } from "express";
 import axios from "axios";
-import dotenv from "dotenv";
-import Web3 from "web3";
-import { AbiItem } from "web3-utils";
 import db from "../../models/index";
+import dotenv from "dotenv";
+import { BigNumber } from "@ethersproject/bignumber";
 
 import { mainNet } from "../setting";
-import { abi as DexAbi } from "../../contracts/artifacts/Dex.json";
-
-const web3 = new Web3(
-  "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
-);
-dotenv.config();
+import {
+  deployed,
+  deployedDFS,
+  deployedETH,
+  deployedDFSETH,
+  deployedUSDT,
+  deployedDFSUSDT,
+  deployedBNB,
+  deployedDFSBNB,
+} from "../deployList";
 
 interface LPData {
   id: string;
@@ -67,6 +70,8 @@ interface detailLp {
 
 const router = Router();
 
+dotenv.config();
+
 const ONE_DAY_MS: number = 24 * 60 * 60 * 1000;
 const MAX_RETRIES: number = 3;
 const RETRY_DELAY: number = 1000;
@@ -91,8 +96,6 @@ let obj: { from?: string; to?: string; data?: string } = {
   to: "",
   data: "",
 };
-
-const deployed = new web3.eth.Contract(DexAbi as AbiItem[], process.env.DEX);
 
 router.get("/", async (req: Request, res: Response<LPData[]>) => {
   retries = 0;
@@ -285,52 +288,99 @@ router.post("/detail", async (req: Request, res: Response<detailLp[]>) => {
   }
 });
 
-router.post("/price", async (req: Request, res: Response) => {
-  const { token1, token2 } = req.body;
+router.post("/approveDFS", async (req: Request, res: Response) => {
   try {
-    const tokenList = (await axios.get(`https://api.beefy.finance/tokens`))
-      .data;
-    // const totalCoinList = (
-    //   await axios.get(`https://api.coingecko.com/api/v3/coins/list`)
-    // ).data.filter(
-    //   (token) =>
-    //     token.symbol == token1?.toLowerCase() ||
-    //     token.symbol == token2?.toLowerCase()
-    // );
-
-    // const ids = totalCoinList.map((token) => token.id).join(",");
-
-    // const { data } = await axios.get(
-    //   `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,eth,bnb,usdt`
-    // );
-
-    // const tokenPrices = totalCoinList.map((token) => {
-    //   const { id, symbol, name } = token;
-
-    //   const usd: number = data[id].usd;
-    //   const eth: number = data[id].eth;
-    //   const bnb: number = data[id].bnb;
-    //   const usdt: number = data[id].usdt;
-
-    //   return { id, symbol, name, usd, eth, bnb, usdt };
-    // });
-
-    // res.send({ tokenPrices, tokenList });
-    res.send(tokenList);
+    const {
+      account,
+      approveDFSAmount,
+    }: { account: string; approveDFSAmount?: any } = req.body;
+    const tokenPrice1: BigNumber = BigNumber.from(
+      Math.floor(approveDFSAmount * 10 ** 18).toString()
+    );
+    obj.from = account;
+    obj.to = process.env.DFS;
+    obj.data = await deployedDFS.methods
+      .approve(process.env.DFS_ETH, tokenPrice1)
+      .encodeABI();
+    res.send(obj);
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    res.send(error);
   }
 });
 
-router.post("/createLiquidityPool", async (req: Request, res: Response) => {
+router.post("/approveOtherToken", async (req: Request, res: Response) => {
   try {
-    const { account }: { account: string } = req.body;
+    const {
+      account,
+      approveOtherAmount,
+      lpSymbol,
+    }: { account: string; approveOtherAmount?: any; lpSymbol?: string } =
+      req.body;
+    const tokenPrice2: BigNumber = BigNumber.from(
+      Math.floor(approveOtherAmount * 10 ** 18).toString()
+    );
+    if (lpSymbol.includes("ETH")) {
+      obj.from = account;
+      obj.to = process.env.ETH;
+      obj.data = await deployedETH.methods
+        .approve(process.env.DFS_ETH, tokenPrice2)
+        .encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      obj.from = account;
+      obj.to = process.env.BNB;
+      obj.data = await deployedBNB.methods
+        .approve(process.env.DFS_BNB, tokenPrice2)
+        .encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      obj.from = account;
+      obj.to = process.env.USDT;
+      obj.data = await deployedUSDT.methods
+        .approve(process.env.DFS_USDT, tokenPrice2)
+        .encodeABI();
+    }
+    res.send(obj);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 
-    obj.from = account;
-    obj.to = process.env.DEX;
-    obj.data = await deployed.methods
-      .createLiquidityPool(process.env.DFS, process.env.ETH)
-      .encodeABI();
+router.post("/addLiquidity", async (req: Request, res: Response) => {
+  try {
+    const {
+      account,
+      token1,
+      token2,
+      lpSymbol,
+    }: { account: string; token1?: any; token2: any; lpSymbol?: string } =
+      req.body;
+    const tokenPrice1: BigNumber = BigNumber.from(
+      Math.floor(token1 * 10 ** 18).toString()
+    );
+    const tokenPrice2: BigNumber = BigNumber.from(
+      Math.floor(token2 * 10 ** 18).toString()
+    );
+
+    if (lpSymbol.includes("ETH")) {
+      obj.from = account;
+      obj.to = process.env.DFS_ETH;
+      obj.data = await deployedDFSETH.methods
+        .addLiquidity(tokenPrice1, tokenPrice2)
+        .encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      obj.from = account;
+      obj.to = process.env.DFS_BNB;
+      obj.data = await deployedDFSBNB.methods
+        .addLiquidity(tokenPrice1, tokenPrice2)
+        .encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      obj.from = account;
+      obj.to = process.env.DFS_USDT;
+      obj.data = await deployedDFSUSDT.methods
+        .addLiquidity(tokenPrice1, tokenPrice2)
+        .encodeABI();
+    }
     res.send(obj);
   } catch (err) {
     console.log(err);
@@ -338,38 +388,162 @@ router.post("/createLiquidityPool", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/insertLpToDB", async (req: Request, res: Response) => {
+router.post("/approveLp", async (req: Request, res: Response) => {
   try {
-    const result = await deployed.methods.getpoolInfo().call();
-    for (let i = 0; i < result.length; i++) {
-      const temp = await db.Pool.findOne({
-        where: {
-          tokenAddress: result[i][0],
-        },
-      });
-      if (!temp)
-        db.Pool.create({
-          tokenAddress: result[i][0],
-          firstToken: null,
-          secondToken: null,
-          lpName: null,
-          platformId: "solar",
-          platformLogo: "./imgs/platform/1inch.jpg",
-          network: "bsc",
-          mainNetLogo: `/imgs/mainNet/bsc.jpg`,
-          apy: 0,
-          tvl: 0,
-        });
-    }
+    const {
+      account,
+      approveDepositAmount,
+      lpSymbol,
+    }: { account: string; approveDepositAmount?: any; lpSymbol?: string } =
+      req.body;
+    const tokenPrice1: BigNumber = BigNumber.from(
+      Math.floor(approveDepositAmount * 10 ** 18).toString()
+    );
 
-    res.send(result);
+    if (lpSymbol.includes("ETH")) {
+      obj.from = account;
+      obj.to = process.env.DFS_ETH;
+      obj.data = await deployedDFSETH.methods
+        .approve(process.env.DEX, tokenPrice1)
+        .encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      obj.from = account;
+      obj.to = process.env.DFS_BNB;
+      obj.data = await deployedDFSBNB.methods
+        .approve(process.env.DEX, tokenPrice1)
+        .encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      obj.from = account;
+      obj.to = process.env.DFS_USDT;
+      obj.data = await deployedDFSUSDT.methods
+        .approve(process.env.DEX, tokenPrice1)
+        .encodeABI();
+    }
+    res.send(obj);
   } catch (err) {
     console.log(err);
     res.send(err);
   }
 });
 
-router.post("/approve", (req, res) => {
-  res.send();
+router.post("/deposit", async (req: Request, res: Response) => {
+  try {
+    const {
+      account,
+      depositAmount,
+      lpSymbol,
+    }: { account: string; depositAmount?: any; lpSymbol?: string } = req.body;
+
+    const tokenPrice1: BigNumber = BigNumber.from(
+      Math.floor(depositAmount * 10 ** 18).toString()
+    );
+
+    if (lpSymbol.includes("ETH")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_ETH)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.deposit(pid, tokenPrice1).encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_BNB)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.deposit(pid, tokenPrice1).encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_USDT)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.deposit(pid, tokenPrice1).encodeABI();
+    }
+    res.send(obj);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
+router.post("/withdraw", async (req: Request, res: Response) => {
+  try {
+    const {
+      account,
+      withdrawAmount,
+      lpSymbol,
+    }: { account: string; withdrawAmount?: any; lpSymbol?: string } = req.body;
+
+    const tokenPrice1: BigNumber = BigNumber.from(
+      Math.floor(withdrawAmount * 10 ** 18).toString()
+    );
+
+    if (lpSymbol.includes("ETH")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_ETH)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.withdraw(pid, tokenPrice1).encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_BNB)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.withdraw(pid, tokenPrice1).encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_USDT)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.withdraw(pid, tokenPrice1).encodeABI();
+    }
+    res.send(obj);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
+router.post("/removeLiquidity", async (req: Request, res: Response) => {
+  try {
+    const { account, lpSymbol }: { account: string; lpSymbol?: string } =
+      req.body;
+    if (lpSymbol.includes("ETH")) {
+      const lpAmount: number = await deployedDFSETH.methods
+        .userLiquidity(account)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DFS_ETH;
+      obj.data = await deployedDFSETH.methods
+        .removeLiquidity(lpAmount)
+        .encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      const lpAmount: number = await deployedDFSBNB.methods
+        .userLiquidity(account)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DFS_BNB;
+      obj.data = await deployedDFSBNB.methods
+        .removeLiquidity(lpAmount)
+        .encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      const lpAmount: number = await deployedDFSUSDT.methods
+        .userLiquidity(account)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DFS_USDT;
+      obj.data = await deployedDFSUSDT.methods
+        .removeLiquidity(lpAmount)
+        .encodeABI();
+    }
+    res.send(obj);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
 });
 export default router;
