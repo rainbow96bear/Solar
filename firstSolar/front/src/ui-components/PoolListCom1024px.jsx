@@ -70,7 +70,7 @@ export default function PoolListCom1024px(props) {
               width: "89vw",
               height: "unset",
               borderRadius: "33px",
-              backgroundColor: "rgba(234,0,50,0.55)",
+              backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
                 "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
@@ -78,10 +78,10 @@ export default function PoolListCom1024px(props) {
             whileHover={{ borderRadius: "75px" }}
           >
             <Flex
-              gap="12px"
+              gap="21px"
               direction="column"
               width="unset"
-              height="unset"
+              height="209px"
               justifyContent="center"
               alignItems="center"
               shrink="0"
@@ -94,7 +94,7 @@ export default function PoolListCom1024px(props) {
               <Text
                 fontFamily="Inter"
                 fontSize="28px"
-                fontWeight="600"
+                fontWeight="700"
                 lineHeight="33.8863639831543px"
                 textAlign="left"
                 display="block"
@@ -113,16 +113,16 @@ export default function PoolListCom1024px(props) {
                 {...getOverrideProps(overrides, "Networks List")}
               ></Text>
               <Flex
-                gap="39px"
+                gap="23px"
                 direction="row"
                 width="unset"
-                height="50px"
-                justifyContent="flex-start"
-                alignItems="flex-start"
+                height="78px"
+                justifyContent="center"
+                alignItems="center"
                 shrink="0"
                 alignSelf="stretch"
                 position="relative"
-                padding="0px 0px 0px 0px"
+                padding="10px 10px 10px 10px"
                 {...getOverrideProps(overrides, "NetWork List39913187")}
               >
                 <Flex
@@ -130,22 +130,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
                   {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -166,22 +166,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2039913190")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -193,7 +193,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913191"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -202,22 +202,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2139913192")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -229,7 +229,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913193"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -238,22 +238,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2239913194")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -265,7 +265,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913195"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -274,22 +274,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2339913196")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -301,7 +301,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913197"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -310,22 +310,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2439913198")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -337,7 +337,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913199"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -346,22 +346,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2539913200")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -373,7 +373,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913201"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -382,22 +382,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2639913202")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -409,7 +409,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913203"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -418,22 +418,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2739913204")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -445,43 +445,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913205"
-                    )}
-                  ></Image>
-                </Flex>
-                <Flex
-                  gap="10px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
-                  padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2839913206")}
-                >
-                  <Image
-                    width="32.7px"
-                    height="32.76px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="20px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(
-                      overrides,
-                      "unsplash:em1OiomfG3g39913207"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -494,7 +458,7 @@ export default function PoolListCom1024px(props) {
               width: "89vw",
               height: "unset",
               borderRadius: "33px",
-              backgroundColor: "rgba(0, 136, 153, 0.86)",
+              backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
                 "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
@@ -502,10 +466,10 @@ export default function PoolListCom1024px(props) {
             whileHover={{ borderRadius: "75px" }}
           >
             <Flex
-              gap="12px"
+              gap="21px"
               direction="column"
               width="unset"
-              height="unset"
+              height="209px"
               justifyContent="center"
               alignItems="center"
               shrink="0"
@@ -513,12 +477,12 @@ export default function PoolListCom1024px(props) {
               position="relative"
               borderRadius="35px"
               padding="30px 51px 46px 51px"
-              {...getOverrideProps(overrides, "Networks39913290")}
+              {...getOverrideProps(overrides, "Networks39913185")}
             >
               <Text
                 fontFamily="Inter"
                 fontSize="28px"
-                fontWeight="600"
+                fontWeight="700"
                 lineHeight="33.8863639831543px"
                 textAlign="left"
                 display="block"
@@ -534,42 +498,42 @@ export default function PoolListCom1024px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children="Dex List"
-                {...getOverrideProps(overrides, "Dex List")}
+                {...getOverrideProps(overrides, "Networks List")}
               ></Text>
               <Flex
-                gap="39px"
+                gap="23px"
                 direction="row"
                 width="unset"
-                height="50px"
-                justifyContent="flex-start"
-                alignItems="flex-start"
+                height="78px"
+                justifyContent="center"
+                alignItems="center"
                 shrink="0"
                 alignSelf="stretch"
                 position="relative"
-                padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "NetWork List39913292")}
+                padding="10px 10px 10px 10px"
+                {...getOverrideProps(overrides, "NetWork List39913187")}
               >
                 <Flex
                   gap="10px"
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 1939913293")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -581,7 +545,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913294"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -590,22 +554,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2039913295")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -617,7 +581,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913296"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -626,22 +590,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2139913297")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -653,7 +617,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913298"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -662,22 +626,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2239913299")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -689,7 +653,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913300"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -698,22 +662,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2339913301")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -725,7 +689,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913302"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -734,22 +698,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2439913303")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -761,7 +725,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913304"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -770,22 +734,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2539913305")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -797,7 +761,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913306"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -806,22 +770,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2639913307")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -833,7 +797,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913308"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -842,22 +806,22 @@ export default function PoolListCom1024px(props) {
                   direction="row"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
                   alignSelf="stretch"
                   position="relative"
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
+                  borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2739913309")}
+                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  {...getOverrideProps(overrides, "Frame 1939913188")}
                 >
                   <Image
-                    width="32.7px"
-                    height="32.76px"
+                    width="38px"
+                    height="38px"
                     display="block"
                     gap="unset"
                     alignItems="unset"
@@ -869,43 +833,7 @@ export default function PoolListCom1024px(props) {
                     objectFit="cover"
                     {...getOverrideProps(
                       overrides,
-                      "unsplash:em1OiomfG3g39913310"
-                    )}
-                  ></Image>
-                </Flex>
-                <Flex
-                  gap="10px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="5px"
-                  padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-                  {...getOverrideProps(overrides, "Frame 2839913311")}
-                >
-                  <Image
-                    width="32.7px"
-                    height="32.76px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="20px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(
-                      overrides,
-                      "unsplash:em1OiomfG3g39913312"
+                      "unsplash:em1OiomfG3g39913189"
                     )}
                   ></Image>
                 </Flex>
@@ -918,7 +846,7 @@ export default function PoolListCom1024px(props) {
               width: "89vw",
               height: "unset",
               borderRadius: "15px",
-              backgroundColor: "rgba(255,226,0,0.35)",
+              backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
                 "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
@@ -940,266 +868,200 @@ export default function PoolListCom1024px(props) {
               {...getOverrideProps(overrides, "Top")}
             >
               <Flex
-                gap="10px"
+                gap="94px"
                 direction="row"
-                width="280px"
+                width="unset"
                 height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                grow="1"
+                shrink="1"
+                basis="0"
                 position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 37")}
+                padding="0px 32px 0px 116px"
+                {...getOverrideProps(overrides, "Frame 143")}
               >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="15px"
-                  fontWeight="600"
-                  lineHeight="18.15340805053711px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="358px"
+                <Flex
+                  gap="10px"
+                  direction="row"
+                  width="unset"
                   height="unset"
-                  gap="unset"
-                  alignItems="unset"
+                  justifyContent="center"
+                  alignItems="center"
                   shrink="0"
                   position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="LP List"
-                  {...getOverrideProps(overrides, "LP List")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 13")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="12px"
-                  fontWeight="600"
-                  lineHeight="14.522727012634277px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
+                  padding="10px 10px 10px 10px"
+                  {...getOverrideProps(overrides, "Frame 144")}
+                >
+                  <Text
+                    fontFamily="Inter"
+                    fontSize="15px"
+                    fontWeight="600"
+                    lineHeight="18.15340805053711px"
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="unset"
+                    gap="unset"
+                    alignItems="unset"
+                    shrink="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children="LP List"
+                    {...getOverrideProps(overrides, "LP List")}
+                  ></Text>
+                </Flex>
+                <Flex
+                  gap="15px"
+                  direction="row"
                   width="unset"
-                  height="25px"
-                  gap="unset"
-                  alignItems="unset"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
+                  alignSelf="stretch"
                   position="relative"
                   padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="WALLET"
-                  {...getOverrideProps(overrides, "WALLET")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 38")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="12px"
-                  fontWeight="600"
-                  lineHeight="14.522727012634277px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="25px"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="DEPOSITED"
-                  {...getOverrideProps(overrides, "DEPOSITED")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 39")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="12px"
-                  fontWeight="600"
-                  lineHeight="14.522727012634277px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="25px"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="APY"
-                  {...getOverrideProps(overrides, "APY")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 14")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="12px"
-                  fontWeight="500"
-                  lineHeight="14.522727012634277px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="25px"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="TVL"
-                  {...getOverrideProps(overrides, "TVL")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 40")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="12px"
-                  fontWeight="500"
-                  lineHeight="14.522727012634277px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="25px"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="DAILY RATE"
-                  {...getOverrideProps(overrides, "DAILY RATE")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 1539913034")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="12px"
-                  fontWeight="500"
-                  lineHeight="14.522727012634277px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="25px"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="Action"
-                  {...getOverrideProps(overrides, "Action")}
-                ></Text>
+                  {...getOverrideProps(overrides, "Frame 142")}
+                >
+                  <Text
+                    fontFamily="Inter"
+                    fontSize="12px"
+                    fontWeight="600"
+                    lineHeight="14.522727012634277px"
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="25px"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children="WALLET"
+                    {...getOverrideProps(overrides, "WALLET")}
+                  ></Text>
+                  <Text
+                    fontFamily="Inter"
+                    fontSize="12px"
+                    fontWeight="600"
+                    lineHeight="14.522727012634277px"
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="25px"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children="DEPOSITED"
+                    {...getOverrideProps(overrides, "DEPOSITED")}
+                  ></Text>
+                  <Text
+                    fontFamily="Inter"
+                    fontSize="12px"
+                    fontWeight="600"
+                    lineHeight="14.522727012634277px"
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="25px"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children="APY"
+                    {...getOverrideProps(overrides, "APY")}
+                  ></Text>
+                  <Text
+                    fontFamily="Inter"
+                    fontSize="12px"
+                    fontWeight="600"
+                    lineHeight="14.522727012634277px"
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="25px"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children="TVL"
+                    {...getOverrideProps(overrides, "TVL")}
+                  ></Text>
+                  <Text
+                    fontFamily="Inter"
+                    fontSize="12px"
+                    fontWeight="600"
+                    lineHeight="14.522727012634277px"
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="25px"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children="DAILY RATE"
+                    {...getOverrideProps(overrides, "DAILY RATE")}
+                  ></Text>
+                  <Text
+                    fontFamily="Inter"
+                    fontSize="12px"
+                    fontWeight="600"
+                    lineHeight="14.522727012634277px"
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="25px"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children="Action"
+                    {...getOverrideProps(overrides, "Action")}
+                  ></Text>
+                </Flex>
               </Flex>
             </Flex>
           </motion.div>
@@ -1755,7 +1617,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={(pageNum) => {
+              onChange={pageNum => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {
