@@ -53,14 +53,13 @@ export default function PooListCom768px(props) {
     <>
       {isTablet ? (
         <Flex
-          className="768box"
           display="flex"
           gap="52px"
-          direction={{ base: "row", medium: "column" }}
-          width={{ base: "80vw", medium: "87vw" }}
+          direction="column"
+          width="87vw"
           height="unset"
-          justifyContent={{ base: "center", medium: "flex-start" }}
-          alignItems={{ base: "center", medium: "flex-start" }}
+          justifyContent="flex-start"
+          alignItems="flex-start"
           position="relative"
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "PooListCom768px")}
@@ -84,7 +83,7 @@ export default function PooListCom768px(props) {
                 width: "89vw",
                 height: "unset",
                 borderRadius: "33px",
-                backgroundColor: "rgba(255,226,0,0.35)",
+                backgroundColor: "rgba(248,251,251,0.35)",
                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                 backgroundImage:
                   "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
@@ -93,7 +92,7 @@ export default function PooListCom768px(props) {
               whileHover={{ borderRadius: "75px" }}
             >
               <Flex
-                gap="12px"
+                gap="23px"
                 direction="column"
                 width="unset"
                 height="unset"
@@ -103,7 +102,7 @@ export default function PooListCom768px(props) {
                 alignSelf="stretch"
                 position="relative"
                 borderRadius="35px"
-                padding="29px 27px 29px 27px"
+                padding="28px 38px 28px 38px"
                 {...getOverrideProps(overrides, "Networks List39563128")}
               >
                 <Text
@@ -124,20 +123,14 @@ export default function PooListCom768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-<<<<<<< HEAD
                   children="Networks List"
                   {...getOverrideProps(overrides, "Networks List39563127")}
-=======
-                  children="Overnight Pulse Act ll"
-                  overflow="hidden"
-                  {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
->>>>>>> 1aade45 (Rebase1)
                 ></Text>
                 <Flex
-                  gap="12px"
+                  gap="18px"
                   direction="column"
                   width="unset"
-                  height="128px"
+                  height="178px"
                   justifyContent="flex-start"
                   alignItems="flex-start"
                   shrink="0"
@@ -147,7 +140,7 @@ export default function PooListCom768px(props) {
                   {...getOverrideProps(overrides, "Networks39422850")}
                 >
                   <Flex
-                    gap="67px"
+                    gap="30px"
                     direction="row"
                     width="unset"
                     height="unset"
@@ -174,21 +167,21 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
                       {...getOverrideProps(overrides, "Frame 1939412770")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
@@ -210,21 +203,21 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
                       {...getOverrideProps(overrides, "Frame 2039573430")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
@@ -246,21 +239,21 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
                       {...getOverrideProps(overrides, "Frame 2139573432")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
@@ -282,21 +275,21 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
                       {...getOverrideProps(overrides, "Frame 2239573434")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
@@ -318,32 +311,32 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2339573436")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2239573434")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573437"
+                          "unsplash:em1OiomfG3g39573435"
                         )}
                       ></Image>
                     </Flex>
                   </Flex>
                   <Flex
-                    gap="67px"
+                    gap="30px"
                     direction="row"
                     width="unset"
                     height="unset"
@@ -355,7 +348,7 @@ export default function PooListCom768px(props) {
                     alignSelf="stretch"
                     position="relative"
                     padding="0px 0px 0px 0px"
-                    {...getOverrideProps(overrides, "Frame 3939573438")}
+                    {...getOverrideProps(overrides, "Frame 3839412790")}
                   >
                     <Flex
                       gap="10px"
@@ -370,26 +363,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 1939573439")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 1939412770")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573440"
+                          "unsplash:em1OiomfG3g39412771"
                         )}
                       ></Image>
                     </Flex>
@@ -406,26 +399,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2039573441")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2039573430")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573442"
+                          "unsplash:em1OiomfG3g39573431"
                         )}
                       ></Image>
                     </Flex>
@@ -442,26 +435,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2139573443")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2139573432")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573444"
+                          "unsplash:em1OiomfG3g39573433"
                         )}
                       ></Image>
                     </Flex>
@@ -478,26 +471,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2239573445")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2239573434")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573446"
+                          "unsplash:em1OiomfG3g39573435"
                         )}
                       ></Image>
                     </Flex>
@@ -514,26 +507,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2339573447")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2239573434")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573448"
+                          "unsplash:em1OiomfG3g39573435"
                         )}
                       ></Image>
                     </Flex>
@@ -547,7 +540,7 @@ export default function PooListCom768px(props) {
                 width: "89vw",
                 height: "unset",
                 borderRadius: "33px",
-                backgroundColor: "rgba(234,0,50,0.55)",
+                backgroundColor: "rgba(248,251,251,0.35)",
                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                 backgroundImage:
                   "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
@@ -555,19 +548,18 @@ export default function PooListCom768px(props) {
               whileHover={{ borderRadius: "75px" }}
             >
               <Flex
-                gap="12px"
+                gap="23px"
                 direction="column"
                 width="unset"
                 height="unset"
-                justifyContent="flex-start"
+                justifyContent="center"
                 alignItems="center"
                 shrink="0"
                 alignSelf="stretch"
                 position="relative"
                 borderRadius="35px"
-                padding="29px 27px 29px 27px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                {...getOverrideProps(overrides, "DexList")}
+                padding="28px 38px 28px 38px"
+                {...getOverrideProps(overrides, "Networks List39563128")}
               >
                 <Text
                   fontFamily="Inter"
@@ -588,23 +580,23 @@ export default function PooListCom768px(props) {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children="Dex List"
-                  {...getOverrideProps(overrides, "Dex List")}
+                  {...getOverrideProps(overrides, "Networks List39563127")}
                 ></Text>
                 <Flex
-                  gap="12px"
+                  gap="18px"
                   direction="column"
                   width="unset"
-                  height="128px"
+                  height="178px"
                   justifyContent="flex-start"
                   alignItems="flex-start"
                   shrink="0"
                   alignSelf="stretch"
                   position="relative"
                   padding="0px 0px 0px 0px"
-                  {...getOverrideProps(overrides, "Networks39573451")}
+                  {...getOverrideProps(overrides, "Networks39422850")}
                 >
                   <Flex
-                    gap="67px"
+                    gap="30px"
                     direction="row"
                     width="unset"
                     height="unset"
@@ -616,7 +608,7 @@ export default function PooListCom768px(props) {
                     alignSelf="stretch"
                     position="relative"
                     padding="0px 0px 0px 0px"
-                    {...getOverrideProps(overrides, "Frame 3839573452")}
+                    {...getOverrideProps(overrides, "Frame 3839412790")}
                   >
                     <Flex
                       gap="10px"
@@ -631,26 +623,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 1939573453")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 1939412770")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573454"
+                          "unsplash:em1OiomfG3g39412771"
                         )}
                       ></Image>
                     </Flex>
@@ -667,26 +659,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2039573455")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2039573430")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573456"
+                          "unsplash:em1OiomfG3g39573431"
                         )}
                       ></Image>
                     </Flex>
@@ -703,26 +695,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2139573457")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2139573432")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573458"
+                          "unsplash:em1OiomfG3g39573433"
                         )}
                       ></Image>
                     </Flex>
@@ -739,26 +731,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2239573459")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2239573434")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573460"
+                          "unsplash:em1OiomfG3g39573435"
                         )}
                       ></Image>
                     </Flex>
@@ -775,32 +767,32 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2339573461")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2239573434")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573462"
+                          "unsplash:em1OiomfG3g39573435"
                         )}
                       ></Image>
                     </Flex>
                   </Flex>
                   <Flex
-                    gap="67px"
+                    gap="30px"
                     direction="row"
                     width="unset"
                     height="unset"
@@ -812,7 +804,7 @@ export default function PooListCom768px(props) {
                     alignSelf="stretch"
                     position="relative"
                     padding="0px 0px 0px 0px"
-                    {...getOverrideProps(overrides, "Frame 3939573463")}
+                    {...getOverrideProps(overrides, "Frame 3839412790")}
                   >
                     <Flex
                       gap="10px"
@@ -827,26 +819,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 1939573464")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 1939412770")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573465"
+                          "unsplash:em1OiomfG3g39412771"
                         )}
                       ></Image>
                     </Flex>
@@ -863,26 +855,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2039573466")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2039573430")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573467"
+                          "unsplash:em1OiomfG3g39573431"
                         )}
                       ></Image>
                     </Flex>
@@ -899,26 +891,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2139573468")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2139573432")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573469"
+                          "unsplash:em1OiomfG3g39573433"
                         )}
                       ></Image>
                     </Flex>
@@ -935,26 +927,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2239573470")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2239573434")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573471"
+                          "unsplash:em1OiomfG3g39573435"
                         )}
                       ></Image>
                     </Flex>
@@ -971,26 +963,26 @@ export default function PooListCom768px(props) {
                       alignSelf="stretch"
                       position="relative"
                       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="5px"
+                      borderRadius="10px"
                       padding="10px 10px 10px 10px"
-                      backgroundColor="rgba(244,244,244,1)"
-                      {...getOverrideProps(overrides, "Frame 2339573472")}
+                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                      {...getOverrideProps(overrides, "Frame 2239573434")}
                     >
                       <Image
-                        width="32.27px"
-                        height="38px"
+                        width="40px"
+                        height="40px"
                         display="block"
                         gap="unset"
                         alignItems="unset"
                         justifyContent="unset"
                         shrink="0"
                         position="relative"
-                        borderRadius="20px"
+                        borderRadius="35px"
                         padding="0px 0px 0px 0px"
                         objectFit="cover"
                         {...getOverrideProps(
                           overrides,
-                          "unsplash:em1OiomfG3g39573473"
+                          "unsplash:em1OiomfG3g39573435"
                         )}
                       ></Image>
                     </Flex>
@@ -1813,7 +1805,7 @@ export default function PooListCom768px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={(pageNum) => {
+                onChange={pageNum => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {
