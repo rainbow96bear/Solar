@@ -22,14 +22,13 @@ export default function SwapCompo768px(props) {
       }}
       gap="30px"
       direction="row"
-      width="80vw"
+      width="86vw"
       height="unset"
       justifyContent="flex-start"
       alignItems="center"
       position="relative"
       borderRadius="18px"
       padding="30px 50px 30px 50px"
-      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
       {...getOverrideProps(overrides, "SwapCompo768px")}
       {...rest}
     >
@@ -94,7 +93,7 @@ export default function SwapCompo768px(props) {
       >
         <Text
           fontFamily="Inter"
-          fontSize="24px"
+          fontSize="1.5rem"
           fontWeight="700"
           lineHeight="29.045454025268555px"
           textAlign="center"
