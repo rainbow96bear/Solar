@@ -26,23 +26,18 @@ export default function PoolListCom1440px(props) {
   const [poolList, setPoolList] = React.useState([]);
   const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
   const [pageIndex, setPageIndex] = React.useState(1);
-  const pageSize = 10;
-  const [resultLength, setResultLength] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
   React.useEffect(() => {
     (async () => {
-      const { result, resultLength, resultTotalPages } = await getMainPoolList(
-        pageIndex
-      );
+      const { result, resultTotalPages } = await getMainPoolList(pageIndex);
       setPoolList(result);
 
       setCurrentPagePoolList(
         result.slice((pageIndex - 1) * 10, pageIndex * 10)
       );
-      setResultLength(resultLength);
       setTotalPages(resultTotalPages);
     })();
   }, []);
@@ -61,6 +56,7 @@ export default function PoolListCom1440px(props) {
 
   return (
     <Flex
+      className="1440box"
       display={{
         base: "none",
         small: "none",

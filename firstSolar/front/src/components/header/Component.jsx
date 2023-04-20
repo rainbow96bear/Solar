@@ -15,7 +15,7 @@ const HeaderComponent = () => {
 
   return (
     <Header>
-      <BeforeHeadCom1440px></BeforeHeadCom1440px>
+      {/* <BeforeHeadCom1440px></BeforeHeadCom1440px> */}
       <BeforeHeadCom1024px></BeforeHeadCom1024px>
       <BeforeHeadCom768px></BeforeHeadCom768px>
       <BeforeHeadCom320px></BeforeHeadCom320px>
