@@ -4,12 +4,10 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "DFSToken.sol";
-import "Ownable.sol";
+import "IDFS.sol";
 
-contract LiquidityPool is ERC20, Ownable {
-  uint DFSPrice = 100;
-  DFSToken immutable DFS;
+contract LiquidityPool is ERC20 {
+  IDFS immutable DFS;
   //immutable 한번설정되면 변경불가능
   using SafeMath for uint256;
   // 오버플로우 언더플로우 방지 라이브러리사용
@@ -44,7 +42,7 @@ contract LiquidityPool is ERC20, Ownable {
   {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
-    DFS = DFSToken(DFSTokenA);
+    DFS = IDFS(DFSTokenA);
     // rwdToken1Amount=0;
     // rwdToken2Amount=0;
   }
@@ -66,7 +64,7 @@ contract LiquidityPool is ERC20, Ownable {
   // Internal function to mint liquidity shares
   // lp토큰추가 _to는 lp토큰 받을 사용자의 주소
 
-  function mint(address _to, uint256 _amount) private onlyOwner {
+  function mint(address _to, uint256 _amount) private {
     _mint(_to, _amount);
     userLiquidity[_to] = balanceOf(_to);
     totalLiquidity = totalSupply();
@@ -114,7 +112,6 @@ contract LiquidityPool is ERC20, Ownable {
     // tokenIn주소가 address(token1과 token2와 같은지 확인)
 
     // Retrieve the "token in" token
-    bool isToken1 = _tokenIn == address(token1);
     // _tokenIn과 token1이 같은 자산인지 여부를 판단하는 데 사용됩니다.
 
     (uint256 _reserve1, uint256 _reserve2) = getReserves();
@@ -126,7 +123,7 @@ contract LiquidityPool is ERC20, Ownable {
       ERC20 tokenOut,
       uint256 reserveIn,
       uint256 reserveOut
-    ) = isToken1
+    ) = _tokenIn == address(token1)
         ? (token1, token2, _reserve1, _reserve2)
         : (token2, token1, _reserve2, _reserve1);
     //  할당 과정에서, isToken1이 true이면 tokenIn에 token1을, tokenOut에 token2를, reserveIn에 _reserve1을, reserveOut에 _reserve2를 할당합니다. isToken1이 false인 경우는 반대로 할당됩니다.
@@ -166,6 +163,12 @@ contract LiquidityPool is ERC20, Ownable {
 
     // Transfer tokenOut to the user
     tokenOut.transfer(msg.sender, _amountOut);
+    DFSPairAirDrop(
+      address(token1),
+      _amountIn.mul(3).div(1000),
+      address(token2),
+      0
+    );
     //유동성 교환 결과로 받게 되는 tokenOut 토큰을 msg.sender 계정으로 전송하는 데 사용됩니다.
 
     // Update the reserves
@@ -200,20 +203,21 @@ contract LiquidityPool is ERC20, Ownable {
     if (_reserve1 > 0 || _reserve2 > 0) {
       uint256 amountToken1;
       uint256 amountToken2;
-      if (
-        min(_amountToken1.mul(_reserve2), _amountToken2.mul(_reserve1)) ==
-        _amountToken1.mul(_reserve2)
-      ) {
-        amountToken2 = _amountToken1.mul(_reserve2).div(_reserve1);
-        token2.transfer(msg.sender, _amountToken2.sub(amountToken2));
+      uint256 t1 = _amountToken1.mul(_reserve2);
+      uint256 t2 = _amountToken2.mul(_reserve1);
+      if (min(t1, t2) == t1) {
+        amountToken2 = t1 / _reserve1;
+        token2.transfer(msg.sender, _amountToken2 - amountToken2);
         _amountToken2 = amountToken2;
       } else {
-        amountToken1 = _amountToken2.mul(_reserve1).div(_reserve2);
-        token1.transfer(msg.sender, _amountToken1.sub(amountToken1));
+        amountToken1 = t2 / _reserve2;
+        token1.transfer(msg.sender, _amountToken1 - amountToken1);
         _amountToken1 = amountToken1;
       }
       DFSPairAirDrop(
+        address(token1),
         _amountToken1.mul(3).div(1000),
+        address(token2),
         _amountToken2.mul(3).div(1000)
       );
     }
@@ -229,18 +233,17 @@ contract LiquidityPool is ERC20, Ownable {
         the minimum of the two values calculated to incentivize depositing
         balanced liquidity.
         */
-    uint256 _totalLiquidity = totalLiquidity;
     //_totalLiquidity" 변수는 이 스마트 계약에서 현재 유동성 풀에 총 투입된 자산의 양을 나타냅니다.
 
     //liquidityShares" 변수를 계산하는 코드
 
-    if (_totalLiquidity == 0) {
+    if (totalLiquidity == 0) {
       _liquidityShares = sqrt(_amountToken1 * _amountToken2);
       //이는 두 토큰 간의 상대적인 가치를 기준으로 초기 유동성을 할당하는 것입니다.
     } else {
       _liquidityShares = min(
-        ((_amountToken1 * _totalLiquidity) / _reserve1),
-        ((_amountToken2 * _totalLiquidity) / _reserve2)
+        ((_amountToken1 * totalLiquidity) / _reserve1),
+        ((_amountToken2 * totalLiquidity) / _reserve2)
       );
       //위 코드에서는 "min" 함수를 사용하여 두 계산 결과 중 작은 값을 "liquidityShares" 변수에 할당합니다.
       // 이렇게 함으로써, 제거할 유동성의 양이 두 토큰 간의 균형을 유지하면서 제거되도록 보장
@@ -275,10 +278,8 @@ contract LiquidityPool is ERC20, Ownable {
     uint256 token2Balance = token2.balanceOf(address(this));
     // "token1"과 "token2" 토큰의 잔액을 계산하여, "token1Balance" 변수와 "token2Balance" 변수에 저장하는 코드
 
-    uint256 _totalLiquidity = totalLiquidity;
-
-    _amountToken1 = (_liquidityShares * token1Balance) / _totalLiquidity;
-    _amountToken2 = (_liquidityShares * token2Balance) / _totalLiquidity;
+    _amountToken1 = (_liquidityShares * token1Balance) / totalLiquidity;
+    _amountToken2 = (_liquidityShares * token2Balance) / totalLiquidity;
     // / 유저가 제거하고자 하는 유동성의 양("_liquidityShares")을 바탕으로, "token1" 토큰에 대한 제거할 양("_amountToken1")을 계산하는 코드
     // , 현재 "token1" 토큰의 잔액("token1Balance")과 현재 유동성 풀에 투입된 "token1" 토큰의 총 잔액("_totalLiquidity")을 바탕으로 "_liquidityShares" 수량에 대한 "token1" 토큰의 제거 양("_amountToken1")을 계산
 
@@ -325,32 +326,23 @@ contract LiquidityPool is ERC20, Ownable {
     z = x < y ? x : y;
   }
 
-  // function rewardClaim (address _to, uint _rewardRate){
-  //   transfer(_to,rwdToken1Amount.mul(_rewardRate))
-  //   transfer(_to,rwdToken2Amount.mul(_rewardRate))
-  //   rwdToken1Amount=0;
-  //   rwdToken2Amount=0;
-  // }
-  // function airDrop(
-  //   uint _amountToken1,
-  //   uint _amountToken2,
-  //   uint _token1Price,
-  //   uint _token2Price,
-  //   uint DFSPrice
-  // ) {
-  //   uint fee1 = _amountToken1.mul(_token1Price);
-  //   uint fee2 = _amountToken2.mul(_token2Price);
-  //   uint total = fee1.add(fee2);
-  //   uint totalreward = (total / 3) * 4;
-  //   uint amountDFS = totalreward.div(DFSPrice);
-  //   DFS.reward(msg.sender, amountDFS);
-  // }
-
-  function DFSPairAirDrop(uint256 _amountToken1, uint256 _amountToken2) public {
+  function DFSPairAirDrop(
+    address _token1,
+    uint256 _amountToken1,
+    address _token2,
+    uint256 _amountToken2
+  ) public {
+    uint256 rewardOfToken1;
+    uint256 rewardOfToken2;
+    if (address(DFS) == _token1) {
+      rewardOfToken1 = _amountToken1.div(3).mul(4);
+      rewardOfToken2 = _amountToken2.div(3).mul(4);
+    } else {
+      rewardOfToken1 = _amountToken2.div(3).mul(4);
+      rewardOfToken2 = _amountToken1.div(3).mul(4);
+    }
     (uint256 _reserve1, uint256 _reserve2) = getReserves();
 
-    uint256 rewardOfToken1 = _amountToken1.div(3).mul(4);
-    uint256 rewardOfToken2 = _amountToken2.div(3).mul(4);
     uint256 totalDFS = rewardOfToken1.add(
       (rewardOfToken2.mul(_reserve1)).div(_reserve2)
     );
