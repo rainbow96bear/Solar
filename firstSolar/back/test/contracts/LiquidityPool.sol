@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import "../contracts/DFSToken.sol";
+import "DFSToken.sol";
 
 contract LiquidityPool is ERC20 {
   uint DFSPrice = 100;
@@ -36,11 +36,7 @@ contract LiquidityPool is ERC20 {
     address _token1,
     address _token2,
     address DFSTokenA
-  )
-    // uint256 rwdToken1Amount,
-    // uint256 rwdToken2Amount
-    ERC20(_name, _symbol)
-  {
+  ) ERC20(_name, _symbol) {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = DFSToken(DFSTokenA);
@@ -355,5 +351,6 @@ contract LiquidityPool is ERC20 {
     );
 
     DFS.reward(msg.sender, totalDFS);
+    // DFS와 페어가 아닌 것은 두 토큰의 가격을 확인하여 DFS로 변환해야하는데 어떻게 할지 아직 모르겠다.
   }
 }

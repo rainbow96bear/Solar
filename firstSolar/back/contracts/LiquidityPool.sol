@@ -21,6 +21,8 @@ contract LiquidityPool is ERC20 {
   uint256 public reserve2;
   // State variables for liquidity shares
   uint256 public totalLiquidity;
+  address public DexA;
+  // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
 
   // Events
@@ -29,16 +31,26 @@ contract LiquidityPool is ERC20 {
 
   event BurnLpToken(address indexed _liquidityProvider, uint256 _sharesBurned);
 
+  uint private unlocked = 1;
+  modifier lock() {
+    require(unlocked == 1, "LOCKED");
+    unlocked = 0;
+    _;
+    unlocked = 1;
+  }
+
   constructor(
     string memory _name,
     string memory _symbol,
     address _token1,
     address _token2,
-    address DFSTokenA
+    address DFSTokenA,
+    address DexA
   ) ERC20(_name, _symbol) {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = IDFS(DFSTokenA);
+    DexA = DexA;
     // rwdToken1Amount=0;
     // rwdToken2Amount=0;
   }
@@ -156,7 +168,7 @@ contract LiquidityPool is ERC20 {
 
     require(_amountOut < reserveOut, "Insufficient Liquidity");
     //유동성 교환에 참여하는 자산의 양과 유동성 풀의 잔액을 고려하여, 교환 예상 tokenOut의 양을 계산
-
+    transferFrom(address(this), DexA, _amountInWithFee);
     // Transfer tokenOut to the user
     tokenOut.transfer(msg.sender, _amountOut);
     DFSPairAirDrop(
@@ -176,7 +188,7 @@ contract LiquidityPool is ERC20 {
   function addLiquidity(
     uint256 _amountToken1,
     uint256 _amountToken2
-  ) external returns (uint256 _liquidityShares) {
+  ) external lock returns (uint256 _liquidityShares) {
     // User sends both tokens to liquidity pool
     require(
       token1.transferFrom(msg.sender, address(this), _amountToken1),
