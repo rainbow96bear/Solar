@@ -24,30 +24,23 @@ import { useMediaQuery } from "react-responsive";
 export default function PooListCom768px(props) {
   const { overrides, ...rest } = props;
 
-  const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
-  const [pageIndex, setPageIndex] = React.useState(1);
-  const [totalPages, setTotalPages] = React.useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  const getPoolList = async () => {
-    const { poolListData, resultTotalPages } = await getMainPoolList(pageIndex);
-    setCurrentPagePoolList(poolListData);
-    setTotalPages(resultTotalPages);
-  };
-  React.useEffect(() => {
-    getPoolList();
-  }, [pageIndex]);
-
-  const paginationProps = usePagination({
-    totalPages: totalPages,
-    currentPage: pageIndex,
-    siblingCount: 2,
-  });
-
-  const isTablet = useMediaQuery({
-    query: "(min-width:481px) and (max-width:991px)",
-  });
+  const items = [
+    {
+      id: "0",
+      title: "1",
+    },
+    {
+      id: "1",
+      title: "2",
+    },
+    {
+      id: "2",
+      title: "3",
+    },
+  ];
 
   return (
     <>
