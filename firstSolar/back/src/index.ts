@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 db.sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("db connected");
   })
