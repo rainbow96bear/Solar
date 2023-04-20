@@ -24,29 +24,19 @@ import { useMediaQuery } from "react-responsive";
 export default function PooListCom768px(props) {
   const { overrides, ...rest } = props;
 
-  const [poolList, setPoolList] = React.useState([]);
   const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
   const [pageIndex, setPageIndex] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
+  const getPoolList = async () => {
+    const { poolListData, resultTotalPages } = await getMainPoolList(pageIndex);
+    setCurrentPagePoolList(poolListData);
+    setTotalPages(resultTotalPages);
+  };
   React.useEffect(() => {
-    (async () => {
-      const { result, resultTotalPages } = await getMainPoolList(pageIndex);
-      setPoolList(result);
-
-      setCurrentPagePoolList(
-        result.slice((pageIndex - 1) * 10, pageIndex * 10)
-      );
-      setTotalPages(resultTotalPages);
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    setCurrentPagePoolList(
-      poolList.slice((pageIndex - 1) * 10, pageIndex * 10)
-    );
+    getPoolList();
   }, [pageIndex]);
 
   const paginationProps = usePagination({
