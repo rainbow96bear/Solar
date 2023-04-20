@@ -46,9 +46,9 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const accountAddress = useSelector((state) => state.account.account.account);
+  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
+  const connect = useSelector(state => state.connect.connect.connect);
+  const accountAddress = useSelector(state => state.account.account.account);
   const dispatch = useDispatch();
 
   const { web3, account, chainId, login } = useWeb3();
