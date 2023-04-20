@@ -38,3 +38,4 @@ export { default as ConnectModal } from "./ConnectModal";
 export { default as LoginAccount } from "./LoginAccount";
 export { default as Footer } from "./Footer";
 export { default as studioTheme } from "./studioTheme";
+export { default as Footer } from "./Footer";

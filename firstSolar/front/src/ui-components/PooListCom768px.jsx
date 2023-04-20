@@ -124,8 +124,14 @@ export default function PooListCom768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
+<<<<<<< HEAD
                   children="Networks List"
                   {...getOverrideProps(overrides, "Networks List39563127")}
+=======
+                  children="Overnight Pulse Act ll"
+                  overflow="hidden"
+                  {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
+>>>>>>> 1aade45 (Rebase1)
                 ></Text>
                 <Flex
                   gap="12px"
