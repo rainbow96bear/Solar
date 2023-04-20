@@ -10,7 +10,7 @@ const DefiComponent = ({
   isAPI,
   inputValue,
   setInput,
-  testing,
+  createLiquidityPoolFunc,
   getPool,
 }) => {
   return (
@@ -70,7 +70,7 @@ const DefiComponent = ({
         <div>
           <button
             onClick={() => {
-              testing();
+              createLiquidityPoolFunc();
             }}
           >
             자체 발행 풀 생성

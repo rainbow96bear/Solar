@@ -322,7 +322,7 @@ router.post("/price", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/test", async (req: Request, res: Response) => {
+router.post("/createLiquidityPool", async (req: Request, res: Response) => {
   try {
     const { account }: { account: string } = req.body;
 
@@ -338,16 +338,38 @@ router.post("/test", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/lp", async (req: Request, res: Response) => {
+router.post("/insertLpToDB", async (req: Request, res: Response) => {
   try {
-    const result = await deployed.methods
-      .getLiquidityPool(process.env.DFS, process.env.ETH)
-      .call();
-    console.log(result);
+    const result = await deployed.methods.getpoolInfo().call();
+    for (let i = 0; i < result.length; i++) {
+      const temp = await db.Pool.findOne({
+        where: {
+          tokenAddress: result[i][0],
+        },
+      });
+      if (!temp)
+        db.Pool.create({
+          tokenAddress: result[i][0],
+          firstToken: null,
+          secondToken: null,
+          lpName: null,
+          platformId: "solar",
+          platformLogo: "./imgs/platform/1inch.jpg",
+          network: "bsc",
+          mainNetLogo: `/imgs/mainNet/bsc.jpg`,
+          apy: 0,
+          tvl: 0,
+        });
+    }
+
     res.send(result);
   } catch (err) {
     console.log(err);
     res.send(err);
   }
+});
+
+router.post("/approve", (req, res) => {
+  res.send();
 });
 export default router;
