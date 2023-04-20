@@ -1,4 +1,4 @@
-import SwapComponent from "./ComponentComponent";
+import SwapComponent from "./Component";
 const SwapContainer = () => {
   return <SwapComponent></SwapComponent>;
 };
