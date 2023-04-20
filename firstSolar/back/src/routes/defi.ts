@@ -545,4 +545,8 @@ router.post("/removeLiquidity", async (req: Request, res: Response) => {
     res.send(err);
   }
 });
+
+router.post("/approve", (req, res) => {
+  res.send();
+});
 export default router;
