@@ -34,9 +34,9 @@ import { useMediaQuery } from "react-responsive";
 export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
-  const login = useSelector((state) => state.login.login.login);
+  const login = useSelector(state => state.login.login.login);
   const { address, isConnecting, isDisconnected } = useAccount();
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const connect = useSelector(state => state.connect.connect.connect);
   const isMobile = useMediaQuery({
     query: "(min-width:0px) and (max-width:480px)",
   });

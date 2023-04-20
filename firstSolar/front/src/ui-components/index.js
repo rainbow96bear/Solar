@@ -6,9 +6,8 @@
 
 export { default as BeforeHeadCom320px } from "./BeforeHeadCom320px";
 export { default as Swap320px } from "./Swap320px";
-export { default as BeforeHeadCom1440px } from "./BeforeHeadCom1440px";
 export { default as ConnectCompo768px } from "./ConnectCompo768px";
-export { default as BeforeHeadCom1024px } from "./BeforeHeadCom1024px";
+export { default as BeforeHeadCom1024px } from "./BeforeHeadCom1440px";
 export { default as Swap768px } from "./Swap768px";
 export { default as AddLiquidityBottom768px } from "./AddLiquidityBottom768px";
 export { default as AddLiquidityTop320px } from "./AddLiquidityTop320px";
