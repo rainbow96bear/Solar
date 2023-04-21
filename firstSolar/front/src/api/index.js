@@ -3,7 +3,7 @@ import axios from "axios";
 const request = axios.create({
   baseURL: "http://localhost:8080",
   header: {
-    "content-type": "applicatiton/json",
+    "content-type": "application/json",
   },
 });
 

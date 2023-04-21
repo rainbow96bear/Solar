@@ -79,7 +79,7 @@ const Poolitem1024 = (props, { item }) => {
                 {...getOverrideProps(overrides, "PoolImg")}
               >
                 <Image
-                  // src={item.mainNetLogo}
+                  src={item?.mainNetLogo}
                   width="15px"
                   height="15px"
                   display="block"
@@ -94,7 +94,7 @@ const Poolitem1024 = (props, { item }) => {
                   {...getOverrideProps(overrides, "unsplash:AYOloXgqjzo")}
                 ></Image>
                 <Image
-                  // src={item.platformLogo}
+                  src={item?.platformLogo}
                   width="38px"
                   height="38px"
                   display="block"
