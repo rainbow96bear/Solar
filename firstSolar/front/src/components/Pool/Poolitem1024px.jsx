@@ -294,7 +294,7 @@ const Poolitem1024 = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="wallet자리"
+                  children="-"
                   {...getOverrideProps(overrides, "039913050")}
                 ></Text>
               </Flex>
@@ -333,7 +333,7 @@ const Poolitem1024 = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="deposit자리"
+                  children="-"
                   {...getOverrideProps(overrides, "039913052")}
                 ></Text>
               </Flex>
