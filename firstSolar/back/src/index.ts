@@ -39,11 +39,11 @@ const connectToDB = async () => {
       if (!temp)
         db.Pool.create({
           tokenAddress: result[i][0],
-          firstToken: null,
-          secondToken: null,
-          lpName: null,
+          firstToken: result[i][1].split("-")[0],
+          secondToken: result[i][1].split("-")[1],
+          name: result[i][1],
           platformId: "solar",
-          platformLogo: "./imgs/platform/1inch.jpg",
+          platformLogo: "./imgs/platform/solar.jpg",
           network: "bsc",
           mainNetLogo: `/imgs/mainNet/bsc.jpg`,
           apy: 0,
