@@ -3,7 +3,9 @@ import axios from "axios";
 import db from "../../models/index";
 import dotenv from "dotenv";
 import { BigNumber } from "@ethersproject/bignumber";
+import { Op } from "sequelize";
 
+import Pool from "../../models/pool";
 import { mainNet } from "../setting";
 import {
   deployed,
@@ -97,6 +99,8 @@ let obj: { from?: string; to?: string; data?: string } = {
   data: "",
 };
 
+let getPool: Pool[];
+
 router.get("/", async (req: Request, res: Response<LPData[]>) => {
   retries = 0;
   const pageIndex: number = parseInt(req.query.pageIndex as string);
@@ -105,7 +109,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
       const now: Date = new Date();
       const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
 
-      const getPool = await db.Pool.findAll();
+      getPool = await db.Pool.findAll();
 
       const activeLpList = (
         await axios.get(`https://api.beefy.finance/vaults`)
@@ -159,7 +163,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -229,7 +233,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await networkListUp();
       } else {
         console.error(error);
@@ -554,4 +558,22 @@ router.post("/removeLiquidity", async (req: Request, res: Response) => {
     res.send(err);
   }
 });
+
+router.post("/search", async (req: Request, res: Response) => {
+  const { search }: { search: string } = req.body;
+  let list: Array<Pool> = [];
+  if (!search) list = await db.Pool.findAll();
+  else {
+    list = await db.Pool.findAll({
+      where: {
+        [Op.or]: [
+          { name: { [Op.like]: `%${search}%` } },
+          { tokenAddress: { [Op.like]: `%${search}%` } },
+        ],
+      },
+    });
+  }
+  res.send(list);
+});
+
 export default router;

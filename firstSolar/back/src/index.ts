@@ -48,6 +48,7 @@ const connectToDB = async () => {
           mainNetLogo: `/imgs/mainNet/bsc.jpg`,
           apy: 0,
           tvl: 0,
+          oracleId: result[i][1],
         });
     }
     console.log("db connected & self-pool inserted");

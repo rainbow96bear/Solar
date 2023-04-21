@@ -4,13 +4,15 @@ export default class pool extends Model {
   public tokenAddress!: string;
   public firstToken!: string;
   public secondToken!: string;
-  public lpName!: string;
+  public name!: string;
   public platformId!: string;
   public platformLogo!: string;
   public network!: string;
   public mainNetLogo!: string;
   public apy!: number;
   public tvl!: number;
+  public oracleId!: string;
+
   public static initModel(sequelize: Sequelize) {
     return pool.init(
       {
@@ -52,6 +54,10 @@ export default class pool extends Model {
         },
         tvl: {
           type: DataTypes.INTEGER.UNSIGNED,
+          allowNull: false,
+        },
+        oracleId: {
+          type: DataTypes.STRING(255),
           allowNull: false,
         },
       },
