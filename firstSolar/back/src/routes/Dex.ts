@@ -4,13 +4,13 @@ import Web3 from "web3";
 import { AbiItem } from "web3-utils";
 import { BigNumber } from "@ethersproject/bignumber";
 
-// const web3 = new Web3(
-//     "wss://goerli.infura.io/ws/v3/2ca09ab04a7c44dcb6f886deeba97502"
-//   );
-
 const web3 = new Web3(
-  "wss://polygon-mumbai.infura.io/ws/v3/2ca09ab04a7c44dcb6f886deeba97502"
+  "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
 );
+// 2ca09ab04a7c44dcb6f886deeba97502
+// const web3 = new Web3(
+//   "wss://polygon-mumbai.infura.io/ws/v3/417c70b502174e5cb15ef580dae6b3d8"
+// );
 
 import { abi as DexAbi } from "../../contracts/artifacts/Dex.json";
 import { abi as LiquiditypoolAbi } from "../../contracts/artifacts/LiquidityPool.json";
@@ -21,16 +21,20 @@ dotenv.config();
 const router = Router();
 
 router.post("/", async (req: Request, res: Response) => {
+  console.log(req.body);
   // console.log(typeof req.body.token1);
-  // const deployed = new web3.eth.Contract(
-  //   // testAbi as AbiItem[],
-  //   // process.env.Wmatic_CA
-  // );
-  const tokenamount1 = BigNumber.from(Math.floor(0.09 * 10 ** 18).toString());
-
-  // let getpoolInfo = await deployed.methods.withdraw(tokenamount1).encodeABI();
-
+  const deployed = new web3.eth.Contract(
+    DexAbi as AbiItem[],
+    process.env.DEX_CA
+  );
   // console.log(deployed);
+  // const tokenamount1 = BigNumber.from(Math.floor(0.09 * 10 ** 18).toString());
+
+  let getpoolInfo = await deployed.methods
+    .getLiquidityPool(process.env.DFSToken_CA, process.env.OtherToken_CA)
+    .call();
+
+  console.log(getpoolInfo);
 
   // const lpDeployed = new web3.eth.Contract(
   //   LiquiditypoolAbi as AbiItem[],
@@ -65,18 +69,19 @@ router.post("/", async (req: Request, res: Response) => {
   // console.log(DFS);
   // res.send(getpoolInfo);
   // res.send(getpoolInfo);
+  res.end();
 });
 
 router.post("/approve", async (req: Request, res: Response) => {
   // console.log(typeof req.body.token1);
-  const deployed = new web3.eth.Contract(
-    DexAbi as AbiItem[],
-    process.env.Dex_CA
-  );
-  const lpDeployed = new web3.eth.Contract(
-    LiquiditypoolAbi as AbiItem[],
-    process.env.DFSLP_CA
-  );
+  // const deployed = new web3.eth.Contract(
+  //   DexAbi as AbiItem[],
+  //   process.env.Dex_CA
+  // );
+  // const lpDeployed = new web3.eth.Contract(
+  //   LiquiditypoolAbi as AbiItem[],
+  //   process.env.DFSLP_CA
+  // );
   // console.log(deployed);
   // console.log(lpDeployed);
 
@@ -93,14 +98,15 @@ router.post("/approve", async (req: Request, res: Response) => {
   // console.log(amount);
   // console.log(bigNumber);
 
-  let approve = await lpDeployed.methods
-    .approve(process.env.Dex_CA, amount)
-    .encodeABI();
+  // let approve = await lpDeployed.methods
+  //   .approve(process.env.Dex_CA, amount)
+  //   .encodeABI();
 
-  console.log(approve);
-  // let DFS = await deployed.methods.owner().call();
-  // console.log(DFS);
-  res.send(approve);
+  // console.log(approve);
+  // // let DFS = await deployed.methods.owner().call();
+  // // console.log(DFS);
+  // res.send(approve);
+  res.end();
 });
 
 export default router;
