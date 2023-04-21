@@ -79,7 +79,7 @@ const Poolitem1024 = (props, { item }) => {
                 {...getOverrideProps(overrides, "PoolImg")}
               >
                 <Image
-                  // src={item.mainNetLogo}
+                  src={item?.mainNetLogo}
                   width="15px"
                   height="15px"
                   display="block"
@@ -94,7 +94,7 @@ const Poolitem1024 = (props, { item }) => {
                   {...getOverrideProps(overrides, "unsplash:AYOloXgqjzo")}
                 ></Image>
                 <Image
-                  // src={item.platformLogo}
+                  src={item?.platformLogo}
                   width="38px"
                   height="38px"
                   display="block"
@@ -144,7 +144,7 @@ const Poolitem1024 = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  // children={item.name}
+                  children={item?.name}
                   {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
                 ></Text>
                 <Flex
@@ -413,7 +413,7 @@ const Poolitem1024 = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  // children={`$${item.tvl}`}
+                  children={`$${item?.tvl}`}
                   {...getOverrideProps(overrides, "$999,99939913056")}
                 ></Text>
               </Flex>
@@ -452,12 +452,12 @@ const Poolitem1024 = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  // children={`$${
-                  //   item.dailyTvlRate == null
-                  //     ? 0
-                  //     : Math.round(item.dailyTvlRate * 10000) / 10000
-                  // }`}
-                  // {...getOverrideProps(overrides, "$999,99939913058")}
+                  children={`$${
+                    item?.dailyTvlRate == null
+                      ? 0
+                      : Math.round(item.dailyTvlRate * 10000) / 10000
+                  }`}
+                  {...getOverrideProps(overrides, "$999,99939913058")}
                 ></Text>
               </Flex>
               <Flex
