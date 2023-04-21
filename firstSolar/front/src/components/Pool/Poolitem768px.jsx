@@ -377,6 +377,7 @@ const Poolitem768px = (props, { item }) => {
                   {...getOverrideProps(overrides, "PoolImg")}
                 >
                   <Image
+                    src={item?.mainNetLogo}
                     width="15px"
                     height="15px"
                     display="block"
@@ -394,6 +395,7 @@ const Poolitem768px = (props, { item }) => {
                     )}
                   ></Image>
                   <Image
+                    src={item?.platformLogo}
                     width="38px"
                     height="38px"
                     display="block"
@@ -443,7 +445,7 @@ const Poolitem768px = (props, { item }) => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children="Overnight Pulse Act ll"
+                    children={item?.name}
                     overflow="hidden"
                     {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
                   ></Text>
@@ -678,7 +680,7 @@ const Poolitem768px = (props, { item }) => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children="99.99%"
+                    children={`${Math.round(item?.apy * 10000) / 10000} %`}
                     {...getOverrideProps(overrides, "99.99%")}
                   ></Text>
                 </Flex>
@@ -715,7 +717,7 @@ const Poolitem768px = (props, { item }) => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children="$999,999"
+                    children={`$${item?.tvl}`}
                     {...getOverrideProps(overrides, "$999,99939574043")}
                   ></Text>
                 </Flex>
@@ -752,7 +754,11 @@ const Poolitem768px = (props, { item }) => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children="$999,999"
+                    children={`$${
+                      item?.dailyTvlRate == null
+                        ? 0
+                        : Math.round(item.dailyTvlRate * 10000) / 10000
+                    }`}
                     {...getOverrideProps(overrides, "$999,99939574045")}
                   ></Text>
                 </Flex>
