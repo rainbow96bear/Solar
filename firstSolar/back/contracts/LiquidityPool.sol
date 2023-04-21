@@ -168,7 +168,7 @@ contract LiquidityPool is ERC20 {
 
     require(_amountOut < reserveOut, "Insufficient Liquidity");
     //유동성 교환에 참여하는 자산의 양과 유동성 풀의 잔액을 고려하여, 교환 예상 tokenOut의 양을 계산
-    transferFrom(address(this), DexA, _amountInWithFee);
+    transfer(DexA, _amountInWithFee);
     // Transfer tokenOut to the user
     tokenOut.transfer(msg.sender, _amountOut);
     DFSPairAirDrop(
