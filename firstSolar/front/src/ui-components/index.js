@@ -7,7 +7,7 @@
 export { default as BeforeHeadCom320px } from "./BeforeHeadCom320px";
 export { default as Swap320px } from "./Swap320px";
 export { default as ConnectCompo768px } from "./ConnectCompo768px";
-export { default as BeforeHeadCom1024px } from "./BeforeHeadCom1440px";
+export { default as BeforeHeadCom1024px } from "./BeforeHeadCom1024px";
 export { default as Swap768px } from "./Swap768px";
 export { default as AddLiquidityBottom768px } from "./AddLiquidityBottom768px";
 export { default as AddLiquidityTop320px } from "./AddLiquidityTop320px";
@@ -21,7 +21,6 @@ export { default as PoolListCom1024px } from "./PoolListCom1024px";
 export { default as BeforeHeadCom768px } from "./BeforeHeadCom768px";
 export { default as PooListCom320px } from "./PooListCom320px";
 export { default as ConnectCompo1440px } from "./ConnectCompo1440px";
-export { default as PoolListCom1440px } from "./PoolListCom1440px";
 export { default as SetNetwork768px } from "./SetNetwork768px";
 export { default as MyWallet768px } from "./MyWallet768px";
 export { default as AddLiquidityTop768px } from "./AddLiquidityTop768px";

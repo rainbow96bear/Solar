@@ -14,6 +14,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { connectThunk } from "../modules/connect";
 import { accountThunk } from "../modules/account";
 import { loginThunk } from "../modules/login";
+import { logout } from "../api";
 export default function LoginAccount(props) {
   const { overrides, ...rest } = props;
   const [view, setView] = React.useState(false);
@@ -40,11 +41,9 @@ export default function LoginAccount(props) {
     };
   }, [view]);
 
-  const logout = () => {
-    document.cookie =
-      document.cookie.split(":")[0] +
-      account +
-      "=; expires=Thu, 01 Jan 1999 00:00:10 GMT";
+  const logoutMethod = () => {
+    logout(document.cookie.split(":")[0], account);
+
     dispatch(connectThunk({ connect: false }));
     dispatch(loginThunk({ false: false }));
     dispatch(accountThunk({ account: "" }));
@@ -143,7 +142,7 @@ export default function LoginAccount(props) {
             <li>
               <div
                 onClick={() => {
-                  logout();
+                  logoutMethod();
                 }}
               >
                 Logout

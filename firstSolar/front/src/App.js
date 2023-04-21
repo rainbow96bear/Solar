@@ -66,7 +66,9 @@ function App() {
   });
 
   useEffect(() => {
+    console.log("account 변동 되었다.", account);
     if (document.cookie) {
+      console.log("쿠키가 있으면 로그인");
       if (document.cookie.split(":")[0] == "metamask") {
         login();
         dispatch(accountThunk({ account: account }));

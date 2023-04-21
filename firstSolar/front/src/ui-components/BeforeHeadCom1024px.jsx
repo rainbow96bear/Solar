@@ -51,14 +51,6 @@ export default function BeforeHeadCom1024px(props) {
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [view]);
-  const logout = () => {
-    document.cookie =
-      document.cookie.split(":")[0] +
-      account +
-      "=; expires=Thu, 01 Jan 1999 00:00:10 GMT";
-    dispatch(connectThunk({ connect: false }));
-    navigate("/");
-  };
 
   const isDesktop = useMediaQuery({
     query: "(min-width:992px)",

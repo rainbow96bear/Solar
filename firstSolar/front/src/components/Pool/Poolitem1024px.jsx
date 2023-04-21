@@ -1,19 +1,22 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCopo1440px, SwapCompo1440px } from "../../ui-components";
 import { getMainPoolList } from "../../api/index";
 import { useMediaQuery } from "react-responsive";
-const Poolitem1024 = (props, { item }) => {
+import { useDispatch } from "react-redux";
+
+const Poolitem1024 = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-
+  const dispatch = useDispatch();
   const isPc = useMediaQuery({
     query: "(min-width:481px) and (max-width:991px)",
   });
+  // props.item.name =="solar"면 내부 풀이다, 아니면 외부 풀이다 이걸 나중에 표시할 수도 있음.
 
   return (
     <>
@@ -24,7 +27,7 @@ const Poolitem1024 = (props, { item }) => {
           duration: 0.2,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
-        key={`Poolitem1024px-${item}`}
+        key={`Poolitem1024px-${props?.idx}`}
       >
         <motion.div
           style={{
@@ -79,7 +82,7 @@ const Poolitem1024 = (props, { item }) => {
                 {...getOverrideProps(overrides, "PoolImg")}
               >
                 <Image
-                  src={item?.mainNetLogo}
+                  src={props?.item?.mainNetLogo}
                   width="15px"
                   height="15px"
                   display="block"
@@ -94,7 +97,7 @@ const Poolitem1024 = (props, { item }) => {
                   {...getOverrideProps(overrides, "unsplash:AYOloXgqjzo")}
                 ></Image>
                 <Image
-                  src={item?.platformLogo}
+                  src={props?.item?.platformLogo}
                   width="38px"
                   height="38px"
                   display="block"
@@ -144,7 +147,7 @@ const Poolitem1024 = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  // children={item.name}
+                  children={props?.item?.name}
                   {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
                 ></Text>
                 <Flex
@@ -374,7 +377,7 @@ const Poolitem1024 = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${Math.round(item?.apy * 10000) / 10000} %`}
+                  children={`${Math.round(props?.item?.apy * 10000) / 10000} %`}
                   {...getOverrideProps(overrides, "99.99%")}
                 ></Text>
               </Flex>
@@ -413,7 +416,7 @@ const Poolitem1024 = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  // children={`$${item.tvl}`}
+                  children={`$${props?.item?.tvl}`}
                   {...getOverrideProps(overrides, "$999,99939913056")}
                 ></Text>
               </Flex>
@@ -452,12 +455,13 @@ const Poolitem1024 = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  // children={`$${
-                  //   item.dailyTvlRate == null
-                  //     ? 0
-                  //     : Math.round(item.dailyTvlRate * 10000) / 10000
-                  // }`}
-                  // {...getOverrideProps(overrides, "$999,99939913058")}
+                  children={`$${
+                    props?.item?.dailyTvlRate == null ||
+                    props?.item?.dailyTvlRate == undefined
+                      ? 0
+                      : Math.round(props?.item?.dailyTvlRate * 10000) / 10000
+                  }`}
+                  {...getOverrideProps(overrides, "$999,99939913058")}
                 ></Text>
               </Flex>
               <Flex
