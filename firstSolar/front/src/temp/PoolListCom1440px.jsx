@@ -17,7 +17,7 @@ import {
 } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
-import { ConnectCompo1440px, SwapCompo1440px } from "../ui-components";
+import { SwapCompo1440px } from "../ui-components";
 import { getMainPoolList } from "../api/index.js";
 
 export default function PoolListCom1440px(props) {
@@ -1647,7 +1647,7 @@ export default function PoolListCom1440px(props) {
       <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
         <Pagination
           {...paginationProps}
-          onChange={(pageNum) => {
+          onChange={pageNum => {
             setPageIndex(pageNum);
           }}
           onNext={() => {

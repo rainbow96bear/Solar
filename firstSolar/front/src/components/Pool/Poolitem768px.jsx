@@ -5,13 +5,14 @@ import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo768px, SwapCompo768px } from "../../ui-components";
+import { connectThunk } from "../../modules/connect";
+import { useDispatch } from "react-redux";
 
 const Poolitem768px = props => {
   const { overrides, ...rest } = props;
-
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-
+  const dispatch = useDispatch();
   return (
     <>
       <ItemWrap
@@ -789,7 +790,15 @@ const Poolitem768px = props => {
                 ease: [0.43, 0.13, 0.23, 0.96],
               }}
             >
-              {document.cookie ? <SwapCompo768px /> : <ConnectCompo768px />}
+              {document.cookie ? (
+                <SwapCompo768px props={props} />
+              ) : (
+                <ConnectCompo768px
+                  onClick={() => {
+                    dispatch(connectThunk({ connect: true }));
+                  }}
+                />
+              )}
             </motion.div>
           </SubWrap>
         )}

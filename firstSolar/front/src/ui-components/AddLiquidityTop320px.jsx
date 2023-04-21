@@ -12,17 +12,9 @@ export default function AddLiquidityTop320px(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      display={{
-        base: "flex",
-        small: "none",
-        medium: "none",
-        large: "none",
-        xl: "none",
-        xxl: "none",
-      }}
       gap="43px"
       direction="column"
-      width="80vw"
+      width="unset"
       height="unset"
       justifyContent="flex-start"
       alignItems="flex-start"
@@ -44,7 +36,7 @@ export default function AddLiquidityTop320px(props) {
         shrink="0"
         alignSelf="stretch"
         position="relative"
-        padding="0px 5px 0px 5px"
+        padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 121")}
       >
         <Flex
@@ -175,8 +167,8 @@ export default function AddLiquidityTop320px(props) {
           position="relative"
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="15px"
-          padding="13px 13px 13px 13px"
-          backgroundColor="rgba(234,0,50,0.55)"
+          padding="13px 21px 13px 21px"
+          backgroundColor="rgba(234,0,50,0.45)"
           {...getOverrideProps(overrides, "Frame 119")}
         >
           <Text
@@ -214,10 +206,10 @@ export default function AddLiquidityTop320px(props) {
         overflow="hidden"
         shrink="0"
         position="relative"
-        border="3.1px SOLID rgba(255,226,0,0.55)"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        border="1.8px SOLID rgba(255,226,0,0.35)"
         borderRadius="35px"
-        padding="46.90000009536743px 46.90000009536743px 46.90000009536743px 46.90000009536743px"
+        padding="23.200000047683716px 48.200000047683716px 23.200000047683716px 48.200000047683716px"
+        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
         {...getOverrideProps(overrides, "Frame 11340162850")}
       >
         <Text
@@ -415,8 +407,10 @@ export default function AddLiquidityTop320px(props) {
         alignItems="center"
         shrink="0"
         position="relative"
+        border="1.8px SOLID rgba(0,136,153,0.59)"
         borderRadius="35px"
-        padding="10px 50px 10px 50px"
+        padding="23.200000047683716px 48.200000047683716px 23.200000047683716px 48.200000047683716px"
+        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
         {...getOverrideProps(overrides, "Frame 11440162862")}
       >
         <Flex
@@ -500,7 +494,7 @@ export default function AddLiquidityTop320px(props) {
               fontFamily="Inter"
               fontSize="13px"
               fontWeight="700"
-              color="rgba(234,0,50,0.55)"
+              color="rgba(234,0,50,0.45)"
               lineHeight="15.732954025268555px"
               textAlign="center"
               display="block"
@@ -613,7 +607,7 @@ export default function AddLiquidityTop320px(props) {
               fontFamily="Inter"
               fontSize="13px"
               fontWeight="700"
-              color="rgba(0,136,153,0.86)"
+              color="rgba(0,136,153,0.59)"
               lineHeight="15.732954025268555px"
               textAlign="left"
               display="block"

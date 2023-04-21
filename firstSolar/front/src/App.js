@@ -30,6 +30,7 @@ import { Swap320px } from "./ui-components";
 import { connectThunk } from "./modules/connect";
 import UserLoading from "./ui-components/UserLoading";
 import SwapContainer from "./components/swap/Container";
+import LiquidityContainer from "./components/liquidity/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -85,9 +86,10 @@ function App() {
           <MainContent>
             <Routes>
               <Route path="/" element={<MainContainer />}></Route>
+              <Route path="/swap" element={<SwapContainer />}></Route>
               <Route
-                path="/swap"
-                element={<SwapContainer></SwapContainer>}
+                path="/addliquidity"
+                element={<LiquidityContainer />}
               ></Route>
             </Routes>
           </MainContent>
