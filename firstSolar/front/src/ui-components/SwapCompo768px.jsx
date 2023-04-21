@@ -9,8 +9,10 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 export default function SwapCompo768px(props) {
   const { overrides, ...rest } = props;
+  const navigate = useNavigate();
   return (
     <Flex
       display={{
@@ -44,6 +46,9 @@ export default function SwapCompo768px(props) {
         whileHover={{ borderRadius: "13px", scale: 1.1 }}
       >
         <Flex
+          onClick={() => {
+            navigate(`/swap?${props?.props.item.oracleId}`);
+          }}
           gap="10px"
           direction="row"
           width="unset"
@@ -94,6 +99,9 @@ export default function SwapCompo768px(props) {
         whileHover={{ borderRadius: "13px", scale: 1.1 }}
       >
         <Flex
+          onClick={() => {
+            navigate(`/ttt?${props?.props.item.oracleId}`);
+          }}
           gap="10px"
           direction="row"
           width="unset"

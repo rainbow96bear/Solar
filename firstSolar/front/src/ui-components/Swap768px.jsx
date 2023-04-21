@@ -7,22 +7,16 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      display={{
-        base: "none",
-        small: "flex",
-        medium: "flex",
-        large: "flex",
-      }}
       gap="10px"
       direction="column"
-      width="87vw"
+      width="689px"
       height="unset"
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="center"
       position="relative"
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
@@ -60,10 +54,9 @@ export default function Swap768px(props) {
         >
           <Text
             fontFamily="Inter"
-            fontSize="20px"
+            fontSize="32px"
             fontWeight="700"
-            color="rgba(0,0,0,1)"
-            lineHeight="24.204544067382812px"
+            lineHeight="38.727272033691406px"
             textAlign="left"
             display="block"
             direction="column"
@@ -98,10 +91,10 @@ export default function Swap768px(props) {
         >
           <Text
             fontFamily="Inter"
-            fontSize="14px"
+            fontSize="18px"
             fontWeight="600"
             color="rgba(43,43,43,1)"
-            lineHeight="16.94318199157715px"
+            lineHeight="21.784090042114258px"
             textAlign="left"
             display="block"
             direction="column"
@@ -192,7 +185,6 @@ export default function Swap768px(props) {
         shrink="0"
         alignSelf="stretch"
         position="relative"
-        border="1px SOLID rgba(0,0,0,1)"
         padding="11px 0px 11px 0px"
         {...getOverrideProps(overrides, "Line")}
       ></Flex>
@@ -265,10 +257,9 @@ export default function Swap768px(props) {
               ></Image>
               <Text
                 fontFamily="Inter"
-                fontSize="13px"
+                fontSize="19px"
                 fontWeight="600"
-                color="rgba(0,0,0,1)"
-                lineHeight="15.732954025268555px"
+                lineHeight="22.99431800842285px"
                 textAlign="left"
                 display="block"
                 direction="column"
@@ -362,10 +353,9 @@ export default function Swap768px(props) {
             >
               <Text
                 fontFamily="Inter"
-                fontSize="9px"
+                fontSize="14px"
                 fontWeight="600"
-                color="rgba(0,0,0,1)"
-                lineHeight="10.892045021057129px"
+                lineHeight="16.94318199157715px"
                 textAlign="right"
                 display="block"
                 direction="column"
@@ -398,10 +388,22 @@ export default function Swap768px(props) {
             position="relative"
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="15px"
-            padding="29px 10px 29px 10px"
-            backgroundColor="rgba(0,136,153,0.86)"
+            padding="28px 18px 28px 18px"
+            backgroundColor="rgba(0,136,153,0.59)"
             {...getOverrideProps(overrides, "Frame 6539752830")}
           >
+            <TextAreaField
+              width="unset"
+              height="unset"
+              placeholder="0.0"
+              shrink="0"
+              alignSelf="stretch"
+              size="small"
+              isDisabled={false}
+              labelHidden={false}
+              variation="default"
+              {...getOverrideProps(overrides, "TextAreaField40432770")}
+            ></TextAreaField>
             <Flex
               gap="8px"
               direction="column"
@@ -491,7 +493,6 @@ export default function Swap768px(props) {
                   fontFamily="Inter"
                   fontSize="14px"
                   fontWeight="600"
-                  color="rgba(0,0,0,1)"
                   lineHeight="21px"
                   textAlign="right"
                   display="block"
@@ -527,7 +528,6 @@ export default function Swap768px(props) {
                   fontFamily="Inter"
                   fontSize="14px"
                   fontWeight="600"
-                  color="rgba(0,0,0,1)"
                   lineHeight="21px"
                   textAlign="right"
                   display="block"
@@ -563,7 +563,6 @@ export default function Swap768px(props) {
                   fontFamily="Inter"
                   fontSize="14px"
                   fontWeight="600"
-                  color="rgba(0,0,0,1)"
                   lineHeight="21px"
                   textAlign="right"
                   display="block"
@@ -599,7 +598,6 @@ export default function Swap768px(props) {
                   fontFamily="Inter"
                   fontSize="14px"
                   fontWeight="600"
-                  color="rgba(0,0,0,1)"
                   lineHeight="21px"
                   textAlign="right"
                   display="block"
@@ -704,10 +702,9 @@ export default function Swap768px(props) {
               ></Image>
               <Text
                 fontFamily="Inter"
-                fontSize="13px"
+                fontSize="19px"
                 fontWeight="600"
-                color="rgba(0,0,0,1)"
-                lineHeight="15.732954025268555px"
+                lineHeight="22.99431800842285px"
                 textAlign="left"
                 display="block"
                 direction="column"
@@ -801,10 +798,9 @@ export default function Swap768px(props) {
             >
               <Text
                 fontFamily="Inter"
-                fontSize="9px"
+                fontSize="14px"
                 fontWeight="600"
-                color="rgba(0,0,0,1)"
-                lineHeight="10.892045021057129px"
+                lineHeight="16.94318199157715px"
                 textAlign="right"
                 display="block"
                 direction="column"
@@ -837,10 +833,22 @@ export default function Swap768px(props) {
             position="relative"
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="15px"
-            padding="29px 10px 29px 10px"
-            backgroundColor="rgba(255,226,0,0.55)"
+            padding="28px 18px 28px 18px"
+            backgroundColor="rgba(255,226,0,0.35)"
             {...getOverrideProps(overrides, "Frame 6539752916")}
           >
+            <TextAreaField
+              width="unset"
+              height="unset"
+              placeholder="0.0"
+              shrink="0"
+              alignSelf="stretch"
+              size="small"
+              isDisabled={false}
+              labelHidden={false}
+              variation="default"
+              {...getOverrideProps(overrides, "TextAreaField40432763")}
+            ></TextAreaField>
             <Flex
               gap="8px"
               direction="column"
@@ -858,7 +866,6 @@ export default function Swap768px(props) {
                 fontFamily="Inter"
                 fontSize="16px"
                 fontWeight="600"
-                color="rgba(0,0,0,1)"
                 lineHeight="24px"
                 textAlign="right"
                 display="block"
@@ -930,7 +937,6 @@ export default function Swap768px(props) {
                   fontFamily="Inter"
                   fontSize="14px"
                   fontWeight="600"
-                  color="rgba(0,0,0,1)"
                   lineHeight="21px"
                   textAlign="right"
                   display="block"
@@ -966,7 +972,6 @@ export default function Swap768px(props) {
                   fontFamily="Inter"
                   fontSize="14px"
                   fontWeight="600"
-                  color="rgba(0,0,0,1)"
                   lineHeight="21px"
                   textAlign="right"
                   display="block"
@@ -1002,7 +1007,6 @@ export default function Swap768px(props) {
                   fontFamily="Inter"
                   fontSize="14px"
                   fontWeight="600"
-                  color="rgba(0,0,0,1)"
                   lineHeight="21px"
                   textAlign="right"
                   display="block"
@@ -1038,7 +1042,6 @@ export default function Swap768px(props) {
                   fontFamily="Inter"
                   fontSize="14px"
                   fontWeight="600"
-                  color="rgba(0,0,0,1)"
                   lineHeight="21px"
                   textAlign="right"
                   display="block"
@@ -1090,7 +1093,6 @@ export default function Swap768px(props) {
             fontFamily="Inter"
             fontSize="13px"
             fontWeight="600"
-            color="rgba(0,0,0,1)"
             lineHeight="15.732954025268555px"
             textAlign="left"
             display="block"
@@ -1113,7 +1115,6 @@ export default function Swap768px(props) {
             fontFamily="Inter"
             fontSize="16px"
             fontWeight="600"
-            color="rgba(0,0,0,1)"
             lineHeight="19.363636016845703px"
             textAlign="right"
             display="block"
@@ -1146,15 +1147,15 @@ export default function Swap768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="15px"
           padding="13px 73px 13px 73px"
-          backgroundColor="rgba(234,0,50,0.55)"
+          backgroundColor="rgba(234,0,50,0.45)"
           {...getOverrideProps(overrides, "Frame 63")}
         >
           <Text
             fontFamily="Inter"
-            fontSize="19px"
-            fontWeight="600"
+            fontSize="25px"
+            fontWeight="700"
             color="rgba(239,239,239,1)"
-            lineHeight="22.99431800842285px"
+            lineHeight="30.25568199157715px"
             textAlign="center"
             display="block"
             direction="column"

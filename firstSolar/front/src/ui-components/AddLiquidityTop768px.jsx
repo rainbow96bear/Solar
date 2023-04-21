@@ -12,17 +12,9 @@ export default function AddLiquidityTop768px(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      display={{
-        base: "none",
-        small: "flex",
-        medium: "flex",
-        large: "none",
-        xl: "none",
-        xxl: "none",
-      }}
       gap="49px"
       direction="column"
-      width="80vw"
+      width="688px"
       height="unset"
       justifyContent="flex-start"
       alignItems="flex-start"
@@ -30,7 +22,7 @@ export default function AddLiquidityTop768px(props) {
       position="relative"
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
-      padding="69px 99px 23px 99px"
+      padding="69px 99px 58px 99px"
       backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
       {...getOverrideProps(overrides, "AddLiquidityTop768px")}
       {...rest}
@@ -177,7 +169,7 @@ export default function AddLiquidityTop768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="15px"
           padding="13px 13px 13px 13px"
-          backgroundColor="rgba(255,226,0,0.55)"
+          backgroundColor="rgba(255,226,0,0.35)"
           {...getOverrideProps(overrides, "Frame 119")}
         >
           <Text
@@ -215,10 +207,10 @@ export default function AddLiquidityTop768px(props) {
         shrink="0"
         alignSelf="stretch"
         position="relative"
-        border="3.1px SOLID rgba(234,0,50,0.55)"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        border="3px SOLID rgba(234,0,50,0.45)"
         borderRadius="35px"
-        padding="46.90000009536743px 46.90000009536743px 46.90000009536743px 46.90000009536743px"
+        padding="47px 47px 47px 47px"
+        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
         {...getOverrideProps(overrides, "Frame 11140132818")}
       >
         <Text
@@ -240,7 +232,7 @@ export default function AddLiquidityTop768px(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="ToTal Tokens Locked"
-          {...getOverrideProps(overrides, "ToTal Tokens Locked")}
+          {...getOverrideProps(overrides, "ToTal Tokens Locked40132805")}
         ></Text>
         <Flex
           gap="172px"
@@ -410,19 +402,43 @@ export default function AddLiquidityTop768px(props) {
         </Flex>
       </Flex>
       <Flex
-        gap="27px"
+        gap="24px"
         direction="column"
         width="unset"
         height="unset"
         justifyContent="flex-start"
         alignItems="flex-start"
+        overflow="hidden"
         shrink="0"
         alignSelf="stretch"
         position="relative"
+        border="3px SOLID rgba(0,136,153,0.59)"
         borderRadius="35px"
-        padding="10px 50px 50px 50px"
-        {...getOverrideProps(overrides, "Frame 11240132819")}
+        padding="47px 47px 47px 47px"
+        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+        {...getOverrideProps(overrides, "Frame 121")}
       >
+        <Text
+          fontFamily="Inter"
+          fontSize="24px"
+          fontWeight="700"
+          lineHeight="29.045454025268555px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="ToTal Tokens Locked"
+          {...getOverrideProps(overrides, "ToTal Tokens Locked40652644")}
+        ></Text>
         <Flex
           gap="15px"
           direction="column"
@@ -505,7 +521,7 @@ export default function AddLiquidityTop768px(props) {
               fontFamily="Inter"
               fontSize="18px"
               fontWeight="700"
-              color="rgba(234,0,50,0.55)"
+              color="rgba(234,0,50,0.45)"
               lineHeight="21.784090042114258px"
               textAlign="center"
               display="block"
@@ -547,7 +563,7 @@ export default function AddLiquidityTop768px(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 11240132835")}
+            {...getOverrideProps(overrides, "Frame 112")}
           >
             <Text
               fontFamily="Inter"
@@ -623,7 +639,7 @@ export default function AddLiquidityTop768px(props) {
               fontFamily="Inter"
               fontSize="18px"
               fontWeight="700"
-              color="rgba(0,136,153,0.86)"
+              color="rgba(0,136,153,0.59)"
               lineHeight="21.784090042114258px"
               textAlign="left"
               display="block"
