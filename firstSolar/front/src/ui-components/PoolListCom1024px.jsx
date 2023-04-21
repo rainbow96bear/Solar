@@ -40,12 +40,19 @@ export default function PoolListCom1024px(props) {
       );
       setCurrentPagePoolList(poolListData);
       setTotalPages(resultTotalPages);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      setTimeout(() => {
+        dispatch(isLoadingThunk({ isLoading: false }));
+      }, 5000);
     } catch (error) {
       dispatch(isLoadingThunk({ isLoading: false }));
       console.error(error);
     }
   };
+
+  // React.useLayoutEffect(() => {
+  //   dispatch(isLoadingThunk({ isLoading: false }));
+  // }, [currentPagePoolList]);
+
   React.useEffect(() => {
     getPoolList();
   }, [pageIndex]);
@@ -1097,6 +1104,8 @@ export default function PoolListCom1024px(props) {
                   padding="0px 0px 0px 0px"
                   key={`PoolList1024px-${idx}`}
                   item={item}
+                  length={currentPagePoolList.length}
+                  idx={idx}
                 />
               ))}
             </motion.div>
@@ -1105,7 +1114,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {
