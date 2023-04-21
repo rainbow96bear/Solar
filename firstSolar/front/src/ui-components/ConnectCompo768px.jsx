@@ -8,6 +8,7 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
+import { motion } from "framer-motion";
 export default function ConnectCompo768px(props) {
   const { overrides, ...rest } = props;
   return (
@@ -22,58 +23,66 @@ export default function ConnectCompo768px(props) {
       }}
       gap="30px"
       direction="row"
-      width="626px"
+      width="88vw"
       height="unset"
-      justifyContent="flex-start"
+      justifyContent="center"
       alignItems="center"
       position="relative"
       borderRadius="18px"
       padding="30px 107px 30px 107px"
-      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
       {...getOverrideProps(overrides, "ConnectCompo768px")}
       {...rest}
     >
-      <Flex
-        gap="10px"
-        direction="row"
-        width="unset"
-        height="50px"
-        justifyContent="flex-end"
-        alignItems="center"
-        grow="1"
-        shrink="1"
-        basis="0"
-        position="relative"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        borderRadius="45px"
-        padding="19px 25px 19px 25px"
-        backgroundColor="rgba(0,136,153,0.86)"
-        {...getOverrideProps(overrides, "Connect40052826")}
+      <motion.div
+        style={{
+          width: "55vw",
+          height: "unset",
+          borderRadius: "35px",
+          backgroundColor: "rgba(0,136,153,0.86)",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        }}
+        whileHover={{ borderRadius: "13px", scale: 1.05 }}
       >
-        <Text
-          fontFamily="Inter"
-          fontSize="24px"
-          fontWeight="700"
-          color="rgba(239,239,239,1)"
-          lineHeight="29.045454025268555px"
-          textAlign="center"
-          display="block"
-          direction="column"
-          justifyContent="unset"
+        <Flex
+          gap="10px"
+          direction="row"
           width="unset"
-          height="29px"
-          gap="unset"
-          alignItems="unset"
+          height="50px"
+          justifyContent="flex-end"
+          alignItems="center"
           grow="1"
           shrink="1"
           basis="0"
           position="relative"
-          padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Connect"
-          {...getOverrideProps(overrides, "Connect40052827")}
-        ></Text>
-      </Flex>
+          borderRadius="45px"
+          padding="19px 25px 19px 25px"
+          {...getOverrideProps(overrides, "Connect40052826")}
+        >
+          <Text
+            fontFamily="Inter"
+            fontSize="24px"
+            fontWeight="700"
+            color="rgba(239,239,239,1)"
+            lineHeight="29.045454025268555px"
+            textAlign="center"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="29px"
+            gap="unset"
+            alignItems="unset"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="Connect"
+            {...getOverrideProps(overrides, "Connect40052827")}
+          ></Text>
+        </Flex>
+      </motion.div>
     </Flex>
   );
 }

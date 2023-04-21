@@ -8,10 +8,25 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { oracleIdList } from "../api/index";
 export default function SwapCompo1440px(props) {
   const { overrides, ...rest } = props;
+  console.log("gggggggggggg", props);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    (async () => {
+      const [oracleId, setoracleId] = React.useState([]);
+      const oracleIdList = await oracleIdList();
+
+      setoracleId(oracleId);
+    })();
+  }, []);
+
+  // console.log("oracleId", oracleId);
+
   return (
     <Flex
       display={{
@@ -46,6 +61,9 @@ export default function SwapCompo1440px(props) {
         whileHover={{ borderRadius: "13px", scale: 1.03 }}
       >
         <Flex
+          onClick={() => {
+            navigate(`/swap?${props.props.item.oracleId}`);
+          }}
           gap="10px"
           direction="row"
           width="unset"
@@ -96,6 +114,9 @@ export default function SwapCompo1440px(props) {
         whileHover={{ borderRadius: "13px", scale: 1.03 }}
       >
         <Flex
+          onClick={() => {
+            navigate(`/addliquidity?id=${props.item.oracleId}`);
+          }}
           gap="10px"
           direction="row"
           width="unset"

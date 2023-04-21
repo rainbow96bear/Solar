@@ -26,7 +26,6 @@ import { useWeb3Modal } from "@web3modal/react";
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
-import TestDefiContainer from "./components/testdefi/Container";
 import { Swap320px } from "./ui-components";
 import { connectThunk } from "./modules/connect";
 import UserLoading from "./ui-components/UserLoading";
@@ -49,9 +48,9 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const accountAddress = useSelector((state) => state.account.account.account);
+  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
+  const connect = useSelector(state => state.connect.connect.connect);
+  const accountAddress = useSelector(state => state.account.account.account);
   const dispatch = useDispatch();
 
   const { web3, account, chainId, login } = useWeb3();
@@ -83,7 +82,6 @@ function App() {
       <WagmiConfig client={wagmiClient}>
         <div className="App">
           <HeaderContainer></HeaderContainer>
-          <TestDefiContainer />
           <MainContent>
             <Routes>
               <Route path="/" element={<MainContainer />}></Route>

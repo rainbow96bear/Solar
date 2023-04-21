@@ -1,22 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text, usePagination } from "@aws-amplify/ui-react";
+import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo320px, SwapCompo320px } from "../../ui-components";
-import { getMainPoolList } from "../../api/index";
-import { useMediaQuery } from "react-responsive";
 
-const Poolitem320px = (props, { item }) => {
+const Poolitem320px = props => {
   const { overrides, ...rest } = props;
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-
-  const isMobile = useMediaQuery({
-    query: "(min-width:481px) and (max-width:991px)",
-  });
 
   return (
     <>
@@ -27,7 +21,7 @@ const Poolitem320px = (props, { item }) => {
           duration: 0.2,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
-        key={`Poolitem320px-${item}`}
+        key={`Poolitem320px-${props}`}
       >
         <motion.div
           style={{
@@ -51,10 +45,8 @@ const Poolitem320px = (props, { item }) => {
             shrink="0"
             alignSelf="stretch"
             position="relative"
-            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="15px"
             padding="39px 34px 39px 14px"
-            backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
             {...getOverrideProps(overrides, "PoolItem")}
           >
             <Flex
@@ -364,6 +356,7 @@ const Poolitem320px = (props, { item }) => {
                   {...getOverrideProps(overrides, "PoolImg")}
                 >
                   <Image
+                    src={props.item?.mainNetLogo}
                     width="15px"
                     height="15px"
                     display="block"
@@ -381,6 +374,7 @@ const Poolitem320px = (props, { item }) => {
                     )}
                   ></Image>
                   <Image
+                    src={props.item?.platformLogo}
                     width="38px"
                     height="38px"
                     display="block"
@@ -413,6 +407,7 @@ const Poolitem320px = (props, { item }) => {
                   {...getOverrideProps(overrides, "LogoTitle")}
                 >
                   <Text
+                    children={props.item?.name}
                     fontFamily="Inter"
                     fontSize="11px"
                     fontWeight="700"
@@ -430,7 +425,6 @@ const Poolitem320px = (props, { item }) => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children="Overnight Pulse Act ll"
                     {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
                   ></Text>
                   <Flex
@@ -689,7 +683,7 @@ const Poolitem320px = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="$999,999"
+                  children={`$${props.item?.tvl}`}
                   {...getOverrideProps(overrides, "$999,99939574061")}
                 ></Text>
               </Flex>
@@ -726,7 +720,11 @@ const Poolitem320px = (props, { item }) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="$999,999"
+                  children={`${
+                    props.item?.dailyTvlRate == null
+                      ? 0
+                      : Math.round(props.item?.dailyTvlRate * 10000) / 10000
+                  }`}
                   {...getOverrideProps(overrides, "$999,99939574063")}
                 ></Text>
               </Flex>
@@ -784,7 +782,7 @@ const Poolitem320px = (props, { item }) => {
                 ease: [0.43, 0.13, 0.23, 0.96],
               }}
             >
-              <SwapCompo320px />
+              {document.cookie ? <SwapCompo320px /> : <ConnectCompo320px />}
             </motion.div>
           </SubWrap>
         )}
