@@ -17,29 +17,6 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.post("/", async (req, res) => {
-  try {
-    // 프론트에서 { address : 주소 ,amount: 수량, data: token(바꿀 토큰) } 정보를
-
-    // axios.post("http://localhost:8080/api/swap/approve")에 보내주고
-
-    // process.env.( 조건을 걸어서 :DFS_TOKEN_CA,ETH_TOKEN_CA,USDT_TOKEN_CA,BNB_TOKEN_CA )
-
-    // 값을 받아 왔다면,{address : 주소 ,amount: 수량, data: token(받을 토큰)} 정보를
-
-    // axios.post("http://localhost:8080/api/swap/swapTransaction")에
-
-    // process.env.(조건을 걸어서 DFS_ETH_POOL_CA,DFS_USDT_POOL_CA,DFS_BNB_POOL_CA)
-
-    // 에서 method swaptokens 를 거쳐서 결과값으로 {from:userAddress, to:조건처리된 pool ,data:swaptokens}
-
-    res.end();
-  } catch (error) {
-    console.log(error);
-    res.send();
-  }
-});
-
 router.post("/swapApprove", async (req, res) => {
   try {
     const filterToken = async () => {
