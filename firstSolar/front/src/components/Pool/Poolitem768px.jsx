@@ -1,46 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Flex,
-  Image,
-  Text,
-  Pagination,
-  usePagination,
-} from "@aws-amplify/ui-react";
+import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useState } from "react";
-import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo768px, SwapCompo768px } from "../../ui-components";
-import { getMainPoolList } from "../../api/index.js";
-import { useMediaQuery } from "react-responsive";
 
-const Poolitem768px = (props, { item }) => {
+const Poolitem768px = props => {
   const { overrides, ...rest } = props;
 
-  const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
-  const [pageIndex, setPageIndex] = React.useState(1);
-  const [totalPages, setTotalPages] = React.useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-
-  const getPoolList = async () => {
-    const { poolListData, resultTotalPages } = await getMainPoolList(pageIndex);
-    setCurrentPagePoolList(poolListData);
-    setTotalPages(resultTotalPages);
-  };
-  React.useEffect(() => {
-    getPoolList();
-  }, [pageIndex]);
-
-  const paginationProps = usePagination({
-    totalPages: totalPages,
-    currentPage: pageIndex,
-    siblingCount: 2,
-  });
-
-  const isTablet = useMediaQuery({
-    query: "(min-width:481px) and (max-width:991px)",
-  });
 
   return (
     <>
@@ -51,7 +21,7 @@ const Poolitem768px = (props, { item }) => {
           duration: 0.2,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
-        key={`Poolitem768px-${item}`}
+        key={`Poolitem768px-${props}`}
       >
         <motion.div
           style={{
@@ -377,7 +347,7 @@ const Poolitem768px = (props, { item }) => {
                   {...getOverrideProps(overrides, "PoolImg")}
                 >
                   <Image
-                    src={item?.mainNetLogo}
+                    src={props.item?.mainNetLogo}
                     width="15px"
                     height="15px"
                     display="block"
@@ -395,7 +365,7 @@ const Poolitem768px = (props, { item }) => {
                     )}
                   ></Image>
                   <Image
-                    src={item?.platformLogo}
+                    src={props.item?.platformLogo}
                     width="38px"
                     height="38px"
                     display="block"
@@ -445,7 +415,7 @@ const Poolitem768px = (props, { item }) => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={item?.name}
+                    children={props.item?.name}
                     overflow="hidden"
                     {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
                   ></Text>
@@ -680,7 +650,9 @@ const Poolitem768px = (props, { item }) => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={`${Math.round(item?.apy * 10000) / 10000} %`}
+                    children={`${
+                      Math.round(props.item?.apy * 10000) / 10000
+                    } %`}
                     {...getOverrideProps(overrides, "99.99%")}
                   ></Text>
                 </Flex>
@@ -717,7 +689,7 @@ const Poolitem768px = (props, { item }) => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={`$${item?.tvl}`}
+                    children={`$${props.item?.tvl}`}
                     {...getOverrideProps(overrides, "$999,99939574043")}
                   ></Text>
                 </Flex>
@@ -755,9 +727,9 @@ const Poolitem768px = (props, { item }) => {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={`$${
-                      item?.dailyTvlRate == null
+                      props.item?.dailyTvlRate == null
                         ? 0
-                        : Math.round(item.dailyTvlRate * 10000) / 10000
+                        : Math.round(props.item?.dailyTvlRate * 10000) / 10000
                     }`}
                     {...getOverrideProps(overrides, "$999,99939574045")}
                   ></Text>
@@ -817,7 +789,7 @@ const Poolitem768px = (props, { item }) => {
                 ease: [0.43, 0.13, 0.23, 0.96],
               }}
             >
-              <SwapCompo768px />
+              {document.cookie ? <SwapCompo768px /> : <ConnectCompo768px />}
             </motion.div>
           </SubWrap>
         )}
