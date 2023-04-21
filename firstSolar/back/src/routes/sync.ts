@@ -3,6 +3,17 @@ import express from "express";
 import db from "../../models/index";
 import axios from "axios";
 
+// mypage sync
+import Web3 from "web3";
+import { AbiItem } from "web3-utils";
+const web3 = new Web3(
+  "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
+);
+import { abi as DFSAbi } from "../../contracts/artifacts/Token.json";
+import { abi as DfsEthPoolAbi } from "../../contracts/artifacts/LiquidityPool.json";
+import { abi as DexlAbi } from "../../contracts/artifacts/Dex.json";
+import { type } from "os";
+
 const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -232,7 +243,6 @@ router.get("/", async (req, res) => {
 
     const SyncDB = async () => {
       const DbList = await db.Price.findAll();
-      // console.log("test", test.length);
       if (DbList.length <= 0) {
         for (let i = 0; i < DBConnet.length; i++) {
           await db.Price.create({
@@ -254,6 +264,48 @@ router.get("/", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.end();
+  }
+});
+
+router.get("/mypage", async (req, res) => {
+  try {
+    // 요청에서 유저 주소 가져오기
+    const userAddress = req.body.account;
+    const MyPageList = [];
+
+    const DexContract = new web3.eth.Contract(
+      DexlAbi as AbiItem[],
+      process.env.DEX
+    );
+
+    // let getLpBalance = contract.methods.getLPBalance().encodeABI();
+    // let getPid = await DexContract.methods.getPid(process.env.DFS_ETH).call();
+
+    let poolInfo = await DexContract.methods.getpoolInfo().call();
+
+    for (let i = 0; i < poolInfo.length; i++) {
+      let userInfo = await DexContract.methods.userInfo(i, userAddress).call();
+
+      MyPageList.push({ pid: i, amount: userInfo.amount });
+    }
+
+    for (let i = 0; i < MyPageList.length; i++) {
+      // 0번째 DFS_ETH
+      // 1번째 DFS_USDT
+      // 2번째 DFS_BNB
+      // console.log(MyPageList[i].amount);
+      // if (MyPageList[i].amount) {
+      //   switch(MyPageList[i].pid){
+      //     case 0: db.,
+      //     case 1:,
+      //     case 2:,
+      //   }
+      // }
+    }
+
+    res.end();
+  } catch (error) {
+    console.log(error);
   }
 });
 
