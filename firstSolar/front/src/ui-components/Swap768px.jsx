@@ -17,14 +17,12 @@ export default function Swap768px(props) {
         small: "flex",
         medium: "flex",
         large: "flex",
-        xl: "none",
-        xxl: "none",
       }}
       gap="10px"
       direction="column"
       width="87vw"
       height="unset"
-      justifyContent="flex-start"
+      justifyContent="center"
       alignItems="center"
       position="relative"
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"

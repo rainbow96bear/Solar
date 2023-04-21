@@ -1,5 +1,12 @@
+import { Swap320px, Swap768px } from "../../ui-components";
+
 const SwapComponent = () => {
-  return <></>;
+  return (
+    <>
+      <Swap320px />
+      <Swap768px />
+    </>
+  );
 };
 
 export default SwapComponent;
