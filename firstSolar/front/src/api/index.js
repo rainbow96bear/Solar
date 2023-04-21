@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const request = axios.create({
   baseURL: "http://localhost:8080",
@@ -7,7 +8,7 @@ const request = axios.create({
   },
 });
 
-export const getMainPoolList = async pageIndex => {
+export const getMainPoolList = async (pageIndex) => {
   const result = (
     await request.get("api/defi", { params: { pageIndex: pageIndex } })
   ).data;
@@ -18,8 +19,17 @@ export const getMainPoolList = async pageIndex => {
   return { poolListData, resultTotalPages };
 };
 
-export const oracleIdList = async _params => {
+export const oracleIdList = async (_params) => {
   const result = (await request.post("api/defi/detail", { id: _params })).data;
 
   return result;
+};
+
+export const logout = async (_walletKind, _account) => {
+  await request.post("api/user/logout", {
+    walletKind: _walletKind,
+    address: _account,
+  });
+
+  console.log("서버에 로그아웃 요청보냈어");
 };

@@ -10,3 +10,9 @@ const SwapComponent = () => {
 };
 
 export default SwapComponent;
+
+const Swap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+`;

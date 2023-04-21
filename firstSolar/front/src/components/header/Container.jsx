@@ -4,24 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { connectThunk } from "../../modules/connect.js";
 import { accountThunk } from "../../modules/account.js";
 import { useNavigate } from "react-router-dom";
+import { loginThunk } from "../../modules/login";
 
 const HeaderContainer = () => {
   const dispatch = useDispatch();
   const connect = useSelector((state) => state.connect.connect.connect);
   const account = useSelector((state) => state.account.account.account);
   const navigate = useNavigate();
-
-  const logoutMethod = () => {
-    document.cookie =
-      document.cookie.split(":")[0] +
-      account +
-      "=; expires=Thu, 01 Jan 1999 00:00:10 GMT";
-    dispatch(connectThunk({ connect: false }));
-    navigate("/");
-  };
-  const logout = () => {
-    logoutMethod();
-  };
 
   window.ethereum?.on("accountsChanged", (accounts) => {
     // logoutMethod();
@@ -47,6 +36,7 @@ const HeaderContainer = () => {
           method: "eth_requestAccounts",
         });
         dispatch(accountThunk({ account: _account }));
+        dispatch(loginThunk({ login: true }));
         dispatch(connectThunk({ connect: true }));
         console.log("메타마스크였다.");
       } else if (document.cookie.split(":")[0] == "kaikas") {
@@ -54,6 +44,7 @@ const HeaderContainer = () => {
 
         const kaikasWallet = (await window.klaytn.enable())[0];
         dispatch(accountThunk({ account: kaikasWallet }));
+        dispatch(loginThunk({ login: true }));
         dispatch(connectThunk({ connect: true }));
         console.log("카이카스였다.");
       }

@@ -1,13 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCompo1440px, SwapCompo1440px } from "../../ui-components";
 import { connectThunk } from "../../modules/connect";
 import { useDispatch } from "react-redux";
 
-const Poolitem1024 = props => {
+const Poolitem1024 = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -22,7 +22,7 @@ const Poolitem1024 = props => {
           duration: 0.2,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
-        key={`Poolitem1024px-${props}`}
+        key={`Poolitem1024px-${props?.idx}`}
       >
         <motion.div
           style={{
@@ -77,7 +77,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "PoolImg")}
               >
                 <Image
-                  src={props.item?.mainNetLogo}
+                  src={props?.item?.mainNetLogo}
                   width="15px"
                   height="15px"
                   display="block"
@@ -92,7 +92,7 @@ const Poolitem1024 = props => {
                   {...getOverrideProps(overrides, "unsplash:AYOloXgqjzo")}
                 ></Image>
                 <Image
-                  src={props.item?.platformLogo}
+                  src={props?.item?.platformLogo}
                   width="38px"
                   height="38px"
                   display="block"
@@ -142,7 +142,7 @@ const Poolitem1024 = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.item?.name}
+                  children={props?.item?.name}
                   {...getOverrideProps(overrides, "Overnight Pulse Act ll")}
                 ></Text>
                 <Flex
@@ -372,7 +372,7 @@ const Poolitem1024 = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${Math.round(props.item?.apy * 10000) / 10000} %`}
+                  children={`${Math.round(props?.item?.apy * 10000) / 10000} %`}
                   {...getOverrideProps(overrides, "99.99%")}
                 ></Text>
               </Flex>
@@ -411,7 +411,7 @@ const Poolitem1024 = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`$${props.item?.tvl}`}
+                  children={`$${props?.item?.tvl}`}
                   {...getOverrideProps(overrides, "$999,99939913056")}
                 ></Text>
               </Flex>
@@ -451,9 +451,10 @@ const Poolitem1024 = props => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`$${
-                    props.item?.dailyTvlRate == null
+                    props?.item?.dailyTvlRate == null ||
+                    props?.item?.dailyTvlRate == undefined
                       ? 0
-                      : Math.round(props.item?.dailyTvlRate * 10000) / 10000
+                      : Math.round(props?.item?.dailyTvlRate * 10000) / 10000
                   }`}
                   {...getOverrideProps(overrides, "$999,99939913058")}
                 ></Text>
