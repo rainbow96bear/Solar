@@ -31,6 +31,6 @@ const Loading = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: rgba(255, 165, 0, 1);
+    backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
   }
 `;
