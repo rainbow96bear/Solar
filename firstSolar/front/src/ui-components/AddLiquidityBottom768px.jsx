@@ -12,17 +12,9 @@ export default function AddLiquidityBottom768px(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      display={{
-        base: "none",
-        small: "flex",
-        medium: "flex",
-        large: "none",
-        xl: "none",
-        xxl: "none",
-      }}
       gap="75px"
       direction="column"
-      width="80vw"
+      width="689px"
       height="unset"
       justifyContent="flex-start"
       alignItems="center"
@@ -45,7 +37,7 @@ export default function AddLiquidityBottom768px(props) {
         shrink="0"
         alignSelf="stretch"
         position="relative"
-        padding="35px 34px 35px 34px"
+        padding="35px 66px 35px 66px"
         {...getOverrideProps(overrides, "Frame 10340052999")}
       >
         <Text
@@ -144,8 +136,8 @@ export default function AddLiquidityBottom768px(props) {
               position="relative"
               boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
               borderRadius="25px"
-              padding="11px 13px 11px 13px"
-              backgroundColor="rgba(255,226,0,0.55)"
+              padding="10px 12px 10px 12px"
+              backgroundColor="rgba(255,226,0,0.35)"
               {...getOverrideProps(overrides, "Dexname140052879")}
             >
               <Image
@@ -245,8 +237,8 @@ export default function AddLiquidityBottom768px(props) {
               position="relative"
               boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
               borderRadius="25px"
-              padding="11px 13px 11px 13px"
-              backgroundColor="rgba(0,136,153,0.86)"
+              padding="10px 12px 10px 12px"
+              backgroundColor="rgba(0,136,153,0.59)"
               {...getOverrideProps(overrides, "Dexname2")}
             >
               <Image
@@ -313,9 +305,9 @@ export default function AddLiquidityBottom768px(props) {
             alignSelf="stretch"
             position="relative"
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            borderRadius="23px"
+            borderRadius="10px"
             padding="15px 15px 15px 15px"
-            backgroundColor="rgba(234,0,50,0.55)"
+            backgroundColor="rgba(234,0,50,0.45)"
             {...getOverrideProps(overrides, "Frame 95")}
           >
             <Flex

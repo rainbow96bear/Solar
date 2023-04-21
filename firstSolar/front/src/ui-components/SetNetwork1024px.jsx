@@ -12,17 +12,9 @@ export default function SetNetwork1024px(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      display={{
-        base: "none",
-        small: "none",
-        medium: "none",
-        large: "flex",
-        xl: "flex",
-        xxl: "flex",
-      }}
       gap="23px"
       direction="column"
-      width="1440px"
+      width="1024px"
       height="unset"
       justifyContent="flex-start"
       alignItems="flex-start"

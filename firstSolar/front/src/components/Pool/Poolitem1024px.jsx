@@ -6,6 +6,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCompo1440px, SwapCompo1440px } from "../../ui-components";
 import { connectThunk } from "../../modules/connect";
 import { useDispatch } from "react-redux";
+
 const Poolitem1024 = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);

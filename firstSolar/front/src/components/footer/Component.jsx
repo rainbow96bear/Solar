@@ -4,7 +4,7 @@ import { Footer } from "../../ui-components";
 const FooterComponent = () => {
   return (
     <FooterCompo>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
       {/* <div className="Footer_innerBox"></div>
       <p className="footer-text">This is the footer.</p> */}
     </FooterCompo>
