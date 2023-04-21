@@ -26,7 +26,7 @@ export default class pool extends Model {
           type: DataTypes.STRING(255),
           allowNull: true,
         },
-        lpName: {
+        name: {
           type: DataTypes.STRING(255),
           allowNull: true,
         },
