@@ -23,14 +23,26 @@ import { getMainPoolList } from "../api/index.js";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
+import { useLocation } from "react-router-dom";
 
 export default function PooListCom768px(props) {
   const { overrides, ...rest } = props;
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
-  const [pageIndex, setPageIndex] = React.useState(1);
+  const [pageIndex, setPageIndex] = React.useState(
+    Number(queryParams.get("page")) || 1
+  );
   const [totalPages, setTotalPages] = React.useState(1);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    queryParams.set("page", pageIndex);
+    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [pageIndex, location, queryParams]);
+
   const getPoolList = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
