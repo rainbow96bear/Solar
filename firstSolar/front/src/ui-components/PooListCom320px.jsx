@@ -32,18 +32,30 @@ import {
   platform768px1,
   platform768px2,
 } from "../mainNet";
+import { useLocation } from "react-router-dom";
 
 export default function PooListCom320px(props) {
   const { overrides, ...rest } = props;
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
   const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
-  const [pageIndex, setPageIndex] = React.useState(1);
+  const [pageIndex, setPageIndex] = React.useState(
+    Number(queryParams.get("page")) || 1
+  );
   const [totalPages, setTotalPages] = React.useState(1);
   const [mainNetList, setMainNetList] = React.useState([]);
   const [platformList, setPlatformList] = React.useState([]);
   const [mainNetList1, setMainNetList1] = React.useState([]);
   const [platformList1, setPlatformList1] = React.useState([]);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    queryParams.set("page", pageIndex);
+    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [pageIndex, location, queryParams]);
 
   const getPoolList = async () => {
     try {
@@ -362,7 +374,7 @@ export default function PooListCom320px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={pageNum => {
+                onChange={(pageNum) => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {

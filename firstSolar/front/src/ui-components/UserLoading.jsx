@@ -73,6 +73,11 @@ export default function UserLoading(props) {
   const onLeave = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 1 });
   };
+
+  useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
   return (
     <Cover>
       <View
