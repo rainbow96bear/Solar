@@ -100,6 +100,7 @@ contract LiquidityPool is ERC20 {
 
   // Function for user to swap tokens
   // NOTE: Could possibly make this into 2 functions for gas saving
+
   function swapTokens(
     address _tokenIn,
     uint256 _amountIn

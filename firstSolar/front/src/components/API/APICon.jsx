@@ -3,59 +3,106 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const APICon = () => {
-  const [NowUSDTprice, setNowUSDTprice] = useState([]);
-  const [NowETHprice, setNowETHprice] = useState([]);
-  const [NowBNBprice, setNowBNBprice] = useState([]);
-  const [BNBtoUSDT, setBNBtoUSDT] = useState([]);
-  const [BNBtoETH, setBNBtoETH] = useState([]);
-  const [ETHtoBNB, setETHtoBNB] = useState([]);
-  const [ETHtoUSDT, setETHtoUSDT] = useState([]);
-  const [USDTtoETH, setUSDTtoETH] = useState([]);
-  const [USDTtoBNB, setUSDTtoBNB] = useState([]);
+  // swap 정보
+  const [volum, setVolum] = useState("");
+  const [secondKeyWord, setSecondkeyWord] = useState("");
+  const [firstSelectTokenPrice, setselectTokenPrice] = useState(0);
+  const [convertPrice, setConvertPrice] = useState({
+    bnb: "",
+    eth: "",
+    usdt: "",
+  });
+  const [secondSelectTokenPrice, setSecondSelectTokenPrice] = useState("");
+  // swap Select
+  const [selectSwapToken, setSelectSwapToken] = useState({});
+  const [selectedSecondSwapToken, setSelectedSecondSwapToken] = useState({});
 
-  const APIClick = async () => {
+  const handleChange = (e) => {
+    setSelectSwapToken(e.target.value);
+  };
+  const handleSecondChange = (e) => {
+    setSecondkeyWord(e.target.value.toLowerCase());
+    setSelectedSecondSwapToken(e.target.value.toLowerCase());
+  };
+
+  // swap price
+  const [swapConvertPrice, setSwapConvertPrice] = useState(0);
+  const [returnSwapConvertPrice, setReturnSwapConvertPrice] = useState(0);
+
+  const SwapToken = async () => {
     try {
-      const {
-        NowUSDTprice,
-        NowETHprice,
-        NowBNBprice,
-        BNBtoUSDT,
-        BNBtoETH,
-        ETHtoBNB,
-        ETHtoUSDT,
-        USDTtoETH,
-        USDTtoBNB,
-      } = (await axios.get("http://localhost:8080/api/sync")).data;
+      const selectTokenPrice = (
+        await axios.post("http://localhost:8080/api/sync/swap", {
+          data: selectSwapToken,
+        })
+      ).data;
 
-      setNowUSDTprice(NowUSDTprice);
-      setNowETHprice(NowETHprice);
-      setNowBNBprice(NowBNBprice);
-      setBNBtoUSDT(BNBtoUSDT);
-      setBNBtoETH(BNBtoETH);
-      setETHtoBNB(ETHtoBNB);
-      setETHtoUSDT(ETHtoUSDT);
-      setUSDTtoETH(USDTtoETH);
-      setUSDTtoBNB(USDTtoBNB);
+      setselectTokenPrice(selectTokenPrice.tokenPrice);
+      setConvertPrice({
+        bnb: selectTokenPrice.ConvertToBNB,
+        eth: selectTokenPrice.ConvertToETH,
+        usdt: selectTokenPrice.ConvertToUSDT,
+      });
+      console.log("swapConvertPrice", swapConvertPrice);
+      console.log("returnSwapConvertPrice", returnSwapConvertPrice);
+
+      setSecondSelectTokenPrice(convertPrice[secondKeyWord]);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(NowUSDTprice);
-  console.log(BNBtoETH);
+
+  useEffect(() => {
+    const firstSync = axios.get("http://localhost:8080/api/sync");
+    if (firstSync) {
+      return;
+    } else {
+      firstSync();
+    }
+  }, []);
+
+  useEffect(() => {
+    setSwapConvertPrice(+volum * +firstSelectTokenPrice);
+  }, [selectSwapToken, volum, secondKeyWord, firstSelectTokenPrice]);
+
+  useEffect(() => {
+    setReturnSwapConvertPrice(+volum * +secondSelectTokenPrice);
+  }, [volum, secondSelectTokenPrice, secondKeyWord, selectedSecondSwapToken]);
+
+  useEffect(() => {
+    const firstSync = axios.get("http://localhost:8080/api/sync");
+    if (firstSync) {
+      return;
+    } else {
+      firstSync();
+    }
+  }, []);
+
+  useEffect(() => {
+    setSwapConvertPrice(+volum * +firstSelectTokenPrice);
+  }, [selectSwapToken, volum, secondKeyWord, firstSelectTokenPrice]);
+
+  useEffect(() => {
+    setReturnSwapConvertPrice(+volum * +secondSelectTokenPrice);
+  }, [volum, secondSelectTokenPrice, secondKeyWord, selectedSecondSwapToken]);
 
   return (
     <div>
       <APIComp
-        APIClick={APIClick}
-        NowUSDTprice={NowUSDTprice}
-        NowETHprice={NowETHprice}
-        NowBNBprice={NowBNBprice}
-        BNBtoUSDT={BNBtoUSDT}
-        BNBtoETH={BNBtoETH}
-        ETHtoBNB={ETHtoBNB}
-        ETHtoUSDT={ETHtoUSDT}
-        USDTtoETH={USDTtoETH}
-        USDTtoBNB={USDTtoBNB}
+        SwapToken={SwapToken}
+        volum={volum}
+        setVolum={setVolum}
+        secondKeyWord={secondKeyWord}
+        setSecondkeyWord={setSecondkeyWord}
+        setSecondSelectTokenPrice={setSecondSelectTokenPrice}
+        convertPrice={convertPrice}
+        firstSelectTokenPrice={firstSelectTokenPrice}
+        selectSwapToken={selectSwapToken}
+        selectedSecondSwapToken={selectedSecondSwapToken}
+        handleChange={handleChange}
+        handleSecondChange={handleSecondChange}
+        swapConvertPrice={swapConvertPrice}
+        returnSwapConvertPrice={returnSwapConvertPrice}
       />
     </div>
   );
