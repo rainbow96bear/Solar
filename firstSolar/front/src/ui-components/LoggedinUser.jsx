@@ -11,7 +11,7 @@ const LoggedinUser = () => {
   }, [pathname]);
 
   useEffect(() => {
-    const checkIfClickedOutside = (e) => {
+    const checkIfClickedOutside = e => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
