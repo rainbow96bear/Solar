@@ -166,7 +166,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -249,7 +249,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);
@@ -312,11 +312,11 @@ router.post("/detail", async (req: Request, res: Response<detailLp[]>) => {
             firstTokenBalance:
               (await axios.get(`https://api.beefy.finance/lps/breakdown`)).data[
                 lpId
-              ]?.balances[0] ?? 0,
+              ].balances[0] ?? 0,
             secondTokenBalance:
               (await axios.get(`https://api.beefy.finance/lps/breakdown`)).data[
                 lpId
-              ]?.balances[1] ?? 0,
+              ].balances[1] ?? 0,
           };
         })
       );
