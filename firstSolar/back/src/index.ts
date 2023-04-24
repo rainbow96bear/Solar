@@ -1,21 +1,19 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import Web3 from "web3";
-import { AbiItem } from "web3-utils";
 
 import routes from "./routes/index";
 import db from "../models/index";
 
-import { abi as DexAbi } from "../contracts/artifacts/Dex.json";
-
+import {
+  deployed,
+  deployedDFSETH,
+  deployedDFSUSDT,
+  deployedDFSBNB,
+} from "./deployList";
 const app: Express = express();
 
 dotenv.config();
-
-const web3 = new Web3(
-  "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
-);
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
@@ -25,18 +23,38 @@ const connectToDB = async () => {
   try {
     await db.sequelize.sync({ force: false });
 
-    const deployed = new web3.eth.Contract(
-      DexAbi as AbiItem[],
-      process.env.DEX
-    );
     const result = await deployed.methods.getpoolInfo().call();
+
+    const DFSETH = await deployedDFSETH.methods.reserve1().call();
+    const eth = await deployedDFSETH.methods.reserve2().call();
+
+    const DFSUSDT = await deployedDFSUSDT.methods.reserve1().call();
+    const usdt = await deployedDFSUSDT.methods.reserve2().call();
+
+    const DFSBNB = await deployedDFSBNB.methods.reserve1().call();
+    const bnb = await deployedDFSBNB.methods.reserve2().call();
+
     for (let i = 0; i < result.length; i++) {
       const temp = await db.Pool.findOne({
         where: {
           tokenAddress: result[i][0],
         },
       });
-      if (!temp)
+      if (!temp) {
+        let firstTokenBalance = 0;
+        let secondTokenBalance = 0;
+        let fee = 0.3;
+
+        if (result[i][1].includes("ETH")) {
+          firstTokenBalance = DFSETH;
+          secondTokenBalance = eth;
+        } else if (result[i][1].includes("USDT")) {
+          firstTokenBalance = DFSUSDT;
+          secondTokenBalance = usdt;
+        } else if (result[i][1].includes("BNB")) {
+          firstTokenBalance = DFSBNB;
+          secondTokenBalance = bnb;
+        }
         db.Pool.create({
           tokenAddress: result[i][0],
           firstToken: result[i][1].split("-")[0],
@@ -49,7 +67,11 @@ const connectToDB = async () => {
           apy: 0,
           tvl: 0,
           oracleId: result[i][1],
+          fee,
+          firstTokenBalance,
+          secondTokenBalance,
         });
+      }
     }
     console.log("db connected & self-pool inserted");
   } catch (err) {

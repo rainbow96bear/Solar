@@ -12,6 +12,9 @@ export default class pool extends Model {
   public apy!: number;
   public tvl!: number;
   public oracleId!: string;
+  public fee!: number;
+  public firstTokenBalance!: string;
+  public secondTokenBalance!: string;
 
   public static initModel(sequelize: Sequelize) {
     return pool.init(
@@ -57,6 +60,18 @@ export default class pool extends Model {
           allowNull: false,
         },
         oracleId: {
+          type: DataTypes.STRING(255),
+          allowNull: false,
+        },
+        fee: {
+          type: DataTypes.FLOAT(24),
+          allowNull: false,
+        },
+        firstTokenBalance: {
+          type: DataTypes.STRING(255),
+          allowNull: false,
+        },
+        secondTokenBalance: {
           type: DataTypes.STRING(255),
           allowNull: false,
         },
