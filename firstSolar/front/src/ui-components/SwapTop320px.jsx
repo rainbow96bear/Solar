@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useMediaQuery } from "react-responsive";
-export default function AddLiquidityTop320px(props) {
+export default function SwapTop320px(props) {
   const { overrides, ...rest } = props;
   const isMobile = useMediaQuery({
     query: "(max-width:480px)",

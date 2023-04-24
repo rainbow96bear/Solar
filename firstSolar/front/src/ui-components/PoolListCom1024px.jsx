@@ -19,17 +19,34 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import { mainNet, platform } from "../mainNet";
+import { useLocation } from "react-router-dom";
 
 export default function PoolListCom1024px(props) {
   const { overrides, ...rest } = props;
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
-  const [pageIndex, setPageIndex] = React.useState(1);
+  const [pageIndex, setPageIndex] = React.useState(
+    Number(queryParams.get("page")) || 1
+  );
   const [totalPages, setTotalPages] = React.useState(1);
   const [mainNetList, setMainNetList] = React.useState([]);
   const [platformList, setPlatformList] = React.useState([]);
 
   const dispatch = useDispatch();
+  React.useEffect(() => {
+    queryParams.set("page", pageIndex);
+    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [pageIndex, location, queryParams]);
+
+  React.useEffect(() => {
+    queryParams.set("page", pageIndex);
+    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [pageIndex, location, queryParams]);
+
   const getPoolList = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
@@ -480,7 +497,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {
