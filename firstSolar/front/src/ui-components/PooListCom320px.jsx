@@ -33,6 +33,7 @@ import {
   platform768px2,
 } from "../mainNet";
 import { useLocation } from "react-router-dom";
+import logo from "./images/logo_new.png";
 
 export default function PooListCom320px(props) {
   const { overrides, ...rest } = props;
@@ -312,6 +313,8 @@ export default function PooListCom320px(props) {
                         key={`Dexlist320px-1${idx}`}
                         item={item}
                         setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        pageIndex={pageIndex}
                       />
                     ))}
                   </Flex>
@@ -335,6 +338,8 @@ export default function PooListCom320px(props) {
                         key={`Dexlist320px-2${idx}`}
                         item={item}
                         setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        pageIndex={pageIndex}
                       />
                     ))}
                   </Flex>
@@ -368,9 +373,9 @@ export default function PooListCom320px(props) {
             </LayoutGroup>
 
             <Flex
-              width="80vw"
+              width="88vw"
               justifyContent="center"
-              padding="30px 0px 0px 0px"
+              padding="30px 0px 50px 0px"
             >
               <Pagination
                 {...paginationProps}
@@ -385,6 +390,7 @@ export default function PooListCom320px(props) {
                 }}
               />
             </Flex>
+            {/* <FooterCompo>asdf</FooterCompo> */}
           </Flex>
         </View>
       ) : (
@@ -393,6 +399,21 @@ export default function PooListCom320px(props) {
     </>
   );
 }
+
+const FooterCompo = styled.div`
+  z-index: 900;
+  background-color: #f8f8f8;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+
+  .Footer_innerBox {
+  }
+`;
 
 const ItemWrap = styled(motion.div)`
   cursor: pointer;

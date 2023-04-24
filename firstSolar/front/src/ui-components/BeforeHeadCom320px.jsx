@@ -31,7 +31,7 @@ export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
   const login = useSelector((state) => state.login.login.login);
-  const { address, isConnecting, isDisconnected } = useAccount();
+  const { address } = useAccount();
   const connect = useSelector((state) => state.connect.connect.connect);
   const isMobile = useMediaQuery({
     query: "(min-width:0px) and (max-width:480px)",
@@ -41,12 +41,16 @@ export default function BeforeHeadCom320px(props) {
     <>
       {isMobile ? (
         <Cover>
-          <Flex>
+          <Flex
+            display="flex"
+            direction="column"
+            // justifyContent="flex-start"
+            height={searchView ? "100px" : "48px"}
+          >
             <Flex
               width="90vw"
-              height={searchView ? "96px" : "48px"}
               display="flex"
-              gap="unset"
+              gap="0px"
               alignItems="unset"
               justifyContent="unset"
               position="relative"
@@ -54,28 +58,6 @@ export default function BeforeHeadCom320px(props) {
               {...getOverrideProps(overrides, "BeforeHeadCom320px")}
               {...rest}
             >
-              {searchView ? (
-                <SearchField
-                  width="300px"
-                  height="33px"
-                  placeholder="Search"
-                  justifyContent="center"
-                  alignItems="center"
-                  position="absolute"
-                  overflow="hidden"
-                  top="65.63%"
-                  bottom="0%"
-                  left="3.13%"
-                  right="3.13%"
-                  size="small"
-                  isDisabled={false}
-                  labelHidden={false}
-                  variation="quiet"
-                  {...getOverrideProps(overrides, "SearchField")}
-                ></SearchField>
-              ) : (
-                <></>
-              )}
               <Flex
                 gap="0"
                 direction="row"
@@ -104,7 +86,10 @@ export default function BeforeHeadCom320px(props) {
                   padding="0px 0px 0px 0px"
                   {...getOverrideProps(overrides, "Frame 50")}
                 >
-                  <Link to="/">
+                  <Link
+                    to="/"
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
                     <Flex
                       direction="row"
                       width="35px"
@@ -194,12 +179,9 @@ export default function BeforeHeadCom320px(props) {
                 height="unset"
                 justifyContent="flex-end"
                 alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
                 alignSelf="stretch"
                 position="relative"
-                padding="10px 10px 10px 10px"
+                padding="0px 10px 0px 10px"
                 {...getOverrideProps(overrides, "Frame 47")}
               >
                 <SwitchField
@@ -226,6 +208,22 @@ export default function BeforeHeadCom320px(props) {
                   )}
                 </div>
               </Flex>
+            </Flex>
+            <Flex justifyContent="flex-end">
+              {searchView && (
+                <SearchField
+                  width="90vw"
+                  height="33px"
+                  placeholder="Search"
+                  justifyContent="center"
+                  position="absolute"
+                  top="55px"
+                  alignItems="center"
+                  isDisabled={false}
+                  labelHidden={false}
+                  variation="quiet"
+                ></SearchField>
+              )}
             </Flex>
           </Flex>
         </Cover>

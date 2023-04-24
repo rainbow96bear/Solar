@@ -8,7 +8,7 @@ const request = axios.create({
   },
 });
 
-export const getMainPoolList = async pageIndex => {
+export const getMainPoolList = async (pageIndex) => {
   const result = (
     await request.get("api/defi", { params: { pageIndex: pageIndex } })
   ).data;
@@ -20,7 +20,7 @@ export const getMainPoolList = async pageIndex => {
   return { poolListData, resultTotalPages };
 };
 
-export const oracleIdList = async _params => {
+export const oracleIdList = async (_params) => {
   const result = (await request.post("api/defi/detail", { id: _params })).data;
 
   return result;
@@ -35,19 +35,22 @@ export const logout = async (_walletKind, _account) => {
   console.log("서버에 로그아웃 요청보냈어");
 };
 
-export const DexList = async _item => {
+export const dexList = async (_item, pageIndex) => {
   console.log(_item);
-  const result = (await request.post("api/defi/filter", { dex: _item })).data;
+  const result = (
+    await request.post("api/defi/filter", { dex: _item, pageIndex: pageIndex })
+  ).data;
 
   console.log(result);
 
   return result;
 };
 
-export const NetList = async _item => {
+export const netList = async (_item, pageIndex) => {
   console.log(_item);
-  const result = (await request.post("api/defi/filter", { network: _item }))
-    .data;
+  const result = (
+    await request.post("api/defi/filter", { network: _item, pageIndex })
+  ).data;
 
   console.log(result);
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import MainComponent from "./Component";
 
 const MainContainer = () => {
