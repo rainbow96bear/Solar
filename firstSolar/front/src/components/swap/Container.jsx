@@ -10,19 +10,20 @@ const SwapContainer = () => {
   const [oracleId, setOracleId] = React.useState([]);
   const [balance, setBalance] = React.useState(0);
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+
+  const address2 = useSelector((state) => state.account.account.account);
 
   React.useEffect(() => {
     (async () => {
-      if (!params.includes("DFS")) return;
       const oracleId = await oracleIdList(params);
       console.log("oracleId", oracleId);
       setOracleId(oracleId);
+      if (!params.includes("DFS")) {
+        const account = address2 ? address2 : address;
 
-      const account = address2 ? address2 : address;
-
-      const balance = await lpBalance(account, oracleId[0].oracleId);
-      setBalance(balance);
+        const balance = await lpBalance(account, oracleId[0].oracleId);
+        setBalance(balance);
+      }
     })();
   }, []);
   return <SwapComponent oracleId={oracleId} balance={balance}></SwapComponent>;

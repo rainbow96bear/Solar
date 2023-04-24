@@ -166,7 +166,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -190,8 +190,6 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
       const now: Date = new Date();
       const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
 
-      getPool = await db.Pool.findAll();
-
       const activeLpList = (
         await axios.get(`https://api.beefy.finance/vaults`)
       ).data.filter((lp: any) =>
@@ -201,8 +199,10 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
           ? lp.status === "active" && lp.platformId === dex
           : lp.status === "active"
       );
-
-      const filterLpList = [...activeLpList, ...getPool];
+      let filterLpList: Array<detailLp | Pool>;
+      if (!network) filterLpList = [...activeLpList];
+      getPool = await db.Pool.findAll({ where: { network } });
+      filterLpList = [...activeLpList, ...getPool];
 
       const paginationFilterLpList = await Promise.all(
         filterLpList
@@ -249,7 +249,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);
