@@ -17,11 +17,13 @@ import metamaskLogo from "./images/metamaskLogo.jpg";
 import kaikasLogo from "./images/kaikasLogo.jpg";
 import axios from "axios";
 import { Web3Button } from "@web3modal/react";
+import { useWeb3 } from "../modules/useWeb3.js";
 
 export default function ConnectModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
+  const { account, login } = useWeb3();
 
   const metamaskLogin = async () => {
     try {
@@ -65,7 +67,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
