@@ -1,11 +1,13 @@
 import { Flex, Image } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { DexList, NetList } from "../../api";
+import { dexList, netList } from "../../api";
 import { motion } from "framer-motion";
+import { isLoadingThunk } from "../../modules/isLoading";
+import { useDispatch } from "react-redux";
 
-const Netlist1024px = props => {
+const Netlist1024px = (props) => {
   const { overrides, ...rest } = props;
-
+  const dispatch = useDispatch();
   return (
     <>
       <motion.div
@@ -22,8 +24,16 @@ const Netlist1024px = props => {
         <Flex
           overflow="hidden"
           onClick={async () => {
-            const temp = await NetList(props?.item);
-            props.setCurrentPagePoolList(temp);
+            try {
+              dispatch(isLoadingThunk({ isLoading: true }));
+              const temp = await netList(props?.item, props?.pageIndex);
+              props.setCurrentPagePoolList(temp.poolListData);
+              props.setTotalPages(temp.poolListDataLength);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            } catch (error) {
+              console.error(error);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            }
           }}
           gap="10px"
           direction="row"
@@ -61,9 +71,9 @@ const Netlist1024px = props => {
   );
 };
 
-const Dexlist1024px = props => {
+const Dexlist1024px = (props) => {
   const { overrides, ...rest } = props;
-
+  const dispatch = useDispatch();
   return (
     <>
       <motion.div
@@ -80,8 +90,16 @@ const Dexlist1024px = props => {
       >
         <Flex
           onClick={async () => {
-            const temp = await DexList(props?.item);
-            props.setCurrentPagePoolList(temp);
+            try {
+              dispatch(isLoadingThunk({ isLoading: true }));
+              const temp = await dexList(props?.item, props?.pageIndex);
+              props.setCurrentPagePoolList(temp.poolListData);
+              props.setTotalPages(temp.poolListDataLength);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            } catch (error) {
+              console.error(error);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            }
           }}
           gap="10px"
           direction="row"
@@ -119,9 +137,9 @@ const Dexlist1024px = props => {
   );
 };
 
-const Netlist768px = props => {
+const Netlist768px = (props) => {
   const { overrides, ...rest } = props;
-
+  const dispatch = useDispatch();
   return (
     <>
       <motion.div
@@ -137,8 +155,16 @@ const Netlist768px = props => {
       >
         <Flex
           onClick={async () => {
-            const temp = await NetList(props?.item);
-            props.setCurrentPagePoolList(temp);
+            try {
+              dispatch(isLoadingThunk({ isLoading: true }));
+              const temp = await netList(props?.item, props?.pageIndex);
+              props.setCurrentPagePoolList(temp.poolListData);
+              props.setTotalPages(temp.poolListDataLength);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            } catch (error) {
+              console.error(error);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            }
           }}
           gap="10px"
           direction="row"
@@ -176,9 +202,9 @@ const Netlist768px = props => {
   );
 };
 
-const Dexlist768px = props => {
+const Dexlist768px = (props) => {
   const { overrides, ...rest } = props;
-
+  const dispatch = useDispatch();
   return (
     <>
       <motion.div
@@ -194,8 +220,16 @@ const Dexlist768px = props => {
       >
         <Flex
           onClick={async () => {
-            const temp = await DexList(props?.item);
-            props.setCurrentPagePoolList(temp);
+            try {
+              dispatch(isLoadingThunk({ isLoading: true }));
+              const temp = await dexList(props?.item, props?.pageIndex);
+              props.setCurrentPagePoolList(temp.poolListData);
+              props.setTotalPages(temp.poolListDataLength);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            } catch (error) {
+              console.error(error);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            }
           }}
           gap="10px"
           direction="row"
@@ -233,9 +267,9 @@ const Dexlist768px = props => {
   );
 };
 
-const Netlist320px = props => {
+const Netlist320px = (props) => {
   const { overrides, ...rest } = props;
-
+  const dispatch = useDispatch();
   return (
     <>
       <motion.div
@@ -251,8 +285,16 @@ const Netlist320px = props => {
       >
         <Flex
           onClick={async () => {
-            const temp = await NetList(props?.item);
-            props.setCurrentPagePoolList(temp);
+            try {
+              dispatch(isLoadingThunk({ isLoading: true }));
+              const temp = await netList(props?.item, props?.pageIndex);
+              props.setCurrentPagePoolList(temp.poolListData);
+              props.setTotalPages(temp.poolListDataLength);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            } catch (error) {
+              console.error(error);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            }
           }}
           gap="10px"
           direction="row"
@@ -290,8 +332,9 @@ const Netlist320px = props => {
   );
 };
 
-const Dexlist320px = props => {
+const Dexlist320px = (props) => {
   const { overrides, ...rest } = props;
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -308,8 +351,16 @@ const Dexlist320px = props => {
       >
         <Flex
           onClick={async () => {
-            const temp = await DexList(props?.item);
-            props.setCurrentPagePoolList(temp);
+            try {
+              dispatch(isLoadingThunk({ isLoading: true }));
+              const temp = await dexList(props?.item, props?.pageIndex);
+              props.setCurrentPagePoolList(temp.poolListData);
+              props.setTotalPages(temp.poolListDataLength);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            } catch (error) {
+              console.error(error);
+              dispatch(isLoadingThunk({ isLoading: false }));
+            }
           }}
           gap="10px"
           direction="row"

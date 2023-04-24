@@ -34,6 +34,9 @@ export default function PoolListCom1024px(props) {
   const [mainNetList, setMainNetList] = React.useState([]);
   const [platformList, setPlatformList] = React.useState([]);
 
+  const [sortAPY, setSortAPY] = React.useState();
+  const [sortTVL, setSortTVL] = React.useState();
+
   const dispatch = useDispatch();
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
@@ -82,6 +85,46 @@ export default function PoolListCom1024px(props) {
   const isDesktop = useMediaQuery({
     query: "(min-width:992px)",
   });
+
+  function aesAPY(a, b) {
+    if (a.apy < b.apy) {
+      return -1;
+    }
+    if (a.apy > b.apy) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function descAPY(a, b) {
+    if (a.apy > b.apy) {
+      return -1;
+    }
+    if (a.apy < b.apy) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function aesTVL(a, b) {
+    if (a.tvl < b.tvl) {
+      return -1;
+    }
+    if (a.tvl > b.tvl) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function descTVL(a, b) {
+    if (a.tvl > b.tvl) {
+      return -1;
+    }
+    if (a.tvl < b.tvl) {
+      return 1;
+    }
+    return 0;
+  }
 
   return (
     <>
@@ -163,7 +206,9 @@ export default function PoolListCom1024px(props) {
                   <Netlist1024px
                     key={`Netlist1024px-${idx}`}
                     item={item}
+                    pageIndex={pageIndex}
                     setCurrentPagePoolList={setCurrentPagePoolList}
+                    setTotalPages={setTotalPages}
                   />
                 ))}
               </Flex>
@@ -235,6 +280,7 @@ export default function PoolListCom1024px(props) {
                   <Dexlist1024px
                     key={`Dexlist1024px-${idx}`}
                     item={item}
+                    pageIndex={pageIndex}
                     setCurrentPagePoolList={setCurrentPagePoolList}
                   />
                 ))}
@@ -394,6 +440,15 @@ export default function PoolListCom1024px(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children="APY"
+                    onClick={() => {
+                      setSortAPY(
+                        sortAPY == undefined
+                          ? "up"
+                          : sortAPY == "up"
+                          ? "down"
+                          : undefined
+                      );
+                    }}
                     {...getOverrideProps(overrides, "APY")}
                   ></Text>
                   <Text
@@ -416,6 +471,15 @@ export default function PoolListCom1024px(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children="TVL"
+                    onClick={() => {
+                      setSortTVL(
+                        sortTVL == undefined
+                          ? "up"
+                          : sortTVL == "up"
+                          ? "down"
+                          : undefined
+                      );
+                    }}
                     {...getOverrideProps(overrides, "TVL")}
                   ></Text>
                   <Text

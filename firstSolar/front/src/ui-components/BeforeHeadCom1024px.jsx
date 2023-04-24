@@ -26,10 +26,10 @@ import { useMediaQuery } from "react-responsive";
 export default function BeforeHeadCom1024px(props) {
   const { overrides, ...rest } = props;
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
-  const login = useSelector(state => state.login.login.login);
+  const login = useSelector((state) => state.login.login.login);
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const navigate = useNavigate();
   const { address, isConnecting, isDisconnected } = useAccount();
   const { pathname } = useLocation();
@@ -40,7 +40,7 @@ export default function BeforeHeadCom1024px(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -70,7 +70,7 @@ export default function BeforeHeadCom1024px(props) {
           {...getOverrideProps(overrides, "BeforeHeadCom1024px")}
           {...rest}
         >
-          <Link to="/">
+          <Link to="/" style={{ display: "flex", alignItems: "center" }}>
             <Flex
               gap="24px"
               direction="row"
@@ -141,6 +141,9 @@ export default function BeforeHeadCom1024px(props) {
             isDisabled={false}
             labelHidden={false}
             variation="quiet"
+            onSubmit={() => {
+              // 검색 버튼을 누르거나 엔터를 눌렀을 때 작동합니다.
+            }}
             {...getOverrideProps(overrides, "SearchField")}
           ></SearchField>
           <Cover>

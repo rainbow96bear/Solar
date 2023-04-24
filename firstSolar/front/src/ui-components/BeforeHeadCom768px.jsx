@@ -72,7 +72,7 @@ export default function BeforeHeadCom768px(props) {
               padding="0px 0px 0px 0px"
               {...getOverrideProps(overrides, "Menu")}
             >
-              <Link to="/">
+              <Link to="/" style={{ display: "flex", alignItems: "center" }}>
                 <Flex
                   gap="10px"
                   direction="row"
