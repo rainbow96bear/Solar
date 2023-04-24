@@ -312,11 +312,11 @@ router.post("/detail", async (req: Request, res: Response<detailLp[]>) => {
             firstTokenBalance:
               (await axios.get(`https://api.beefy.finance/lps/breakdown`)).data[
                 lpId
-              ].balances[0] ?? 0,
+              ]?.balances[0] ?? 0,
             secondTokenBalance:
               (await axios.get(`https://api.beefy.finance/lps/breakdown`)).data[
                 lpId
-              ].balances[1] ?? 0,
+              ]?.balances[1] ?? 0,
           };
         })
       );
