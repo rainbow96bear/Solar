@@ -10,7 +10,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Divider, Flex, Icon, Text } from "@aws-amplify/ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { connectThunk } from "../modules/connect";
 import { accountThunk } from "../modules/account";
 import { loginThunk } from "../modules/login";
@@ -133,7 +133,9 @@ export default function LoginAccount(props) {
         <MenuDropDown>
           <ul>
             <li>
-              <div>내 정보</div>
+              <Link to="/mypage">
+                <div>내 정보</div>
+              </Link>
             </li>
             <li>
               <div>메뉴2</div>
@@ -157,6 +159,8 @@ export default function LoginAccount(props) {
 
 const LoginAccountCover = styled.div`
   .LoginAccountCover_accountBox {
+    cursor: pointer;
+
     // text-overflow: ellipsis;
     // overflow: hidden;
     // white-space: nowrap;
@@ -196,6 +200,7 @@ const MenuDropDown = styled.div`
 
     li {
       font-size: 20px;
+      cursor: pointer;
 
       .afterheader_dropdown_account {
         width: 100%;

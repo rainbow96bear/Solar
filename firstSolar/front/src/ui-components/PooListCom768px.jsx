@@ -201,6 +201,8 @@ export default function PooListCom768px(props) {
                         key={`Netlist768px-1${idx}`}
                         item={item}
                         setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        pageIndex={pageIndex}
                       />
                     ))}
                   </Flex>
@@ -311,6 +313,8 @@ export default function PooListCom768px(props) {
                         key={`platformList768px-1${idx}`}
                         item={item}
                         setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        pageIndex={pageIndex}
                       />
                     ))}
                   </Flex>
