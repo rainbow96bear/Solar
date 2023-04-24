@@ -11,7 +11,7 @@ const SwapContainer = () => {
   const [balance, setBalance] = React.useState(0);
   const { address } = useAccount();
 
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
 
   React.useEffect(() => {
     (async () => {
