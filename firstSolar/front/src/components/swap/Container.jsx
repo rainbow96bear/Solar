@@ -10,12 +10,11 @@ const SwapContainer = () => {
   const [oracleId, setOracleId] = React.useState([]);
   const [balance, setBalance] = React.useState(0);
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
 
   React.useEffect(() => {
     (async () => {
       const oracleId = await oracleIdList(params);
-      console.log("oracleIdList", oracleId);
       setOracleId(oracleId);
 
       const account = address2 ? address2 : address;

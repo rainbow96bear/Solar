@@ -102,7 +102,7 @@ export default function SwapCompo768px(props) {
       >
         <Flex
           onClick={() => {
-            navigate(`/ttt?${props?.props.item.oracleId}`);
+            navigate(`/swap?${props?.props.item.oracleId}`);
           }}
           gap="10px"
           direction="row"
