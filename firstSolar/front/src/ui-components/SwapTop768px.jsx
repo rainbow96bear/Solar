@@ -227,7 +227,11 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.assets[0]}
+                  children={
+                    props?.oracleiddata[0]?.assets?.length
+                      ? props?.oracleiddata[0]?.assets[0]
+                      : props?.oracleiddata[0]?.firstToken
+                  }
                   {...getOverrideProps(overrides, "TokenName40162900")}
                 ></Text>
               </Flex>
@@ -293,7 +297,11 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.assets[1]}
+                  children={
+                    props?.oracleiddata[0]?.assets?.length
+                      ? props?.oracleiddata[0]?.assets[1]
+                      : props?.oracleiddata[0]?.secondToken
+                  }
                   {...getOverrideProps(overrides, "TokenName40162900")}
                 ></Text>
               </Flex>
@@ -437,7 +445,11 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.assets[0]}
+                  children={
+                    props?.oracleiddata[0]?.assets?.length
+                      ? props?.oracleiddata[0]?.assets[0]
+                      : props?.oracleiddata[0]?.firstToken
+                  }
                   {...getOverrideProps(overrides, "TokenName40132808")}
                 ></Text>
               </Flex>
@@ -521,7 +533,11 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.assets[1]}
+                  children={
+                    props?.oracleiddata[0]?.assets?.length
+                      ? props?.oracleiddata[0]?.assets[1]
+                      : props?.oracleiddata[0]?.secondToken
+                  }
                   {...getOverrideProps(overrides, "TokenName40132816")}
                 ></Text>
               </Flex>
