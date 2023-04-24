@@ -16,6 +16,10 @@ export default function SwapTop768px(props) {
     query: "(min-width:481px)",
   });
 
+  const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
+  const date = new Date(lastTimeStamp * 1000);
+  const dateString = date.toLocaleDateString();
+
   return (
     <>
       {isDesktop && (
@@ -53,8 +57,8 @@ export default function SwapTop768px(props) {
               direction="row"
               width="unset"
               height="unset"
-              justifyContent="center"
-              alignItems="center"
+              justifyContent="flex-start"
+              alignItems="flex-start"
               shrink="0"
               alignSelf="stretch"
               position="relative"
@@ -62,6 +66,7 @@ export default function SwapTop768px(props) {
               {...getOverrideProps(overrides, "Frame 122")}
             >
               <Image
+                src={props?.oracleiddata[0]?.mainNetLogo}
                 width="30px"
                 height="30px"
                 display="block"
@@ -77,8 +82,8 @@ export default function SwapTop768px(props) {
               ></Image>
               <Text
                 fontFamily="Inter"
-                fontSize="18px"
-                fontWeight="600"
+                fontSize="28px"
+                fontWeight="800"
                 lineHeight="21.784090042114258px"
                 textAlign="center"
                 display="block"
@@ -92,7 +97,7 @@ export default function SwapTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="TokenName"
+                children={props?.oracleiddata[0]?.network}
                 {...getOverrideProps(overrides, "TokenName40162892")}
               ></Text>
             </Flex>
@@ -104,7 +109,7 @@ export default function SwapTop768px(props) {
               textAlign="left"
               display="block"
               direction="column"
-              justifyContent="unset"
+              justifyContent="center"
               width="unset"
               height="unset"
               gap="unset"
@@ -121,8 +126,8 @@ export default function SwapTop768px(props) {
               direction="row"
               width="unset"
               height="unset"
-              justifyContent="center"
-              alignItems="center"
+              justifyContent="flex-start"
+              alignItems="flex-start"
               shrink="0"
               alignSelf="stretch"
               position="relative"
@@ -141,11 +146,12 @@ export default function SwapTop768px(props) {
                 borderRadius="35px"
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
+                src={props?.oracleiddata[0]?.platformLogo}
                 {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
               ></Image>
               <Text
                 fontFamily="Inter"
-                fontSize="18px"
+                fontSize="28px"
                 fontWeight="600"
                 lineHeight="21.784090042114258px"
                 textAlign="center"
@@ -160,9 +166,137 @@ export default function SwapTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="TokenName"
+                children={props?.oracleiddata[0]?.platformId}
                 {...getOverrideProps(overrides, "TokenName40162900")}
               ></Text>
+            </Flex>
+            <Flex
+              marginTop="23px"
+              marginBottom="15px"
+              gap="16px"
+              direction="row"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              {...getOverrideProps(overrides, "Frame 123")}
+            >
+              <Flex
+                width="unset"
+                height="unset"
+                justifyContent="center"
+                alignItems="center"
+                shrink="0"
+                alignSelf="stretch"
+                position="relative"
+                padding="0px 0px 0px 0px"
+              >
+                <Image
+                  width="21px"
+                  height="21px"
+                  display="block"
+                  gap="unset"
+                  alignItems="unset"
+                  justifyContent="unset"
+                  shrink="0"
+                  position="relative"
+                  borderRadius="35px"
+                  padding="0px 0px 0px 0px"
+                  objectFit="cover"
+                  src={props?.oracleiddata[0]?.mainNetLogo}
+                  {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
+                ></Image>
+                <Text
+                  fontFamily="Inter"
+                  fontSize="21px"
+                  fontWeight="600"
+                  lineHeight="21.784090042114258px"
+                  textAlign="center"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  shrink="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children={props?.oracleiddata[0]?.assets[0]}
+                  {...getOverrideProps(overrides, "TokenName40162900")}
+                ></Text>
+              </Flex>
+              <Text
+                fontFamily="Inter"
+                fontSize="25px"
+                fontWeight="600"
+                lineHeight="30.25568199157715px"
+                textAlign="left"
+                display="block"
+                direction="column"
+                justifyContent="center"
+                width="unset"
+                height="unset"
+                gap="unset"
+                alignItems="unset"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="-"
+                {...getOverrideProps(overrides, "-")}
+              ></Text>
+              <Flex
+                width="unset"
+                height="unset"
+                justifyContent="center"
+                alignItems="center"
+                shrink="0"
+                alignSelf="stretch"
+                position="relative"
+                padding="0px 0px 0px 0px"
+              >
+                <Image
+                  width="21px"
+                  height="21px"
+                  display="block"
+                  gap="unset"
+                  alignItems="unset"
+                  justifyContent="unset"
+                  shrink="0"
+                  position="relative"
+                  borderRadius="35px"
+                  padding="0px 0px 0px 0px"
+                  objectFit="cover"
+                  src={props?.oracleiddata[0]?.platformLogo}
+                  {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
+                ></Image>
+                <Text
+                  fontFamily="Inter"
+                  fontSize="21px"
+                  fontWeight="600"
+                  lineHeight="21.784090042114258px"
+                  textAlign="center"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  shrink="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children={props?.oracleiddata[0]?.assets[1]}
+                  {...getOverrideProps(overrides, "TokenName40162900")}
+                ></Text>
+              </Flex>
             </Flex>
             <Flex
               gap="10px"
@@ -199,13 +333,15 @@ export default function SwapTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="99.99%"
+                children={`${
+                  Math.round(props?.oracleiddata[0]?.apy * 10000) / 10000
+                } %`}
                 {...getOverrideProps(overrides, "99.99%")}
               ></Text>
             </Flex>
           </Flex>
           <Flex
-            gap="24px"
+            gap="34px"
             direction="column"
             width="unset"
             height="unset"
@@ -223,8 +359,8 @@ export default function SwapTop768px(props) {
           >
             <Text
               fontFamily="Inter"
-              fontSize="24px"
-              fontWeight="700"
+              fontSize="31px"
+              fontWeight="900"
               lineHeight="29.045454025268555px"
               textAlign="left"
               display="block"
@@ -281,6 +417,7 @@ export default function SwapTop768px(props) {
                   borderRadius="15px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
+                  src={props?.oracleiddata[0]?.mainNetLogo}
                   {...getOverrideProps(overrides, "ghrgclzzd 940132806")}
                 ></Image>
                 <Text
@@ -300,7 +437,7 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="TokenName"
+                  children={props?.oracleiddata[0]?.assets[0]}
                   {...getOverrideProps(overrides, "TokenName40132808")}
                 ></Text>
               </Flex>
@@ -364,6 +501,7 @@ export default function SwapTop768px(props) {
                   borderRadius="15px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
+                  src={props?.oracleiddata[0]?.platformLogo}
                   {...getOverrideProps(overrides, "ghrgclzzd 940132815")}
                 ></Image>
                 <Text
@@ -383,7 +521,7 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="TokenName"
+                  children={props?.oracleiddata[0]?.assets[1]}
                   {...getOverrideProps(overrides, "TokenName40132816")}
                 ></Text>
               </Flex>
@@ -410,7 +548,7 @@ export default function SwapTop768px(props) {
             </Flex>
           </Flex>
           <Flex
-            gap="24px"
+            gap="34px"
             direction="column"
             width="unset"
             height="unset"
@@ -428,8 +566,8 @@ export default function SwapTop768px(props) {
           >
             <Text
               fontFamily="Inter"
-              fontSize="24px"
-              fontWeight="700"
+              fontSize="31px"
+              fontWeight="900"
               lineHeight="29.045454025268555px"
               textAlign="left"
               display="block"
@@ -444,7 +582,7 @@ export default function SwapTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="ToTal Tokens Locked"
+              children="ToTal Infomation"
               {...getOverrideProps(overrides, "ToTal Tokens Locked40652644")}
             ></Text>
             <Flex
@@ -490,39 +628,6 @@ export default function SwapTop768px(props) {
                 shrink="0"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 10940132821")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="25px"
-                  fontWeight="700"
-                  lineHeight="30.25568199157715px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="$29.99M"
-                  {...getOverrideProps(overrides, "$29.99M")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="172px"
-                direction="row"
-                width="390px"
-                height="unset"
-                justifyContent="flex-start"
-                alignItems="flex-end"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
                 {...getOverrideProps(overrides, "Frame 11040132831")}
               >
                 <Text
@@ -543,7 +648,9 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="16.82%"
+                  children={`${
+                    Math.round(props?.oracleiddata[0]?.tvl * 10000) / 10000
+                  } `}
                   {...getOverrideProps(overrides, "16.82%")}
                 ></Text>
               </Flex>
@@ -592,45 +699,11 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Volume 24H"
+                  children="Daily TVl Rate"
                   {...getOverrideProps(overrides, "Volume 24H")}
                 ></Text>
               </Flex>
-              <Flex
-                gap="172px"
-                direction="row"
-                width="390px"
-                height="unset"
-                justifyContent="flex-start"
-                alignItems="flex-end"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 11140132833")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="25px"
-                  fontWeight="700"
-                  lineHeight="30.25568199157715px"
-                  textAlign="left"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="$99.99M"
-                  {...getOverrideProps(overrides, "$99.99M40132834")}
-                ></Text>
-              </Flex>
+
               <Flex
                 gap="172px"
                 direction="row"
@@ -647,7 +720,7 @@ export default function SwapTop768px(props) {
                   fontFamily="Inter"
                   fontSize="18px"
                   fontWeight="700"
-                  color="rgba(0,136,153,0.59)"
+                  color="rgba(234,0,50,0.45)"
                   lineHeight="21.784090042114258px"
                   textAlign="left"
                   display="block"
@@ -663,7 +736,10 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="262.40%"
+                  children={`${
+                    Math.round(props?.oracleiddata[0]?.dailyTvlRate * 10000) /
+                    10000
+                  } %`}
                   {...getOverrideProps(overrides, "262.40%")}
                 ></Text>
               </Flex>
@@ -712,7 +788,7 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Fees 24H"
+                  children="Last Harvest"
                   {...getOverrideProps(overrides, "Fees 24H")}
                 ></Text>
               </Flex>
@@ -730,9 +806,10 @@ export default function SwapTop768px(props) {
               >
                 <Text
                   fontFamily="Inter"
-                  fontSize="25px"
+                  fontSize="18px"
                   fontWeight="700"
-                  lineHeight="30.25568199157715px"
+                  color="rgba(234,0,50,0.45)"
+                  lineHeight="21.784090042114258px"
                   textAlign="left"
                   display="block"
                   direction="column"
@@ -747,7 +824,7 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="$99.99M"
+                  children={dateString}
                   {...getOverrideProps(overrides, "$99.99M40132843")}
                 ></Text>
               </Flex>
