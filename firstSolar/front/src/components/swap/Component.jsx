@@ -2,20 +2,18 @@ import styled from "styled-components";
 import {
   Swap320px,
   Swap768px,
-  AddLiquidityTop768px,
-  AddLiquidityTop320px,
-  SelTokken768px,
-  SelTokken320px,
+  SwapTop320px,
+  SwapTop768px,
 } from "../../ui-components";
 
 const SwapComponent = ({ oracleId, balance }) => {
   const props = oracleId;
   return (
     <Swap>
-      <AddLiquidityTop320px />
+      <SwapTop320px />
       <Swap320px />
 
-      <AddLiquidityTop768px />
+      <SwapTop768px oracleiddata={props} balance={balance} />
       <Swap768px oracleiddata={props} balance={balance} />
     </Swap>
   );
