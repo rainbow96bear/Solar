@@ -28,7 +28,8 @@ const Netlist1024px = (props) => {
               dispatch(isLoadingThunk({ isLoading: true }));
               const temp = await netList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(temp.poolListDataLength);
+              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              props.setFilter(props?.item);
               dispatch(isLoadingThunk({ isLoading: false }));
             } catch (error) {
               console.error(error);
@@ -94,7 +95,8 @@ const Dexlist1024px = (props) => {
               dispatch(isLoadingThunk({ isLoading: true }));
               const temp = await dexList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(temp.poolListDataLength);
+              props.setFilter(props?.item);
+              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(isLoadingThunk({ isLoading: false }));
             } catch (error) {
               console.error(error);
@@ -159,7 +161,8 @@ const Netlist768px = (props) => {
               dispatch(isLoadingThunk({ isLoading: true }));
               const temp = await netList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(temp.poolListDataLength);
+              props.setFilter(props?.item);
+              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(isLoadingThunk({ isLoading: false }));
             } catch (error) {
               console.error(error);
@@ -224,7 +227,8 @@ const Dexlist768px = (props) => {
               dispatch(isLoadingThunk({ isLoading: true }));
               const temp = await dexList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(temp.poolListDataLength);
+              props.setFilter(props?.item);
+              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(isLoadingThunk({ isLoading: false }));
             } catch (error) {
               console.error(error);
@@ -289,7 +293,8 @@ const Netlist320px = (props) => {
               dispatch(isLoadingThunk({ isLoading: true }));
               const temp = await netList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(temp.poolListDataLength);
+              props.setFilter(props?.item);
+              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(isLoadingThunk({ isLoading: false }));
             } catch (error) {
               console.error(error);
@@ -355,7 +360,8 @@ const Dexlist320px = (props) => {
               dispatch(isLoadingThunk({ isLoading: true }));
               const temp = await dexList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(temp.poolListDataLength);
+              props.setFilter(props?.item);
+              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(isLoadingThunk({ isLoading: false }));
             } catch (error) {
               console.error(error);
