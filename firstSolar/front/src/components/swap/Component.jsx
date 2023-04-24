@@ -14,57 +14,57 @@ const SwapComponent = ({ oracleId, balance }) => {
   const toggleOpen = () => setIsOpen(!isOpen);
 
   return (
-    <Swap>
-      <ItemWrap
-        onClick={toggleOpen}
-        layout
-        transition={{
-          duration: 0.2,
-          ease: [0.43, 0.13, 0.23, 0.96],
-        }}
-      >
-        <motion.div
-          style={{
-            // width: "89vw",
-            height: "unset",
-            borderRadius: "33px",
-          }}
-          whileHover={{ borderRadius: "75px" }}
-        >
-          <SwapTop768px oracleiddata={props} balance={balance} />
-        </motion.div>
-      </ItemWrap>
-      <AnimatePresence>
-        {isOpen && (
-          <SubWrap>
-            <motion.div
-              layout
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 0.25,
-                ease: [0.43, 0.13, 0.23, 0.96],
-              }}
-            >
-              <Swap768px
-                style={{ marginTop: "30px" }}
-                oracleiddata={props}
-                balance={balance}
-              />
-            </motion.div>
-          </SubWrap>
-        )}
-      </AnimatePresence>
-    </Swap>
-
     // <Swap>
-    //   <SwapTop320px />
-    //   <Swap320px />
-
-    //   <SwapTop768px oracleiddata={props} balance={balance} />
-    //   <Swap768px oracleiddata={props} balance={balance} />
+    //   <ItemWrap
+    //     onClick={toggleOpen}
+    //     layout
+    //     transition={{
+    //       duration: 0.2,
+    //       ease: [0.43, 0.13, 0.23, 0.96],
+    //     }}
+    //   >
+    //     <motion.div
+    //       style={{
+    //         // width: "89vw",
+    //         height: "unset",
+    //         borderRadius: "33px",
+    //       }}
+    //       whileHover={{ borderRadius: "75px" }}
+    //     >
+    //       <SwapTop768px oracleiddata={props} balance={balance} />
+    //     </motion.div>
+    //   </ItemWrap>
+    //   <AnimatePresence>
+    //     {isOpen && (
+    //       <SubWrap>
+    //         <motion.div
+    //           layout
+    //           initial={{ y: -10, opacity: 0 }}
+    //           animate={{ y: 0, opacity: 1 }}
+    //           exit={{ opacity: 0 }}
+    //           transition={{
+    //             duration: 0.25,
+    //             ease: [0.43, 0.13, 0.23, 0.96],
+    //           }}
+    //         >
+    //           <Swap768px
+    //             style={{ marginTop: "30px" }}
+    //             oracleiddata={"props"}
+    //             balance={balance}
+    //           />
+    //         </motion.div>
+    //       </SubWrap>
+    //     )}
+    //   </AnimatePresence>
     // </Swap>
+
+    <Swap>
+      <SwapTop320px />
+      <Swap320px />
+
+      <SwapTop768px oracleiddata={props} balance={balance} />
+      <Swap768px oracleiddata={props} balance={balance} />
+    </Swap>
   );
 };
 

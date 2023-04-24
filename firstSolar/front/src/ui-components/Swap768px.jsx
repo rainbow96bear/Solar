@@ -10,6 +10,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
 import { useMediaQuery } from "react-responsive";
 import QuestionModal from "./QuestionModal";
+import styled from "styled-components";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
