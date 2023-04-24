@@ -15,20 +15,13 @@ import { accountThunk } from "../modules/account.js";
 import { loginThunk } from "../modules/login.js";
 import metamaskLogo from "./images/metamaskLogo.jpg";
 import kaikasLogo from "./images/kaikasLogo.jpg";
-import walletConnectLogo from "./images/walletConnectLogo.png";
-import { useWeb3 } from "../modules/useWeb3.js";
 import axios from "axios";
 import { Web3Button } from "@web3modal/react";
-import { useWeb3K } from "../modules/useWeb3Kaikas.js";
 
 export default function ConnectModal(props) {
   const { overrides, ...rest } = props;
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const accountAddress = useSelector((state) => state.account.account.account);
+
   const dispatch = useDispatch();
-  const { account, login } = useWeb3();
-  const { accountK, loginK } = useWeb3K();
-  const [signClient, setSignClient] = React.useState();
 
   const metamaskLogin = async () => {
     try {
@@ -72,7 +65,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
