@@ -70,60 +70,62 @@ export default function BeforeHeadCom1024px(props) {
           {...getOverrideProps(overrides, "BeforeHeadCom1024px")}
           {...rest}
         >
-          <Flex
-            gap="24px"
-            direction="row"
-            width="221px"
-            height="unset"
-            justifyContent="flex-start"
-            alignItems="center"
-            // position="absolute"
-            top="13.33%"
-            bottom="11.67%"
-            left="0%"
-            right="78.42%"
-            padding="0px 14px 0px 14px"
-            {...getOverrideProps(overrides, "Menu39912868")}
-          >
-            <Image
-              src={logo}
-              width="45px"
-              height="45px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="50px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "unsplash:PfBvNnGIhmQ")}
-            ></Image>
-            <Text
-              fontFamily="Inter"
-              fontSize="28px"
-              fontWeight="700"
-              color="rgba(0,0,0,1)"
-              lineHeight="33.8863639831543px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="41px"
-              gap="unset"
-              alignItems="unset"
-              grow="1"
-              shrink="1"
-              basis="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="Menu"
-              {...getOverrideProps(overrides, "Menu39912870")}
-            ></Text>
-          </Flex>
+          <Link to="/">
+            <Flex
+              gap="24px"
+              direction="row"
+              width="221px"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="center"
+              // position="absolute"
+              top="13.33%"
+              bottom="11.67%"
+              left="0%"
+              right="78.42%"
+              padding="0px 14px 0px 14px"
+              {...getOverrideProps(overrides, "Menu39912868")}
+            >
+              <Image
+                src={logo}
+                width="45px"
+                height="45px"
+                display="block"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                shrink="0"
+                position="relative"
+                borderRadius="50px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "unsplash:PfBvNnGIhmQ")}
+              ></Image>
+              <Text
+                fontFamily="Inter"
+                fontSize="28px"
+                fontWeight="700"
+                color="rgba(0,0,0,1)"
+                lineHeight="33.8863639831543px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="41px"
+                gap="unset"
+                alignItems="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="Menu"
+                {...getOverrideProps(overrides, "Menu39912870")}
+              ></Text>
+            </Flex>
+          </Link>
           <SearchField
             width="264px"
             height="unset"
