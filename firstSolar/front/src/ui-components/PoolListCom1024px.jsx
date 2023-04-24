@@ -41,6 +41,12 @@ export default function PoolListCom1024px(props) {
     window.history.replaceState(null, "", newUrl);
   }, [pageIndex, location, queryParams]);
 
+  React.useEffect(() => {
+    queryParams.set("page", pageIndex);
+    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [pageIndex, location, queryParams]);
+
   const getPoolList = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
