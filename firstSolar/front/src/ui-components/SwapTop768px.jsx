@@ -23,7 +23,7 @@ export default function SwapTop768px(props) {
   const dateString = date.toLocaleDateString();
 
   const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
-  const reducedNumber = tokenNumBer.toString().substring(0, 7);
+  const reducedNumber = tokenNumBer?.toString().substring(0, 7);
 
   return (
     <>

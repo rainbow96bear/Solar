@@ -40,13 +40,13 @@ export default function PoolListCom1024px(props) {
   const dispatch = useDispatch();
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
     window.history.replaceState(null, "", newUrl);
   }, [pageIndex, location, queryParams]);
 
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
     window.history.replaceState(null, "", newUrl);
   }, [pageIndex, location, queryParams]);
 

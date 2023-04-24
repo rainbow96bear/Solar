@@ -54,7 +54,7 @@ export default function PooListCom320px(props) {
 
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
     window.history.replaceState(null, "", newUrl);
   }, [pageIndex, location, queryParams]);
 
