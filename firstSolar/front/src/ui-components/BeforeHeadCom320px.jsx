@@ -9,22 +9,17 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Flex,
-  Icon,
   Image,
   SearchField,
-  View,
   SwitchField,
   Menu,
   MenuItem,
   Divider,
-  Loader,
-  useTheme,
 } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import LoginButton from "./LoginButton";
-import LoginAccount from "./LoginAccount";
 import ConnectModal from "./ConnectModal";
 import LoggedinUser from "./LoggedinUser";
 import { useAccount } from "wagmi";
@@ -87,7 +82,6 @@ export default function BeforeHeadCom320px(props) {
                 height="50px"
                 justifyContent="center"
                 alignItems="center"
-                // position="absolute"
                 top="calc(50% - 25px - 23px)"
                 left="0%"
                 right="0%"
@@ -117,8 +111,6 @@ export default function BeforeHeadCom320px(props) {
                     alignItems="center"
                     shrink="0"
                     position="relative"
-                    // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                    // padding="10px 10px 10px 10px"
                     {...getOverrideProps(overrides, "Frame 48")}
                   >
                     <Image
@@ -149,7 +141,6 @@ export default function BeforeHeadCom320px(props) {
                     alignItems="center"
                     shrink="0"
                     position="relative"
-                    // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                     padding="5px 5px 5px 5px"
                     {...getOverrideProps(overrides, "Frame 49")}
                   >
@@ -187,58 +178,9 @@ export default function BeforeHeadCom320px(props) {
                   alignItems="center"
                   shrink="0"
                   position="relative"
-                  // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   padding="10px 10px 10px 10px"
                   {...getOverrideProps(overrides, "Frame 49")}
-                >
-                  {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                width="30px"
-              >
-                <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-              </svg> */}
-                  {/* <SwitchField
-            width="unset"
-            height="unset"
-            justifyContent="flex-end"
-            alignItems="center"
-            grow="1"
-            shrink="1"
-            basis="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="10px 10px 10px 10px"
-            {...getOverrideProps(overrides, "Frame 47")}
-          >
-            <SwitchField
-              className="my-custom-switchfield"
-              onChange={() => {
-                setSearchView(!searchView);
-              }}
-            ></SwitchField>
-            <div className="header_right">
-              {connect ? (
-                document.cookie ? (
-                  <LoggedinUser></LoggedinUser>
-                ) : (
-                  <>
-                    <ConnectModal></ConnectModal>
-                    <Loader
-                      width="30px"
-                      height="30px"
-                      emptyColor={tokens.colors.red}
-                      filledColor={tokens.colors.red[40]}
-                    />
-                  </>
-                )
-              ) : (
-                <div className="header_conenct">
-                  <LoginButton></LoginButton>
-                </div>
-              )}
-            </div> */}
-                </Flex>
+                ></Flex>
               </Flex>
               <Flex
                 gap="10px"
