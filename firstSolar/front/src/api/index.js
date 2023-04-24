@@ -8,7 +8,7 @@ const request = axios.create({
   },
 });
 
-export const getMainPoolList = async (pageIndex) => {
+export const getMainPoolList = async pageIndex => {
   const result = (
     await request.get("api/defi", { params: { pageIndex: pageIndex } })
   ).data;
@@ -20,7 +20,7 @@ export const getMainPoolList = async (pageIndex) => {
   return { poolListData, resultTotalPages };
 };
 
-export const oracleIdList = async (_params) => {
+export const oracleIdList = async _params => {
   const result = (await request.post("api/defi/detail", { id: _params })).data;
 
   return result;
