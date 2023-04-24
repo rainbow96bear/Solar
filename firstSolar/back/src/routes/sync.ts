@@ -272,6 +272,7 @@ router.get("/mypage", async (req, res) => {
     // 요청에서 유저 주소 가져오기
     const userAddress = req.body.account;
     const MyPageList = [];
+    const filterPool = [];
 
     const DexContract = new web3.eth.Contract(
       DexlAbi as AbiItem[],
@@ -284,8 +285,8 @@ router.get("/mypage", async (req, res) => {
     let poolInfo = await DexContract.methods.getpoolInfo().call();
 
     for (let i = 0; i < poolInfo.length; i++) {
+      console.log("PoolInfo 부분");
       let userInfo = await DexContract.methods.userInfo(i, userAddress).call();
-
       MyPageList.push({ pid: i, amount: userInfo.amount });
     }
 
@@ -293,17 +294,37 @@ router.get("/mypage", async (req, res) => {
       // 0번째 DFS_ETH
       // 1번째 DFS_USDT
       // 2번째 DFS_BNB
-      // console.log(MyPageList[i].amount);
-      // if (MyPageList[i].amount) {
-      //   switch(MyPageList[i].pid){
-      //     case 0: db.,
-      //     case 1:,
-      //     case 2:,
-      //   }
-      // }
+      console.log(typeof MyPageList[i].pid);
+      if (+MyPageList[i].amount > 0) {
+        switch (MyPageList[i].pid.toString()) {
+          case "0":
+            filterPool.push(
+              ...(await db.Pool.findAll({
+                where: { id: MyPageList[i].pid + 1 },
+              }))
+            );
+            break;
+          case "1":
+            filterPool.push(
+              ...(await db.Pool.findAll({
+                where: { id: MyPageList[i].pid + 1 },
+              }))
+            );
+            break;
+          case "2":
+            filterPool.push(
+              ...(await db.Pool.findAll({
+                where: { id: MyPageList[i].pid + 1 },
+              }))
+            );
+            break;
+          default:
+            throw new Error("Invalid token");
+        }
+      }
     }
 
-    res.end();
+    res.send(filterPool);
   } catch (error) {
     console.log(error);
   }
