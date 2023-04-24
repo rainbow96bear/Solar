@@ -15,6 +15,7 @@ const SwapContainer = () => {
   React.useEffect(() => {
     (async () => {
       const oracleId = await oracleIdList(params);
+      console.log("oracleId", oracleId);
       setOracleId(oracleId);
 
       const account = address2 ? address2 : address;

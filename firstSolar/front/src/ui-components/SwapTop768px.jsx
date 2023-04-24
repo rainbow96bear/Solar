@@ -12,6 +12,8 @@ import { useMediaQuery } from "react-responsive";
 export default function SwapTop768px(props) {
   const { overrides, ...rest } = props;
 
+  console.log(props);
+
   const isDesktop = useMediaQuery({
     query: "(min-width:481px)",
   });
@@ -19,6 +21,9 @@ export default function SwapTop768px(props) {
   const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
   const date = new Date(lastTimeStamp * 1000);
   const dateString = date.toLocaleDateString();
+
+  const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
+  const reducedNumber = tokenNumBer.toString().substring(0, 7);
 
   return (
     <>
@@ -227,7 +232,7 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.assets[0]}
+                  children={props?.oracleiddata[0]?.assets[0] || 0}
                   {...getOverrideProps(overrides, "TokenName40162900")}
                 ></Text>
               </Flex>
@@ -293,7 +298,7 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.assets[1]}
+                  children={props?.oracleiddata[0]?.assets[1] || 0}
                   {...getOverrideProps(overrides, "TokenName40162900")}
                 ></Text>
               </Flex>
@@ -379,7 +384,7 @@ export default function SwapTop768px(props) {
               {...getOverrideProps(overrides, "ToTal Tokens Locked40132805")}
             ></Text>
             <Flex
-              gap="172px"
+              gap="112px"
               direction="row"
               width="unset"
               height="unset"
@@ -437,7 +442,7 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.assets[0]}
+                  children={props?.oracleiddata[0]?.assets[0] || 0}
                   {...getOverrideProps(overrides, "TokenName40132808")}
                 ></Text>
               </Flex>
@@ -458,12 +463,12 @@ export default function SwapTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="99,99M"
+                children={`${reducedNumber} K`}
                 {...getOverrideProps(overrides, "99,99M40132809")}
               ></Text>
             </Flex>
             <Flex
-              gap="172px"
+              gap="112px"
               direction="row"
               width="unset"
               height="unset"
@@ -521,7 +526,7 @@ export default function SwapTop768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.assets[1]}
+                  children={props?.oracleiddata[0]?.assets[1] || 0}
                   {...getOverrideProps(overrides, "TokenName40132816")}
                 ></Text>
               </Flex>
@@ -542,7 +547,7 @@ export default function SwapTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="99,99M"
+                children={`${reducedNumber} K`}
                 {...getOverrideProps(overrides, "99,99M40132817")}
               ></Text>
             </Flex>
@@ -825,6 +830,91 @@ export default function SwapTop768px(props) {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={dateString}
+                  {...getOverrideProps(overrides, "$99.99M40132843")}
+                ></Text>
+              </Flex>
+            </Flex>
+            <Flex
+              gap="15px"
+              direction="column"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              {...getOverrideProps(overrides, "Frame 118")}
+            >
+              <Flex
+                gap="172px"
+                direction="row"
+                width="390px"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="flex-end"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                {...getOverrideProps(overrides, "Frame 114")}
+              >
+                <Text
+                  fontFamily="Inter"
+                  fontSize="21px"
+                  fontWeight="700"
+                  lineHeight="25.414772033691406px"
+                  textAlign="left"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  grow="1"
+                  shrink="1"
+                  basis="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children="Fee"
+                  {...getOverrideProps(overrides, "Fees 24H")}
+                ></Text>
+              </Flex>
+              <Flex
+                gap="172px"
+                direction="row"
+                width="390px"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="flex-end"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                {...getOverrideProps(overrides, "Frame 115")}
+              >
+                <Text
+                  fontFamily="Inter"
+                  fontSize="18px"
+                  fontWeight="700"
+                  color="rgba(234,0,50,0.45)"
+                  lineHeight="21.784090042114258px"
+                  textAlign="left"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  grow="1"
+                  shrink="1"
+                  basis="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children={`${props?.oracleiddata[0]?.fee}%`}
                   {...getOverrideProps(overrides, "$99.99M40132843")}
                 ></Text>
               </Flex>
