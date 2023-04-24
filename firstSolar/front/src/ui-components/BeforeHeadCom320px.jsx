@@ -26,12 +26,13 @@ import { useAccount } from "wagmi";
 import LoadingButton768 from "./LoadingButton768";
 import { Web3Button } from "@web3modal/react";
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
-  const login = useSelector(state => state.login.login.login);
+  const login = useSelector((state) => state.login.login.login);
   const { address, isConnecting, isDisconnected } = useAccount();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const isMobile = useMediaQuery({
     query: "(min-width:0px) and (max-width:480px)",
   });
@@ -103,35 +104,39 @@ export default function BeforeHeadCom320px(props) {
                   padding="0px 0px 0px 0px"
                   {...getOverrideProps(overrides, "Frame 50")}
                 >
-                  <Flex
-                    direction="row"
-                    width="35px"
-                    height="35px"
-                    justifyContent="center"
-                    alignItems="center"
-                    shrink="0"
-                    position="relative"
-                    {...getOverrideProps(overrides, "Frame 48")}
-                  >
-                    <Image
-                      src={logo}
+                  <Link to="/">
+                    <Flex
+                      direction="row"
                       width="35px"
                       height="35px"
-                      display="block"
-                      gap="unset"
-                      alignItems="unset"
-                      justifyContent="unset"
+                      justifyContent="center"
+                      alignItems="center"
                       shrink="0"
                       position="relative"
-                      borderRadius="50px"
-                      padding="0px 0px 0px 0px"
-                      objectFit="cover"
-                      {...getOverrideProps(
-                        overrides,
-                        "unsplash:PfBvNnGIhmQ39443727"
-                      )}
-                    ></Image>
-                  </Flex>
+                      // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                      // padding="10px 10px 10px 10px"
+                      {...getOverrideProps(overrides, "Frame 48")}
+                    >
+                      <Image
+                        src={logo}
+                        width="35px"
+                        height="35px"
+                        display="block"
+                        gap="unset"
+                        alignItems="unset"
+                        justifyContent="unset"
+                        shrink="0"
+                        position="relative"
+                        borderRadius="50px"
+                        padding="0px 0px 0px 0px"
+                        objectFit="cover"
+                        {...getOverrideProps(
+                          overrides,
+                          "unsplash:PfBvNnGIhmQ39443727"
+                        )}
+                      ></Image>
+                    </Flex>
+                  </Link>
                   <Flex
                     gap="10px"
                     direction="row"
