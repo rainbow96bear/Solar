@@ -70,12 +70,7 @@ const APICon = () => {
   }, [volum, secondSelectTokenPrice, secondKeyWord, selectedSecondSwapToken]);
 
   useEffect(() => {
-    const firstSync = axios.get("http://localhost:8080/api/sync");
-    if (firstSync) {
-      return;
-    } else {
-      firstSync();
-    }
+    axios.get("http://localhost:8080/api/sync");
   }, []);
 
   useEffect(() => {
