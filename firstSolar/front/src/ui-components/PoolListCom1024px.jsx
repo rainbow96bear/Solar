@@ -27,7 +27,7 @@ export default function PoolListCom1024px(props) {
   const queryParams = new URLSearchParams(location.search);
 
   const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
-  const [pageIndex, setPageIndex] = useState(
+  const [pageIndex, setPageIndex] = React.useState(
     Number(queryParams.get("page")) || 1
   );
   const [totalPages, setTotalPages] = React.useState(1);
