@@ -25,6 +25,8 @@ export { default as MyWallet768px } from "./MyWallet768px";
 export { default as AddLiquidityTop768px } from "./AddLiquidityTop768px";
 export { default as Component1 } from "./Component1";
 export { default as PooListCom768px } from "./PooListCom768px";
+export { default as SwapTop320px } from "./SwapTop320px";
+export { default as SwapTop320px } from "./SwapTop320px";
 
 export { default as LogoTitle } from "./LogoTitle";
 export { default as ChainChange } from "./ChainChange";
