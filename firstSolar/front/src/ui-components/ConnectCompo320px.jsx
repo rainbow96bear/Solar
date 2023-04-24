@@ -40,8 +40,9 @@ export default function ConnectCompo320px(props) {
           borderRadius: "35px",
           backgroundColor: "rgba(0,136,153,0.86)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.05 }}
+        whileHover={{ borderRadius: "13px", scale: 1.05, opacity: 0.88 }}
       >
         <Flex
           gap="10px"

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCompo1440px, SwapCompo1440px } from "../../ui-components";
@@ -16,8 +16,6 @@ const Poolitem1024 = props => {
   return (
     <>
       <ItemWrap
-        onClick={toggleOpen}
-        layout
         transition={{
           duration: 0.2,
           ease: [0.43, 0.13, 0.23, 0.96],
@@ -25,6 +23,8 @@ const Poolitem1024 = props => {
         key={`Poolitem1024px-${props?.idx}`}
       >
         <motion.div
+          onClick={toggleOpen}
+          layout
           style={{
             width: "89vw",
             height: "unset",

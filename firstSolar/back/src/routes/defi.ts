@@ -253,7 +253,6 @@ router.post("/check", async (req: Request, res: Response) => {
 
 router.post("/detail", async (req: Request, res: Response<detailLp[]>) => {
   const { id } = req.body;
-  console.log("gggg", id);
   try {
     const now: Date = new Date();
     const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);

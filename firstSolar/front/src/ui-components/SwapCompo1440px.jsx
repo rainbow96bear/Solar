@@ -44,8 +44,13 @@ export default function SwapCompo1440px(props) {
           borderRadius: "35px",
           backgroundColor: "rgba(234,0,50,0.55)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.03 }}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.03,
+          opacity: 0.88,
+        }}
       >
         <Flex
           onClick={() => {
@@ -97,8 +102,13 @@ export default function SwapCompo1440px(props) {
           borderRadius: "35px",
           backgroundColor: "rgba(255,226,0,0.35)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.03 }}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.03,
+          opacity: 0.88,
+        }}
       >
         <Flex
           onClick={() => {
