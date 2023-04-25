@@ -30,6 +30,7 @@ import { connectThunk } from "./modules/connect";
 import UserLoading2 from "./ui-components/UserLoading2";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
+import MypageContainer from "./components/mypage/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -90,6 +91,7 @@ function App() {
                 path="/addliquidity"
                 element={<LiquidityContainer />}
               ></Route>
+              <Route path="/mypage" element={<MypageContainer />}></Route>
             </Routes>
           </MainContent>
           <FooterContainer></FooterContainer>

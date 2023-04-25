@@ -266,9 +266,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/mypage", async (req, res) => {
+router.post("/mypage", async (req, res) => {
   try {
     // 요청에서 유저 주소 가져오기
+    console.log(req.body.account);
     const userAddress = req.body.account;
     const MyPageList = [];
     const filterPool = [];
