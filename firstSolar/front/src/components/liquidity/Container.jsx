@@ -16,14 +16,18 @@ const LiquidityContainer = () => {
 
   React.useEffect(() => {
     (async () => {
-      const oracleId = await oracleIdList(params);
-      console.log("oracleId", oracleId);
-      setOracleId(oracleId);
-      if (!params.includes("DFS")) {
-        const account = address2 ? address2 : address;
+      try {
+        const oracleId = await oracleIdList(params);
+        console.log("oracleId", oracleId);
+        setOracleId(oracleId);
+        if (!params.includes("DFS")) {
+          const account = address2 ? address2 : address;
 
-        const balance = await lpBalance(account, oracleId[0].oracleId);
-        setBalance(balance);
+          const balance = await lpBalance(account, oracleId[0].oracleId);
+          setBalance(balance);
+        }
+      } catch (error) {
+        console.error(error);
       }
     })();
   }, []);
