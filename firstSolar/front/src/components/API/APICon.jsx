@@ -51,15 +51,6 @@ const APICon = () => {
   };
 
   useEffect(() => {
-    const firstSync = axios.get("http://localhost:8080/api/sync");
-    if (firstSync) {
-      return;
-    } else {
-      firstSync();
-    }
-  }, []);
-
-  useEffect(() => {
     setSwapConvertPrice(+volum * +firstSelectTokenPrice);
   }, [selectSwapToken, volum, secondKeyWord, firstSelectTokenPrice]);
 
