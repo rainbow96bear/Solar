@@ -16,11 +16,93 @@ import {
 } from "@aws-amplify/ui-react";
 import { useMediaQuery } from "react-responsive";
 import QuestionModal from "./QuestionModal";
+import { useDispatch, useSelector } from "react-redux";
+import { isLoadingThunk } from "../modules/isLoading";
+import debounce from "lodash.debounce";
+import { firstSync, lpBalance } from "../api";
+import { useAccount } from "wagmi";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
-  const [swapMoney, setSwapMoney] = React.useState();
+  const { address } = useAccount();
+  const address2 = useSelector((state) => state.account.account.account);
+  const [userBalance, setUserBalance] = React.useState(0);
+  const dispatch = useDispatch();
+
   const [questionMark, setQuestionMark] = React.useState(0);
+  const [convertedAmount, setConvertedAmount] = React.useState(0);
+  const [keyWord, setKeyWord] = React.useState(""); //swap 하려는 수량
+  const [secondKeyWord, setSecondKeyWord] = React.useState(""); // swap을 통해 받으려는 토큰정보
+  const [firstSelectTokenPrice, setSelectTokenPrice] = React.useState(0); // swap을 희망하는 토큰정보
+  const [convertPrice, setConvertPrice] = React.useState({
+    bnb: "",
+    eth: "",
+    usdt: "",
+  }); // Convert 토큰들을 filter 해서 해당하는 값을 기입한다.
+  const [secondSelectTokenPrice, setSecondSelectTokenPrice] =
+    React.useState(""); // 어떤 Convert를 할껀지 값을 찾아준다.
+  const [selectedOptions, setSelectedOptions] = React.useState({}); // handle 함수를 호출해서서 현재값을 확인합니다.
+  const [selectedSeconOptions, setSelectedSecondOptions] = React.useState({}); // handleSecondChange 함수를 호출해서 현재값을 확인합니다.
+  const handleChange = (e) => {
+    setSelectedOptions(e.target.value);
+  };
+  const handleSecondChange = (e) => {
+    setSelectedSecondOptions(setSecondKeyWord(e.target.value.toLowerCase()));
+  };
+
+  const [swapConvertPrice, setSwapConvertPrice] = React.useState(0); // handle 함수를 호출해서서 현재값을 확인합니다.
+  const [returnSwapConvertPrice, setReturnSwapConvertPrice] = React.useState(0); // swap된 결과값을 나타내 줍니다.
+
+  React.useEffect(() => {
+    setSwapConvertPrice(+keyWord * +firstSelectTokenPrice);
+  }, [selectedOptions, keyWord, secondKeyWord, firstSelectTokenPrice]);
+
+  React.useEffect(() => {
+    setReturnSwapConvertPrice(swapConvertPrice / +secondSelectTokenPrice);
+  }, [
+    swapConvertPrice,
+    secondSelectTokenPrice,
+    secondKeyWord,
+    selectedSeconOptions,
+  ]);
+
+  React.useEffect(
+    () => {
+      (async () => {
+        try {
+          dispatch(isLoadingThunk({ isLoading: true }));
+          const data = await lpBalance(
+            address ? address : address2,
+            firstSelectTokenPrice // 임시로 넣은 것.
+          );
+          setUserBalance(5000); // 임시 값
+          dispatch(isLoadingThunk({ isLoading: false }));
+        } catch (error) {
+          console.error(error);
+          dispatch(isLoadingThunk({ isLoading: false }));
+        }
+      })();
+    },
+    [
+      // 지금은 비워두지만 서로 바꾸는 기능을 만들면 해당 state를 추가할 것.
+    ]
+  );
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const result = await firstSync();
+        if (firstSync) {
+          return;
+        } else {
+          firstSync();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
   const isDesktop = useMediaQuery({
     query: "(min-width:481px)",
   });
@@ -57,9 +139,17 @@ export default function Swap768px(props) {
   };
 
   const setPercentBalance = (percentNum) => {
-    if (props?.balance == 0) return;
-    setSwapMoney(swapMoney * percentNum);
+    if (userBalance == 0) return;
+    setKeyWord(userBalance * percentNum);
   };
+
+  const delayedFunction = debounce((num) => {
+    try {
+      setConvertedAmount(num);
+    } catch (error) {
+      console.error(error);
+    }
+  }, 1000);
 
   return (
     <>
@@ -394,7 +484,7 @@ export default function Swap768px(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={`Balance : ${props?.balance}`}
+                    children={`Balance : ${userBalance}`}
                     {...getOverrideProps(overrides, "Balance : 039752863")}
                   ></Text>
                 </Flex>
@@ -427,11 +517,14 @@ export default function Swap768px(props) {
                   labelHidden={false}
                   variation="default"
                   onChange={(e) => {
-                    setSwapMoney(e.target.value);
+                    setKeyWord(e.target.value);
+                    delayedFunction(e.target.value);
                   }}
                   onKeyPress={(e) => {
                     handleKeyPress(e);
                   }}
+                  defaultValue={0}
+                  value={userBalance}
                   {...getOverrideProps(overrides, "TextAreaField40432770")}
                 ></TextAreaField>
                 <Flex
@@ -466,7 +559,7 @@ export default function Swap768px(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={swapMoney ? swapMoney : 0}
+                    children={keyWord ? keyWord : 0}
                     {...getOverrideProps(
                       overrides,
                       "12312312312312312339752827"
@@ -524,7 +617,7 @@ export default function Swap768px(props) {
                     padding="10px 10px 10px 10px"
                     backgroundColor="rgba(255,255,253,1)"
                     onClick={() => {
-                      setPercentBalance(25);
+                      setPercentBalance(0.25);
                     }}
                     {...getOverrideProps(overrides, "Frame 8039814040")}
                   >
@@ -546,6 +639,7 @@ export default function Swap768px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="25%"
+                      style={{ cursor: "pointer" }}
                       {...getOverrideProps(overrides, "25%39814035")}
                     ></Text>
                   </Flex>
@@ -562,7 +656,7 @@ export default function Swap768px(props) {
                     padding="10px 10px 10px 10px"
                     backgroundColor="rgba(255,255,253,1)"
                     onClick={() => {
-                      setPercentBalance(50);
+                      setPercentBalance(0.5);
                     }}
                     {...getOverrideProps(overrides, "Frame 8139814043")}
                   >
@@ -584,6 +678,7 @@ export default function Swap768px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="50%"
+                      style={{ cursor: "pointer" }}
                       {...getOverrideProps(overrides, "50%39814044")}
                     ></Text>
                   </Flex>
@@ -600,7 +695,7 @@ export default function Swap768px(props) {
                     padding="10px 10px 10px 10px"
                     backgroundColor="rgba(255,255,253,1)"
                     onClick={() => {
-                      setPercentBalance(75);
+                      setPercentBalance(0.75);
                     }}
                     {...getOverrideProps(overrides, "Frame 8239814045")}
                   >
@@ -622,6 +717,7 @@ export default function Swap768px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="75%"
+                      style={{ cursor: "pointer" }}
                       {...getOverrideProps(overrides, "75%39814046")}
                     ></Text>
                   </Flex>
@@ -638,7 +734,7 @@ export default function Swap768px(props) {
                     padding="10px 10px 10px 10px"
                     backgroundColor="rgba(255,255,253,1)"
                     onClick={() => {
-                      setPercentBalance(100);
+                      setPercentBalance(1);
                     }}
                     {...getOverrideProps(overrides, "Frame 8339814047")}
                   >
@@ -660,6 +756,7 @@ export default function Swap768px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="Max"
+                      style={{ cursor: "pointer" }}
                       {...getOverrideProps(overrides, "Max39814048")}
                     ></Text>
                   </Flex>
@@ -865,12 +962,13 @@ export default function Swap768px(props) {
                   isDisabled={false}
                   labelHidden={false}
                   variation="default"
-                  onChange={(e) => {
-                    setSwapMoney(e.target.value);
-                  }}
-                  onKeyPress={(e) => {
-                    handleKeyPress(e);
-                  }}
+                  // onChange={(e) => {
+                  //   setKeyWord(e.target.value);
+                  // }}
+                  // onKeyPress={(e) => {
+                  //   handleKeyPress(e);
+                  // }}
+                  defaultValue={convertedAmount}
                   {...getOverrideProps(overrides, "TextAreaField40432770")}
                 ></TextAreaField>
                 <Flex
@@ -905,7 +1003,7 @@ export default function Swap768px(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={swapMoney ? swapMoney : 0}
+                    children={convertedAmount ? convertedAmount : 0}
                     {...getOverrideProps(
                       overrides,
                       "12312312312312312339752827"
@@ -985,6 +1083,7 @@ export default function Swap768px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="25%"
+                      style={{ cursor: "pointer" }}
                       {...getOverrideProps(overrides, "25%39814035")}
                     ></Text>
                   </Flex>
@@ -1023,6 +1122,7 @@ export default function Swap768px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="50%"
+                      style={{ cursor: "pointer" }}
                       {...getOverrideProps(overrides, "50%39814044")}
                     ></Text>
                   </Flex>
@@ -1061,6 +1161,7 @@ export default function Swap768px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="75%"
+                      style={{ cursor: "pointer" }}
                       {...getOverrideProps(overrides, "75%39814046")}
                     ></Text>
                   </Flex>
@@ -1099,6 +1200,7 @@ export default function Swap768px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="Max"
+                      style={{ cursor: "pointer" }}
                       {...getOverrideProps(overrides, "Max39814048")}
                     ></Text>
                   </Flex>
