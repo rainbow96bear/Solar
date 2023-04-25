@@ -591,20 +591,54 @@ router.post("/removeLiquidity", async (req: Request, res: Response) => {
 });
 
 router.post("/search", async (req: Request, res: Response) => {
-  const { search }: { search: string } = req.body;
-  let list: Array<Pool> = [];
-  if (!search) list = await db.Pool.findAll();
-  else {
-    list = await db.Pool.findAll({
-      where: {
-        [Op.or]: [
-          { name: { [Op.like]: `%${search}%` } },
-          { tokenAddress: { [Op.like]: `%${search}%` } },
-        ],
-      },
-    });
+  try {
+    const { search, pageIndex }: { search: string; pageIndex: number } =
+      req.body;
+    let list: Array<Pool> = [];
+
+    if (search) {
+      const [poolList, activeLpList] = await Promise.all([
+        db.Pool.findAll({
+          where: {
+            [Op.or]: [
+              { name: { [Op.like]: `%${search}%` } },
+              { tokenAddress: { [Op.like]: `%${search}%` } },
+            ],
+          },
+        }),
+        axios.get(`https://api.beefy.finance/vaults`),
+      ]);
+
+      const activeList: any[] = activeLpList?.data.filter(
+        (lp: any) =>
+          lp.status === "active" &&
+          (lp.name?.toLowerCase().includes(search.toLowerCase()) ||
+            lp.tokenAddress?.toLowerCase().includes(search.toLowerCase()))
+      );
+
+      list = [...poolList, ...activeList];
+    } else {
+      const [poolList, activeLpList] = await Promise.all([
+        db.Pool.findAll(),
+        axios.get(`https://api.beefy.finance/vaults`),
+      ]);
+
+      const activeList: any[] = activeLpList?.data.filter(
+        (lp: any) => lp.status === "active"
+      );
+
+      list = [...poolList, ...activeList];
+    }
+    const paginationMyLpList = list.slice((pageIndex - 1) * 10, pageIndex * 10);
+    const data: any = {
+      poolListData: paginationMyLpList,
+      poolListDataLength: list.length,
+    };
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
   }
-  res.send(list);
 });
 
 export default router;
