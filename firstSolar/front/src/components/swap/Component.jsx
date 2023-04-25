@@ -7,62 +7,131 @@ import {
 } from "../../ui-components";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 
 const SwapComponent = ({ oracleId, balance }) => {
   const props = oracleId;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
+  const isDesktop = useMediaQuery({
+    query: "(min-width:1280px)",
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(max-width:1179px)",
+  });
 
   return (
-    <Swap>
-      <ItemWrap
-        onClick={toggleOpen}
-        layout
-        transition={{
-          duration: 0.2,
-          ease: [0.43, 0.13, 0.23, 0.96],
-        }}
-      >
-        <motion.div
-          style={{
-            height: "unset",
-            borderRadius: "35px",
-            backgroundColor: "rgba(249,249,249,1)",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          }}
-          whileHover={{
-            borderRadius: "55px",
-            scale: 0.99,
-            backgroundColor: "rgba(249,249,249,0.55)",
-            boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
-          }}
-        >
-          <SwapTop768px oracleiddata={props} balance={balance} />
-        </motion.div>
-      </ItemWrap>
-      <AnimatePresence>
-        {isOpen && (
-          <SubWrap>
+    <>
+      {isDesktop ? (
+        <Swap>
+          <ItemWrap
+            onClick={toggleOpen}
+            layout
+            transition={{
+              duration: 0.2,
+              ease: [0.43, 0.13, 0.23, 0.96],
+            }}
+          >
             <motion.div
+              style={{
+                height: "unset",
+                borderRadius: "35px",
+                backgroundColor: "rgba(249,249,249,1)",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              }}
+              whileHover={{
+                borderRadius: "55px",
+                scale: 0.99,
+                backgroundColor: "rgba(249,249,249,0.55)",
+                boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+              }}
+            >
+              <SwapTop768px oracleiddata={props} balance={balance} />
+            </motion.div>
+          </ItemWrap>
+          <AnimatePresence>
+            {isOpen && (
+              <SubWrap>
+                <motion.div
+                  layout
+                  initial={{ y: -10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.25,
+                    ease: [0.43, 0.13, 0.23, 0.96],
+                  }}
+                >
+                  <Swap768px
+                    style={{ marginTop: "75px" }}
+                    oracleiddata={"props"}
+                    balance={balance}
+                  />
+                </motion.div>
+              </SubWrap>
+            )}
+          </AnimatePresence>
+        </Swap>
+      ) : (
+        <></>
+      )}
+      {isMobile ? (
+        <>
+          <Swap>
+            <ItemWrap
               layout
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ opacity: 0 }}
               transition={{
-                duration: 0.25,
+                duration: 0.2,
                 ease: [0.43, 0.13, 0.23, 0.96],
               }}
             >
-              <Swap768px
-                style={{ marginTop: "75px" }}
-                oracleiddata={"props"}
-                balance={balance}
-              />
-            </motion.div>
-          </SubWrap>
-        )}
-      </AnimatePresence>
-    </Swap>
+              <motion.div
+                onClick={toggleOpen}
+                style={{
+                  height: "unset",
+                  borderRadius: "35px",
+                  backgroundColor: "rgba(249,249,249,1)",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                }}
+                whileHover={{
+                  borderRadius: "55px",
+                  scale: 0.99,
+                  backgroundColor: "rgba(249,249,249,0.55)",
+                  boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+                }}
+              >
+                <SwapTop320px oracleiddata={props} balance={balance} />
+              </motion.div>
+            </ItemWrap>
+            <AnimatePresence>
+              {isOpen && (
+                <SubWrap>
+                  <motion.div
+                    layout
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.25,
+                      ease: [0.43, 0.13, 0.23, 0.96],
+                    }}
+                  >
+                    <Swap320px
+                      style={{ marginTop: "75px" }}
+                      oracleiddata={"props"}
+                      balance={balance}
+                    />
+                  </motion.div>
+                </SubWrap>
+              )}
+            </AnimatePresence>
+          </Swap>
+        </>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 
@@ -86,7 +155,7 @@ const ItemWrap = styled(motion.div)`
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background: white;
   margin-top: 38px;
 `;
