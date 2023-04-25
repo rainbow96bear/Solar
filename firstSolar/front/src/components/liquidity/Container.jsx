@@ -7,8 +7,12 @@ const LiquidityContainer = () => {
 
   React.useEffect(() => {
     (async () => {
-      const oracleId = await oracleIdList(params);
-      console.log("oracleIdList", oracleId);
+      try {
+        const oracleId = await oracleIdList(params);
+        console.log("oracleIdList", oracleId);
+      } catch (error) {
+        console.error(error);
+      }
     })();
   }, []);
   return <LiquidComponent></LiquidComponent>;
