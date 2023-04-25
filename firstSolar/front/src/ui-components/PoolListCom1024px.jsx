@@ -75,16 +75,15 @@ export default function PoolListCom1024px(props) {
   const getPoolList = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
-      if (!filter) {
+      if (filter == "null") {
         const { poolListData, resultTotalPages } = await getMainPoolList(
           pageIndex
         );
         setCurrentPagePoolList(poolListData);
         setTotalPages(resultTotalPages);
-      } else if (filter) {
+      } else if (filter != "null") {
         if (networkArray.includes(filter)) {
           const data = await netList(filter, pageIndex);
-          console.log("networkArray data : ", data);
           setCurrentPagePoolList(data.poolListData);
           setTotalPages(Math.ceil(data.poolListDataLength / 10));
         } else if (dexArray.includes(filter)) {

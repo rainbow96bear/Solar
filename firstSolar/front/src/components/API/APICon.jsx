@@ -43,8 +43,6 @@ const APICon = () => {
         eth: selectTokenPrice.ConvertToETH,
         usdt: selectTokenPrice.ConvertToUSDT,
       });
-      console.log("swapConvertPrice", swapConvertPrice);
-      console.log("returnSwapConvertPrice", returnSwapConvertPrice);
 
       setSecondSelectTokenPrice(convertPrice[secondKeyWord]);
     } catch (error) {

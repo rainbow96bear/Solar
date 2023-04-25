@@ -31,4 +31,5 @@ export { default as SetNetwork768px } from "./SetNetwork768px";
 export { default as AddLiquidityBottom320px } from "./AddLiquidityBottom320px";
 export { default as BeforeHeadCom320px } from "./BeforeHeadCom320px";
 export { default as SelTokken768px } from "./SelTokken768px";
+export { default as UserLoading2 } from "./UserLoading2";
 export { default as studioTheme } from "./studioTheme";
