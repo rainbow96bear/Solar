@@ -1,4 +1,4 @@
-import db from "../models/index";
+import db from "../../models/index";
 import price from "./priceList";
 const timeSync = async () => {
   const updateTime = await db.Price.findAll();
@@ -17,6 +17,7 @@ const timeSync = async () => {
         tokenPrice: priceDataList[i].tokenPrice,
       });
     }
+
     let priceDB = await db.Price.findAll();
     return priceDB;
   } else {

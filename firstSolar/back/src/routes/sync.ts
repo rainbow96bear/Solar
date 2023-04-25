@@ -1,7 +1,6 @@
 // server
 import express from "express";
 import db from "../../models/index";
-import axios from "axios";
 
 // mypage sync
 import Web3 from "web3";
@@ -11,10 +10,8 @@ const web3 = new Web3(
 );
 
 import { abi as DexlAbi } from "../../contracts/artifacts/Dex.json";
-import price from "../priceList";
-import swapPriceSync from "../swapPriceSync";
-import { type } from "os";
-import { send } from "process";
+import price from "../price/priceList";
+import swapPriceSync from "../price/swapPriceSync";
 
 const router = express.Router();
 router.use(express.json());
@@ -48,7 +45,7 @@ router.get("/", async (req, res) => {
 router.post("/mypage", async (req, res) => {
   try {
     // 요청에서 유저 주소 가져오기
-    console.log(req.body.account);
+
     const userAddress = req.body.account;
     const MyPageList = [];
     const filterPool = [];
@@ -64,16 +61,11 @@ router.post("/mypage", async (req, res) => {
     let poolInfo = await DexContract.methods.getpoolInfo().call();
 
     for (let i = 0; i < poolInfo.length; i++) {
-      console.log("PoolInfo 부분");
       let userInfo = await DexContract.methods.userInfo(i, userAddress).call();
       MyPageList.push({ pid: i, amount: userInfo.amount });
     }
 
     for (let i = 0; i < MyPageList.length; i++) {
-      // 0번째 DFS_ETH
-      // 1번째 DFS_USDT
-      // 2번째 DFS_BNB
-      console.log(typeof MyPageList[i].pid);
       if (+MyPageList[i].amount > 0) {
         switch (MyPageList[i].pid.toString()) {
           case "0":
@@ -109,23 +101,6 @@ router.post("/mypage", async (req, res) => {
   }
 });
 
-// router.post("/swap", async (req, res) => {
-//   const BtnUSDT = await db.Price.findOne({
-//     where: {
-//       tokenSymbol: req.body.data,
-//     },
-//   });
-//   res.send(BtnUSDT);
-// });
-// router.post("/filterSwap", async (req, res) => {
-//   console.log(req.body);
-//   const BtnUSDT = await db.Price.findOne({
-//     where: {
-//       tokenSymbol: req.body.data,
-//     },
-//   });
-//   res.send(BtnUSDT.tokenPrice);
-// });
 router.get("/datesync", async (req, res) => {
   try {
     const sync = await swapPriceSync();

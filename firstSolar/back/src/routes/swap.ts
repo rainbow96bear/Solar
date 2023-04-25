@@ -1,5 +1,4 @@
 import express from "express";
-import db from "../../models/index";
 import Web3 from "web3";
 
 // Swap
@@ -86,7 +85,6 @@ router.post("/swapTransaction", async (req, res) => {
     const amount = BigNumber.from(
       Math.floor(req.body.amount * 10 ** 18).toString()
     );
-    console.log("result.options", result.options.address);
 
     const tokenSwap = result.methods
       .swapTokens(result.options.address, amount)
