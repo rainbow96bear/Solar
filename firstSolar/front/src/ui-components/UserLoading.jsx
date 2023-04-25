@@ -18,6 +18,8 @@ import {
 import { gsap } from "gsap";
 import { Tween, SplitChars, Reveal } from "react-gsap";
 import styled from "styled-components";
+import "../css/Font.css";
+
 const { useEffect, useState } = React;
 
 export default function UserLoading(props) {
@@ -39,7 +41,7 @@ export default function UserLoading(props) {
     <Cover>
       <View
         width="454.16px"
-        height="855.1px"
+        height="655.1px"
         display="block"
         gap="unset"
         alignItems="unset"
@@ -1899,8 +1901,8 @@ export default function UserLoading(props) {
                     style={{
                       display: "inline-block",
                     }}
-                    top="505px"
-                    left="165px"
+                    top="655px"
+                    left="155px"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     position="relative"

@@ -127,7 +127,7 @@ const Poolitem1024 = props => {
               >
                 <Text
                   fontFamily="ffCondExtraLight"
-                  fontSize="15px"
+                  fontSize="16px"
                   fontWeight="500"
                   lineHeight="18.15340805053711px"
                   textAlign="center"
@@ -278,8 +278,8 @@ const Poolitem1024 = props => {
               >
                 <Text
                   fontFamily="ffCompExtraLight"
-                  fontSize="12px"
-                  fontWeight="500"
+                  fontSize="19px"
+                  fontWeight="900"
                   lineHeight="14.522727012634277px"
                   textAlign="center"
                   display="block"
@@ -317,8 +317,8 @@ const Poolitem1024 = props => {
               >
                 <Text
                   fontFamily="ffCompExtraLight"
-                  fontSize="12px"
-                  fontWeight="500"
+                  fontSize="19px"
+                  fontWeight="900"
                   lineHeight="14.522727012634277px"
                   textAlign="center"
                   display="block"
@@ -356,7 +356,7 @@ const Poolitem1024 = props => {
               >
                 <Text
                   fontFamily="ffCompExtraLight"
-                  fontSize="12px"
+                  fontSize="px"
                   fontWeight="500"
                   lineHeight="14.522727012634277px"
                   textAlign="center"
@@ -395,7 +395,7 @@ const Poolitem1024 = props => {
               >
                 <Text
                   fontFamily="ffCompExtraLight"
-                  fontSize="9px"
+                  fontSize="19px"
                   fontWeight="500"
                   lineHeight="10.892045021057129px"
                   textAlign="center"
@@ -434,7 +434,7 @@ const Poolitem1024 = props => {
               >
                 <Text
                   fontFamily="ffCompExtraLight"
-                  fontSize="9px"
+                  fontSize="19px"
                   fontWeight="500"
                   lineHeight="10.892045021057129px"
                   textAlign="center"
@@ -478,7 +478,7 @@ const Poolitem1024 = props => {
               >
                 <Text
                   fontFamily="ffCompExtraLight"
-                  fontSize="9px"
+                  fontSize="19px"
                   fontWeight="500"
                   lineHeight="10.892045021057129px"
                   textAlign="center"

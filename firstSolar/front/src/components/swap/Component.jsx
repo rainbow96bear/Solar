@@ -26,9 +26,16 @@ const SwapComponent = ({ oracleId, balance }) => {
         <motion.div
           style={{
             height: "unset",
-            borderRadius: "33px",
+            borderRadius: "35px",
+            backgroundColor: "rgba(249,249,249,1)",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           }}
-          whileHover={{ borderRadius: "75px" }}
+          whileHover={{
+            borderRadius: "55px",
+            scale: 0.99,
+            backgroundColor: "rgba(249,249,249,0.55)",
+            boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+          }}
         >
           <SwapTop768px oracleiddata={props} balance={balance} />
         </motion.div>
@@ -56,14 +63,6 @@ const SwapComponent = ({ oracleId, balance }) => {
         )}
       </AnimatePresence>
     </Swap>
-
-    // <Swap>
-    //   <SwapTop320px />
-    //   <Swap320px />
-
-    //   <SwapTop768px oracleiddata={props} balance={balance} />
-    //   <Swap768px oracleiddata={props} balance={balance} />
-    // </Swap>
   );
 };
 

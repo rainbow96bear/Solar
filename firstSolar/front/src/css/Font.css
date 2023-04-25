@@ -72,8 +72,7 @@
 }
 @font-face {
   font-family: ffProExtraLight;
-  src: local("testfont") url(./FF\ QType\ Square\ Pro\ Extra\ Light.otf)
-    format("opentype");
+  src: url(./FF\ QType\ Square\ Pro\ Extra\ Light.otf) format("opentype");
   font-weight: 500;
   font-style: normal;
 }
