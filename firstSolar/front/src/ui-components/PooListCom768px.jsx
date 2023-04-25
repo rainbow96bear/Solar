@@ -148,7 +148,7 @@ export default function PooListCom768px(props) {
                 {...getOverrideProps(overrides, "Networks List39563128")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProLight"
                   fontSize="24px"
                   fontWeight="700"
                   lineHeight="29.045454025268555px"
@@ -260,7 +260,7 @@ export default function PooListCom768px(props) {
                 {...getOverrideProps(overrides, "Networks List39563128")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProLight"
                   fontSize="24px"
                   fontWeight="700"
                   lineHeight="29.045454025268555px"
