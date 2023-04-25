@@ -14,13 +14,37 @@ import {
   Netlist1024px,
   Dexlist1024px,
 } from "../components/netdexlist/Netdexlist";
-import { getMainPoolList } from "../api/index.js";
+import { getMainPoolList, netList, dexList } from "../api/index.js";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import { mainNet, platform } from "../mainNet";
 import { useLocation } from "react-router-dom";
 
+const networkArray = [
+  "ethereum",
+  "optimism",
+  "metis",
+  "aurora",
+  "bsc",
+  "kava",
+  "heco",
+  "polygon",
+  "fantom",
+];
+
+const dexArray = [
+  "uniswap",
+  "pancakeswap",
+  "sushi",
+  "quickswap",
+  "linch",
+  "curve",
+  "bnt",
+  "knc",
+  "matcha",
+  "bal",
+];
 export default function PoolListCom1024px(props) {
   const { overrides, ...rest } = props;
   const location = useLocation();
@@ -30,6 +54,8 @@ export default function PoolListCom1024px(props) {
   const [pageIndex, setPageIndex] = React.useState(
     Number(queryParams.get("page")) || 1
   );
+  const [filter, setFilter] = React.useState(String(queryParams.get("filter")));
+
   const [totalPages, setTotalPages] = React.useState(1);
   const [mainNetList, setMainNetList] = React.useState([]);
   const [platformList, setPlatformList] = React.useState([]);
@@ -40,24 +66,34 @@ export default function PoolListCom1024px(props) {
   const dispatch = useDispatch();
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
-    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
-    window.history.replaceState(null, "", newUrl);
-  }, [pageIndex, location, queryParams]);
+    queryParams.set("filter", filter);
 
-  React.useEffect(() => {
-    queryParams.set("page", pageIndex);
-    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
+    const newUrl = `${location.pathname}?${queryParams.toString()}`;
     window.history.replaceState(null, "", newUrl);
-  }, [pageIndex, location, queryParams]);
+  }, [pageIndex, filter, location, queryParams]);
 
   const getPoolList = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
-      const { poolListData, resultTotalPages } = await getMainPoolList(
-        pageIndex
-      );
-      setCurrentPagePoolList(poolListData);
-      setTotalPages(resultTotalPages);
+      if (filter == "null") {
+        const { poolListData, resultTotalPages } = await getMainPoolList(
+          pageIndex
+        );
+        setCurrentPagePoolList(poolListData);
+        setTotalPages(resultTotalPages);
+      } else if (filter != "null") {
+        if (networkArray.includes(filter)) {
+          const data = await netList(filter, pageIndex);
+          setCurrentPagePoolList(data.poolListData);
+          setTotalPages(Math.ceil(data.poolListDataLength / 10));
+        } else if (dexArray.includes(filter)) {
+          const data = await dexList(filter, pageIndex);
+
+          setCurrentPagePoolList(data.poolListData);
+          setTotalPages(Math.ceil(data.poolListDataLength / 10));
+        }
+      }
+
       setTimeout(() => {
         dispatch(isLoadingThunk({ isLoading: false }));
       }, 5000);
@@ -67,9 +103,28 @@ export default function PoolListCom1024px(props) {
     }
   };
 
+  // const getFilteredList = async () => {
+  //   try {
+  //     dispatch(isLoadingThunk({ isLoading: true }));
+  //     if (networkArray.includes(filter)) {
+  //       netList(filter, pageIndex);
+  //     } else if (dexArray.includes(filter)) {
+  //       dexList(filter, pageIndex);
+  //     }
+  //     dispatch(isLoadingThunk({ isLoading: false }));
+  //   } catch (error) {
+  //     dispatch(isLoadingThunk({ isLoading: false }));
+  //     console.error(error);
+  //   }
+  // };
+
   React.useEffect(() => {
     getPoolList();
   }, [pageIndex]);
+
+  React.useEffect(() => {
+    setPageIndex(1);
+  }, [filter]);
 
   React.useEffect(() => {
     setMainNetList(Object.keys(mainNet));
@@ -207,6 +262,7 @@ export default function PoolListCom1024px(props) {
                     key={`Netlist1024px-${idx}`}
                     item={item}
                     pageIndex={pageIndex}
+                    setFilter={setFilter}
                     setCurrentPagePoolList={setCurrentPagePoolList}
                     setTotalPages={setTotalPages}
                   />
@@ -282,6 +338,8 @@ export default function PoolListCom1024px(props) {
                     item={item}
                     pageIndex={pageIndex}
                     setCurrentPagePoolList={setCurrentPagePoolList}
+                    setTotalPages={setTotalPages}
+                    setFilter={setFilter}
                   />
                 ))}
               </Flex>
@@ -537,31 +595,120 @@ export default function PoolListCom1024px(props) {
               initial={{ borderRadius: 25 }}
               transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
             >
-              {currentPagePoolList.map((item, idx) => (
-                <Poolitem1024
-                  gap="17px"
-                  direction="column"
-                  width="unset"
-                  height="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  key={`PoolList1024px-${idx}`}
-                  item={item}
-                  length={currentPagePoolList.length}
-                  idx={idx}
-                />
-              ))}
+              {sortAPY == undefined && sortTVL == undefined ? (
+                // 정렬 안함
+                currentPagePoolList?.map((item, idx) => (
+                  <Poolitem1024
+                    gap="17px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="center"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    key={`PoolList1024px-${idx}`}
+                    item={item}
+                    length={currentPagePoolList.length}
+                    idx={idx}
+                  />
+                ))
+              ) : sortAPY == "up" ? (
+                currentPagePoolList
+                  .sort(aesAPY)
+                  .map((item, idx) => (
+                    <Poolitem1024
+                      gap="17px"
+                      direction="column"
+                      width="unset"
+                      height="unset"
+                      justifyContent="center"
+                      alignItems="center"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      key={`PoolList1024px-${idx}`}
+                      item={item}
+                      length={currentPagePoolList.length}
+                      idx={idx}
+                    />
+                  ))
+              ) : sortAPY == "down" ? (
+                currentPagePoolList
+                  .sort(descAPY)
+                  .map((item, idx) => (
+                    <Poolitem1024
+                      gap="17px"
+                      direction="column"
+                      width="unset"
+                      height="unset"
+                      justifyContent="center"
+                      alignItems="center"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      key={`PoolList1024px-${idx}`}
+                      item={item}
+                      length={currentPagePoolList.length}
+                      idx={idx}
+                    />
+                  ))
+              ) : sortTVL == "up" ? (
+                currentPagePoolList
+                  .sort(aesTVL)
+                  .map((item, idx) => (
+                    <Poolitem1024
+                      gap="17px"
+                      direction="column"
+                      width="unset"
+                      height="unset"
+                      justifyContent="center"
+                      alignItems="center"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      key={`PoolList1024px-${idx}`}
+                      item={item}
+                      length={currentPagePoolList.length}
+                      idx={idx}
+                    />
+                  ))
+              ) : sortTVL == "down" ? (
+                currentPagePoolList
+                  .sort(descTVL)
+                  .map((item, idx) => (
+                    <Poolitem1024
+                      gap="17px"
+                      direction="column"
+                      width="unset"
+                      height="unset"
+                      justifyContent="center"
+                      alignItems="center"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      key={`PoolList1024px-${idx}`}
+                      item={item}
+                      length={currentPagePoolList.length}
+                      idx={idx}
+                    />
+                  ))
+              ) : (
+                <></>
+              )}
             </motion.div>
           </LayoutGroup>
 
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

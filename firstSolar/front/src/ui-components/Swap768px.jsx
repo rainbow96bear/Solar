@@ -13,16 +13,11 @@ import QuestionModal from "./QuestionModal";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
-  console.log("Swap768px", props);
   const [swapMoney, setSwapMoney] = React.useState();
   const [questionMark, setQuestionMark] = React.useState(0);
   const isDesktop = useMediaQuery({
     query: "(min-width:481px)",
   });
-  React.useEffect(() => {
-    console.log(props?.oracleiddata[0]?.name);
-  }, [props?.oracleiddata]);
-
   const allowedKeys = [
     "0",
     "1",
@@ -48,14 +43,14 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = percentNum => {
+  const setPercentBalance = (percentNum) => {
     if (props?.balance == 0) return;
     setSwapMoney(swapMoney * percentNum);
   };
@@ -425,10 +420,10 @@ export default function Swap768px(props) {
                   isDisabled={false}
                   labelHidden={false}
                   variation="default"
-                  onChange={e => {
+                  onChange={(e) => {
                     setSwapMoney(e.target.value);
                   }}
-                  onKeyPress={e => {
+                  onKeyPress={(e) => {
                     handleKeyPress(e);
                   }}
                   {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -864,10 +859,10 @@ export default function Swap768px(props) {
                   isDisabled={false}
                   labelHidden={false}
                   variation="default"
-                  onChange={e => {
+                  onChange={(e) => {
                     setSwapMoney(e.target.value);
                   }}
-                  onKeyPress={e => {
+                  onKeyPress={(e) => {
                     handleKeyPress(e);
                   }}
                   {...getOverrideProps(overrides, "TextAreaField40432770")}

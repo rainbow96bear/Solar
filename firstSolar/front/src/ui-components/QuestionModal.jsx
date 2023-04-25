@@ -11,12 +11,11 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, SearchField, Text, Icon } from "@aws-amplify/ui-react";
 
 export default function QuestionModal(props) {
-  // console.log("QuestionModal", props);
   const { overrides, setquestionmark, ...rest } = props;
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
       }}
     >

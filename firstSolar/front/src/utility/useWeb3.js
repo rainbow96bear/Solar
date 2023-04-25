@@ -21,11 +21,9 @@ export const useWeb3 = () => {
 
         window.ethereum?.on("accountsChanged", async () => {
           if (window.ethereum) {
-            console.log("계정바뀜");
             const [_account] = await window.ethereum.request({
               method: "eth_requestAccounts",
             });
-            console.log(_account);
             setAccount(_account);
           }
         });
