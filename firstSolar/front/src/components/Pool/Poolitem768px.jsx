@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo768px, SwapCompo768px } from "../../ui-components";
 import { connectThunk } from "../../modules/connect";
 import { useDispatch } from "react-redux";
+import "../../css/Font.css";
 
 const Poolitem768px = props => {
   const { overrides, ...rest } = props;

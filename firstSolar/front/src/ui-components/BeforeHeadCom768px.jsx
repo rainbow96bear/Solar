@@ -33,8 +33,8 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 export default function BeforeHeadCom768px(props) {
   const { overrides, ...rest } = props;
-  const login = useSelector((state) => state.login.login.login);
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const login = useSelector(state => state.login.login.login);
+  const connect = useSelector(state => state.connect.connect.connect);
   const { address, isConnecting, isDisconnected } = useAccount();
 
   const isTablet = useMediaQuery({
@@ -121,31 +121,7 @@ export default function BeforeHeadCom768px(props) {
                 // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 padding="10px 10px 10px 10px"
                 {...getOverrideProps(overrides, "Frame 45")}
-              >
-                <Menu
-                  menuAlign="start"
-                  size="large"
-                  className="my-menu-content"
-                  triggerClassName="my-menu-trigger"
-                >
-                  <MenuItem onClick={() => alert("Download")}>
-                    Download
-                  </MenuItem>
-                  <MenuItem onClick={() => alert("Create a Copy")}>
-                    Create a Copy
-                  </MenuItem>
-                  <MenuItem onClick={() => alert("Mark as Draft")}>
-                    Mark as Draft
-                  </MenuItem>
-                  <Divider />
-                  <MenuItem isDisabled onClick={() => alert("Delete")}>
-                    Delete
-                  </MenuItem>
-                  <MenuItem onClick={() => alert("Attend a workshop")}>
-                    Attend a workshop
-                  </MenuItem>
-                </Menu>
-              </Flex>
+              ></Flex>
             </Flex>
             <SearchField
               className="searchInput"

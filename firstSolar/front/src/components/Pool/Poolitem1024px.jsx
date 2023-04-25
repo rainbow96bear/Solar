@@ -6,6 +6,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCompo1440px, SwapCompo1440px } from "../../ui-components";
 import { connectThunk } from "../../modules/connect";
 import { useDispatch } from "react-redux";
+import "../../css/Font.css";
 
 const Poolitem1024 = props => {
   const { overrides, ...rest } = props;
@@ -125,7 +126,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "LogoTitle")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffCondExtraLight"
                   fontSize="15px"
                   fontWeight="500"
                   lineHeight="18.15340805053711px"
@@ -179,7 +180,7 @@ const Poolitem1024 = props => {
                     {...getOverrideProps(overrides, "Frame 9")}
                   >
                     <Text
-                      fontFamily="Inter"
+                      fontFamily="ffCondBold"
                       fontSize="8px"
                       fontWeight="500"
                       color="rgba(239,239,239,1)"
@@ -220,7 +221,7 @@ const Poolitem1024 = props => {
                     {...getOverrideProps(overrides, "Frame 8")}
                   >
                     <Text
-                      fontFamily="Inter"
+                      fontFamily="ffCondBold"
                       fontSize="8px"
                       fontWeight="500"
                       lineHeight="9.681818008422852px"
@@ -276,7 +277,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "Frame 1539913049")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffCompExtraLight"
                   fontSize="12px"
                   fontWeight="500"
                   lineHeight="14.522727012634277px"
@@ -315,7 +316,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "Frame 18")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffCompExtraLight"
                   fontSize="12px"
                   fontWeight="500"
                   lineHeight="14.522727012634277px"
@@ -354,7 +355,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "Frame 1939913053")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffCompExtraLight"
                   fontSize="12px"
                   fontWeight="500"
                   lineHeight="14.522727012634277px"
@@ -393,7 +394,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "Frame 16")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffCompExtraLight"
                   fontSize="9px"
                   fontWeight="500"
                   lineHeight="10.892045021057129px"
@@ -432,7 +433,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "Frame 2039913057")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffCompExtraLight"
                   fontSize="9px"
                   fontWeight="500"
                   lineHeight="10.892045021057129px"
@@ -476,7 +477,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "Frame 17")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffCompExtraLight"
                   fontSize="9px"
                   fontWeight="500"
                   lineHeight="10.892045021057129px"

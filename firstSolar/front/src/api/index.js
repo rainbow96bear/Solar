@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
 const request = axios.create({
   baseURL: "http://localhost:8080",
@@ -22,6 +21,8 @@ export const getMainPoolList = async pageIndex => {
 
 export const oracleIdList = async _params => {
   const result = (await request.post("api/defi/detail", { id: _params })).data;
+  console.log("result", result);
+  console.log("_params", _params);
 
   return result;
 };
