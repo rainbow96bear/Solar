@@ -19,7 +19,7 @@ router.use(express.urlencoded({ extended: true }));
 router.post("/swapApprove", async (req, res) => {
   try {
     const filterToken = async () => {
-      switch (req.body.data) {
+      switch (req.body.tokenName) {
         case "dfs":
           return new web3.eth.Contract(DFSAbi as AbiItem[], process.env.DFS);
 
@@ -60,8 +60,8 @@ router.post("/swapApprove", async (req, res) => {
 router.post("/swapTransaction", async (req, res) => {
   try {
     const filterPool = async () => {
-      let target = req.body.data;
-
+      let target = req.body.poolName;
+      console.log("target : ", target);
       if ("dfsethpool".includes(target)) {
         return new web3.eth.Contract(
           DfsEthPoolAbi as AbiItem[],
