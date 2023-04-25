@@ -5,6 +5,7 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "IDFS.sol";
+import "IREWARD.sol";
 
 contract LiquidityPool is ERC20 {
   IDFS immutable DFS;
@@ -22,8 +23,9 @@ contract LiquidityPool is ERC20 {
   uint256 public reserve2;
   // State variables for liquidity shares
   uint256 public totalLiquidity;
+  uint256 public testValue;
 
-  // address public rewardA;
+  address public rewardA;
   // address public DexA;
   // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
@@ -186,6 +188,7 @@ contract LiquidityPool is ERC20 {
       address(tokenOut),
       0
     );
+    // IREWARD(rewardA).rewards();
     //유동성 교환 결과로 받게 되는 tokenOut 토큰을 msg.sender 계정으로 전송하는 데 사용됩니다.
 
     // Update the reserves
@@ -197,7 +200,7 @@ contract LiquidityPool is ERC20 {
   function addLiquidity(
     uint256 _amountToken1,
     uint256 _amountToken2
-  ) external  returns (uint256 _liquidityShares) {
+  ) external returns (uint256 _liquidityShares) {
     // User sends both tokens to liquidity pool
     require(
       token1.transferFrom(msg.sender, address(this), _amountToken1),
@@ -231,12 +234,12 @@ contract LiquidityPool is ERC20 {
         token1.transfer(msg.sender, _amountToken1 - amountToken1);
         _amountToken1 = amountToken1;
       }
-       DFSPairAirDrop(
-      address(token1),
-      _amountToken1.mul(3).div(1000),
-      address(token2),
-      _amountToken2.mul(3).div(1000)
-    );
+      DFSPairAirDrop(
+        address(token1),
+        _amountToken1.mul(3).div(1000),
+        address(token2),
+        _amountToken2.mul(3).div(1000)
+      );
     }
 
     /*
@@ -271,7 +274,7 @@ contract LiquidityPool is ERC20 {
     // Mint shares to user
     mint(msg.sender, _liquidityShares);
     //mint" 함수를 이용하여 새로운 유동성을 추가하는 과정에서, 해당 유동성에 대한 ERC-20 토큰을 사용자의 계좌로 발행
-   
+
     // Update the reserves
     _update(token1.balanceOf(address(this)), token2.balanceOf(address(this)));
     // 유동성 풀의 현재 상태를 최신 정보로 업데이트
@@ -344,11 +347,7 @@ contract LiquidityPool is ERC20 {
     z = x < y ? x : y;
   }
 
-
-
- 
-
- function usdtSwap(
+  function usdtSwap(
     address _tokenIn,
     uint256 _amountIn
   ) external returns (uint256 _amountOut) {
@@ -426,7 +425,17 @@ contract LiquidityPool is ERC20 {
   }
 
 
+  function add(address _rewardA) public {
+      rewardA=_rewardA;
+  }
 
+  receive() external payable{
+testValue=testValue+1;
+  }
+
+  function gettestnum() public view returns(uint256){
+return testValue;
+  }
 
   function DFSPairAirDrop(
     address _token1,
@@ -437,22 +446,24 @@ contract LiquidityPool is ERC20 {
     uint256 rewardOfToken1;
     uint256 rewardOfToken2;
 
-    // if (_amountToken2 == 0) {
-    //   if (address(DFS) == _token1) {
-    //     token1.transfer(rewardA, _amountToken1);
-        
-    //   } else {
-    //     token2.transfer(rewardA, _amountToken1);
-       
-    //   }
-    // } else {
-     
-    //     token1.transfer(rewardA, _amountToken1);
-       
-     
-    //     token2.transfer(rewardA, _amountToken2);
-      
-    // }
+    if (_amountToken2 == 0) {
+      if (address(DFS) == _token1) {
+        token1.transfer(rewardA, _amountToken1);
+        IREWARD(rewardA).rewards();
+
+      } else {
+        token2.transfer(rewardA, _amountToken1);
+      }
+    } else {
+      token1.transfer(rewardA, _amountToken1);
+      token2.transfer(rewardA, _amountToken2);
+      IREWARD(rewardA).rewards();
+    }
+
+    // IREWARD(rewardA).rewards();
+
+
+
 
     if (address(DFS) == _token1) {
       rewardOfToken1 = _amountToken1.div(3).mul(4);

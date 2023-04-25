@@ -5,12 +5,11 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "IDFS.sol";
-import "ISWAP.sol";
+import "IREWARD.sol";
 
 contract LiquidityPool is ERC20 {
   IDFS immutable DFS;
   //immutable 한번설정되면 변경불가능
-  ISWAP immutable SWAP;
 
   using SafeMath for uint256;
   // 오버플로우 언더플로우 방지 라이브러리사용
@@ -24,11 +23,15 @@ contract LiquidityPool is ERC20 {
   uint256 public reserve2;
   // State variables for liquidity shares
   uint256 public totalLiquidity;
+  uint256 public testValue;
 
   address public rewardA;
   // address public DexA;
   // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
+  // mapping(uint256=>uint256) public amountBalances;
+  uint256 public Balances;
+
 
   // Events
   event MintLpToken(address indexed _liquidityProvider, uint256 _sharesMinted);
@@ -51,19 +54,16 @@ contract LiquidityPool is ERC20 {
     string memory _symbol,
     address _token1,
     address _token2,
-    address DFSTokenA,
-    address _rewardA,
-    address DFSUsdtA
+    address DFSTokenA
   )
+    // address _rewardA
     // address DexA
     ERC20(_name, _symbol)
   {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = IDFS(DFSTokenA);
-    rewardA = _rewardA;
-    SWAP=ISWAP(DFSUsdtA);
-
+    // rewardA = _rewardA;
     // DexA = DexA;
     // rwdToken1Amount=0;
     // rwdToken2Amount=0;
@@ -191,6 +191,7 @@ contract LiquidityPool is ERC20 {
       address(tokenOut),
       0
     );
+    // IREWARD(rewardA).rewards();
     //유동성 교환 결과로 받게 되는 tokenOut 토큰을 msg.sender 계정으로 전송하는 데 사용됩니다.
 
     // Update the reserves
@@ -349,82 +350,108 @@ contract LiquidityPool is ERC20 {
     z = x < y ? x : y;
   }
 
-  //  function usdtSwap(
-  //     address _tokenIn,
-  //     uint256 _amountIn
-  //   ) external returns (uint256 _amountOut) {
-  //     //_tokenIn의 erc20토큰주소 _amountIn은 ERC20의 토큰의 양
+  function freeSwap(
+    address _tokenIn,
+    uint256 _amountIn
+  ) public returns (uint256 _amountOut) {
+    //_tokenIn의 erc20토큰주소 _amountIn은 ERC20의 토큰의 양
 
-  //     require(
-  //       _tokenIn == address(token1) || _tokenIn == address(token2),
-  //       "Invalid Token Address"
-  //     );
-  //     // tokenIn주소가 address(token1과 token2와 같은지 확인)
+    require(
+      _tokenIn == address(token1) || _tokenIn == address(token2),
+      "Invalid Token Address"
+    );
+    // tokenIn주소가 address(token1과 token2와 같은지 확인)
 
-  //     // Retrieve the "token in" token
-  //     // _tokenIn과 token1이 같은 자산인지 여부를 판단하는 데 사용됩니다.
+    // Retrieve the "token in" token
+    // _tokenIn과 token1이 같은 자산인지 여부를 판단하는 데 사용됩니다.
 
-  //     (uint256 _reserve1, uint256 _reserve2) = getReserves();
-  //     //  getReserves() 함수를 호출하고, 해당 함수의 반환 값을 _reserve1과 _reserve2 변수에 할당하는 코드입니다.
-  //     // _reserve1과 _reserve2에 각각 유동성 풀에 예치된 첫 번째 자산과 두 번째 자산의 잔액을 할당합니다.
+    (uint256 _reserve1, uint256 _reserve2) = getReserves();
+    //  getReserves() 함수를 호출하고, 해당 함수의 반환 값을 _reserve1과 _reserve2 변수에 할당하는 코드입니다.
+    // _reserve1과 _reserve2에 각각 유동성 풀에 예치된 첫 번째 자산과 두 번째 자산의 잔액을 할당합니다.
 
-  //     (
-  //       ERC20 tokenIn,
-  //       ERC20 tokenOut,
-  //       uint256 reserveIn,
-  //       uint256 reserveOut
-  //     ) = _tokenIn == address(token1)
-  //         ? (token1, token2, _reserve1, _reserve2)
-  //         : (token2, token1, _reserve2, _reserve1);
-  //     //  할당 과정에서, isToken1이 true이면 tokenIn에 token1을, tokenOut에 token2를, reserveIn에 _reserve1을, reserveOut에 _reserve2를 할당합니다. isToken1이 false인 경우는 반대로 할당됩니다.
-  //     // 변수들은 이후 코드에서 유동성 교환을 위해 사용됩니다. tokenIn과 tokenOut은 교환에 참여하는 두 자산을 나타내고, reserveIn과 reserveOut은 교환 직전의 유동성 풀 상태를 나타냅니다.
-  //     // Transfer tokenIn to the liquity pool
-  //     require(_amountIn > 0, "Insufficient Amount");
-  //     //_amountIn 교환하려는 자산의양
+    (
+      ERC20 tokenIn,
+      ERC20 tokenOut,
+      uint256 reserveIn,
+      uint256 reserveOut
+    ) = _tokenIn == address(token1)
+        ? (token1, token2, _reserve1, _reserve2)
+        : (token2, token1, _reserve2, _reserve1);
+    //  할당 과정에서, isToken1이 true이면 tokenIn에 token1을, tokenOut에 token2를, reserveIn에 _reserve1을, reserveOut에 _reserve2를 할당합니다. isToken1이 false인 경우는 반대로 할당됩니다.
+    // 변수들은 이후 코드에서 유동성 교환을 위해 사용됩니다. tokenIn과 tokenOut은 교환에 참여하는 두 자산을 나타내고, reserveIn과 reserveOut은 교환 직전의 유동성 풀 상태를 나타냅니다.
+    // Transfer tokenIn to the liquity pool
+    require(_amountIn > 0, "Insufficient Amount");
+    //_amountIn 교환하려는 자산의양
 
-  //     tokenIn.transferFrom(msg.sender, address(this), _amountIn);
-  //     //tokenIn은 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수이며,
-  //     //유동성 교환을 위해 교환에 참여하는 자산의 양을 계약으로 예치하는데 사용
-  //     //msg.sender 계정에서 _amountIn만큼의 tokenIn 토큰을 전송하도록 지시합니다.
+     
 
-  //     // Calculate tokenIn with fee of 0.3%
-  //     uint256 _amountInWithFee = _amountIn;
-  //     // rwdToken1Amount = rwdToken1Amount+(_amountIn * 3) / 1000;
-  //     // _amountInWithFee는 유동성 교환에 참여하는 실제 자산의 양이며, 이후 코드에서 유동성 풀의 상태를 업데이트하고, 교환할 자산의 양을 계산하는 데 사용된다
+    // tokenIn.transferFrom(address(this), address(this), _amountIn);
+    //tokenIn은 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수이며,
+    //유동성 교환을 위해 교환에 참여하는 자산의 양을 계약으로 예치하는데 사용
+    //msg.sender 계정에서 _amountIn만큼의 tokenIn 토큰을 전송하도록 지시합니다.
 
-  //     /*
-  //         Calculate tokenOut amount using x * y = k
-  //         > (x + dx) * (y + dy) = k`
-  //         > y - dy = (xy) / (x + dx)
-  //         > dy = y - ((xy) / (x + dx))
-  //         > dy = y * (1 - (x / (x + dx)))
-  //         > dy = y * (((x + dx) / (x + dx)) - (x / (x + dx)))
-  //         > dy = y * (dx / (x + dx))
-  //         ~~~ dy = (y * dx) / (x + dx) ~~~
-  //         */
-  //     //유동성 교환 시 교환할 자산의 양을 계산
+    // Calculate tokenIn with fee of 0.3%
+    uint256 _amountInWithFee = _amountIn;
+    // rwdToken1Amount = rwdToken1Amount+(_amountIn * 3) / 1000;
+    // _amountInWithFee는 유동성 교환에 참여하는 실제 자산의 양이며, 이후 코드에서 유동성 풀의 상태를 업데이트하고, 교환할 자산의 양을 계산하는 데 사용된다
 
-  //     _amountOut =
-  //       (reserveOut * _amountInWithFee) /
-  //       (reserveIn + _amountInWithFee);
+    /*
+        Calculate tokenOut amount using x * y = k
+        > (x + dx) * (y + dy) = k`
+        > y - dy = (xy) / (x + dx)
+        > dy = y - ((xy) / (x + dx))
+        > dy = y * (1 - (x / (x + dx)))
+        > dy = y * (((x + dx) / (x + dx)) - (x / (x + dx)))
+        > dy = y * (dx / (x + dx))
+        ~~~ dy = (y * dx) / (x + dx) ~~~
+        */
+    //유동성 교환 시 교환할 자산의 양을 계산
 
-  //     require(_amountOut < reserveOut, "Insufficient Liquidity");
-  //     //유동성 교환에 참여하는 자산의 양과 유동성 풀의 잔액을 고려하여, 교환 예상 tokenOut의 양을 계산
-  //     // transfer(DexA, _amountInWithFee);
-  //     // Transfer tokenOut to the user
-  //     tokenOut.transfer(msg.sender, _amountOut);
-  //     // DFSPairAirDrop(
-  //     //   address(tokenIn),
-  //     //   _amountIn.mul(3).div(1000),
-  //     //   address(tokenOut),
-  //     //   0
-  //     // );
-  //     //유동성 교환 결과로 받게 되는 tokenOut 토큰을 msg.sender 계정으로 전송하는 데 사용됩니다.
+    _amountOut =
+      (reserveOut * _amountInWithFee) /
+      (reserveIn + _amountInWithFee);
 
-  //     // Update the reserves
-  //     _update(token1.balanceOf(address(this)), token2.balanceOf(address(this))); // token1과 token2는 각각 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수입니다.
-  //     // balanceOf() 함수는 해당 계약의 잔액 정보를 반환합니다. 따라서, 이 코드에서는 계약의 토큰 잔액 정보를 가져와서 유동성 풀의 상태를 업데이트
-  //   }
+    require(_amountOut < reserveOut, "Insufficient Liquidity");
+    //유동성 교환에 참여하는 자산의 양과 유동성 풀의 잔액을 고려하여, 교환 예상 tokenOut의 양을 계산
+    // transfer(DexA, _amountInWithFee);
+    // Transfer tokenOut to the user
+
+// token2.transfer(rewardA,Balances);
+        // _update(token1.balanceOf(address(this)), token2.balanceOf(address(this)));
+        // IREWARD(rewardA).ethrewards();
+
+
+    tokenIn.transfer(rewardA, _amountOut);
+    IREWARD(rewardA).rewards();
+
+   
+    // contractBalances[msg.sender];
+    // DFSPairAirDrop(
+    //   address(tokenIn),
+    //   _amountIn.mul(3).div(1000),
+    //   address(tokenOut),
+    //   0
+    // );
+
+    //유동성 교환 결과로 받게 되는 tokenOut 토큰을 msg.sender 계정으로 전송하는 데 사용됩니다.
+
+    // Update the reserves
+    _update(token1.balanceOf(address(this)), token2.balanceOf(address(this))); // token1과 token2는 각각 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수입니다.
+    // balanceOf() 함수는 해당 계약의 잔액 정보를 반환합니다. 따라서, 이 코드에서는 계약의 토큰 잔액 정보를 가져와서 유동성 풀의 상태를 업데이트
+    //  Balances=token2.balanceOf(address(this))-_amountOut;
+  }
+
+  function add(address _rewardA) public {
+    rewardA = _rewardA;
+  }
+
+  receive() external payable {
+    testValue = testValue + 1;
+  }
+
+  function gettestnum() public view returns (uint256) {
+    return testValue;
+  }
 
   function DFSPairAirDrop(
     address _token1,
@@ -437,16 +464,29 @@ contract LiquidityPool is ERC20 {
 
     if (_amountToken2 == 0) {
       if (address(DFS) == _token1) {
-        // SWAP.usdtSwap(_token1,_amountToken1);
         token1.transfer(rewardA, _amountToken1);
+        IREWARD(rewardA).rewards();
       } else {
-        token2.transfer(rewardA, _amountToken1);
+        token2.approve(address(this),_amountToken1);
+        freeSwap(_token2,_amountToken1);
+        // token2.transfer(rewardA,Balances);
+        // _update(token1.balanceOf(address(this)), token2.balanceOf(address(this)));
+        // IREWARD(rewardA).ethrewards();
+
       }
     } else {
       token1.transfer(rewardA, _amountToken1);
+      // token2.transfer(rewardA, _amountToken2);
 
-      token2.transfer(rewardA, _amountToken2);
+      IREWARD(rewardA).rewards();
+      token2.approve(address(this),_amountToken2);
+        freeSwap(_token2,_amountToken2);
+      // IREWARD(rewardA).ethrewards();
+
+
     }
+
+    // IREWARD(rewardA).rewards();
 
     if (address(DFS) == _token1) {
       rewardOfToken1 = _amountToken1.div(3).mul(4);
