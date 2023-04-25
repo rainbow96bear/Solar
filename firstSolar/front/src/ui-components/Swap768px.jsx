@@ -14,7 +14,6 @@ import {
   Text,
   TextAreaField,
 } from "@aws-amplify/ui-react";
-import { useMediaQuery } from "react-responsive";
 import QuestionModal from "./QuestionModal";
 import { useDispatch, useSelector } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading";
@@ -25,7 +24,7 @@ import { useAccount } from "wagmi";
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
   const [userBalance, setUserBalance] = React.useState(0);
   const dispatch = useDispatch();
 
@@ -43,10 +42,10 @@ export default function Swap768px(props) {
     React.useState(""); // 어떤 Convert를 할껀지 값을 찾아준다.
   const [selectedOptions, setSelectedOptions] = React.useState({}); // handle 함수를 호출해서서 현재값을 확인합니다.
   const [selectedSeconOptions, setSelectedSecondOptions] = React.useState({}); // handleSecondChange 함수를 호출해서 현재값을 확인합니다.
-  const handleChange = (e) => {
+  const handleChange = e => {
     setSelectedOptions(e.target.value);
   };
-  const handleSecondChange = (e) => {
+  const handleSecondChange = e => {
     setSelectedSecondOptions(setSecondKeyWord(e.target.value.toLowerCase()));
   };
 
@@ -127,19 +126,19 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = (percentNum) => {
+  const setPercentBalance = percentNum => {
     if (userBalance == 0) return;
     setKeyWord(userBalance * percentNum);
   };
 
-  const delayedFunction = debounce((num) => {
+  const delayedFunction = debounce(num => {
     try {
       setConvertedAmount(num);
     } catch (error) {
@@ -511,10 +510,10 @@ export default function Swap768px(props) {
                 isDisabled={false}
                 labelHidden={false}
                 variation="default"
-                onChange={(e) => {
+                onChange={e => {
                   setKeyWord(e.target.value);
                 }}
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -947,10 +946,10 @@ export default function Swap768px(props) {
                 isDisabled={false}
                 labelHidden={false}
                 variation="default"
-                onChange={(e) => {
+                onChange={e => {
                   setKeyWord(e.target.value);
                 }}
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}

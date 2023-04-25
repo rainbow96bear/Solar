@@ -17,14 +17,7 @@ export default function SwapCompo1440px(props) {
 
   return (
     <Flex
-      display={{
-        base: "none",
-        small: "none",
-        medium: "flex",
-        large: "flex",
-        xl: "flex",
-        xxl: "flex",
-      }}
+      display="flex"
       gap="30px"
       direction="row"
       width="90vw"
@@ -70,7 +63,7 @@ export default function SwapCompo1440px(props) {
           {...getOverrideProps(overrides, "Connect40052819")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProMedium"
             fontSize="24px"
             fontWeight="700"
             color="rgba(249,249,249,1)"
@@ -112,7 +105,7 @@ export default function SwapCompo1440px(props) {
       >
         <Flex
           onClick={() => {
-            navigate(`/addliquidity?=${props.props.item.oracleId}`);
+            navigate(`/addliquidity?${props.props.item.oracleId}`);
           }}
           gap="10px"
           direction="row"
@@ -128,7 +121,7 @@ export default function SwapCompo1440px(props) {
           {...getOverrideProps(overrides, "Connect40052821")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProMedium"
             fontSize="24px"
             fontWeight="700"
             lineHeight="29.045454025268555px"
