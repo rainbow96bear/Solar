@@ -27,7 +27,7 @@ import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
 import { connectThunk } from "./modules/connect";
-import UserLoading2 from "./ui-components/UserLoading2";
+import { UserLoading2, UserLoading } from "./ui-component";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
@@ -99,7 +99,7 @@ function App() {
           {/* 로딩 중에는 로딩 창이 뜨도록 할 것입니다. */}
           {isLoading ? (
             <LoadingModal>
-              <UserLoading2 />
+              <UserLoading className="marginT" />
             </LoadingModal>
           ) : (
             <></>
