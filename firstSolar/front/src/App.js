@@ -27,7 +27,7 @@ import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
 import { connectThunk } from "./modules/connect";
-import { UserLoading2, UserLoading } from "./ui-component";
+import UserLoading from "./ui-components/UserLoading";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
