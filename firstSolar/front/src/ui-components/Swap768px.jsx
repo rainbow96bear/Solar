@@ -7,7 +7,13 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Image,
+  Text,
+  TextAreaField,
+} from "@aws-amplify/ui-react";
 import { useMediaQuery } from "react-responsive";
 import QuestionModal from "./QuestionModal";
 
@@ -1133,7 +1139,7 @@ export default function Swap768px(props) {
               ></Image>
             </Flex>
 
-            <Flex
+            <Button
               gap="10px"
               direction="row"
               width="unset"
@@ -1147,6 +1153,8 @@ export default function Swap768px(props) {
               borderRadius="15px"
               padding="13px 73px 13px 73px"
               backgroundColor="rgba(234,0,50,0.45)"
+              border="0px"
+              disabled={props}
               {...getOverrideProps(overrides, "Frame 63")}
             >
               <Text
@@ -1156,9 +1164,9 @@ export default function Swap768px(props) {
                 color="rgba(249,249,249,1)"
                 lineHeight="30.25568199157715px"
                 textAlign="center"
-                display="block"
+                display="flex"
                 direction="column"
-                justifyContent="unset"
+                justifyContent="center"
                 width="347.98px"
                 height="23px"
                 gap="unset"
@@ -1170,7 +1178,7 @@ export default function Swap768px(props) {
                 children="Enter an Amount"
                 {...getOverrideProps(overrides, "Enter an Amount")}
               ></Text>
-            </Flex>
+            </Button>
           </Flex>
           {questionMark == 1 ? (
             <QuestionModal

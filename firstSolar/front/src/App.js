@@ -99,7 +99,7 @@ function App() {
           {/* 로딩 중에는 로딩 창이 뜨도록 할 것입니다. */}
           {isLoading ? (
             <LoadingModal>
-              <UserLoading />
+              <UserLoading className="marginT" />
             </LoadingModal>
           ) : (
             <></>
@@ -135,4 +135,7 @@ const LoadingModal = styled.div`
   right: 0%;
   justify-content: center;
   z-index: 999999999;
+  .marginT {
+    margin-bottom: 270px;
+  }
 `;
