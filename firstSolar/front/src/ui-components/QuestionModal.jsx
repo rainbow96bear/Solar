@@ -461,6 +461,7 @@ export default function QuestionModal(props) {
             padding="10px 10px 10px 10px"
             backgroundColor="rgba(255,226,0,0.35)"
             style={{ cursor: "pointer" }}
+            onClick={() => {}}
             {...getOverrideProps(overrides, "MapList40632581")}
           >
             <Flex
