@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { isLoadingThunk } from "../../modules/isLoading";
 import { useDispatch } from "react-redux";
 
-const Netlist1024px = (props) => {
+const Netlist1024px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -72,7 +72,7 @@ const Netlist1024px = (props) => {
   );
 };
 
-const Dexlist1024px = (props) => {
+const Dexlist1024px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -139,7 +139,7 @@ const Dexlist1024px = (props) => {
   );
 };
 
-const Netlist768px = (props) => {
+const Netlist768px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -205,7 +205,7 @@ const Netlist768px = (props) => {
   );
 };
 
-const Dexlist768px = (props) => {
+const Dexlist768px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -271,7 +271,7 @@ const Dexlist768px = (props) => {
   );
 };
 
-const Netlist320px = (props) => {
+const Netlist320px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -337,7 +337,7 @@ const Netlist320px = (props) => {
   );
 };
 
-const Dexlist320px = (props) => {
+const Dexlist320px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
 
