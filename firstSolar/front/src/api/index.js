@@ -55,3 +55,17 @@ export const lpBalance = async (account, symbol) => {
   ).data;
   return result.balance;
 };
+
+export const mypageList = async (account) => {
+  try {
+    console.log(account);
+    const result = (
+      await request.post("api/sync/mypage", {
+        account,
+      })
+    ).data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};

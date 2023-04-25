@@ -200,9 +200,11 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
           : lp.status === "active"
       );
       let filterLpList: Array<detailLp | Pool>;
-      if (!network) filterLpList = [...activeLpList];
-      getPool = await db.Pool.findAll({ where: { network } });
-      filterLpList = [...activeLpList, ...getPool];
+
+      if (network) {
+        getPool = await db.Pool.findAll({ where: { network } });
+        filterLpList = [...activeLpList, ...getPool];
+      } else filterLpList = [...activeLpList];
 
       const paginationFilterLpList = await Promise.all(
         filterLpList
