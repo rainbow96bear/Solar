@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import { abi as DexAbi } from "../contracts/artifacts/Dex.json";
-import { abi as DFSTokenAbi } from "../contracts/artifacts/DFSToken.json";
-import { abi as TokenAbi } from "../contracts/artifacts/Token.json";
-import { abi as LiquidityPoolAbi } from "../contracts/artifacts/LiquidityPool.json";
+import { abi as DexAbi } from "../../contracts/artifacts/Dex.json";
+import { abi as DFSTokenAbi } from "../../contracts/artifacts/DFSToken.json";
+import { abi as TokenAbi } from "../../contracts/artifacts/Token.json";
+import { abi as LiquidityPoolAbi } from "../../contracts/artifacts/LiquidityPool.json";
 
 const web3 = new Web3(
   "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
