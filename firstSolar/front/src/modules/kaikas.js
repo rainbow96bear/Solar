@@ -18,12 +18,8 @@ const kaikasWallet = ({ chains, projectId }) => ({
     qrCode: "https://qr1.be/TB10",
   },
   createConnector: () => {
-    console.log("나오나");
     const connector = getWalletConnectConnector({ projectId, chains });
-    const getUri = async () =>
-      (await connector.getProvider()).then((e) => {
-        console.log(e);
-      });
+    const getUri = async () => await connector.getProvider();
     // .connector;
     connector.getProvider().then((e) => {
       console.log(e);

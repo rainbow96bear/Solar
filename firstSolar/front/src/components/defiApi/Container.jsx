@@ -21,7 +21,6 @@ const DefiContainer = () => {
       setStatus(DATA_STATUS.LOADING);
       const result = (await axios.get("http://localhost:8080/api/defi")).data;
       setDefiList(result);
-      console.log(result);
       setStatus(DATA_STATUS.SUCCESS);
     } catch (error) {
       console.error(error);

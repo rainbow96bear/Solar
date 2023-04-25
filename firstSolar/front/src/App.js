@@ -27,7 +27,7 @@ import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
 import { connectThunk } from "./modules/connect";
-import UserLoading from "./ui-components/UserLoading";
+import UserLoading2 from "./ui-components/UserLoading2";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
 
@@ -48,9 +48,9 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
-  const connect = useSelector(state => state.connect.connect.connect);
-  const accountAddress = useSelector(state => state.account.account.account);
+  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
+  const connect = useSelector((state) => state.connect.connect.connect);
+  const accountAddress = useSelector((state) => state.account.account.account);
   const dispatch = useDispatch();
 
   const { web3, account, chainId, login } = useWeb3();
@@ -58,7 +58,7 @@ function App() {
 
   const accountWagmi = useAccount({
     onConnect({ address, connector, isReconnected }) {
-      console.log("Connected", { address, connector, isReconnected });
+      // console.log("Connected", { address, connector, isReconnected });
     },
     onDisconnect() {
       dispatch(connectThunk({ connect: false }));
@@ -66,9 +66,7 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("account 변동 되었다.", account);
     if (document.cookie) {
-      console.log("쿠키가 있으면 로그인");
       if (document.cookie.split(":")[0] == "metamask") {
         login();
         dispatch(accountThunk({ account: account }));
@@ -99,7 +97,7 @@ function App() {
           {/* 로딩 중에는 로딩 창이 뜨도록 할 것입니다. */}
           {isLoading ? (
             <LoadingModal>
-              <UserLoading />
+              <UserLoading2 />
             </LoadingModal>
           ) : (
             <></>

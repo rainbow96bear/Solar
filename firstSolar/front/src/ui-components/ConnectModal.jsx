@@ -32,7 +32,6 @@ export default function ConnectModal(props) {
       const [_account] = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      console.log(_account);
       const data = await axios.post("http://localhost:8080/api/user/login", {
         account: _account,
         walletKind: "metamask",
@@ -51,7 +50,6 @@ export default function ConnectModal(props) {
       }
       await loginK();
       const [_account] = await window.klaytn.enable();
-      console.log(_account);
       const data = await axios.post("http://localhost:8080/api/user/login", {
         account: _account,
         walletKind: "kaikas",
@@ -65,7 +63,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}

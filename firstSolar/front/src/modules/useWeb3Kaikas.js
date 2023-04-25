@@ -18,13 +18,8 @@ export const useWeb3K = () => {
 
         window.klaytn.on("accountsChanged", async () => {
           if (window.klaytn) {
-            console.log(
-              "useWeb3Kaikas wallet : ",
-              (await window.klaytn.enable())[0]
-            );
             const [_account] = (await window.klaytn.enable())[0];
             setAccountK(_account);
-            console.log("계정을 바꿔버렸다.", _account);
           }
         });
 
