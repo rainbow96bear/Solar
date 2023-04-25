@@ -23,19 +23,23 @@ const HeaderContainer = () => {
 
   useEffect(() => {
     (async () => {
-      if (!document.cookie) return;
-      if (document.cookie.split(":")[0] == "metamask") {
-        const [_account] = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        dispatch(accountThunk({ account: _account }));
-        dispatch(loginThunk({ login: true }));
-        dispatch(connectThunk({ connect: true }));
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        const kaikasWallet = (await window.klaytn.enable())[0];
-        dispatch(accountThunk({ account: kaikasWallet }));
-        dispatch(loginThunk({ login: true }));
-        dispatch(connectThunk({ connect: true }));
+      try {
+        if (!document.cookie) return;
+        if (document.cookie.split(":")[0] == "metamask") {
+          const [_account] = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          dispatch(accountThunk({ account: _account }));
+          dispatch(loginThunk({ login: true }));
+          dispatch(connectThunk({ connect: true }));
+        } else if (document.cookie.split(":")[0] == "kaikas") {
+          const kaikasWallet = (await window.klaytn.enable())[0];
+          dispatch(accountThunk({ account: kaikasWallet }));
+          dispatch(loginThunk({ login: true }));
+          dispatch(connectThunk({ connect: true }));
+        }
+      } catch (error) {
+        console.error(error);
       }
     })();
   }, []);

@@ -13,6 +13,13 @@ import { Flex, Image, Text, Icon } from "@aws-amplify/ui-react";
 export default function QuestionModal(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
+  const tokenList = ["DFS", "ETH", "USDT", "BNB"];
+  const tokenListDescription = [
+    "Solar's token",
+    "Ethereum token",
+    "Stablecoin pegged to USD 1:1 ratio by Tether.",
+    "Binance Chain Native Token",
+  ];
   return (
     <ModalCover
       onClick={(e) => {
@@ -106,7 +113,7 @@ export default function QuestionModal(props) {
             {...getOverrideProps(overrides, "Select a Token")}
           ></Text>
         </Flex>
-        <Flex
+        {/* <Flex
           gap="9px"
           direction="column"
           width="unset"
@@ -155,8 +162,8 @@ export default function QuestionModal(props) {
               {...getOverrideProps(overrides, "Common bases")}
             ></Text>
           </Flex>
-        </Flex>
-        <Flex
+        </Flex> */}
+        {/* <Flex
           gap="16px"
           direction="row"
           width="unset"
@@ -437,148 +444,154 @@ export default function QuestionModal(props) {
               {...getOverrideProps(overrides, "040493199")}
             ></Text>
           </Flex>
-        </Flex>
-        <Flex
-          gap="16px"
-          direction="row"
-          width="unset"
-          height="unset"
-          justifyContent="flex-start"
-          alignItems="center"
-          shrink="0"
-          alignSelf="stretch"
-          position="relative"
-          padding="10px 10px 10px 10px"
-          backgroundColor="rgba(255,226,0,0.35)"
-          {...getOverrideProps(overrides, "MapList40632581")}
-        >
+        </Flex> */}
+
+        {tokenList.map((item, idx) => (
           <Flex
-            gap="25px"
+            key={`tokenList${idx}`}
+            gap="16px"
             direction="row"
             width="unset"
             height="unset"
             justifyContent="flex-start"
             alignItems="center"
-            grow="1"
-            shrink="1"
-            basis="0"
+            shrink="0"
             alignSelf="stretch"
             position="relative"
-            borderRadius="25px"
-            padding="11px 13px 11px 13px"
-            {...getOverrideProps(overrides, "Dexname140632582")}
+            padding="10px 10px 10px 10px"
+            backgroundColor="rgba(255,226,0,0.35)"
+            style={{ cursor: "pointer" }}
+            onClick={() => {}}
+            {...getOverrideProps(overrides, "MapList40632581")}
           >
-            <Image
-              width="45px"
-              height="45px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="35px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "ghrgclzzd 740632583")}
-            ></Image>
             <Flex
-              gap="8px"
-              direction="column"
+              gap="25px"
+              direction="row"
               width="unset"
               height="unset"
               justifyContent="flex-start"
-              alignItems="flex-start"
+              alignItems="center"
               grow="1"
               shrink="1"
               basis="0"
+              alignSelf="stretch"
               position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 13540632584")}
+              borderRadius="25px"
+              padding="11px 13px 11px 13px"
+              {...getOverrideProps(overrides, "Dexname140632582")}
+            >
+              <Image
+                width="45px"
+                height="45px"
+                display="block"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                shrink="0"
+                position="relative"
+                borderRadius="35px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "ghrgclzzd 740632583")}
+              ></Image>
+              <Flex
+                gap="8px"
+                direction="column"
+                width="unset"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                grow="1"
+                shrink="1"
+                basis="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                {...getOverrideProps(overrides, "Frame 13540632584")}
+              >
+                <Text
+                  fontFamily="Inter"
+                  fontSize="20px"
+                  fontWeight="700"
+                  lineHeight="24.204544067382812px"
+                  textAlign="left"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="16px"
+                  gap="unset"
+                  alignItems="unset"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children={tokenList[idx]}
+                  {...getOverrideProps(overrides, "USDT40632585")}
+                ></Text>
+                <Text
+                  fontFamily="Inter"
+                  fontSize="15px"
+                  fontWeight="700"
+                  lineHeight="18.15340805053711px"
+                  textAlign="left"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="16px"
+                  gap="unset"
+                  alignItems="unset"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children={tokenListDescription[idx]}
+                  {...getOverrideProps(
+                    overrides,
+                    "Binance Chain Native Token40632586"
+                  )}
+                ></Text>
+              </Flex>
+            </Flex>
+            <Flex
+              gap="25px"
+              direction="row"
+              width="unset"
+              height="unset"
+              justifyContent="center"
+              alignItems="center"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              borderRadius="25px"
+              padding="11px 13px 11px 13px"
+              {...getOverrideProps(overrides, "Dexname140632587")}
             >
               <Text
                 fontFamily="Inter"
                 fontSize="20px"
                 fontWeight="700"
                 lineHeight="24.204544067382812px"
-                textAlign="left"
+                textAlign="right"
                 display="block"
                 direction="column"
                 justifyContent="unset"
                 width="unset"
-                height="16px"
+                height="unset"
                 gap="unset"
                 alignItems="unset"
                 shrink="0"
-                alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="USDT"
-                {...getOverrideProps(overrides, "USDT40632585")}
-              ></Text>
-              <Text
-                fontFamily="Inter"
-                fontSize="15px"
-                fontWeight="700"
-                lineHeight="18.15340805053711px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="16px"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children="Binance Chain Native Token"
-                {...getOverrideProps(
-                  overrides,
-                  "Binance Chain Native Token40632586"
-                )}
+                children="0"
+                {...getOverrideProps(overrides, "040632588")}
               ></Text>
             </Flex>
           </Flex>
-          <Flex
-            gap="25px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            borderRadius="25px"
-            padding="11px 13px 11px 13px"
-            {...getOverrideProps(overrides, "Dexname140632587")}
-          >
-            <Text
-              fontFamily="Inter"
-              fontSize="20px"
-              fontWeight="700"
-              lineHeight="24.204544067382812px"
-              textAlign="right"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="0"
-              {...getOverrideProps(overrides, "040632588")}
-            ></Text>
-          </Flex>
-        </Flex>
+        ))}
       </Flex>
     </ModalCover>
   );
