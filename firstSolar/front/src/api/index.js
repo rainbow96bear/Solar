@@ -96,19 +96,6 @@ export const firstSync = async () => {
     console.log(error);
   }
 };
-export const mypageList = async (account) => {
-  try {
-    console.log(account);
-    const result = (
-      await request.post("api/sync/mypage", {
-        account,
-      })
-    ).data;
-    return result;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const mypageList = async (account) => {
   try {
