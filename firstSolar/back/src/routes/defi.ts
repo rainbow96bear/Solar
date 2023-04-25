@@ -166,7 +166,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -200,9 +200,11 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
           : lp.status === "active"
       );
       let filterLpList: Array<detailLp | Pool>;
-      // if (!network) filterLpList = [...activeLpList];
-      // getPool = await db.Pool.findAll({ where: { network } });
-      filterLpList = [...activeLpList, ...getPool];
+
+      if (network) {
+        getPool = await db.Pool.findAll({ where: { network } });
+        filterLpList = [...activeLpList, ...getPool];
+      } else filterLpList = [...activeLpList];
 
       const paginationFilterLpList = await Promise.all(
         filterLpList
@@ -249,7 +251,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);

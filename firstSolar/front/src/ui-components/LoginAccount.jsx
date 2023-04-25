@@ -133,7 +133,7 @@ export default function LoginAccount(props) {
         <MenuDropDown>
           <ul>
             <li>
-              <Link to="/mypage">
+              <Link to={`/mypage?${account}`}>
                 <div>내 정보</div>
               </Link>
             </li>
