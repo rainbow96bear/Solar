@@ -10,7 +10,6 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
 import { useMediaQuery } from "react-responsive";
 import QuestionModal from "./QuestionModal";
-import styled from "styled-components";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
@@ -67,7 +66,7 @@ export default function Swap768px(props) {
         <Flex
           gap="10px"
           direction="column"
-          width="689px"
+          width="45vw"
           height="unset"
           justifyContent="flex-start"
           alignItems="center"
@@ -915,7 +914,7 @@ export default function Swap768px(props) {
                     fontFamily="Inter"
                     fontSize="11px"
                     fontWeight="400"
-                    color="rgba(44,44,44,1)"
+                    color="rgba(239,239,239,1)"
                     lineHeight="16.5px"
                     textAlign="right"
                     display="block"
@@ -1154,7 +1153,7 @@ export default function Swap768px(props) {
                 fontFamily="Inter"
                 fontSize="25px"
                 fontWeight="700"
-                color="rgba(239,239,239,1)"
+                color="rgba(249,249,249,1)"
                 lineHeight="30.25568199157715px"
                 textAlign="center"
                 display="block"

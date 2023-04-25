@@ -1893,7 +1893,7 @@ export default function UserLoading(props) {
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
                     className="testMan"
-                    fontFamily="Inter"
+                    fontFamily="ffCondMedium"
                     fontSize="24px"
                     fontWeight="700"
                     style={{

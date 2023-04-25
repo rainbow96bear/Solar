@@ -14,15 +14,18 @@ const SwapContainer = () => {
 
   React.useEffect(() => {
     (async () => {
-      if (!params.includes("DFS")) return;
-      const oracleId = await oracleIdList(params);
-      console.log("oracleId", oracleId);
-      setOracleId(oracleId);
+      console.log("jjjj789678");
+      if (!params.includes("DFS")) {
+        const oracleId = await oracleIdList(params);
+        console.log("oracleId", oracleId);
+        console.log("params", params);
+        setOracleId(oracleId);
 
-      const account = address2 ? address2 : address;
+        const account = address2 ? address2 : address;
 
-      const balance = await lpBalance(account, oracleId[0].oracleId);
-      setBalance(balance);
+        const balance = await lpBalance(account, oracleId[0].oracleId);
+        setBalance(balance);
+      }
     })();
   }, []);
   return <SwapComponent oracleId={oracleId} balance={balance}></SwapComponent>;

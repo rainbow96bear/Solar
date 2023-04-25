@@ -73,7 +73,7 @@ export default function SwapCompo1440px(props) {
             fontFamily="Inter"
             fontSize="24px"
             fontWeight="700"
-            color="rgba(239,239,239,1)"
+            color="rgba(249,249,249,1)"
             lineHeight="29.045454025268555px"
             textAlign="center"
             display="block"

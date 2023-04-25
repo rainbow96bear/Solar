@@ -52,7 +52,7 @@ export default function PooListCom768px(props) {
 
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
     window.history.replaceState(null, "", newUrl);
   }, [pageIndex, location, queryParams]);
 
@@ -376,7 +376,7 @@ export default function PooListCom768px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={(pageNum) => {
+                onChange={pageNum => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {

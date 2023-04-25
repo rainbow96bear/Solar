@@ -40,13 +40,13 @@ export default function PoolListCom1024px(props) {
   const dispatch = useDispatch();
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
     window.history.replaceState(null, "", newUrl);
   }, [pageIndex, location, queryParams]);
 
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
     window.history.replaceState(null, "", newUrl);
   }, [pageIndex, location, queryParams]);
 
@@ -169,7 +169,7 @@ export default function PoolListCom1024px(props) {
               {...getOverrideProps(overrides, "Networks39913185")}
             >
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProBlack"
                 fontSize="28px"
                 fontWeight="700"
                 lineHeight="33.8863639831543px"
@@ -242,7 +242,7 @@ export default function PoolListCom1024px(props) {
               {...getOverrideProps(overrides, "Networks39913185")}
             >
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProBlack"
                 fontSize="28px"
                 fontWeight="700"
                 lineHeight="33.8863639831543px"
@@ -341,7 +341,7 @@ export default function PoolListCom1024px(props) {
                   {...getOverrideProps(overrides, "Frame 144")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="15px"
                     fontWeight="600"
                     lineHeight="18.15340805053711px"
@@ -377,7 +377,7 @@ export default function PoolListCom1024px(props) {
                   {...getOverrideProps(overrides, "Frame 142")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="12px"
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
@@ -399,7 +399,7 @@ export default function PoolListCom1024px(props) {
                     {...getOverrideProps(overrides, "WALLET")}
                   ></Text>
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="12px"
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
@@ -421,7 +421,7 @@ export default function PoolListCom1024px(props) {
                     {...getOverrideProps(overrides, "DEPOSITED")}
                   ></Text>
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="12px"
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
@@ -452,7 +452,7 @@ export default function PoolListCom1024px(props) {
                     {...getOverrideProps(overrides, "APY")}
                   ></Text>
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="12px"
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
@@ -483,7 +483,7 @@ export default function PoolListCom1024px(props) {
                     {...getOverrideProps(overrides, "TVL")}
                   ></Text>
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="12px"
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
@@ -505,7 +505,7 @@ export default function PoolListCom1024px(props) {
                     {...getOverrideProps(overrides, "DAILY RATE")}
                   ></Text>
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="12px"
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
@@ -561,7 +561,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={(pageNum) => {
+              onChange={pageNum => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

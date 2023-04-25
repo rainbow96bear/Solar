@@ -64,7 +64,7 @@ export default function SwapCompo768px(props) {
           {...getOverrideProps(overrides, "Connect40052829")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProBlack"
             fontSize="24px"
             fontWeight="700"
             color="rgba(239,239,239,1)"
@@ -115,7 +115,7 @@ export default function SwapCompo768px(props) {
           {...getOverrideProps(overrides, "Connect40052831")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProBlack"
             fontSize="1.5rem"
             fontWeight="700"
             lineHeight="29.045454025268555px"
