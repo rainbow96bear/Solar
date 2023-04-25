@@ -28,7 +28,9 @@ export default function Footer(props) {
         justifyContent="center"
         alignItems="flex-start"
         position="relative"
-        padding="0px 0px 0px 0px"
+        padding="30px 0px 0px 0px"
+        margin="50px 0px 0px 0px"
+        backgroundColor="gainsboro"
         {...getOverrideProps(overrides, "Footer")}
         {...rest}
       >

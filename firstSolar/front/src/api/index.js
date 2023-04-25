@@ -20,6 +20,8 @@ export const getMainPoolList = async (pageIndex) => {
 
 export const oracleIdList = async (_params) => {
   const result = (await request.post("api/defi/detail", { id: _params })).data;
+  console.log("result : ", result);
+
   return result;
 };
 
@@ -54,4 +56,11 @@ export const lpBalance = async (account, symbol) => {
     })
   ).data;
   return result.balance;
+};
+
+export const firstSync = async () => {
+  const result = (await request.get("api/sync")).data;
+  console.log("result : ", result);
+
+  return result;
 };
