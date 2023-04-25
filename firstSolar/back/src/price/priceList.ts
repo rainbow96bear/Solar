@@ -222,6 +222,15 @@ const PriceList = async () => {
       convertBNB: 1,
       tokenPrice: NowBNBprice,
     });
+    DBConnet.push({
+      IdData: 9371,
+      symbolData: "DFS",
+      slugData: "dfs",
+      convertUSDT: 1,
+      convertETH: USDTtoETH,
+      convertBNB: USDTtoBNB,
+      tokenPrice: NowUSDTprice,
+    });
     return DBConnet;
   } catch (error) {
     console.log(error);
