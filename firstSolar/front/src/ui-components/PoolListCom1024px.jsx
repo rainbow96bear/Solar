@@ -18,7 +18,7 @@ import { getMainPoolList, netList, dexList } from "../api/index.js";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
-import { mainNet, platform } from "../mainNet";
+import { mainNet1024px1, platform } from "../mainNet";
 import { useLocation } from "react-router-dom";
 
 const networkArray = [
@@ -127,7 +127,7 @@ export default function PoolListCom1024px(props) {
   }, [filter]);
 
   React.useEffect(() => {
-    setMainNetList(Object.keys(mainNet));
+    setMainNetList(Object.keys(mainNet1024px1));
     setPlatformList(Object.values(platform));
   }, []);
 
@@ -708,7 +708,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={(pageNum) => {
+              onChange={pageNum => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

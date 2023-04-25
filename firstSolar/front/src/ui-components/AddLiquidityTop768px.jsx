@@ -28,10 +28,8 @@ export default function AddLiquidityTop768px(props) {
           alignItems="flex-start"
           overflow="hidden"
           position="relative"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="35px"
           padding="69px 99px 58px 99px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
           {...getOverrideProps(overrides, "AddLiquidityTop768px")}
           {...rest}
         >
