@@ -110,3 +110,53 @@ export const mypageList = async (account) => {
     console.log(err);
   }
 };
+
+export const getConvertPrice = async (tokenKind) => {
+  try {
+    const result = (await request.get("api/sync/datesync")).data;
+    console.log("result : ", result);
+    if (tokenKind == "ETH") {
+      const eth = result.find((item) => item.tokenSlug === "ethereum");
+      return {
+        bnb: eth.ConvertToBNB,
+        eth: eth.ConvertToETH,
+        usdt: eth.ConvertToUSDT,
+        tokenPrice: eth.tokenPrice,
+      };
+    } else if (tokenKind == "USDT") {
+      const usdt = result.find((item) => item.tokenSlug === "tether");
+      return {
+        bnb: usdt.ConvertToBNB,
+        eth: usdt.ConvertToETH,
+        usdt: usdt.ConvertToUSDT,
+        tokenPrice: usdt.tokenPrice,
+      };
+    } else if (tokenKind == "BNB") {
+      const bnb = result.find((item) => item.tokenSlug === "bnb");
+      return {
+        bnb: bnb.ConvertToBNB,
+        eth: bnb.ConvertToETH,
+        usdt: bnb.ConvertToUSDT,
+        tokenPrice: bnb.tokenPrice,
+      };
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const swap = async (address, amount) => {
+  try {
+    const result1 = await request.post("api/swap/swapApprove", {
+      data: address,
+      amount: amount,
+    });
+
+    const result2 = await request.post("api/swap/swapTransaction", {
+      data: address,
+      amount: amount,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

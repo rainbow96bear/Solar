@@ -15,32 +15,57 @@ import {
   TextAreaField,
 } from "@aws-amplify/ui-react";
 import { useMediaQuery } from "react-responsive";
-import QuestionModal from "./QuestionModal";
+import QuestionModalTop from "./QuestionModalTop";
+import QuestionModalBottom from "./QuestionModalBottom";
 import { useDispatch, useSelector } from "react-redux";
-import { isLoadingThunk } from "../modules/isLoading";
 import debounce from "lodash.debounce";
-import { firstSync, lpBalance } from "../api";
+import { firstSync, getConvertPrice, lpBalance } from "../api";
 import { useAccount } from "wagmi";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
   const { address } = useAccount();
   const address2 = useSelector((state) => state.account.account.account);
-  const [userBalance, setUserBalance] = React.useState(0);
+  const [userFirstBalance, setUserFirstBalance] = React.useState(0); // swap을 희망하는 토큰의 갯수.
+  const [userSecondBalance, setUserSecondBalance] = React.useState(0); // swap을 환전하는 토큰의 갯수.
   const dispatch = useDispatch();
 
-  const [questionMark, setQuestionMark] = React.useState(0);
-  const [convertedAmount, setConvertedAmount] = React.useState(0);
-  const [keyWord, setKeyWord] = React.useState(""); //swap 하려는 수량
-  const [secondKeyWord, setSecondKeyWord] = React.useState(""); // swap을 통해 받으려는 토큰정보
-  const [firstSelectTokenPrice, setSelectTokenPrice] = React.useState(0); // swap을 희망하는 토큰정보
+  const [swapPossibility, setSwapPossibility] = React.useState(false); // Swap 버튼을 활성화할 지 결정하는 state이다.
+  const [questionMark, setQuestionMark] = React.useState(0); // ?를 클릭하면 모달이 뜨는데 그 on off 를 제어한다.
+
   const [convertPrice, setConvertPrice] = React.useState({
     bnb: "",
     eth: "",
     usdt: "",
   }); // Convert 토큰들을 filter 해서 해당하는 값을 기입한다.
+
+  const [firstSelectToken, setFirstSelectToken] = React.useState("DFS"); // swap을 희망하는 토큰
+  const [firstSelectTokenPrice, setFirstSelectTokenPrice] = React.useState(0); // swap을 희망하는 토큰의 가격
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const { bnb, eth, usdt, tokenPrice } = await getConvertPrice(
+          firstSelectToken
+        );
+        setConvertPrice({ bnb: bnb, eth: eth, usdt: usdt });
+        setFirstSelectTokenPrice(tokenPrice);
+        console.log(bnb, eth, usdt, tokenPrice);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [firstSelectToken]);
+
+  const [convertedAmount, setConvertedAmount] = React.useState(0); // swap을 희망하는 토큰을 swap하면 돌아올 예상 토큰의 수량
+
+  const [keyWord, setKeyWord] = React.useState(""); //swap 하려는 수량
+  const [secondKeyWord, setSecondKeyWord] = React.useState(""); // swap을 통해 받으려는 토큰정보
+
+  const [secondSelectToken, setSecondSelectToken] = React.useState("ETH");
   const [secondSelectTokenPrice, setSecondSelectTokenPrice] =
     React.useState(""); // 어떤 Convert를 할껀지 값을 찾아준다.
+
   const [selectedOptions, setSelectedOptions] = React.useState({}); // handle 함수를 호출해서서 현재값을 확인합니다.
   const [selectedSeconOptions, setSelectedSecondOptions] = React.useState({}); // handleSecondChange 함수를 호출해서 현재값을 확인합니다.
   const handleChange = (e) => {
@@ -66,20 +91,25 @@ export default function Swap768px(props) {
     selectedSeconOptions,
   ]);
 
+  React.useEffect(() => {
+    if (firstSelectToken == "DFS") {
+      setSecondSelectToken("ETH");
+    } else if (firstSelectToken != "DFS") {
+      setSecondSelectToken("DFS");
+    }
+  }, [firstSelectToken]);
+
   React.useEffect(
     () => {
       (async () => {
         try {
-          dispatch(isLoadingThunk({ isLoading: true }));
           const data = await lpBalance(
             address ? address : address2,
             firstSelectTokenPrice // 임시로 넣은 것.
           );
-          setUserBalance(5000); // 임시 값
-          dispatch(isLoadingThunk({ isLoading: false }));
+          setUserFirstBalance(5000); // 임시 값
         } catch (error) {
           console.error(error);
-          dispatch(isLoadingThunk({ isLoading: false }));
         }
       })();
     },
@@ -135,8 +165,13 @@ export default function Swap768px(props) {
   };
 
   const setPercentBalance = (percentNum) => {
-    if (userBalance == 0) return;
-    setKeyWord(userBalance * percentNum);
+    if (
+      userFirstBalance == 0 &&
+      userFirstBalance == undefined &&
+      userFirstBalance == null
+    )
+      return;
+    setKeyWord(userFirstBalance * percentNum);
   };
 
   const delayedFunction = debounce((num) => {
@@ -415,7 +450,10 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.network}
+                  children={firstSelectToken}
+                  onClick={() => {
+                    setQuestionMark(1);
+                  }}
                   {...getOverrideProps(overrides, "DexName39752856")}
                 ></Text>
                 <Flex
@@ -479,7 +517,9 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${props?.balance ? props?.balance : 0}`}
+                  children={`Balance : ${
+                    userFirstBalance ? userFirstBalance : 0
+                  }`}
                   {...getOverrideProps(overrides, "Balance : 039752863")}
                 ></Text>
               </Flex>
@@ -605,8 +645,9 @@ export default function Swap768px(props) {
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
                   backgroundColor="rgba(255,255,253,1)"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setPercentBalance(25);
+                    setPercentBalance(0.25);
                   }}
                   {...getOverrideProps(overrides, "Frame 8039814040")}
                 >
@@ -643,8 +684,9 @@ export default function Swap768px(props) {
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
                   backgroundColor="rgba(255,255,253,1)"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setPercentBalance(50);
+                    setPercentBalance(0.5);
                   }}
                   {...getOverrideProps(overrides, "Frame 8139814043")}
                 >
@@ -681,8 +723,9 @@ export default function Swap768px(props) {
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
                   backgroundColor="rgba(255,255,253,1)"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setPercentBalance(75);
+                    setPercentBalance(0.75);
                   }}
                   {...getOverrideProps(overrides, "Frame 8239814045")}
                 >
@@ -719,8 +762,9 @@ export default function Swap768px(props) {
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
                   backgroundColor="rgba(255,255,253,1)"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setPercentBalance(100);
+                    setPercentBalance(1);
                   }}
                   {...getOverrideProps(overrides, "Frame 8339814047")}
                 >
@@ -851,7 +895,10 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.oracleiddata[0]?.oracleId}
+                  children={secondSelectToken}
+                  onClick={() => {
+                    setQuestionMark(2);
+                  }}
                   {...getOverrideProps(overrides, "DexName39752856")}
                 ></Text>
                 <Flex
@@ -871,7 +918,7 @@ export default function Swap768px(props) {
                 >
                   <svg
                     onClick={() => {
-                      setQuestionMark(1);
+                      setQuestionMark(2);
                     }}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 320 512"
@@ -915,7 +962,7 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${props?.balance}`}
+                  children={`Balance : ${props?.balance ? props?.balance : 0}`}
                   {...getOverrideProps(overrides, "Balance : 039752863")}
                 ></Text>
               </Flex>
@@ -987,7 +1034,7 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={keyWord ? keyWord : 0}
+                  children={userSecondBalance ? userSecondBalance : 0}
                   {...getOverrideProps(overrides, "12312312312312312339752827")}
                 ></Text>
                 <Text
@@ -1041,8 +1088,9 @@ export default function Swap768px(props) {
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
                   backgroundColor="rgba(255,255,253,1)"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setPercentBalance(25);
+                    setPercentBalance(0.25);
                   }}
                   {...getOverrideProps(overrides, "Frame 8039814040")}
                 >
@@ -1079,8 +1127,9 @@ export default function Swap768px(props) {
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
                   backgroundColor="rgba(255,255,253,1)"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setPercentBalance(50);
+                    setPercentBalance(0.5);
                   }}
                   {...getOverrideProps(overrides, "Frame 8139814043")}
                 >
@@ -1117,8 +1166,9 @@ export default function Swap768px(props) {
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
                   backgroundColor="rgba(255,255,253,1)"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setPercentBalance(75);
+                    setPercentBalance(0.75);
                   }}
                   {...getOverrideProps(overrides, "Frame 8239814045")}
                 >
@@ -1155,8 +1205,9 @@ export default function Swap768px(props) {
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
                   backgroundColor="rgba(255,255,253,1)"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setPercentBalance(100);
+                    setPercentBalance(1);
                   }}
                   {...getOverrideProps(overrides, "Frame 8339814047")}
                 >
@@ -1228,7 +1279,9 @@ export default function Swap768px(props) {
             padding="13px 73px 13px 73px"
             backgroundColor="rgba(234,0,50,0.45)"
             border="0px"
-            disabled={props}
+            disabled={swapPossibility}
+            style={{ cursor: swapPossibility ? "pointer" : "not-allowed" }}
+            onClick={() => {}}
             {...getOverrideProps(overrides, "Frame 63")}
           >
             <Text
@@ -1255,10 +1308,17 @@ export default function Swap768px(props) {
           </Button>
         </Flex>
         {questionMark == 1 ? (
-          <QuestionModal
-            oracleiddata={props}
+          <QuestionModalTop
             setquestionmark={setQuestionMark}
-          ></QuestionModal>
+            secondselecttoken={secondSelectToken}
+            setfirstselecttoken={setFirstSelectToken}
+          ></QuestionModalTop>
+        ) : questionMark == 2 ? (
+          <QuestionModalBottom
+            setquestionmark={setQuestionMark}
+            firstselecttoken={firstSelectToken}
+            setsecondselecttoken={setSecondSelectToken}
+          ></QuestionModalBottom>
         ) : (
           <></>
         )}
