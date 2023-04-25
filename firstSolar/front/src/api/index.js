@@ -109,3 +109,17 @@ export const mypageList = async (account) => {
     console.log(error);
   }
 };
+
+export const mypageList = async (account) => {
+  try {
+    console.log(account);
+    const result = (
+      await request.post("api/sync/mypage", {
+        account,
+      })
+    ).data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
