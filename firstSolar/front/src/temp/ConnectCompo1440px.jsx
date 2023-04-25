@@ -59,7 +59,7 @@ export default function ConnectCompo1440px(props) {
           {...getOverrideProps(overrides, "Connect40052814")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProBlack"
             fontSize="24px"
             fontWeight="700"
             color="rgba(239,239,239,1)"
