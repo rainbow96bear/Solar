@@ -30,79 +30,9 @@ export default function Swap768px(props) {
   const dispatch = useDispatch();
 
   const [questionMark, setQuestionMark] = React.useState(0);
-  const [convertedAmount, setConvertedAmount] = React.useState(0);
-  const [keyWord, setKeyWord] = React.useState(""); //swap 하려는 수량
-  const [secondKeyWord, setSecondKeyWord] = React.useState(""); // swap을 통해 받으려는 토큰정보
-  const [firstSelectTokenPrice, setSelectTokenPrice] = React.useState(0); // swap을 희망하는 토큰정보
-  const [convertPrice, setConvertPrice] = React.useState({
-    bnb: "",
-    eth: "",
-    usdt: "",
-  }); // Convert 토큰들을 filter 해서 해당하는 값을 기입한다.
-  const [secondSelectTokenPrice, setSecondSelectTokenPrice] =
-    React.useState(""); // 어떤 Convert를 할껀지 값을 찾아준다.
-  const [selectedOptions, setSelectedOptions] = React.useState({}); // handle 함수를 호출해서서 현재값을 확인합니다.
-  const [selectedSeconOptions, setSelectedSecondOptions] = React.useState({}); // handleSecondChange 함수를 호출해서 현재값을 확인합니다.
-  const handleChange = e => {
-    setSelectedOptions(e.target.value);
-  };
-  const handleSecondChange = e => {
-    setSelectedSecondOptions(setSecondKeyWord(e.target.value.toLowerCase()));
-  };
-
-  const [swapConvertPrice, setSwapConvertPrice] = React.useState(0); // handle 함수를 호출해서서 현재값을 확인합니다.
-  const [returnSwapConvertPrice, setReturnSwapConvertPrice] = React.useState(0); // swap된 결과값을 나타내 줍니다.
-
-  React.useEffect(() => {
-    setSwapConvertPrice(+keyWord * +firstSelectTokenPrice);
-  }, [selectedOptions, keyWord, secondKeyWord, firstSelectTokenPrice]);
-
-  React.useEffect(() => {
-    setReturnSwapConvertPrice(swapConvertPrice / +secondSelectTokenPrice);
-  }, [
-    swapConvertPrice,
-    secondSelectTokenPrice,
-    secondKeyWord,
-    selectedSeconOptions,
-  ]);
-
-  React.useEffect(
-    () => {
-      (async () => {
-        try {
-          dispatch(isLoadingThunk({ isLoading: true }));
-          const data = await lpBalance(
-            address ? address : address2,
-            firstSelectTokenPrice // 임시로 넣은 것.
-          );
-          setUserBalance(5000); // 임시 값
-          dispatch(isLoadingThunk({ isLoading: false }));
-        } catch (error) {
-          console.error(error);
-          dispatch(isLoadingThunk({ isLoading: false }));
-        }
-      })();
-    },
-    [
-      // 지금은 비워두지만 서로 바꾸는 기능을 만들면 해당 state를 추가할 것.
-    ]
-  );
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const result = await firstSync();
-        if (firstSync) {
-          return;
-        } else {
-          firstSync();
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
-
+  const isDesktop = useMediaQuery({
+    query: "(min-width:481px)",
+  });
   const allowedKeys = [
     "0",
     "1",
@@ -136,8 +66,8 @@ export default function Swap768px(props) {
   };
 
   const setPercentBalance = percentNum => {
-    if (userBalance == 0) return;
-    setKeyWord(userBalance * percentNum);
+    if (props?.balance == 0) return;
+    setSwapMoney(swapMoney * percentNum);
   };
 
   const delayedFunction = debounce(num => {
