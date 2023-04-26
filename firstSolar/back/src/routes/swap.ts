@@ -70,7 +70,7 @@ router.post("/swapTransaction", async (req, res) => {
       if (req.body.poolName.includes("-")) {
         target = req.body.poolName.toLowerCase().split("-")[1];
       } else {
-        target = req.body.poolName;
+        target = req.body.poolName.toLowerCase();
       }
 
       if ("dfsethpool".includes(target)) {
