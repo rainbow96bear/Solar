@@ -36,7 +36,7 @@ export default function AddLiquidityBottom768px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -785,7 +785,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={e => {
+              onChange={(e) => {
                 setFirstValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40052913")}
@@ -970,7 +970,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={e => {
+              onChange={(e) => {
                 setSecondValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40052988")}
