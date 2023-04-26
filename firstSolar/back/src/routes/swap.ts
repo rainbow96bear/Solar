@@ -121,11 +121,11 @@ router.post("/swapTransaction", async (req, res) => {
     );
 
     const tokenSwap = result.pool.methods
-      .swapTokens("0xBE5C8b532EE6Ae98b49EFEa54cE2c738Ec43f1ad", amount)
+      .swapTokens(result.swapTokenAddress, amount)
       .encodeABI();
     res.send({
       from: req.body.account,
-      to: "0x1e4d3C829A35Cdf08c87a853cB8caB6F1B8D09EB",
+      to: result.pool.options.address,
       data: tokenSwap,
     });
   } catch (error) {
