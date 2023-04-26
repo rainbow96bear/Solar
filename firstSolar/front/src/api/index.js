@@ -152,25 +152,31 @@ export const getConvertPrice = async (tokenKind) => {
   }
 };
 
-export const swapApprove = async (userAddress, tokenName, amount) => {
+export const swapApprove = async (account, tokenName, amount) => {
   try {
     const result = await request.post("api/swap/swapApprove", {
-      userAddress: userAddress,
-      tokenName: tokenName,
-      amount: amount,
+      account,
+      tokenName,
+      amount,
     });
+    return result;
   } catch (error) {
     console.error(error);
   }
 };
 
-export const swapTransaction = async (userAddress, poolName, amount) => {
+export const swapTransaction = async (account, poolName, amount) => {
   try {
-    const result = await request.post("api/swap/swapTransaction", {
-      userAddress: userAddress,
-      poolName: poolName,
-      amount: amount,
-    });
+    console.log("poolName :", poolName);
+    const result = (
+      await request.post("api/swap/swapTransaction", {
+        account,
+        poolName,
+        amount,
+      })
+    ).data;
+
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -180,7 +186,7 @@ export const swapBalance = async (userAddress, firstSelectToken) => {
   try {
     const result = (
       await request.post("api/swap/swapBalance", {
-        userAddress: userAddress,
+        account: userAddress,
       })
     ).data[0];
     switch (firstSelectToken) {

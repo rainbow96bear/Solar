@@ -29,9 +29,16 @@ import {
 } from "../api";
 import { useAccount } from "wagmi";
 import { swap } from "../api";
+import { useWeb3 } from "../modules/useWeb3.js";
+import { useWeb3K } from "../modules/useWeb3Kaikas";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
+  const { web3, account, chainId, login } = useWeb3();
+  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
+
+  console.log("web3는 : ", web3);
+
   const { address } = useAccount();
   const address2 = useSelector((state) => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 1
@@ -83,33 +90,43 @@ export default function Swap768px(props) {
     }
   }, [firstSelectToken]);
 
-  // React.useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const data = await swapBalance(
-  //         address ? address : address2,
-  //         firstSelectToken
-  //       );
-  //       setUserFirstBalance(data); // 임시 값
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   })();
-  // }, [firstSelectToken]);
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          firstSelectToken
+        );
+        setUserFirstBalance(data); // 임시 값
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [firstSelectToken]);
 
-  // React.useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const data = await swapBalance(
-  //         address ? address : address2,
-  //         secondSelectToken
-  //       );
-  //       setUserSecondBalance(data); // 임시 값
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   })();
-  // }, [secondSelectToken]);
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          secondSelectToken
+        );
+        setUserSecondBalance(data); // 임시 값
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [secondSelectToken]);
+
+  React.useEffect(() => {
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        loginK();
+      }
+    }
+  }, []);
 
   const allowedKeys = [
     "0",
@@ -174,35 +191,42 @@ export default function Swap768px(props) {
       } else if (secondSelectToken == "USDT") {
         setSecondAmountPrice(convertPrice.usdt * num);
       }
+      setSwapPossibility(true);
+
+      if (textareaValue == 0 || textareaValue > userFirstBalance) return;
+      setSwapPossibility(true);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // const changeSwap = () => {
-  //   set
-  //   [firstSelectToken, secondSelectToken] = changeSwapMethod(
-  //     firstSelectToken,
-  //     secondSelectToken
-  //   )[(firstAmountPrice, secondAmountPrice)] = changeSwapMethod(
-  //     firstAmountPrice,
-  //     secondAmountPrice
-  //   );
-  // };
-
   const swapMethod = async () => {
     console.log("어드레스", address ? address : address2);
-    const result1 = await swapApprove(
-      address ? address : address2,
-      firstSelectToken.toLowerCase(),
-      textareaValue
-    );
+    const result1 = (
+      await swapApprove(
+        address ? address : address2,
+        firstSelectToken.toLowerCase(),
+        textareaValue
+      )
+    ).data;
+
+    let transactionResult;
+    if (document.cookie.split(":")[0] == "metamask") {
+      console.log("web3 : ", web3);
+      console.log("result1 : ", result1);
+      transactionResult = await web3.eth.sendTransaction(result1);
+    } else if (document.cookie.split(":")[0] == "kaikas") {
+      transactionResult = await web3K.eth.sendTransaction(result1);
+    }
 
     const result2 = await swapTransaction(
       address ? address : address2,
-      props?.oracleiddata[0].oracleid,
+      // props?.oracleiddata[0].network, // 지금은 백이 달라서 취소선 처리했다.
+      props?.oracleiddata[0].oracleId.toLowerCase(),
       textareaValue
     );
+    // 백에서 오류가 발생한 이유 :  dfs-usdt
+    console.log("result2 : ", result2);
   };
   return (
     <>
@@ -1087,13 +1111,15 @@ export default function Swap768px(props) {
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="15px"
             padding="13px 73px 13px 73px"
-            // backgroundColor={swapPossibility ? "rgba(234,0,50,0.45)" : "rgba()"}
+            backgroundColor={
+              swapPossibility ? "rgba(234,0,50,0.45)" : "rgba(230,230,230,1)"
+            }
             border="0px"
-            disabled={swapPossibility}
+            disabled={!swapPossibility}
             style={{ cursor: swapPossibility ? "pointer" : "not-allowed" }}
-            onClick={() => {
+            onClick={async () => {
               if (!swapPossibility) return;
-              swapMethod();
+              await swapMethod();
             }}
             {...getOverrideProps(overrides, "Frame 63")}
           >
