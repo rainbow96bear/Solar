@@ -159,6 +159,7 @@ router.post("/swapBalance", async (req, res) => {
     res.send(myTokenBalance);
   } catch (error) {
     console.log(error);
+    res.send(error);
   }
 });
 

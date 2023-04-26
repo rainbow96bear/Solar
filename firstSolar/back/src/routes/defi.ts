@@ -276,7 +276,6 @@ router.post("/check", async (req: Request, res: Response) => {
 router.post("/detail", async (req: Request, res: Response<detailLp[]>) => {
   const { id } = req.body;
   try {
-    console.log(id);
     const now: Date = new Date();
     const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
     const detailList = (
@@ -336,15 +335,32 @@ router.post("/approveDFS", async (req: Request, res: Response) => {
     const {
       account,
       approveDFSAmount,
-    }: { account: string; approveDFSAmount?: any } = req.body;
+      lpSymbol,
+    }: { account: string; approveDFSAmount?: any; lpSymbol?: string } =
+      req.body;
     const tokenPrice1: BigNumber = BigNumber.from(
       Math.floor(approveDFSAmount * 10 ** 18).toString()
     );
-    obj.from = account;
-    obj.to = process.env.DFS;
-    obj.data = await deployedDFS.methods
-      .approve(process.env.DFS_ETH, tokenPrice1)
-      .encodeABI();
+
+    if (lpSymbol.includes("ETH")) {
+      obj.from = account;
+      obj.to = process.env.DFS;
+      obj.data = await deployedDFS.methods
+        .approve(process.env.DFS_ETH, tokenPrice1)
+        .encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      obj.from = account;
+      obj.to = process.env.DFS;
+      obj.data = await deployedBNB.methods
+        .approve(process.env.DFS_BNB, tokenPrice1)
+        .encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      obj.from = account;
+      obj.to = process.env.DFS;
+      obj.data = await deployedUSDT.methods
+        .approve(process.env.DFS_USDT, tokenPrice1)
+        .encodeABI();
+    }
     res.send(obj);
   } catch (error) {
     console.log(error);
@@ -404,7 +420,6 @@ router.post("/addLiquidity", async (req: Request, res: Response) => {
     const tokenPrice2: BigNumber = BigNumber.from(
       Math.floor(token2 * 10 ** 18).toString()
     );
-
     if (lpSymbol.includes("ETH")) {
       obj.from = account;
       obj.to = process.env.DFS_ETH;
