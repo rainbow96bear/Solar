@@ -31,10 +31,8 @@ export default function SwapTop320px(props) {
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="35px"
         padding="44px 40px 44px 40px"
-        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
         {...getOverrideProps(overrides, "AddLiquidityTop320px")}
         {...rest}
       >
@@ -51,6 +49,43 @@ export default function SwapTop320px(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Frame 121")}
         >
+          <Flex
+            gap="16px"
+            direction="row"
+            width="unset"
+            height="unset"
+            justifyContent="center"
+            alignItems="center"
+            shrink="0"
+            alignSelf="stretch"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            marginBottom="15px"
+            {...getOverrideProps(overrides, "Frame 122")}
+          >
+            <Text
+              fontFamily="ffCondExtraLight"
+              fontSize="30px"
+              fontWeight="600"
+              lineHeight="19.363636016845703px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Information"
+              color="rgba(234, 0, 50, 0.45)"
+              {...getOverrideProps(overrides, "TokenName40162904")}
+            ></Text>
+          </Flex>
+
           <Flex
             gap="16px"
             direction="row"

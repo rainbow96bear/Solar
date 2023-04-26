@@ -14,16 +14,14 @@ export default function AddLiquidityBottom320px(props) {
     <Flex
       gap="24px"
       direction="column"
-      width="300px"
+      width="320px"
       height="unset"
       justifyContent="flex-start"
       alignItems="flex-start"
       overflow="hidden"
       position="relative"
-      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
       padding="16px 0px 16px 0px"
-      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
       {...getOverrideProps(overrides, "AddLiquidityBottom320px")}
       {...rest}
     >
@@ -37,7 +35,10 @@ export default function AddLiquidityBottom320px(props) {
         shrink="0"
         alignSelf="stretch"
         position="relative"
-        padding="35px 40px 35px 40px"
+        padding="0px 40px 18px 40px"
+        style={{
+          borderBottom: "1px dashed black",
+        }}
         {...getOverrideProps(overrides, "Frame 105")}
       >
         <Text

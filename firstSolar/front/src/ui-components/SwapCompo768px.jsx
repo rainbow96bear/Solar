@@ -10,19 +10,14 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import "../css/Font.css";
+
 export default function SwapCompo768px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
   return (
     <Flex
-      display={{
-        base: "none",
-        small: "flex",
-        medium: "flex",
-        large: "flex",
-        xl: "none",
-        xxl: "none",
-      }}
+      display="flex"
       gap="30px"
       direction="row"
       width="86vw"
@@ -65,7 +60,7 @@ export default function SwapCompo768px(props) {
           {...getOverrideProps(overrides, "Connect40052829")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProMedium"
             fontSize="24px"
             fontWeight="700"
             color="rgba(239,239,239,1)"
@@ -102,7 +97,7 @@ export default function SwapCompo768px(props) {
       >
         <Flex
           onClick={() => {
-            navigate(`/swap?${props?.props.item.oracleId}`);
+            navigate(`/addliquidity?${props.props.item.oracleId}`);
           }}
           gap="10px"
           direction="row"
@@ -120,7 +115,7 @@ export default function SwapCompo768px(props) {
           {...getOverrideProps(overrides, "Connect40052831")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProMedium"
             fontSize="1.5rem"
             fontWeight="700"
             lineHeight="29.045454025268555px"

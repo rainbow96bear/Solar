@@ -126,7 +126,7 @@ const Poolitem1024 = props => {
                 {...getOverrideProps(overrides, "LogoTitle")}
               >
                 <Text
-                  fontFamily="ffCondExtraLight"
+                  fontFamily="ffProBold"
                   fontSize="16px"
                   fontWeight="500"
                   lineHeight="18.15340805053711px"
@@ -180,15 +180,15 @@ const Poolitem1024 = props => {
                     {...getOverrideProps(overrides, "Frame 9")}
                   >
                     <Text
-                      fontFamily="ffCondBold"
+                      fontFamily="ffProExtraLight"
                       fontSize="8px"
                       fontWeight="500"
                       color="rgba(239,239,239,1)"
                       lineHeight="9.681818008422852px"
                       textAlign="center"
-                      display="block"
+                      display="flex"
                       direction="column"
-                      justifyContent="unset"
+                      justifyContent="center"
                       width="unset"
                       height="15px"
                       gap="unset"
@@ -198,7 +198,7 @@ const Poolitem1024 = props => {
                       position="relative"
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
-                      children="VELOCIMETER"
+                      children={props?.item?.network}
                       {...getOverrideProps(overrides, "VELOCIMETER")}
                     ></Text>
                   </Flex>
@@ -221,7 +221,7 @@ const Poolitem1024 = props => {
                     {...getOverrideProps(overrides, "Frame 8")}
                   >
                     <Text
-                      fontFamily="ffCondBold"
+                      fontFamily="ffProExtraLight"
                       fontSize="8px"
                       fontWeight="500"
                       lineHeight="9.681818008422852px"
@@ -239,7 +239,7 @@ const Poolitem1024 = props => {
                       position="relative"
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
-                      children="STADER BOOST"
+                      children={props?.item?.platformId}
                       {...getOverrideProps(overrides, "STADER BOOST")}
                     ></Text>
                   </Flex>

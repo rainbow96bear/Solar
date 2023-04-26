@@ -12,14 +12,6 @@ export default function AddLiquidityBottom768px(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      display={{
-        base: "none",
-        small: "flex",
-        medium: "flex",
-        large: "none",
-        xl: "none",
-        xxl: "none",
-      }}
       gap="75px"
       direction="column"
       width="80vw"

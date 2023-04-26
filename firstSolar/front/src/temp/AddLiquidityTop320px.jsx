@@ -12,14 +12,6 @@ export default function AddLiquidityTop320px(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      display={{
-        base: "flex",
-        small: "none",
-        medium: "none",
-        large: "none",
-        xl: "none",
-        xxl: "none",
-      }}
       gap="43px"
       direction="column"
       width="80vw"

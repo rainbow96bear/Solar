@@ -77,7 +77,7 @@ const Poolitem768px = props => {
                 {...getOverrideProps(overrides, "lpList")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProBook"
                   fontSize="21px"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
@@ -122,7 +122,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "APY39412809")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="21px"
                     fontWeight="700"
                     lineHeight="25.414772033691406px"
@@ -155,7 +155,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "TVL39412816")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="21px"
                     fontWeight="700"
                     lineHeight="25.414772033691406px"
@@ -188,7 +188,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "Action39412819")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="21px"
                     fontWeight="700"
                     lineHeight="25.414772033691406px"
@@ -221,7 +221,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "Action39574048")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="21px"
                     fontWeight="700"
                     lineHeight="25.414772033691406px"
@@ -254,7 +254,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "Action39574050")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="21px"
                     fontWeight="700"
                     lineHeight="25.414772033691406px"
@@ -287,7 +287,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "Action39574052")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBook"
                     fontSize="21px"
                     fontWeight="700"
                     lineHeight="25.414772033691406px"
@@ -400,7 +400,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "LogoTitle")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProBold"
                     fontSize="21px"
                     fontWeight="500"
                     lineHeight="25.414772033691406px"
@@ -439,6 +439,7 @@ const Poolitem768px = props => {
                       direction="column"
                       width="unset"
                       height="unset"
+                      display="flex"
                       justifyContent="center"
                       alignItems="center"
                       shrink="0"
@@ -451,7 +452,7 @@ const Poolitem768px = props => {
                       {...getOverrideProps(overrides, "Frame 9")}
                     >
                       <Text
-                        fontFamily="Inter"
+                        fontFamily="ffProExtraLight"
                         fontSize="9px"
                         fontWeight="600"
                         color="rgba(239,239,239,1)"
@@ -469,7 +470,7 @@ const Poolitem768px = props => {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="VELOCIMETER"
+                        children={props?.item?.network}
                         {...getOverrideProps(overrides, "VELOCIMETER")}
                       ></Text>
                     </Flex>
@@ -490,7 +491,7 @@ const Poolitem768px = props => {
                       {...getOverrideProps(overrides, "Frame 8")}
                     >
                       <Text
-                        fontFamily="Inter"
+                        fontFamily="ffProExtraLight"
                         fontSize="9px"
                         fontWeight="600"
                         lineHeight="10.892045021057129px"
@@ -508,26 +509,9 @@ const Poolitem768px = props => {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="STADER BOOST"
+                        children={props?.item?.platformId}
                         {...getOverrideProps(overrides, "STADER BOOST")}
                       ></Text>
-                      <Image
-                        width="15px"
-                        height="15px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="15px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:AYOloXgqjzo39422845"
-                        )}
-                      ></Image>
                     </Flex>
                   </Flex>
                 </Flex>
@@ -562,7 +546,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "APY39422826")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="500"
                     lineHeight="16.94318199157715px"
@@ -599,7 +583,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "TVL39422829")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="500"
                     lineHeight="16.94318199157715px"
@@ -636,7 +620,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "Action39422832")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="500"
                     lineHeight="16.94318199157715px"
@@ -675,7 +659,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "Action39574042")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="500"
                     lineHeight="16.94318199157715px"
@@ -712,7 +696,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "Action39574044")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="500"
                     lineHeight="16.94318199157715px"
@@ -753,7 +737,7 @@ const Poolitem768px = props => {
                   {...getOverrideProps(overrides, "Action39574046")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="500"
                     lineHeight="16.94318199157715px"
