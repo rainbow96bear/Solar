@@ -113,9 +113,9 @@ export default function SwapTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.assets?.length
-                    ? props?.oracleiddata[0]?.assets[0]
-                    : "UDF"
+                  props?.oracleiddata[0]?.firstToken
+                    ? props?.oracleiddata[0]?.firstToken
+                    : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
               ></Text>
@@ -183,9 +183,9 @@ export default function SwapTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.assets?.length
-                    ? props?.oracleiddata[0]?.assets[1]
-                    : "UDF"
+                  props?.oracleiddata[0]?.secondToken
+                    ? props?.oracleiddata[0]?.secondToken
+                    : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
               ></Text>
@@ -469,9 +469,9 @@ export default function SwapTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.assets?.length
-                    ? props?.oracleiddata[0]?.assets[0]
-                    : "Solar"
+                  props?.oracleiddata[0]?.firstToken
+                    ? props?.oracleiddata[0]?.firstToken
+                    : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40132808")}
               ></Text>
@@ -561,9 +561,9 @@ export default function SwapTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.assets?.length
-                    ? props?.oracleiddata[0]?.assets[1]
-                    : "Solar"
+                  props?.oracleiddata[0]?.secondToken
+                    ? props?.oracleiddata[0]?.secondToken
+                    : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40132816")}
               ></Text>

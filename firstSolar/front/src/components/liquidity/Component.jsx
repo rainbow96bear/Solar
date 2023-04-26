@@ -72,7 +72,7 @@ const LiquidComponent = ({ oracleId, balance }) => {
                   >
                     <AddLiquidityBottom768px
                       style={{ marginTop: "75px" }}
-                      oracleiddata={"props"}
+                      oracleiddata={props}
                       balance={balance}
                     />
                   </motion.div>
@@ -149,7 +149,7 @@ const LiquidComponent = ({ oracleId, balance }) => {
                     >
                       <AddLiquidityBottom320px
                         style={{ marginTop: "75px" }}
-                        oracleiddata={"props"}
+                        oracleiddata={props}
                         balance={balance}
                       />
                     </motion.div>
