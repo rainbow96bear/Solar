@@ -55,7 +55,7 @@ router.post("/mypage", async (req, res) => {
       process.env.DEX
     );
 
-    let poolInfo = await DexContract.methods.getpoolInfo().call();
+    let poolInfo = await DexContract.methods.getPoolInfo().call();
 
     for (let i = 0; i < poolInfo.length; i++) {
       let userInfo = await DexContract.methods.userInfo(i, userAddress).call();
