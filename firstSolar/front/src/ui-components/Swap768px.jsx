@@ -31,6 +31,7 @@ import { useAccount } from "wagmi";
 import { swap } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
+import { isLoadingThunk } from "../modules/isLoading.js";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
@@ -201,42 +202,64 @@ export default function Swap768px(props) {
       } else if (secondSelectToken == "USDT") {
         setSecondAmountPrice(convertPrice.usdt * num);
       }
-      setSwapPossibility(true);
-
-      if (textareaValue == 0 || textareaValue > userFirstBalance) return;
-      setSwapPossibility(true);
     } catch (error) {
       console.error(error);
     }
   };
+  React.useEffect(() => {
+    if (
+      textareaValue == 0 ||
+      textareaValue == undefined ||
+      textareaValue == null ||
+      textareaValue > userFirstBalance
+    ) {
+      setSwapPossibility(false);
+    } else setSwapPossibility(true);
+  }, [textareaValue]);
 
   const swapMethod = async () => {
-    console.log("어드레스", address ? address : address2);
-    const result1 = (
-      await swapApprove(
-        address ? address : address2,
-        firstSelectToken.toLowerCase(),
-        textareaValue
-      )
-    ).data;
+    try {
+      dispatch(isLoadingThunk({ isLoading: true }));
+      console.log("어드레스", address ? address : address2);
+      const result1 = (
+        await swapApprove(
+          address ? address : address2,
+          firstSelectToken.toLowerCase(),
+          textareaValue,
+          props?.oracleiddata[0].tokenAddress
+        )
+      ).data;
 
-    let transactionResult;
-    if (document.cookie.split(":")[0] == "metamask") {
-      console.log("web3 : ", web3);
-      console.log("result1 : ", result1);
-      transactionResult = await web3.eth.sendTransaction(result1);
-    } else if (document.cookie.split(":")[0] == "kaikas") {
-      transactionResult = await web3K.eth.sendTransaction(result1);
+      let transactionResult;
+      if (document.cookie.split(":")[0] == "metamask") {
+        console.log("web3 : ", web3);
+        console.log("result1 : ", result1);
+        transactionResult = await web3.eth.sendTransaction(result1);
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        transactionResult = await web3K.eth.sendTransaction(result1);
+      }
+      console.log("typeof textareaValue : ", typeof +textareaValue);
+      const result2 = (
+        await swapTransaction(
+          address ? address : address2,
+          props?.oracleiddata[0].oracleId,
+          +textareaValue
+        )
+      ).data;
+
+      console.log("result2 : ", result2);
+      if (document.cookie.split(":")[0] == "metamask") {
+        console.log("web3 : ", web3);
+        console.log("result2 : ", result2);
+        transactionResult = await web3.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        transactionResult = await web3K.eth.sendTransaction(result2);
+      }
+      dispatch(isLoadingThunk({ isLoading: false }));
+    } catch (error) {
+      console.error(error);
+      dispatch(isLoadingThunk({ isLoading: false }));
     }
-
-    const result2 = await swapTransaction(
-      address ? address : address2,
-      // props?.oracleiddata[0].network, // 지금은 백이 달라서 취소선 처리했다.
-      props?.oracleiddata[0].oracleId.toLowerCase(),
-      textareaValue
-    );
-    // 백에서 오류가 발생한 이유 :  dfs-usdt
-    console.log("result2 : ", result2);
   };
   return (
     <>
