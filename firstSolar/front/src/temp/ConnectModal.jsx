@@ -64,7 +64,7 @@ export default function ConnectModal(props) {
       dispatch(accountThunk({ account: _account }));
       dispatch(loginThunk({ login: true }));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

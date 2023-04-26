@@ -45,8 +45,10 @@ const dexArray = [
   "matcha",
   "bal",
 ];
+
 export default function PoolListCom1024px(props) {
   const { overrides, ...rest } = props;
+  const didMount = React.useRef(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
@@ -103,27 +105,13 @@ export default function PoolListCom1024px(props) {
     }
   };
 
-  // const getFilteredList = async () => {
-  //   try {
-  //     dispatch(isLoadingThunk({ isLoading: true }));
-  //     if (networkArray.includes(filter)) {
-  //       netList(filter, pageIndex);
-  //     } else if (dexArray.includes(filter)) {
-  //       dexList(filter, pageIndex);
-  //     }
-  //     dispatch(isLoadingThunk({ isLoading: false }));
-  //   } catch (error) {
-  //     dispatch(isLoadingThunk({ isLoading: false }));
-  //     console.error(error);
-  //   }
-  // };
-
   React.useEffect(() => {
     getPoolList();
   }, [pageIndex]);
 
   React.useEffect(() => {
-    setPageIndex(1);
+    if (didMount.current) setPageIndex(1);
+    else didMount.current = true;
   }, [filter]);
 
   React.useEffect(() => {
@@ -708,7 +696,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {
