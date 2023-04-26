@@ -24,6 +24,7 @@ import {
   getConvertPrice,
   lpBalance,
   swapApprove,
+  swapBalance,
   swapTransaction,
 } from "../api";
 import { useAccount } from "wagmi";
@@ -33,7 +34,8 @@ export default function Swap768px(props) {
   const { overrides, ...rest } = props;
   const { address } = useAccount();
   const address2 = useSelector((state) => state.account.account.account);
-  const [userFirstBalance, setUserFirstBalance] = React.useState(0); // swap을 희망하는 토큰의 갯수.
+  const [userFirstBalance, setUserFirstBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 1
+  const [userSecondBalance, setUserSecondBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 2
   const dispatch = useDispatch();
 
   const [textareaValue, setTextAreaValue] = React.useState(""); // first의 textarea에 저장할 state변수
@@ -83,19 +85,30 @@ export default function Swap768px(props) {
   React.useEffect(() => {
     (async () => {
       try {
-        const data = await lpBalance(
+        const data = await swapBalance(
           address ? address : address2,
-          firstSelectTokenPrice // 임시로 넣은 것.
-        ); // 나중에 새로운 함수가 배정될 예정...
-        setUserFirstBalance(5000); // 임시 값
+          firstSelectToken
+        );
+        setUserFirstBalance(data); // 임시 값
       } catch (error) {
         console.error(error);
       }
     })();
-  }, [
-    firstSelectToken,
-    // 지금은 비워두지만 서로 바꾸는 기능을 만들면 해당 state를 추가할 것.
-  ]);
+  }, [firstSelectToken]);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          secondSelectToken
+        );
+        setUserSecondBalance(data); // 임시 값
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [secondSelectToken]);
 
   const allowedKeys = [
     "0",
@@ -988,7 +1001,9 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${props?.balance ? props?.balance : 0}`}
+                  children={`Balance : ${
+                    userSecondBalance ? userSecondBalance : 0
+                  }`}
                   {...getOverrideProps(overrides, "Balance : 039752863")}
                 ></Text>
               </Flex>

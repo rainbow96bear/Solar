@@ -175,3 +175,25 @@ export const swapTransaction = async (userAddress, poolName, amount) => {
     console.error(error);
   }
 };
+
+export const swapBalance = async (userAddress, firstSelectToken) => {
+  try {
+    const result = (
+      await request.post("api/swap/swapBalance", {
+        userAddress: userAddress,
+      })
+    ).data[0];
+    switch (firstSelectToken) {
+      case "DFS":
+        return result.dfs;
+      case "ETH":
+        return result.eth;
+      case "BNB":
+        return result.bnb;
+      case "USDT":
+        return result.usdt;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
