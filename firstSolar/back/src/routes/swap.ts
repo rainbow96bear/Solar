@@ -53,7 +53,7 @@ router.post("/swapApprove", async (req, res) => {
       .encodeABI();
 
     res.send({
-      from: req.body.userAddress,
+      from: req.body.account,
       to: result.options.address,
       data: approve,
     });
@@ -96,7 +96,7 @@ router.post("/swapTransaction", async (req, res) => {
       .encodeABI();
 
     res.send({
-      from: req.body.userAddress,
+      from: req.body.account,
       to: result.options.address,
       data: tokenSwap,
     });
@@ -109,16 +109,17 @@ router.post("/swapTransaction", async (req, res) => {
 router.post("/swapBalance", async (req, res) => {
   try {
     const myTokenBalance = [];
-    const target = await req.body.userAddress;
-    let balanceDFS = await deployedDFS.methods.balanceOf(target).call();
-    let balanceETH = await deployedETH.methods.balanceOf(target).call();
-    let balanceUSDT = await deployedUSDT.methods.balanceOf(target).call();
-    let balanceBNB = await deployedBNB.methods.balanceOf(target).call();
+    const target = await req.body.account;
 
-    const dfs = Math.floor(balanceDFS / 10 ** 18).toString();
-    const eth = Math.floor(balanceETH / 10 ** 18).toString();
-    const usdt = Math.floor(balanceUSDT / 10 ** 18).toString();
-    const bnb = Math.floor(balanceBNB / 10 ** 18).toString();
+    async function getBalance(contract: any, target: string) {
+      const balance = await contract.methods.balanceOf(target).call();
+      return Math.floor(balance / 10 ** 18).toString();
+    }
+
+    const dfs = await getBalance(deployedDFS, target);
+    const eth = await getBalance(deployedETH, target);
+    const usdt = await getBalance(deployedUSDT, target);
+    const bnb = await getBalance(deployedBNB, target);
 
     myTokenBalance.push({
       dfs,
