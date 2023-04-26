@@ -209,12 +209,13 @@ export const swapBalance = async (userAddress, firstSelectToken) => {
   }
 };
 
-export const approveDFS = async (account, approveDFSAmount) => {
+export const approveDFS = async (account, approveDFSAmount, lpSymbol) => {
   try {
     const result = (
       await request.post("api/defi/approveDFS", {
         account,
         approveDFSAmount,
+        lpSymbol,
       })
     ).data;
     return result;
