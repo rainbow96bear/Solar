@@ -19,17 +19,26 @@ import QuestionModalTop from "./QuestionModalTop";
 import QuestionModalBottom from "./QuestionModalBottom";
 import { useDispatch, useSelector } from "react-redux";
 import debounce from "lodash.debounce";
-import { firstSync, getConvertPrice, lpBalance } from "../api";
+import {
+  firstSync,
+  getConvertPrice,
+  lpBalance,
+  swapApprove,
+  swapBalance,
+  swapTransaction,
+} from "../api";
 import { useAccount } from "wagmi";
+import { swap } from "../api";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
-  const [userFirstBalance, setUserFirstBalance] = React.useState(0); // swap을 희망하는 토큰의 갯수.
-  const [userSecondBalance, setUserSecondBalance] = React.useState(0); // swap을 환전하는 토큰의 갯수.
+  const address2 = useSelector((state) => state.account.account.account);
+  const [userFirstBalance, setUserFirstBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 1
+  const [userSecondBalance, setUserSecondBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 2
   const dispatch = useDispatch();
 
+  const [textareaValue, setTextAreaValue] = React.useState(""); // first의 textarea에 저장할 state변수
   const [swapPossibility, setSwapPossibility] = React.useState(false); // Swap 버튼을 활성화할 지 결정하는 state이다.
   const [questionMark, setQuestionMark] = React.useState(0); // ?를 클릭하면 모달이 뜨는데 그 on off 를 제어한다.
 
@@ -42,6 +51,9 @@ export default function Swap768px(props) {
   const [firstSelectToken, setFirstSelectToken] = React.useState("DFS"); // swap을 희망하는 토큰
   const [firstSelectTokenPrice, setFirstSelectTokenPrice] = React.useState(0); // swap을 희망하는 토큰의 가격
 
+  const [secondSelectToken, setSecondSelectToken] = React.useState("ETH");
+  const [secondSelectTokenPrice, setSecondSelectTokenPrice] =
+    React.useState(""); // 어떤 Convert를 할껀지 값을 찾아준다.
   React.useEffect(() => {
     (async () => {
       try {
@@ -50,46 +62,17 @@ export default function Swap768px(props) {
         );
         setConvertPrice({ bnb: bnb, eth: eth, usdt: usdt });
         setFirstSelectTokenPrice(tokenPrice);
-        console.log(bnb, eth, usdt, tokenPrice);
+        setTextAreaValue(0);
+        setFirstAmountPrice(0);
+        setSecondAmountPrice(0);
       } catch (error) {
         console.error(error);
       }
     })();
   }, [firstSelectToken]);
 
-  const [convertedAmount, setConvertedAmount] = React.useState(0); // swap을 희망하는 토큰을 swap하면 돌아올 예상 토큰의 수량
-
-  const [keyWord, setKeyWord] = React.useState(""); //swap 하려는 수량
-  const [secondKeyWord, setSecondKeyWord] = React.useState(""); // swap을 통해 받으려는 토큰정보
-
-  const [secondSelectToken, setSecondSelectToken] = React.useState("ETH");
-  const [secondSelectTokenPrice, setSecondSelectTokenPrice] =
-    React.useState(""); // 어떤 Convert를 할껀지 값을 찾아준다.
-
-  const [selectedOptions, setSelectedOptions] = React.useState({}); // handle 함수를 호출해서서 현재값을 확인합니다.
-  const [selectedSeconOptions, setSelectedSecondOptions] = React.useState({}); // handleSecondChange 함수를 호출해서 현재값을 확인합니다.
-  const handleChange = e => {
-    setSelectedOptions(e.target.value);
-  };
-  const handleSecondChange = e => {
-    setSelectedSecondOptions(setSecondKeyWord(e.target.value.toLowerCase()));
-  };
-
-  const [swapConvertPrice, setSwapConvertPrice] = React.useState(0); // handle 함수를 호출해서서 현재값을 확인합니다.
-  const [returnSwapConvertPrice, setReturnSwapConvertPrice] = React.useState(0); // swap된 결과값을 나타내 줍니다.
-
-  React.useEffect(() => {
-    setSwapConvertPrice(+keyWord * +firstSelectTokenPrice);
-  }, [selectedOptions, keyWord, secondKeyWord, firstSelectTokenPrice]);
-
-  React.useEffect(() => {
-    setReturnSwapConvertPrice(swapConvertPrice / +secondSelectTokenPrice);
-  }, [
-    swapConvertPrice,
-    secondSelectTokenPrice,
-    secondKeyWord,
-    selectedSeconOptions,
-  ]);
+  const [firstAmountPrice, setFirstAmountPrice] = React.useState(0); // first의 토큰의 가격 x 토큰의 갯수
+  const [secondAmountPrice, setSecondAmountPrice] = React.useState(0); // second의 토큰의 가격 x 토큰의 갯수
 
   React.useEffect(() => {
     if (firstSelectToken == "DFS") {
@@ -99,39 +82,34 @@ export default function Swap768px(props) {
     }
   }, [firstSelectToken]);
 
-  React.useEffect(
-    () => {
-      (async () => {
-        try {
-          const data = await lpBalance(
-            address ? address : address2,
-            firstSelectTokenPrice // 임시로 넣은 것.
-          );
-          setUserFirstBalance(5000); // 임시 값
-        } catch (error) {
-          console.error(error);
-        }
-      })();
-    },
-    [
-      // 지금은 비워두지만 서로 바꾸는 기능을 만들면 해당 state를 추가할 것.
-    ]
-  );
-
   React.useEffect(() => {
     (async () => {
       try {
-        const result = await firstSync();
-        if (firstSync) {
-          return;
-        } else {
-          firstSync();
-        }
+        const data = await swapBalance(
+          address ? address : address2,
+          firstSelectToken
+        );
+        setUserFirstBalance(data); // 임시 값
       } catch (error) {
         console.error(error);
       }
     })();
-  }, []);
+  }, [firstSelectToken]);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          secondSelectToken
+        );
+        setUserSecondBalance(data); // 임시 값
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [secondSelectToken]);
+
   const allowedKeys = [
     "0",
     "1",
@@ -157,31 +135,75 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = percentNum => {
+  const setPercentBalance = (percentNum) => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
       userFirstBalance == null
     )
       return;
-    setKeyWord(userFirstBalance * percentNum);
+    setTextAreaValue(userFirstBalance * percentNum);
+    delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const delayedFunction = debounce(num => {
+  const delayedFunction1 = debounce((num) => {
     try {
-      setConvertedAmount(num);
+      console.log("delay");
+      setFirstAmountPrice(num * firstSelectTokenPrice);
+      delayedFunction2(num);
     } catch (error) {
       console.error(error);
     }
   }, 1000);
 
+  const delayedFunction2 = (num) => {
+    try {
+      if (secondSelectToken == "DFS") {
+        setSecondAmountPrice(convertPrice.usdt * num);
+      } else if (secondSelectToken == "ETH") {
+        setSecondAmountPrice(convertPrice.eth * num);
+      } else if (secondSelectToken == "BNB") {
+        setSecondAmountPrice(convertPrice.bnb * num);
+      } else if (secondSelectToken == "USDT") {
+        setSecondAmountPrice(convertPrice.usdt * num);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // const changeSwap = () => {
+  //   set
+  //   [firstSelectToken, secondSelectToken] = changeSwapMethod(
+  //     firstSelectToken,
+  //     secondSelectToken
+  //   )[(firstAmountPrice, secondAmountPrice)] = changeSwapMethod(
+  //     firstAmountPrice,
+  //     secondAmountPrice
+  //   );
+  // };
+
+  const swapMethod = async () => {
+    console.log("어드레스", address ? address : address2);
+    const result1 = await swapApprove(
+      address ? address : address2,
+      firstSelectToken.toLowerCase(),
+      textareaValue
+    );
+
+    const result2 = await swapTransaction(
+      address ? address : address2,
+      props?.oracleiddata[0].oracleid,
+      textareaValue
+    );
+  };
   return (
     <>
       <Flex
@@ -551,10 +573,15 @@ export default function Swap768px(props) {
                 isDisabled={false}
                 labelHidden={false}
                 variation="default"
-                onChange={e => {
-                  setKeyWord(e.target.value);
+                value={textareaValue}
+                onChange={(e) => {
+                  if (e.target.value > userFirstBalance) {
+                    e.target.value = userFirstBalance;
+                  }
+                  setTextAreaValue(e.target.value);
+                  delayedFunction1(e.target.value);
                 }}
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -591,7 +618,7 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={keyWord ? keyWord : 0}
+                  children={firstAmountPrice ? firstAmountPrice : 0}
                   {...getOverrideProps(overrides, "12312312312312312339752827")}
                 ></Text>
                 <Text
@@ -805,7 +832,19 @@ export default function Swap768px(props) {
             padding="10px 10px 10px 10px"
             {...getOverrideProps(overrides, "Frame 67")}
           >
-            <Image
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+              width="25px"
+              height="25px"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                changeSwap();
+              }}
+            >
+              <path d="M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3V402.7L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7V109.3l41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z" />
+            </svg>
+            {/* <Image
               width="25px"
               height="25px"
               display="block"
@@ -818,7 +857,7 @@ export default function Swap768px(props) {
               padding="0px 0px 0px 0px"
               objectFit="cover"
               {...getOverrideProps(overrides, "ghrgclzzd 839752853")}
-            ></Image>
+            ></Image> */}
           </Flex>
           <Flex
             gap="10px"
@@ -962,7 +1001,9 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${props?.balance ? props?.balance : 0}`}
+                  children={`Balance : ${
+                    userSecondBalance ? userSecondBalance : 0
+                  }`}
                   {...getOverrideProps(overrides, "Balance : 039752863")}
                 ></Text>
               </Flex>
@@ -994,15 +1035,15 @@ export default function Swap768px(props) {
                 isDisabled={false}
                 labelHidden={false}
                 variation="default"
-                onChange={e => {
-                  setKeyWord(e.target.value);
-                }}
-                onKeyPress={e => {
+                value={secondAmountPrice ? secondAmountPrice : 0}
+                disabled
+                backgroundColor="transparent"
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
               ></TextAreaField>
-              <Flex
+              {/* <Flex
                 gap="8px"
                 direction="column"
                 width="unset"
@@ -1034,7 +1075,6 @@ export default function Swap768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={userSecondBalance ? userSecondBalance : 0}
                   {...getOverrideProps(overrides, "12312312312312312339752827")}
                 ></Text>
                 <Text
@@ -1062,7 +1102,7 @@ export default function Swap768px(props) {
                     "~12312312312312312339752828"
                   )}
                 ></Text>
-              </Flex>
+              </Flex> */}
               <Flex
                 gap="10px"
                 direction="row"
@@ -1281,7 +1321,9 @@ export default function Swap768px(props) {
             border="0px"
             disabled={swapPossibility}
             style={{ cursor: swapPossibility ? "pointer" : "not-allowed" }}
-            onClick={() => {}}
+            onClick={() => {
+              swapMethod();
+            }}
             {...getOverrideProps(overrides, "Frame 63")}
           >
             <Text

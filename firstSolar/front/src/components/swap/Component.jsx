@@ -72,7 +72,7 @@ const SwapComponent = ({ oracleId, balance }) => {
                   >
                     <Swap768px
                       style={{ marginTop: "75px" }}
-                      oracleiddata={"props"}
+                      oracleiddata={props}
                       balance={balance}
                     />
                   </motion.div>
@@ -145,7 +145,7 @@ const SwapComponent = ({ oracleId, balance }) => {
                           backgroundColor: "rgba(249,249,249,0.55)",
                           boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
                         }}
-                        oracleiddata={"props"}
+                        oracleiddata={props}
                         balance={balance}
                       />
                     </motion.div>

@@ -89,7 +89,7 @@ export const lpBalance = async (account, symbol) => {
 export const firstSync = async () => {
   try {
     const result = (await request.get("api/sync")).data;
-    console.log("result : ", result);
+    // console.log("result : ", result);
 
     return result;
   } catch (error) {
@@ -114,8 +114,15 @@ export const mypageList = async (account) => {
 export const getConvertPrice = async (tokenKind) => {
   try {
     const result = (await request.get("api/sync/datesync")).data;
-    console.log("result : ", result);
-    if (tokenKind == "ETH") {
+    if (tokenKind == "DFS") {
+      const dfs = result.find((item) => item.tokenSlug === "dfs");
+      return {
+        bnb: dfs.ConvertToBNB,
+        eth: dfs.ConvertToETH,
+        usdt: dfs.ConvertToUSDT,
+        tokenPrice: dfs.tokenPrice,
+      };
+    } else if (tokenKind == "ETH") {
       const eth = result.find((item) => item.tokenSlug === "ethereum");
       return {
         bnb: eth.ConvertToBNB,
@@ -145,18 +152,48 @@ export const getConvertPrice = async (tokenKind) => {
   }
 };
 
-export const swap = async (address, amount) => {
+export const swapApprove = async (userAddress, tokenName, amount) => {
   try {
-    const result1 = await request.post("api/swap/swapApprove", {
-      data: address,
-      amount: amount,
-    });
-
-    const result2 = await request.post("api/swap/swapTransaction", {
-      data: address,
+    const result = await request.post("api/swap/swapApprove", {
+      userAddress: userAddress,
+      tokenName: tokenName,
       amount: amount,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+  }
+};
+
+export const swapTransaction = async (userAddress, poolName, amount) => {
+  try {
+    const result = await request.post("api/swap/swapTransaction", {
+      userAddress: userAddress,
+      poolName: poolName,
+      amount: amount,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const swapBalance = async (userAddress, firstSelectToken) => {
+  try {
+    const result = (
+      await request.post("api/swap/swapBalance", {
+        userAddress: userAddress,
+      })
+    ).data[0];
+    switch (firstSelectToken) {
+      case "DFS":
+        return result.dfs;
+      case "ETH":
+        return result.eth;
+      case "BNB":
+        return result.bnb;
+      case "USDT":
+        return result.usdt;
+    }
+  } catch (error) {
+    console.error(error);
   }
 };
