@@ -55,9 +55,6 @@ router.post("/mypage", async (req, res) => {
       process.env.DEX
     );
 
-    // let getLpBalance = contract.methods.getLPBalance().encodeABI();
-    // let getPid = await DexContract.methods.getPid(process.env.DFS_ETH).call();
-
     let poolInfo = await DexContract.methods.getpoolInfo().call();
 
     for (let i = 0; i < poolInfo.length; i++) {

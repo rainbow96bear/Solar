@@ -66,7 +66,13 @@ router.post("/swapApprove", async (req, res) => {
 router.post("/swapTransaction", async (req, res) => {
   try {
     const filterPool = async () => {
-      let target = req.body.poolName;
+      let target = "";
+      if (req.body.poolName.includes("-")) {
+        target = req.body.poolName.toLowerCase().split("-")[1];
+      } else {
+        target = req.body.poolName;
+      }
+
       if ("dfsethpool".includes(target)) {
         return new web3.eth.Contract(
           DfsEthPoolAbi as AbiItem[],
