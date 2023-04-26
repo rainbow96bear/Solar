@@ -12,6 +12,9 @@ import {
   deployedETH,
   deployedUSDT,
   deployedBNB,
+  deployedDFSETH,
+  deployedDFSUSDT,
+  deployedDFSBNB,
 } from "../deployList/index";
 // MainNet
 const web3 = new Web3(
@@ -27,16 +30,16 @@ router.post("/swapApprove", async (req, res) => {
     const filterToken = async () => {
       switch (req.body.tokenName) {
         case "dfs":
-          return new web3.eth.Contract(DFSAbi as AbiItem[], process.env.DFS);
+          return deployedDFS;
 
         case "eth":
-          return new web3.eth.Contract(DFSAbi as AbiItem[], process.env.ETH);
+          return deployedETH;
 
         case "usdt":
-          return new web3.eth.Contract(DFSAbi as AbiItem[], process.env.USDT);
+          return deployedUSDT;
 
         case "bnb":
-          return new web3.eth.Contract(DFSAbi as AbiItem[], process.env.BNB);
+          return deployedBNB;
         default:
           throw new Error("Invalid token");
       }
@@ -47,9 +50,9 @@ router.post("/swapApprove", async (req, res) => {
     const amount = BigNumber.from(
       Math.floor(req.body.amount * 10 ** 18).toString()
     );
-
+    // 해당 풀 어드레스
     let approve = await result.methods
-      .approve(result.options.address, amount)
+      .approve(req.body.poolAddress, amount)
       .encodeABI();
 
     res.send({
@@ -72,38 +75,30 @@ router.post("/swapTransaction", async (req, res) => {
       } else {
         target = req.body.poolName.toLowerCase();
       }
-
       if ("dfsethpool".includes(target)) {
-        return new web3.eth.Contract(
-          DfsEthPoolAbi as AbiItem[],
-          process.env.DFS_ETH
-        );
+        const swapTokenAddress = deployedETH.options.address;
+        return { pool: deployedDFSETH, swapTokenAddress };
       } else if ("dfsbnbpool".includes(target)) {
-        return new web3.eth.Contract(
-          DfsEthPoolAbi as AbiItem[],
-          process.env.DFS_BNB
-        );
+        const swapTokenAddress = deployedBNB.options.address;
+        return { pool: deployedDFSBNB, swapTokenAddress };
       } else if ("dfsusdtpool".includes(target)) {
-        return new web3.eth.Contract(
-          DfsEthPoolAbi as AbiItem[],
-          process.env.DFS_USDT
-        );
+        const swapTokenAddress = deployedUSDT.options.address;
+        return { pool: deployedDFSUSDT, swapTokenAddress };
       } else {
         throw new Error("Invalid Error");
       }
     };
     const result = await filterPool();
+
     const amount = BigNumber.from(
       Math.floor(req.body.amount * 10 ** 18).toString()
     );
-
-    const tokenSwap = result.methods
-      .swapTokens(result.options.address, amount)
+    const tokenSwap = result.pool.methods
+      .swapTokens(result.swapTokenAddress, amount)
       .encodeABI();
-
     res.send({
       from: req.body.account,
-      to: result.options.address,
+      to: result.pool.options.address,
       data: tokenSwap,
     });
   } catch (error) {
