@@ -35,6 +35,9 @@ export default function AddLiquidityBottom768px(props) {
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
 
+  const [userFirstBalance, setUserFirstBalance] = React.useState(0);
+  const [userSecondBalance, setUserSecondBalance] = React.useState(0);
+
   const addLiquidtiyFunc = async () => {
     dispatch(isLoadingThunk({ isLoading: true }));
     const approveDFSTx = await approveDFS(
