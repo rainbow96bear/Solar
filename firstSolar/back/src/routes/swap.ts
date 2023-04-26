@@ -93,8 +93,9 @@ router.post("/swapTransaction", async (req, res) => {
     const amount = BigNumber.from(
       Math.floor(req.body.amount * 10 ** 18).toString()
     );
+
     const tokenSwap = result.pool.methods
-      .swapTokens(result.swapTokenAddress, amount)
+      .swapTokens(process.env.DFS, amount)
       .encodeABI();
     res.send({
       from: req.body.account,

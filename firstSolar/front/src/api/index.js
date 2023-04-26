@@ -152,13 +152,13 @@ export const getConvertPrice = async (tokenKind) => {
   }
 };
 
-export const swapApprove = async (account, tokenName, amount, tokenAddress) => {
+export const swapApprove = async (account, tokenName, amount, poolAddress) => {
   try {
     const result = await request.post("api/swap/swapApprove", {
       account,
       tokenName,
       amount,
-      tokenAddress,
+      poolAddress,
     });
     return result;
   } catch (error) {
@@ -166,13 +166,13 @@ export const swapApprove = async (account, tokenName, amount, tokenAddress) => {
   }
 };
 
-export const swapTransaction = async (account, poolName, amount) => {
+export const swapTransaction = async (account, poolName, amount, tokenName) => {
   try {
-    console.log("poolName :", poolName);
     const result = await request.post("api/swap/swapTransaction", {
       account,
       poolName,
       amount,
+      tokenName,
     });
     return result;
   } catch (error) {
