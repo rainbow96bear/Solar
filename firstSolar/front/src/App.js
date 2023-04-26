@@ -53,6 +53,7 @@ function App() {
   const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
   const connect = useSelector((state) => state.connect.connect.connect);
   const accountAddress = useSelector((state) => state.account.account.account);
+  const { address } = useAccount();
   const dispatch = useDispatch();
 
   const { web3, account, chainId, login } = useWeb3();
@@ -78,7 +79,6 @@ function App() {
       }
     }
   }, [account]);
-
   return (
     <>
       <WagmiConfig client={wagmiClient}>

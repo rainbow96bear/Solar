@@ -18,13 +18,14 @@ import kaikasLogo from "./images/kaikasLogo.jpg";
 import axios from "axios";
 import { Web3Button } from "@web3modal/react";
 import { useWeb3 } from "../modules/useWeb3.js";
+import { useWeb3K } from "../modules/useWeb3Kaikas.js";
 
 export default function ConnectModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
   const { account, login } = useWeb3();
-
+  const { accountK, loginK } = useWeb3K();
   const metamaskLogin = async () => {
     try {
       if (!window.ethereum) {
