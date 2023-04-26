@@ -5,6 +5,7 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "IDFS.sol";
+import "IReward.sol";
 
 contract LiquidityPool is ERC20 {
   IDFS immutable DFS;
@@ -24,7 +25,8 @@ contract LiquidityPool is ERC20 {
   address public DexA;
   // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
-
+  uint256 testnum;
+  address public rewardA;
   // Events
   event MintLpToken(address indexed _liquidityProvider, uint256 _sharesMinted);
   // sharesMinted는 lp토큰의 수
@@ -38,21 +40,37 @@ contract LiquidityPool is ERC20 {
     _;
     unlocked = 1;
   }
+  uint private rLock = 1;
+  modifier rewardLock() {
+    require(rLock == 1, "LOCKED");
+    rLock = 0;
+    _;
+  }
 
   constructor(
     string memory _name,
     string memory _symbol,
     address _token1,
     address _token2,
-    address DFSTokenA,
-    address DexA
+    address DFSTokenA
   ) ERC20(_name, _symbol) {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = IDFS(DFSTokenA);
-    DexA = DexA;
     // rwdToken1Amount=0;
     // rwdToken2Amount=0;
+  }
+
+  function add(address _rewardA) public rewardLock {
+    rewardA = _rewardA;
+  }
+
+  receive() external payable {
+    testnum = testnum + 1;
+  }
+
+  function getTestNum() public view returns (uint256) {
+    return testnum;
   }
 
   // Function to get reserves
@@ -168,13 +186,12 @@ contract LiquidityPool is ERC20 {
 
     require(_amountOut < reserveOut, "Insufficient Liquidity");
     //유동성 교환에 참여하는 자산의 양과 유동성 풀의 잔액을 고려하여, 교환 예상 tokenOut의 양을 계산
-    transfer(DexA, _amountInWithFee);
     // Transfer tokenOut to the user
     tokenOut.transfer(msg.sender, _amountOut);
     DFSPairAirDrop(
-      address(token1),
+      address(tokenIn),
       _amountIn.mul(3).div(1000),
-      address(token2),
+      address(tokenOut),
       0
     );
     //유동성 교환 결과로 받게 되는 tokenOut 토큰을 msg.sender 계정으로 전송하는 데 사용됩니다.
@@ -182,6 +199,24 @@ contract LiquidityPool is ERC20 {
     // Update the reserves
     _update(token1.balanceOf(address(this)), token2.balanceOf(address(this))); // token1과 token2는 각각 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수입니다.
     // balanceOf() 함수는 해당 계약의 잔액 정보를 반환합니다. 따라서, 이 코드에서는 계약의 토큰 잔액 정보를 가져와서 유동성 풀의 상태를 업데이트
+  }
+
+  function rewardSelfSwap(
+    address _tokenIn,
+    uint256 _amountIn
+  ) private returns (uint256 _amountOut) {
+    require(_tokenIn != address(DFS));
+
+    require(_amountIn > 0, "Insufficient Amount");
+    (uint256 _reserve1, uint256 _reserve2) = getReserves();
+    (uint256 reserveOut, uint256 reserveIn) = _tokenIn == address(token1)
+      ? (_reserve2, _reserve1)
+      : (_reserve1, _reserve2);
+
+    _amountOut = (reserveOut * _amountIn) / (reserveIn + _amountIn);
+    ERC20(address(DFS)).transfer(address(rewardA), _amountOut);
+    require(_amountOut < reserveOut, "Insufficient Liquidity");
+    _update(token1.balanceOf(address(this)), token2.balanceOf(address(this)));
   }
 
   // Function for user to add liquidity
@@ -340,21 +375,60 @@ contract LiquidityPool is ERC20 {
     address _token2,
     uint256 _amountToken2
   ) public {
-    uint256 rewardOfToken1;
-    uint256 rewardOfToken2;
-    if (address(DFS) == _token1) {
-      rewardOfToken1 = _amountToken1.div(3).mul(4);
-      rewardOfToken2 = _amountToken2.div(3).mul(4);
+    if (_amountToken2 == 0) {
+      if (_token1 != address(DFS)) {
+        rewardSelfSwap(address(_token1), _amountToken1);
+      } else {
+        ERC20(address(DFS)).transfer(rewardA, _amountToken1);
+      }
     } else {
-      rewardOfToken1 = _amountToken2.div(3).mul(4);
-      rewardOfToken2 = _amountToken1.div(3).mul(4);
+      if (_token1 != address(DFS)) {
+        rewardSelfSwap(address(_token1), _amountToken1);
+        ERC20(address(DFS)).transfer(rewardA, _amountToken2);
+      } else {
+        rewardSelfSwap(address(_token2), _amountToken2);
+        ERC20(address(DFS)).transfer(rewardA, _amountToken1);
+      }
     }
+    uint256 rewardOfToken1 = _amountToken1.div(3).mul(4);
+    uint256 rewardOfToken2 = _amountToken2.div(3).mul(4);
     (uint256 _reserve1, uint256 _reserve2) = getReserves();
-
     uint256 totalDFS = rewardOfToken1.add(
       (rewardOfToken2.mul(_reserve1)).div(_reserve2)
     );
-
+    IReward(rewardA).rewards();
     DFS.reward(msg.sender, totalDFS);
+  }
+
+  function usdtSwap(
+    address _tokenIn,
+    uint256 _amountIn
+  ) external returns (uint256 _amountOut) {
+    require(
+      _tokenIn == address(token1) || _tokenIn == address(token2),
+      "Invalid Token Address"
+    );
+
+    (uint256 _reserve1, uint256 _reserve2) = getReserves();
+    (
+      ERC20 tokenIn,
+      ERC20 tokenOut,
+      uint256 reserveIn,
+      uint256 reserveOut
+    ) = _tokenIn == address(token1)
+        ? (token1, token2, _reserve1, _reserve2)
+        : (token2, token1, _reserve2, _reserve1);
+    require(_amountIn > 0, "Insufficient Amount");
+    tokenIn.transferFrom(msg.sender, address(this), _amountIn);
+    uint256 _amountInWithFee = _amountIn;
+
+    _amountOut =
+      (reserveOut * _amountInWithFee) /
+      (reserveIn + _amountInWithFee);
+
+    require(_amountOut < reserveOut, "Insufficient Liquidity");
+    tokenOut.transfer(msg.sender, _amountOut);
+
+    _update(token1.balanceOf(address(this)), token2.balanceOf(address(this))); // token1과 token2는 각각 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수입니다.
   }
 }
