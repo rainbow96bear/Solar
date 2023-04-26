@@ -29,9 +29,17 @@ import {
 } from "../api";
 import { useAccount } from "wagmi";
 import { swap } from "../api";
+import { useWeb3 } from "../modules/useWeb3.js";
+import { useWeb3K } from "../modules/useWeb3Kaikas";
+import { isLoadingThunk } from "../modules/isLoading.js";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
+  const { web3, account, chainId, login } = useWeb3();
+  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
+
+  console.log("web3는 : ", web3);
+
   const { address } = useAccount();
   const address2 = useSelector((state) => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 1
@@ -54,6 +62,7 @@ export default function Swap768px(props) {
   const [secondSelectToken, setSecondSelectToken] = React.useState("ETH");
   const [secondSelectTokenPrice, setSecondSelectTokenPrice] =
     React.useState(""); // 어떤 Convert를 할껀지 값을 찾아준다.
+
   React.useEffect(() => {
     (async () => {
       try {
@@ -110,6 +119,26 @@ export default function Swap768px(props) {
     })();
   }, [secondSelectToken]);
 
+  React.useEffect(() => {
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        loginK();
+      }
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        loginK();
+      }
+    }
+  }, []);
+
   const allowedKeys = [
     "0",
     "1",
@@ -155,7 +184,6 @@ export default function Swap768px(props) {
 
   const delayedFunction1 = debounce((num) => {
     try {
-      console.log("delay");
       setFirstAmountPrice(num * firstSelectTokenPrice);
       delayedFunction2(num);
     } catch (error) {
@@ -178,31 +206,60 @@ export default function Swap768px(props) {
       console.error(error);
     }
   };
-
-  // const changeSwap = () => {
-  //   set
-  //   [firstSelectToken, secondSelectToken] = changeSwapMethod(
-  //     firstSelectToken,
-  //     secondSelectToken
-  //   )[(firstAmountPrice, secondAmountPrice)] = changeSwapMethod(
-  //     firstAmountPrice,
-  //     secondAmountPrice
-  //   );
-  // };
+  React.useEffect(() => {
+    if (
+      textareaValue == 0 ||
+      textareaValue == undefined ||
+      textareaValue == null ||
+      textareaValue > userFirstBalance
+    ) {
+      setSwapPossibility(false);
+    } else setSwapPossibility(true);
+  }, [textareaValue]);
 
   const swapMethod = async () => {
-    console.log("어드레스", address ? address : address2);
-    const result1 = await swapApprove(
-      address ? address : address2,
-      firstSelectToken.toLowerCase(),
-      textareaValue
-    );
+    try {
+      dispatch(isLoadingThunk({ isLoading: true }));
+      console.log("어드레스", address ? address : address2);
+      const result1 = (
+        await swapApprove(
+          address ? address : address2,
+          firstSelectToken.toLowerCase(),
+          textareaValue,
+          props?.oracleiddata[0].tokenAddress
+        )
+      ).data;
 
-    const result2 = await swapTransaction(
-      address ? address : address2,
-      props?.oracleiddata[0].oracleid,
-      textareaValue
-    );
+      let transactionResult;
+      if (document.cookie.split(":")[0] == "metamask") {
+        console.log("web3 : ", web3);
+        console.log("result1 : ", result1);
+        transactionResult = await web3.eth.sendTransaction(result1);
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        transactionResult = await web3K.eth.sendTransaction(result1);
+      }
+      console.log("typeof textareaValue : ", typeof +textareaValue);
+      const result2 = (
+        await swapTransaction(
+          address ? address : address2,
+          props?.oracleiddata[0].oracleId,
+          +textareaValue
+        )
+      ).data;
+
+      console.log("result2 : ", result2);
+      if (document.cookie.split(":")[0] == "metamask") {
+        console.log("web3 : ", web3);
+        console.log("result2 : ", result2);
+        transactionResult = await web3.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        transactionResult = await web3K.eth.sendTransaction(result2);
+      }
+      dispatch(isLoadingThunk({ isLoading: false }));
+    } catch (error) {
+      console.error(error);
+      dispatch(isLoadingThunk({ isLoading: false }));
+    }
   };
   return (
     <>
@@ -621,7 +678,7 @@ export default function Swap768px(props) {
                   children={firstAmountPrice ? firstAmountPrice : 0}
                   {...getOverrideProps(overrides, "12312312312312312339752827")}
                 ></Text>
-                <Text
+                {/* <Text
                   fontFamily="Inter"
                   fontSize="11px"
                   fontWeight="400"
@@ -645,7 +702,7 @@ export default function Swap768px(props) {
                     overrides,
                     "~12312312312312312339752828"
                   )}
-                ></Text>
+                ></Text> */}
               </Flex>
               <Flex
                 gap="10px"
@@ -832,7 +889,7 @@ export default function Swap768px(props) {
             padding="10px 10px 10px 10px"
             {...getOverrideProps(overrides, "Frame 67")}
           >
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 320 512"
               width="25px"
@@ -843,7 +900,7 @@ export default function Swap768px(props) {
               }}
             >
               <path d="M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3V402.7L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7V109.3l41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z" />
-            </svg>
+            </svg> */}
             {/* <Image
               width="25px"
               height="25px"
@@ -1012,7 +1069,7 @@ export default function Swap768px(props) {
               gap="21px"
               direction="column"
               width="unset"
-              height="unset"
+              height="200px"
               justifyContent="center"
               alignItems="flex-end"
               overflow="hidden"
@@ -1027,11 +1084,11 @@ export default function Swap768px(props) {
             >
               <TextAreaField
                 width="unset"
-                height="unset"
+                height="100%"
                 placeholder="0.0"
                 shrink="0"
                 alignSelf="stretch"
-                size="small"
+                size="large"
                 isDisabled={false}
                 labelHidden={false}
                 variation="default"
@@ -1043,236 +1100,6 @@ export default function Swap768px(props) {
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
               ></TextAreaField>
-              {/* <Flex
-                gap="8px"
-                direction="column"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="flex-end"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 6439752829")}
-              >
-                <Text
-                  fontFamily="Inter"
-                  fontSize="16px"
-                  fontWeight="600"
-                  color="rgba(239,239,239,1)"
-                  lineHeight="24px"
-                  textAlign="right"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="24px"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  {...getOverrideProps(overrides, "12312312312312312339752827")}
-                ></Text>
-                <Text
-                  fontFamily="Inter"
-                  fontSize="11px"
-                  fontWeight="400"
-                  color="rgba(239,239,239,1)"
-                  lineHeight="16.5px"
-                  textAlign="right"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="17px"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="~123123123123123123"
-                  {...getOverrideProps(
-                    overrides,
-                    "~12312312312312312339752828"
-                  )}
-                ></Text>
-              </Flex> */}
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="flex-end"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 6539814034")}
-              >
-                <Flex
-                  gap="10px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="15px"
-                  padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,255,253,1)"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setPercentBalance(0.25);
-                  }}
-                  {...getOverrideProps(overrides, "Frame 8039814040")}
-                >
-                  <Text
-                    fontFamily="Inter"
-                    fontSize="14px"
-                    fontWeight="600"
-                    lineHeight="21px"
-                    textAlign="right"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="unset"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="25%"
-                    {...getOverrideProps(overrides, "25%39814035")}
-                  ></Text>
-                </Flex>
-                <Flex
-                  gap="10px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="15px"
-                  padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,255,253,1)"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setPercentBalance(0.5);
-                  }}
-                  {...getOverrideProps(overrides, "Frame 8139814043")}
-                >
-                  <Text
-                    fontFamily="Inter"
-                    fontSize="14px"
-                    fontWeight="600"
-                    lineHeight="21px"
-                    textAlign="right"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="unset"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="50%"
-                    {...getOverrideProps(overrides, "50%39814044")}
-                  ></Text>
-                </Flex>
-                <Flex
-                  gap="10px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="15px"
-                  padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,255,253,1)"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setPercentBalance(0.75);
-                  }}
-                  {...getOverrideProps(overrides, "Frame 8239814045")}
-                >
-                  <Text
-                    fontFamily="Inter"
-                    fontSize="14px"
-                    fontWeight="600"
-                    lineHeight="21px"
-                    textAlign="right"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="unset"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="75%"
-                    {...getOverrideProps(overrides, "75%39814046")}
-                  ></Text>
-                </Flex>
-                <Flex
-                  gap="10px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="15px"
-                  padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,255,253,1)"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setPercentBalance(1);
-                  }}
-                  {...getOverrideProps(overrides, "Frame 8339814047")}
-                >
-                  <Text
-                    fontFamily="Inter"
-                    fontSize="14px"
-                    fontWeight="600"
-                    lineHeight="21px"
-                    textAlign="right"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="unset"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="Max"
-                    {...getOverrideProps(overrides, "Max39814048")}
-                  ></Text>
-                </Flex>
-              </Flex>
             </Flex>
           </Flex>
           <Flex
@@ -1317,12 +1144,15 @@ export default function Swap768px(props) {
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="15px"
             padding="13px 73px 13px 73px"
-            backgroundColor="rgba(234,0,50,0.45)"
+            backgroundColor={
+              swapPossibility ? "rgba(234,0,50,0.45)" : "rgba(230,230,230,1)"
+            }
             border="0px"
-            disabled={swapPossibility}
+            disabled={!swapPossibility}
             style={{ cursor: swapPossibility ? "pointer" : "not-allowed" }}
-            onClick={() => {
-              swapMethod();
+            onClick={async () => {
+              if (!swapPossibility) return;
+              await swapMethod();
             }}
             {...getOverrideProps(overrides, "Frame 63")}
           >
