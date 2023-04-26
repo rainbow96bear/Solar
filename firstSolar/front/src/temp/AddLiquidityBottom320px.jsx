@@ -21,7 +21,7 @@ export default function AddLiquidityBottom320px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
 
   const addLiquidtiyFunc = async () => {
     const approveDFSTx = await approveDFS(
