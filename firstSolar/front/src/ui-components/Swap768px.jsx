@@ -232,7 +232,8 @@ export default function Swap768px(props) {
         await swapTransaction(
           address ? address : address2,
           props?.oracleiddata[0].oracleId,
-          +textareaValue
+          +textareaValue,
+          firstSelectToken.toLowerCase()
         )
       ).data;
 
