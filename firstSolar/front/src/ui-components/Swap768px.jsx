@@ -90,33 +90,43 @@ export default function Swap768px(props) {
     }
   }, [firstSelectToken]);
 
-  // React.useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const data = await swapBalance(
-  //         address ? address : address2,
-  //         firstSelectToken
-  //       );
-  //       setUserFirstBalance(data); // 임시 값
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   })();
-  // }, [firstSelectToken]);
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          firstSelectToken
+        );
+        setUserFirstBalance(data); // 임시 값
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [firstSelectToken]);
 
-  // React.useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const data = await swapBalance(
-  //         address ? address : address2,
-  //         secondSelectToken
-  //       );
-  //       setUserSecondBalance(data); // 임시 값
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   })();
-  // }, [secondSelectToken]);
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          secondSelectToken
+        );
+        setUserSecondBalance(data); // 임시 값
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [secondSelectToken]);
+
+  React.useEffect(() => {
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        loginK();
+      }
+    }
+  }, []);
 
   React.useEffect(() => {
     if (document.cookie) {
