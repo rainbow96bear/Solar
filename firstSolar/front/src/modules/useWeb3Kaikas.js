@@ -28,7 +28,7 @@ export const useWeb3K = () => {
         console.log("Kaikas is not exist");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 

@@ -33,7 +33,7 @@ export const useWeb3 = () => {
         console.log("MetaMask is not exist");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 

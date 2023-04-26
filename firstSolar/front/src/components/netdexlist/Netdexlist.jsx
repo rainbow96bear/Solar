@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { isLoadingThunk } from "../../modules/isLoading";
 import { useDispatch } from "react-redux";
 
-const Netlist1024px = props => {
+const Netlist1024px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -72,7 +72,7 @@ const Netlist1024px = props => {
   );
 };
 
-const Dexlist1024px = props => {
+const Dexlist1024px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -139,7 +139,7 @@ const Dexlist1024px = props => {
   );
 };
 
-const Netlist768px = props => {
+const Netlist768px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -161,6 +161,7 @@ const Netlist768px = props => {
               dispatch(isLoadingThunk({ isLoading: true }));
               const temp = await netList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
+              console.log("props?.item : ", props?.item);
               props.setFilter(props?.item);
               props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(isLoadingThunk({ isLoading: false }));
@@ -205,7 +206,7 @@ const Netlist768px = props => {
   );
 };
 
-const Dexlist768px = props => {
+const Dexlist768px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -271,7 +272,7 @@ const Dexlist768px = props => {
   );
 };
 
-const Netlist320px = props => {
+const Netlist320px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -337,7 +338,7 @@ const Netlist320px = props => {
   );
 };
 
-const Dexlist320px = props => {
+const Dexlist320px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
 

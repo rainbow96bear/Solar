@@ -209,7 +209,7 @@ export default function Swap768px(props) {
   const swapMethod = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
-      console.log("어드레스", address ? address : address2);
+
       const result1 = (
         await swapApprove(
           address ? address : address2,
@@ -227,16 +227,17 @@ export default function Swap768px(props) {
       } else if (document.cookie.split(":")[0] == "kaikas") {
         transactionResult = await web3K.eth.sendTransaction(result1);
       }
-      console.log("typeof textareaValue : ", typeof +textareaValue);
+
       const result2 = (
         await swapTransaction(
           address ? address : address2,
           props?.oracleiddata[0].oracleId,
-          +textareaValue
+          +textareaValue,
+          firstSelectToken.toLowerCase(),
+          secondSelectToken
         )
       ).data;
 
-      console.log("result2 : ", result2);
       if (document.cookie.split(":")[0] == "metamask") {
         console.log("web3 : ", web3);
         console.log("result2 : ", result2);
@@ -877,34 +878,7 @@ export default function Swap768px(props) {
             position="relative"
             padding="10px 10px 10px 10px"
             {...getOverrideProps(overrides, "Frame 67")}
-          >
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 320 512"
-              width="25px"
-              height="25px"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                changeSwap();
-              }}
-            >
-              <path d="M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3V402.7L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7V109.3l41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z" />
-            </svg> */}
-            {/* <Image
-              width="25px"
-              height="25px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="15px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "ghrgclzzd 839752853")}
-            ></Image> */}
-          </Flex>
+          ></Flex>
           <Flex
             gap="10px"
             direction="column"
