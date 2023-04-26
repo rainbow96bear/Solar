@@ -14,7 +14,6 @@ import {
   Text,
   TextAreaField,
 } from "@aws-amplify/ui-react";
-import { useMediaQuery } from "react-responsive";
 import QuestionModalTop from "./QuestionModalTop";
 import QuestionModalBottom from "./QuestionModalBottom";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,7 +40,7 @@ export default function Swap768px(props) {
   console.log("web3는 : ", web3);
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 1
   const [userSecondBalance, setUserSecondBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 2
   const dispatch = useDispatch();
@@ -164,14 +163,14 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = (percentNum) => {
+  const setPercentBalance = percentNum => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
@@ -182,7 +181,7 @@ export default function Swap768px(props) {
     delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const delayedFunction1 = debounce((num) => {
+  const delayedFunction1 = debounce(num => {
     try {
       setFirstAmountPrice(num * firstSelectTokenPrice);
       delayedFunction2(num);
@@ -191,7 +190,7 @@ export default function Swap768px(props) {
     }
   }, 1000);
 
-  const delayedFunction2 = (num) => {
+  const delayedFunction2 = num => {
     try {
       if (secondSelectToken == "DFS") {
         setSecondAmountPrice(convertPrice.usdt * num);
@@ -631,14 +630,14 @@ export default function Swap768px(props) {
                 labelHidden={false}
                 variation="default"
                 value={textareaValue}
-                onChange={(e) => {
+                onChange={e => {
                   if (e.target.value > userFirstBalance) {
                     e.target.value = userFirstBalance;
                   }
                   setTextAreaValue(e.target.value);
                   delayedFunction1(e.target.value);
                 }}
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -1095,7 +1094,7 @@ export default function Swap768px(props) {
                 value={secondAmountPrice ? secondAmountPrice : 0}
                 disabled
                 backgroundColor="transparent"
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}

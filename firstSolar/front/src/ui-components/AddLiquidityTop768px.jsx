@@ -12,8 +12,9 @@ import logo from "./images/logo_new.png";
 import "../css/Font.css";
 
 export default function AddLiquidityTop768px(props) {
-  const { overrides, ...rest } = props;
+  const { overrides, oracleiddata, ...rest } = props;
 
+  console.log(props);
   const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
   const date = new Date(lastTimeStamp * 1000);
   const dateString = date.toLocaleDateString();
@@ -111,9 +112,9 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.assets?.length
-                    ? props?.oracleiddata[0]?.assets[0]
-                    : "UDF"
+                  props?.oracleiddata[0]?.firstToken
+                    ? props?.oracleiddata[0]?.firstToken
+                    : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
               ></Text>
@@ -181,9 +182,9 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.assets?.length
-                    ? props?.oracleiddata[0]?.assets[1]
-                    : "UDF"
+                  props?.oracleiddata[0]?.secondToken
+                    ? props?.oracleiddata[0]?.secondToken
+                    : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
               ></Text>
@@ -467,9 +468,9 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.assets?.length
-                    ? props?.oracleiddata[0]?.assets[0]
-                    : "Solar"
+                  props?.oracleiddata[0]?.firstToken
+                    ? props?.oracleiddata[0]?.firstToken
+                    : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40132808")}
               ></Text>
@@ -559,9 +560,9 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.assets?.length
-                    ? props?.oracleiddata[0]?.assets[1]
-                    : "Solar"
+                  props?.oracleiddata[0]?.secondToken
+                    ? props?.oracleiddata[0]?.secondToken
+                    : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40132816")}
               ></Text>

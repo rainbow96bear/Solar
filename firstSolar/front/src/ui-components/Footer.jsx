@@ -21,17 +21,15 @@ export default function Footer(props) {
     <>
       {/* {isNotMobile && ( */}
       <Flex
+        display={{ base: "none", small: "none", medium: "flex" }}
         marginTop="100px"
-        gap="131px"
         direction="row"
-        width="unset"
         height="unset"
         justifyContent="center"
-        alignItems="flex-start"
+        alignItems="center"
         position="relative"
         padding="30px 0px 0px 0px"
         margin="50px 0px 0px 0px"
-        backgroundColor="gainsboro"
         {...getOverrideProps(overrides, "Footer")}
         {...rest}
       >
@@ -41,10 +39,11 @@ export default function Footer(props) {
           width="unset"
           height="unset"
           justifyContent="center"
-          alignItems="flex-start"
+          alignItems="center"
           shrink="0"
           position="relative"
           padding="10px 10px 10px 10px"
+          marginBottom="140px"
           {...getOverrideProps(overrides, "Frame 1")}
         ></Flex>
         <Flex
@@ -52,7 +51,7 @@ export default function Footer(props) {
           direction="row"
           width="unset"
           height="unset"
-          justifyContent="flex-start"
+          justifyContent="center"
           alignItems="center"
           shrink="0"
           position="relative"

@@ -7,13 +7,14 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Text } from "@aws-amplify/ui-react";
+import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function SwapCompo1440px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
+  const disbleButton = props?.props?.item?.oracleId?.split("-")[0] == "DFS";
 
   return (
     <Flex
@@ -120,7 +121,8 @@ export default function SwapCompo1440px(props) {
           padding="19px 25px 19px 25px"
           {...getOverrideProps(overrides, "Connect40052821")}
         >
-          <Text
+          <Button
+            border="0px"
             fontFamily="ffProMedium"
             fontSize="24px"
             fontWeight="700"
@@ -140,8 +142,9 @@ export default function SwapCompo1440px(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Add Liquidity"
+            disabled={disbleButton ? false : true}
             {...getOverrideProps(overrides, "Add Liquidity")}
-          ></Text>
+          ></Button>
         </Flex>
       </motion.div>
     </Flex>
