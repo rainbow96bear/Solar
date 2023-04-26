@@ -69,23 +69,49 @@ router.post("/swapApprove", async (req, res) => {
 router.post("/swapTransaction", async (req, res) => {
   try {
     const filterPool = async () => {
-      let target = "";
-      if (req.body.poolName.includes("-")) {
-        target = req.body.poolName.toLowerCase().split("-")[1];
+      let target = req.body.convertToken;
+
+      if (req.body.tokenName.toLowerCase() == "dfs") {
+        if ("eth" == target) {
+          const swapTokenAddress = deployedDFS.options.address;
+          return { pool: deployedDFSETH, swapTokenAddress };
+          //
+        } else if ("bnb" == target) {
+          const swapTokenAddress = deployedDFS.options.address;
+          return { pool: deployedDFSBNB, swapTokenAddress };
+          //
+        } else if ("usdt" == target) {
+          const swapTokenAddress = deployedDFS.options.address;
+          return { pool: deployedDFSUSDT, swapTokenAddress };
+          //
+        } else {
+          throw new Error("Invalid Error");
+        }
       } else {
-        target = req.body.poolName.toLowerCase();
-      }
-      if ("dfsethpool".includes(target)) {
-        const swapTokenAddress = deployedETH.options.address;
-        return { pool: deployedDFSETH, swapTokenAddress };
-      } else if ("dfsbnbpool".includes(target)) {
-        const swapTokenAddress = deployedBNB.options.address;
-        return { pool: deployedDFSBNB, swapTokenAddress };
-      } else if ("dfsusdtpool".includes(target)) {
-        const swapTokenAddress = deployedUSDT.options.address;
-        return { pool: deployedDFSUSDT, swapTokenAddress };
-      } else {
-        throw new Error("Invalid Error");
+        if (req.body.tokenName.toLowerCase() == "eth") {
+          if ("dfs" == target) {
+            const swapTokenAddress = deployedETH.options.address;
+            return { pool: deployedDFSETH, swapTokenAddress };
+          } else {
+            throw new Error("Invalid Error");
+          }
+        } else if (req.body.tokenName.toLowerCase() == "usdt") {
+          if ("dfs" == target) {
+            const swapTokenAddress = deployedUSDT.options.address;
+            return { pool: deployedDFSUSDT, swapTokenAddress };
+          } else {
+            throw new Error("Invalid Error");
+          }
+        } else if (req.body.tokenName.toLowerCase() == "bnb") {
+          if ("dfs" == target) {
+            const swapTokenAddress = deployedBNB.options.address;
+            return { pool: deployedDFSBNB, swapTokenAddress };
+          } else {
+            throw new Error("Invalid Error");
+          }
+        } else {
+          res.status(400).send("Invalid token");
+        }
       }
     };
     const result = await filterPool();
