@@ -8,8 +8,50 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
+import logo from "./images/logo_new.png";
+import "../css/Font.css";
+import { useAccount } from "wagmi";
+import { useSelector } from "react-redux";
+import { approveDFS, approveOtherToken, addLiquidity } from "../api/index";
+
 export default function AddLiquidityBottom320px(props) {
-  const { overrides, ...rest } = props;
+  const { overrides, oracleiddata, ...rest } = props;
+
+  const [firstValue, setFirstValue] = React.useState();
+  const [secondValue, setSecondValue] = React.useState();
+
+  const { address } = useAccount();
+  const address2 = useSelector(state => state.account.account.account);
+
+  const addLiquidtiyFunc = async () => {
+    const approveDFSTx = await approveDFS(
+      address2 ? address2 : address,
+      firstValue
+    );
+    const txResult = await web3.eth.sendTransaction(approveDFSTx);
+
+    if (txResult) {
+      const approveOtherTokenTx = await approveOtherToken(
+        address2 ? address2 : address,
+        secondValue,
+        props?.oracleiddata[0]?.secondToken
+      );
+      const pairTxResult = await web3.eth.sendTransaction(approveOtherTokenTx);
+      if (pairTxResult) {
+        const addLiquidityTx = await addLiquidity(
+          address2 ? address2 : address,
+          firstValue,
+          secondValue,
+          props?.oracleiddata[0]?.secondToken
+        );
+        const addLiquidityTxResult = await web3.eth.sendTransaction(
+          addLiquidityTx
+        );
+        if (addLiquidityTxResult) console.log(addLiquidityTxResult);
+      }
+    }
+  };
+
   return (
     <Flex
       gap="24px"
@@ -37,12 +79,12 @@ export default function AddLiquidityBottom320px(props) {
         position="relative"
         padding="0px 40px 18px 40px"
         style={{
-          borderBottom: "1px dashed black",
+          borderBottom: "1px dashed rgba(234,0,50,0.45)",
         }}
         {...getOverrideProps(overrides, "Frame 105")}
       >
         <Text
-          fontFamily="Inter"
+          fontFamily="ffProMedium"
           fontSize="18px"
           fontWeight="600"
           lineHeight="21.784090042114258px"
@@ -69,8 +111,8 @@ export default function AddLiquidityBottom320px(props) {
         direction="column"
         width="unset"
         height="unset"
-        justifyContent="center"
-        alignItems="center"
+        justifyContent="flex-start"
+        alignItems="flex-start"
         shrink="0"
         alignSelf="stretch"
         position="relative"
@@ -81,7 +123,7 @@ export default function AddLiquidityBottom320px(props) {
           gap="27px"
           direction="column"
           width="unset"
-          height="366px"
+          height="unset"
           justifyContent="flex-start"
           alignItems="flex-start"
           shrink="0"
@@ -91,7 +133,7 @@ export default function AddLiquidityBottom320px(props) {
           {...getOverrideProps(overrides, "Frame 96")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProLight"
             fontSize="15px"
             fontWeight="600"
             lineHeight="18.15340805053711px"
@@ -152,10 +194,15 @@ export default function AddLiquidityBottom320px(props) {
                 borderRadius="35px"
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
+                src={
+                  props?.oracleiddata[0]?.mainNetLogo
+                    ? props?.oracleiddata[0]?.mainNetLogo
+                    : { logo }
+                }
                 {...getOverrideProps(overrides, "ghrgclzzd 740053013")}
               ></Image>
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProMedium"
                 fontSize="13px"
                 fontWeight="600"
                 color="rgba(239,239,239,1)"
@@ -174,7 +221,11 @@ export default function AddLiquidityBottom320px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="DEX Name"
+                children={
+                  props?.oracleiddata[0]?.firstToken
+                    ? props?.oracleiddata[0]?.firstToken
+                    : "DFS"
+                }
                 {...getOverrideProps(overrides, "DEX Name40053014")}
               ></Text>
               <Image
@@ -205,7 +256,7 @@ export default function AddLiquidityBottom320px(props) {
               {...getOverrideProps(overrides, "Frame 91")}
             >
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProMedium"
                 fontSize="33px"
                 fontWeight="600"
                 lineHeight="39.9375px"
@@ -253,10 +304,15 @@ export default function AddLiquidityBottom320px(props) {
                 borderRadius="35px"
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
+                src={
+                  props?.oracleiddata[0]?.platformLogo
+                    ? props?.oracleiddata[0]?.platformLogo
+                    : { logo }
+                }
                 {...getOverrideProps(overrides, "ghrgclzzd 740053019")}
               ></Image>
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProMedium"
                 fontSize="13px"
                 fontWeight="600"
                 color="rgba(239,239,239,1)"
@@ -275,7 +331,11 @@ export default function AddLiquidityBottom320px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="DEX Name"
+                children={
+                  props?.oracleiddata[0]?.secondToken
+                    ? props?.oracleiddata[0]?.secondToken
+                    : "DFS"
+                }
                 {...getOverrideProps(overrides, "DEX Name40053020")}
               ></Text>
               <Image
@@ -294,7 +354,7 @@ export default function AddLiquidityBottom320px(props) {
               ></Image>
             </Flex>
           </Flex>
-          <Flex
+          {/* <Flex
             gap="-7px"
             direction="column"
             width="unset"
@@ -326,7 +386,7 @@ export default function AddLiquidityBottom320px(props) {
               {...getOverrideProps(overrides, "Frame 93")}
             >
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProMedium"
                 fontSize="11px"
                 fontWeight="600"
                 lineHeight="13.3125px"
@@ -361,7 +421,7 @@ export default function AddLiquidityBottom320px(props) {
                 {...getOverrideProps(overrides, "Frame 92")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="8px"
                   fontWeight="600"
                   lineHeight="9.681818008422852px"
@@ -396,7 +456,7 @@ export default function AddLiquidityBottom320px(props) {
               {...getOverrideProps(overrides, "Frame 94")}
             >
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProMedium"
                 fontSize="8px"
                 fontWeight="600"
                 lineHeight="9.681818008422852px"
@@ -432,7 +492,7 @@ export default function AddLiquidityBottom320px(props) {
                 {...getOverrideProps(overrides, "ghrgclzzd 840053029")}
               ></Image>
             </Flex>
-          </Flex>
+          </Flex> */}
         </Flex>
         <Flex
           gap="9px"
@@ -448,7 +508,7 @@ export default function AddLiquidityBottom320px(props) {
           {...getOverrideProps(overrides, "Frame 102")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProLight"
             fontSize="15px"
             fontWeight="600"
             lineHeight="18.15340805053711px"
@@ -469,6 +529,7 @@ export default function AddLiquidityBottom320px(props) {
             {...getOverrideProps(overrides, "DEPOSIT AMOUNT")}
           ></Text>
           <Flex
+            marginTop="15px"
             gap="9px"
             direction="column"
             width="unset"
@@ -520,10 +581,15 @@ export default function AddLiquidityBottom320px(props) {
                   borderRadius="35px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
+                  src={
+                    props?.oracleiddata[0]?.mainNetLogo
+                      ? props?.oracleiddata[0]?.mainNetLogo
+                      : { logo }
+                  }
                   {...getOverrideProps(overrides, "ghrgclzzd 740053035")}
                 ></Image>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="13px"
                   fontWeight="600"
                   lineHeight="15.732954025268555px"
@@ -541,7 +607,11 @@ export default function AddLiquidityBottom320px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="DEX Name"
+                  children={
+                    props?.oracleiddata[0]?.firstToken
+                      ? props?.oracleiddata[0]?.firstToken
+                      : "DFS"
+                  }
                   {...getOverrideProps(overrides, "DEX Name40053036")}
                 ></Text>
                 <Flex
@@ -602,7 +672,7 @@ export default function AddLiquidityBottom320px(props) {
                 {...getOverrideProps(overrides, "Frame 9740053040")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="10px"
                   fontWeight="600"
                   lineHeight="12.102272033691406px"
@@ -618,7 +688,7 @@ export default function AddLiquidityBottom320px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Balance : 0"
+                  children={`Balance : ${props?.balance ? props?.balance : 0}`}
                   {...getOverrideProps(overrides, "Balance : 040053041")}
                 ></Text>
               </Flex>
@@ -664,6 +734,7 @@ export default function AddLiquidityBottom320px(props) {
               {...getOverrideProps(overrides, "Frame 9940053044")}
             >
               <Flex
+                marginTop="30px"
                 gap="5px"
                 direction="row"
                 width="unset"
@@ -689,10 +760,15 @@ export default function AddLiquidityBottom320px(props) {
                   borderRadius="35px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
+                  src={
+                    props?.oracleiddata[0]?.platformLogo
+                      ? props?.oracleiddata[0]?.platformLogo
+                      : { logo }
+                  }
                   {...getOverrideProps(overrides, "ghrgclzzd 740053046")}
                 ></Image>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="13px"
                   fontWeight="600"
                   lineHeight="15.732954025268555px"
@@ -710,7 +786,11 @@ export default function AddLiquidityBottom320px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="DEX Name"
+                  children={
+                    props?.oracleiddata[0]?.secondToken
+                      ? props?.oracleiddata[0]?.secondToken
+                      : "Solar"
+                  }
                   {...getOverrideProps(overrides, "DEX Name40053047")}
                 ></Text>
                 <Flex
@@ -771,7 +851,7 @@ export default function AddLiquidityBottom320px(props) {
                 {...getOverrideProps(overrides, "Frame 9740053051")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="10px"
                   fontWeight="600"
                   lineHeight="12.102272033691406px"
@@ -824,15 +904,15 @@ export default function AddLiquidityBottom320px(props) {
           {...getOverrideProps(overrides, "Frame 76")}
         >
           <Text
-            fontFamily="Inter"
-            fontSize="15px"
+            fontFamily="ffProMedium"
+            fontSize={{ base: "14px", small: "14px" }}
             fontWeight="700"
             color="rgba(239,239,239,1)"
             lineHeight="18.15340805053711px"
             textAlign="center"
-            display="block"
+            display="flex"
             direction="column"
-            justifyContent="unset"
+            justifyContent="center"
             width="144.04px"
             height="23px"
             gap="unset"

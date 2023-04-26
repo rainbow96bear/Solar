@@ -89,7 +89,6 @@ const DefiComponent = ({
                   TVL : ${formatNumber(item.tvl)}
                 </div>
                 <div style={{ width: "10%" }}>
-                  {" "}
                   daily : {Math.round(item.dailyTvlRate * 10000) / 10000 || 0}%
                 </div>
               </div>

@@ -498,6 +498,7 @@ export default function PoolListCom1024px(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children="APY"
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       setSortAPY(
                         sortAPY == undefined

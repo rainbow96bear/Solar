@@ -14,7 +14,6 @@ import {
   Text,
   TextAreaField,
 } from "@aws-amplify/ui-react";
-import { useMediaQuery } from "react-responsive";
 import QuestionModalTop from "./QuestionModalTop";
 import QuestionModalBottom from "./QuestionModalBottom";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +22,8 @@ import { firstSync, getConvertPrice, lpBalance } from "../api";
 import { useAccount } from "wagmi";
 
 export default function Swap768px(props) {
-  const { overrides, ...rest } = props;
+  const { overrides, oracleId, ...rest } = props;
+
   const { address } = useAccount();
   const address2 = useSelector(state => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0); // swap을 희망하는 토큰의 갯수.
