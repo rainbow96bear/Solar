@@ -9,7 +9,7 @@ import {
 
 const initDB = async () => {
   try {
-    const result = await deployed.methods.getpoolInfo().call();
+    const result = await deployed.methods.getPoolInfo().call();
 
     const DFSETH = await deployedDFSETH.methods.reserve1().call();
     const eth = await deployedDFSETH.methods.reserve2().call();
