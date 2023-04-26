@@ -128,16 +128,6 @@ export default function Swap768px(props) {
     }
   }, []);
 
-  React.useEffect(() => {
-    if (document.cookie) {
-      if (document.cookie.split(":")[0] == "metamask") {
-        login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
-      }
-    }
-  }, []);
-
   const allowedKeys = [
     "0",
     "1",

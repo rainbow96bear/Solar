@@ -11,11 +11,20 @@ import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useAccount } from "wagmi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { approveDFS, approveOtherToken, addLiquidity } from "../api/index";
+import { swapBalance } from "../api";
+import { useWeb3 } from "../modules/useWeb3.js";
+import { useWeb3K } from "../modules/useWeb3Kaikas";
+import { isLoadingThunk } from "../modules/isLoading.js";
 
 export default function AddLiquidityBottom768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
+
+  const dispatch = useDispatch();
+
+  const { web3, account, chainId, login } = useWeb3();
+  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
 
   const [firstValue, setFirstValue] = React.useState();
   const [secondValue, setSecondValue] = React.useState();
@@ -23,11 +32,16 @@ export default function AddLiquidityBottom768px(props) {
   const { address } = useAccount();
   const address2 = useSelector(state => state.account.account.account);
 
+  const [userFirstBalance, setUserFirstBalance] = React.useState(0);
+  const [userSecondBalance, setUserSecondBalance] = React.useState(0);
+
   const addLiquidtiyFunc = async () => {
+    dispatch(isLoadingThunk({ isLoading: true }));
     const approveDFSTx = await approveDFS(
       address2 ? address2 : address,
       firstValue
     );
+
     const txResult = await web3.eth.sendTransaction(approveDFSTx);
 
     if (txResult) {
@@ -36,6 +50,7 @@ export default function AddLiquidityBottom768px(props) {
         secondValue,
         props?.oracleiddata[0]?.secondToken
       );
+
       const pairTxResult = await web3.eth.sendTransaction(approveOtherTokenTx);
       if (pairTxResult) {
         const addLiquidityTx = await addLiquidity(
@@ -44,13 +59,56 @@ export default function AddLiquidityBottom768px(props) {
           secondValue,
           props?.oracleiddata[0]?.secondToken
         );
+
         const addLiquidityTxResult = await web3.eth.sendTransaction(
           addLiquidityTx
         );
-        if (addLiquidityTxResult) console.log(addLiquidityTxResult);
+        if (addLiquidityTxResult) {
+          console.log(addLiquidityTxResult);
+          dispatch(isLoadingThunk({ isLoading: false }));
+        }
       }
     }
   };
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          props?.oracleiddata[0]?.firstToken
+        );
+        setUserFirstBalance(data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          props?.oracleiddata[0]?.secondToken
+        );
+        console.log("datadatadatadata", data);
+        setUserSecondBalance(data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  React.useEffect(() => {
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        loginK();
+      }
+    }
+  }, []);
 
   return (
     <Flex
@@ -691,7 +749,7 @@ export default function AddLiquidityBottom768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${props?.balance ? props?.balance : 0}`}
+                  children={`Balance : ${userFirstBalance}`}
                   {...getOverrideProps(overrides, "Balance : 040052909")}
                 ></Text>
               </Flex>
@@ -876,7 +934,7 @@ export default function AddLiquidityBottom768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${0}`}
+                  children={`Balance : ${userSecondBalance}`}
                   {...getOverrideProps(overrides, "Balance : 040052987")}
                 ></Text>
               </Flex>
