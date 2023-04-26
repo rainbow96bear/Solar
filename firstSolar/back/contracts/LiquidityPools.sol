@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "IDFS.sol";
 import "IReward.sol";
 
-contract LiquidityPool is ERC20 {
+contract LiquidityPools is ERC20 {
   IDFS immutable DFS;
   //immutable 한번설정되면 변경불가능
   using SafeMath for uint256;
@@ -40,12 +40,14 @@ contract LiquidityPool is ERC20 {
     _;
     unlocked = 1;
   }
-  uint private rLock=1;
-  modifier rewardLock(){
-    require(rLock==1,"LOCKED");
-    rLock=0;
+  uint private rLock = 1;
+
+  modifier rewardLock() {
+    require(rLock == 1, "LOCKED");
+    rLock = 0;
     _;
   }
+
   constructor(
     string memory _name,
     string memory _symbol,
@@ -60,7 +62,7 @@ contract LiquidityPool is ERC20 {
     // rwdToken2Amount=0;
   }
 
-  function add(address _rewardA) public rewardLock{
+  function add(address _rewardA) public rewardLock {
     rewardA = _rewardA;
   }
 
@@ -397,37 +399,5 @@ contract LiquidityPool is ERC20 {
     );
     IReward(rewardA).rewards();
     DFS.reward(msg.sender, totalDFS);
-  }
-
-  function usdtSwap(
-    address _tokenIn,
-    uint256 _amountIn
-  ) external returns (uint256 _amountOut) {
-    require(
-      _tokenIn == address(token1) || _tokenIn == address(token2),
-      "Invalid Token Address"
-    );
-
-    (uint256 _reserve1, uint256 _reserve2) = getReserves();
-    (
-      ERC20 tokenIn,
-      ERC20 tokenOut,
-      uint256 reserveIn,
-      uint256 reserveOut
-    ) = _tokenIn == address(token1)
-        ? (token1, token2, _reserve1, _reserve2)
-        : (token2, token1, _reserve2, _reserve1);
-    require(_amountIn > 0, "Insufficient Amount");
-    tokenIn.transferFrom(msg.sender, address(this), _amountIn);
-    uint256 _amountInWithFee = _amountIn;
-
-    _amountOut =
-      (reserveOut * _amountInWithFee) /
-      (reserveIn + _amountInWithFee);
-
-    require(_amountOut < reserveOut, "Insufficient Liquidity");
-    tokenOut.transfer(msg.sender, _amountOut);
-
-    _update(token1.balanceOf(address(this)), token2.balanceOf(address(this))); // token1과 token2는 각각 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수입니다.
   }
 }

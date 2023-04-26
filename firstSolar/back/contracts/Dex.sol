@@ -11,8 +11,6 @@ import "Ownable.sol";
 
 contract Dex is Ownable {
   using SafeMath for uint256;
- 
-  
 
   event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
   event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
@@ -23,15 +21,12 @@ contract Dex is Ownable {
     uint256 amount;
     uint256 shares;
   }
- 
-  
 
   mapping(uint256 => mapping(address => UserInfo)) public userInfo;
 
   struct PoolInfo {
     ERC20 lpToken;
     string symbol;
-   
   }
   PoolInfo[] public poolInfo;
   // Owner's address of DEX
@@ -50,8 +45,11 @@ contract Dex is Ownable {
 
   constructor() {
     _owner = msg.sender;
-   
   }
+
+  // function reward(uint256 _pid) {
+  //   PoolInfo storage pool = poolInfo[_pid];
+  // }
 
   // function createLiquidityPool(
   //   address _tokenA,
@@ -97,16 +95,11 @@ contract Dex is Ownable {
   //   emit LiquidityPoolCreted(_token1, _token2, address(_lpToken));
   // }
 
-  function rewardShares(uint256 _pid, ERC20 _lpToken) public{
+  function rewardShares(uint256 _pid, ERC20 _lpToken) public {
     UserInfo storage user = userInfo[_pid][msg.sender];
-    
-    user.shares =user.amount.div(_lpToken.totalSupply());
+
+    user.shares = user.amount.div(_lpToken.totalSupply());
   }
-
- 
-
-
-  
 
   function add(ERC20 _lpToken) public onlyOwner {
     poolInfo.push(PoolInfo({ lpToken: _lpToken, symbol: _lpToken.symbol() }));
@@ -121,11 +114,9 @@ contract Dex is Ownable {
     // pool.total = pool.total.add(_amount);
     user.amount = user.amount.add(_amount);
 
-    
-   
-  //  uint256 userShares = _amount.mul(totalShares).div(pool.lpToken.balanceOf(address(this)).sub(_amount));
-  //   user.shares = user.shares.add(userShares);
-  //   totalShares = totalShares.add(userShares);
+    //  uint256 userShares = _amount.mul(totalShares).div(pool.lpToken.balanceOf(address(this)).sub(_amount));
+    //   user.shares = user.shares.add(userShares);
+    //   totalShares = totalShares.add(userShares);
 
     emit Deposit(msg.sender, _pid, _amount);
   }
@@ -145,14 +136,14 @@ contract Dex is Ownable {
     // totalShares = totalShares.sub(userShares);
 
     user.amount = user.amount.sub(_amount);
-  
+
     pool.lpToken.transfer(address(msg.sender), _amount);
     // 승인돼있으니 msg.sender에게 amount만큼
     // pool.total = pool.total.sub(_amount);
     emit Withdraw(msg.sender, _pid, _amount);
   }
 
-  function getpoolInfo() public view returns (PoolInfo[] memory) {
+  function getPoolInfo() public view returns (PoolInfo[] memory) {
     return poolInfo;
   }
 
@@ -164,7 +155,7 @@ contract Dex is Ownable {
     }
   }
 
-
-
+  function getPoolLength() public view returns (uint256) {
+    return poolInfo.length;
   }
-
+}
