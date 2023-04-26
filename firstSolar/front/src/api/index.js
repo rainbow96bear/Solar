@@ -18,7 +18,7 @@ export const getMainPoolList = async pageIndex => {
     const resultTotalPages = Math.ceil(resultLength / pageSize); // 총 몇 페이지나 있는지 구한다.
     return { poolListData, resultTotalPages };
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -30,7 +30,7 @@ export const oracleIdList = async _params => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -41,7 +41,7 @@ export const logout = async (_walletKind, _account) => {
       address: _account,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -56,7 +56,7 @@ export const dexList = async (_item, pageIndex) => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -68,7 +68,7 @@ export const netList = async (_item, pageIndex) => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -82,7 +82,7 @@ export const lpBalance = async (account, symbol) => {
     ).data;
     return result.balance;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -93,7 +93,7 @@ export const firstSync = async () => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -166,13 +166,20 @@ export const swapApprove = async (account, tokenName, amount, poolAddress) => {
   }
 };
 
-export const swapTransaction = async (account, poolName, amount, tokenName) => {
+export const swapTransaction = async (
+  account,
+  poolName,
+  amount,
+  tokenName,
+  convertToken
+) => {
   try {
     const result = await request.post("api/swap/swapTransaction", {
       account,
       poolName,
       amount,
       tokenName,
+      convertToken,
     });
     return result;
   } catch (error) {
