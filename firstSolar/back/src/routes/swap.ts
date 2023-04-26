@@ -121,7 +121,7 @@ router.post("/swapTransaction", async (req, res) => {
     );
 
     const tokenSwap = result.pool.methods
-      .swapTokens(process.env.DFS, amount)
+      .swapTokens(result.swapTokenAddress, amount)
       .encodeABI();
     res.send({
       from: req.body.account,
