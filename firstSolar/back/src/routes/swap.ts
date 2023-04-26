@@ -7,6 +7,12 @@ import { AbiItem } from "web3-utils";
 import { abi as DFSAbi } from "../../contracts/artifacts/Token.json";
 import { abi as DfsEthPoolAbi } from "../../contracts/artifacts/LiquidityPool.json";
 
+import {
+  deployedDFS,
+  deployedETH,
+  deployedUSDT,
+  deployedBNB,
+} from "../deployList/index";
 // MainNet
 const web3 = new Web3(
   "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
@@ -47,7 +53,7 @@ router.post("/swapApprove", async (req, res) => {
       .encodeABI();
 
     res.send({
-      from: req.body.userAddress,
+      from: req.body.account,
       to: result.options.address,
       data: approve,
     });
@@ -61,7 +67,6 @@ router.post("/swapTransaction", async (req, res) => {
   try {
     const filterPool = async () => {
       let target = req.body.poolName;
-      console.log("target : ", target);
       if ("dfsethpool".includes(target)) {
         return new web3.eth.Contract(
           DfsEthPoolAbi as AbiItem[],
@@ -91,13 +96,41 @@ router.post("/swapTransaction", async (req, res) => {
       .encodeABI();
 
     res.send({
-      from: req.body.userAddress,
+      from: req.body.account,
       to: result.options.address,
       data: tokenSwap,
     });
   } catch (error) {
     console.log(error);
     res.send();
+  }
+});
+
+router.post("/swapBalance", async (req, res) => {
+  try {
+    const myTokenBalance = [];
+    const target = await req.body.account;
+
+    async function getBalance(contract: any, target: string) {
+      const balance = await contract.methods.balanceOf(target).call();
+      return Math.floor(balance / 10 ** 18).toString();
+    }
+
+    const dfs = await getBalance(deployedDFS, target);
+    const eth = await getBalance(deployedETH, target);
+    const usdt = await getBalance(deployedUSDT, target);
+    const bnb = await getBalance(deployedBNB, target);
+
+    myTokenBalance.push({
+      dfs,
+      eth,
+      usdt,
+      bnb,
+    });
+
+    res.send(myTokenBalance);
+  } catch (error) {
+    console.log(error);
   }
 });
 
