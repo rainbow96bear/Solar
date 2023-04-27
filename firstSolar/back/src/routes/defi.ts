@@ -656,4 +656,55 @@ router.post("/search", async (req: Request, res: Response) => {
   }
 });
 
+router.post("/updatePool", async (req: Request, res: Response) => {
+  try {
+    const { tokenAddress }: { tokenAddress: string } = req.body;
+
+    const pool = await db.Pool.findOne({
+      where: { tokenAddress },
+    });
+
+    if (!pool) {
+      throw new Error(
+        `Pool with address ${tokenAddress} not found in the database`
+      );
+    }
+
+    let firstTokenBalance = pool.firstTokenBalance;
+    let secondTokenBalance = pool.secondTokenBalance;
+    let reserve1: string;
+    let reserve2: string;
+
+    switch (pool.secondToken) {
+      case "ETH":
+        reserve1 = await deployedDFSETH.methods.reserve1().call();
+        reserve2 = await deployedDFSETH.methods.reserve2().call();
+        break;
+      case "USDT":
+        reserve1 = await deployedDFSUSDT.methods.reserve1().call();
+        reserve2 = await deployedDFSUSDT.methods.reserve2().call();
+        break;
+      case "BNB":
+        reserve1 = await deployedDFSBNB.methods.reserve1().call();
+        reserve2 = await deployedDFSBNB.methods.reserve2().call();
+        break;
+      default:
+        break;
+    }
+
+    if (reserve1 != firstTokenBalance || reserve2 != secondTokenBalance) {
+      const tvl = Number(reserve1) + Number(reserve2);
+      await pool.update({
+        firstTokenBalance: reserve1,
+        secondTokenBalance: reserve2,
+        tvl,
+      });
+    }
+    res.end();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("update error");
+  }
+});
+
 export default router;
