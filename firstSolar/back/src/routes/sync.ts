@@ -6,6 +6,10 @@ import Price from "../../models/price";
 // mypage sync
 import {
   deployed,
+  deployedDFS,
+  deployedETH,
+  deployedUSDT,
+  deployedBNB,
   deployedDFSETH,
   deployedDFSUSDT,
   deployedDFSBNB,
@@ -48,34 +52,62 @@ router.post("/mypage", async (req: Request, res: Response) => {
     let poolInfo = await deployed.methods.getPoolInfo().call();
 
     for (let i = 0; i < poolInfo.length; i++) {
-      let balance = 0;
+      let LPTokenBalance: number = 0;
+      let DFSTokenBalance: number = 0;
+      let OtherTokenBalance: number = 0;
       let pool: Pool | null = null;
 
       if (poolInfo[i][0] == process.env.DFS_ETH) {
-        balance = await deployedDFSETH.methods.balanceOf(userAddress).call();
-        if (balance > 0) {
+        LPTokenBalance = await deployedDFSETH.methods
+          .balanceOf(userAddress)
+          .call();
+        if (LPTokenBalance > 0) {
           pool = await db.Pool.findOne({
             where: { tokenAddress: poolInfo[i][0] },
           });
         }
+        DFSTokenBalance = await deployedDFS.methods
+          .balanceOf(userAddress)
+          .call();
+        OtherTokenBalance = await deployedETH.methods
+          .balanceOf(userAddress)
+          .call();
       } else if (poolInfo[i][0] == process.env.DFS_USDT) {
-        balance = await deployedDFSUSDT.methods.balanceOf(userAddress).call();
-        if (balance > 0) {
+        LPTokenBalance = await deployedDFSUSDT.methods
+          .balanceOf(userAddress)
+          .call();
+        if (LPTokenBalance > 0) {
           pool = await db.Pool.findOne({
             where: { tokenAddress: poolInfo[i][0] },
           });
         }
+        DFSTokenBalance = await deployedDFS.methods
+          .balanceOf(userAddress)
+          .call();
+        OtherTokenBalance = await deployedUSDT.methods
+          .balanceOf(userAddress)
+          .call();
       } else if (poolInfo[i][0] == process.env.DFS_BNB) {
-        balance = await deployedDFSBNB.methods.balanceOf(userAddress).call();
-        if (balance > 0) {
+        LPTokenBalance = await deployedDFSBNB.methods
+          .balanceOf(userAddress)
+          .call();
+        if (LPTokenBalance > 0) {
           pool = await db.Pool.findOne({
             where: { tokenAddress: poolInfo[i][0] },
           });
         }
+        DFSTokenBalance = await deployedDFS.methods
+          .balanceOf(userAddress)
+          .call();
+        OtherTokenBalance = await deployedBNB.methods
+          .balanceOf(userAddress)
+          .call();
       }
 
       if (pool) {
-        pool.dataValues.balance = balance; // balance를 객체 원소에 추가
+        pool.dataValues.DFSTokenBalance = DFSTokenBalance;
+        pool.dataValues.OtherTokenBalance = OtherTokenBalance;
+        pool.dataValues.LPTokenBalance = LPTokenBalance; // balance를 객체 원소에 추가
         filterPool.push(pool);
       }
     }
@@ -85,7 +117,6 @@ router.post("/mypage", async (req: Request, res: Response) => {
     console.log(error);
   }
 });
-
 router.get("/datesync", async (req: Request, res: Response) => {
   try {
     const sync = await swapPriceSync();
