@@ -31,6 +31,8 @@ import { swap } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
+import styled from "styled-components";
+import SwapSuccessModal from "./SwapSuccessModal";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
@@ -38,27 +40,30 @@ export default function Swap768px(props) {
   const { web3K, accountK, chainIdK, loginK } = useWeb3K();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
-  const [userFirstBalance, setUserFirstBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 1
-  const [userSecondBalance, setUserSecondBalance] = React.useState(0); // 지갑이 보유중인 토큰 갯수 2
+  const address2 = useSelector((state) => state.account.account.account);
+  const [userFirstBalance, setUserFirstBalance] = React.useState(0);
+  const [userSecondBalance, setUserSecondBalance] = React.useState(0);
   const dispatch = useDispatch();
+  const [textareaValue, setTextAreaValue] = React.useState("");
+  const [swapPossibility, setSwapPossibility] = React.useState(false);
+  const [questionMark, setQuestionMark] = React.useState(0);
 
-  const [textareaValue, setTextAreaValue] = React.useState(""); // first의 textarea에 저장할 state변수
-  const [swapPossibility, setSwapPossibility] = React.useState(false); // Swap 버튼을 활성화할 지 결정하는 state이다.
-  const [questionMark, setQuestionMark] = React.useState(0); // ?를 클릭하면 모달이 뜨는데 그 on off 를 제어한다.
-
+  const [swapSuccessModalOpen, setSwapSuccessModalOpen] = React.useState(false);
   const [convertPrice, setConvertPrice] = React.useState({
     bnb: "",
     eth: "",
     usdt: "",
-  }); // Convert 토큰들을 filter 해서 해당하는 값을 기입한다.
+  });
 
-  const [firstSelectToken, setFirstSelectToken] = React.useState("DFS"); // swap을 희망하는 토큰
-  const [firstSelectTokenPrice, setFirstSelectTokenPrice] = React.useState(0); // swap을 희망하는 토큰의 가격
+  const [firstAmountPrice, setFirstAmountPrice] = React.useState(0);
+  const [secondAmountPrice, setSecondAmountPrice] = React.useState(0);
+
+  const [firstSelectToken, setFirstSelectToken] = React.useState("DFS");
+  const [firstSelectTokenPrice, setFirstSelectTokenPrice] = React.useState(0);
 
   const [secondSelectToken, setSecondSelectToken] = React.useState("ETH");
   const [secondSelectTokenPrice, setSecondSelectTokenPrice] =
-    React.useState(""); // 어떤 Convert를 할껀지 값을 찾아준다.
+    React.useState("");
 
   React.useEffect(() => {
     (async () => {
@@ -77,9 +82,6 @@ export default function Swap768px(props) {
     })();
   }, [firstSelectToken]);
 
-  const [firstAmountPrice, setFirstAmountPrice] = React.useState(0); // first의 토큰의 가격 x 토큰의 갯수
-  const [secondAmountPrice, setSecondAmountPrice] = React.useState(0); // second의 토큰의 가격 x 토큰의 갯수
-
   React.useEffect(() => {
     if (firstSelectToken == "DFS") {
       setSecondSelectToken("ETH");
@@ -95,7 +97,7 @@ export default function Swap768px(props) {
           address ? address : address2,
           firstSelectToken
         );
-        setUserFirstBalance(data); // 임시 값
+        setUserFirstBalance(data);
       } catch (error) {
         console.error(error);
       }
@@ -109,7 +111,7 @@ export default function Swap768px(props) {
           address ? address : address2,
           secondSelectToken
         );
-        setUserSecondBalance(data); // 임시 값
+        setUserSecondBalance(data);
       } catch (error) {
         console.error(error);
       }
@@ -151,14 +153,14 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = percentNum => {
+  const setPercentBalance = (percentNum) => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
@@ -169,16 +171,50 @@ export default function Swap768px(props) {
     delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const delayedFunction1 = debounce(num => {
-    try {
-      setFirstAmountPrice(num * firstSelectTokenPrice);
-      delayedFunction2(num);
-    } catch (error) {
-      console.error(error);
-    }
-  }, 1000);
+  const handleTextareaChange = (event) => {
+    const value = event.target.value;
 
-  const delayedFunction2 = num => {
+    const filteredValue = value.replace(/[^0-9.\b]/g, "");
+
+    if (
+      filteredValue.length > 1 &&
+      filteredValue.startsWith("0") &&
+      !filteredValue.startsWith("0.")
+    ) {
+      setTextAreaValue(filteredValue.slice(1));
+    } else {
+      const dotIndex = filteredValue.indexOf(".");
+      const lastDotIndex = filteredValue.lastIndexOf(".");
+      if (dotIndex !== -1 && dotIndex !== lastDotIndex) {
+        const newValue =
+          filteredValue.substring(0, dotIndex) +
+          filteredValue.substring(dotIndex + 1);
+        setTextAreaValue(newValue);
+      } else {
+        setTextAreaValue(filteredValue);
+      }
+    }
+  };
+  let timerId = null;
+
+  function delayedFunction1(num) {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    timerId = setTimeout(() => {
+      try {
+        setFirstAmountPrice(num * firstSelectTokenPrice);
+        delayedFunction2(num);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        timerId = null;
+      }
+    }, 1000);
+  }
+
+  const delayedFunction2 = (num) => {
     try {
       if (secondSelectToken == "DFS") {
         setSecondAmountPrice(convertPrice.usdt * num);
@@ -201,7 +237,9 @@ export default function Swap768px(props) {
       textareaValue > userFirstBalance
     ) {
       setSwapPossibility(false);
-    } else setSwapPossibility(true);
+    } else {
+      setSwapPossibility(true);
+    }
   }, [textareaValue]);
 
   const swapMethod = async () => {
@@ -219,8 +257,6 @@ export default function Swap768px(props) {
 
       let transactionResult;
       if (document.cookie.split(":")[0] == "metamask") {
-        console.log("web3 : ", web3);
-        console.log("result1 : ", result1);
         transactionResult = await web3.eth.sendTransaction(result1);
       } else if (document.cookie.split(":")[0] == "kaikas") {
         transactionResult = await web3K.eth.sendTransaction(result1);
@@ -237,13 +273,32 @@ export default function Swap768px(props) {
       ).data;
 
       if (document.cookie.split(":")[0] == "metamask") {
-        console.log("web3 : ", web3);
-        console.log("result2 : ", result2);
         transactionResult = await web3.eth.sendTransaction(result2);
       } else if (document.cookie.split(":")[0] == "kaikas") {
         transactionResult = await web3K.eth.sendTransaction(result2);
       }
+
+      const firstBalanceTemp = await swapBalance(
+        address ? address : address2,
+        firstSelectToken
+      );
+      setUserFirstBalance(firstBalanceTemp);
+
+      const secondBalanceTemp = await swapBalance(
+        address ? address : address2,
+        secondSelectToken
+      );
+      setUserSecondBalance(secondBalanceTemp);
+      setTextAreaValue("");
       dispatch(isLoadingThunk({ isLoading: false }));
+
+      setTimeout(() => {
+        setSwapSuccessModalOpen(true);
+      }, 1000);
+
+      setTimeout(() => {
+        setSwapSuccessModalOpen(false);
+      }, 5000);
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
@@ -518,6 +573,7 @@ export default function Swap768px(props) {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={firstSelectToken}
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     setQuestionMark(1);
                   }}
@@ -539,6 +595,7 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "Frame 10740102763")}
                 >
                   <svg
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       setQuestionMark(1);
                     }}
@@ -619,14 +676,15 @@ export default function Swap768px(props) {
                 labelHidden={false}
                 variation="default"
                 value={textareaValue}
-                onChange={e => {
-                  if (e.target.value > userFirstBalance) {
+                onChange={(e) => {
+                  if (+e.target.value > +userFirstBalance) {
                     e.target.value = userFirstBalance;
                   }
                   setTextAreaValue(e.target.value);
+                  handleTextareaChange(e);
                   delayedFunction1(e.target.value);
                 }}
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -953,6 +1011,7 @@ export default function Swap768px(props) {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={secondSelectToken}
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     setQuestionMark(2);
                   }}
@@ -974,6 +1033,7 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "Frame 10740102763")}
                 >
                   <svg
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       setQuestionMark(2);
                     }}
@@ -1056,7 +1116,7 @@ export default function Swap768px(props) {
                 value={secondAmountPrice ? secondAmountPrice : 0}
                 disabled
                 backgroundColor="transparent"
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -1155,7 +1215,29 @@ export default function Swap768px(props) {
         ) : (
           <></>
         )}
+        {swapSuccessModalOpen && (
+          <LoadingModal>
+            <SwapSuccessModal className="marginT" />
+          </LoadingModal>
+        )}
       </Flex>
     </>
   );
 }
+
+const LoadingModal = styled.div`
+  width: 100vmax;
+  height: 100vmax;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999999999;
+  .marginT {
+    margin-bottom: 270px;
+  }
+`;
