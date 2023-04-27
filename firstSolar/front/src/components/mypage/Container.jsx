@@ -15,7 +15,7 @@ const MypageContainer = () => {
     mypageLpListUp();
   }, []);
 
-  return <MypageComponent></MypageComponent>;
+  return <MypageComponent mypageLpListUp={mypageLpListUp}></MypageComponent>;
 };
 
 export default MypageContainer;
