@@ -1,11 +1,5 @@
 import express from "express";
-import Web3 from "web3";
-
-// Swap
 import { BigNumber } from "@ethersproject/bignumber";
-import { AbiItem } from "web3-utils";
-import { abi as DFSAbi } from "../../contracts/artifacts/Token.json";
-import { abi as DfsEthPoolAbi } from "../../contracts/artifacts/LiquidityPool.json";
 
 import {
   deployedDFS,
@@ -16,10 +10,6 @@ import {
   deployedDFSUSDT,
   deployedDFSBNB,
 } from "../deployList/index";
-// MainNet
-const web3 = new Web3(
-  "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
-);
 
 const router = express.Router();
 router.use(express.json());
@@ -50,7 +40,7 @@ router.post("/swapApprove", async (req, res) => {
     const amount = BigNumber.from(
       Math.floor(req.body.amount * 10 ** 18).toString()
     );
-    // 해당 풀 어드레스
+
     let approve = await result.methods
       .approve(req.body.poolAddress, amount)
       .encodeABI();
@@ -75,15 +65,12 @@ router.post("/swapTransaction", async (req, res) => {
         if ("eth" == target) {
           const swapTokenAddress = deployedDFS.options.address;
           return { pool: deployedDFSETH, swapTokenAddress };
-          //
         } else if ("bnb" == target) {
           const swapTokenAddress = deployedDFS.options.address;
           return { pool: deployedDFSBNB, swapTokenAddress };
-          //
         } else if ("usdt" == target) {
           const swapTokenAddress = deployedDFS.options.address;
           return { pool: deployedDFSUSDT, swapTokenAddress };
-          //
         } else {
           throw new Error("Invalid Error");
         }
@@ -119,7 +106,6 @@ router.post("/swapTransaction", async (req, res) => {
     const amount = BigNumber.from(
       Math.floor(req.body.amount * 10 ** 18).toString()
     );
-
     const tokenSwap = result.pool.methods
       .swapTokens(result.swapTokenAddress, amount)
       .encodeABI();
