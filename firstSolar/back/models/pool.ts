@@ -56,7 +56,7 @@ export default class pool extends Model {
           allowNull: false,
         },
         tvl: {
-          type: DataTypes.INTEGER.UNSIGNED,
+          type: DataTypes.DECIMAL(30, 0),
           allowNull: false,
         },
         oracleId: {
@@ -68,11 +68,11 @@ export default class pool extends Model {
           allowNull: false,
         },
         firstTokenBalance: {
-          type: DataTypes.STRING(255),
+          type: DataTypes.DECIMAL(30, 0),
           allowNull: false,
         },
         secondTokenBalance: {
-          type: DataTypes.STRING(255),
+          type: DataTypes.DECIMAL(30, 0),
           allowNull: false,
         },
       },
