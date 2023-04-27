@@ -44,8 +44,6 @@ router.get("/", async (req, res) => {
 
 router.post("/mypage", async (req, res) => {
   try {
-    // 요청에서 유저 주소 가져오기
-
     const userAddress = req.body.account;
     const MyPageList = [];
     const filterPool = [];
