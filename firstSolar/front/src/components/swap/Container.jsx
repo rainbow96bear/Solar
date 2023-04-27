@@ -17,7 +17,6 @@ const SwapContainer = () => {
     (async () => {
       try {
         const oracleId = await oracleIdList(params);
-        console.log("oracleId : ", oracleId);
         setOracleId(oracleId);
         if (!params.includes("DFS")) {
           const account = address2 ? address2 : address;

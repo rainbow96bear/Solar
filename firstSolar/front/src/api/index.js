@@ -26,8 +26,6 @@ export const oracleIdList = async (_params) => {
   try {
     const result = (await request.post("api/defi/detail", { id: _params }))
       .data;
-    console.log("result : ", result);
-
     return result;
   } catch (error) {
     console.error(error);
@@ -89,8 +87,6 @@ export const lpBalance = async (account, symbol) => {
 export const firstSync = async () => {
   try {
     const result = (await request.get("api/sync")).data;
-    // console.log("result : ", result);
-
     return result;
   } catch (error) {
     console.error(error);
@@ -107,7 +103,7 @@ export const mypageList = async (account) => {
     ).data;
     return result;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 

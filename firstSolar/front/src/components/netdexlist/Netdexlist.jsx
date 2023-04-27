@@ -161,7 +161,6 @@ const Netlist768px = (props) => {
               dispatch(isLoadingThunk({ isLoading: true }));
               const temp = await netList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
-              console.log("props?.item : ", props?.item);
               props.setFilter(props?.item);
               props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(isLoadingThunk({ isLoading: false }));
