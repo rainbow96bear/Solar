@@ -17,6 +17,7 @@ import { swapBalance } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
+import { motion } from "framer-motion";
 
 export default function AddLiquidityBottom768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
@@ -30,10 +31,7 @@ export default function AddLiquidityBottom768px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
-
-  const [userFirstBalance, setUserFirstBalance] = React.useState(0);
-  const [userSecondBalance, setUserSecondBalance] = React.useState(0);
+  const address2 = useSelector(state => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -48,33 +46,39 @@ export default function AddLiquidityBottom768px(props) {
       firstValue,
       props?.oracleiddata[0]?.secondToken
     );
+    try {
+      const txResult = await web3.eth.sendTransaction(approveDFSTx);
 
-    const txResult = await web3.eth.sendTransaction(approveDFSTx);
-
-    if (txResult) {
-      const approveOtherTokenTx = await approveOtherToken(
-        address2 ? address2 : address,
-        secondValue,
-        props?.oracleiddata[0]?.secondToken
-      );
-
-      const pairTxResult = await web3.eth.sendTransaction(approveOtherTokenTx);
-      if (pairTxResult) {
-        const addLiquidityTx = await addLiquidity(
+      if (txResult) {
+        const approveOtherTokenTx = await approveOtherToken(
           address2 ? address2 : address,
-          firstValue,
           secondValue,
           props?.oracleiddata[0]?.secondToken
         );
 
-        const addLiquidityTxResult = await web3.eth.sendTransaction(
-          addLiquidityTx
+        const pairTxResult = await web3.eth.sendTransaction(
+          approveOtherTokenTx
         );
-        if (addLiquidityTxResult) {
-          console.log(addLiquidityTxResult);
-          dispatch(isLoadingThunk({ isLoading: false }));
+        if (pairTxResult) {
+          const addLiquidityTx = await addLiquidity(
+            address2 ? address2 : address,
+            firstValue,
+            secondValue,
+            props?.oracleiddata[0]?.secondToken
+          );
+
+          const addLiquidityTxResult = await web3.eth.sendTransaction(
+            addLiquidityTx
+          );
+          if (addLiquidityTxResult) {
+            console.log(addLiquidityTxResult);
+            dispatch(isLoadingThunk({ isLoading: false }));
+          }
         }
       }
+    } catch (err) {
+      console.log(err);
+      dispatch(isLoadingThunk({ isLoading: false }));
     }
   };
 
@@ -145,7 +149,10 @@ export default function AddLiquidityBottom768px(props) {
         alignSelf="stretch"
         position="relative"
         padding="35px 66px 35px 66px"
-        style={{ borderBottom: "1px dashed rgba(234,0,50,0.45)" }}
+        style={{
+          borderBottom: "1px dashed rgba(234,0,50,0.45)",
+          borderWidth: "2px",
+        }}
         {...getOverrideProps(overrides, "Frame 10340052999")}
       >
         <Text
@@ -773,7 +780,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={(e) => {
+              onChange={e => {
                 setFirstValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40052913")}
@@ -958,54 +965,68 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={(e) => {
+              onChange={e => {
                 setSecondValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40052988")}
             ></TextAreaField>
           </Flex>
         </Flex>
-        <Flex
-          gap="10px"
-          direction="row"
-          width="unset"
-          height="66px"
-          justifyContent="center"
-          alignItems="center"
-          shrink="0"
-          alignSelf="stretch"
-          position="relative"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-          borderRadius="15px"
-          padding="13px 73px 13px 73px"
-          backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-          onClick={() => {
-            addLiquidtiyFunc();
+        <motion.div
+          style={{
+            height: "unset",
+            borderRadius: "15px",
+            backgroundImage:
+              "linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           }}
-          {...getOverrideProps(overrides, "Frame 10340122803")}
+          whileHover={{
+            borderRadius: "31px",
+            scale: 0.985,
+            backgroundImage:
+              "linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))",
+            boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+          }}
         >
-          <Text
-            fontFamily="ffProMedium"
-            fontSize="28px"
-            fontWeight="700"
-            color="rgba(239,239,239,1)"
-            lineHeight="33.8863639831543px"
-            textAlign="center"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="364.13px"
-            height="30.98px"
-            gap="unset"
-            alignItems="unset"
+          <Flex
+            gap="10px"
+            direction="row"
+            width="unset"
+            height="66px"
+            justifyContent="center"
+            alignItems="center"
             shrink="0"
+            alignSelf="stretch"
             position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="Add Liquidity"
-            {...getOverrideProps(overrides, "Enter an Amount")}
-          ></Text>
-        </Flex>
+            padding="13px 73px 13px 73px"
+            onClick={() => {
+              addLiquidtiyFunc();
+            }}
+            {...getOverrideProps(overrides, "Frame 10340122803")}
+          >
+            <Text
+              fontFamily="ffProMedium"
+              fontSize="28px"
+              fontWeight="700"
+              color="rgba(239,239,239,1)"
+              lineHeight="33.8863639831543px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="364.13px"
+              height="30.98px"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Add Liquidity"
+              {...getOverrideProps(overrides, "Enter an Amount")}
+            ></Text>
+          </Flex>
+        </motion.div>
       </Flex>
     </Flex>
   );

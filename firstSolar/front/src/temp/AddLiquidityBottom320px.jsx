@@ -11,11 +11,19 @@ import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useAccount } from "wagmi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { approveDFS, approveOtherToken, addLiquidity } from "../api/index";
-
+import { swapBalance } from "../api";
+import { useWeb3 } from "../modules/useWeb3.js";
+import { useWeb3K } from "../modules/useWeb3Kaikas";
+import { isLoadingThunk } from "../modules/isLoading.js";
+import { motion } from "framer-motion";
 export default function AddLiquidityBottom320px(props) {
   const { overrides, oracleiddata, ...rest } = props;
+  const dispatch = useDispatch();
+
+  const { web3, account, chainId, login } = useWeb3();
+  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
 
   const [firstValue, setFirstValue] = React.useState();
   const [secondValue, setSecondValue] = React.useState();
@@ -23,35 +31,90 @@ export default function AddLiquidityBottom320px(props) {
   const { address } = useAccount();
   const address2 = useSelector(state => state.account.account.account);
 
+  const [userFirstBalance, setUserFirstBalance] = React.useState(0);
+  const [userSecondBalance, setUserSecondBalance] = React.useState(0);
+
   const addLiquidtiyFunc = async () => {
+    dispatch(isLoadingThunk({ isLoading: true }));
     const approveDFSTx = await approveDFS(
       address2 ? address2 : address,
       firstValue,
       props?.oracleiddata[0]?.secondToken
     );
-    const txResult = await web3.eth.sendTransaction(approveDFSTx);
+    try {
+      const txResult = await web3.eth.sendTransaction(approveDFSTx);
 
-    if (txResult) {
-      const approveOtherTokenTx = await approveOtherToken(
-        address2 ? address2 : address,
-        secondValue,
-        props?.oracleiddata[0]?.secondToken
-      );
-      const pairTxResult = await web3.eth.sendTransaction(approveOtherTokenTx);
-      if (pairTxResult) {
-        const addLiquidityTx = await addLiquidity(
+      if (txResult) {
+        const approveOtherTokenTx = await approveOtherToken(
           address2 ? address2 : address,
-          firstValue,
           secondValue,
           props?.oracleiddata[0]?.secondToken
         );
-        const addLiquidityTxResult = await web3.eth.sendTransaction(
-          addLiquidityTx
+
+        const pairTxResult = await web3.eth.sendTransaction(
+          approveOtherTokenTx
         );
-        if (addLiquidityTxResult) console.log(addLiquidityTxResult);
+        if (pairTxResult) {
+          const addLiquidityTx = await addLiquidity(
+            address2 ? address2 : address,
+            firstValue,
+            secondValue,
+            props?.oracleiddata[0]?.secondToken
+          );
+
+          const addLiquidityTxResult = await web3.eth.sendTransaction(
+            addLiquidityTx
+          );
+          if (addLiquidityTxResult) {
+            console.log(addLiquidityTxResult);
+            dispatch(isLoadingThunk({ isLoading: false }));
+          }
+        }
       }
+    } catch (err) {
+      console.log(err);
+      dispatch(isLoadingThunk({ isLoading: false }));
     }
   };
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          props?.oracleiddata[0]?.firstToken
+        );
+        setUserFirstBalance(data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await swapBalance(
+          address ? address : address2,
+          props?.oracleiddata[0]?.secondToken
+        );
+        console.log("datadatadatadata", data);
+        setUserSecondBalance(data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  React.useEffect(() => {
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        loginK();
+      }
+    }
+  }, []);
 
   return (
     <Flex
@@ -81,6 +144,7 @@ export default function AddLiquidityBottom320px(props) {
         padding="0px 40px 18px 40px"
         style={{
           borderBottom: "1px dashed rgba(234,0,50,0.45)",
+          borderWidth: "2px",
         }}
         {...getOverrideProps(overrides, "Frame 105")}
       >
@@ -888,44 +952,63 @@ export default function AddLiquidityBottom320px(props) {
             ></TextAreaField>
           </Flex>
         </Flex>
-        <Flex
-          gap="10px"
-          direction="row"
-          width="unset"
-          height="unset"
-          justifyContent="center"
-          alignItems="center"
-          shrink="0"
-          alignSelf="stretch"
-          position="relative"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-          borderRadius="15px"
-          padding="13px 73px 13px 73px"
-          backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
-          {...getOverrideProps(overrides, "Frame 76")}
+        <motion.div
+          style={{
+            width: "230px",
+            height: "unset",
+            borderRadius: "15px",
+            backgroundImage:
+              "linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          }}
+          whileHover={{
+            borderRadius: "31px",
+            scale: 0.985,
+            backgroundImage:
+              "linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))",
+            boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+          }}
         >
-          <Text
-            fontFamily="ffProMedium"
-            fontSize={{ base: "14px", small: "14px" }}
-            fontWeight="700"
-            color="rgba(239,239,239,1)"
-            lineHeight="18.15340805053711px"
-            textAlign="center"
-            display="flex"
-            direction="column"
+          <Flex
+            gap="10px"
+            direction="row"
+            width="unset"
+            height="unset"
             justifyContent="center"
-            width="144.04px"
-            height="23px"
-            gap="unset"
-            alignItems="unset"
+            alignItems="center"
             shrink="0"
+            alignSelf="stretch"
             position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="Enter an Amount"
-            {...getOverrideProps(overrides, "Enter an Amount")}
-          ></Text>
-        </Flex>
+            borderRadius="15px"
+            padding="13px 73px 13px 73px"
+            {...getOverrideProps(overrides, "Frame 76")}
+            onClick={() => {
+              addLiquidtiyFunc();
+            }}
+          >
+            <Text
+              fontFamily="ffProMedium"
+              fontSize="17.5px"
+              fontWeight="700"
+              color="rgba(239,239,239,1)"
+              lineHeight="18.15340805053711px"
+              textAlign="center"
+              display="flex"
+              direction="column"
+              justifyContent="center"
+              width="144.04px"
+              height="23px"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Add Liquidity"
+              {...getOverrideProps(overrides, "Enter an Amount")}
+            ></Text>
+          </Flex>
+        </motion.div>
       </Flex>
     </Flex>
   );
