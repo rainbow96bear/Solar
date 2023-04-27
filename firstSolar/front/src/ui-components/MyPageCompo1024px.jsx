@@ -317,8 +317,6 @@ export default function MyPageCompo1024px(props) {
         </Flex>
 
         <MyPageList1024px />
-        <MyPageList1024px />
-        <MyPageList1024px />
       </Flex>
     </Flex>
   );

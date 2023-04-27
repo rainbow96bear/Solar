@@ -2,9 +2,9 @@ import * as React from "react";
 import { MyPageCompo1024px } from "../../ui-components";
 import styled from "styled-components";
 import "../../css/Font.css";
-import { useState } from "react";
 
-const MypageComponent = () => {
+const MypageComponent = ({ mypageLpListUp }) => {
+  console.log("mypageLpListUp", mypageLpListUp);
   return (
     <>
       <MypPage>
