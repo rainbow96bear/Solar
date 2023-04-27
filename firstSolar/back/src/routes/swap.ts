@@ -1,4 +1,4 @@
-import express from "express";
+import { Router, Request, Response } from "express";
 import { BigNumber } from "@ethersproject/bignumber";
 
 import {
@@ -11,11 +11,9 @@ import {
   deployedDFSBNB,
 } from "../deployList/index";
 
-const router = express.Router();
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
+const router = Router();
 
-router.post("/swapApprove", async (req, res) => {
+router.post("/swapApprove", async (req: Request, res: Response) => {
   try {
     const filterToken = async () => {
       switch (req.body.tokenName) {
@@ -56,7 +54,7 @@ router.post("/swapApprove", async (req, res) => {
   }
 });
 
-router.post("/swapTransaction", async (req, res) => {
+router.post("/swapTransaction", async (req: Request, res: Response) => {
   try {
     const filterPool = async () => {
       let target = req.body.convertToken;
@@ -120,7 +118,7 @@ router.post("/swapTransaction", async (req, res) => {
   }
 });
 
-router.post("/swapBalance", async (req, res) => {
+router.post("/swapBalance", async (req: Request, res: Response) => {
   try {
     const myTokenBalance = [];
     const target = await req.body.account;

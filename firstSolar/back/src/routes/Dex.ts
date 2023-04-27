@@ -30,11 +30,11 @@ router.post("/", async (req: Request, res: Response) => {
   // console.log(deployed);
   // const tokenamount1 = BigNumber.from(Math.floor(0.09 * 10 ** 18).toString());
 
-  let getpoolInfo = await deployed.methods
+  let getPoolInfo = await deployed.methods
     .getLiquidityPool(process.env.DFSToken_CA, process.env.OtherToken_CA)
     .call();
 
-  console.log(getpoolInfo);
+  console.log(getPoolInfo);
 
   // const lpDeployed = new web3.eth.Contract(
   //   LiquiditypoolAbi as AbiItem[],
