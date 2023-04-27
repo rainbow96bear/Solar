@@ -22,7 +22,7 @@ export { default as ConnectCompo768px } from "./ConnectCompo768px";
 export { default as ConnectCompo320px } from "./ConnectCompo320px";
 export { default as QuestionModalTop } from "./QuestionModalTop";
 export { default as QuestionModalBottom } from "./QuestionModalBottom";
-
+export { default as SwapSuccessModal } from "./SwapSuccessModal";
 export { default as Swap320px } from "./Swap320px";
 export { default as Swap768px } from "./Swap768px";
 export { default as SwapTop320px } from "./SwapTop320px";

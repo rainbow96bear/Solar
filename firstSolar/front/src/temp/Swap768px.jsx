@@ -217,7 +217,6 @@ export default function Swap768px(props) {
   const swapMethod = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
-      console.log("어드레스", address ? address : address2);
       const result1 = (
         await swapApprove(
           address ? address : address2,
@@ -229,13 +228,10 @@ export default function Swap768px(props) {
 
       let transactionResult;
       if (document.cookie.split(":")[0] == "metamask") {
-        console.log("web3 : ", web3);
-        console.log("result1 : ", result1);
         transactionResult = await web3.eth.sendTransaction(result1);
       } else if (document.cookie.split(":")[0] == "kaikas") {
         transactionResult = await web3K.eth.sendTransaction(result1);
       }
-      console.log("typeof textareaValue : ", typeof +textareaValue);
       const result2 = (
         await swapTransaction(
           address ? address : address2,
@@ -244,10 +240,7 @@ export default function Swap768px(props) {
         )
       ).data;
 
-      console.log("result2 : ", result2);
       if (document.cookie.split(":")[0] == "metamask") {
-        console.log("web3 : ", web3);
-        console.log("result2 : ", result2);
         transactionResult = await web3.eth.sendTransaction(result2);
       } else if (document.cookie.split(":")[0] == "kaikas") {
         transactionResult = await web3K.eth.sendTransaction(result2);
