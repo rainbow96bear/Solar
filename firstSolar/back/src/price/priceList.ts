@@ -1,8 +1,22 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
-const PriceList = async () => {
+interface Response {
+  data: any;
+}
+
+interface DBData {
+  IdData: number;
+  symbolData: string;
+  slugData: string;
+  convertUSDT: number;
+  convertETH: number;
+  convertBNB: number;
+  tokenPrice: number;
+}
+
+const PriceList = async (): Promise<DBData[] | undefined> => {
   try {
-    const BNBPrice = (
+    const BNBPrice: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest",
         {
@@ -16,7 +30,7 @@ const PriceList = async () => {
       )
     ).data;
 
-    const ETHPrice = (
+    const ETHPrice: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest",
         {
@@ -30,7 +44,7 @@ const PriceList = async () => {
       )
     ).data;
 
-    const USDTPrice = (
+    const USDTPrice: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest",
         {
@@ -44,7 +58,7 @@ const PriceList = async () => {
       )
     ).data;
 
-    const bnbPriceToUSDT: Response = (
+    const bnbPriceToUSDT: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/tools/price-conversion",
         {
@@ -60,7 +74,7 @@ const PriceList = async () => {
       )
     ).data;
 
-    const bnbPriceToETH: Response = (
+    const bnbPriceToETH: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/tools/price-conversion",
         {
@@ -76,7 +90,7 @@ const PriceList = async () => {
       )
     ).data;
 
-    const ETHPriceToBNB: Response = (
+    const ETHPriceToBNB: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/tools/price-conversion",
         {
@@ -92,7 +106,7 @@ const PriceList = async () => {
       )
     ).data;
 
-    const EthPriceToUSDT: Response = (
+    const EthPriceToUSDT: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/tools/price-conversion",
         {
@@ -108,7 +122,7 @@ const PriceList = async () => {
       )
     ).data;
 
-    const usdtPriceToETH: Response = (
+    const usdtPriceToETH: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/tools/price-conversion",
         {
@@ -124,7 +138,7 @@ const PriceList = async () => {
       )
     ).data;
 
-    const usdtPriceToBNB: Response = (
+    const usdtPriceToBNB: AxiosResponse = (
       await axios.get(
         "https://pro-api.coinmarketcap.com/v2/tools/price-conversion",
         {

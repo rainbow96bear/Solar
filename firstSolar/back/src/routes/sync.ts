@@ -1,25 +1,23 @@
 // server
-import express from "express";
+import { Router, Request, Response } from "express";
 import db from "../../models/index";
-
+import Pool from "../../models/pool";
+import Price from "../../models/price";
 // mypage sync
-import Web3 from "web3";
-import { AbiItem } from "web3-utils";
-const web3 = new Web3(
-  "wss://polygon-mumbai.g.alchemy.com/v2/U60psLWRd8tg7yShqQgZ-1YTMSYB0EGo"
-);
-
-import { abi as DexlAbi } from "../../contracts/artifacts/Dex.json";
+import {
+  deployed,
+  deployedDFSETH,
+  deployedDFSUSDT,
+  deployedDFSBNB,
+} from "../deployList/index";
 import price from "../price/priceList";
 import swapPriceSync from "../price/swapPriceSync";
 
-const router = express.Router();
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
+const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
-    const DbList = await db.Price.findAll();
+    const DbList: Price[] = await db.Price.findAll();
     if (DbList.length <= 0) {
       let priceDataList = await price();
       for (let i = 0; i < priceDataList.length; i++) {
@@ -42,51 +40,43 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/mypage", async (req, res) => {
+router.post("/mypage", async (req: Request, res: Response) => {
   try {
     const userAddress = req.body.account;
-    const MyPageList = [];
-    const filterPool = [];
+    const filterPool: Pool[] = [];
 
-    const DexContract = new web3.eth.Contract(
-      DexlAbi as AbiItem[],
-      process.env.DEX
-    );
-
-    let poolInfo = await DexContract.methods.getPoolInfo().call();
+    let poolInfo = await deployed.methods.getPoolInfo().call();
 
     for (let i = 0; i < poolInfo.length; i++) {
-      let userInfo = await DexContract.methods.userInfo(i, userAddress).call();
-      MyPageList.push({ pid: i, amount: userInfo.amount });
-    }
+      let balance = 0;
+      let pool: Pool | null = null;
 
-    for (let i = 0; i < MyPageList.length; i++) {
-      if (+MyPageList[i].amount > 0) {
-        switch (MyPageList[i].pid.toString()) {
-          case "0":
-            filterPool.push(
-              ...(await db.Pool.findAll({
-                where: { id: MyPageList[i].pid + 1 },
-              }))
-            );
-            break;
-          case "1":
-            filterPool.push(
-              ...(await db.Pool.findAll({
-                where: { id: MyPageList[i].pid + 1 },
-              }))
-            );
-            break;
-          case "2":
-            filterPool.push(
-              ...(await db.Pool.findAll({
-                where: { id: MyPageList[i].pid + 1 },
-              }))
-            );
-            break;
-          default:
-            throw new Error("Invalid token");
+      if (poolInfo[i][0] == process.env.DFS_ETH) {
+        balance = await deployedDFSETH.methods.balanceOf(userAddress).call();
+        if (balance > 0) {
+          pool = await db.Pool.findOne({
+            where: { tokenAddress: poolInfo[i][0] },
+          });
         }
+      } else if (poolInfo[i][0] == process.env.DFS_USDT) {
+        balance = await deployedDFSUSDT.methods.balanceOf(userAddress).call();
+        if (balance > 0) {
+          pool = await db.Pool.findOne({
+            where: { tokenAddress: poolInfo[i][0] },
+          });
+        }
+      } else if (poolInfo[i][0] == process.env.DFS_BNB) {
+        balance = await deployedDFSBNB.methods.balanceOf(userAddress).call();
+        if (balance > 0) {
+          pool = await db.Pool.findOne({
+            where: { tokenAddress: poolInfo[i][0] },
+          });
+        }
+      }
+
+      if (pool) {
+        pool.dataValues.balance = balance; // balance를 객체 원소에 추가
+        filterPool.push(pool);
       }
     }
 
@@ -96,7 +86,7 @@ router.post("/mypage", async (req, res) => {
   }
 });
 
-router.get("/datesync", async (req, res) => {
+router.get("/datesync", async (req: Request, res: Response) => {
   try {
     const sync = await swapPriceSync();
     res.send(sync);
