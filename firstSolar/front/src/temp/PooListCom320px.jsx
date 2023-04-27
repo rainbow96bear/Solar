@@ -22,7 +22,7 @@ import {
 } from "../components/netdexlist/Netdexlist";
 import Poolitem320px from "../components/pool/Poolitem320px";
 import { motion, LayoutGroup } from "framer-motion";
-import { getMainPoolList } from "../api";
+import { dexList, getMainPoolList, netList } from "../api";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
@@ -35,9 +35,34 @@ import {
 import { useLocation } from "react-router-dom";
 import logo from "./images/logo_new.png";
 
+const networkArray = [
+  "ethereum",
+  "optimism",
+  "metis",
+  "aurora",
+  "bsc",
+  "kava",
+  "heco",
+  "polygon",
+  "fantom",
+];
+
+const dexArray = [
+  "uniswap",
+  "pancakeswap",
+  "sushi",
+  "quickswap",
+  "linch",
+  "curve",
+  "bnt",
+  "knc",
+  "matcha",
+  "bal",
+];
+
 export default function PooListCom320px(props) {
   const { overrides, ...rest } = props;
-
+  const didMount = React.useRef(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
@@ -45,15 +70,21 @@ export default function PooListCom320px(props) {
   const [pageIndex, setPageIndex] = React.useState(
     Number(queryParams.get("page")) || 1
   );
+
+  const [filter, setFilter] = React.useState(String(queryParams.get("filter")));
+
   const [totalPages, setTotalPages] = React.useState(1);
   const [mainNetList, setMainNetList] = React.useState([]);
   const [platformList, setPlatformList] = React.useState([]);
   const [mainNetList1, setMainNetList1] = React.useState([]);
   const [platformList1, setPlatformList1] = React.useState([]);
+
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
+    queryParams.set("filter", filter);
+
     const newUrl = `${location.pathname}?${queryParams?.toString()}`;
     window.history.replaceState(null, "", newUrl);
   }, [pageIndex, location, queryParams]);
@@ -61,12 +92,28 @@ export default function PooListCom320px(props) {
   const getPoolList = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
-      const { poolListData, resultTotalPages } = await getMainPoolList(
-        pageIndex
-      );
-      setCurrentPagePoolList(poolListData);
-      setTotalPages(resultTotalPages);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      if (filter == "null") {
+        const { poolListData, resultTotalPages } = await getMainPoolList(
+          pageIndex
+        );
+        setCurrentPagePoolList(poolListData);
+        setTotalPages(resultTotalPages);
+      } else if (filter != "null") {
+        if (networkArray.includes(filter)) {
+          const data = await netList(filter, pageIndex);
+          setCurrentPagePoolList(data.poolListData);
+          setTotalPages(Math.ceil(data.poolListDataLength / 10));
+        } else if (dexArray.includes(filter)) {
+          const data = await dexList(filter, pageIndex);
+
+          setCurrentPagePoolList(data.poolListData);
+          setTotalPages(Math.ceil(data.poolListDataLength / 10));
+        }
+      }
+
+      setTimeout(() => {
+        dispatch(isLoadingThunk({ isLoading: false }));
+      }, 5000);
     } catch (error) {
       dispatch(isLoadingThunk({ isLoading: false }));
       console.error(error);
@@ -76,6 +123,11 @@ export default function PooListCom320px(props) {
   React.useEffect(() => {
     getPoolList();
   }, [pageIndex]);
+
+  React.useEffect(() => {
+    if (didMount.current) setPageIndex(1);
+    else didMount.current = true;
+  }, [filter]);
 
   React.useEffect(() => {
     setMainNetList(Object.keys(mainNet768px1));
@@ -202,7 +254,10 @@ export default function PooListCom320px(props) {
                       <Netlist320px
                         key={`Netlist320px-1${idx}`}
                         item={item}
+                        setFilter={setFilter}
                         setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        pageIndex={pageIndex}
                       />
                     ))}
                   </Flex>
@@ -225,7 +280,10 @@ export default function PooListCom320px(props) {
                       <Netlist320px
                         key={`Netlist320px-2${idx}`}
                         item={item}
+                        pageIndex={pageIndex}
                         setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        setFilter={setFilter}
                       />
                     ))}
                   </Flex>
@@ -379,7 +437,7 @@ export default function PooListCom320px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={pageNum => {
+                onChange={(pageNum) => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {
