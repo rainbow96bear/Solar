@@ -153,7 +153,7 @@ export default function DepositButton1024px(props) {
       {questionMark == 1 ? (
         <QuestionModalDeposit
           setquestionmark={setQuestionMark}
-          myPagelist={props.myPageList}
+          mypagelist={props.mypagelist}
         ></QuestionModalDeposit>
       ) : (
         <></>
@@ -161,7 +161,7 @@ export default function DepositButton1024px(props) {
       {questionMark == 2 ? (
         <QuestionModalWithDraw
           setquestionmark={setQuestionMark}
-          myPagelist={props.myPageList}
+          mypagelist={props.mypagelist}
         ></QuestionModalWithDraw>
       ) : (
         <></>
