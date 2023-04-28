@@ -22,10 +22,9 @@ contract LiquidityPool is ERC20 {
   uint256 public reserve2;
   // State variables for liquidity shares
   uint256 public totalLiquidity;
-  address public DexA;
+
   // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
-  uint256 testnum;
   address public rewardA;
   // Events
   event MintLpToken(address indexed _liquidityProvider, uint256 _sharesMinted);
@@ -57,20 +56,10 @@ contract LiquidityPool is ERC20 {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = IDFS(DFSTokenA);
-    // rwdToken1Amount=0;
-    // rwdToken2Amount=0;
   }
 
   function add(address _rewardA) public rewardLock {
     rewardA = _rewardA;
-  }
-
-  receive() external payable {
-    testnum = testnum + 1;
-  }
-
-  function getTestNum() public view returns (uint256) {
-    return testnum;
   }
 
   // Function to get reserves
@@ -96,24 +85,14 @@ contract LiquidityPool is ERC20 {
     totalLiquidity = totalSupply();
   }
 
-  // function _mint(address _to, uint256 _amount) private {
-  //   userLiquidity[_to] = balanceOf(_to);
-  //   totalLiquidity += _amount;
-  // }
-
   // Internal function to burn liquidity shares
   // from은 lp토큰 소유한 사용자 주소
 
   function burn(address _from, uint256 _amount) private {
     _burn(_from, _amount);
-    userLiquidity[_from] = balanceOf(_from);
+    userLiquidity[_from] = userLiquidity[_from].sub(_amount);
     totalLiquidity = totalSupply();
   }
-
-  // function _burn(address _from, uint256 _amount) private {
-  //   userLiquidity[_from] -= _amount;
-  //   totalLiquidity -= _amount;
-  // }
 
   // Internal function to update liquidity pool reserves
   function _update(uint256 _reserve1, uint256 _reserve2) private {

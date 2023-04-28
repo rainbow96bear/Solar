@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 
 contract MonthlyCheck {
   uint256 private constant SECONDS_PER_DAY = 86400;
-  uint256 private constant SECONDS_PER_MONTH = 30 * SECONDS_PER_DAY;
+  uint256 private constant SECONDS_PER_MONTH = 28 * SECONDS_PER_DAY;
   uint256 private startTimestamp;
 
   constructor() {
@@ -17,7 +17,7 @@ contract MonthlyCheck {
     return currentDay;
   }
 
-  function time() public view returns(uint256){
-return startTimestamp;
+  function time() public view returns (uint256) {
+    return startTimestamp;
   }
 }
