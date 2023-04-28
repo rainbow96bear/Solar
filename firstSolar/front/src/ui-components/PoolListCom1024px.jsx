@@ -62,8 +62,8 @@ export default function PoolListCom1024px(props) {
   const [mainNetList, setMainNetList] = React.useState([]);
   const [platformList, setPlatformList] = React.useState([]);
 
-  const [sortAPY, setSortAPY] = React.useState();
-  const [sortTVL, setSortTVL] = React.useState();
+  const [sortTVL, setSortTVL] = React.useState("down");
+  const [sortAPY, setSortAPY] = React.useState("down");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -132,6 +132,7 @@ export default function PoolListCom1024px(props) {
   });
 
   const aesAPY = (a, b) => {
+    console.log("aesAPY");
     if (a.apy < b.apy) {
       return -1;
     }
@@ -152,6 +153,7 @@ export default function PoolListCom1024px(props) {
   };
 
   const aesTVL = (a, b) => {
+    console.log("aesTVL");
     if (a.tvl < b.tvl) {
       return -1;
     }
@@ -473,6 +475,16 @@ export default function PoolListCom1024px(props) {
                     basis="0"
                     style={{ cursor: "pointer" }}
                     justifyContent="center"
+                    onClick={() => {
+                      setSortAPY(
+                        sortAPY == "down"
+                          ? "up"
+                          : sortAPY == "up"
+                          ? "down"
+                          : "up"
+                      );
+                      setSortTVL(undefined);
+                    }}
                   >
                     <Text
                       fontFamily="ffProBook"
@@ -492,15 +504,6 @@ export default function PoolListCom1024px(props) {
                       whiteSpace="pre-wrap"
                       children="APY"
                       style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        setSortAPY(
-                          sortAPY == undefined
-                            ? "up"
-                            : sortAPY == "up"
-                            ? "down"
-                            : "up"
-                        );
-                      }}
                       {...getOverrideProps(overrides, "APY")}
                     ></Text>
                     <svg
@@ -518,6 +521,16 @@ export default function PoolListCom1024px(props) {
                     basis="0"
                     justifyContent="center"
                     style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setSortTVL(
+                        sortTVL == "down"
+                          ? "up"
+                          : sortTVL == "up"
+                          ? "down"
+                          : "up"
+                      );
+                      setSortAPY(undefined);
+                    }}
                   >
                     <Text
                       fontFamily="ffProBook"
@@ -536,15 +549,6 @@ export default function PoolListCom1024px(props) {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children="TVL"
-                      onClick={() => {
-                        setSortTVL(
-                          sortTVL == undefined
-                            ? "up"
-                            : sortTVL == "up"
-                            ? "down"
-                            : "up"
-                        );
-                      }}
                       {...getOverrideProps(overrides, "TVL")}
                     ></Text>
                     <svg
@@ -611,27 +615,7 @@ export default function PoolListCom1024px(props) {
               initial={{ borderRadius: 25 }}
               transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
             >
-              {sortAPY == undefined && sortTVL == undefined ? (
-                // 정렬 안함
-                currentPagePoolList?.map((item, idx) => (
-                  <Poolitem1024
-                    gap="17px"
-                    direction="column"
-                    width="unset"
-                    height="unset"
-                    justifyContent="center"
-                    alignItems="center"
-                    shrink="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    key={`PoolList1024px-${idx}`}
-                    item={item}
-                    length={currentPagePoolList.length}
-                    idx={idx}
-                  />
-                ))
-              ) : sortAPY == "up" ? (
+              {sortAPY == "up" ? (
                 currentPagePoolList
                   .sort(aesAPY)
                   .map((item, idx) => (
