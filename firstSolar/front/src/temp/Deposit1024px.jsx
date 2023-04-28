@@ -7,14 +7,17 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
+import { Flex, Image, Text, TextAreaField, Icon } from "@aws-amplify/ui-react";
+import QuestionModalBottom from "./QuestionModalDeposit";
+
 export default function Deposit1024px(props) {
   const { overrides, ...rest } = props;
+  const [questionMark, setQuestionMark] = React.useState(0);
   return (
     <Flex
       gap="38px"
       direction="column"
-      width="689px"
+      width="53vw"
       height="unset"
       justifyContent="flex-start"
       alignItems="flex-start"
@@ -65,6 +68,43 @@ export default function Deposit1024px(props) {
           children="Deposit"
           {...getOverrideProps(overrides, "Deposit40822779")}
         ></Text>
+        <Flex
+          gap="10px"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="flex-end"
+          alignItems="center"
+          shrink="0"
+          position="relative"
+          padding="5px 5px 5px 5px"
+          className="cursorPointer"
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            setQuestionMark(0);
+          }}
+          {...getOverrideProps(overrides, "XIcon")}
+        >
+          <Icon
+            width="20px"
+            height="20px"
+            viewBox={{ minX: 0, minY: 0, width: 20, height: 20 }}
+            paths={[
+              {
+                d: "M3.59236 0L0 3.59236L1.8344 5.42675L6.36943 10.0382L1.8344 14.5732L0 16.3312L3.59236 20L5.42675 18.1656L10.0382 13.5541L14.5732 18.1656L16.3312 20L20 16.3312L18.1656 14.5732L13.5541 10.0382L18.1656 5.42675L20 3.59236L16.3312 1.13144e-15L14.5732 1.8344L10.0382 6.36943L5.42675 1.8344L3.59236 0Z",
+                fill: "rgba(0,0,0,1)",
+                fillRule: "nonzero",
+              },
+            ]}
+            display="block"
+            gap="unset"
+            alignItems="unset"
+            justifyContent="unset"
+            shrink="0"
+            position="relative"
+            {...getOverrideProps(overrides, "Vector")}
+          ></Icon>
+        </Flex>
       </Flex>
       <Flex
         gap="43px"

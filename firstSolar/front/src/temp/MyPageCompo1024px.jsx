@@ -78,7 +78,7 @@ export default function MyPageCompo1024px(props) {
           {...getOverrideProps(overrides, "Frame 14240762657")}
         >
           <Text
-            fontFamily="ffProBlack"
+            fontFamily="Inter"
             fontSize="43px"
             fontWeight="600"
             lineHeight="52.039772033691406px"
@@ -176,7 +176,7 @@ export default function MyPageCompo1024px(props) {
                 {...getOverrideProps(overrides, "ghrgclzzd 740892934")}
               ></Image>
               <Text
-                fontFamily="ffProMedium"
+                fontFamily="Inter"
                 fontSize="17px"
                 fontWeight="600"
                 lineHeight="20.573863983154297px"
@@ -211,7 +211,7 @@ export default function MyPageCompo1024px(props) {
               {...getOverrideProps(overrides, "Frame 9140892937")}
             >
               <Text
-                fontFamily="ffProLight"
+                fontFamily="Inter"
                 fontSize="33px"
                 fontWeight="600"
                 lineHeight="39.9375px"
@@ -264,7 +264,7 @@ export default function MyPageCompo1024px(props) {
                 {...getOverrideProps(overrides, "ghrgclzzd 740892940")}
               ></Image>
               <Text
-                fontFamily="ffProMedium"
+                fontFamily="Inter"
                 fontSize="17px"
                 fontWeight="600"
                 color="rgba(239,239,239,1)"
@@ -316,7 +316,7 @@ export default function MyPageCompo1024px(props) {
               {...getOverrideProps(overrides, "Frame 175")}
             >
               <Text
-                fontFamily="ffProExtraLight"
+                fontFamily="Inter"
                 fontSize="24px"
                 fontWeight="600"
                 lineHeight="29.045454025268555px"
@@ -334,9 +334,9 @@ export default function MyPageCompo1024px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={`Balance : ${
-                  lpTokenValue?.slice(0, 7) / 1000000 || 0
-                } ${lpToken || ""} `}
+                children={`${lpTokenValue?.slice(0, 7) / 1000000 || 0} ${
+                  lpToken || ""
+                } `}
                 {...getOverrideProps(overrides, "Balance : 0")}
               ></Text>
             </Flex>

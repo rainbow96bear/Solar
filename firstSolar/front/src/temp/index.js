@@ -22,8 +22,6 @@ export { default as ConnectCompo768px } from "./ConnectCompo768px";
 export { default as ConnectCompo320px } from "./ConnectCompo320px";
 export { default as QuestionModalTop } from "./QuestionModalTop";
 export { default as QuestionModalBottom } from "./QuestionModalBottom";
-export { default as QuestionModalDeposit } from "./QuestionModalDeposit";
-
 export { default as MyPageCompo1024px } from "./MyPageCompo1024px";
 export { default as MyPageCompo768px } from "./MyPageCompo768px";
 export { default as DepositButton1024px } from "./DepositButton1024px";
@@ -31,6 +29,7 @@ export { default as DepositButton768px } from "./DepositButton768px";
 export { default as Deposit1024px } from "./Deposit1024px";
 export { default as WithDraw1024px } from "./WithDraw1024px";
 
+export { default as SwapSuccessModal } from "./SwapSuccessModal";
 export { default as Swap320px } from "./Swap320px";
 export { default as Swap768px } from "./Swap768px";
 export { default as SwapTop320px } from "./SwapTop320px";
