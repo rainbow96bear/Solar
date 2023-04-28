@@ -129,7 +129,7 @@ export default function PoolListCom1024px(props) {
     query: "(min-width:992px)",
   });
 
-  function aesAPY(a, b) {
+  const aesAPY = (a, b) => {
     if (a.apy < b.apy) {
       return -1;
     }
@@ -137,9 +137,9 @@ export default function PoolListCom1024px(props) {
       return 1;
     }
     return 0;
-  }
+  };
 
-  function descAPY(a, b) {
+  const descAPY = (a, b) => {
     if (a.apy > b.apy) {
       return -1;
     }
@@ -147,9 +147,9 @@ export default function PoolListCom1024px(props) {
       return 1;
     }
     return 0;
-  }
+  };
 
-  function aesTVL(a, b) {
+  const aesTVL = (a, b) => {
     if (a.tvl < b.tvl) {
       return -1;
     }
@@ -157,9 +157,9 @@ export default function PoolListCom1024px(props) {
       return 1;
     }
     return 0;
-  }
+  };
 
-  function descTVL(a, b) {
+  const descTVL = (a, b) => {
     if (a.tvl > b.tvl) {
       return -1;
     }
@@ -167,8 +167,7 @@ export default function PoolListCom1024px(props) {
       return 1;
     }
     return 0;
-  }
-
+  };
   return (
     <>
       {isDesktop ? (
