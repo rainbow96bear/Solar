@@ -8,22 +8,25 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
+import QuestionModalDeposit from "./QuestionModalDeposit";
+import QuestionModalWithDraw from "./QuestionModalWithDraw";
+
 export default function DepositButton1024px(props) {
   const { overrides, ...rest } = props;
+
+  const [questionMark, setQuestionMark] = React.useState(0);
   return (
     <>
       <Flex
         gap="33px"
         direction="row"
-        width="88vw"
+        width="78.1vw"
         height="unset"
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
         borderRadius="35px"
         padding="31px 63.5px 31px 63.5px"
-        backgroundImage="rgba(5, 3, 2, 0.75)"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         {...getOverrideProps(overrides, "DepositButton1024px")}
         {...rest}
       >
@@ -64,6 +67,9 @@ export default function DepositButton1024px(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Deposit"
+            onClick={() => {
+              setQuestionMark(1);
+            }}
             {...getOverrideProps(overrides, "Deposit")}
           ></Text>
         </Flex>
@@ -105,9 +111,28 @@ export default function DepositButton1024px(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="With Draw"
+            onClick={() => {
+              setQuestionMark(2);
+            }}
             {...getOverrideProps(overrides, "With Draw")}
           ></Text>
         </Flex>
+        {questionMark == 1 ? (
+          <QuestionModalDeposit
+            setquestionmark={setQuestionMark}
+            myPagelist={props.myPageList}
+          ></QuestionModalDeposit>
+        ) : (
+          <></>
+        )}
+        {questionMark == 2 ? (
+          <QuestionModalWithDraw
+            setquestionmark={setQuestionMark}
+            myPagelist={props.myPageList}
+          ></QuestionModalWithDraw>
+        ) : (
+          <></>
+        )}
       </Flex>
     </>
   );

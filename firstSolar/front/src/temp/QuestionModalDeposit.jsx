@@ -57,8 +57,8 @@ export default function QuestionModalDeposit(props) {
           {...getOverrideProps(overrides, "Frame 105")}
         >
           <Text
-            fontFamily="ffProBold"
-            fontSize="28px"
+            fontFamily="Inter"
+            fontSize="24px"
             fontWeight="700"
             lineHeight="29.045454025268555px"
             textAlign="left"
@@ -666,11 +666,10 @@ export default function QuestionModalDeposit(props) {
             borderRadius="15px"
             padding="13px 73px 13px 73px"
             backgroundColor="rgba(255,226,0,0.35)"
-            style={{ cursor: "pointer" }}
             {...getOverrideProps(overrides, "Frame 103")}
           >
             <Text
-              fontFamily="ffProBook"
+              fontFamily="Inter"
               fontSize="27px"
               fontWeight="700"
               lineHeight="32.6761360168457px"

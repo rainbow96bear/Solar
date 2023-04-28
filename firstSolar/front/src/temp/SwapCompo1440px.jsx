@@ -143,6 +143,7 @@ export default function SwapCompo1440px(props) {
             whiteSpace="pre-wrap"
             children="Add Liquidity"
             disabled={disbleButton ? false : true}
+            backgroundColor="rgba(255,226,0,0.001)"
             {...getOverrideProps(overrides, "Add Liquidity")}
           ></Button>
         </Flex>

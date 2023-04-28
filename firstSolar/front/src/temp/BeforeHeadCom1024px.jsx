@@ -17,7 +17,6 @@ import logo from "./images/logo_new.png";
 import LoginAccount from "./LoginAccount.jsx";
 import ConnectModal from "./ConnectModal.jsx";
 import LoadingButton from "./LoadingButton.jsx";
-import ConnectButton from "./ConnectButton.jsx";
 import { Web3Button } from "@web3modal/react";
 import { useWeb3Modal } from "@web3modal/react";
 import { useAccount } from "wagmi";
@@ -26,10 +25,10 @@ import { useMediaQuery } from "react-responsive";
 export default function BeforeHeadCom1024px(props) {
   const { overrides, ...rest } = props;
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
-  const login = useSelector(state => state.login.login.login);
+  const login = useSelector((state) => state.login.login.login);
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const navigate = useNavigate();
   const { address, isConnecting, isDisconnected } = useAccount();
   const { pathname } = useLocation();
@@ -40,7 +39,7 @@ export default function BeforeHeadCom1024px(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -74,7 +73,7 @@ export default function BeforeHeadCom1024px(props) {
             <Flex
               gap="24px"
               direction="row"
-              width="221px"
+              width="80px"
               height="unset"
               justifyContent="flex-start"
               alignItems="center"

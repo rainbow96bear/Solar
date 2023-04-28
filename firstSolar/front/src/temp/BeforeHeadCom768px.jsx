@@ -33,8 +33,8 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 export default function BeforeHeadCom768px(props) {
   const { overrides, ...rest } = props;
-  const login = useSelector(state => state.login.login.login);
-  const connect = useSelector(state => state.connect.connect.connect);
+  const login = useSelector((state) => state.login.login.login);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const { address, isConnecting, isDisconnected } = useAccount();
 
   const isTablet = useMediaQuery({
@@ -72,7 +72,10 @@ export default function BeforeHeadCom768px(props) {
               padding="0px 0px 0px 0px"
               {...getOverrideProps(overrides, "Menu")}
             >
-              <Link to="/" style={{ display: "flex", alignItems: "center" }}>
+              <Link
+                to="/?page=1&filter=null"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <Flex
                   gap="10px"
                   direction="row"
