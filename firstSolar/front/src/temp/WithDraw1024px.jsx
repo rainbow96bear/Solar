@@ -14,7 +14,7 @@ export default function WithDraw1024px(props) {
     <Flex
       gap="38px"
       direction="column"
-      width="689px"
+      width="53vw"
       height="unset"
       justifyContent="flex-start"
       alignItems="flex-start"
@@ -45,7 +45,7 @@ export default function WithDraw1024px(props) {
       >
         <Text
           fontFamily="Inter"
-          fontSize="24px"
+          fontSize="28px"
           fontWeight="700"
           lineHeight="29.045454025268555px"
           textAlign="left"

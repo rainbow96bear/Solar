@@ -20,7 +20,7 @@ export default function AddLiquidityTop768px(props) {
   const dateString = date.toLocaleDateString();
 
   const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
-  const reducedNumber = tokenNumBer?.toString().substring(0, 7);
+  const reducedNumber = tokenNumBer?.toString().substring(0, 5);
 
   return (
     <>
@@ -492,7 +492,11 @@ export default function AddLiquidityTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={reducedNumber ? `${reducedNumber} K` : "0 K"}
+              children={
+                reducedNumber
+                  ? `${props?.oracleiddata[0]?.firstTokenBalance.slice(0, 6)} K`
+                  : "0 K"
+              }
               {...getOverrideProps(overrides, "99,99M40132809")}
             ></Text>
           </Flex>
@@ -548,7 +552,7 @@ export default function AddLiquidityTop768px(props) {
                 fontWeight="700"
                 lineHeight="21.784090042114258px"
                 textAlign="left"
-                display="block"
+                display="flex"
                 direction="column"
                 justifyContent="unset"
                 width="unset"
@@ -584,7 +588,14 @@ export default function AddLiquidityTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={reducedNumber ? `${reducedNumber} K` : "0 K"}
+              children={
+                reducedNumber
+                  ? `${props?.oracleiddata[0]?.secondTokenBalance.slice(
+                      0,
+                      6
+                    )} K`
+                  : "0 K"
+              }
               {...getOverrideProps(overrides, "99,99M40132817")}
             ></Text>
           </Flex>
@@ -692,9 +703,7 @@ export default function AddLiquidityTop768px(props) {
                 whiteSpace="pre-wrap"
                 children={
                   props?.oracleiddata[0]?.tvl
-                    ? `${
-                        Math.round(props?.oracleiddata[0]?.tvl * 10000) / 10000
-                      } `
+                    ? `${props?.oracleiddata[0]?.tvl.slice(0, 10) / 100} `
                     : 0
                 }
                 {...getOverrideProps(overrides, "16.82%")}

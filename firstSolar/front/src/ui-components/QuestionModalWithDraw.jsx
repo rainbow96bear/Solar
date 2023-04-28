@@ -11,8 +11,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, Icon, TextAreaField } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
-
-export default function QuestionModalDeposit(props) {
+export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
   console.log("item", props.myPagelist);
@@ -51,7 +50,7 @@ export default function QuestionModalDeposit(props) {
           position="relative"
           padding="35px 66px 35px 66px"
           style={{
-            borderBottom: "1px dashed rgba(255,226,0,0.35)",
+            borderBottom: "1px dashed rgba(234,0,50,0.45)",
             borderWidth: "2px",
           }}
           {...getOverrideProps(overrides, "Frame 105")}
@@ -75,7 +74,7 @@ export default function QuestionModalDeposit(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Deposit"
+            children="With Draw"
             {...getOverrideProps(overrides, "Deposit40822779")}
           ></Text>
           <Flex
@@ -382,7 +381,7 @@ export default function QuestionModalDeposit(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="DEPOSIT AMOUNT"
+              children="With Draw AMOUNT"
               {...getOverrideProps(overrides, "DEPOSIT AMOUNT")}
             ></Text>
             <Flex
@@ -665,14 +664,15 @@ export default function QuestionModalDeposit(props) {
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="15px"
             padding="13px 73px 13px 73px"
-            backgroundColor="rgba(255,226,0,0.35)"
+            backgroundColor="rgba(234,0,50,0.45)"
             style={{ cursor: "pointer" }}
             {...getOverrideProps(overrides, "Frame 103")}
           >
             <Text
-              fontFamily="ffProBook"
+              fontFamily="ffProMedium"
               fontSize="27px"
               fontWeight="700"
+              color="rgba(244,244,244,1)"
               lineHeight="32.6761360168457px"
               textAlign="center"
               display="block"
@@ -686,7 +686,7 @@ export default function QuestionModalDeposit(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Deposit"
+              children="With Draw"
               {...getOverrideProps(overrides, "Deposit40822827")}
             ></Text>
           </Flex>
