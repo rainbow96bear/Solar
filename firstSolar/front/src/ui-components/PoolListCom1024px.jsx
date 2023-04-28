@@ -19,7 +19,7 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import { mainNet1024px1, platform } from "../mainNet";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const networkArray = [
   "ethereum",
@@ -66,13 +66,15 @@ export default function PoolListCom1024px(props) {
   const [sortTVL, setSortTVL] = React.useState();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
     queryParams.set("filter", filter);
 
     const newUrl = `${location.pathname}?${queryParams.toString()}`;
     window.history.replaceState(null, "", newUrl);
-  }, [pageIndex, filter, location, queryParams]);
+  }, [pageIndex, filter, queryParams]);
 
   const getPoolList = async () => {
     try {
@@ -465,69 +467,95 @@ export default function PoolListCom1024px(props) {
                     children="DEPOSITED"
                     {...getOverrideProps(overrides, "DEPOSITED")}
                   ></Text>
-                  <Text
-                    fontFamily="ffProBook"
-                    fontSize="12px"
-                    fontWeight="600"
-                    lineHeight="14.522727012634277px"
-                    textAlign="center"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="25px"
-                    gap="unset"
-                    alignItems="unset"
+                  <Flex
                     grow="1"
                     shrink="1"
                     basis="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="APY"
                     style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setSortAPY(
-                        sortAPY == undefined
-                          ? "up"
-                          : sortAPY == "up"
-                          ? "down"
-                          : undefined
-                      );
-                    }}
-                    {...getOverrideProps(overrides, "APY")}
-                  ></Text>
-                  <Text
-                    fontFamily="ffProBook"
-                    fontSize="12px"
-                    fontWeight="600"
-                    lineHeight="14.522727012634277px"
-                    textAlign="center"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="25px"
-                    gap="unset"
-                    alignItems="unset"
+                    justifyContent="center"
+                  >
+                    <Text
+                      fontFamily="ffProBook"
+                      fontSize="12px"
+                      fontWeight="600"
+                      lineHeight="14.522727012634277px"
+                      textAlign="center"
+                      display="block"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="25px"
+                      gap="unset"
+                      alignItems="unset"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="APY"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setSortAPY(
+                          sortAPY == undefined
+                            ? "up"
+                            : sortAPY == "up"
+                            ? "down"
+                            : "up"
+                        );
+                      }}
+                      {...getOverrideProps(overrides, "APY")}
+                    ></Text>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 320 512"
+                      width="15px"
+                      height="15px"
+                    >
+                      <path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z" />
+                    </svg>
+                  </Flex>
+                  <Flex
                     grow="1"
                     shrink="1"
                     basis="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="TVL"
-                    onClick={() => {
-                      setSortTVL(
-                        sortTVL == undefined
-                          ? "up"
-                          : sortTVL == "up"
-                          ? "down"
-                          : undefined
-                      );
-                    }}
-                    {...getOverrideProps(overrides, "TVL")}
-                  ></Text>
+                    justifyContent="center"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Text
+                      fontFamily="ffProBook"
+                      fontSize="12px"
+                      fontWeight="600"
+                      lineHeight="14.522727012634277px"
+                      textAlign="center"
+                      display="block"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="25px"
+                      gap="unset"
+                      alignItems="unset"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="TVL"
+                      onClick={() => {
+                        setSortTVL(
+                          sortTVL == undefined
+                            ? "up"
+                            : sortTVL == "up"
+                            ? "down"
+                            : "up"
+                        );
+                      }}
+                      {...getOverrideProps(overrides, "TVL")}
+                    ></Text>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 320 512"
+                      width="15px"
+                      height="15px"
+                    >
+                      <path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z" />
+                    </svg>
+                  </Flex>
                   <Text
                     fontFamily="ffProBook"
                     fontSize="12px"

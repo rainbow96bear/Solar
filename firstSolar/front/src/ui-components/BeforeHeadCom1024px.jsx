@@ -69,7 +69,12 @@ export default function BeforeHeadCom1024px(props) {
           {...getOverrideProps(overrides, "BeforeHeadCom1024px")}
           {...rest}
         >
-          <Link to="/" style={{ display: "flex", alignItems: "center" }}>
+          <Flex
+            onClick={() => {
+              navigate("/redirectHome");
+            }}
+            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          >
             <Flex
               gap="24px"
               direction="row"
@@ -101,7 +106,7 @@ export default function BeforeHeadCom1024px(props) {
                 {...getOverrideProps(overrides, "unsplash:PfBvNnGIhmQ")}
               ></Image>
             </Flex>
-          </Link>
+          </Flex>
           <SearchField
             width="264px"
             height="unset"

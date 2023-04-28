@@ -41,8 +41,8 @@ export default function LoginAccount(props) {
     };
   }, [view]);
 
-  const logoutMethod = () => {
-    logout(document.cookie.split(":")[0], account);
+  const logoutMethod = async () => {
+    await logout(document.cookie.split(":")[0], account);
 
     dispatch(connectThunk({ connect: false }));
     dispatch(loginThunk({ false: false }));
