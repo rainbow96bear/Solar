@@ -18,6 +18,7 @@ const Poolitem1024 = (props) => {
 
   const addressResult = address || address2;
   const dispatch = useDispatch();
+  const pageIndex = useSelector((state) => state.pageIndex);
 
   return (
     <>

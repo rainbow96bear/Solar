@@ -72,9 +72,15 @@ export default function BeforeHeadCom768px(props) {
               padding="0px 0px 0px 0px"
               {...getOverrideProps(overrides, "Menu")}
             >
-              <Link
-                to="/?page=1&filter=null"
-                style={{ display: "flex", alignItems: "center" }}
+              <Flex
+                onClick={() => {
+                  navigate("/redirectHome");
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
               >
                 <Flex
                   gap="10px"
@@ -111,7 +117,7 @@ export default function BeforeHeadCom768px(props) {
                     )}
                   ></Image>
                 </Flex>
-              </Link>
+              </Flex>
               <Flex
                 gap="10px"
                 direction="row"
