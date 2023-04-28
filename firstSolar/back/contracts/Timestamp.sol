@@ -7,6 +7,7 @@ contract DateCalculation {
 
   function getCurrentDay() public view returns (uint256) {
     return (block.timestamp / SECONDS_PER_DAY) % 30;
+    
   }
 
   function getCurrentMonth() public view returns (uint256) {
