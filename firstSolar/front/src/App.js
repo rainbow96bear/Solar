@@ -32,6 +32,7 @@ import UserLoading2 from "./ui-components/UserLoading2";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
+import NavigatorContainer from "./components/navigateHome/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -68,17 +69,18 @@ function App() {
     },
   });
 
-  useEffect(() => {
-    if (document.cookie) {
-      if (document.cookie.split(":")[0] == "metamask") {
-        login();
-        dispatch(accountThunk({ account: account }));
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
-        dispatch(accountThunk({ account: accountK }));
-      }
-    }
-  }, [account]);
+  // useEffect(() => {
+  //   if (document.cookie) {
+  //     if (document.cookie.split(":")[0] == "metamask") {
+  //       login();
+  //       dispatch(accountThunk({ account: account }));
+  //     } else if (document.cookie.split(":")[0] == "kaikas") {
+  //       loginK();
+  //       dispatch(accountThunk({ account: accountK }));
+  //     }
+  //   }
+  // }, [account]);
+
   return (
     <>
       <WagmiConfig client={wagmiClient}>
@@ -93,6 +95,10 @@ function App() {
                 element={<LiquidityContainer />}
               ></Route>
               <Route path="/mypage" element={<MypageContainer />}></Route>
+              <Route
+                path="/redirectHome"
+                element={<NavigatorContainer></NavigatorContainer>}
+              ></Route>
             </Routes>
           </MainContent>
           <FooterContainer></FooterContainer>

@@ -86,9 +86,15 @@ export default function BeforeHeadCom320px(props) {
                   padding="0px 0px 0px 0px"
                   {...getOverrideProps(overrides, "Frame 50")}
                 >
-                  <Link
-                    to="/?page=1&filter=null"
-                    style={{ display: "flex", alignItems: "center" }}
+                  <Flex
+                    onClick={() => {
+                      navigate("/redirectHome");
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      cursor: "pointer",
+                    }}
                   >
                     <Flex
                       direction="row"
@@ -121,7 +127,7 @@ export default function BeforeHeadCom320px(props) {
                         )}
                       ></Image>
                     </Flex>
-                  </Link>
+                  </Flex>
                   <Flex
                     gap="10px"
                     direction="row"
