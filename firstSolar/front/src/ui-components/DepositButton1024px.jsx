@@ -67,13 +67,6 @@ export default function DepositButton1024px(props) {
             children="Deposit"
             {...getOverrideProps(overrides, "Deposit")}
           ></Text>
-          {questionMark == 1 ? (
-            <QuestionModalDeposit
-              setquestionmark={setQuestionMark}
-            ></QuestionModalDeposit>
-          ) : (
-            <></>
-          )}
         </Flex>
         <Flex
           gap="10px"
@@ -116,6 +109,13 @@ export default function DepositButton1024px(props) {
             {...getOverrideProps(overrides, "With Draw")}
           ></Text>
         </Flex>
+        {questionMark == 1 ? (
+          <QuestionModalDeposit
+            setquestionmark={setQuestionMark}
+          ></QuestionModalDeposit>
+        ) : (
+          <></>
+        )}
       </Flex>
     </>
   );

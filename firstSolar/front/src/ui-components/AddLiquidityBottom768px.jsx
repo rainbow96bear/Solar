@@ -12,7 +12,12 @@ import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useAccount } from "wagmi";
 import { useDispatch, useSelector } from "react-redux";
-import { approveDFS, approveOtherToken, addLiquidity } from "../api/index";
+import {
+  approveDFS,
+  approveOtherToken,
+  addLiquidity,
+  updatePool,
+} from "../api/index";
 import { swapBalance } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
@@ -67,8 +72,11 @@ export default function AddLiquidityBottom768px(props) {
           const addLiquidityTxResult = await web3.eth.sendTransaction(
             addLiquidityTx
           );
-          if (addLiquidityTxResult) {
+          const updatePoolResult = await updatePool(tokenAddress);
+
+          if ((addLiquidityTxResult, updatePoolResult)) {
             console.log(addLiquidityTxResult);
+            console.log("updatePoolResult", updatePoolResult);
             dispatch(isLoadingThunk({ isLoading: false }));
           }
         }
