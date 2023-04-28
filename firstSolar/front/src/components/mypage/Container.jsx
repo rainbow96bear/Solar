@@ -1,21 +1,21 @@
 import * as React from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+// import { mypageList } from "../../api/index";
 
 import MypageComponent from "./Component";
-import { mypageList } from "../../api/index";
 
 const MypageContainer = () => {
-  const params = useLocation().search.replace("?", "");
+  // const params = useLocation().search.replace("?", "");
 
-  const mypageLpListUp = async () => {
-    const myLists = await mypageList(params);
-    console.log(myLists);
-  };
-  React.useEffect(() => {
-    mypageLpListUp();
-  }, []);
+  // const mypageLpListUp = async () => {
+  //   const myLists = await mypageList(params);
+  //   console.log(myLists);
+  // };
+  // React.useEffect(() => {
+  //   mypageLpListUp();
+  // }, []);
 
-  return <MypageComponent mypageLpListUp={mypageLpListUp}></MypageComponent>;
+  return <MypageComponent></MypageComponent>;
 };
 
 export default MypageContainer;

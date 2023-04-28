@@ -11,6 +11,11 @@ const MyPageList1024px = props => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
+  const tvlValue = Number(
+    Math.floor(props?.item?.firstTokenBalance.slice(7, 10)) / 10 +
+      Math.floor(props?.item?.secondTokenBalance.slice(7, 10)) / 10
+  ).toFixed(1);
+
   return (
     <>
       <ItemWrap
@@ -18,7 +23,6 @@ const MyPageList1024px = props => {
           duration: 0.2,
           ease: [0.43, 0.13, 0.23, 0.96],
         }}
-        key={`MyPageList1024px-${props?.idx}`}
       >
         <motion.div
           onClick={toggleOpen}
@@ -363,7 +367,7 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="1"
+                  children={props.item.id}
                   {...getOverrideProps(overrides, "1")}
                 ></Text>
               </Flex>
@@ -384,7 +388,7 @@ const MyPageList1024px = props => {
               >
                 <Text
                   fontFamily="Inter"
-                  fontSize="20px"
+                  fontSize="16px"
                   fontWeight="600"
                   lineHeight="24.204544067382812px"
                   textAlign="center"
@@ -402,7 +406,7 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="DFS-ETH"
+                  children={props.item.name}
                   {...getOverrideProps(overrides, "DFS-ETH")}
                 ></Text>
               </Flex>
@@ -423,7 +427,7 @@ const MyPageList1024px = props => {
               >
                 <Text
                   fontFamily="Inter"
-                  fontSize="20px"
+                  fontSize="16px"
                   fontWeight="600"
                   lineHeight="24.204544067382812px"
                   textAlign="center"
@@ -441,7 +445,7 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0"
+                  children={props.item.apy}
                   {...getOverrideProps(overrides, "040702571")}
                 ></Text>
               </Flex>
@@ -462,7 +466,7 @@ const MyPageList1024px = props => {
               >
                 <Text
                   fontFamily="Inter"
-                  fontSize="20px"
+                  fontSize="16px"
                   fontWeight="600"
                   lineHeight="24.204544067382812px"
                   textAlign="center"
@@ -480,7 +484,7 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0"
+                  children={`${tvlValue}EA`}
                   {...getOverrideProps(overrides, "040702572")}
                 ></Text>
               </Flex>
@@ -501,7 +505,7 @@ const MyPageList1024px = props => {
               >
                 <Text
                   fontFamily="Inter"
-                  fontSize="20px"
+                  fontSize="16px"
                   fontWeight="600"
                   lineHeight="24.204544067382812px"
                   textAlign="center"
@@ -519,7 +523,7 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0.3%"
+                  children={`${props.item.fee}%`}
                   {...getOverrideProps(overrides, "0.3%")}
                 ></Text>
               </Flex>
@@ -540,7 +544,7 @@ const MyPageList1024px = props => {
               >
                 <Text
                   fontFamily="Inter"
-                  fontSize="20px"
+                  fontSize="16px"
                   fontWeight="600"
                   lineHeight="24.204544067382812px"
                   textAlign="center"
@@ -558,7 +562,9 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0"
+                  children={`${
+                    Math.floor(props?.item?.firstTokenBalance.slice(7, 10)) / 10
+                  } EA`}
                   {...getOverrideProps(overrides, "040892897")}
                 ></Text>
               </Flex>
@@ -578,7 +584,7 @@ const MyPageList1024px = props => {
               >
                 <Text
                   fontFamily="Inter"
-                  fontSize="20px"
+                  fontSize="16px"
                   fontWeight="600"
                   lineHeight="24.204544067382812px"
                   textAlign="center"
@@ -596,7 +602,10 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0"
+                  children={`${
+                    Math.floor(props?.item?.secondTokenBalance.slice(7, 10)) /
+                    10
+                  } EA`}
                   {...getOverrideProps(overrides, "040892899")}
                 ></Text>
               </Flex>

@@ -17,7 +17,6 @@ import logo from "./images/logo_new.png";
 import LoginAccount from "./LoginAccount.jsx";
 import ConnectModal from "./ConnectModal.jsx";
 import LoadingButton from "./LoadingButton.jsx";
-import ConnectButton from "./ConnectButton.jsx";
 import { Web3Button } from "@web3modal/react";
 import { useWeb3Modal } from "@web3modal/react";
 import { useAccount } from "wagmi";
@@ -74,7 +73,7 @@ export default function BeforeHeadCom1024px(props) {
             <Flex
               gap="24px"
               direction="row"
-              width="221px"
+              width="80px"
               height="unset"
               justifyContent="flex-start"
               alignItems="center"
