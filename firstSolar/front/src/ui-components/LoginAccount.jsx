@@ -137,9 +137,7 @@ export default function LoginAccount(props) {
                 <div>내 정보</div>
               </Link>
             </li>
-            <li>
-              <div>메뉴2</div>
-            </li>
+
             <Divider></Divider>
             <li>
               <div
