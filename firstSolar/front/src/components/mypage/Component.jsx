@@ -3,8 +3,7 @@ import { MyPageCompo1024px } from "../../ui-components";
 import styled from "styled-components";
 import "../../css/Font.css";
 
-const MypageComponent = ({ mypageLpListUp }) => {
-  console.log("mypageLpListUp", mypageLpListUp);
+const MypageComponent = () => {
   return (
     <>
       <MypPage>

@@ -9,8 +9,24 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyPageList1024px from "../components/myPageList/MyPageList1024px";
+import { useLocation } from "react-router-dom";
+import { mypageList } from "../api/index";
+
 export default function MyPageCompo1024px(props) {
   const { overrides, ...rest } = props;
+  const [myList, setMyList] = React.useState([]);
+
+  const params = useLocation().search.replace("?", "");
+
+  const mypageLpListUp = async () => {
+    const myLists = await mypageList(params);
+    console.log(myLists);
+    setMyList(myLists);
+  };
+  React.useEffect(() => {
+    mypageLpListUp();
+  }, []);
+
   return (
     <Flex
       gap="31px"
@@ -316,7 +332,9 @@ export default function MyPageCompo1024px(props) {
           </Flex>
         </Flex>
 
-        <MyPageList1024px />
+        {myList?.map((item, idx) => (
+          <MyPageList1024px key={`MyPageList1024px-2${idx}`} item={item} />
+        ))}
       </Flex>
     </Flex>
   );
