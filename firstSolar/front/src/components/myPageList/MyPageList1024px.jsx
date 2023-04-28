@@ -628,7 +628,7 @@ const MyPageList1024px = props => {
                 ease: [0.43, 0.13, 0.23, 0.96],
               }}
             >
-              <DepositButton1024px myPageList={props.item} />
+              <DepositButton1024px mypagelist={props.item} />
             </motion.div>
           </SubWrap>
         )}
