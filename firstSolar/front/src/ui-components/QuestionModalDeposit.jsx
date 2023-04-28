@@ -23,7 +23,7 @@ export default function QuestionModalDeposit(props) {
   const { web3K, accountK, loginK } = useWeb3K();
 
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const [depositAmountValue, setDepositAmountValue] = React.useState(0);
 
   // console.log("item", props.mypagelist);
@@ -66,7 +66,7 @@ export default function QuestionModalDeposit(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -561,7 +561,7 @@ export default function QuestionModalDeposit(props) {
                 labelHidden={false}
                 variation="default"
                 value={depositAmountValue}
-                onInput={(e) => setDepositAmountValue(e.target.value)}
+                onInput={e => setDepositAmountValue(e.target.value)}
                 {...getOverrideProps(overrides, "TextAreaField40822814")}
               ></TextAreaField>
             </Flex>

@@ -6,7 +6,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton1024px } from "../../ui-components";
 import "../../css/Font.css";
 
-const MyPageList1024px = (props) => {
+const MyPageList1024px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
