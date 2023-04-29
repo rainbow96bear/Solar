@@ -118,7 +118,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
         await axios.get(`https://api.beefy.finance/vaults`)
       ).data.filter((lp: any) => lp.status === "active");
 
-      const totalLpList = [...activeLpList, ...getPool];
+      const totalLpList = [...getPool, ...activeLpList];
 
       const paginationLpList = await Promise.all(
         totalLpList
@@ -203,7 +203,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
 
       if (network) {
         getPool = await db.Pool.findAll({ where: { network } });
-        filterLpList = [...activeLpList, ...getPool];
+        filterLpList = [...getPool, ...activeLpList];
       } else filterLpList = [...activeLpList];
 
       const paginationFilterLpList = await Promise.all(
