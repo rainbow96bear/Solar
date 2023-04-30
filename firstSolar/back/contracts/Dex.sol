@@ -28,6 +28,13 @@ contract Dex is Ownable {
 
   mapping(uint256 => mapping(address => UserInfo)) public userInfo;
   mapping(uint256 => address[]) public userAddress;
+  // 컴파운드 설정 추가
+  mapping(uint256 => mapping(address => bool)) public userAutoCompound;
+
+  // 컴파운드 활성화/비활성화 설정 함수 추가
+  function setAutoCompound(uint256 _pid, bool _autoCompound) public {
+    userAutoCompound[_pid][msg.sender] = _autoCompound;
+  }
 
   struct PoolInfo {
     ERC20 lpToken;
