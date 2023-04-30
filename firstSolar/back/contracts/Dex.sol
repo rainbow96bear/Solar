@@ -24,10 +24,16 @@ contract Dex is Ownable {
     uint256 shares;
     bool checkDeposit;
   }
-  
 
   mapping(uint256 => mapping(address => UserInfo)) public userInfo;
   mapping(uint256 => address[]) public userAddress;
+  // 컴파운드 설정 추가
+  mapping(uint256 => mapping(address => bool)) public userAutoCompound;
+
+  // 컴파운드 활성화/비활성화 설정 함수 추가
+  function setAutoCompound(uint256 _pid, bool _autoCompound) public {
+    userAutoCompound[_pid][msg.sender] = _autoCompound;
+  }
 
   struct PoolInfo {
     ERC20 lpToken;
@@ -49,7 +55,6 @@ contract Dex is Ownable {
   constructor() {
     _owner = msg.sender;
   }
-  
 
   function allDistribution() public {
     for (uint256 i = 0; i < poolInfo.length; i++) {
@@ -60,10 +65,22 @@ contract Dex is Ownable {
       for (uint256 j = 0; j < userArr.length; j++) {
         UserInfo storage user = userInfo[i][userArr[j]];
         if (user.amount > 0) {
-          IReward(pool.rewardA).distribution(
-            userArr[j],
-            balance.mul(user.shares).div(10000)
-          );
+          uint256 userReward = balance.mul(user.shares).div(10000);
+
+          // 오토 컴파운드 확인
+          if (userAutoCompound[i][userArr[j]]) {
+            // 컴파운드 처리
+            pool.lpToken.transferFrom(
+              address(pool.rewardA),
+              address(this),
+              userReward
+            );
+            user.amount = user.amount.add(userReward);
+            rewardShares(i, pool.lpToken);
+          } else {
+            // 일반 분배
+            IReward(pool.rewardA).distribution(userArr[j], userReward);
+          }
         }
       }
     }
