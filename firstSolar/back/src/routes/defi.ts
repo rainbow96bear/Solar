@@ -707,4 +707,17 @@ router.post("/updatePool", async (req: Request, res: Response) => {
   }
 });
 
+router.post("/getLPBalance", async (req: Request, res: Response) => {
+  try {
+    const { pid, account }: { pid: number; account: string } = req.body;
+    const stakingBalance = await deployed.methods
+      .getLPBalance(pid)
+      .call({ from: account });
+
+    res.send(stakingBalance);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
 export default router;
