@@ -350,7 +350,7 @@ export default function MyPageCompo1024px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={`Balance : ${
-                  lpTokenValue?.slice(0, 7) / 10000 || 0
+                  parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000 || 0
                 } ${lpToken || ""} `}
                 {...getOverrideProps(overrides, "Balance : 0")}
               ></Text>
