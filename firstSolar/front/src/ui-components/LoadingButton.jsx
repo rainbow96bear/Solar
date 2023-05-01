@@ -23,13 +23,12 @@ const Loading = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   .Loading_innerBox {
-    width: 220px;
-    max-width: 220px;
-    height: 40px;
+    width: 133px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: rgba(255, 165, 0, 1);
+    background-color: rgba(32, 32, 32, 0.85);
   }
 `;

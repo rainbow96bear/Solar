@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "./images/logo_new.png";
+import "../css/Font.css";
 
 import LoginAccount from "./LoginAccount.jsx";
 import ConnectModal from "./ConnectModal.jsx";
@@ -25,10 +26,10 @@ import { useMediaQuery } from "react-responsive";
 export default function BeforeHeadCom1024px(props) {
   const { overrides, ...rest } = props;
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
-  const login = useSelector((state) => state.login.login.login);
+  const login = useSelector(state => state.login.login.login);
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const connect = useSelector(state => state.connect.connect.connect);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = React.useState();
   const { address, isConnecting, isDisconnected } = useAccount();
@@ -40,7 +41,7 @@ export default function BeforeHeadCom1024px(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = (e) => {
+    const checkIfClickedOutside = e => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -52,7 +53,7 @@ export default function BeforeHeadCom1024px(props) {
     };
   }, [view]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const inputValue = e.target.value;
     const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
     setInputValue(sanitizedValue);
@@ -166,7 +167,7 @@ export default function BeforeHeadCom1024px(props) {
                     direction="row"
                     width="133px"
                     height="35px"
-                    justifyContent="flex-end"
+                    justifyContent="center"
                     alignItems="center"
                     // position="absolute"
                     top="21.67%"
@@ -183,15 +184,15 @@ export default function BeforeHeadCom1024px(props) {
                     {...getOverrideProps(overrides, "Connect39912872")}
                   >
                     <Text
-                      fontFamily="Inter"
-                      fontSize="18px"
+                      fontFamily="ffProBook"
+                      fontSize="17px"
                       fontWeight="700"
                       color="rgba(239,239,239,1)"
                       lineHeight="21.784090042114258px"
                       textAlign="center"
-                      display="block"
+                      display="flex"
                       direction="column"
-                      justifyContent="unset"
+                      justifyContent="center"
                       width="unset"
                       height="29px"
                       gap="unset"
