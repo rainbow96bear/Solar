@@ -34,18 +34,22 @@ export default function MyPageCompo1024px(props) {
   const isLoadingTrue = () => {
     dispatch(isLoadingThunk({ isLoading: true }));
   };
+
   const isLoadingFalse = () => {
     dispatch(isLoadingThunk({ isLoading: false }));
   };
+
   const mypageLpListUp = async () => {
     try {
       const myLists = await mypageList(params);
-
+      console.log("mypageLpListUp 불러와서 실행하였다.");
+      console.log("myLists : ", myLists);
       setMyList(myLists);
     } catch (error) {
       console.error(error);
     }
   };
+
   React.useEffect(() => {
     (async () => {
       isLoadingTrue();
