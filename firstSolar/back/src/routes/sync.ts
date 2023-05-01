@@ -56,6 +56,7 @@ router.post("/mypage", async (req: Request, res: Response) => {
       let DFSTokenBalance: number = 0;
       let OtherTokenBalance: number = 0;
       let pool: Pool | null = null;
+      let lpPidNumber: number = 0;
 
       if (poolInfo[i][0] == process.env.DFS_ETH) {
         LPTokenBalance = await deployedDFSETH.methods
@@ -72,6 +73,7 @@ router.post("/mypage", async (req: Request, res: Response) => {
         OtherTokenBalance = await deployedETH.methods
           .balanceOf(userAddress)
           .call();
+        lpPidNumber = i;
       } else if (poolInfo[i][0] == process.env.DFS_USDT) {
         LPTokenBalance = await deployedDFSUSDT.methods
           .balanceOf(userAddress)
@@ -87,6 +89,7 @@ router.post("/mypage", async (req: Request, res: Response) => {
         OtherTokenBalance = await deployedUSDT.methods
           .balanceOf(userAddress)
           .call();
+        lpPidNumber = i;
       } else if (poolInfo[i][0] == process.env.DFS_BNB) {
         LPTokenBalance = await deployedDFSBNB.methods
           .balanceOf(userAddress)
@@ -102,12 +105,14 @@ router.post("/mypage", async (req: Request, res: Response) => {
         OtherTokenBalance = await deployedBNB.methods
           .balanceOf(userAddress)
           .call();
+        lpPidNumber = i;
       }
 
       if (pool) {
         pool.dataValues.DFSTokenBalance = DFSTokenBalance;
         pool.dataValues.OtherTokenBalance = OtherTokenBalance;
         pool.dataValues.LPTokenBalance = LPTokenBalance; // balance를 객체 원소에 추가
+        pool.dataValues.lpPidNumber = lpPidNumber;
         filterPool.push(pool);
       }
     }
