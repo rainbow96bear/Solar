@@ -132,7 +132,6 @@ export default function PoolListCom1024px(props) {
   });
 
   const aesAPY = (a, b) => {
-    console.log("aesAPY");
     if (a.apy < b.apy) {
       return -1;
     }
@@ -153,7 +152,6 @@ export default function PoolListCom1024px(props) {
   };
 
   const aesTVL = (a, b) => {
-    console.log("aesTVL");
     if (a.tvl < b.tvl) {
       return -1;
     }

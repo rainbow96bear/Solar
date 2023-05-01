@@ -82,6 +82,23 @@ export default function AddLiquidityBottom768px(props) {
           if (addLiquidityTxResult) {
             setFirstValue(0);
             setSecondValue(0);
+            const firstBalanceTemp = await swapBalance(
+              address ? address : address2,
+              props?.oracleiddata[0]?.firstToken
+                ? props?.oracleiddata[0]?.firstToken
+                : "DFS"
+            );
+
+            setUserFirstBalance(firstBalanceTemp);
+
+            const secondBalanceTemp = await swapBalance(
+              address ? address : address2,
+              props?.oracleiddata[0]?.secondToken
+                ? props?.oracleiddata[0]?.secondToken
+                : "ETH"
+            );
+            setUserSecondBalance(secondBalanceTemp);
+
             dispatch(isLoadingThunk({ isLoading: false }));
           }
         }
@@ -131,17 +148,6 @@ export default function AddLiquidityBottom768px(props) {
   }, []);
 
   React.useEffect(() => {
-    console.log(
-      "secondValue <= userSecondBalance : ",
-      secondValue <= userSecondBalance
-    );
-    console.log("secondValue : ", secondValue, typeof secondValue);
-    console.log(
-      "userSecondBalance",
-      userSecondBalance,
-      typeof userSecondBalance
-    );
-    console.log("");
     if (
       +firstValue <= +userFirstBalance &&
       +secondValue <= +userSecondBalance &&

@@ -10,6 +10,8 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
+import { useDispatch } from "react-redux";
+import { isLoadingThunk } from "../modules/isLoading";
 
 export default function AddLiquidityTop320px(props) {
   const { overrides, ...rest } = props;
@@ -18,9 +20,17 @@ export default function AddLiquidityTop320px(props) {
   const date = new Date(lastTimeStamp * 1000);
   const dateString = date.toLocaleDateString();
 
+  const dispatch = useDispatch();
   const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
   const reducedNumber = tokenNumBer?.toString().substring(0, 7);
 
+  React.useEffect(() => {
+    dispatch(isLoadingThunk({ isLoading: true }));
+
+    setTimeout(() => {
+      dispatch(isLoadingThunk({ isLoading: false }));
+    }, 1500);
+  }, []);
   return (
     <>
       <Flex
