@@ -350,7 +350,7 @@ export default function Foot320px(props) {
                           position="relative"
                           padding="0px 0px 0px 0px"
                           whiteSpace="pre-wrap"
-                          children="HGWA333"
+                          children="@HGWA333"
                           {...getOverrideProps(overrides, "HGWA333")}
                         ></Text>
                       </Flex>

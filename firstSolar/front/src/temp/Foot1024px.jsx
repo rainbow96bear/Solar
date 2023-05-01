@@ -92,6 +92,7 @@ export default function Foot1024px(props) {
                 <Image
                   onMouseEnter={onEnter}
                   onMouseLeave={onLeave}
+                  style={{ cursor: "pointer" }}
                   src={solarLogo}
                   width="140px"
                   height="140px"
@@ -179,6 +180,9 @@ export default function Foot1024px(props) {
                   ></Text>
                 </Flex>
                 <Flex
+                  onMouseEnter={onEnter}
+                  onMouseLeave={onLeave}
+                  style={{ cursor: "pointer" }}
                   gap="6px"
                   direction="row"
                   width="unset"
@@ -279,6 +283,7 @@ export default function Foot1024px(props) {
                   <Image
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
+                    style={{ cursor: "pointer" }}
                     src={logo1}
                     width="unset"
                     height="296px"
@@ -338,6 +343,9 @@ export default function Foot1024px(props) {
                         {...getOverrideProps(overrides, "Frame 19241063219")}
                       >
                         <Flex
+                          onMouseEnter={onEnter}
+                          onMouseLeave={onLeave}
+                          style={{ cursor: "pointer" }}
                           gap="10px"
                           direction="row"
                           width="unset"
@@ -373,7 +381,7 @@ export default function Foot1024px(props) {
                             )}
                           ></Image>
                           <Text
-                            fontFamily="ffProExtraLight"
+                            fontFamily="ffProLight"
                             fontSize="9px"
                             fontWeight="700"
                             lineHeight="13.5px"
@@ -391,7 +399,7 @@ export default function Foot1024px(props) {
                             position="relative"
                             padding="0px 0px 0px 0px"
                             whiteSpace="pre-wrap"
-                            children="HGWA333"
+                            children="@HGWA333"
                             {...getOverrideProps(overrides, "HGWA333")}
                           ></Text>
                         </Flex>
@@ -494,6 +502,7 @@ export default function Foot1024px(props) {
                   <Image
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
+                    style={{ cursor: "pointer" }}
                     src={logo2}
                     width="unset"
                     height="296px"
@@ -553,6 +562,9 @@ export default function Foot1024px(props) {
                         {...getOverrideProps(overrides, "Frame 19241063231")}
                       >
                         <Flex
+                          onMouseEnter={onEnter}
+                          onMouseLeave={onLeave}
+                          style={{ cursor: "pointer" }}
                           gap="10px"
                           direction="row"
                           width="unset"
@@ -588,7 +600,7 @@ export default function Foot1024px(props) {
                             )}
                           ></Image>
                           <Text
-                            fontFamily="ffProExtraLight"
+                            fontFamily="ffProLight"
                             fontSize="9px"
                             fontWeight="700"
                             lineHeight="13.5px"
@@ -724,6 +736,7 @@ export default function Foot1024px(props) {
                   <Image
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
+                    style={{ cursor: "pointer" }}
                     src={logo3}
                     width="unset"
                     height="296px"
@@ -783,6 +796,9 @@ export default function Foot1024px(props) {
                         {...getOverrideProps(overrides, "Frame 19241063244")}
                       >
                         <Flex
+                          onMouseEnter={onEnter}
+                          onMouseLeave={onLeave}
+                          style={{ cursor: "pointer" }}
                           gap="10px"
                           direction="row"
                           width="unset"
@@ -818,7 +834,7 @@ export default function Foot1024px(props) {
                             )}
                           ></Image>
                           <Text
-                            fontFamily="ffProExtraLight"
+                            fontFamily="ffProLight"
                             fontSize="9px"
                             fontWeight="700"
                             lineHeight="13.5px"
@@ -939,6 +955,7 @@ export default function Foot1024px(props) {
                   <Image
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
+                    style={{ cursor: "pointer" }}
                     src={logo4}
                     width="unset"
                     height="296px"
@@ -998,6 +1015,9 @@ export default function Foot1024px(props) {
                         {...getOverrideProps(overrides, "Frame 19241063256")}
                       >
                         <Flex
+                          onMouseEnter={onEnter}
+                          onMouseLeave={onLeave}
+                          style={{ cursor: "pointer" }}
                           gap="10px"
                           direction="row"
                           width="unset"
@@ -1169,6 +1189,7 @@ export default function Foot1024px(props) {
                   <Image
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
+                    style={{ cursor: "pointer" }}
                     src={logo5}
                     width="unset"
                     height="296px"
@@ -1228,6 +1249,9 @@ export default function Foot1024px(props) {
                         {...getOverrideProps(overrides, "Frame 19241063244")}
                       >
                         <Flex
+                          onMouseEnter={onEnter}
+                          onMouseLeave={onLeave}
+                          style={{ cursor: "pointer" }}
                           gap="10px"
                           direction="row"
                           width="unset"
@@ -1263,7 +1287,7 @@ export default function Foot1024px(props) {
                             )}
                           ></Image>
                           <Text
-                            fontFamily="ffProExtraLight"
+                            fontFamily="ffProLight"
                             fontSize="9px"
                             fontWeight="700"
                             lineHeight="13.5px"
@@ -1281,7 +1305,7 @@ export default function Foot1024px(props) {
                             position="relative"
                             padding="0px 0px 0px 0px"
                             whiteSpace="pre-wrap"
-                            children="@JJeonghyun"
+                            children="@pippen11"
                             {...getOverrideProps(overrides, "@JJeonghyun")}
                           ></Text>
                         </Flex>
@@ -1384,6 +1408,7 @@ export default function Foot1024px(props) {
                   <Image
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
+                    style={{ cursor: "pointer" }}
                     src={logo6}
                     width="unset"
                     height="296px"
@@ -1443,11 +1468,14 @@ export default function Foot1024px(props) {
                         {...getOverrideProps(overrides, "Frame 19241063256")}
                       >
                         <Flex
+                          onMouseEnter={onEnter}
+                          onMouseLeave={onLeave}
+                          style={{ cursor: "pointer" }}
                           gap="10px"
                           direction="row"
                           width="unset"
                           height="unset"
-                          justifyContent="flex-start"
+                          justifyContent="center"
                           alignItems="center"
                           grow="1"
                           shrink="1"
@@ -1455,7 +1483,7 @@ export default function Foot1024px(props) {
                           position="relative"
                           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                           borderRadius="25px"
-                          padding="6px 9px 6px 9px"
+                          padding="6px 25px 6px 25px"
                           backgroundColor="rgba(0,136,153,0.59)"
                           {...getOverrideProps(overrides, "Frame 10141063257")}
                         >
@@ -1478,7 +1506,7 @@ export default function Foot1024px(props) {
                             )}
                           ></Image>
                           <Text
-                            fontFamily="ffProExtraLight"
+                            fontFamily="ffProLight"
                             fontSize="9px"
                             fontWeight="700"
                             lineHeight="13.5px"
@@ -1496,7 +1524,7 @@ export default function Foot1024px(props) {
                             position="relative"
                             padding="0px 0px 0px 0px"
                             whiteSpace="pre-wrap"
-                            children="@JaeHyuk"
+                            children="@rainbow96bear"
                             {...getOverrideProps(overrides, "@JaeHyuk")}
                           ></Text>
                         </Flex>

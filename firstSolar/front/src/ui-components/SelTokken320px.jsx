@@ -149,20 +149,6 @@ export default function SelTokken320px(props) {
             backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
             {...getOverrideProps(overrides, "Dexname140452895")}
           >
-            <Image
-              width="25px"
-              height="25px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="35px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "ghrgclzzd 740452896")}
-            ></Image>
             <Text
               fontFamily="Inter"
               fontSize="20px"
