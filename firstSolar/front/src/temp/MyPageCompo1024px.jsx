@@ -27,7 +27,6 @@ export default function MyPageCompo1024px(props) {
 
   const mypageLpListUp = async () => {
     const myLists = await mypageList(params);
-    console.log(myLists);
     setMyList(myLists);
   };
   React.useEffect(() => {

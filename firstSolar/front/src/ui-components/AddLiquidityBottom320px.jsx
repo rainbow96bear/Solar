@@ -29,7 +29,7 @@ export default function AddLiquidityBottom320px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -66,7 +66,6 @@ export default function AddLiquidityBottom320px(props) {
             addLiquidityTx
           );
           if (addLiquidityTxResult) {
-            console.log(addLiquidityTxResult);
             dispatch(isLoadingThunk({ isLoading: false }));
           }
         }
@@ -98,7 +97,6 @@ export default function AddLiquidityBottom320px(props) {
           address ? address : address2,
           props?.oracleiddata[0]?.secondToken
         );
-        console.log("datadatadatadata", data);
         setUserSecondBalance(data);
       } catch (error) {
         console.error(error);

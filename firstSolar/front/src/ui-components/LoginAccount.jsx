@@ -133,9 +133,15 @@ export default function LoginAccount(props) {
         <MenuDropDown>
           <ul>
             <li>
-              <Link to={`/mypage?${account}`}>
-                <div>내 정보</div>
-              </Link>
+              {/* <Link to={`/mypage?${account}`}> */}
+              <div
+                onClick={() => {
+                  navigate(`/mypage?${account}`);
+                }}
+              >
+                내 정보
+              </div>
+              {/* </Link> */}
             </li>
 
             <Divider></Divider>
