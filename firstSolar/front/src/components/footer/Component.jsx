@@ -1,20 +1,19 @@
 import styled from "styled-components";
-import { Footer } from "../../ui-components";
+import { Foot1024px, Foot768px, Foot320px } from "../../ui-components";
 
 const FooterComponent = () => {
   return (
-    // <FooterCompo>
-    <Footer></Footer>
-    //  <div className="Footer_innerBox"></div>
-    // <p className="footer-text">This is the footer.</p>
-    // </FooterCompo>
+    <FooterCompo>
+      <Foot1024px />
+      <Foot768px />
+    </FooterCompo>
   );
 };
 export default FooterComponent;
 
 const FooterCompo = styled.div`
   background-color: #f8f8f8;
-  padding: 16px;
+  padding: 56px;
   text-align: center;
   display: flex;
   flex-direction: column;
