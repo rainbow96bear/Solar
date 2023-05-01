@@ -547,7 +547,7 @@ export default function QuestionModalDeposit(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={`Balance :${
-                      props?.lpTokenValue?.slice(0, 7) / 10000000 || 0
+                      props?.lpTokenValue?.slice(0, 7) / 1000000 || 0
                     }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>

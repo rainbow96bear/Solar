@@ -115,10 +115,10 @@ export default function MyPageCompo1024px(props) {
         direction="column"
         width="unset"
         height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="center"
+        alignItems="center"
         shrink="0"
-        alignSelf="stretch"
+        alignSelf="center"
         position="relative"
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 17040762674")}
@@ -344,7 +344,7 @@ export default function MyPageCompo1024px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={`Balance : ${
-                  lpTokenValue?.slice(0, 7) / 10000000 || 0
+                  lpTokenValue?.slice(0, 7) / 1000000 || 0
                 } ${lpToken || ""} `}
                 {...getOverrideProps(overrides, "Balance : 0")}
               ></Text>
