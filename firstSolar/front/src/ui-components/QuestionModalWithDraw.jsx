@@ -16,13 +16,15 @@ import { useWeb3 } from "../modules/useWeb3";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { getLPBalance } from "../api";
 import { useAccount } from "wagmi";
+import { isLoadingThunk } from "../modules/isLoading";
+import { withDraw } from "../api";
 
 export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
   const { web3, login } = useWeb3();
   const { loginK } = useWeb3K();
-
+  const [lpBalance, setLpBalance] = React.useState();
   const dispatch = useDispatch();
   const { account } = useAccount();
   const account2 = useSelector((state) => state.account.account.account);
@@ -42,10 +44,11 @@ export default function QuestionModalWithDraw(props) {
     (async () => {
       try {
         const result = await getLPBalance(
-          // props?.aa,
-          0,
+          props?.pid, // 이거 아닌듯?
           account ? account : account2
         );
+
+        setLpBalance(result);
       } catch (error) {
         console.error(error);
       }
@@ -56,15 +59,21 @@ export default function QuestionModalWithDraw(props) {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
 
-      const result2 = await withDrawAmountValue(
-        account2,
-        +withDrawAmountValue,
+      const result2 = await withDraw(
+        account2 ? account2 : account,
+        withDrawAmountValue,
         props?.lptoken
       );
 
       let transactionResult2 = await web3.eth.sendTransaction(result2);
       setWithDrawAmountValue(0);
-      await props.mypageLpListUp();
+
+      await props.mypagelplistup();
+      const result = await getLPBalance(
+        props?.pid,
+        account ? account : account2
+      );
+      setLpBalance(result);
       dispatch(isLoadingThunk({ isLoading: false }));
     } catch (error) {
       console.error(error);
@@ -552,7 +561,7 @@ export default function QuestionModalWithDraw(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={`Balance :${
-                      props?.lptokenvalue?.slice(0, 7) / 100000 || 0
+                      lpBalance ? lpBalance?.toString().slice(0, 7) / 100000 : 0
                     }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>

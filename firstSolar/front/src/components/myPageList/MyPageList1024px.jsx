@@ -281,7 +281,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="MY DFS"
+                  children={`MY ${props?.item?.oracleId.split("-")[0]}`}
                   {...getOverrideProps(overrides, "DFS")}
                 ></Text>
               </Flex>
@@ -317,7 +317,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="MY ETH"
+                  children={`MY ${props?.item?.oracleId.split("-")[1]}`}
                   {...getOverrideProps(overrides, "ETH")}
                 ></Text>
               </Flex>
@@ -633,6 +633,8 @@ const MyPageList1024px = (props) => {
                 lptokenvalue={props.lptokenvalue}
                 lptoken={props.lptoken}
                 mypagelplistup={props.mypagelplistup}
+                pid={props?.pid}
+                setlptokenvalue={props.setLpTokenValue}
               />
             </motion.div>
           </SubWrap>

@@ -27,22 +27,27 @@ export default function MyPageCompo1024px(props) {
   const dispatch = useDispatch();
   const params = useLocation().search.replace("?", "");
 
+  const isLoadingTrue = () => {
+    dispatch(isLoadingThunk({ isLoading: true }));
+  };
+  const isLoadingFalse = () => {
+    dispatch(isLoadingThunk({ isLoading: false }));
+  };
   const mypageLpListUp = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
       const myLists = await mypageList(params);
       console.log(myLists);
       setMyList(myLists);
-      setTimeout(() => {
-        dispatch(isLoadingThunk({ isLoading: false }));
-      }, 1500);
+      setTimeout(() => {}, 1500);
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      isLoadingFalse();
     }
   };
   React.useEffect(() => {
+    isLoadingTrue();
     mypageLpListUp();
+    isLoadingFalse();
   }, []);
 
   return (
@@ -346,7 +351,7 @@ export default function MyPageCompo1024px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={`Balance : ${
-                  lpTokenValue?.slice(0, 7) / 100000 || 0
+                  lpTokenValue?.slice(0, 7) / 10000 || 0
                 } ${lpToken || ""} `}
                 {...getOverrideProps(overrides, "Balance : 0")}
               ></Text>
@@ -357,6 +362,7 @@ export default function MyPageCompo1024px(props) {
         {myList?.map((item, idx) => (
           <MyPageList1024px
             key={`MyPageList1024px-2${idx}`}
+            pid={myList[idx]?.lpPidNumber}
             item={item}
             idx={idx}
             setLpToken={setLpToken}

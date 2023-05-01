@@ -59,6 +59,7 @@ export default function QuestionModalDeposit(props) {
       let transactionResult2 = await web3.eth.sendTransaction(result2);
       setDepositAmountValue(0);
       await props?.mypagelplistup();
+
       dispatch(isLoadingThunk({ isLoading: false }));
       dispatch(setCompleteModal(true));
     } catch (error) {
@@ -547,7 +548,7 @@ export default function QuestionModalDeposit(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={`Balance :${
-                      props?.lptokenvalue?.slice(0, 7) / 100000 || 0
+                      props?.lptokenvalue?.slice(0, 7) / 10000 || 0
                     }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>
