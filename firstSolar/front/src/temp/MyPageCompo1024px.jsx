@@ -43,7 +43,7 @@ export default function MyPageCompo1024px(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+      boxShadow="-38px 45px 28px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
       padding="38px 33px 38px 33px"
       backgroundColor="rgba(255,255,252,1)"
@@ -78,7 +78,7 @@ export default function MyPageCompo1024px(props) {
           {...getOverrideProps(overrides, "Frame 14240762657")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProBlack"
             fontSize="43px"
             fontWeight="600"
             lineHeight="52.039772033691406px"
@@ -176,7 +176,7 @@ export default function MyPageCompo1024px(props) {
                 {...getOverrideProps(overrides, "ghrgclzzd 740892934")}
               ></Image>
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProMedium"
                 fontSize="17px"
                 fontWeight="600"
                 lineHeight="20.573863983154297px"
@@ -211,7 +211,7 @@ export default function MyPageCompo1024px(props) {
               {...getOverrideProps(overrides, "Frame 9140892937")}
             >
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProLight"
                 fontSize="33px"
                 fontWeight="600"
                 lineHeight="39.9375px"
@@ -264,7 +264,7 @@ export default function MyPageCompo1024px(props) {
                 {...getOverrideProps(overrides, "ghrgclzzd 740892940")}
               ></Image>
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProMedium"
                 fontSize="17px"
                 fontWeight="600"
                 color="rgba(239,239,239,1)"
@@ -316,7 +316,7 @@ export default function MyPageCompo1024px(props) {
               {...getOverrideProps(overrides, "Frame 175")}
             >
               <Text
-                fontFamily="Inter"
+                fontFamily="ffProExtraLight"
                 fontSize="24px"
                 fontWeight="600"
                 lineHeight="29.045454025268555px"
@@ -334,9 +334,9 @@ export default function MyPageCompo1024px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={`${lpTokenValue?.slice(0, 7) / 1000000 || 0} ${
-                  lpToken || ""
-                } `}
+                children={`Balance : ${
+                  lpTokenValue?.slice(0, 7) / 1000000 || 0
+                } ${lpToken || ""} `}
                 {...getOverrideProps(overrides, "Balance : 0")}
               ></Text>
             </Flex>

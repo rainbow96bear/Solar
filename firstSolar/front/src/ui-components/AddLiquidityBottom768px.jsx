@@ -136,7 +136,7 @@ export default function AddLiquidityBottom768px(props) {
       alignItems="center"
       overflow="hidden"
       position="relative"
-      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+      boxShadow="11px 11px 31px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
       padding="71px 0px 71px 0px"
       backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"

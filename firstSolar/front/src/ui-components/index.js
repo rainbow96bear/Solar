@@ -28,7 +28,6 @@ export { default as DepositButton1024px } from "./DepositButton1024px";
 export { default as DepositButton768px } from "./DepositButton768px";
 export { default as Deposit1024px } from "./Deposit1024px";
 export { default as WithDraw1024px } from "./WithDraw1024px";
-
 export { default as SwapSuccessModal } from "./SwapSuccessModal";
 export { default as Swap320px } from "./Swap320px";
 export { default as Swap768px } from "./Swap768px";
@@ -42,3 +41,7 @@ export { default as BeforeHeadCom320px } from "./BeforeHeadCom320px";
 export { default as SelTokken768px } from "./SelTokken768px";
 export { default as UserLoading2 } from "./UserLoading2";
 export { default as studioTheme } from "./studioTheme";
+export { default as LoadingCompo } from "./LoadingCompo";
+export { default as Foot1024px } from "./Foot1024px";
+export { default as Foot320px } from "./Foot320px";
+export { default as Foot768px } from "./Foot768px";
