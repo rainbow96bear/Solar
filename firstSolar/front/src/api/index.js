@@ -298,12 +298,12 @@ export const deposit = async (account, depositAmount, lpSymbol) => {
   }
 };
 
-export const withDraw = async (account, withDrawAmount, lpSymbol) => {
+export const withDraw = async (account, withdrawAmount, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/deposit", {
+      await request.post("api/defi/withdraw", {
         account,
-        withDrawAmount,
+        withdrawAmount,
         lpSymbol,
       })
     ).data;

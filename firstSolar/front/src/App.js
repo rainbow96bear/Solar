@@ -122,11 +122,7 @@ function App() {
               <EmptySearchModal className="marginT" />
             </LoadingModal>
           )}
-          {emptySearch && (
-            <LoadingModal>
-              <EmptySearchModal className="marginT" />
-            </LoadingModal>
-          )}
+
           {completeModal && (
             <LoadingModal>
               <DepositCompletedModal className="marginT" />
