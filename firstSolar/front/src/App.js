@@ -35,6 +35,7 @@ import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
 import NavigatorContainer from "./components/navigateHome/Container";
 import EmptySearchModal from "./ui-components/EmptySearchModal";
+import { DepositCompletedModal } from "./ui-components";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -53,10 +54,12 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
-  const emptySearch = useSelector(state => state.emptySearch);
-  const connect = useSelector(state => state.connect.connect.connect);
-  const accountAddress = useSelector(state => state.account.account.account);
+  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
+  const emptySearch = useSelector((state) => state.emptySearch);
+
+  const completeModal = useSelector((state) => state.completeModal);
+  const connect = useSelector((state) => state.connect.connect.connect);
+  const accountAddress = useSelector((state) => state.account.account.account);
   const { address } = useAccount();
   const dispatch = useDispatch();
 
@@ -117,6 +120,16 @@ function App() {
           {emptySearch && (
             <LoadingModal>
               <EmptySearchModal className="marginT" />
+            </LoadingModal>
+          )}
+          {emptySearch && (
+            <LoadingModal>
+              <EmptySearchModal className="marginT" />
+            </LoadingModal>
+          )}
+          {completeModal && (
+            <LoadingModal>
+              <DepositCompletedModal className="marginT" />
             </LoadingModal>
           )}
         </div>

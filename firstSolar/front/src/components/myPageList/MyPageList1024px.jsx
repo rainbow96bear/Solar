@@ -630,8 +630,9 @@ const MyPageList1024px = (props) => {
             >
               <DepositButton1024px
                 mypagelist={props.item}
-                lpTokenValue={props.lpTokenValue}
-                lpToken={props.lpToken}
+                lptokenvalue={props.lptokenvalue}
+                lptoken={props.lptoken}
+                mypagelplistup={props.mypagelplistup}
               />
             </motion.div>
           </SubWrap>

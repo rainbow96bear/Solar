@@ -30,12 +30,13 @@ import { useAccount } from "wagmi";
 import { Web3Button } from "@web3modal/react";
 import LoadingButton768 from "./LoadingButton768";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function BeforeHeadCom768px(props) {
   const { overrides, ...rest } = props;
   const login = useSelector((state) => state.login.login.login);
   const connect = useSelector((state) => state.connect.connect.connect);
   const { address, isConnecting, isDisconnected } = useAccount();
+  const navigate = useNavigate();
 
   const isTablet = useMediaQuery({
     query: "(min-width:481px) and (max-width:991px)",

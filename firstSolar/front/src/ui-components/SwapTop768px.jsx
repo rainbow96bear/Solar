@@ -702,10 +702,8 @@ export default function SwapTop768px(props) {
                 whiteSpace="pre-wrap"
                 children={
                   props?.oracleiddata[0]?.tvl
-                    ? `${
-                        Math.round(props?.oracleiddata[0]?.tvl * 10000) / 10000
-                      } `
-                    : 0
+                    ? parseFloat(props?.oracleiddata[0]?.tvl).toFixed(5)
+                    : "0"
                 }
                 {...getOverrideProps(overrides, "16.82%")}
               ></Text>

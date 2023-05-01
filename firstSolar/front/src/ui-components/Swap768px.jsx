@@ -34,6 +34,7 @@ import { isLoadingThunk } from "../modules/isLoading.js";
 import styled from "styled-components";
 import SwapSuccessModal from "./SwapSuccessModal";
 import { useParams } from "react-router-dom";
+import SwapFailModal from "./SwapFailModal";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
@@ -50,6 +51,8 @@ export default function Swap768px(props) {
   const [questionMark, setQuestionMark] = React.useState(0);
 
   const [swapSuccessModalOpen, setSwapSuccessModalOpen] = React.useState(false);
+  const [swapFailModalOpen, setSwapFailModalOpen] = React.useState(false);
+
   const [convertPrice, setConvertPrice] = React.useState({
     bnb: "",
     eth: "",
@@ -303,6 +306,7 @@ export default function Swap768px(props) {
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setSwapFailModalOpen(true);
     }
   };
   return (
@@ -1220,6 +1224,15 @@ export default function Swap768px(props) {
           <LoadingModal>
             <SwapSuccessModal
               setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            />
+          </LoadingModal>
+        )}
+        {swapFailModalOpen && (
+          <LoadingModal>
+            <SwapFailModal
+              setSwapFailModalOpen={setSwapFailModalOpen}
               firstSelectToken={firstSelectToken}
               secondSelectToken={secondSelectToken}
             />
