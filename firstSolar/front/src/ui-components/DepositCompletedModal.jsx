@@ -253,7 +253,7 @@ export default function DepositCompletedModal(props) {
         variation="primary"
         children="OK"
         onClick={() => {
-          dispatch(setCompleteModal({ completeModal: false }));
+          dispatch(setCompleteModal(false));
           clearInterval(intervalId);
         }}
         {...getOverrideProps(overrides, "Button")}

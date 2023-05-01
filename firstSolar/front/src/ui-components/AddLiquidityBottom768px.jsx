@@ -41,6 +41,9 @@ export default function AddLiquidityBottom768px(props) {
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
 
+  const [addLiquidityPossibility, setAddLiquidityPossibility] =
+    React.useState(false);
+
   const addLiquidtiyFunc = async () => {
     dispatch(isLoadingThunk({ isLoading: true }));
     const approveDFSTx = await approveDFS(
@@ -72,11 +75,11 @@ export default function AddLiquidityBottom768px(props) {
           const addLiquidityTxResult = await web3.eth.sendTransaction(
             addLiquidityTx
           );
-          const updatePoolResult = await updatePool(tokenAddress);
+          await updatePool(props?.oracleiddata[0]?.tokenAddress);
 
-          if ((addLiquidityTxResult, updatePoolResult)) {
-            console.log(addLiquidityTxResult);
-            console.log("updatePoolResult", updatePoolResult);
+          if (addLiquidityTxResult) {
+            setFirstValue(0);
+            setSecondValue(0);
             dispatch(isLoadingThunk({ isLoading: false }));
           }
         }
@@ -108,7 +111,6 @@ export default function AddLiquidityBottom768px(props) {
           address ? address : address2,
           props?.oracleiddata[0]?.secondToken
         );
-        console.log("datadatadatadata", data);
         setUserSecondBalance(data);
       } catch (error) {
         console.error(error);
@@ -126,6 +128,30 @@ export default function AddLiquidityBottom768px(props) {
     }
   }, []);
 
+  React.useEffect(() => {
+    console.log(
+      "secondValue <= userSecondBalance : ",
+      secondValue <= userSecondBalance
+    );
+    console.log("secondValue : ", secondValue, typeof secondValue);
+    console.log(
+      "userSecondBalance",
+      userSecondBalance,
+      typeof userSecondBalance
+    );
+    console.log("");
+    if (
+      +firstValue <= +userFirstBalance &&
+      +secondValue <= +userSecondBalance &&
+      firstValue == secondValue &&
+      firstValue != 0 &&
+      secondValue != 0 &&
+      firstValue != undefined &&
+      secondValue != undefined
+    ) {
+      setAddLiquidityPossibility(true);
+    } else setAddLiquidityPossibility(false);
+  }, [firstValue, secondValue]);
   return (
     <Flex
       gap="75px"
@@ -1004,8 +1030,18 @@ export default function AddLiquidityBottom768px(props) {
             alignSelf="stretch"
             position="relative"
             padding="13px 73px 13px 73px"
-            onClick={() => {
-              addLiquidtiyFunc();
+            // backgroundColor={
+            //   addLiquidityPossibility
+            //     ? "rgba(234,0,50,0.45)"
+            //     : "rgba(230,230,230,1)"
+            // }
+
+            onClick={async () => {
+              if (!addLiquidityPossibility) return;
+              await addLiquidtiyFunc();
+            }}
+            style={{
+              cursor: addLiquidityPossibility ? "pointer" : "not-allowed",
             }}
             {...getOverrideProps(overrides, "Frame 10340122803")}
           >
