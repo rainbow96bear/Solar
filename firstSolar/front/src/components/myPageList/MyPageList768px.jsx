@@ -3,14 +3,16 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { DepositButton1024px } from "../../ui-components";
+import { DepositButton768px } from "../../ui-components";
 import "../../css/Font.css";
-
-const MyPageList1024px = props => {
+import { useMediaQuery } from "react-responsive";
+const MyPageList768px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-
+  const isMobile = useMediaQuery({
+    query: "(min-width:768px)",
+  });
   return (
     <>
       <ItemWrap
@@ -31,35 +33,35 @@ const MyPageList1024px = props => {
           }}
           layout
           style={{
-            width: "78.4vw",
+            width: "70vw",
             height: "unset",
-            borderRadius: "33px",
-            backgroundColor: "rgba(255,226,0,0.35)",
+            borderRadius: "25px",
+            backgroundColor: "rgba(0,136,153,0.89)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+            overflow: "hidden",
           }}
-          whileHover={{ borderRadius: "75px" }}
+          whileHover={{ borderRadius: "39px" }}
         >
           <Flex
-            gap="15px"
-            direction="column"
+            gap="0"
+            direction="row"
             width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
+            height="419px"
+            justifyContent="flex-start"
+            alignItems="flex-start"
             shrink="0"
             alignSelf="stretch"
             position="relative"
             borderRadius="27px"
-            padding="27px 34px 27px 34px"
-            {...getOverrideProps(overrides, "Frame 163")}
+            padding="21px 34px 21px 34px"
+            {...getOverrideProps(overrides, "Frame 16340773335")}
           >
             <Flex
-              style={{ borderBottom: "1px dashed black", borderWidth: "2px" }}
               gap="0"
-              direction="row"
-              width="unset"
+              direction="column"
+              width="110px"
               height="unset"
               justifyContent="center"
               alignItems="center"
@@ -67,14 +69,14 @@ const MyPageList1024px = props => {
               alignSelf="stretch"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 14240692545")}
+              {...getOverrideProps(overrides, "Frame 14240773336")}
             >
               <Flex
                 gap="10px"
                 direction="row"
                 width="unset"
                 height="unset"
-                justifyContent="center"
+                justifyContent="flex-start"
                 alignItems="center"
                 grow="1"
                 shrink="1"
@@ -82,14 +84,15 @@ const MyPageList1024px = props => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 183")}
+                {...getOverrideProps(overrides, "Frame 176")}
               >
                 <Text
-                  fontFamily="ffProLight"
-                  fontSize="18px"
+                  fontFamily="ffProExtraLight"
+                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
                   fontWeight="600"
-                  lineHeight="21.784090042114258px"
-                  textAlign="center"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="29.045454025268555px"
+                  textAlign="left"
                   display="block"
                   direction="column"
                   justifyContent="unset"
@@ -110,7 +113,7 @@ const MyPageList1024px = props => {
                 direction="row"
                 width="unset"
                 height="unset"
-                justifyContent="center"
+                justifyContent="flex-start"
                 alignItems="center"
                 grow="1"
                 shrink="1"
@@ -118,22 +121,24 @@ const MyPageList1024px = props => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 184")}
+                {...getOverrideProps(overrides, "Frame 177")}
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize="18px"
+                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
                   fontWeight="600"
-                  lineHeight="21.784090042114258px"
-                  textAlign="center"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="29.045454025268555px"
+                  textAlign="left"
                   display="block"
                   direction="column"
                   justifyContent="unset"
-                  width="unset"
+                  width="67px"
                   height="unset"
                   gap="unset"
                   alignItems="unset"
                   shrink="0"
+                  alignSelf="stretch"
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
@@ -146,7 +151,7 @@ const MyPageList1024px = props => {
                 direction="row"
                 width="unset"
                 height="unset"
-                justifyContent="center"
+                justifyContent="flex-start"
                 alignItems="center"
                 grow="1"
                 shrink="1"
@@ -154,14 +159,15 @@ const MyPageList1024px = props => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 185")}
+                {...getOverrideProps(overrides, "Frame 178")}
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize="18px"
+                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
                   fontWeight="600"
-                  lineHeight="21.784090042114258px"
-                  textAlign="center"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="29.045454025268555px"
+                  textAlign="left"
                   display="block"
                   direction="column"
                   justifyContent="unset"
@@ -182,7 +188,7 @@ const MyPageList1024px = props => {
                 direction="row"
                 width="unset"
                 height="unset"
-                justifyContent="center"
+                justifyContent="flex-start"
                 alignItems="center"
                 grow="1"
                 shrink="1"
@@ -190,14 +196,15 @@ const MyPageList1024px = props => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 186")}
+                {...getOverrideProps(overrides, "Frame 179")}
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize="18px"
+                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
                   fontWeight="600"
-                  lineHeight="21.784090042114258px"
-                  textAlign="center"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="29.045454025268555px"
+                  textAlign="left"
                   display="block"
                   direction="column"
                   justifyContent="unset"
@@ -218,7 +225,7 @@ const MyPageList1024px = props => {
                 direction="row"
                 width="unset"
                 height="unset"
-                justifyContent="center"
+                justifyContent="flex-start"
                 alignItems="center"
                 grow="1"
                 shrink="1"
@@ -226,14 +233,15 @@ const MyPageList1024px = props => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 187")}
+                {...getOverrideProps(overrides, "Frame 180")}
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize="18px"
+                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
                   fontWeight="600"
-                  lineHeight="21.784090042114258px"
-                  textAlign="center"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="29.045454025268555px"
+                  textAlign="left"
                   display="block"
                   direction="column"
                   justifyContent="unset"
@@ -254,7 +262,7 @@ const MyPageList1024px = props => {
                 direction="row"
                 width="unset"
                 height="unset"
-                justifyContent="center"
+                justifyContent="flex-start"
                 alignItems="center"
                 grow="1"
                 shrink="1"
@@ -262,14 +270,15 @@ const MyPageList1024px = props => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 188")}
+                {...getOverrideProps(overrides, "Frame 181")}
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize="18px"
+                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
                   fontWeight="600"
-                  lineHeight="21.784090042114258px"
-                  textAlign="center"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="29.045454025268555px"
+                  textAlign="left"
                   display="block"
                   direction="column"
                   justifyContent="unset"
@@ -281,8 +290,109 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`MY ${props?.item?.oracleId.split("-")[0]}`}
+                  children="DFS"
                   {...getOverrideProps(overrides, "DFS")}
+                ></Text>
+              </Flex>
+              <Flex
+                gap="10px"
+                direction="row"
+                width="unset"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="center"
+                grow="1"
+                shrink="1"
+                basis="0"
+                alignSelf="stretch"
+                position="relative"
+                padding="10px 10px 10px 10px"
+                {...getOverrideProps(overrides, "Frame 182")}
+              >
+                <Text
+                  fontFamily="ffProExtraLight"
+                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
+                  fontWeight="600"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="29.045454025268555px"
+                  textAlign="left"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  shrink="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children="ETH"
+                  {...getOverrideProps(overrides, "ETH")}
+                ></Text>
+              </Flex>
+            </Flex>
+            <Flex
+              gap="0"
+              direction="column"
+              width="unset"
+              height="unset"
+              justifyContent="center"
+              alignItems="center"
+              grow="1"
+              shrink="1"
+              basis="0"
+              alignSelf="stretch"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              {...getOverrideProps(overrides, "Frame 14340773342")}
+            >
+              <Flex
+                gap="10px"
+                direction="row"
+                width="unset"
+                height="unset"
+                justifyContent="center"
+                alignItems="center"
+                grow="1"
+                shrink="1"
+                basis="0"
+                alignSelf="stretch"
+                position="relative"
+                style={{
+                  borderTop: "1px dashed rgba(0,0,0,1)",
+                  borderLeft: "1px dashed rgba(0,0,0,1)",
+                  borderRight: "1px dashed rgba(0,0,0,1)",
+                  borderTopWidth: "2px",
+                  borderLeftWidth: "2px",
+                  borderRightWidth: "2px",
+                }}
+                padding="9px 9px 9px 9px"
+                {...getOverrideProps(overrides, "Frame 165")}
+              >
+                <Text
+                  fontFamily="ffProExtraLight"
+                  fontSize="13px"
+                  fontWeight="600"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="21.784090042114258px"
+                  textAlign="center"
+                  display="flex"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  grow="1"
+                  shrink="1"
+                  basis="0"
+                  alignSelf="center"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children="1"
+                  {...getOverrideProps(overrides, "1")}
                 ></Text>
               </Flex>
               <Flex
@@ -297,66 +407,25 @@ const MyPageList1024px = props => {
                 basis="0"
                 alignSelf="stretch"
                 position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 189")}
+                style={{
+                  borderTop: "1px dashed rgba(0,0,0,1)",
+                  borderLeft: "1px dashed rgba(0,0,0,1)",
+                  borderRight: "1px dashed rgba(0,0,0,1)",
+                  borderTopWidth: "2px",
+                  borderLeftWidth: "2px",
+                  borderRightWidth: "2px",
+                }}
+                padding="9px 9px 9px 9px"
+                {...getOverrideProps(overrides, "Frame 16940773345")}
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize="18px"
+                  fontSize="13px"
                   fontWeight="600"
+                  color="rgba(244,244,244,1)"
                   lineHeight="21.784090042114258px"
                   textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children={`MY ${props?.item?.oracleId.split("-")[1]}`}
-                  {...getOverrideProps(overrides, "ETH")}
-                ></Text>
-              </Flex>
-            </Flex>
-            <Flex
-              gap="0"
-              direction="row"
-              width="unset"
-              height="unset"
-              justifyContent="center"
-              alignItems="center"
-              shrink="0"
-              alignSelf="stretch"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 14340702569")}
-            >
-              <Flex
-                style={{ borderRight: "1px dashed black", borderWidth: "2px" }}
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="52px"
-                justifyContent="center"
-                alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="9px 9px 9px 9px"
-                {...getOverrideProps(overrides, "Frame 16540712596")}
-              >
-                <Text
-                  fontFamily="ffProLight"
-                  fontSize="20px"
-                  fontWeight="600"
-                  lineHeight="24.204544067382812px"
-                  textAlign="center"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -366,75 +435,45 @@ const MyPageList1024px = props => {
                   grow="1"
                   shrink="1"
                   basis="0"
-                  alignSelf="stretch"
+                  alignSelf="center"
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.idx + 1}
-                  {...getOverrideProps(overrides, "1")}
-                ></Text>
-              </Flex>
-              <Flex
-                style={{ borderRight: "1px dashed black", borderWidth: "2px" }}
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="52px"
-                justifyContent="center"
-                alignItems="center"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="9px 9px 9px 9px"
-                {...getOverrideProps(overrides, "Frame 169")}
-              >
-                <Text
-                  fontFamily="ffProLight"
-                  fontSize="16px"
-                  fontWeight="600"
-                  lineHeight="24.204544067382812px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children={props.item.name}
+                  children="DFS-ETH"
                   {...getOverrideProps(overrides, "DFS-ETH")}
                 ></Text>
               </Flex>
               <Flex
-                style={{ borderRight: "1px dashed black", borderWidth: "2px" }}
                 gap="10px"
                 direction="row"
                 width="unset"
-                height="52px"
+                height="unset"
                 justifyContent="center"
                 alignItems="center"
                 grow="1"
                 shrink="1"
                 basis="0"
+                alignSelf="stretch"
                 position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 16640712597")}
+                style={{
+                  borderTop: "1px dashed rgba(0,0,0,1)",
+                  borderLeft: "1px dashed rgba(0,0,0,1)",
+                  borderRight: "1px dashed rgba(0,0,0,1)",
+                  borderTopWidth: "2px",
+                  borderLeftWidth: "2px",
+                  borderRightWidth: "2px",
+                }}
+                padding="9px 9px 9px 9px"
+                {...getOverrideProps(overrides, "Frame 166")}
               >
                 <Text
-                  fontFamily="ffProLight"
-                  fontSize="16px"
+                  fontFamily="ffProExtraLight"
+                  fontSize="13px"
                   fontWeight="600"
-                  lineHeight="24.204544067382812px"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="21.784090042114258px"
                   textAlign="center"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -444,36 +483,45 @@ const MyPageList1024px = props => {
                   grow="1"
                   shrink="1"
                   basis="0"
-                  alignSelf="stretch"
+                  alignSelf="center"
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.item.apy}
-                  {...getOverrideProps(overrides, "040702571")}
+                  children="0"
+                  {...getOverrideProps(overrides, "040773348")}
                 ></Text>
               </Flex>
               <Flex
-                style={{ borderRight: "1px dashed black", borderWidth: "2px" }}
                 gap="10px"
                 direction="row"
                 width="unset"
-                height="52px"
+                height="unset"
                 justifyContent="center"
                 alignItems="center"
                 grow="1"
                 shrink="1"
                 basis="0"
+                alignSelf="stretch"
                 position="relative"
+                style={{
+                  borderTop: "1px dashed rgba(0,0,0,1)",
+                  borderLeft: "1px dashed rgba(0,0,0,1)",
+                  borderRight: "1px dashed rgba(0,0,0,1)",
+                  borderTopWidth: "2px",
+                  borderLeftWidth: "2px",
+                  borderRightWidth: "2px",
+                }}
                 padding="9px 9px 9px 9px"
                 {...getOverrideProps(overrides, "Frame 167")}
               >
                 <Text
-                  fontFamily="ffProLight"
-                  fontSize="16px"
+                  fontFamily="ffProExtraLight"
+                  fontSize="13px"
                   fontWeight="600"
-                  lineHeight="24.204544067382812px"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="21.784090042114258px"
                   textAlign="center"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -483,36 +531,45 @@ const MyPageList1024px = props => {
                   grow="1"
                   shrink="1"
                   basis="0"
-                  alignSelf="stretch"
+                  alignSelf="center"
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${props?.item?.tvl.slice(0, 10) / 100}`}
-                  {...getOverrideProps(overrides, "040702572")}
+                  children="0"
+                  {...getOverrideProps(overrides, "040773350")}
                 ></Text>
               </Flex>
               <Flex
-                style={{ borderRight: "1px dashed black", borderWidth: "2px" }}
                 gap="10px"
                 direction="row"
                 width="unset"
-                height="52px"
+                height="unset"
                 justifyContent="center"
                 alignItems="center"
                 grow="1"
                 shrink="1"
                 basis="0"
+                alignSelf="stretch"
                 position="relative"
+                style={{
+                  borderTop: "1px dashed rgba(0,0,0,1)",
+                  borderLeft: "1px dashed rgba(0,0,0,1)",
+                  borderRight: "1px dashed rgba(0,0,0,1)",
+                  borderTopWidth: "2px",
+                  borderLeftWidth: "2px",
+                  borderRightWidth: "2px",
+                }}
                 padding="9px 9px 9px 9px"
                 {...getOverrideProps(overrides, "Frame 168")}
               >
                 <Text
-                  fontFamily="ffProLight"
-                  fontSize="16px"
+                  fontFamily="ffProExtraLight"
+                  fontSize="13px"
                   fontWeight="600"
-                  lineHeight="24.204544067382812px"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="21.784090042114258px"
                   textAlign="center"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -522,36 +579,45 @@ const MyPageList1024px = props => {
                   grow="1"
                   shrink="1"
                   basis="0"
-                  alignSelf="stretch"
+                  alignSelf="center"
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${props.item.fee}%`}
+                  children="0.3%"
                   {...getOverrideProps(overrides, "0.3%")}
                 ></Text>
               </Flex>
               <Flex
-                style={{ borderRight: "1px dashed black", borderWidth: "2px" }}
                 gap="10px"
                 direction="row"
                 width="unset"
-                height="52px"
+                height="unset"
                 justifyContent="center"
                 alignItems="center"
                 grow="1"
                 shrink="1"
                 basis="0"
+                alignSelf="stretch"
                 position="relative"
+                style={{
+                  borderTop: "1px dashed rgba(0,0,0,1)",
+                  borderLeft: "1px dashed rgba(0,0,0,1)",
+                  borderRight: "1px dashed rgba(0,0,0,1)",
+                  borderTopWidth: "2px",
+                  borderLeftWidth: "2px",
+                  borderRightWidth: "2px",
+                }}
                 padding="9px 9px 9px 9px"
-                {...getOverrideProps(overrides, "Frame 17040892896")}
+                {...getOverrideProps(overrides, "Frame 170")}
               >
                 <Text
-                  fontFamily="ffProLight"
-                  fontSize="16px"
+                  fontFamily="ffProExtraLight"
+                  fontSize="13px"
                   fontWeight="600"
-                  lineHeight="24.204544067382812px"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="21.784090042114258px"
                   textAlign="center"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -561,37 +627,41 @@ const MyPageList1024px = props => {
                   grow="1"
                   shrink="1"
                   basis="0"
-                  alignSelf="stretch"
+                  alignSelf="center"
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${
-                    Math.floor(props?.item?.DFSTokenBalance.slice(0, 6)) / 100
-                  } `}
-                  {...getOverrideProps(overrides, "040892897")}
+                  children="0"
+                  {...getOverrideProps(overrides, "040892928")}
                 ></Text>
               </Flex>
               <Flex
                 gap="10px"
                 direction="row"
                 width="unset"
-                height="52px"
+                height="unset"
                 justifyContent="center"
                 alignItems="center"
                 grow="1"
                 shrink="1"
                 basis="0"
+                alignSelf="stretch"
                 position="relative"
+                style={{
+                  border: "1px dashed rgba(0,0,0,1)",
+                  borderWidth: "2px",
+                }}
                 padding="9px 9px 9px 9px"
-                {...getOverrideProps(overrides, "Frame 171")}
+                {...getOverrideProps(overrides, "Frame 17140892929")}
               >
                 <Text
-                  fontFamily="ffProLight"
-                  fontSize="16px"
+                  fontFamily="ffProExtraLight"
+                  fontSize="13px"
                   fontWeight="600"
-                  lineHeight="24.204544067382812px"
+                  color="rgba(244,244,244,1)"
+                  lineHeight="21.784090042114258px"
                   textAlign="center"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -601,14 +671,12 @@ const MyPageList1024px = props => {
                   grow="1"
                   shrink="1"
                   basis="0"
-                  alignSelf="stretch"
+                  alignSelf="center"
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${
-                    Math.floor(props?.item?.OtherTokenBalance.slice(0, 6)) / 100
-                  } `}
-                  {...getOverrideProps(overrides, "040892899")}
+                  children="0"
+                  {...getOverrideProps(overrides, "040892930")}
                 ></Text>
               </Flex>
             </Flex>
@@ -628,13 +696,11 @@ const MyPageList1024px = props => {
                 ease: [0.43, 0.13, 0.23, 0.96],
               }}
             >
-              <DepositButton1024px
+              <DepositButton768px
                 mypagelist={props.item}
                 lptokenvalue={props.lptokenvalue}
                 lptoken={props.lptoken}
                 mypagelplistup={props.mypagelplistup}
-                pid={props?.pid}
-                setlptokenvalue={props.setLpTokenValue}
               />
             </motion.div>
           </SubWrap>
@@ -644,7 +710,7 @@ const MyPageList1024px = props => {
   );
 };
 
-export default MyPageList1024px;
+export default MyPageList768px;
 
 const ItemWrap = styled(motion.div)`
   cursor: pointer;
@@ -657,6 +723,7 @@ const ItemWrap = styled(motion.div)`
 const SubWrap = styled(motion.div)`
   font-size: 15px;
   display: flex;
+
   :last-child {
     border-radius: 0 0 20px 20px;
   }

@@ -8,16 +8,17 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
+import "../css/Font.css";
 export default function DepositButton768px(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
       gap="33px"
-      direction="row"
-      width="636px"
+      direction={{ base: "column", small: "column", medium: "row" }}
+      width="74.4vw"
       height="unset"
-      justifyContent="flex-start"
-      alignItems="flex-start"
+      justifyContent="center"
+      alignItems="center"
       position="relative"
       borderRadius="35px"
       padding="31px 63.5px 31px 63.5px"
@@ -28,7 +29,7 @@ export default function DepositButton768px(props) {
       <Flex
         gap="10px"
         direction="row"
-        width="unset"
+        width="48vw"
         height="50px"
         justifyContent="flex-end"
         alignItems="center"
@@ -43,8 +44,8 @@ export default function DepositButton768px(props) {
         {...getOverrideProps(overrides, "Connect40822702")}
       >
         <Text
-          fontFamily="Inter"
-          fontSize="24px"
+          fontFamily="ffProBook"
+          fontSize={{ base: "19px", small: "19px", medium: "24px" }}
           fontWeight="700"
           lineHeight="29.045454025268555px"
           textAlign="center"
@@ -68,7 +69,7 @@ export default function DepositButton768px(props) {
       <Flex
         gap="10px"
         direction="row"
-        width="unset"
+        width="48vw"
         height="50px"
         justifyContent="flex-end"
         alignItems="center"
@@ -83,8 +84,8 @@ export default function DepositButton768px(props) {
         {...getOverrideProps(overrides, "Connect40822700")}
       >
         <Text
-          fontFamily="Inter"
-          fontSize="24px"
+          fontFamily="ffProBook"
+          fontSize={{ base: "19px", small: "19px", medium: "24px" }}
           fontWeight="700"
           color="rgba(239,239,239,1)"
           lineHeight="29.045454025268555px"

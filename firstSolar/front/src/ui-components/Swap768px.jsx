@@ -29,7 +29,6 @@ import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import styled from "styled-components";
 import SwapSuccessModal from "./SwapSuccessModal";
-import { useParams } from "react-router-dom";
 import SwapFailModal from "./SwapFailModal";
 import "../css/Font.css";
 

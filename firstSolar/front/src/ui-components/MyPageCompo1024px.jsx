@@ -120,10 +120,10 @@ export default function MyPageCompo1024px(props) {
         direction="column"
         width="unset"
         height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="center"
+        alignItems="center"
         shrink="0"
-        alignSelf="stretch"
+        alignSelf="center"
         position="relative"
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 17040762674")}
