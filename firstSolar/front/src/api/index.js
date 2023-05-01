@@ -267,3 +267,33 @@ export const updatePool = async (tokenAddress) => {
     console.error(error);
   }
 };
+
+export const approveLp = async (account, approveDepositAmount, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/approveLp", {
+        account,
+        approveDepositAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deposit = async (account, depositAmount, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/deposit", {
+        account,
+        depositAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
