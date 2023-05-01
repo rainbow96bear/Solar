@@ -58,6 +58,11 @@ export default function BeforeHeadCom1024px(props) {
     setInputValue(sanitizedValue);
   };
 
+  const handleSearch = () => {
+    const searchQuery = encodeURIComponent(inputValue); // 검색어를 URL로 인코딩합니다.
+    navigate(`/search/?searchData=${searchQuery}`);
+  };
+
   const isDesktop = useMediaQuery({
     query: "(min-width:992px)",
   });
@@ -131,7 +136,12 @@ export default function BeforeHeadCom1024px(props) {
             variation="quiet"
             value={inputValue}
             onSubmit={() => {
-              // 검색 버튼을 누르거나 엔터를 눌렀을 때 작동합니다.
+              if (inputValue.match(/\S/g)) {
+                handleSearch();
+                return;
+              } else {
+                alert("검색어를 입력하세요");
+              }
             }}
             onChange={handleInputChange}
             {...getOverrideProps(overrides, "SearchField")}
