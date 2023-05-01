@@ -27,7 +27,7 @@ export default function QuestionModalWithDraw(props) {
   const [lpBalance, setLpBalance] = React.useState();
   const dispatch = useDispatch();
   const { account } = useAccount();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account.account.account);
   const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
 
   React.useEffect(() => {
@@ -83,7 +83,7 @@ export default function QuestionModalWithDraw(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -561,7 +561,7 @@ export default function QuestionModalWithDraw(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={`Balance :${
-                      lpBalance ? lpBalance?.toString().slice(0, 7) / 100000 : 0
+                      parseInt((lpBalance / 10 ** 18) * 10000) / 10000 || 0
                     }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>
@@ -578,7 +578,7 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={e => setWithDrawAmountValue(e.target.value)}
+                onInput={(e) => setWithDrawAmountValue(e.target.value)}
                 {...getOverrideProps(overrides, "TextAreaField40822814")}
               ></TextAreaField>
             </Flex>
