@@ -31,6 +31,7 @@ export default function QuestionModalDeposit(props) {
     React.useState(false);
   const [depositFailModalOpen, setDepositFailModalOpen] = React.useState(false);
   // console.log("item", props.mypagelist);
+  console.log("  props?.lptoken", props?.lptoken);
 
   React.useEffect(() => {
     if (document.cookie) {
