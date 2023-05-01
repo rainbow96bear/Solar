@@ -12,7 +12,12 @@ import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useAccount } from "wagmi";
 import { useDispatch, useSelector } from "react-redux";
-import { approveDFS, approveOtherToken, addLiquidity } from "../api/index";
+import {
+  approveDFS,
+  approveOtherToken,
+  addLiquidity,
+  updatePool,
+} from "../api/index";
 import { swapBalance } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
@@ -33,6 +38,9 @@ export default function AddLiquidityBottom320px(props) {
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
+
+  const [addLiquidityPossibility, setAddLiquidityPossibility] =
+    React.useState(false);
 
   const addLiquidtiyFunc = async () => {
     dispatch(isLoadingThunk({ isLoading: true }));
@@ -65,13 +73,33 @@ export default function AddLiquidityBottom320px(props) {
           const addLiquidityTxResult = await web3.eth.sendTransaction(
             addLiquidityTx
           );
+          await updatePool(props?.oracleiddata[0]?.tokenAddress);
+
           if (addLiquidityTxResult) {
+            setFirstValue(0);
+            setSecondValue(0);
+            const firstBalanceTemp = await swapBalance(
+              address ? address : address2,
+              props?.oracleiddata[0]?.firstToken
+                ? props?.oracleiddata[0]?.firstToken
+                : "DFS"
+            );
+            setUserFirstBalance(firstBalanceTemp);
+
+            const secondBalanceTemp = await swapBalance(
+              address ? address : address2,
+              props?.oracleiddata[0]?.secondToken
+                ? props?.oracleiddata[0]?.secondToken
+                : "ETH"
+            );
+            setUserSecondBalance(secondBalanceTemp);
+
             dispatch(isLoadingThunk({ isLoading: false }));
           }
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       dispatch(isLoadingThunk({ isLoading: false }));
     }
   };
@@ -113,6 +141,20 @@ export default function AddLiquidityBottom320px(props) {
       }
     }
   }, []);
+
+  React.useEffect(() => {
+    if (
+      +firstValue <= +userFirstBalance &&
+      +secondValue <= +userSecondBalance &&
+      firstValue == secondValue &&
+      firstValue != 0 &&
+      secondValue != 0 &&
+      firstValue != undefined &&
+      secondValue != undefined
+    ) {
+      setAddLiquidityPossibility(true);
+    } else setAddLiquidityPossibility(false);
+  }, [firstValue, secondValue]);
 
   return (
     <Flex
@@ -751,7 +793,9 @@ export default function AddLiquidityBottom320px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${props?.balance ? props?.balance : 0}`}
+                  children={`Balance : ${
+                    userFirstBalance ? userFirstBalance : 0
+                  }`}
                   {...getOverrideProps(overrides, "Balance : 040053041")}
                 ></Text>
               </Flex>
@@ -767,6 +811,10 @@ export default function AddLiquidityBottom320px(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
+              value={firstValue}
+              onChange={(e) => {
+                setFirstValue(e.target.value);
+              }}
               {...getOverrideProps(overrides, "TextAreaField40053042")}
             ></TextAreaField>
           </Flex>
@@ -930,7 +978,9 @@ export default function AddLiquidityBottom320px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Balance : 0"
+                  children={`Balance : ${
+                    userSecondBalance ? userSecondBalance : 0
+                  }`}
                   {...getOverrideProps(overrides, "Balance : 040053052")}
                 ></Text>
               </Flex>
@@ -946,6 +996,10 @@ export default function AddLiquidityBottom320px(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
+              value={secondValue}
+              onChange={(e) => {
+                setSecondValue(e.target.value);
+              }}
               {...getOverrideProps(overrides, "TextAreaField40053053")}
             ></TextAreaField>
           </Flex>
@@ -979,12 +1033,12 @@ export default function AddLiquidityBottom320px(props) {
             position="relative"
             borderRadius="15px"
             padding="13px 73px 13px 73px"
-            style={{
-              cursor: "pointer",
-            }}
             {...getOverrideProps(overrides, "Frame 76")}
             onClick={() => {
               addLiquidtiyFunc();
+            }}
+            style={{
+              cursor: addLiquidityPossibility ? "pointer" : "not-allowed",
             }}
           >
             <Text
