@@ -297,3 +297,32 @@ export const deposit = async (account, depositAmount, lpSymbol) => {
     console.error(error);
   }
 };
+
+export const withDraw = async (account, withDrawAmount, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/deposit", {
+        account,
+        withDrawAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getLPBalance = async (pid, account) => {
+  try {
+    const result = (
+      await request.post("api/defi/getLPBalance", {
+        pid,
+        account,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};

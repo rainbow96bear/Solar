@@ -26,12 +26,13 @@ import { useAccount } from "wagmi";
 import LoadingButton768 from "./LoadingButton768";
 import { Web3Button } from "@web3modal/react";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
   const login = useSelector((state) => state.login.login.login);
   const { address } = useAccount();
+  const navigate = useNavigate();
   const connect = useSelector((state) => state.connect.connect.connect);
   const isMobile = useMediaQuery({
     query: "(min-width:0px) and (max-width:480px)",

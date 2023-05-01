@@ -154,8 +154,9 @@ export default function DepositButton1024px(props) {
         <QuestionModalDeposit
           setquestionmark={setQuestionMark}
           mypagelist={props.mypagelist}
-          lpTokenValue={props.lpTokenValue}
-          lpToken={props.lpToken}
+          mypagelplistup={props.mypagelplistup}
+          lptokenvalue={props.lptokenvalue}
+          lptoken={props.lptoken}
         ></QuestionModalDeposit>
       ) : (
         <></>
@@ -164,6 +165,8 @@ export default function DepositButton1024px(props) {
         <QuestionModalWithDraw
           setquestionmark={setQuestionMark}
           mypagelist={props.mypagelist}
+          lptokenvalue={props.lptokenvalue}
+          lptoken={props.lptoken}
         ></QuestionModalWithDraw>
       ) : (
         <></>
