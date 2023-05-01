@@ -1069,7 +1069,7 @@ export default function AddLiquidityBottom768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Enter an Add Liquidity"
+              children="Add Liquidity"
               {...getOverrideProps(overrides, "Enter an Amount")}
             ></Text>
           </Flex>

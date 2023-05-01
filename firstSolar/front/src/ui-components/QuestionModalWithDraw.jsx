@@ -207,7 +207,7 @@ export default function QuestionModalWithDraw(props) {
             {...getOverrideProps(overrides, "Frame 96")}
           >
             <Text
-              fontFamily="ffProExtraLight"
+              fontFamily="ffProLight"
               fontSize="15px"
               fontWeight="600"
               lineHeight="18.15340805053711px"
@@ -429,7 +429,7 @@ export default function QuestionModalWithDraw(props) {
             {...getOverrideProps(overrides, "Frame 102")}
           >
             <Text
-              fontFamily="ffProExtraLight"
+              fontFamily="ffProLight"
               fontSize="15px"
               fontWeight="600"
               lineHeight="18.15340805053711px"
