@@ -36,18 +36,19 @@ export default function MyPageCompo1024px(props) {
   const mypageLpListUp = async () => {
     try {
       const myLists = await mypageList(params);
-      console.log(myLists);
+
       setMyList(myLists);
-      setTimeout(() => {}, 1500);
     } catch (error) {
       console.error(error);
-      isLoadingFalse();
     }
   };
   React.useEffect(() => {
-    isLoadingTrue();
-    mypageLpListUp();
-    isLoadingFalse();
+    (async () => {
+      isLoadingTrue();
+      await mypageLpListUp();
+
+      isLoadingFalse();
+    })();
   }, []);
 
   return (

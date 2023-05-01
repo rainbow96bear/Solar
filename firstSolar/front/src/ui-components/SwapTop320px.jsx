@@ -10,6 +10,8 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
+import { useDispatch } from "react-redux";
+import { isLoadingThunk } from "../modules/isLoading";
 
 export default function SwapTop320px(props) {
   const { overrides, ...rest } = props;
@@ -20,6 +22,16 @@ export default function SwapTop320px(props) {
 
   const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
   const reducedNumber = tokenNumBer?.toString().substring(0, 7);
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(isLoadingThunk({ isLoading: true }));
+
+    setTimeout(() => {
+      dispatch(isLoadingThunk({ isLoading: false }));
+    }, 1500);
+  }, []);
 
   return (
     <>

@@ -14,7 +14,6 @@ import "../css/Font.css";
 export default function AddLiquidityTop768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
 
-  console.log(props);
   const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
   const date = new Date(lastTimeStamp * 1000);
   const dateString = date.toLocaleDateString();

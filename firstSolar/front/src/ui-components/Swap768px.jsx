@@ -39,7 +39,7 @@ export default function Swap768px(props) {
   const { web3K, accountK, chainIdK, loginK } = useWeb3K();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
   const dispatch = useDispatch();
@@ -160,14 +160,14 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = percentNum => {
+  const setPercentBalance = (percentNum) => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
@@ -178,7 +178,7 @@ export default function Swap768px(props) {
     delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const handleTextareaChange = event => {
+  const handleTextareaChange = (event) => {
     const value = event.target.value;
 
     const filteredValue = value.replace(/[^0-9.\b]/g, "");
@@ -221,7 +221,7 @@ export default function Swap768px(props) {
     }, 1000);
   }
 
-  const delayedFunction2 = num => {
+  const delayedFunction2 = (num) => {
     try {
       if (secondSelectToken == "DFS") {
         setSecondAmountPrice(convertPrice.usdt * num);
@@ -679,7 +679,7 @@ export default function Swap768px(props) {
                 labelHidden={false}
                 variation="default"
                 value={textareaValue}
-                onChange={e => {
+                onChange={(e) => {
                   if (+e.target.value > +userFirstBalance) {
                     e.target.value = userFirstBalance;
                   }
@@ -687,7 +687,7 @@ export default function Swap768px(props) {
                   handleTextareaChange(e);
                   delayedFunction1(e.target.value);
                 }}
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -1119,7 +1119,7 @@ export default function Swap768px(props) {
                 value={secondAmountPrice ? secondAmountPrice : 0}
                 disabled
                 backgroundColor="transparent"
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}

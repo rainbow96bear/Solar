@@ -14,11 +14,9 @@ import "../css/Font.css";
 export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
-  console.log("item", props.mypagelist);
-
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}

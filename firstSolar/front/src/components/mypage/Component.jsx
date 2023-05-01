@@ -19,7 +19,7 @@ const MypageComponent = () => {
           }}
           whileHover={{
             borderRadius: "55px",
-            backgroundColor: "rgba(234, 0, 50, 0.45);",
+            backgroundColor: "rgba(234, 0, 50, 0.45)",
           }}
         >
           <MyPageCompo1024px></MyPageCompo1024px>
