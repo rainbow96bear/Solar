@@ -12,8 +12,6 @@ contract Reward {
   IERC20 public immutable rewardToken;
   address public immutable valutA;
   ISwap immutable SWAP;
-  uint256 public balance=0;
-  
 
   constructor(
     address _DFSA,
@@ -32,17 +30,23 @@ contract Reward {
     SWAP.usdtSwap(address(DFS), DFS.balanceOf(address(this)));
   }
 
+  function autoCompound(
+    address _lpAddress,
+    uint256 _amount
+  ) public returns (uint256) {
+    rewardToken.approve(address(SWAP), _amount);
+    uint256 amountOut = SWAP.dfsSwap(_lpAddress, address(rewardToken), _amount);
+    return amountOut;
+  }
+
   function distribution(address _contributor, uint256 _amount) public {
     rewardToken.transfer(_contributor, _amount);
   }
 
-  function sendProfit() public returns(uint256) {
-    uint256 balance=rewardToken.balanceOf(address(this));
+  function sendProfit() public returns (uint256) {
+    uint256 balance = rewardToken.balanceOf(address(this));
+    uint256 distributeAmount = balance.mul(2).div(10);
     rewardToken.transfer(valutA, balance.mul(8).div(10));
-    return balance.mul(2).div(10);
-
+    return distributeAmount;
   }
-
-
-
 }

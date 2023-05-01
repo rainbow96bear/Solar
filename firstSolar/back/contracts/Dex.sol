@@ -5,10 +5,10 @@ pragma solidity ^0.8.19;
 // import "LiquidityPool.sol";
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "Ownable.sol";
 import "IReward.sol";
+import "ILiquidityPool.sol";
 
 contract Dex is Ownable {
   using SafeMath for uint256;
@@ -23,17 +23,11 @@ contract Dex is Ownable {
     uint256 amount;
     uint256 shares;
     bool checkDeposit;
+    bool checkAutoCompounding;
   }
 
   mapping(uint256 => mapping(address => UserInfo)) public userInfo;
   mapping(uint256 => address[]) public userAddress;
-  // 컴파운드 설정 추가
-  mapping(uint256 => mapping(address => bool)) public userAutoCompound;
-
-  // 컴파운드 활성화/비활성화 설정 함수 추가
-  function setAutoCompound(uint256 _pid, bool _autoCompound) public {
-    userAutoCompound[_pid][msg.sender] = _autoCompound;
-  }
 
   struct PoolInfo {
     ERC20 lpToken;
@@ -43,7 +37,7 @@ contract Dex is Ownable {
   PoolInfo[] public poolInfo;
   // Owner's address of DEX
   address public immutable _owner;
-  // Array of liquidity pool addresses
+  // Array of liquidity pool addresses90997987098
 
   // Event
   event LiquidityPoolCreted(
@@ -56,34 +50,51 @@ contract Dex is Ownable {
     _owner = msg.sender;
   }
 
+  function setAutoCompound(uint256 _pid) public {
+    UserInfo storage user = userInfo[_pid][msg.sender];
+    user.checkAutoCompounding = !user.checkAutoCompounding;
+  }
+
   function allDistribution() public {
     for (uint256 i = 0; i < poolInfo.length; i++) {
       address[] storage userArr = userAddress[i];
       PoolInfo storage pool = poolInfo[i];
-
       uint256 balance = IReward(pool.rewardA).sendProfit();
       for (uint256 j = 0; j < userArr.length; j++) {
         UserInfo storage user = userInfo[i][userArr[j]];
         if (user.amount > 0) {
-          uint256 userReward = balance.mul(user.shares).div(10000);
-
-          // 오토 컴파운드 확인
-          if (userAutoCompound[i][userArr[j]]) {
-            // 컴파운드 처리
-            pool.lpToken.transferFrom(
-              address(pool.rewardA),
-              address(this),
-              userReward
+          if (user.checkAutoCompounding) {
+            uint256 amountOut = IReward(pool.rewardA).autoCompound(
+              address(pool.lpToken),
+              balance.mul(user.shares).div(10000)
             );
-            user.amount = user.amount.add(userReward);
+            uint256 totalAmount = pool.lpToken.totalSupply();
+            (uint256 _reserve1, uint256 _reserve2) = ILiquidityPool(
+              address(pool.lpToken)
+            ).getReserves();
+            ILiquidityPool(address(pool.lpToken)).mint(
+              address(this),
+              (amountOut * totalAmount) / (2 * _reserve2)
+            );
+            user.amount = user.amount.add(
+              (amountOut * totalAmount) / (2 * _reserve2)
+            );
+
             rewardShares(i, pool.lpToken);
           } else {
-            // 일반 분배
-            IReward(pool.rewardA).distribution(userArr[j], userReward);
+            IReward(pool.rewardA).distribution(
+              userArr[j],
+              balance.mul(user.shares).div(10000)
+            );
           }
         }
       }
     }
+  }
+
+  function getArrLength(uint256 _pid) public view returns (uint256) {
+    address[] storage userArr = userAddress[_pid];
+    return userArr.length;
   }
 
   function rewardShares(uint256 _pid, ERC20 _lpToken) public {
@@ -136,7 +147,6 @@ contract Dex is Ownable {
 
     pool.lpToken.transfer(address(msg.sender), _amount);
     // 승인돼있으니 msg.sender에게 amount만큼
-
     rewardShares(_pid, pool.lpToken);
     emit Withdraw(msg.sender, _pid, _amount);
   }
