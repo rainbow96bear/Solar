@@ -6,6 +6,7 @@ import { reducer as loginReducer } from "./login.js";
 import pageIndexReducer from "./pageIndex.js";
 import filterReducer from "./filter.js";
 import emptySearchReducer from "./emptySearch.js";
+import completeModalReducer from "./completeModal.js";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     pageIndex: pageIndexReducer,
     filter: filterReducer,
     emptySearch: emptySearchReducer,
+    completeModal: completeModalReducer,
   },
 });
 

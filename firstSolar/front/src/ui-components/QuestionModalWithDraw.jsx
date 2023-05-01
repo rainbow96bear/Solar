@@ -11,14 +11,70 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, Icon, TextAreaField } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useWeb3 } from "../modules/useWeb3";
+import { useWeb3K } from "../modules/useWeb3Kaikas";
+import { getLPBalance } from "../api";
+import { useAccount } from "wagmi";
+
 export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
-  console.log("item", props.mypagelist);
+  const { web3, login } = useWeb3();
+  const { loginK } = useWeb3K();
+
+  const dispatch = useDispatch();
+  const { account } = useAccount();
+  const account2 = useSelector((state) => state.account.account.account);
+  const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
+
+  React.useEffect(() => {
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+      } else if (document.cookie.split(":")[0] == "kaikas") {
+        loginK();
+      }
+    }
+  }, []);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const result = await getLPBalance(
+          // props?.aa,
+          0,
+          account ? account : account2
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
+  const withDrawFunc = async () => {
+    try {
+      dispatch(isLoadingThunk({ isLoading: true }));
+
+      const result2 = await withDrawAmountValue(
+        account2,
+        +withDrawAmountValue,
+        props?.lptoken
+      );
+
+      let transactionResult2 = await web3.eth.sendTransaction(result2);
+      setWithDrawAmountValue(0);
+      await props.mypageLpListUp();
+      dispatch(isLoadingThunk({ isLoading: false }));
+    } catch (error) {
+      console.error(error);
+      dispatch(isLoadingThunk({ isLoading: false }));
+    }
+  };
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -459,7 +515,7 @@ export default function QuestionModalWithDraw(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={props.mypagelist.firstToken || "불러오는 중"}
+                    children={props?.lptoken || "불러오는 중"}
                     {...getOverrideProps(overrides, "DEX Name40822808")}
                   ></Text>
                 </Flex>
@@ -495,11 +551,9 @@ export default function QuestionModalWithDraw(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={`Balance : ${
-                      Math.floor(
-                        props?.mypagelist?.OtherTokenBalance.slice(0, 6)
-                      ) / 100
-                    } `}
+                    children={`Balance :${
+                      props?.lptokenvalue?.slice(0, 7) / 100000 || 0
+                    }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>
                 </Flex>
@@ -514,140 +568,9 @@ export default function QuestionModalWithDraw(props) {
                 isDisabled={false}
                 labelHidden={false}
                 variation="default"
+                value={withDrawAmountValue}
+                onInput={(e) => setWithDrawAmountValue(e.target.value)}
                 {...getOverrideProps(overrides, "TextAreaField40822814")}
-              ></TextAreaField>
-            </Flex>
-            <Flex
-              gap="9px"
-              direction="column"
-              width="unset"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              shrink="0"
-              alignSelf="stretch"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 100")}
-            >
-              <Flex
-                gap="9px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="flex-start"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 99")}
-              >
-                <Flex
-                  gap="5px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="center"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  borderRadius="25px"
-                  padding="11px 0px 11px 0px"
-                  {...getOverrideProps(overrides, "Dexname140822817")}
-                >
-                  <Image
-                    width="28px"
-                    height="28px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    src={props.mypagelist.platformLogo || logo}
-                    {...getOverrideProps(overrides, "ghrgclzzd 740822818")}
-                  ></Image>
-                  <Text
-                    fontFamily="Inter"
-                    fontSize="17px"
-                    fontWeight="600"
-                    lineHeight="20.573863983154297px"
-                    textAlign="left"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="16px"
-                    gap="unset"
-                    alignItems="unset"
-                    grow="1"
-                    shrink="1"
-                    basis="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children={props.mypagelist.secondToken || "불러오는 중"}
-                    {...getOverrideProps(overrides, "DEX Name40822819")}
-                  ></Text>
-                </Flex>
-                <Flex
-                  gap="10px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="10px 10px 10px 10px"
-                  {...getOverrideProps(overrides, "Frame 9740822823")}
-                >
-                  <Text
-                    fontFamily="Inter"
-                    fontSize="13px"
-                    fontWeight="600"
-                    lineHeight="15.732954025268555px"
-                    textAlign="right"
-                    display="block"
-                    direction="column"
-                    justifyContent="unset"
-                    width="256px"
-                    height="unset"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children={`Balance : ${
-                      Math.floor(
-                        props?.mypagelist?.DFSTokenBalance.slice(0, 6)
-                      ) / 100
-                    } `}
-                    {...getOverrideProps(overrides, "Balance : 040822824")}
-                  ></Text>
-                </Flex>
-              </Flex>
-              <TextAreaField
-                width="unset"
-                height="unset"
-                placeholder="0.0"
-                shrink="0"
-                alignSelf="stretch"
-                size="small"
-                isDisabled={false}
-                labelHidden={false}
-                variation="default"
-                {...getOverrideProps(overrides, "TextAreaField40822825")}
               ></TextAreaField>
             </Flex>
           </Flex>
@@ -666,6 +589,9 @@ export default function QuestionModalWithDraw(props) {
             padding="13px 73px 13px 73px"
             backgroundColor="rgba(234,0,50,0.45)"
             style={{ cursor: "pointer" }}
+            onClick={() => {
+              withDrawFunc();
+            }}
             {...getOverrideProps(overrides, "Frame 103")}
           >
             <Text

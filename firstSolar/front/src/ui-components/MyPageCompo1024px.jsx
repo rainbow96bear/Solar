@@ -12,6 +12,8 @@ import MyPageList1024px from "../components/myPageList/MyPageList1024px";
 import { useLocation } from "react-router-dom";
 import { mypageList } from "../api/index";
 import logo from "./images/logo_new.png";
+import { useDispatch } from "react-redux";
+import { isLoadingThunk } from "../modules/isLoading";
 
 export default function MyPageCompo1024px(props) {
   const { overrides, ...rest } = props;
@@ -22,13 +24,22 @@ export default function MyPageCompo1024px(props) {
   const [secondToken, setSecondToken] = React.useState();
   const [firstImgToken, setFirstImgToken] = React.useState();
   const [secondImgToken, setSecondImgToken] = React.useState();
-
+  const dispatch = useDispatch();
   const params = useLocation().search.replace("?", "");
 
   const mypageLpListUp = async () => {
-    const myLists = await mypageList(params);
-    console.log(myLists);
-    setMyList(myLists);
+    try {
+      dispatch(isLoadingThunk({ isLoading: true }));
+      const myLists = await mypageList(params);
+      console.log(myLists);
+      setMyList(myLists);
+      setTimeout(() => {
+        dispatch(isLoadingThunk({ isLoading: false }));
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+      dispatch(isLoadingThunk({ isLoading: false }));
+    }
   };
   React.useEffect(() => {
     mypageLpListUp();
@@ -335,7 +346,7 @@ export default function MyPageCompo1024px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={`Balance : ${
-                  lpTokenValue?.slice(0, 7) / 1000000 || 0
+                  lpTokenValue?.slice(0, 7) / 100000 || 0
                 } ${lpToken || ""} `}
                 {...getOverrideProps(overrides, "Balance : 0")}
               ></Text>
@@ -354,8 +365,9 @@ export default function MyPageCompo1024px(props) {
             setSecondToken={setSecondToken}
             setFirstImgToken={setFirstImgToken}
             setSecondImgToken={setSecondImgToken}
-            lpTokenValue={lpTokenValue}
-            lpToken={lpToken}
+            lptokenvalue={lpTokenValue}
+            lptoken={lpToken}
+            mypagelplistup={mypageLpListUp}
           />
         ))}
       </Flex>

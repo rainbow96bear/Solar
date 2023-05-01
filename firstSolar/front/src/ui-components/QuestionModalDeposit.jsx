@@ -16,6 +16,7 @@ import { approveLp, deposit } from "../api";
 import { useWeb3 } from "../modules/useWeb3";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading";
+import { setCompleteModal } from "../modules/completeModal";
 
 export default function QuestionModalDeposit(props) {
   const { overrides, setquestionmark, ...rest } = props;
@@ -23,7 +24,7 @@ export default function QuestionModalDeposit(props) {
   const { web3K, accountK, loginK } = useWeb3K();
 
   const dispatch = useDispatch();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account.account.account);
   const [depositAmountValue, setDepositAmountValue] = React.useState(0);
 
   // console.log("item", props.mypagelist);
@@ -44,7 +45,7 @@ export default function QuestionModalDeposit(props) {
       const result1 = await approveLp(
         account2,
         +depositAmountValue,
-        props?.lpToken
+        props?.lptoken
       );
 
       let transactionResult1 = await web3.eth.sendTransaction(result1);
@@ -52,12 +53,14 @@ export default function QuestionModalDeposit(props) {
       const result2 = await deposit(
         account2,
         +depositAmountValue,
-        props?.lpToken
+        props?.lptoken
       );
 
       let transactionResult2 = await web3.eth.sendTransaction(result2);
       setDepositAmountValue(0);
+      await props?.mypagelplistup();
       dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setCompleteModal(true));
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
@@ -66,7 +69,7 @@ export default function QuestionModalDeposit(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -507,7 +510,7 @@ export default function QuestionModalDeposit(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={props?.lpToken || "불러오는 중"}
+                    children={props?.lptoken || "불러오는 중"}
                     {...getOverrideProps(overrides, "DEX Name40822808")}
                   ></Text>
                 </Flex>
@@ -544,7 +547,7 @@ export default function QuestionModalDeposit(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={`Balance :${
-                      props?.lpTokenValue?.slice(0, 7) / 100000 || 0
+                      props?.lptokenvalue?.slice(0, 7) / 100000 || 0
                     }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>
@@ -561,7 +564,7 @@ export default function QuestionModalDeposit(props) {
                 labelHidden={false}
                 variation="default"
                 value={depositAmountValue}
-                onInput={e => setDepositAmountValue(e.target.value)}
+                onInput={(e) => setDepositAmountValue(e.target.value)}
                 {...getOverrideProps(overrides, "TextAreaField40822814")}
               ></TextAreaField>
             </Flex>

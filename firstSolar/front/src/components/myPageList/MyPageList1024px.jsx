@@ -6,7 +6,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton1024px } from "../../ui-components";
 import "../../css/Font.css";
 
-const MyPageList1024px = props => {
+const MyPageList1024px = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -630,8 +630,9 @@ const MyPageList1024px = props => {
             >
               <DepositButton1024px
                 mypagelist={props.item}
-                lpTokenValue={props.lpTokenValue}
-                lpToken={props.lpToken}
+                lptokenvalue={props.lptokenvalue}
+                lptoken={props.lptoken}
+                mypagelplistup={props.mypagelplistup}
               />
             </motion.div>
           </SubWrap>
