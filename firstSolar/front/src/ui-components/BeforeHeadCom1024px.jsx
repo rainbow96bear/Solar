@@ -30,6 +30,7 @@ export default function BeforeHeadCom1024px(props) {
   const dispatch = useDispatch();
   const connect = useSelector((state) => state.connect.connect.connect);
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = React.useState();
   const { address, isConnecting, isDisconnected } = useAccount();
   const { pathname } = useLocation();
   const ref = React.useRef();
@@ -50,6 +51,17 @@ export default function BeforeHeadCom1024px(props) {
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [view]);
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
+    setInputValue(sanitizedValue);
+  };
+
+  const handleSearch = () => {
+    const searchQuery = encodeURIComponent(inputValue); // 검색어를 URL로 인코딩합니다.
+    navigate(`/search/?searchData=${searchQuery}`);
+  };
 
   const isDesktop = useMediaQuery({
     query: "(min-width:992px)",
@@ -122,9 +134,16 @@ export default function BeforeHeadCom1024px(props) {
             isDisabled={false}
             labelHidden={false}
             variation="quiet"
+            value={inputValue}
             onSubmit={() => {
-              // 검색 버튼을 누르거나 엔터를 눌렀을 때 작동합니다.
+              if (inputValue.match(/\S/g)) {
+                handleSearch();
+                return;
+              } else {
+                alert("검색어를 입력하세요");
+              }
             }}
+            onChange={handleInputChange}
             {...getOverrideProps(overrides, "SearchField")}
           ></SearchField>
           <Cover>

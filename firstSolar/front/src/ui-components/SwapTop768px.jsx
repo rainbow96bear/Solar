@@ -10,16 +10,27 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { isLoadingThunk } from "../modules/isLoading.js";
 
 export default function SwapTop768px(props) {
   const { overrides, ...rest } = props;
-
+  const dispatch = useDispatch();
   const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
   const date = new Date(lastTimeStamp * 1000);
   const dateString = date.toLocaleDateString();
 
   const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
   const reducedNumber = tokenNumBer?.toString().substring(0, 7);
+
+  useEffect(() => {
+    dispatch(isLoadingThunk({ isLoading: true }));
+
+    setTimeout(() => {
+      dispatch(isLoadingThunk({ isLoading: false }));
+    }, 1500);
+  }, []);
 
   return (
     <>

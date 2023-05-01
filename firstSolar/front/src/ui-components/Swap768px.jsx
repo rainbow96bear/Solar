@@ -33,6 +33,7 @@ import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import styled from "styled-components";
 import SwapSuccessModal from "./SwapSuccessModal";
+import { useParams } from "react-router-dom";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
@@ -68,6 +69,7 @@ export default function Swap768px(props) {
   React.useEffect(() => {
     (async () => {
       try {
+        dispatch(isLoadingThunk({ isLoading: true }));
         const { bnb, eth, usdt, tokenPrice } = await getConvertPrice(
           firstSelectToken
         );
@@ -76,8 +78,13 @@ export default function Swap768px(props) {
         setTextAreaValue(0);
         setFirstAmountPrice(0);
         setSecondAmountPrice(0);
+
+        setTimeout(() => {
+          dispatch(isLoadingThunk({ isLoading: false }));
+        }, 2000);
       } catch (error) {
         console.error(error);
+        dispatch(isLoadingThunk({ isLoading: false }));
       }
     })();
   }, [firstSelectToken]);

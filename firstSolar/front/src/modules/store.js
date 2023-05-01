@@ -5,6 +5,8 @@ import { reducer as accountReducer } from "./account.js";
 import { reducer as loginReducer } from "./login.js";
 import pageIndexReducer from "./pageIndex.js";
 import filterReducer from "./filter.js";
+import emptySearchReducer from "./emptySearch.js";
+
 const store = configureStore({
   reducer: {
     isLoading: isLoadingReducer,
@@ -13,6 +15,7 @@ const store = configureStore({
     login: loginReducer,
     pageIndex: pageIndexReducer,
     filter: filterReducer,
+    emptySearch: emptySearchReducer,
   },
 });
 
