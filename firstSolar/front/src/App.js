@@ -28,7 +28,8 @@ import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
 import { connectThunk } from "./modules/connect";
 import UserLoading from "./ui-components/UserLoading";
-import UserLoading2 from "./ui-components/UserLoading2";
+import LoadingCompo from "./ui-components/LoadingCompo";
+import Foot320px from "./ui-components/Foot320px";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
@@ -50,9 +51,9 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const accountAddress = useSelector((state) => state.account.account.account);
+  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
+  const connect = useSelector(state => state.connect.connect.connect);
+  const accountAddress = useSelector(state => state.account.account.account);
   const { address } = useAccount();
   const dispatch = useDispatch();
 
@@ -100,7 +101,7 @@ function App() {
           {/* 로딩 중에는 로딩 창이 뜨도록 할 것입니다. */}
           {isLoading ? (
             <LoadingModal>
-              <UserLoading className="marginT" />
+              <LoadingCompo />
             </LoadingModal>
           ) : (
             <></>
@@ -125,18 +126,15 @@ const MainContent = styled.div`
 `;
 
 const LoadingModal = styled.div`
-  width: 100vmax;
-  height: 100vmax;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
-  align-items: center;
   left: 0%;
   top: 0%;
   right: 0%;
   justify-content: center;
-  z-index: 999999999;
-  .marginT {
-    margin-bottom: 270px;
-  }
+  align-items: center;
+  z-index: 9999;
 `;

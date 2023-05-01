@@ -8,6 +8,7 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
+import "../css/Font.css";
 export default function ConnectCompo1024px(props) {
   const { overrides, ...rest } = props;
   return (
@@ -43,7 +44,7 @@ export default function ConnectCompo1024px(props) {
         {...getOverrideProps(overrides, "Connect40052814")}
       >
         <Text
-          fontFamily="Inter"
+          fontFamily="ffProMedium"
           fontSize="31px"
           fontWeight="700"
           color="rgba(239,239,239,1)"

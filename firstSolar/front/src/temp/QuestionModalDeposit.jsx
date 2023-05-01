@@ -15,7 +15,7 @@ import "../css/Font.css";
 export default function QuestionModalDeposit(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
-  console.log("item", props.myPagelist);
+  console.log("item", props.mypagelist);
 
   return (
     <ModalCover
@@ -57,8 +57,8 @@ export default function QuestionModalDeposit(props) {
           {...getOverrideProps(overrides, "Frame 105")}
         >
           <Text
-            fontFamily="Inter"
-            fontSize="24px"
+            fontFamily="ffProBold"
+            fontSize="28px"
             fontWeight="700"
             lineHeight="29.045454025268555px"
             textAlign="left"
@@ -205,7 +205,7 @@ export default function QuestionModalDeposit(props) {
                   borderRadius="35px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
-                  src={props.myPagelist.mainNetLogo || logo}
+                  src={props.mypagelist.mainNetLogo || logo}
                   {...getOverrideProps(overrides, "ghrgclzzd 740822785")}
                 ></Image>
                 <Text
@@ -228,7 +228,7 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.myPagelist.firstToken || "불러오는 중"}
+                  children={props.mypagelist.firstToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822786")}
                 ></Text>
                 <Image
@@ -308,7 +308,7 @@ export default function QuestionModalDeposit(props) {
                   borderRadius="35px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
-                  src={props.myPagelist.platformLogo || logo}
+                  src={props.mypagelist.platformLogo || logo}
                   {...getOverrideProps(overrides, "ghrgclzzd 740822791")}
                 ></Image>
                 <Text
@@ -331,7 +331,7 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.myPagelist.secondToken || "불러오는 중"}
+                  children={props.mypagelist.secondToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822792")}
                 ></Text>
                 <Image
@@ -438,7 +438,7 @@ export default function QuestionModalDeposit(props) {
                     borderRadius="35px"
                     padding="0px 0px 0px 0px"
                     objectFit="cover"
-                    src={props.myPagelist.mainNetLogo || logo}
+                    src={props.mypagelist.mainNetLogo || logo}
                     {...getOverrideProps(overrides, "ghrgclzzd 740822807")}
                   ></Image>
                   <Text
@@ -460,7 +460,7 @@ export default function QuestionModalDeposit(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={props.myPagelist.firstToken || "불러오는 중"}
+                    children={props.mypagelist.firstToken || "불러오는 중"}
                     {...getOverrideProps(overrides, "DEX Name40822808")}
                   ></Text>
                 </Flex>
@@ -498,7 +498,7 @@ export default function QuestionModalDeposit(props) {
                     whiteSpace="pre-wrap"
                     children={`Balance : ${
                       Math.floor(
-                        props?.myPagelist?.OtherTokenBalance.slice(0, 6)
+                        props?.mypagelist?.OtherTokenBalance.slice(0, 6)
                       ) / 100
                     } `}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
@@ -571,7 +571,7 @@ export default function QuestionModalDeposit(props) {
                     borderRadius="35px"
                     padding="0px 0px 0px 0px"
                     objectFit="cover"
-                    src={props.myPagelist.platformLogo || logo}
+                    src={props.mypagelist.platformLogo || logo}
                     {...getOverrideProps(overrides, "ghrgclzzd 740822818")}
                   ></Image>
                   <Text
@@ -593,7 +593,7 @@ export default function QuestionModalDeposit(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={props.myPagelist.secondToken || "불러오는 중"}
+                    children={props.mypagelist.secondToken || "불러오는 중"}
                     {...getOverrideProps(overrides, "DEX Name40822819")}
                   ></Text>
                 </Flex>
@@ -631,7 +631,7 @@ export default function QuestionModalDeposit(props) {
                     whiteSpace="pre-wrap"
                     children={`Balance : ${
                       Math.floor(
-                        props?.myPagelist?.DFSTokenBalance.slice(0, 6)
+                        props?.mypagelist?.DFSTokenBalance.slice(0, 6)
                       ) / 100
                     } `}
                     {...getOverrideProps(overrides, "Balance : 040822824")}
@@ -666,10 +666,11 @@ export default function QuestionModalDeposit(props) {
             borderRadius="15px"
             padding="13px 73px 13px 73px"
             backgroundColor="rgba(255,226,0,0.35)"
+            style={{ cursor: "pointer" }}
             {...getOverrideProps(overrides, "Frame 103")}
           >
             <Text
-              fontFamily="Inter"
+              fontFamily="ffProBook"
               fontSize="27px"
               fontWeight="700"
               lineHeight="32.6761360168457px"

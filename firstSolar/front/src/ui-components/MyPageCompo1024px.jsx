@@ -43,7 +43,7 @@ export default function MyPageCompo1024px(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+      boxShadow="-38px 45px 28px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
       padding="38px 33px 38px 33px"
       backgroundColor="rgba(255,255,252,1)"

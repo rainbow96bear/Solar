@@ -51,7 +51,7 @@ const LiquidComponent = ({ oracleId, balance }) => {
                   borderRadius: "55px",
                   scale: 0.99,
                   backgroundColor: "rgba(249,249,249,0.55)",
-                  boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+                  boxShadow: "-18px 25px 28px rgba(0, 0, 0, 0.25)",
                 }}
               >
                 <AddLiquidityTop768px oracleiddata={props} balance={balance} />
@@ -113,7 +113,7 @@ const LiquidComponent = ({ oracleId, balance }) => {
                     borderRadius: "55px",
                     scale: 0.99,
                     backgroundColor: "rgba(249,249,249,0.55)",
-                    boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+                    boxShadow: "-18px 25px 28px rgba(0, 0, 0, 0.25)",
                   }}
                 >
                   <AddLiquidityTop320px

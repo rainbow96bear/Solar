@@ -127,7 +127,7 @@ export default function AddLiquidityBottom320px(props) {
       overflow="hidden"
       position="relative"
       borderRadius="35px"
-      padding="16px 0px 16px 0px"
+      padding="0px 0px 16px 0px"
       {...getOverrideProps(overrides, "AddLiquidityBottom320px")}
       {...rest}
     >
