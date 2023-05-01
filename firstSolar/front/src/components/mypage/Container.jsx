@@ -1,6 +1,6 @@
 import * as React from "react";
-// import { useLocation } from "react-router-dom";
-// import { mypageList } from "../../api/index";
+import { useLocation } from "react-router-dom";
+import { mypageList } from "../../api/index";
 
 import MypageComponent from "./Component";
 

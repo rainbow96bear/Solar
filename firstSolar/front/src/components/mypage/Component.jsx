@@ -74,3 +74,17 @@ const MypPage = styled.div`
   margin-top: 30px;
   align-self: center;
 `;
+
+const LoadingModal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+`;

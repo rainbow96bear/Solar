@@ -20,6 +20,7 @@ import { Tween, SplitChars, Reveal } from "react-gsap";
 const { useEffect } = React;
 import styled from "styled-components";
 import "../css/Font.css";
+
 export default function LoadingCompo(props) {
   const { overrides, ...rest } = props;
   const { tokens } = useTheme();
