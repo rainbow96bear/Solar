@@ -1010,7 +1010,7 @@ export default function AddLiquidityBottom768px(props) {
             {...getOverrideProps(overrides, "Frame 10340122803")}
           >
             <Text
-              fontFamily="ffProMedium"
+              fontFamily="ffProBook"
               fontSize="28px"
               fontWeight="700"
               color="rgba(239,239,239,1)"
@@ -1027,7 +1027,7 @@ export default function AddLiquidityBottom768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Add Liquidity"
+              children="Enter an Add Liquidity"
               {...getOverrideProps(overrides, "Enter an Amount")}
             ></Text>
           </Flex>

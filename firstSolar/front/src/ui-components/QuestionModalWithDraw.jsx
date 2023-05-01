@@ -142,7 +142,7 @@ export default function QuestionModalWithDraw(props) {
             {...getOverrideProps(overrides, "Frame 96")}
           >
             <Text
-              fontFamily="Inter"
+              fontFamily="ffProExtraLight"
               fontSize="15px"
               fontWeight="600"
               lineHeight="18.15340805053711px"
@@ -208,7 +208,7 @@ export default function QuestionModalWithDraw(props) {
                   {...getOverrideProps(overrides, "ghrgclzzd 740822785")}
                 ></Image>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="17px"
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
@@ -258,7 +258,7 @@ export default function QuestionModalWithDraw(props) {
                 {...getOverrideProps(overrides, "Frame 91")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="33px"
                   fontWeight="600"
                   lineHeight="39.9375px"
@@ -311,7 +311,7 @@ export default function QuestionModalWithDraw(props) {
                   {...getOverrideProps(overrides, "ghrgclzzd 740822791")}
                 ></Image>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="17px"
                   fontWeight="600"
                   color="rgba(239,239,239,1)"
@@ -364,7 +364,7 @@ export default function QuestionModalWithDraw(props) {
             {...getOverrideProps(overrides, "Frame 102")}
           >
             <Text
-              fontFamily="Inter"
+              fontFamily="ffProExtraLight"
               fontSize="15px"
               fontWeight="600"
               lineHeight="18.15340805053711px"
@@ -441,7 +441,7 @@ export default function QuestionModalWithDraw(props) {
                     {...getOverrideProps(overrides, "ghrgclzzd 740822807")}
                   ></Image>
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="17px"
                     fontWeight="600"
                     lineHeight="20.573863983154297px"
@@ -479,7 +479,7 @@ export default function QuestionModalWithDraw(props) {
                   {...getOverrideProps(overrides, "Frame 9740822812")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="13px"
                     fontWeight="600"
                     lineHeight="15.732954025268555px"
@@ -574,7 +574,7 @@ export default function QuestionModalWithDraw(props) {
                     {...getOverrideProps(overrides, "ghrgclzzd 740822818")}
                   ></Image>
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="17px"
                     fontWeight="600"
                     lineHeight="20.573863983154297px"
@@ -612,7 +612,7 @@ export default function QuestionModalWithDraw(props) {
                   {...getOverrideProps(overrides, "Frame 9740822823")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="13px"
                     fontWeight="600"
                     lineHeight="15.732954025268555px"

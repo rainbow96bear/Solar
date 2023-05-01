@@ -281,7 +281,7 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="MY DFS"
+                  children={props?.item?.firstToken}
                   {...getOverrideProps(overrides, "DFS")}
                 ></Text>
               </Flex>
@@ -317,7 +317,7 @@ const MyPageList1024px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="MY ETH"
+                  children={props?.item?.secondToken}
                   {...getOverrideProps(overrides, "ETH")}
                 ></Text>
               </Flex>
@@ -648,7 +648,6 @@ const ItemWrap = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: white;
   margin-top: 38px;
 `;
 
