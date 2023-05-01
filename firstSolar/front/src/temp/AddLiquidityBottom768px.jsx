@@ -22,6 +22,7 @@ import { swapBalance } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
+
 import { motion } from "framer-motion";
 
 export default function AddLiquidityBottom768px(props) {
@@ -72,11 +73,9 @@ export default function AddLiquidityBottom768px(props) {
           const addLiquidityTxResult = await web3.eth.sendTransaction(
             addLiquidityTx
           );
-          const updatePoolResult = await updatePool(tokenAddress);
+          await updatePool(props?.oracleiddata[0]?.tokenAddress);
 
-          if ((addLiquidityTxResult, updatePoolResult)) {
-            console.log(addLiquidityTxResult);
-            console.log("updatePoolResult", updatePoolResult);
+          if (addLiquidityTxResult) {
             dispatch(isLoadingThunk({ isLoading: false }));
           }
         }

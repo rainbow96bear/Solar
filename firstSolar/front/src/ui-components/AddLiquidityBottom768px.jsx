@@ -23,6 +23,8 @@ import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import { motion } from "framer-motion";
+import SwapSuccessModal from "./SwapSuccessModal";
+import SwapFailModal from "./SwapFailModal";
 
 export default function AddLiquidityBottom768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
@@ -36,7 +38,7 @@ export default function AddLiquidityBottom768px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -718,7 +720,7 @@ export default function AddLiquidityBottom768px(props) {
                   }
                   {...getOverrideProps(overrides, "DEX Name40052906")}
                 ></Text>
-                <Flex
+                {/* <Flex
                   gap="5px"
                   direction="row"
                   width="unset"
@@ -760,7 +762,7 @@ export default function AddLiquidityBottom768px(props) {
                     objectFit="cover"
                     {...getOverrideProps(overrides, "ghrgclzzd 940052908")}
                   ></Image>
-                </Flex>
+                </Flex> */}
               </Flex>
               <Flex
                 gap="10px"
@@ -794,7 +796,9 @@ export default function AddLiquidityBottom768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${userFirstBalance}`}
+                  children={`Balance : ${
+                    userFirstBalance ? userFirstBalance : 0
+                  }`}
                   {...getOverrideProps(overrides, "Balance : 040052909")}
                 ></Text>
               </Flex>
@@ -811,7 +815,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={(e) => {
+              onChange={e => {
                 setFirstValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40052913")}
@@ -903,7 +907,7 @@ export default function AddLiquidityBottom768px(props) {
                   }
                   {...getOverrideProps(overrides, "DEX Name40052982")}
                 ></Text>
-                <Flex
+                {/* <Flex
                   gap="5px"
                   direction="row"
                   width="unset"
@@ -945,7 +949,7 @@ export default function AddLiquidityBottom768px(props) {
                     objectFit="cover"
                     {...getOverrideProps(overrides, "ghrgclzzd 940052985")}
                   ></Image>
-                </Flex>
+                </Flex> */}
               </Flex>
               <Flex
                 gap="10px"
@@ -979,7 +983,9 @@ export default function AddLiquidityBottom768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`Balance : ${userSecondBalance}`}
+                  children={`Balance : ${
+                    userSecondBalance ? userSecondBalance : 0
+                  }`}
                   {...getOverrideProps(overrides, "Balance : 040052987")}
                 ></Text>
               </Flex>
@@ -996,7 +1002,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={(e) => {
+              onChange={e => {
                 setSecondValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40052988")}
