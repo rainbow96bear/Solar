@@ -33,7 +33,6 @@ import {
   platform768px2,
 } from "../mainNet";
 import { useLocation } from "react-router-dom";
-import logo from "./images/logo_new.png";
 
 const networkArray = [
   "ethereum",
