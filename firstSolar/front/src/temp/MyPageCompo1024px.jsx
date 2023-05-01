@@ -354,6 +354,8 @@ export default function MyPageCompo1024px(props) {
             setSecondToken={setSecondToken}
             setFirstImgToken={setFirstImgToken}
             setSecondImgToken={setSecondImgToken}
+            lpTokenValue={lpTokenValue}
+            lpToken={lpToken}
           />
         ))}
       </Flex>

@@ -14,7 +14,7 @@ export default function DepositCompletedModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
-  const completeModal = useSelector((state) => state.completeModal);
+  const completeModal = useSelector(state => state.completeModal);
 
   const [timer, setTimer] = React.useState(6); // 초기 값: 5초
   let intervalId;

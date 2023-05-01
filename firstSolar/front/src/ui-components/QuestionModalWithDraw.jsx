@@ -25,7 +25,7 @@ export default function QuestionModalWithDraw(props) {
 
   const dispatch = useDispatch();
   const { account } = useAccount();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
 
   React.useEffect(() => {
@@ -74,7 +74,7 @@ export default function QuestionModalWithDraw(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -198,7 +198,7 @@ export default function QuestionModalWithDraw(props) {
             {...getOverrideProps(overrides, "Frame 96")}
           >
             <Text
-              fontFamily="Inter"
+              fontFamily="ffProExtraLight"
               fontSize="15px"
               fontWeight="600"
               lineHeight="18.15340805053711px"
@@ -264,7 +264,7 @@ export default function QuestionModalWithDraw(props) {
                   {...getOverrideProps(overrides, "ghrgclzzd 740822785")}
                 ></Image>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="17px"
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
@@ -314,7 +314,7 @@ export default function QuestionModalWithDraw(props) {
                 {...getOverrideProps(overrides, "Frame 91")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="33px"
                   fontWeight="600"
                   lineHeight="39.9375px"
@@ -367,7 +367,7 @@ export default function QuestionModalWithDraw(props) {
                   {...getOverrideProps(overrides, "ghrgclzzd 740822791")}
                 ></Image>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="17px"
                   fontWeight="600"
                   color="rgba(239,239,239,1)"
@@ -420,7 +420,7 @@ export default function QuestionModalWithDraw(props) {
             {...getOverrideProps(overrides, "Frame 102")}
           >
             <Text
-              fontFamily="Inter"
+              fontFamily="ffProExtraLight"
               fontSize="15px"
               fontWeight="600"
               lineHeight="18.15340805053711px"
@@ -497,7 +497,7 @@ export default function QuestionModalWithDraw(props) {
                     {...getOverrideProps(overrides, "ghrgclzzd 740822807")}
                   ></Image>
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="17px"
                     fontWeight="600"
                     lineHeight="20.573863983154297px"
@@ -535,7 +535,7 @@ export default function QuestionModalWithDraw(props) {
                   {...getOverrideProps(overrides, "Frame 9740822812")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="13px"
                     fontWeight="600"
                     lineHeight="15.732954025268555px"
@@ -569,7 +569,7 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={(e) => setWithDrawAmountValue(e.target.value)}
+                onInput={e => setWithDrawAmountValue(e.target.value)}
                 {...getOverrideProps(overrides, "TextAreaField40822814")}
               ></TextAreaField>
             </Flex>

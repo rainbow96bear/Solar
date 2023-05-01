@@ -556,9 +556,7 @@ export default function AddLiquidityTop320px(props) {
                 whiteSpace="pre-wrap"
                 children={
                   props?.oracleiddata[0]?.tvl
-                    ? `${
-                        Math.round(props?.oracleiddata[0]?.tvl * 10000) / 10000
-                      } `
+                    ? `${props?.oracleiddata[0]?.tvl.slice(0, 10) / 100} `
                     : 0
                 }
                 {...getOverrideProps(overrides, "16.82%")}

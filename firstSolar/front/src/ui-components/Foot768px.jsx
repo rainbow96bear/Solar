@@ -177,7 +177,7 @@ export default function Foot768px(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children="23.04.11 ~ 23.05.23"
+                    children="23.04.01 ~ 23.05.22"
                     {...getOverrideProps(overrides, "23.04.11 ~ 23.05.23")}
                   ></Text>
                 </Flex>
@@ -397,7 +397,7 @@ export default function Foot768px(props) {
                             position="relative"
                             padding="0px 0px 0px 0px"
                             whiteSpace="pre-wrap"
-                            children="HGWA333"
+                            children="@HGWA333"
                             {...getOverrideProps(overrides, "HGWA333")}
                           ></Text>
                         </Flex>

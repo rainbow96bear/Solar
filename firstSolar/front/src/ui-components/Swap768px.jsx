@@ -17,17 +17,13 @@ import {
 import QuestionModalTop from "./QuestionModalTop";
 import QuestionModalBottom from "./QuestionModalBottom";
 import { useDispatch, useSelector } from "react-redux";
-import debounce from "lodash.debounce";
 import {
-  firstSync,
   getConvertPrice,
-  lpBalance,
   swapApprove,
   swapBalance,
   swapTransaction,
 } from "../api";
 import { useAccount } from "wagmi";
-import { swap } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
@@ -35,6 +31,7 @@ import styled from "styled-components";
 import SwapSuccessModal from "./SwapSuccessModal";
 import { useParams } from "react-router-dom";
 import SwapFailModal from "./SwapFailModal";
+import "../css/Font.css";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
@@ -42,7 +39,7 @@ export default function Swap768px(props) {
   const { web3K, accountK, chainIdK, loginK } = useWeb3K();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
   const dispatch = useDispatch();
@@ -163,14 +160,14 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = (percentNum) => {
+  const setPercentBalance = percentNum => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
@@ -181,7 +178,7 @@ export default function Swap768px(props) {
     delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const handleTextareaChange = (event) => {
+  const handleTextareaChange = event => {
     const value = event.target.value;
 
     const filteredValue = value.replace(/[^0-9.\b]/g, "");
@@ -224,7 +221,7 @@ export default function Swap768px(props) {
     }, 1000);
   }
 
-  const delayedFunction2 = (num) => {
+  const delayedFunction2 = num => {
     try {
       if (secondSelectToken == "DFS") {
         setSecondAmountPrice(convertPrice.usdt * num);
@@ -353,7 +350,7 @@ export default function Swap768px(props) {
             {...getOverrideProps(overrides, "Frame 58")}
           >
             <Text
-              fontFamily="Inter"
+              fontFamily="ffProMedium"
               fontSize="32px"
               fontWeight="700"
               lineHeight="38.727272033691406px"
@@ -390,7 +387,7 @@ export default function Swap768px(props) {
             {...getOverrideProps(overrides, "Frame 57")}
           >
             <Text
-              fontFamily="Inter"
+              fontFamily="ffProExtraLight"
               fontSize="18px"
               fontWeight="600"
               color="rgba(43,43,43,1)"
@@ -456,10 +453,11 @@ export default function Swap768px(props) {
                 borderRadius="35px"
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
-                src={props?.oracleiddata[0]?.assets}
+                src={props?.oracleiddata[0]?.mainNetLogo}
                 {...getOverrideProps(overrides, "ghrgclzzd 4")}
               ></Image>
               <Image
+                src={props?.oracleiddata[0]?.platformLogo}
                 width="38.66px"
                 height="35px"
                 display="block"
@@ -543,7 +541,7 @@ export default function Swap768px(props) {
                 {...getOverrideProps(overrides, "Frame 7239752875")}
               >
                 <Image
-                  src={props?.oracleiddata[0]?.platformLogo}
+                  src={props?.oracleiddata[0]?.mainNetLogo}
                   width="25px"
                   height="25px"
                   display="block"
@@ -558,18 +556,18 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "ghrgclzzd 739752855")}
                 ></Image>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProLight"
                   fontSize="19px"
                   fontWeight="600"
                   lineHeight="22.99431800842285px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
-                  justifyContent="unset"
+                  justifyContent="center"
                   width="unset"
                   height="unset"
                   gap="unset"
-                  alignItems="unset"
+                  alignItems="flex-start"
                   grow="1"
                   shrink="1"
                   basis="0"
@@ -628,18 +626,18 @@ export default function Swap768px(props) {
                 {...getOverrideProps(overrides, "Frame 7339752882")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="14px"
                   fontWeight="600"
                   lineHeight="16.94318199157715px"
                   textAlign="right"
-                  display="block"
+                  display="flex"
                   direction="column"
-                  justifyContent="unset"
+                  justifyContent="center"
                   width="unset"
                   height="25px"
                   gap="unset"
-                  alignItems="unset"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
@@ -681,7 +679,7 @@ export default function Swap768px(props) {
                 labelHidden={false}
                 variation="default"
                 value={textareaValue}
-                onChange={(e) => {
+                onChange={e => {
                   if (+e.target.value > +userFirstBalance) {
                     e.target.value = userFirstBalance;
                   }
@@ -689,7 +687,7 @@ export default function Swap768px(props) {
                   handleTextareaChange(e);
                   delayedFunction1(e.target.value);
                 }}
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -708,7 +706,7 @@ export default function Swap768px(props) {
                 {...getOverrideProps(overrides, "Frame 6439752829")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="16px"
                   fontWeight="600"
                   color="rgba(5,2,3,0.75)"
@@ -730,7 +728,7 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "12312312312312312339752827")}
                 ></Text>
                 {/* <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="11px"
                   fontWeight="400"
                   color="rgba(44,44,44,1)"
@@ -787,7 +785,7 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "Frame 8039814040")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="600"
                     lineHeight="21px"
@@ -826,7 +824,7 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "Frame 8139814043")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="600"
                     lineHeight="21px"
@@ -865,7 +863,7 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "Frame 8239814045")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="600"
                     lineHeight="21px"
@@ -904,7 +902,7 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "Frame 8339814047")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProExtraLight"
                     fontSize="14px"
                     fontWeight="600"
                     lineHeight="21px"
@@ -996,18 +994,18 @@ export default function Swap768px(props) {
                   {...getOverrideProps(overrides, "ghrgclzzd 739752855")}
                 ></Image>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProLight"
                   fontSize="19px"
                   fontWeight="600"
                   lineHeight="22.99431800842285px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
-                  justifyContent="unset"
+                  justifyContent="center"
                   width="unset"
                   height="unset"
                   gap="unset"
-                  alignItems="unset"
+                  alignItems="flex-start"
                   grow="1"
                   shrink="1"
                   basis="0"
@@ -1066,18 +1064,18 @@ export default function Swap768px(props) {
                 {...getOverrideProps(overrides, "Frame 7339752882")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="14px"
                   fontWeight="600"
                   lineHeight="16.94318199157715px"
                   textAlign="right"
-                  display="block"
+                  display="flex"
                   direction="column"
-                  justifyContent="unset"
+                  justifyContent="center"
                   width="unset"
                   height="25px"
                   gap="unset"
-                  alignItems="unset"
+                  alignItems="center"
                   grow="1"
                   shrink="1"
                   basis="0"
@@ -1121,40 +1119,12 @@ export default function Swap768px(props) {
                 value={secondAmountPrice ? secondAmountPrice : 0}
                 disabled
                 backgroundColor="transparent"
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
               ></TextAreaField>
             </Flex>
-          </Flex>
-          <Flex
-            gap="10px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="center"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="10px 10px 10px 10px"
-            {...getOverrideProps(overrides, "Frame 67")}
-          >
-            <Image
-              width="25px"
-              height="25px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="15px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "ghrgclzzd 839752853")}
-            ></Image>
           </Flex>
 
           <Button
@@ -1183,7 +1153,7 @@ export default function Swap768px(props) {
             {...getOverrideProps(overrides, "Frame 63")}
           >
             <Text
-              fontFamily="Inter"
+              fontFamily="ffProBook"
               fontSize="25px"
               fontWeight="700"
               color="rgba(249,249,249,1)"
@@ -1200,7 +1170,7 @@ export default function Swap768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Enter an Amount"
+              children="Enter an Swap"
               {...getOverrideProps(overrides, "Enter an Amount")}
             ></Text>
           </Button>

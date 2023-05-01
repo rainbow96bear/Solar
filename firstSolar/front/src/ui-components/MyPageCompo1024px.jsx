@@ -54,10 +54,8 @@ export default function MyPageCompo1024px(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      boxShadow="-38px 45px 28px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
       padding="38px 33px 38px 33px"
-      backgroundColor="rgba(255,255,252,1)"
       {...getOverrideProps(overrides, "MyPageCompo1024px")}
       {...rest}
     >
@@ -346,7 +344,7 @@ export default function MyPageCompo1024px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={`Balance : ${
-                  lpTokenValue?.slice(0, 7) / 100000 || 0
+                  lpTokenValue?.slice(0, 7) / 10000000 || 0
                 } ${lpToken || ""} `}
                 {...getOverrideProps(overrides, "Balance : 0")}
               ></Text>

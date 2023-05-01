@@ -24,7 +24,7 @@ export default function QuestionModal(props) {
   ];
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         if (e.target !== e.currentTarget) return;
       }}
     >
@@ -94,7 +94,7 @@ export default function QuestionModal(props) {
           {...getOverrideProps(overrides, "Frame 131")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProExtraLight"
             fontSize="38px"
             fontWeight="700"
             lineHeight="57px"
@@ -117,7 +117,7 @@ export default function QuestionModal(props) {
           ></Text>
         </Flex>
 
-        {tokenList.map((item) => (
+        {tokenList.map(item => (
           <Flex
             key={`tokenList-${item}`}
             gap="16px"
@@ -169,7 +169,7 @@ export default function QuestionModal(props) {
                 {...getOverrideProps(overrides, "Frame 13540632584")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="20px"
                   fontWeight="700"
                   lineHeight="24.204544067382812px"
@@ -190,7 +190,7 @@ export default function QuestionModal(props) {
                   {...getOverrideProps(overrides, "USDT40632585")}
                 ></Text>
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="15px"
                   fontWeight="700"
                   lineHeight="18.15340805053711px"
