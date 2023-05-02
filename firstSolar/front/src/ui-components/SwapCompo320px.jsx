@@ -60,7 +60,7 @@ export default function SwapCompo320px(props) {
         >
           <Text
             fontFamily="ffProMedium"
-            fontSize="24px"
+            fontSize={{ base: "17px", small: "24px" }}
             fontWeight="700"
             color="rgba(239,239,239,1)"
             lineHeight="29.045454025268555px"
@@ -114,7 +114,7 @@ export default function SwapCompo320px(props) {
         >
           <Text
             fontFamily="ffProMedium"
-            fontSize={{ base: "19px", small: "24px" }}
+            fontSize={{ base: "17px", small: "24px" }}
             fontWeight="700"
             lineHeight="29.045454025268555px"
             textAlign="center"

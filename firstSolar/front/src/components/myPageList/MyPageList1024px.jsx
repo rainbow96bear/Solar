@@ -5,9 +5,6 @@ import { Flex, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton1024px } from "../../ui-components";
 import "../../css/Font.css";
-import LoadingCompo from "../../ui-components/LoadingCompo";
-import { useSelector } from "react-redux";
-import { isLoadingThunk } from "../../modules/isLoading";
 
 const MyPageList1024px = props => {
   const { overrides, ...rest } = props;
@@ -37,12 +34,15 @@ const MyPageList1024px = props => {
             width: "78.4vw",
             height: "unset",
             borderRadius: "33px",
-            backgroundColor: "rgba(255,226,0,0.35)",
+            backgroundColor: "rgba(249,251,250,0.85)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
           }}
-          whileHover={{ borderRadius: "75px" }}
+          whileHover={{
+            borderRadius: "75px",
+            backgroundColor: "rgba(0,049,073,0.85)",
+          }}
         >
           <Flex
             gap="15px"
@@ -632,6 +632,7 @@ const MyPageList1024px = props => {
               }}
             >
               <DepositButton1024px
+                lpBalanceValue={props.lpBalanceValue}
                 mypagelist={props.item}
                 lptokenvalue={props.lptokenvalue}
                 lptoken={props.lptoken}

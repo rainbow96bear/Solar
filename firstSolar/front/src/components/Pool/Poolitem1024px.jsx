@@ -9,16 +9,16 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../css/Font.css";
 import { useAccount } from "wagmi";
 
-const Poolitem1024 = (props) => {
+const Poolitem1024 = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
   const { address } = useAccount();
 
   const addressResult = address || address2;
   const dispatch = useDispatch();
-  const pageIndex = useSelector((state) => state.pageIndex);
+  const pageIndex = useSelector(state => state.pageIndex);
 
   return (
     <>
@@ -41,7 +41,10 @@ const Poolitem1024 = (props) => {
             backgroundImage:
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
           }}
-          whileHover={{ borderRadius: "75px" }}
+          whileHover={{
+            borderRadius: "75px",
+            backgroundColor: "rgba(247,239,227,0.75)",
+          }}
         >
           <Flex
             gap="29px"

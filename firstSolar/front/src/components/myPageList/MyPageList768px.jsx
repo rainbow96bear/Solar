@@ -5,14 +5,12 @@ import { Flex, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton768px } from "../../ui-components";
 import "../../css/Font.css";
-import { useMediaQuery } from "react-responsive";
+
 const MyPageList768px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  const isMobile = useMediaQuery({
-    query: "(min-width:768px)",
-  });
+
   return (
     <>
       <ItemWrap
@@ -42,7 +40,10 @@ const MyPageList768px = props => {
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
             overflow: "hidden",
           }}
-          whileHover={{ borderRadius: "39px" }}
+          whileHover={{
+            borderRadius: "39px",
+            backgroundColor: "rgba(0,049,073,0.85)",
+          }}
         >
           <Flex
             gap="0"
@@ -88,7 +89,7 @@ const MyPageList768px = props => {
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
+                  fontSize={{ base: "18px", small: "18px", medium: "21px" }}
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
                   lineHeight="29.045454025268555px"
@@ -125,7 +126,7 @@ const MyPageList768px = props => {
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
+                  fontSize={{ base: "18px", small: "18px", medium: "21px" }}
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
                   lineHeight="29.045454025268555px"
@@ -163,7 +164,7 @@ const MyPageList768px = props => {
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
+                  fontSize={{ base: "18px", small: "18px", medium: "21px" }}
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
                   lineHeight="29.045454025268555px"
@@ -200,7 +201,7 @@ const MyPageList768px = props => {
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
+                  fontSize={{ base: "18px", small: "18px", medium: "21px" }}
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
                   lineHeight="29.045454025268555px"
@@ -237,7 +238,7 @@ const MyPageList768px = props => {
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
+                  fontSize={{ base: "18px", small: "18px", medium: "21px" }}
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
                   lineHeight="29.045454025268555px"
@@ -274,7 +275,7 @@ const MyPageList768px = props => {
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
+                  fontSize={{ base: "18px", small: "18px", medium: "21px" }}
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
                   lineHeight="29.045454025268555px"
@@ -290,7 +291,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="DFS"
+                  children={`MY ${props?.item?.oracleId.split("-")[0]}`}
                   {...getOverrideProps(overrides, "DFS")}
                 ></Text>
               </Flex>
@@ -311,7 +312,7 @@ const MyPageList768px = props => {
               >
                 <Text
                   fontFamily="ffProExtraLight"
-                  fontSize={{ base: "19px", small: "19px", medium: "24px" }}
+                  fontSize={{ base: "18px", small: "18px", medium: "21px" }}
                   fontWeight="600"
                   color="rgba(244,244,244,1)"
                   lineHeight="29.045454025268555px"
@@ -327,7 +328,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="ETH"
+                  children={`MY ${props?.item?.oracleId.split("-")[1]}`}
                   {...getOverrideProps(overrides, "ETH")}
                 ></Text>
               </Flex>
@@ -391,7 +392,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="1"
+                  children={props.idx + 1}
                   {...getOverrideProps(overrides, "1")}
                 ></Text>
               </Flex>
@@ -439,7 +440,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="DFS-ETH"
+                  children={props.item.name}
                   {...getOverrideProps(overrides, "DFS-ETH")}
                 ></Text>
               </Flex>
@@ -487,7 +488,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0"
+                  children={props.item.apy}
                   {...getOverrideProps(overrides, "040773348")}
                 ></Text>
               </Flex>
@@ -535,7 +536,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0"
+                  children={`${props?.item?.tvl.slice(0, 10) / 100}`}
                   {...getOverrideProps(overrides, "040773350")}
                 ></Text>
               </Flex>
@@ -583,7 +584,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0.3%"
+                  children={`${props.item.fee}%`}
                   {...getOverrideProps(overrides, "0.3%")}
                 ></Text>
               </Flex>
@@ -631,7 +632,9 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0"
+                  children={`${
+                    Math.floor(props?.item?.DFSTokenBalance.slice(0, 6)) / 100
+                  } `}
                   {...getOverrideProps(overrides, "040892928")}
                 ></Text>
               </Flex>
@@ -675,7 +678,9 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="0"
+                  children={`${
+                    Math.floor(props?.item?.OtherTokenBalance.slice(0, 6)) / 100
+                  } `}
                   {...getOverrideProps(overrides, "040892930")}
                 ></Text>
               </Flex>
@@ -697,10 +702,13 @@ const MyPageList768px = props => {
               }}
             >
               <DepositButton768px
+                lpBalanceValue={props.lpBalanceValue}
                 mypagelist={props.item}
                 lptokenvalue={props.lptokenvalue}
                 lptoken={props.lptoken}
                 mypagelplistup={props.mypagelplistup}
+                pid={props?.pid}
+                setlptokenvalue={props.setLpTokenValue}
               />
             </motion.div>
           </SubWrap>

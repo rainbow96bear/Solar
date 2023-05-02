@@ -196,7 +196,10 @@ export default function PoolListCom1024px(props) {
               backgroundImage:
                 "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
             }}
-            whileHover={{ borderRadius: "75px" }}
+            whileHover={{
+              borderRadius: "75px",
+              backgroundColor: "rgba(247,239,227,0.75)",
+            }}
           >
             <Flex
               gap="21px"
@@ -218,7 +221,7 @@ export default function PoolListCom1024px(props) {
                 fontWeight="700"
                 lineHeight="33.8863639831543px"
                 textAlign="left"
-                display="block"
+                display="flex"
                 direction="column"
                 justifyContent="unset"
                 width="unset"
@@ -270,7 +273,10 @@ export default function PoolListCom1024px(props) {
               backgroundImage:
                 "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
             }}
-            whileHover={{ borderRadius: "75px" }}
+            whileHover={{
+              borderRadius: "75px",
+              backgroundColor: "rgba(247,239,227,0.75)",
+            }}
           >
             <Flex
               gap="21px"
@@ -292,7 +298,7 @@ export default function PoolListCom1024px(props) {
                 fontWeight="700"
                 lineHeight="33.8863639831543px"
                 textAlign="left"
-                display="block"
+                display="flex"
                 direction="column"
                 justifyContent="unset"
                 width="unset"
@@ -345,7 +351,10 @@ export default function PoolListCom1024px(props) {
               backgroundImage:
                 "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
             }}
-            whileHover={{ borderRadius: "35px" }}
+            whileHover={{
+              borderRadius: "35px",
+              backgroundColor: "rgba(247,239,227,0.75)",
+            }}
           >
             <Flex
               gap="0"
@@ -393,9 +402,9 @@ export default function PoolListCom1024px(props) {
                     fontWeight="600"
                     lineHeight="18.15340805053711px"
                     textAlign="center"
-                    display="block"
+                    display="flex"
                     direction="column"
-                    justifyContent="unset"
+                    justifyContent="center"
                     width="unset"
                     height="unset"
                     gap="unset"
@@ -429,9 +438,9 @@ export default function PoolListCom1024px(props) {
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
                     textAlign="center"
-                    display="block"
+                    display="flex"
                     direction="column"
-                    justifyContent="unset"
+                    justifyContent="center"
                     width="unset"
                     height="25px"
                     gap="unset"
@@ -451,9 +460,9 @@ export default function PoolListCom1024px(props) {
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
                     textAlign="center"
-                    display="block"
+                    display="flex"
                     direction="column"
-                    justifyContent="unset"
+                    justifyContent="center"
                     width="unset"
                     height="25px"
                     gap="unset"
@@ -468,11 +477,12 @@ export default function PoolListCom1024px(props) {
                     {...getOverrideProps(overrides, "DEPOSITED")}
                   ></Text>
                   <Flex
+                    alignItems="center"
+                    justifyContent="center"
                     grow="1"
                     shrink="1"
                     basis="0"
                     style={{ cursor: "pointer" }}
-                    justifyContent="center"
                     onClick={() => {
                       setSortAPY(
                         sortAPY == "down"
@@ -490,9 +500,9 @@ export default function PoolListCom1024px(props) {
                       fontWeight="600"
                       lineHeight="14.522727012634277px"
                       textAlign="center"
-                      display="block"
+                      display="flex"
                       direction="column"
-                      justifyContent="unset"
+                      justifyContent="center"
                       width="unset"
                       height="25px"
                       gap="unset"
@@ -505,6 +515,9 @@ export default function PoolListCom1024px(props) {
                       {...getOverrideProps(overrides, "APY")}
                     ></Text>
                     <svg
+                      display="flex"
+                      justifyContent="center"
+                      direction="column"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 320 512"
                       width="15px"
@@ -536,9 +549,9 @@ export default function PoolListCom1024px(props) {
                       fontWeight="600"
                       lineHeight="14.522727012634277px"
                       textAlign="center"
-                      display="block"
+                      display="flex"
+                      justifyContent="center"
                       direction="column"
-                      justifyContent="unset"
                       width="unset"
                       height="25px"
                       gap="unset"
@@ -550,6 +563,8 @@ export default function PoolListCom1024px(props) {
                       {...getOverrideProps(overrides, "TVL")}
                     ></Text>
                     <svg
+                      display="flex"
+                      justifyContent="center"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 320 512"
                       width="15px"
@@ -564,9 +579,9 @@ export default function PoolListCom1024px(props) {
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
                     textAlign="center"
-                    display="block"
+                    display="flex"
                     direction="column"
-                    justifyContent="unset"
+                    justifyContent="center"
                     width="unset"
                     height="25px"
                     gap="unset"
@@ -586,9 +601,9 @@ export default function PoolListCom1024px(props) {
                     fontWeight="600"
                     lineHeight="14.522727012634277px"
                     textAlign="center"
-                    display="block"
+                    display="flex"
                     direction="column"
-                    justifyContent="unset"
+                    justifyContent="center"
                     width="unset"
                     height="25px"
                     gap="unset"
@@ -599,7 +614,7 @@ export default function PoolListCom1024px(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children="Action"
+                    children="ACTION"
                     {...getOverrideProps(overrides, "Action")}
                   ></Text>
                 </Flex>
@@ -706,7 +721,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={(pageNum) => {
+              onChange={pageNum => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

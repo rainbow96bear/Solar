@@ -166,7 +166,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -251,7 +251,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);
@@ -568,34 +568,31 @@ router.post("/withdraw", async (req: Request, res: Response) => {
 
 router.post("/removeLiquidity", async (req: Request, res: Response) => {
   try {
-    const { account, lpSymbol }: { account: string; lpSymbol?: string } =
-      req.body;
+    const {
+      account,
+      lpSymbol,
+      removeAmount,
+    }: { account: string; lpSymbol?: string; removeAmount?: any } = req.body;
+    const tokenPrice1: BigNumber = BigNumber.from(
+      Math.floor(removeAmount * 10 ** 18).toString()
+    );
     if (lpSymbol.includes("ETH")) {
-      const lpAmount: number = await deployedDFSETH.methods
-        .userLiquidity(account)
-        .call();
       obj.from = account;
       obj.to = process.env.DFS_ETH;
       obj.data = await deployedDFSETH.methods
-        .removeLiquidity(lpAmount)
+        .removeLiquidity(tokenPrice1)
         .encodeABI();
     } else if (lpSymbol.includes("BNB")) {
-      const lpAmount: number = await deployedDFSBNB.methods
-        .userLiquidity(account)
-        .call();
       obj.from = account;
       obj.to = process.env.DFS_BNB;
       obj.data = await deployedDFSBNB.methods
-        .removeLiquidity(lpAmount)
+        .removeLiquidity(tokenPrice1)
         .encodeABI();
     } else if (lpSymbol.includes("USDT")) {
-      const lpAmount: number = await deployedDFSUSDT.methods
-        .userLiquidity(account)
-        .call();
       obj.from = account;
       obj.to = process.env.DFS_USDT;
       obj.data = await deployedDFSUSDT.methods
-        .removeLiquidity(lpAmount)
+        .removeLiquidity(tokenPrice1)
         .encodeABI();
     }
     res.send(obj);
