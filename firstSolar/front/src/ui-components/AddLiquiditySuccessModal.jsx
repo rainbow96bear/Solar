@@ -31,8 +31,6 @@ export default function AddLiquiditySuccessModal(props) {
       width="30%"
       height="40%"
       display="flex"
-      // gap="unset"
-      // alignItems="center"
       justifycontent="unset"
       position="fixed"
       top="50%"

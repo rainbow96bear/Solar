@@ -286,66 +286,11 @@ export default function ConnectModal(props) {
               {...getOverrideProps(overrides, "Kaikas")}
             ></Text>
           </Flex>
-          {/* <Flex
-            gap="10px"
-            direction="row"
-            width="300px"
-            height="unset"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            shrink="0"
-            position="relative"
-            border="1px SOLID rgba(220,220,220,1)"
-            borderRadius="10px"
-            padding="9px 33px 9px 9px"
-            className="cursorPointer"
-            onClick={() => {
-              handleConnect();
-            }}
-            disbaled={!signClient}
-            {...getOverrideProps(overrides, "ConnectModalKaikas37532689")}
-          >
-            <Image
-              src={walletConnectLogo}
-              width="40px"
-              height="40px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "kaikasLogo 137532690")}
-            ></Image> */}
 
           <Web3Button
             className="Web3Button"
             label="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connect Wallet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
           ></Web3Button>
-          {/* <Text
-              fontFamily="Do Hyeon"
-              fontSize="24px"
-              fontWeight="400"
-              color="rgba(0,0,0,1)"
-              lineHeight="40px"
-              textAlign="left"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="Wallet Connect"
-              {...getOverrideProps(overrides, "WalletConnect")}
-            ></Text>
-          </Flex> */}
         </Flex>
       </Flex>
     </ModalCover>
@@ -361,7 +306,6 @@ const ModalCover = styled.div`
   left: 0%;
   top: 0%;
   right: 0%;
-  // bottom: 0%;
   justify-content: center;
   align-items: center;
   z-index: 88;
@@ -380,17 +324,3 @@ const ModalCover = styled.div`
     }
   }
 `;
-// const QRCodeModal = styled.div`
-//   width: 100vw;
-//   height: 100vh;
-//   background-color: rgba(0, 0, 0, 0.4);
-//   display: flex;
-//   position: fixed;
-//   left: 0%;
-//   top: 0%;
-//   right: 0%;
-//   // bottom: 0%;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 89;
-// `;

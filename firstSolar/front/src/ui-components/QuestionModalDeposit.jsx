@@ -17,11 +17,15 @@ import { useWeb3 } from "../modules/useWeb3";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading";
 import { setCompleteModal } from "../modules/completeModal";
+import DepositCompletedModal from "./DepositCompletedModal";
+import DepositFaildModal from "./DepositFaildModal";
+import { mypageList, getLPBalance } from "../api";
 
 export default function QuestionModalDeposit(props) {
   const { overrides, setquestionmark, ...rest } = props;
   const { web3, account, chainId, login } = useWeb3();
   const { web3K, accountK, loginK } = useWeb3K();
+  const [balanceChange, setBalanceChange] = React.useState(false);
 
   const dispatch = useDispatch();
   const account2 = useSelector((state) => state.account.account.account);
@@ -30,7 +34,6 @@ export default function QuestionModalDeposit(props) {
   const [depositSuccessModalOpen, setDepositSuccessModalOpen] =
     React.useState(false);
   const [depositFailModalOpen, setDepositFailModalOpen] = React.useState(false);
-  // console.log("item", props.mypagelist);
 
   React.useEffect(() => {
     if (document.cookie) {
@@ -41,7 +44,6 @@ export default function QuestionModalDeposit(props) {
       }
     }
   }, []);
-
   const depositFunc = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
@@ -62,6 +64,7 @@ export default function QuestionModalDeposit(props) {
       let transactionResult2 = await web3.eth.sendTransaction(result2);
       setDepositAmountValue(0);
       await props?.mypagelplistup();
+      setBalanceChange(!balanceChange);
 
       dispatch(isLoadingThunk({ isLoading: false }));
       dispatch(setCompleteModal(true));
@@ -72,6 +75,10 @@ export default function QuestionModalDeposit(props) {
       setDepositFailModalOpen(true);
     }
   };
+
+  React.useEffect(() => {
+    props?.mypageMethod();
+  }, [balanceChange]);
 
   React.useEffect(() => {
     document.body.style = `overflow: hidden`;
@@ -683,21 +690,16 @@ export default function QuestionModalDeposit(props) {
       </Flex>
       {depositSuccessModalOpen && (
         <LoadingModal>
-          {/* <SwapSuccessModal
-              setSwapSuccessModalOpen={setSwapSuccessModalOpen}
-              firstSelectToken={firstSelectToken}
-              secondSelectToken={secondSelectToken}
-            /> */}
+          <DepositCompletedModal
+            setDepositSuccessModalOpen={setDepositSuccessModalOpen}
+          ></DepositCompletedModal>
         </LoadingModal>
       )}
       {depositFailModalOpen && (
         <LoadingModal>
-          {/* <SwapFailModal
-              setSwapFailModalOpen={setSwapFailModalOpen}
-              firstSelectToken={firstSelectToken}
-              secondSelectToken={secondSelectToken}
-            /> */}
-          {/* 모달  */}
+          <DepositFaildModal
+            setDepositFailModalOpen={setDepositFailModalOpen}
+          ></DepositFaildModal>
         </LoadingModal>
       )}
     </ModalCover>
@@ -713,7 +715,6 @@ const ModalCover = styled.div`
   left: 0%;
   top: 0%;
   right: 0%;
-  // bottom: 0%;
   justify-content: center;
   align-items: center;
   z-index: 88;
@@ -734,8 +735,8 @@ const ModalCover = styled.div`
 `;
 
 const LoadingModal = styled.div`
-  width: 100vmax;
-  height: 100vmax;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
@@ -744,5 +745,5 @@ const LoadingModal = styled.div`
   top: 0%;
   right: 0%;
   justify-content: center;
-  z-index: 999999999;
+  z-index: 999;
 `;

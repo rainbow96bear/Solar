@@ -11,7 +11,7 @@ import { Button, Flex, Text, Image } from "@aws-amplify/ui-react";
 import logo1 from "./images/1.png";
 import logo2 from "./images/5.png";
 
-export default function DepositCompletedModal(props) {
+export default function DepositFaildModal(props) {
   const { overrides, ...rest } = props;
 
   const [timer, setTimer] = React.useState(6); // 초기 값: 5초
@@ -22,7 +22,7 @@ export default function DepositCompletedModal(props) {
         setTimer(timer - 1);
       }, 1000);
     } else {
-      props?.setDepositSuccessModalOpen(false);
+      props?.setDepositFailModalOpen(false);
     }
 
     return () => {
@@ -48,7 +48,7 @@ export default function DepositCompletedModal(props) {
       borderRadius="55px"
       padding="0px 132px 0px 132px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "DepositCompletedModal")}
+      {...getOverrideProps(overrides, "DepositFaildModal")}
       {...rest}
     >
       <Flex
@@ -85,7 +85,7 @@ export default function DepositCompletedModal(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Deposit Completed"
+          children="Deposit Faild"
           {...getOverrideProps(overrides, "Deposit Completed")}
         ></Text>
         <Text
@@ -250,7 +250,7 @@ export default function DepositCompletedModal(props) {
         variation="primary"
         children="OK"
         onClick={() => {
-          props?.setDepositSuccessModalOpen(false);
+          props?.setDepositFailModalOpen(false);
           clearInterval(intervalId);
         }}
         {...getOverrideProps(overrides, "Button")}

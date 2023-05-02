@@ -48,7 +48,6 @@ export default function BeforeHeadCom1024px(props) {
     };
     document.addEventListener("click", checkIfClickedOutside);
     return () => {
-      // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [view]);
@@ -60,7 +59,7 @@ export default function BeforeHeadCom1024px(props) {
   };
 
   const handleSearch = () => {
-    const searchQuery = encodeURIComponent(inputValue); // 검색어를 URL로 인코딩합니다.
+    const searchQuery = encodeURIComponent(inputValue);
     navigate("/searchRedirect", { state: { searchData: searchQuery } });
 
     setInputValue("");
@@ -97,7 +96,6 @@ export default function BeforeHeadCom1024px(props) {
               height="unset"
               justifyContent="flex-start"
               alignItems="center"
-              // position="absolute"
               top="13.33%"
               bottom="11.67%"
               left="0%"
@@ -128,7 +126,6 @@ export default function BeforeHeadCom1024px(props) {
             placeholder="Search"
             justifyContent="center"
             alignItems="center"
-            // position="absolute"
             top="23.33%"
             bottom="21.67%"
             left="40.04%"
@@ -171,7 +168,6 @@ export default function BeforeHeadCom1024px(props) {
                     height="35px"
                     justifyContent="center"
                     alignItems="center"
-                    // position="absolute"
                     top="21.67%"
                     bottom="20%"
                     left="85.64%"

@@ -12,7 +12,6 @@ import { useMediaQuery } from "react-responsive";
 
 const SwapComponent = ({ oracleId, balance }) => {
   const props = oracleId;
-  console.log("props?", props);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const isDesktop = useMediaQuery({

@@ -6,11 +6,19 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton1024px } from "../../ui-components";
 import "../../css/Font.css";
 
-const MyPageList1024px = props => {
+const MyPageList1024px = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
+  const mypageMethod = () => {
+    props.setLpTokenValue(props?.item?.LPTokenBalance);
+    props.setLpToken(props?.item?.name);
+    props.setFirstToken(props?.item?.firstToken);
+    props.setSecondToken(props?.item?.secondToken);
+    props.setFirstImgToken(props?.item?.mainNetLogo);
+    props.setSecondImgToken(props?.item?.platformLogo);
+  };
   return (
     <>
       <ItemWrap
@@ -22,12 +30,7 @@ const MyPageList1024px = props => {
         <motion.div
           onClick={() => {
             toggleOpen();
-            props.setLpTokenValue(props?.item?.LPTokenBalance);
-            props.setLpToken(props?.item?.name);
-            props.setFirstToken(props?.item?.firstToken);
-            props.setSecondToken(props?.item?.secondToken);
-            props.setFirstImgToken(props?.item?.mainNetLogo);
-            props.setSecondImgToken(props?.item?.platformLogo);
+            mypageMethod();
           }}
           layout
           style={{
@@ -639,6 +642,8 @@ const MyPageList1024px = props => {
                 mypagelplistup={props.mypagelplistup}
                 pid={props?.pid}
                 setlptokenvalue={props.setLpTokenValue}
+                mypageMethod={mypageMethod}
+                lpTokenBalance={props?.item?.LPTokenBalance}
               />
             </motion.div>
           </SubWrap>

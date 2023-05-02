@@ -1,10 +1,3 @@
-// /***************************************************************************
-//  * The contents of this file were generated with Amplify Studio.           *
-//  * Please refrain from making any modifications to this file.              *
-//  * Any changes to this file will be overwritten when running amplify pull. *
-//  **************************************************************************/
-
-/* eslint-disable */
 import * as React from "react";
 import { Button, Flex, Text, View } from "@aws-amplify/ui-react";
 import "../css/Font.css";
@@ -38,8 +31,6 @@ export default function AddLiquidityFailModal(props) {
       width="30%"
       height="40%"
       display="flex"
-      // gap="unset"
-      // alignItems="center"
       justifycontent="unset"
       position="fixed"
       top="50%"

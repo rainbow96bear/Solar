@@ -78,21 +78,6 @@ export default function AddLiquidityTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
             >
-              {/* <Image
-                width="21px"
-                height="21px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="35px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                src={props?.oracleiddata[0]?.mainNetLogo}
-                {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
-              ></Image> */}
               <Text
                 fontFamily="ffProMedium"
                 fontSize="38px"
@@ -148,21 +133,6 @@ export default function AddLiquidityTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
             >
-              {/* <Image
-                width="21px"
-                height="21px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="35px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                src={props?.oracleiddata[0]?.platformLogo}
-                {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
-              ></Image> */}
               <Text
                 fontFamily="ffProMedium"
                 fontSize="38px"

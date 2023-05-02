@@ -439,7 +439,7 @@ export default function PooListCom320px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={pageNum => {
+                onChange={(pageNum) => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {
@@ -450,7 +450,6 @@ export default function PooListCom320px(props) {
                 }}
               />
             </Flex>
-            {/* <FooterCompo>asdf</FooterCompo> */}
           </Flex>
         </View>
       ) : (

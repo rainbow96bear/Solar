@@ -27,7 +27,6 @@ const LoggedinUser = () => {
     };
     document.addEventListener("click", checkIfClickedOutside);
     return () => {
-      // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [view]);
@@ -82,7 +81,6 @@ const LoggedinUser = () => {
 export default LoggedinUser;
 
 const LoggedinUserCover = styled.div`
-  //   width: 40px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -96,7 +94,6 @@ const MenuDropDown = styled.div`
   border-radius: 10px;
   position: absolute;
   top: 50px;
-  //   left: 95px;
   right: 0px;
   width: 200px;
   background: white;

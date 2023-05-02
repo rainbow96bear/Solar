@@ -3,10 +3,8 @@ import "./App.css";
 
 // 라이브러리 import
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import { accountThunk } from "./modules/account.js";
 import { useWeb3 } from "./modules/useWeb3";
 import { useWeb3K } from "./modules/useWeb3Kaikas";
 
@@ -19,17 +17,13 @@ import {
 import { Web3Modal } from "@web3modal/react";
 import { configureChains, createClient, useAccount, WagmiConfig } from "wagmi";
 import { arbitrum, mainnet, polygon } from "wagmi/chains";
-import { useWeb3React } from "@web3modal/ethereum";
-import { useWeb3Modal } from "@web3modal/react";
 
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
 import { connectThunk } from "./modules/connect";
-import UserLoading from "./ui-components/UserLoading";
 import LoadingCompo from "./ui-components/LoadingCompo";
-import Foot320px from "./ui-components/Foot320px";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
@@ -59,13 +53,7 @@ function App() {
   const emptySearch = useSelector((state) => state.emptySearch);
 
   const completeModal = useSelector((state) => state.completeModal);
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const accountAddress = useSelector((state) => state.account.account.account);
-  const { address } = useAccount();
   const dispatch = useDispatch();
-
-  const { web3, account, chainId, login } = useWeb3();
-  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
 
   const accountWagmi = useAccount({
     onConnect({ address, connector, isReconnected }) {
@@ -75,18 +63,6 @@ function App() {
       dispatch(connectThunk({ connect: false }));
     },
   });
-
-  // useEffect(() => {
-  //   if (document.cookie) {
-  //     if (document.cookie.split(":")[0] == "metamask") {
-  //       login();
-  //       dispatch(accountThunk({ account: account }));
-  //     } else if (document.cookie.split(":")[0] == "kaikas") {
-  //       loginK();
-  //       dispatch(accountThunk({ account: accountK }));
-  //     }
-  //   }
-  // }, [account]);
 
   return (
     <>
@@ -115,23 +91,14 @@ function App() {
           </MainContent>
           <FooterContainer></FooterContainer>
 
-          {/* 로딩 중에는 로딩 창이 뜨도록 할 것입니다. */}
-          {isLoading ? (
+          {isLoading && (
             <LoadingModal>
               <LoadingCompo />
             </LoadingModal>
-          ) : (
-            <></>
           )}
           {emptySearch && (
             <LoadingModal>
               <EmptySearchModal className="marginT" />
-            </LoadingModal>
-          )}
-
-          {completeModal && (
-            <LoadingModal>
-              <DepositCompletedModal className="marginT" />
             </LoadingModal>
           )}
         </div>

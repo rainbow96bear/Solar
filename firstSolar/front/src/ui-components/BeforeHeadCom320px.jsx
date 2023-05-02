@@ -45,7 +45,6 @@ export default function BeforeHeadCom320px(props) {
           <Flex
             display="flex"
             direction="column"
-            // justifyContent="flex-start"
             height={searchView ? "100px" : "48px"}
           >
             <Flex
@@ -105,8 +104,6 @@ export default function BeforeHeadCom320px(props) {
                       alignItems="center"
                       shrink="0"
                       position="relative"
-                      // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      // padding="10px 10px 10px 10px"
                       {...getOverrideProps(overrides, "Frame 48")}
                     >
                       <Image

@@ -36,7 +36,6 @@ export default function LoginAccount(props) {
     };
     document.addEventListener("click", checkIfClickedOutside);
     return () => {
-      // Cleanup the event listener
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [view]);
@@ -133,7 +132,6 @@ export default function LoginAccount(props) {
         <MenuDropDown>
           <ul>
             <li>
-              {/* <Link to={`/mypage?${account}`}> */}
               <div
                 onClick={() => {
                   navigate(`/mypage?${account}`);
@@ -141,7 +139,6 @@ export default function LoginAccount(props) {
               >
                 My Page
               </div>
-              {/* </Link> */}
             </li>
 
             <Divider></Divider>
@@ -164,10 +161,6 @@ export default function LoginAccount(props) {
 const LoginAccountCover = styled.div`
   .LoginAccountCover_accountBox {
     cursor: pointer;
-
-    // text-overflow: ellipsis;
-    // overflow: hidden;
-    // white-space: nowrap;
   }
 `;
 
