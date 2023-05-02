@@ -24,8 +24,12 @@ export default function QuestionModalDeposit(props) {
   const { web3K, accountK, loginK } = useWeb3K();
 
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const [depositAmountValue, setDepositAmountValue] = React.useState(0);
+
+  const [depositSuccessModalOpen, setDepositSuccessModalOpen] =
+    React.useState(false);
+  const [depositFailModalOpen, setDepositFailModalOpen] = React.useState(false);
 
   // console.log("item", props.mypagelist);
   console.log("  props?.lptoken", props?.lptoken);
@@ -63,15 +67,17 @@ export default function QuestionModalDeposit(props) {
 
       dispatch(isLoadingThunk({ isLoading: false }));
       dispatch(setCompleteModal(true));
+      setDepositSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setDepositFailModalOpen(true);
     }
   };
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -567,54 +573,130 @@ export default function QuestionModalDeposit(props) {
                 labelHidden={false}
                 variation="default"
                 value={depositAmountValue}
-                onInput={(e) => setDepositAmountValue(e.target.value)}
+                onInput={e => setDepositAmountValue(e.target.value)}
+                onChange={e => {
+                  if (+e.target.value > +props.lpBalanceValue) {
+                    e.target.value = props.lpBalanceValue;
+                  }
+                  setDepositAmountValue(e.target.value);
+                }}
                 {...getOverrideProps(overrides, "TextAreaField40822814")}
               ></TextAreaField>
             </Flex>
           </Flex>
           <Flex
-            gap="10px"
             direction="row"
             width="unset"
-            height="66px"
+            height="unset"
             justifyContent="center"
             alignItems="center"
             shrink="0"
             alignSelf="stretch"
             position="relative"
-            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            borderRadius="15px"
-            padding="13px 73px 13px 73px"
-            backgroundColor="rgba(255,226,0,0.35)"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              depositFunc();
-            }}
-            {...getOverrideProps(overrides, "Frame 103")}
+            padding="0px 0px 0px 0px"
           >
-            <Text
-              fontFamily="ffProBook"
-              fontSize="27px"
-              fontWeight="700"
-              lineHeight="32.6761360168457px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="364.13px"
-              height="30.98px"
-              gap="unset"
-              alignItems="unset"
+            <Flex
+              gap="10px"
+              direction="row"
+              width="21vw"
+              height="66px"
+              justifyContent="center"
+              alignItems="center"
               shrink="0"
+              alignSelf="stretch"
               position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="Deposit"
-              {...getOverrideProps(overrides, "Deposit40822827")}
-            ></Text>
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="15px"
+              backgroundColor="rgba(255,226,0,0.35)"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                depositFunc();
+              }}
+              {...getOverrideProps(overrides, "Frame 103")}
+            >
+              <Text
+                fontFamily="ffProMedium"
+                fontSize="21px"
+                fontWeight="700"
+                lineHeight="32.6761360168457px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="364.13px"
+                height="30.98px"
+                gap="unset"
+                alignItems="unset"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="Deposit"
+                {...getOverrideProps(overrides, "Deposit40822827")}
+              ></Text>
+            </Flex>
+            <Flex
+              gap="10px"
+              direction="row"
+              width="21vw"
+              height="66px"
+              justifyContent="center"
+              alignItems="center"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="15px"
+              backgroundColor="rgba(32, 32, 32, 0.85)"
+              style={{ cursor: "pointer" }}
+              overflow="hidden"
+              onClick={() => {}}
+              {...getOverrideProps(overrides, "Frame 103")}
+            >
+              <Text
+                fontFamily="ffProBook"
+                color="rgba(250,250,250,1)"
+                fontSize="21px"
+                fontWeight="700"
+                lineHeight="32.6761360168457px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="364.13px"
+                height="30.98px"
+                gap="unset"
+                alignItems="unset"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="Auto Compounding"
+                {...getOverrideProps(overrides, "Deposit40822827")}
+              ></Text>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
+      {depositSuccessModalOpen && (
+        <LoadingModal>
+          {/* <SwapSuccessModal
+              setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            /> */}
+        </LoadingModal>
+      )}
+      {depositFailModalOpen && (
+        <LoadingModal>
+          {/* <SwapFailModal
+              setSwapFailModalOpen={setSwapFailModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            /> */}
+          {/* 모달  */}
+        </LoadingModal>
+      )}
     </ModalCover>
   );
 }
@@ -646,4 +728,18 @@ const ModalCover = styled.div`
       background-color: orange !import;
     }
   }
+`;
+
+const LoadingModal = styled.div`
+  width: 100vmax;
+  height: 100vmax;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999999999;
 `;

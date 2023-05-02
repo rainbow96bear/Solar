@@ -35,7 +35,10 @@ const Poolitem768px = props => {
             backgroundImage:
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
           }}
-          whileHover={{ borderRadius: "75px" }}
+          whileHover={{
+            borderRadius: "75px",
+            backgroundColor: "rgba(247,239,227,0.75)",
+          }}
         >
           <Flex
             gap="40px"
@@ -452,15 +455,15 @@ const Poolitem768px = props => {
                       {...getOverrideProps(overrides, "Frame 9")}
                     >
                       <Text
-                        fontFamily="ffProExtraLight"
-                        fontSize="9px"
+                        fontFamily="ffProLight"
+                        fontSize="15px"
                         fontWeight="600"
                         color="rgba(239,239,239,1)"
                         lineHeight="10.892045021057129px"
                         textAlign="center"
-                        display="block"
+                        display="flex"
                         direction="column"
-                        justifyContent="unset"
+                        justifyContent="center"
                         width="unset"
                         height="15px"
                         gap="unset"
@@ -491,21 +494,20 @@ const Poolitem768px = props => {
                       {...getOverrideProps(overrides, "Frame 8")}
                     >
                       <Text
-                        fontFamily="ffProExtraLight"
-                        fontSize="9px"
+                        fontFamily="ffProLight"
+                        fontSize="15px"
                         fontWeight="600"
                         lineHeight="10.892045021057129px"
                         textAlign="center"
-                        display="block"
+                        display="flex"
                         direction="column"
-                        justifyContent="unset"
+                        justifyContent="center"
                         width="unset"
                         height="15px"
                         gap="unset"
                         alignItems="unset"
-                        grow="1"
-                        shrink="1"
-                        basis="0"
+                        shrink="0"
+                        alignSelf="stretch"
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"

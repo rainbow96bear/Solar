@@ -18,17 +18,18 @@ import { getLPBalance } from "../api";
 import { useAccount } from "wagmi";
 import { isLoadingThunk } from "../modules/isLoading";
 import { withDraw } from "../api";
-
+import YesNoButton768px from "./YesNoButton768px";
 export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
+  const dispatch = useDispatch();
+  const account2 = useSelector(state => state.account.account.account);
   const { web3, login } = useWeb3();
   const { loginK } = useWeb3K();
-  const [lpBalance, setLpBalance] = React.useState();
-  const dispatch = useDispatch();
   const { account } = useAccount();
-  const account2 = useSelector((state) => state.account.account.account);
+  const [lpBalance, setLpBalance] = React.useState();
   const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
+  const [questionMark, setQuestionMark] = React.useState(0);
 
   React.useEffect(() => {
     if (document.cookie) {
@@ -83,7 +84,7 @@ export default function QuestionModalWithDraw(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -185,8 +186,8 @@ export default function QuestionModalWithDraw(props) {
           direction="column"
           width="unset"
           height="unset"
-          justifyContent="center"
-          alignItems="center"
+          justifyContent="flex-start"
+          alignItems="flex-start"
           shrink="0"
           alignSelf="stretch"
           position="relative"
@@ -295,20 +296,6 @@ export default function QuestionModalWithDraw(props) {
                   children={props.mypagelist.firstToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822786")}
                 ></Text>
-                <Image
-                  width="15px"
-                  height="15px"
-                  display="block"
-                  gap="unset"
-                  alignItems="unset"
-                  justifyContent="unset"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="35px"
-                  padding="0px 0px 0px 0px"
-                  objectFit="cover"
-                  {...getOverrideProps(overrides, "ghrgclzzd 840822787")}
-                ></Image>
               </Flex>
               <Flex
                 gap="10px"
@@ -398,20 +385,6 @@ export default function QuestionModalWithDraw(props) {
                   children={props.mypagelist.secondToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822792")}
                 ></Text>
-                <Image
-                  width="15px"
-                  height="15px"
-                  display="block"
-                  gap="unset"
-                  alignItems="unset"
-                  justifyContent="unset"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="35px"
-                  padding="0px 0px 0px 0px"
-                  objectFit="cover"
-                  {...getOverrideProps(overrides, "ghrgclzzd 840822793")}
-                ></Image>
               </Flex>
             </Flex>
           </Flex>
@@ -560,9 +533,7 @@ export default function QuestionModalWithDraw(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={`Balance :${
-                      parseInt((lpBalance / 10 ** 18) * 10000) / 10000 || 0
-                    }`}
+                    children={`Balance :${props.lpBalanceValue}`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>
                 </Flex>
@@ -578,55 +549,127 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={(e) => setWithDrawAmountValue(e.target.value)}
+                onInput={e => setWithDrawAmountValue(e.target.value)}
+                onChange={e => {
+                  if (+e.target.value > +props.lpBalanceValue) {
+                    e.target.value = props.lpBalanceValue;
+                  }
+                  setWithDrawAmountValue(e.target.value);
+                }}
                 {...getOverrideProps(overrides, "TextAreaField40822814")}
               ></TextAreaField>
             </Flex>
           </Flex>
           <Flex
-            gap="10px"
             direction="row"
             width="unset"
-            height="66px"
+            height="unset"
             justifyContent="center"
             alignItems="center"
             shrink="0"
             alignSelf="stretch"
             position="relative"
-            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            borderRadius="15px"
-            padding="13px 73px 13px 73px"
-            backgroundColor="rgba(234,0,50,0.45)"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              withDrawFunc();
-            }}
-            {...getOverrideProps(overrides, "Frame 103")}
+            padding="0px 0px 0px 0px"
           >
-            <Text
-              fontFamily="ffProMedium"
-              fontSize="27px"
-              fontWeight="700"
-              color="rgba(244,244,244,1)"
-              lineHeight="32.6761360168457px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="364.13px"
-              height="30.98px"
-              gap="unset"
-              alignItems="unset"
+            <Flex
+              gap="10px"
+              direction="row"
+              width="21vw"
+              height="66px"
+              justifyContent="center"
+              alignItems="center"
               shrink="0"
+              alignSelf="stretch"
               position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="With Draw"
-              {...getOverrideProps(overrides, "Deposit40822827")}
-            ></Text>
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="15px"
+              backgroundColor="rgba(234,0,50,0.45)"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                withDrawFunc();
+              }}
+              {...getOverrideProps(overrides, "Frame 103")}
+            >
+              <Text
+                fontFamily="ffProBook"
+                fontSize="21px"
+                fontWeight="700"
+                color="rgba(244,244,244,1)"
+                lineHeight="32.6761360168457px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="30.98px"
+                gap="unset"
+                alignItems="unset"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="With Draw"
+                {...getOverrideProps(overrides, "Deposit40822827")}
+              ></Text>
+            </Flex>
+            <Flex
+              gap="10px"
+              direction="row"
+              width="21vw"
+              height="66px"
+              justifyContent="center"
+              alignItems="center"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="15px"
+              backgroundColor="rgba(32, 32, 32, 0.85)"
+              style={{ cursor: "pointer" }}
+              overflow="hidden"
+              onClick={() => {
+                setQuestionMark(1);
+                // removeLiquidityFunc();
+              }}
+              {...getOverrideProps(overrides, "Frame 103")}
+            >
+              <Text
+                fontFamily="ffProBook"
+                fontSize="21px"
+                fontWeight="700"
+                color="rgba(244,244,244,1)"
+                lineHeight="32.6761360168457px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="30.98px"
+                gap="unset"
+                alignItems="unset"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="Remove Liquidity"
+                {...getOverrideProps(overrides, "Deposit40822827")}
+              ></Text>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
+
+      {questionMark == 1 ? (
+        <RemoveModal>
+          <YesNoButton768px
+            withDrawAmountValue={withDrawAmountValue}
+            setquestionmark={setQuestionMark}
+            lpSymbol={props?.lptoken}
+          />
+        </RemoveModal>
+      ) : (
+        <></>
+      )}
     </ModalCover>
   );
 }
@@ -658,4 +701,18 @@ const ModalCover = styled.div`
       background-color: orange !import;
     }
   }
+`;
+
+const RemoveModal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  align-items: center;
+  z-index: 88;
 `;

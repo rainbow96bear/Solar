@@ -43,6 +43,7 @@ export default function DepositButton1024px(props) {
           }}
           whileHover={{
             borderRadius: "13px",
+            backgroundColor: "rgba(252,250,242,0.75)",
             scale: 1.03,
             opacity: 0.88,
           }}
@@ -90,6 +91,7 @@ export default function DepositButton1024px(props) {
             ></Text>
           </Flex>
         </motion.div>
+
         <motion.div
           style={{
             width: "45vw",
@@ -103,6 +105,7 @@ export default function DepositButton1024px(props) {
             borderRadius: "13px",
             scale: 1.03,
             opacity: 0.88,
+            backgroundColor: "rgba(0,056,071,0.75)",
           }}
         >
           <Flex
@@ -153,6 +156,7 @@ export default function DepositButton1024px(props) {
       {questionMark == 1 ? (
         <QuestionModalDeposit
           setquestionmark={setQuestionMark}
+          lpBalanceValue={props.lpBalanceValue}
           mypagelist={props.mypagelist}
           mypagelplistup={props.mypagelplistup}
           lptokenvalue={props.lptokenvalue}
@@ -165,6 +169,7 @@ export default function DepositButton1024px(props) {
       {questionMark == 2 ? (
         <QuestionModalWithDraw
           setquestionmark={setQuestionMark}
+          lpBalanceValue={props.lpBalanceValue}
           mypagelist={props.mypagelist}
           lptokenvalue={props.lptokenvalue}
           mypagelplistup={props.mypagelplistup}

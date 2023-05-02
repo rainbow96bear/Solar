@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { isLoadingThunk } from "../../modules/isLoading";
 import { useDispatch } from "react-redux";
 
-const Netlist1024px = (props) => {
+const Netlist1024px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -19,7 +19,11 @@ const Netlist1024px = (props) => {
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.15 }}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.15,
+          backgroundColor: "rgba(235,069,074,0.85)",
+        }}
       >
         <Flex
           overflow="hidden"
@@ -72,7 +76,7 @@ const Netlist1024px = (props) => {
   );
 };
 
-const Dexlist1024px = (props) => {
+const Dexlist1024px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -87,7 +91,11 @@ const Dexlist1024px = (props) => {
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.15 }}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.15,
+          backgroundColor: "rgba(0,125,122,0.85)",
+        }}
       >
         <Flex
           onClick={async () => {
@@ -139,7 +147,7 @@ const Dexlist1024px = (props) => {
   );
 };
 
-const Netlist768px = (props) => {
+const Netlist768px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -153,7 +161,11 @@ const Netlist768px = (props) => {
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.15 }}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.15,
+          backgroundColor: "rgba(235,069,074,0.85)",
+        }}
       >
         <Flex
           onClick={async () => {
@@ -205,7 +217,7 @@ const Netlist768px = (props) => {
   );
 };
 
-const Dexlist768px = (props) => {
+const Dexlist768px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -219,7 +231,11 @@ const Dexlist768px = (props) => {
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.15 }}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.15,
+          backgroundColor: "rgba(0,125,122,0.85)",
+        }}
       >
         <Flex
           onClick={async () => {
@@ -271,7 +287,7 @@ const Dexlist768px = (props) => {
   );
 };
 
-const Netlist320px = (props) => {
+const Netlist320px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -285,7 +301,11 @@ const Netlist320px = (props) => {
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.15 }}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.15,
+          backgroundColor: "rgba(235,069,074,0.85)",
+        }}
       >
         <Flex
           onClick={async () => {
@@ -337,7 +357,7 @@ const Netlist320px = (props) => {
   );
 };
 
-const Dexlist320px = (props) => {
+const Dexlist320px = props => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
 
@@ -352,7 +372,11 @@ const Dexlist320px = (props) => {
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.15 }}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.15,
+          backgroundColor: "rgba(0,125,122,0.85)",
+        }}
       >
         <Flex
           onClick={async () => {

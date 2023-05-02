@@ -188,7 +188,10 @@ export default function PooListCom768px(props) {
                   "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
               }}
               width={{ base: "80vw", medium: "87vw" }}
-              whileHover={{ borderRadius: "75px" }}
+              whileHover={{
+                borderRadius: "75px",
+                backgroundColor: "rgba(247,239,227,0.75)",
+              }}
             >
               <Flex
                 gap="23px"
@@ -304,7 +307,10 @@ export default function PooListCom768px(props) {
                 backgroundImage:
                   "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
               }}
-              whileHover={{ borderRadius: "75px" }}
+              whileHover={{
+                borderRadius: "75px",
+                backgroundColor: "rgba(247,239,227,0.75)",
+              }}
             >
               <Flex
                 gap="23px"
@@ -437,7 +443,7 @@ export default function PooListCom768px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={(pageNum) => {
+                onChange={pageNum => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {
