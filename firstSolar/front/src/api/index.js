@@ -352,7 +352,9 @@ export const getSearch = async (search, pageIndex) => {
     console.log("result : ", result);
 
     const poolListData = result.poolListData;
-    const resultTotalPages = result.poolListDataLength;
+    const pageSize = 10;
+    const resultLength = result.poolListDataLength;
+    const resultTotalPages = Math.ceil(resultLength / pageSize);
 
     return { poolListData, resultTotalPages };
   } catch (error) {
