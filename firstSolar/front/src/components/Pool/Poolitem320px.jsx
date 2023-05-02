@@ -36,7 +36,10 @@ const Poolitem320px = props => {
             backgroundImage:
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
           }}
-          whileHover={{ borderRadius: "75px" }}
+          whileHover={{
+            borderRadius: "75px",
+            backgroundColor: "rgba(247,239,227,0.75)",
+          }}
         >
           <Flex
             gap="15px"
@@ -460,15 +463,15 @@ const Poolitem320px = props => {
                       {...getOverrideProps(overrides, "Frame 9")}
                     >
                       <Text
-                        fontFamily="ffProExtraLight"
-                        fontSize="9px"
+                        fontFamily="ffProLight"
+                        fontSize="11px"
                         fontWeight="700"
                         color="rgba(239,239,239,1)"
                         lineHeight="10.892045021057129px"
                         textAlign="center"
-                        display="block"
+                        display="flex"
                         direction="column"
-                        justifyContent="unset"
+                        justifyContent="center"
                         width="unset"
                         height="15px"
                         gap="unset"
@@ -498,31 +501,14 @@ const Poolitem320px = props => {
                       backgroundColor="rgba(0,136,153,0.59)"
                       {...getOverrideProps(overrides, "Frame 8")}
                     >
-                      <Image
-                        width="15px"
-                        height="15px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="15px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:AYOloXgqjzo39433741"
-                        )}
-                      ></Image>
                       <Text
-                        fontFamily="ffProExtraLight"
-                        fontSize="9px"
+                        fontFamily="ffProLight"
+                        fontSize="11px"
                         fontWeight="700"
                         color="rgba(239,239,239,1)"
                         lineHeight="10.892045021057129px"
                         textAlign="center"
-                        display="block"
+                        display="flex"
                         direction="column"
                         justifyContent="unset"
                         width="unset"

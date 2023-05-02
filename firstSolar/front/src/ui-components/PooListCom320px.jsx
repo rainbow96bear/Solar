@@ -185,7 +185,10 @@ export default function PooListCom320px(props) {
                 backgroundImage:
                   "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
               }}
-              whileHover={{ borderRadius: "75px" }}
+              whileHover={{
+                borderRadius: "75px",
+                backgroundColor: "rgba(247,239,227,0.75)",
+              }}
             >
               <Flex
                 gap="14px"
@@ -437,7 +440,7 @@ export default function PooListCom320px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={(pageNum) => {
+                onChange={pageNum => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {

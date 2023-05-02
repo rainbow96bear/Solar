@@ -14,11 +14,11 @@ import { mypageList } from "../api/index";
 import logo from "./images/logo_new.png";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading";
+import { motion } from "framer-motion";
 import "../css/Font.css";
 
 export default function MyPageCompo768px(props) {
   const { overrides, ...rest } = props;
-
   const [myList, setMyList] = React.useState([]);
   const [lpTokenValue, setLpTokenValue] = React.useState();
   const [lpToken, setLpToken] = React.useState();
@@ -28,6 +28,15 @@ export default function MyPageCompo768px(props) {
   const [secondImgToken, setSecondImgToken] = React.useState();
   const dispatch = useDispatch();
   const params = useLocation().search.replace("?", "");
+
+  const lpBalanceValue = parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
+
+  const isLoadingTrue = () => {
+    dispatch(isLoadingThunk({ isLoading: true }));
+  };
+  const isLoadingFalse = () => {
+    dispatch(isLoadingThunk({ isLoading: false }));
+  };
 
   const mypageLpListUp = async () => {
     try {
@@ -127,192 +136,110 @@ export default function MyPageCompo768px(props) {
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 174")}
       >
-        <Flex
-          gap="27px"
-          direction="column"
-          width="unset"
-          height="unset"
-          justifyContent="center"
-          alignItems="center"
-          shrink="0"
-          alignSelf="stretch"
-          position="relative"
-          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-          borderRadius="35px"
-          padding="8px 0px 8px 0px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-          {...getOverrideProps(overrides, "Frame 17340782541")}
+        <motion.div
+          layout
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "center",
+            width: "71.4vw",
+            height: "unset",
+            borderRadius: "23px",
+            backgroundColor: "rgba(249,251,250,0.85)",
+            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+            backgroundImage:
+              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+          }}
+          whileHover={{
+            borderRadius: "55px",
+            backgroundColor: "rgba(0,056,071,0.75)",
+          }}
         >
           <Flex
-            gap="23px"
+            gap="27px"
             direction="column"
             width="unset"
             height="unset"
-            justifyContent="flex-start"
-            alignItems="flex-start"
+            justifyContent="center"
+            alignItems="center"
             shrink="0"
             alignSelf="stretch"
             position="relative"
-            borderRadius="27px"
-            padding="21px 34px 21px 34px"
-            backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-            {...getOverrideProps(overrides, "Frame 16340782542")}
+            borderRadius="35px"
+            padding="8px 0px 8px 0px"
+            {...getOverrideProps(overrides, "Frame 17340782541")}
           >
             <Flex
-              gap="0"
+              gap="23px"
               direction="column"
               width="unset"
               height="unset"
-              justifyContent="center"
-              alignItems="center"
+              justifyContent="flex-start"
+              alignItems="flex-start"
               shrink="0"
               alignSelf="stretch"
               position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 14340782549")}
+              borderRadius="27px"
+              padding="21px 34px 21px 34px"
+              {...getOverrideProps(overrides, "Frame 16340782542")}
             >
               <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="59.5px"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 16940782552")}
-              >
-                <Text
-                  fontFamily="ffProExtraLight"
-                  fontSize={{ base: "18px", small: "18px", medium: "25px" }}
-                  fontWeight="600"
-                  lineHeight="30.25568199157715px"
-                  textAlign="center"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children={`Balance : ${
-                    lpTokenValue?.slice(0, 7) / 1000000 || 0
-                  } ${lpToken || ""} `}
-                  {...getOverrideProps(overrides, "Balance : 0")}
-                ></Text>
-              </Flex>
-            </Flex>
-            <Flex
-              gap="2px"
-              direction="column"
-              width="unset"
-              height="unset"
-              justifyContent="center"
-              alignItems="center"
-              shrink="0"
-              alignSelf="stretch"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 144")}
-            >
-              <Flex
-                gap="5px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                borderRadius="25px"
-                padding="11px 13px 11px 13px"
-                backgroundColor="rgba(255,255,252,1)"
-                {...getOverrideProps(overrides, "Dexname1")}
-              >
-                <Image
-                  width="28px"
-                  height="28px"
-                  display="block"
-                  gap="unset"
-                  alignItems="unset"
-                  justifyContent="unset"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="35px"
-                  padding="0px 0px 0px 0px"
-                  objectFit="cover"
-                  {...getOverrideProps(overrides, "ghrgclzzd 740892945")}
-                ></Image>
-                <Text
-                  fontFamily="ffProExtraLight"
-                  fontSize={{ base: "15px", small: "15px", medium: "19px" }}
-                  fontWeight="600"
-                  lineHeight="20.573863983154297px"
-                  textAlign="left"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="16px"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="DEX Name"
-                  {...getOverrideProps(overrides, "DEX Name40892946")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
+                gap="0"
                 direction="column"
                 width="unset"
                 height="unset"
-                justifyContent="flex-start"
-                alignItems="flex-start"
+                justifyContent="center"
+                alignItems="center"
                 shrink="0"
+                alignSelf="stretch"
                 position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 91")}
+                padding="0px 0px 0px 0px"
+                {...getOverrideProps(overrides, "Frame 14340782549")}
               >
-                <Text
-                  fontFamily="ffProExtraLight"
-                  fontSize="33px"
-                  fontWeight="600"
-                  lineHeight="39.9375px"
-                  textAlign="left"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
+                <Flex
+                  gap="10px"
+                  direction="row"
                   width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
+                  height="59.5px"
+                  justifyContent="center"
+                  alignItems="center"
                   shrink="0"
+                  alignSelf="stretch"
                   position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="+"
-                  {...getOverrideProps(overrides, "+")}
-                ></Text>
+                  padding="10px 10px 10px 10px"
+                  {...getOverrideProps(overrides, "Frame 16940782552")}
+                >
+                  <Text
+                    fontFamily="ffProExtraLight"
+                    fontSize={{ base: "18px", small: "18px", medium: "25px" }}
+                    fontWeight="600"
+                    lineHeight="30.25568199157715px"
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="unset"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children={`Balance : ${
+                      lpTokenValue?.slice(0, 7) / 1000000 || 0
+                    } ${lpToken || ""} `}
+                    {...getOverrideProps(overrides, "Balance : 0")}
+                  ></Text>
+                </Flex>
               </Flex>
               <Flex
-                gap="5px"
-                direction="row"
+                gap="2px"
+                direction="column"
                 width="unset"
                 height="unset"
                 justifyContent="center"
@@ -320,51 +247,153 @@ export default function MyPageCompo768px(props) {
                 shrink="0"
                 alignSelf="stretch"
                 position="relative"
-                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                borderRadius="25px"
-                padding="11px 13px 11px 13px"
-                backgroundColor="rgba(255,226,0,0.35)"
-                {...getOverrideProps(overrides, "Dexname2")}
+                padding="0px 0px 0px 0px"
+                {...getOverrideProps(overrides, "Frame 144")}
               >
-                <Image
-                  width="28px"
-                  height="28px"
-                  display="block"
-                  gap="unset"
-                  alignItems="unset"
-                  justifyContent="unset"
+                <Flex
+                  gap="5px"
+                  direction="row"
+                  width="unset"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="center"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                  borderRadius="25px"
+                  padding="11px 13px 11px 13px"
+                  backgroundColor="rgba(255,255,252,1)"
+                  {...getOverrideProps(overrides, "Dexname1")}
+                >
+                  <Image
+                    width="28px"
+                    height="28px"
+                    display="block"
+                    gap="unset"
+                    alignItems="unset"
+                    justifyContent="unset"
+                    shrink="0"
+                    position="relative"
+                    borderRadius="35px"
+                    padding="0px 0px 0px 0px"
+                    objectFit="cover"
+                    src={firstImgToken || logo}
+                    {...getOverrideProps(overrides, "ghrgclzzd 740892945")}
+                  ></Image>
+                  <Text
+                    fontFamily="ffProExtraLight"
+                    fontSize={{ base: "15px", small: "15px", medium: "19px" }}
+                    fontWeight="600"
+                    lineHeight="20.573863983154297px"
+                    textAlign="left"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="16px"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children={firstToken || "select list"}
+                    {...getOverrideProps(overrides, "DEX Name40892946")}
+                  ></Text>
+                </Flex>
+                <Flex
+                  gap="10px"
+                  direction="column"
+                  width="unset"
+                  height="unset"
+                  justifyContent="flex-start"
+                  alignItems="flex-start"
                   shrink="0"
                   position="relative"
-                  borderRadius="35px"
-                  padding="0px 0px 0px 0px"
-                  objectFit="cover"
-                  {...getOverrideProps(overrides, "ghrgclzzd 740892950")}
-                ></Image>
-                <Text
-                  fontFamily="ffProExtraLight"
-                  fontSize="17px"
-                  fontWeight="600"
-                  lineHeight="20.573863983154297px"
-                  textAlign="left"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
+                  padding="10px 10px 10px 10px"
+                  {...getOverrideProps(overrides, "Frame 91")}
+                >
+                  <Text
+                    fontFamily="ffProExtraLight"
+                    fontSize="33px"
+                    fontWeight="600"
+                    lineHeight="39.9375px"
+                    textAlign="left"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="unset"
+                    gap="unset"
+                    alignItems="unset"
+                    shrink="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children="+"
+                    {...getOverrideProps(overrides, "+")}
+                  ></Text>
+                </Flex>
+                <Flex
+                  gap="5px"
+                  direction="row"
                   width="unset"
-                  height="16px"
-                  gap="unset"
-                  alignItems="unset"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="center"
+                  shrink="0"
+                  alignSelf="stretch"
                   position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="DEX Name"
-                ></Text>
+                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                  borderRadius="25px"
+                  padding="11px 13px 11px 13px"
+                  backgroundColor="rgba(255,226,0,0.35)"
+                  {...getOverrideProps(overrides, "Dexname2")}
+                >
+                  <Image
+                    src={secondImgToken || logo}
+                    width="28px"
+                    height="28px"
+                    display="block"
+                    gap="unset"
+                    alignItems="unset"
+                    justifyContent="unset"
+                    shrink="0"
+                    position="relative"
+                    borderRadius="35px"
+                    padding="0px 0px 0px 0px"
+                    objectFit="cover"
+                    {...getOverrideProps(overrides, "ghrgclzzd 740892950")}
+                  ></Image>
+                  <Text
+                    fontFamily="ffProExtraLight"
+                    fontSize="17px"
+                    fontWeight="600"
+                    lineHeight="20.573863983154297px"
+                    textAlign="left"
+                    display="block"
+                    direction="column"
+                    justifyContent="unset"
+                    width="unset"
+                    height="16px"
+                    gap="unset"
+                    alignItems="unset"
+                    grow="1"
+                    shrink="1"
+                    basis="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    whiteSpace="pre-wrap"
+                    children={secondToken || "select list"}
+                  ></Text>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
-        </Flex>
+        </motion.div>
         <Flex
           gap="27px"
           direction="column"
@@ -380,7 +409,8 @@ export default function MyPageCompo768px(props) {
         >
           {myList?.map((item, idx) => (
             <MyPageList768px
-              key={`MyPageList1024px-2${idx}`}
+              key={`MyPageList768px-2${idx}`}
+              pid={myList[idx]?.lpPidNumber}
               item={item}
               idx={idx}
               setLpToken={setLpToken}
@@ -392,6 +422,7 @@ export default function MyPageCompo768px(props) {
               lptokenvalue={lpTokenValue}
               lptoken={lpToken}
               mypagelplistup={mypageLpListUp}
+              lpBalanceValue={lpBalanceValue}
             />
           ))}
         </Flex>
