@@ -43,6 +43,7 @@ export default function Foot1024px(props) {
             height: "unset",
             backgroundColor: "rgba(255,255,255,0.8)",
             boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
+            borderRadius: "27px",
             backgroundImage:
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
           }}

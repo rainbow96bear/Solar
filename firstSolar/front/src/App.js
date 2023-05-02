@@ -36,6 +36,7 @@ import MypageContainer from "./components/mypage/Container";
 import NavigatorContainer from "./components/navigateHome/Container";
 import EmptySearchModal from "./ui-components/EmptySearchModal";
 import { DepositCompletedModal } from "./ui-components";
+import { DepositFaildModal } from "./ui-components";
 import SearchNavigatorContainer from "./components/navigateSearch/Container";
 
 const chains = [arbitrum, mainnet, polygon];
@@ -55,12 +56,12 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
-  const emptySearch = useSelector((state) => state.emptySearch);
+  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
+  const emptySearch = useSelector(state => state.emptySearch);
 
-  const completeModal = useSelector((state) => state.completeModal);
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const accountAddress = useSelector((state) => state.account.account.account);
+  const completeModal = useSelector(state => state.completeModal);
+  const connect = useSelector(state => state.connect.connect.connect);
+  const accountAddress = useSelector(state => state.account.account.account);
   const { address } = useAccount();
   const dispatch = useDispatch();
 

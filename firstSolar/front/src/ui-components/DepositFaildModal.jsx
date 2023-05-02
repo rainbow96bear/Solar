@@ -5,6 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
+
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Text, View, Image } from "@aws-amplify/ui-react";
@@ -15,7 +16,7 @@ import { motion } from "framer-motion";
 import logo1 from "./images/1.png";
 import logo2 from "./images/5.png";
 
-export default function DepositCompletedModal(props) {
+export default function DepositFaildModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ export default function DepositCompletedModal(props) {
       borderRadius="55px"
       padding="0px 132px 0px 132px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "DepositCompletedModal")}
+      {...getOverrideProps(overrides, "DepositFaildModal")}
       {...rest}
     >
       <Flex
@@ -100,7 +101,7 @@ export default function DepositCompletedModal(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Deposit Completed"
+          children="Deposit Faild"
           {...getOverrideProps(overrides, "Deposit Completed")}
         ></Text>
         <Text

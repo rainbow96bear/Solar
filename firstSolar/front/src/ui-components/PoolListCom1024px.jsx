@@ -654,7 +654,7 @@ export default function PoolListCom1024px(props) {
             >
               {sortAPY == "up" ? (
                 currentPagePoolList
-                  .sort(aesAPY)
+                  ?.sort(aesAPY)
                   .map((item, idx) => (
                     <Poolitem1024
                       gap="17px"
@@ -675,7 +675,7 @@ export default function PoolListCom1024px(props) {
                   ))
               ) : sortAPY == "down" ? (
                 currentPagePoolList
-                  .sort(descAPY)
+                  ?.sort(descAPY)
                   .map((item, idx) => (
                     <Poolitem1024
                       gap="17px"
@@ -696,7 +696,7 @@ export default function PoolListCom1024px(props) {
                   ))
               ) : sortTVL == "up" ? (
                 currentPagePoolList
-                  .sort(aesTVL)
+                  ?.sort(aesTVL)
                   .map((item, idx) => (
                     <Poolitem1024
                       gap="17px"
@@ -717,7 +717,7 @@ export default function PoolListCom1024px(props) {
                   ))
               ) : sortTVL == "down" ? (
                 currentPagePoolList
-                  .sort(descTVL)
+                  ?.sort(descTVL)
                   .map((item, idx) => (
                     <Poolitem1024
                       gap="17px"
