@@ -19,7 +19,6 @@ export default function Footer(props) {
 
   return (
     <>
-      {/* {isNotMobile && ( */}
       <Flex
         display={{ base: "none", small: "none", medium: "flex" }}
         marginTop="100px"
@@ -103,7 +102,6 @@ export default function Footer(props) {
           ></Text>
         </Flex>
       </Flex>
-      {/* )} */}
     </>
   );
 }

@@ -20,7 +20,7 @@ export default function DepositFaildModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
-  const completeModal = useSelector(state => state.completeModal);
+  const completeModal = useSelector((state) => state.completeModal);
 
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 0.94 });

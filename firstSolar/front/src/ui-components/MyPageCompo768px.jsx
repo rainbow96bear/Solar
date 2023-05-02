@@ -42,7 +42,6 @@ export default function MyPageCompo768px(props) {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
       const myLists = await mypageList(params);
-      console.log(myLists);
       setMyList(myLists);
       setTimeout(() => {
         dispatch(isLoadingThunk({ isLoading: false }));

@@ -89,11 +89,10 @@ export default function PoolListCom1024px(props) {
             searchData,
             pageIndex
           );
-          console.log("poolListData search : ", poolListData);
-          console.log("resultTotalPages : ", resultTotalPages);
           setCurrentPagePoolList(poolListData);
           setTotalPages(resultTotalPages);
         } else if (filter != "null") {
+          // 필터 있을 때 실행할 코드
         }
         setTimeout(() => {
           dispatch(isLoadingThunk({ isLoading: false }));
@@ -105,7 +104,6 @@ export default function PoolListCom1024px(props) {
           const { poolListData, resultTotalPages } = await getMainPoolList(
             pageIndex
           );
-          console.log("poolListData : ", poolListData);
           setCurrentPagePoolList(poolListData);
           setTotalPages(resultTotalPages);
         } else if (filter != "null") {
@@ -540,7 +538,6 @@ export default function PoolListCom1024px(props) {
                     ></Text>
                     <svg
                       display="flex"
-                      justifyContent="center"
                       direction="column"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 320 512"
@@ -554,8 +551,11 @@ export default function PoolListCom1024px(props) {
                     grow="1"
                     shrink="1"
                     basis="0"
-                    justifyContent="center"
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                     onClick={() => {
                       setSortTVL(
                         sortTVL == "down"
@@ -588,7 +588,6 @@ export default function PoolListCom1024px(props) {
                     ></Text>
                     <svg
                       display="flex"
-                      justifyContent="center"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 320 512"
                       width="15px"
@@ -745,7 +744,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

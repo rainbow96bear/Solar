@@ -42,8 +42,6 @@ export default function MyPageCompo1024px(props) {
   const mypageLpListUp = async () => {
     try {
       const myLists = await mypageList(params);
-      console.log("mypageLpListUp 불러와서 실행하였다.");
-      console.log("myLists : ", myLists);
       setMyList(myLists);
     } catch (error) {
       console.error(error);

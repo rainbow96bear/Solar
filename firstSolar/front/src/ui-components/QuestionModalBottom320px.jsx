@@ -123,8 +123,7 @@ export default function QuestionModal(props) {
           ></Text>
         </Flex>
         {props?.firstselecttoken == "DFS"
-          ? // DFS는 모든 토큰으로 스왑가능
-            tokenList
+          ? tokenList
               .filter((token) => token !== "DFS")
               .map((item) => (
                 <Flex
@@ -339,7 +338,6 @@ const ModalCover = styled.div`
   left: 0%;
   top: 0%;
   right: 0%;
-  // bottom: 0%;
   justify-content: center;
   align-items: center;
   z-index: 88;

@@ -19,7 +19,7 @@ export default function DepositCompletedModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
-  const completeModal = useSelector(state => state.completeModal);
+  const completeModal = useSelector((state) => state.completeModal);
 
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 0.94 });
@@ -37,7 +37,7 @@ export default function DepositCompletedModal(props) {
         setTimer(timer - 1);
       }, 1000);
     } else {
-      dispatch(setCompleteModal(false));
+      props?.setDepositSuccessModalOpen(false);
     }
 
     return () => {
@@ -284,7 +284,7 @@ export default function DepositCompletedModal(props) {
         variation="primary"
         children="OK"
         onClick={() => {
-          dispatch(setCompleteModal(false));
+          props?.setDepositSuccessModalOpen(false);
           clearInterval(intervalId);
         }}
         {...getOverrideProps(overrides, "Button")}

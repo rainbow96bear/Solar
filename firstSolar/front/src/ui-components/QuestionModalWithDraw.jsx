@@ -19,6 +19,8 @@ import { useAccount } from "wagmi";
 import { isLoadingThunk } from "../modules/isLoading";
 import { withDraw } from "../api";
 import YesNoButton768px from "./YesNoButton768px";
+import DepositCompletedModal from "./DepositCompletedModal";
+import DepositFaildModal from "./DepositFaildModal";
 export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
@@ -50,7 +52,7 @@ export default function QuestionModalWithDraw(props) {
     (async () => {
       try {
         const result = await getLPBalance(
-          props?.pid, // 이거 아닌듯?
+          props?.pid,
           account ? account : account2
         );
 
@@ -545,7 +547,9 @@ export default function QuestionModalWithDraw(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={`Balance :${props.lpBalanceValue}`}
+                    children={`Balance :${
+                      parseInt((lpBalance / 10 ** 18) * 10000) / 10000
+                    }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>
                 </Flex>
@@ -641,7 +645,6 @@ export default function QuestionModalWithDraw(props) {
               overflow="hidden"
               onClick={() => {
                 setQuestionMark(1);
-                // removeLiquidityFunc();
               }}
               {...getOverrideProps(overrides, "Frame 103")}
             >
@@ -684,21 +687,16 @@ export default function QuestionModalWithDraw(props) {
       )}
       {withDrawSuccessModalOpen && (
         <LoadingModal>
-          {/* <SwapSuccessModal
-              setSwapSuccessModalOpen={setSwapSuccessModalOpen}
-              firstSelectToken={firstSelectToken}
-              secondSelectToken={secondSelectToken}
-            /> */}
+          <DepositCompletedModal
+            setDepositSuccessModalOpen={setWithDrawSuccessModalOpen}
+          ></DepositCompletedModal>
         </LoadingModal>
       )}
       {withDrawFailModalOpen && (
         <LoadingModal>
-          {/* <SwapFailModal
-              setSwapFailModalOpen={setSwapFailModalOpen}
-              firstSelectToken={firstSelectToken}
-              secondSelectToken={secondSelectToken}
-            /> */}
-          {/* 모달  */}
+          <DepositFaildModal
+            setDepositFailModalOpen={setWithDrawFailModalOpen}
+          ></DepositFaildModal>
         </LoadingModal>
       )}
     </ModalCover>
@@ -714,7 +712,6 @@ const ModalCover = styled.div`
   left: 0%;
   top: 0%;
   right: 0%;
-  // bottom: 0%;
   justify-content: center;
   align-items: center;
   z-index: 88;
@@ -742,8 +739,8 @@ const RemoveModal = styled.div`
   position: fixed;
 `;
 const LoadingModal = styled.div`
-  width: 100vmax;
-  height: 100vmax;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;

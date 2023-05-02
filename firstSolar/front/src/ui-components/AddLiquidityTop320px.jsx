@@ -108,20 +108,6 @@ export default function AddLiquidityTop320px(props) {
             padding="0px 0px 0px 0px"
             {...getOverrideProps(overrides, "Frame 122")}
           >
-            {/* <Image
-              width="30px"
-              height="30px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="35px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "ghrgclzzd 1040162903")}
-            ></Image> */}
             <Text
               fontFamily="ffProMedium"
               fontSize="16px"
@@ -180,20 +166,6 @@ export default function AddLiquidityTop320px(props) {
             padding="0px 0px 0px 0px"
             {...getOverrideProps(overrides, "Frame 123")}
           >
-            {/* <Image
-              width="30px"
-              height="30px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="35px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "ghrgclzzd 1040162907")}
-            ></Image> */}
             <Text
               fontFamily="ffProMedium"
               fontSize="16px"
