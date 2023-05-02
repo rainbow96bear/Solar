@@ -47,3 +47,5 @@ export { default as Foot1024px } from "./Foot1024px";
 export { default as Foot320px } from "./Foot320px";
 export { default as Foot768px } from "./Foot768px";
 export { default as DepositCompletedModal } from "./DepositCompletedModal";
+export { default as AddLiquiditySuccessModal } from "./AddLiquiditySuccessModal";
+export { default as AddLiquidityFailModal } from "./AddLiquidityFailModal";

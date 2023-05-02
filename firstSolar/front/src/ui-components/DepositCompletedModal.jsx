@@ -14,7 +14,7 @@ export default function DepositCompletedModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
-  const completeModal = useSelector(state => state.completeModal);
+  const completeModal = useSelector((state) => state.completeModal);
 
   const [timer, setTimer] = React.useState(6); // 초기 값: 5초
   let intervalId;
@@ -31,6 +31,11 @@ export default function DepositCompletedModal(props) {
       clearInterval(intervalId);
     };
   }, [timer]);
+
+  useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
 
   return (
     <Flex

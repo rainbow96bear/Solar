@@ -14,7 +14,7 @@ import {
   Netlist1024px,
   Dexlist1024px,
 } from "../components/netdexlist/Netdexlist";
-import { getMainPoolList, netList, dexList } from "../api/index.js";
+import { getMainPoolList, netList, dexList, getSearch } from "../api/index.js";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
@@ -57,6 +57,9 @@ export default function PoolListCom1024px(props) {
     Number(queryParams.get("page")) || 1
   );
   const [filter, setFilter] = React.useState(String(queryParams.get("filter")));
+  const [searchData, setSearchData] = React.useState(
+    String(queryParams.get("searchData"))
+  );
 
   const [totalPages, setTotalPages] = React.useState(1);
   const [mainNetList, setMainNetList] = React.useState([]);
@@ -79,28 +82,49 @@ export default function PoolListCom1024px(props) {
   const getPoolList = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
-      if (filter == "null") {
-        const { poolListData, resultTotalPages } = await getMainPoolList(
-          pageIndex
-        );
-        setCurrentPagePoolList(poolListData);
-        setTotalPages(resultTotalPages);
-      } else if (filter != "null") {
-        if (networkArray.includes(filter)) {
-          const data = await netList(filter, pageIndex);
-          setCurrentPagePoolList(data.poolListData);
-          setTotalPages(Math.ceil(data.poolListDataLength / 10));
-        } else if (dexArray.includes(filter)) {
-          const data = await dexList(filter, pageIndex);
-
-          setCurrentPagePoolList(data.poolListData);
-          setTotalPages(Math.ceil(data.poolListDataLength / 10));
+      if (searchData != "null") {
+        // 검색이다.
+        if (filter == "null") {
+          const { poolListData, resultTotalPages } = await getSearch(
+            searchData,
+            pageIndex
+          );
+          console.log("poolListData search : ", poolListData);
+          console.log("resultTotalPages : ", resultTotalPages);
+          setCurrentPagePoolList(poolListData);
+          setTotalPages(resultTotalPages);
+        } else if (filter != "null") {
         }
-      }
+        setTimeout(() => {
+          dispatch(isLoadingThunk({ isLoading: false }));
+        }, 5000);
+      } else {
+        // 검색이 아니다. 메인 페이지
 
-      setTimeout(() => {
-        dispatch(isLoadingThunk({ isLoading: false }));
-      }, 5000);
+        if (filter == "null") {
+          const { poolListData, resultTotalPages } = await getMainPoolList(
+            pageIndex
+          );
+          console.log("poolListData : ", poolListData);
+          setCurrentPagePoolList(poolListData);
+          setTotalPages(resultTotalPages);
+        } else if (filter != "null") {
+          if (networkArray.includes(filter)) {
+            const data = await netList(filter, pageIndex);
+            setCurrentPagePoolList(data.poolListData);
+            setTotalPages(Math.ceil(data.poolListDataLength / 10));
+          } else if (dexArray.includes(filter)) {
+            const data = await dexList(filter, pageIndex);
+
+            setCurrentPagePoolList(data.poolListData);
+            setTotalPages(Math.ceil(data.poolListDataLength / 10));
+          }
+        }
+
+        setTimeout(() => {
+          dispatch(isLoadingThunk({ isLoading: false }));
+        }, 5000);
+      }
     } catch (error) {
       dispatch(isLoadingThunk({ isLoading: false }));
       console.error(error);

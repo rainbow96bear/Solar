@@ -22,9 +22,15 @@ export default function QuestionModal(props) {
     "Stablecoin pegged to USD 1:1 ratio by Tether.",
     "Binance Chain Native Token",
   ];
+
+  React.useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
+
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
       }}
     >
@@ -116,7 +122,7 @@ export default function QuestionModal(props) {
           ></Text>
         </Flex>
 
-        {tokenList.map(item => (
+        {tokenList.map((item) => (
           <Flex
             key={`tokenList-${item}`}
             gap="16px"

@@ -9,7 +9,7 @@ import { connectThunk } from "../../modules/connect";
 import { useDispatch } from "react-redux";
 import "../../css/Font.css";
 
-const Poolitem768px = props => {
+const Poolitem768px = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -677,7 +677,10 @@ const Poolitem768px = props => {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={`$${props.item?.tvl}`}
+                    children={`$${
+                      parseInt((props?.item?.tvl / 10 ** 18) * 10000) / 10000 ||
+                      0
+                    }`}
                     {...getOverrideProps(overrides, "$999,99939574043")}
                   ></Text>
                 </Flex>

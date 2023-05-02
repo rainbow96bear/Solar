@@ -420,7 +420,9 @@ const Poolitem1024 = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`$${props?.item?.tvl}`}
+                  children={`$${
+                    parseInt((props?.item?.tvl / 10 ** 18) * 10000) / 10000 || 0
+                  }`}
                   {...getOverrideProps(overrides, "$999,99939913056")}
                 ></Text>
               </Flex>
