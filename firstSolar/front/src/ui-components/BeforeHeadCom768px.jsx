@@ -92,7 +92,6 @@ export default function BeforeHeadCom768px(props) {
                   alignItems="flex-start"
                   shrink="0"
                   position="relative"
-                  // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   padding="10px 10px 10px 10px"
                   {...getOverrideProps(overrides, "Frame 4639443730")}
                 >
@@ -128,7 +127,6 @@ export default function BeforeHeadCom768px(props) {
                 alignItems="flex-start"
                 shrink="0"
                 position="relative"
-                // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 padding="10px 10px 10px 10px"
                 {...getOverrideProps(overrides, "Frame 45")}
               ></Flex>

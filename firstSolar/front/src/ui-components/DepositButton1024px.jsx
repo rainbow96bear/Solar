@@ -162,6 +162,9 @@ export default function DepositButton1024px(props) {
           lptokenvalue={props.lptokenvalue}
           lptoken={props.lptoken}
           setlptokenvalue={props?.setlptokenvalue}
+          mypageMethod={props?.mypageMethod}
+          pid={props?.pid}
+          lpTokenBalance={props?.lpTokenBalance}
         ></QuestionModalDeposit>
       ) : (
         <></>

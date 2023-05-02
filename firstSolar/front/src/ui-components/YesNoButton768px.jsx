@@ -1,17 +1,9 @@
-/***************************************************************************
- * The contents of this file were generated with Amplify Studio.           *
- * Please refrain from making any modifications to this file.              *
- * Any changes to this file will be overwritten when running amplify pull. *
- **************************************************************************/
-
-/* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "../css/Font.css";
-// import logo from "./images/logo_new.pnglpSymbol";
 import { useDispatch, useSelector } from "react-redux";
 import { useWeb3 } from "../modules/useWeb3";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
@@ -25,7 +17,7 @@ export default function YesNoButton768px(props) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account.account.account);
   const { web3, login } = useWeb3();
   const { loginK } = useWeb3K();
   const { account } = useAccount();
@@ -33,7 +25,6 @@ export default function YesNoButton768px(props) {
   const removeLiquidityFunc = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
-      console.log("    props?.lpSymbol", props);
       const result2 = await removeLiquidity(
         account2 ? account2 : account,
         props?.withDrawAmountValue,
@@ -41,7 +32,6 @@ export default function YesNoButton768px(props) {
       );
 
       const removeTx = await web3.eth.sendTransaction(result2);
-      console.log(removeTx);
 
       dispatch(isLoadingThunk({ isLoading: false }));
       props.setquestionmark(0);

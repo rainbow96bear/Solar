@@ -16,17 +16,25 @@ import { isLoadingThunk } from "../modules/isLoading";
 export default function SwapTop320px(props) {
   const { overrides, ...rest } = props;
 
-  const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
-  const date = new Date(lastTimeStamp * 1000);
-  const dateString = date.toLocaleDateString();
-
-  const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
-  const reducedNumber = tokenNumBer?.toString().substring(0, 7);
-
   const dispatch = useDispatch();
+
+  const [lastTimeStamp, setLastTimeStamp] = React.useState();
+
+  const [date, setDate] = React.useState();
+  const [dateString, setDateString] = React.useState();
+
+  const [tokenNumBer, setTokenNumber] = React.useState();
+  const [reducedNumber, setReducedNumber] = React.useState();
 
   React.useEffect(() => {
     dispatch(isLoadingThunk({ isLoading: true }));
+
+    const tempDate = new Date(lastTimeStamp * 1000);
+    setLastTimeStamp(props?.oracleiddata[0]?.lastHarvest);
+    setDate(tempDate);
+    setDateString(tempDate.toLocaleDateString());
+    setTokenNumber(props?.oracleiddata[0]?.firstTokenBalance);
+    setReducedNumber(tokenNumBer?.toString().substring(0, 7));
 
     setTimeout(() => {
       dispatch(isLoadingThunk({ isLoading: false }));
@@ -111,20 +119,6 @@ export default function SwapTop320px(props) {
             padding="0px 0px 0px 0px"
             {...getOverrideProps(overrides, "Frame 122")}
           >
-            {/* <Image
-              width="30px"
-              height="30px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="35px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "ghrgclzzd 1040162903")}
-            ></Image> */}
             <Text
               fontFamily="ffProMedium"
               fontSize="16px"
@@ -183,20 +177,6 @@ export default function SwapTop320px(props) {
             padding="0px 0px 0px 0px"
             {...getOverrideProps(overrides, "Frame 123")}
           >
-            {/* <Image
-              width="30px"
-              height="30px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              shrink="0"
-              position="relative"
-              borderRadius="35px"
-              padding="0px 0px 0px 0px"
-              objectFit="cover"
-              {...getOverrideProps(overrides, "ghrgclzzd 1040162907")}
-            ></Image> */}
             <Text
               fontFamily="ffProMedium"
               fontSize="16px"

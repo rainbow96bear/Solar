@@ -110,7 +110,7 @@ export default function AddLiquidityBottom768px(props) {
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       dispatch(isLoadingThunk({ isLoading: false }));
       setAddLiquidityFailModalOpen(true);
     }
@@ -347,20 +347,6 @@ export default function AddLiquidityBottom768px(props) {
                 }
                 {...getOverrideProps(overrides, "DEX Name40052881")}
               ></Text>
-              {/* <Image
-                width="15px"
-                height="15px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="35px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                {...getOverrideProps(overrides, "ghrgclzzd 840052882")}
-              ></Image> */}
             </Flex>
             <Flex
               gap="10px"
@@ -458,161 +444,8 @@ export default function AddLiquidityBottom768px(props) {
                 }
                 {...getOverrideProps(overrides, "DEX Name40052902")}
               ></Text>
-              {/* <Image
-                width="15px"
-                height="15px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="35px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                {...getOverrideProps(overrides, "ghrgclzzd 840052903")}
-              ></Image> */}
             </Flex>
           </Flex>
-          {/* <Flex
-            gap="50px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="flex-start"
-            alignItems="center"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            borderRadius="10px"
-            padding="15px 15px 15px 15px"
-            backgroundColor="rgba(234,0,50,0.45)"
-            {...getOverrideProps(overrides, "Frame 95")}
-          >
-            <Flex
-              gap="13px"
-              direction="column"
-              width="unset"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 93")}
-            >
-              <Text
-                fontFamily="ffProExtraLight"
-                fontSize="15px"
-                fontWeight="600"
-                color="rgba(239,239,239,1)"
-                lineHeight="18.15340805053711px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children="V3 LP - 0.25% fee tier"
-                {...getOverrideProps(overrides, "V3 LP - 0.25% fee tier")}
-              ></Text>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="flex-start"
-                alignItems="flex-start"
-                shrink="0"
-                position="relative"
-                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                borderRadius="35px"
-                padding="9px 9px 9px 9px"
-                backgroundColor="rgba(255,255,253,1)"
-                {...getOverrideProps(overrides, "Frame 92")}
-              >
-                <Text
-                  fontFamily="ffProExtraLight"
-                  fontSize="12px"
-                  fontWeight="600"
-                  lineHeight="14.522727012634277px"
-                  textAlign="left"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="60px"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="100% Pick"
-                  {...getOverrideProps(overrides, "100% Pick")}
-                ></Text>
-              </Flex>
-            </Flex>
-            <Flex
-              gap="7px"
-              direction="row"
-              width="unset"
-              height="15px"
-              justifyContent="flex-end"
-              alignItems="center"
-              grow="1"
-              shrink="1"
-              basis="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 94")}
-            >
-              <Text
-                fontFamily="ffProExtraLight"
-                fontSize="12px"
-                fontWeight="600"
-                color="rgba(239,239,239,1)"
-                lineHeight="14.522727012634277px"
-                textAlign="right"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="15px"
-                gap="unset"
-                alignItems="unset"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children="More"
-                {...getOverrideProps(overrides, "More")}
-              ></Text>
-              <Image
-                width="15px"
-                height="15px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="35px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                {...getOverrideProps(overrides, "ghrgclzzd 840052855")}
-              ></Image>
-            </Flex>
-          </Flex> */}
         </Flex>
         <Flex
           gap="20px"
@@ -734,49 +567,6 @@ export default function AddLiquidityBottom768px(props) {
                   }
                   {...getOverrideProps(overrides, "DEX Name40052906")}
                 ></Text>
-                {/* <Flex
-                  gap="5px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  {...getOverrideProps(overrides, "Frame 9940052912")}
-                >
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 840052907")}
-                  ></Image>
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 940052908")}
-                  ></Image>
-                </Flex> */}
               </Flex>
               <Flex
                 gap="10px"
@@ -924,49 +714,6 @@ export default function AddLiquidityBottom768px(props) {
                   }
                   {...getOverrideProps(overrides, "DEX Name40052982")}
                 ></Text>
-                {/* <Flex
-                  gap="5px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  {...getOverrideProps(overrides, "Frame 9940052983")}
-                >
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 840052984")}
-                  ></Image>
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 940052985")}
-                  ></Image>
-                </Flex> */}
               </Flex>
               <Flex
                 gap="10px"
@@ -1056,12 +803,6 @@ export default function AddLiquidityBottom768px(props) {
             alignSelf="stretch"
             position="relative"
             padding="13px 73px 13px 73px"
-            // backgroundColor={
-            //   addLiquidityPossibility
-            //     ? "rgba(234,0,50,0.45)"
-            //     : "rgba(230,230,230,1)"
-            // }
-
             onClick={async () => {
               if (!addLiquidityPossibility) return;
               await addLiquidtiyFunc();

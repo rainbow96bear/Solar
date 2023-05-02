@@ -726,31 +726,6 @@ export default function Swap768px(props) {
                   children={firstAmountPrice ? firstAmountPrice : 0}
                   {...getOverrideProps(overrides, "12312312312312312339752827")}
                 ></Text>
-                {/* <Text
-                  fontFamily="ffProExtraLight"
-                  fontSize="11px"
-                  fontWeight="400"
-                  color="rgba(44,44,44,1)"
-                  lineHeight="16.5px"
-                  textAlign="right"
-                  display="block"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="17px"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="~123123123123123123"
-                  {...getOverrideProps(
-                    overrides,
-                    "~12312312312312312339752828"
-                  )}
-                ></Text> */}
               </Flex>
               <Flex
                 gap="10px"

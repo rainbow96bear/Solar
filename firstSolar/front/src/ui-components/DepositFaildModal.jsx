@@ -20,7 +20,7 @@ export default function DepositFaildModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
-  const completeModal = useSelector(state => state.completeModal);
+  const completeModal = useSelector((state) => state.completeModal);
 
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 0.94 });
@@ -38,7 +38,7 @@ export default function DepositFaildModal(props) {
         setTimer(timer - 1);
       }, 1000);
     } else {
-      dispatch(setCompleteModal(false));
+      props?.setDepositFailModalOpen(false);
     }
 
     return () => {
@@ -285,7 +285,7 @@ export default function DepositFaildModal(props) {
         variation="primary"
         children="OK"
         onClick={() => {
-          dispatch(setCompleteModal(false));
+          props?.setDepositFailModalOpen(false);
           clearInterval(intervalId);
         }}
         {...getOverrideProps(overrides, "Button")}
