@@ -23,23 +23,36 @@ export default function SwapTop768px(props) {
   const [date, setDate] = React.useState();
   const [dateString, setDateString] = React.useState();
 
-  const [tokenNumBer, setTokenNumber] = React.useState();
-  const [reducedNumber, setReducedNumber] = React.useState();
+  const [firstLiquidity, setFirstLiquidity] = React.useState();
+  const [secondLiquidity, setSecondLiquidity] = React.useState();
 
   useEffect(() => {
-    dispatch(isLoadingThunk({ isLoading: true }));
-
-    const tempDate = new Date(lastTimeStamp * 1000);
-    setLastTimeStamp(props?.oracleiddata[0]?.lastHarvest);
-    setDate(tempDate);
-    setDateString(tempDate.toLocaleDateString());
-    setTokenNumber(props?.oracleiddata[0]?.firstTokenBalance);
-    setReducedNumber(tokenNumBer?.toString().substring(0, 7));
-
-    setTimeout(() => {
-      dispatch(isLoadingThunk({ isLoading: false }));
-    }, 3000);
-  }, []);
+    (async () => {
+      dispatch(isLoadingThunk({ isLoading: true }));
+      const tempDate = new Date(lastTimeStamp * 1000);
+      setLastTimeStamp(
+        props?.oracleiddata[0]?.lastHarvest
+          ? props?.oracleiddata[0]?.lastHarvest
+          : props?.oracleiddata[0]?.updatedAt.split("T")[0]
+      );
+      setDate(tempDate);
+      setDateString(tempDate?.toLocaleDateString());
+      console.log(props.oracleiddata[0]);
+      setFirstLiquidity(
+        (parseInt(props?.oracleiddata[0]?.firstTokenBalance / 10 ** 18) *
+          100000) /
+          100000
+      );
+      setSecondLiquidity(
+        (parseInt(props?.oracleiddata[0]?.secondTokenBalance / 10 ** 18) *
+          100000) /
+          100000
+      );
+      setTimeout(() => {
+        dispatch(isLoadingThunk({ isLoading: false }));
+      }, 3000);
+    })();
+  }, [props.oracleiddata[0]]);
 
   return (
     <>
@@ -481,7 +494,7 @@ export default function SwapTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={reducedNumber ? `${reducedNumber} K` : "0 K"}
+              children={firstLiquidity ? `${firstLiquidity} K` : "0 K"}
               {...getOverrideProps(overrides, "99,99M40132809")}
             ></Text>
           </Flex>
@@ -573,7 +586,7 @@ export default function SwapTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={reducedNumber ? `${reducedNumber} K` : "0 K"}
+              children={secondLiquidity ? `${secondLiquidity} K` : "0 K"}
               {...getOverrideProps(overrides, "99,99M40132817")}
             ></Text>
           </Flex>
@@ -829,7 +842,11 @@ export default function SwapTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Last Harvest"
+                children={`${
+                  props?.oracleiddata[0]?.lastHarvest
+                    ? "Last Harvest"
+                    : "UpdatedAt"
+                }`}
                 {...getOverrideProps(overrides, "Fees 24H")}
               ></Text>
             </Flex>
@@ -868,7 +885,7 @@ export default function SwapTop768px(props) {
                 children={
                   props?.oracleiddata[0]?.lastHarvest
                     ? dateString
-                    : "불러오는 중"
+                    : lastTimeStamp
                 }
                 {...getOverrideProps(overrides, "$99.99M40132843")}
               ></Text>

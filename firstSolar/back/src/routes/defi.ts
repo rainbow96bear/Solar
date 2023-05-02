@@ -166,7 +166,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -201,57 +201,59 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
       );
       let filterLpList: Array<detailLp | Pool>;
 
+      const returnLpList = await Promise.all(
+        activeLpList.map(async (lp: any) => {
+          const lpId: string = lp.id;
+          const oracleId: string = lp.oracleId;
+          const lpChain: number = mainNet[lp.chain];
+          const tokens: Array<string> = lp.assets;
+
+          const [tvlNow, tvlYesterday] = await Promise.all([
+            getTvlData(lpId, oracleId, lpChain),
+            getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+          ]);
+
+          const dailyTvlRate: number =
+            ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+
+          return {
+            id: lpId,
+            name: lp.name,
+            platformId: lp.platformId,
+            network: lp.network,
+            oracleId: oracleId,
+            status: lp.status,
+            symbol: lp.symbol,
+            tvl: tvlNow,
+            apy:
+              (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                .data[lpId] ?? 0,
+            dailyTvlRate,
+            mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+            platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+            tokens,
+            tokenAddress: lp.tokenAddress,
+          };
+        })
+      );
+
       if (network) {
         getPool = await db.Pool.findAll({ where: { network } });
-        filterLpList = [...getPool, ...activeLpList];
-      } else filterLpList = [...activeLpList];
-
-      const paginationFilterLpList = await Promise.all(
-        filterLpList
-          .slice((pageIndex - 1) * 10, pageIndex * 10)
-          .map(async (lp: any) => {
-            const lpId: string = lp.id;
-            const oracleId: string = lp.oracleId;
-            const lpChain: number = mainNet[lp.chain];
-            const tokens: Array<string> = lp.assets;
-
-            const [tvlNow, tvlYesterday] = await Promise.all([
-              getTvlData(lpId, oracleId, lpChain),
-              getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
-            ]);
-
-            const dailyTvlRate: number =
-              ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
-
-            return {
-              id: lpId,
-              name: lp.name,
-              platformId: lp.platformId,
-              network: lp.network,
-              oracleId: oracleId,
-              status: lp.status,
-              symbol: lp.symbol,
-              tvl: tvlNow,
-              apy:
-                (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
-                  .data[lpId] ?? 0,
-              dailyTvlRate,
-              mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
-              platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
-              tokens,
-              tokenAddress: lp.tokenAddress,
-            };
-          })
+        filterLpList = [...getPool, ...returnLpList];
+      } else filterLpList = [...returnLpList];
+      const renewalLpList = filterLpList.slice(
+        (pageIndex - 1) * 10,
+        pageIndex * 10
       );
       const data: any = {
-        poolListData: paginationFilterLpList,
+        poolListData: renewalLpList,
         poolListDataLength: filterLpList.length,
       };
       res.send(data);
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);
