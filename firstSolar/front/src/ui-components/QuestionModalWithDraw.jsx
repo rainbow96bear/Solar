@@ -30,6 +30,11 @@ export default function QuestionModalWithDraw(props) {
   const account2 = useSelector((state) => state.account.account.account);
   const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
 
+  const [withDrawSuccessModalOpen, setWithDrawSuccessModalOpen] =
+    React.useState(false);
+  const [withDrawFailModalOpen, setWithDrawFailModalOpen] =
+    React.useState(false);
+
   React.useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
@@ -75,11 +80,18 @@ export default function QuestionModalWithDraw(props) {
       );
       setLpBalance(result);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setWithDrawSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setWithDrawFailModalOpen(true);
     }
   };
+
+  React.useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
 
   return (
     <ModalCover
@@ -627,6 +639,25 @@ export default function QuestionModalWithDraw(props) {
           </Flex>
         </Flex>
       </Flex>
+      {withDrawSuccessModalOpen && (
+        <LoadingModal>
+          {/* <SwapSuccessModal
+              setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            /> */}
+        </LoadingModal>
+      )}
+      {withDrawFailModalOpen && (
+        <LoadingModal>
+          {/* <SwapFailModal
+              setSwapFailModalOpen={setSwapFailModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            /> */}
+          {/* 모달  */}
+        </LoadingModal>
+      )}
     </ModalCover>
   );
 }
@@ -658,4 +689,18 @@ const ModalCover = styled.div`
       background-color: orange !import;
     }
   }
+`;
+
+const LoadingModal = styled.div`
+  width: 100vmax;
+  height: 100vmax;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999999999;
 `;

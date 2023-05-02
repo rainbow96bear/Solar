@@ -23,6 +23,10 @@ import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import { motion } from "framer-motion";
+import AddLiquiditySuccessModal from "./AddLiquiditySuccessModal";
+import AddLiquidityFailModal from "./AddLiquidityFailModal";
+import styled from "styled-components";
+
 export default function AddLiquidityBottom320px(props) {
   const { overrides, oracleiddata, ...rest } = props;
   const dispatch = useDispatch();
@@ -40,6 +44,11 @@ export default function AddLiquidityBottom320px(props) {
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
 
   const [addLiquidityPossibility, setAddLiquidityPossibility] =
+    React.useState(false);
+
+  const [addLiquiditySuccessModalOpen, setAddLiquiditySuccessModalOpen] =
+    React.useState(false);
+  const [addLiquidityFailModalOpen, setAddLiquidityFailModalOpen] =
     React.useState(false);
 
   const addLiquidtiyFunc = async () => {
@@ -76,8 +85,6 @@ export default function AddLiquidityBottom320px(props) {
           await updatePool(props?.oracleiddata[0]?.tokenAddress);
 
           if (addLiquidityTxResult) {
-            setFirstValue(0);
-            setSecondValue(0);
             const firstBalanceTemp = await swapBalance(
               address ? address : address2,
               props?.oracleiddata[0]?.firstToken
@@ -93,14 +100,17 @@ export default function AddLiquidityBottom320px(props) {
                 : "ETH"
             );
             setUserSecondBalance(secondBalanceTemp);
-
+            setFirstValue(0);
+            setSecondValue(0);
             dispatch(isLoadingThunk({ isLoading: false }));
+            setAddLiquiditySuccessModalOpen(true);
           }
         }
       }
     } catch (err) {
       console.error(err);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setAddLiquidityFailModalOpen(true);
     }
   };
 
@@ -813,6 +823,9 @@ export default function AddLiquidityBottom320px(props) {
               variation="default"
               value={firstValue}
               onChange={(e) => {
+                if (+e.target.value > +userFirstBalance) {
+                  e.target.value = userFirstBalance;
+                }
                 setFirstValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40053042")}
@@ -998,6 +1011,9 @@ export default function AddLiquidityBottom320px(props) {
               variation="default"
               value={secondValue}
               onChange={(e) => {
+                if (+e.target.value > +userSecondBalance) {
+                  e.target.value = userSecondBalance;
+                }
                 setSecondValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40053053")}
@@ -1034,8 +1050,9 @@ export default function AddLiquidityBottom320px(props) {
             borderRadius="15px"
             padding="13px 73px 13px 73px"
             {...getOverrideProps(overrides, "Frame 76")}
-            onClick={() => {
-              addLiquidtiyFunc();
+            onClick={async () => {
+              if (!addLiquidityPossibility) return;
+              await addLiquidtiyFunc();
             }}
             style={{
               cursor: addLiquidityPossibility ? "pointer" : "not-allowed",
@@ -1065,6 +1082,36 @@ export default function AddLiquidityBottom320px(props) {
           </Flex>
         </motion.div>
       </Flex>
+      {addLiquiditySuccessModalOpen && (
+        <LoadingModal>
+          <AddLiquiditySuccessModal
+            setAddLiquiditySuccessModalOpen={setAddLiquiditySuccessModalOpen}
+            firstSelectToken={props?.oracleiddata[0]?.firstToken}
+            secondSelectToken={props?.oracleiddata[0]?.secondToken}
+          />
+        </LoadingModal>
+      )}
+      {addLiquidityFailModalOpen && (
+        <LoadingModal>
+          <AddLiquidityFailModal
+            setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
+          />
+        </LoadingModal>
+      )}
     </Flex>
   );
 }
+
+const LoadingModal = styled.div`
+  width: 100vmax;
+  height: 100vmax;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999999999;
+`;

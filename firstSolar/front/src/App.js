@@ -36,6 +36,7 @@ import MypageContainer from "./components/mypage/Container";
 import NavigatorContainer from "./components/navigateHome/Container";
 import EmptySearchModal from "./ui-components/EmptySearchModal";
 import { DepositCompletedModal } from "./ui-components";
+import SearchNavigatorContainer from "./components/navigateSearch/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -101,6 +102,11 @@ function App() {
                 element={<LiquidityContainer />}
               ></Route>
               <Route path="/mypage" element={<MypageContainer />}></Route>
+              <Route path="/search" element={<MainContainer />} />
+              <Route
+                path="/searchRedirect"
+                element={<SearchNavigatorContainer></SearchNavigatorContainer>}
+              />
               <Route
                 path="/redirectHome"
                 element={<NavigatorContainer></NavigatorContainer>}

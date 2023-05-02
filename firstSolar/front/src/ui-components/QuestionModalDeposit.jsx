@@ -27,8 +27,10 @@ export default function QuestionModalDeposit(props) {
   const account2 = useSelector((state) => state.account.account.account);
   const [depositAmountValue, setDepositAmountValue] = React.useState(0);
 
+  const [depositSuccessModalOpen, setDepositSuccessModalOpen] =
+    React.useState(false);
+  const [depositFailModalOpen, setDepositFailModalOpen] = React.useState(false);
   // console.log("item", props.mypagelist);
-  console.log("  props?.lptoken", props?.lptoken);
 
   React.useEffect(() => {
     if (document.cookie) {
@@ -63,11 +65,18 @@ export default function QuestionModalDeposit(props) {
 
       dispatch(isLoadingThunk({ isLoading: false }));
       dispatch(setCompleteModal(true));
+      setDepositSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setDepositFailModalOpen(true);
     }
   };
+
+  React.useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
 
   return (
     <ModalCover
@@ -615,6 +624,25 @@ export default function QuestionModalDeposit(props) {
           </Flex>
         </Flex>
       </Flex>
+      {depositSuccessModalOpen && (
+        <LoadingModal>
+          {/* <SwapSuccessModal
+              setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            /> */}
+        </LoadingModal>
+      )}
+      {depositFailModalOpen && (
+        <LoadingModal>
+          {/* <SwapFailModal
+              setSwapFailModalOpen={setSwapFailModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            /> */}
+          {/* 모달  */}
+        </LoadingModal>
+      )}
     </ModalCover>
   );
 }
@@ -646,4 +674,18 @@ const ModalCover = styled.div`
       background-color: orange !import;
     }
   }
+`;
+
+const LoadingModal = styled.div`
+  width: 100vmax;
+  height: 100vmax;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999999999;
 `;

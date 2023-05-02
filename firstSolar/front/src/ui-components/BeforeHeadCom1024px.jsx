@@ -26,10 +26,10 @@ import { useMediaQuery } from "react-responsive";
 export default function BeforeHeadCom1024px(props) {
   const { overrides, ...rest } = props;
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
-  const login = useSelector(state => state.login.login.login);
+  const login = useSelector((state) => state.login.login.login);
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = React.useState();
   const { address, isConnecting, isDisconnected } = useAccount();
@@ -41,7 +41,7 @@ export default function BeforeHeadCom1024px(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -53,7 +53,7 @@ export default function BeforeHeadCom1024px(props) {
     };
   }, [view]);
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const inputValue = e.target.value;
     const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
     setInputValue(sanitizedValue);
@@ -61,7 +61,9 @@ export default function BeforeHeadCom1024px(props) {
 
   const handleSearch = () => {
     const searchQuery = encodeURIComponent(inputValue); // 검색어를 URL로 인코딩합니다.
-    navigate(`/search/?searchData=${searchQuery}`);
+    navigate("/searchRedirect", { state: { searchData: searchQuery } });
+
+    setInputValue("");
   };
 
   const isDesktop = useMediaQuery({

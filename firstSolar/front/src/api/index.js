@@ -325,3 +325,22 @@ export const getLPBalance = async (pid, account) => {
     console.error(error);
   }
 };
+
+export const getSearch = async (search, pageIndex) => {
+  try {
+    const result = (
+      await request.post("api/defi/search", {
+        search,
+        pageIndex,
+      })
+    ).data;
+    console.log("result : ", result);
+
+    const poolListData = result.poolListData;
+    const resultTotalPages = result.poolListDataLength;
+
+    return { poolListData, resultTotalPages };
+  } catch (error) {
+    console.error(error);
+  }
+};

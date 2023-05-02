@@ -30,6 +30,7 @@ import { isLoadingThunk } from "../modules/isLoading.js";
 import styled from "styled-components";
 import SwapSuccessModal from "./SwapSuccessModal";
 import "../css/Font.css";
+import SwapFailModal from "./SwapFailModal";
 
 export default function Swap320px(props) {
   const { overrides, ...rest } = props;
@@ -38,7 +39,7 @@ export default function Swap320px(props) {
   const { web3K, accountK, chainIdK, loginK } = useWeb3K();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
   const dispatch = useDispatch();
@@ -47,6 +48,8 @@ export default function Swap320px(props) {
   const [questionMark, setQuestionMark] = React.useState(0);
 
   const [swapSuccessModalOpen, setSwapSuccessModalOpen] = React.useState(false);
+  const [swapFailModalOpen, setSwapFailModalOpen] = React.useState(false);
+
   const [convertPrice, setConvertPrice] = React.useState({
     bnb: "",
     eth: "",
@@ -157,14 +160,14 @@ export default function Swap320px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = percentNum => {
+  const setPercentBalance = (percentNum) => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
@@ -175,7 +178,7 @@ export default function Swap320px(props) {
     delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const handleTextareaChange = event => {
+  const handleTextareaChange = (event) => {
     const value = event.target.value;
 
     const filteredValue = value.replace(/[^0-9.\b]/g, "");
@@ -218,7 +221,7 @@ export default function Swap320px(props) {
     }, 1000);
   }
 
-  const delayedFunction2 = num => {
+  const delayedFunction2 = (num) => {
     try {
       if (secondSelectToken == "DFS") {
         setSecondAmountPrice(convertPrice.usdt * num);
@@ -300,6 +303,7 @@ export default function Swap320px(props) {
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setSwapFailModalOpen(true);
     }
   };
 
@@ -702,7 +706,7 @@ export default function Swap320px(props) {
                 labelHidden={false}
                 variation="default"
                 value={textareaValue}
-                onChange={e => {
+                onChange={(e) => {
                   if (+e.target.value > +userFirstBalance) {
                     e.target.value = userFirstBalance;
                   }
@@ -710,7 +714,7 @@ export default function Swap320px(props) {
                   handleTextareaChange(e);
                   delayedFunction1(e.target.value);
                 }}
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432785")}
@@ -1134,7 +1138,7 @@ export default function Swap320px(props) {
                 value={secondAmountPrice ? secondAmountPrice : 0}
                 disabled
                 backgroundColor="transparent"
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432792")}
@@ -1397,6 +1401,15 @@ export default function Swap320px(props) {
           <LoadingModal>
             <SwapSuccessModal
               setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            />
+          </LoadingModal>
+        )}
+        {swapFailModalOpen && (
+          <LoadingModal>
+            <SwapFailModal
+              setSwapFailModalOpen={setSwapFailModalOpen}
               firstSelectToken={firstSelectToken}
               secondSelectToken={secondSelectToken}
             />

@@ -19,6 +19,10 @@ export default function EmptySearchModal(props) {
   const emptySearch = useSelector((state) => state.emptySearch);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
   return (
     <View
       width="30%"

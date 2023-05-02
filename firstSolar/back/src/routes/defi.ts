@@ -118,48 +118,48 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
         await axios.get(`https://api.beefy.finance/vaults`)
       ).data.filter((lp: any) => lp.status === "active");
 
-      const totalLpList = [...getPool, ...activeLpList];
+      const returnLpList = await Promise.all(
+        activeLpList.map(async (lp: any) => {
+          const lpId: string = lp.id;
+          const oracleId: string = lp.oracleId;
+          const lpChain: number = mainNet[lp.chain];
+          const tokens: Array<string> = lp.assets;
 
-      const paginationLpList = await Promise.all(
-        totalLpList
-          .slice((pageIndex - 1) * 10, pageIndex * 10)
-          .map(async (lp: any) => {
-            const lpId: string = lp.id;
-            const oracleId: string = lp.oracleId;
-            const lpChain: number = mainNet[lp.chain];
-            const tokens: Array<string> = lp.assets;
+          const [tvlNow, tvlYesterday] = await Promise.all([
+            getTvlData(lpId, oracleId, lpChain),
+            getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+          ]);
 
-            const [tvlNow, tvlYesterday] = await Promise.all([
-              getTvlData(lpId, oracleId, lpChain),
-              getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
-            ]);
+          const dailyTvlRate: number =
+            ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
 
-            const dailyTvlRate: number =
-              ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
-
-            return {
-              id: lpId,
-              name: lp.name,
-              platformId: lp.platformId,
-              network: lp.network,
-              oracleId: oracleId,
-              status: lp.status,
-              symbol: lp.symbol,
-              tvl: tvlNow,
-              apy:
-                (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
-                  .data[lpId] ?? 0,
-              dailyTvlRate,
-              mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
-              platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
-              tokens,
-              tokenAddress: lp.tokenAddress,
-            };
-          })
+          return {
+            id: lpId,
+            name: lp.name,
+            platformId: lp.platformId,
+            network: lp.network,
+            oracleId: oracleId,
+            status: lp.status,
+            symbol: lp.symbol,
+            tvl: tvlNow,
+            apy:
+              (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                .data[lpId] ?? 0,
+            dailyTvlRate,
+            mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+            platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+            tokens,
+            tokenAddress: lp.tokenAddress,
+          };
+        })
       );
-
+      let totalLpList = [...getPool, ...returnLpList];
+      const renewalLpList = totalLpList.slice(
+        (pageIndex - 1) * 10,
+        pageIndex * 10
+      );
       const data: any = {
-        poolListData: paginationLpList,
+        poolListData: renewalLpList,
         poolListDataLength: totalLpList.length,
       };
       res.send(data);
