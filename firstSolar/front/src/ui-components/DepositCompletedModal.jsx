@@ -32,7 +32,7 @@ export default function DepositCompletedModal(props) {
     };
   }, [timer]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.body.style = `overflow: hidden`;
     return () => (document.body.style = `overflow: auto`);
   }, []);
