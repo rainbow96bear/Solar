@@ -5,9 +5,6 @@ import { Flex, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton1024px } from "../../ui-components";
 import "../../css/Font.css";
-import LoadingCompo from "../../ui-components/LoadingCompo";
-import { useSelector } from "react-redux";
-import { isLoadingThunk } from "../../modules/isLoading";
 
 const MyPageList1024px = props => {
   const { overrides, ...rest } = props;
