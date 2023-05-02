@@ -1049,6 +1049,9 @@ export default function AddLiquidityBottom320px(props) {
             position="relative"
             borderRadius="15px"
             padding="13px 73px 13px 73px"
+            style={{
+              cursor: "pointer",
+            }}
             {...getOverrideProps(overrides, "Frame 76")}
             onClick={async () => {
               if (!addLiquidityPossibility) return;

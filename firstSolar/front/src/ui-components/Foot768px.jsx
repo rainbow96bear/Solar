@@ -42,6 +42,7 @@ export default function Foot768px(props) {
             width: "91vw",
             height: "unset",
             backgroundColor: "rgba(255,255,255,0.8)",
+            borderRadius: "21px",
             boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
             backgroundImage:
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
