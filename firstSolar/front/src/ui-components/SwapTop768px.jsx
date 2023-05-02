@@ -29,7 +29,7 @@ export default function SwapTop768px(props) {
 
     setTimeout(() => {
       dispatch(isLoadingThunk({ isLoading: false }));
-    }, 1500);
+    }, 3000);
   }, []);
 
   return (
@@ -702,7 +702,10 @@ export default function SwapTop768px(props) {
                 whiteSpace="pre-wrap"
                 children={
                   props?.oracleiddata[0]?.tvl
-                    ? `${props?.oracleiddata[0]?.tvl.slice(0, 10) / 100} `
+                    ? `${
+                        props?.oracleiddata[0]?.tvl?.toString().slice(0, 10) /
+                        100
+                      } `
                     : 0
                 }
                 {...getOverrideProps(overrides, "16.82%")}

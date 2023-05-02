@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 
 const SwapComponent = ({ oracleId, balance }) => {
   const props = oracleId;
+  console.log("props?", props);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const isDesktop = useMediaQuery({
@@ -33,7 +34,11 @@ const SwapComponent = ({ oracleId, balance }) => {
             }}
           >
             <ItemWrap
-              onClick={toggleOpen}
+              onClick={() => {
+                if (props[0].name.includes("DFS")) {
+                  toggleOpen();
+                }
+              }}
               layout
               transition={{
                 duration: 0.2,
@@ -102,7 +107,11 @@ const SwapComponent = ({ oracleId, balance }) => {
                 }}
               >
                 <motion.div
-                  onClick={toggleOpen}
+                  onClick={() => {
+                    if (props[0].name.includes("DFS")) {
+                      toggleOpen();
+                    }
+                  }}
                   style={{
                     height: "unset",
                     borderRadius: "35px",

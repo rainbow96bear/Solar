@@ -30,7 +30,7 @@ export default function SwapTop320px(props) {
 
     setTimeout(() => {
       dispatch(isLoadingThunk({ isLoading: false }));
-    }, 1500);
+    }, 3000);
   }, []);
 
   return (

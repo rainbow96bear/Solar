@@ -47,7 +47,7 @@ const initDB = async (): Promise<void> => {
           secondToken: result[i][1].split("-")[1],
           name: result[i][1],
           platformId: "solar",
-          platformLogo: "./imgs/platform/solar.jpg",
+          platformLogo: "/imgs/platform/solar.jpg",
           network: "bsc",
           mainNetLogo: `/imgs/mainNet/bsc.jpg`,
           apy: 0,

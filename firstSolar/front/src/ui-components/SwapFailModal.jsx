@@ -30,6 +30,11 @@ export default function SwapFailModal(props) {
     };
   }, [timer]);
 
+  useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
+
   return (
     <View
       width="30%"

@@ -23,8 +23,9 @@ import { useWeb3 } from "../modules/useWeb3.js";
 import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import { motion } from "framer-motion";
-import SwapSuccessModal from "./SwapSuccessModal";
-import SwapFailModal from "./SwapFailModal";
+import styled from "styled-components";
+import AddLiquiditySuccessModal from "./AddLiquiditySuccessModal";
+import AddLiquidityFailModal from "./AddLiquidityFailModal";
 
 export default function AddLiquidityBottom768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
@@ -38,12 +39,17 @@ export default function AddLiquidityBottom768px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
 
   const [addLiquidityPossibility, setAddLiquidityPossibility] =
+    React.useState(false);
+
+  const [addLiquiditySuccessModalOpen, setAddLiquiditySuccessModalOpen] =
+    React.useState(false);
+  const [addLiquidityFailModalOpen, setAddLiquidityFailModalOpen] =
     React.useState(false);
 
   const addLiquidtiyFunc = async () => {
@@ -80,8 +86,6 @@ export default function AddLiquidityBottom768px(props) {
           await updatePool(props?.oracleiddata[0]?.tokenAddress);
 
           if (addLiquidityTxResult) {
-            setFirstValue(0);
-            setSecondValue(0);
             const firstBalanceTemp = await swapBalance(
               address ? address : address2,
               props?.oracleiddata[0]?.firstToken
@@ -98,14 +102,17 @@ export default function AddLiquidityBottom768px(props) {
                 : "ETH"
             );
             setUserSecondBalance(secondBalanceTemp);
-
+            setFirstValue(0);
+            setSecondValue(0);
             dispatch(isLoadingThunk({ isLoading: false }));
+            setAddLiquiditySuccessModalOpen(true);
           }
         }
       }
     } catch (err) {
       console.log(err);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setAddLiquidityFailModalOpen(true);
     }
   };
 
@@ -160,6 +167,7 @@ export default function AddLiquidityBottom768px(props) {
       setAddLiquidityPossibility(true);
     } else setAddLiquidityPossibility(false);
   }, [firstValue, secondValue]);
+
   return (
     <Flex
       gap="75px"
@@ -821,7 +829,10 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={e => {
+              onChange={(e) => {
+                if (+e.target.value > +userFirstBalance) {
+                  e.target.value = userFirstBalance;
+                }
                 setFirstValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40052913")}
@@ -1008,7 +1019,10 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={e => {
+              onChange={(e) => {
+                if (+e.target.value > +userSecondBalance) {
+                  e.target.value = userSecondBalance;
+                }
                 setSecondValue(e.target.value);
               }}
               {...getOverrideProps(overrides, "TextAreaField40052988")}
@@ -1081,6 +1095,36 @@ export default function AddLiquidityBottom768px(props) {
           </Flex>
         </motion.div>
       </Flex>
+      {addLiquiditySuccessModalOpen && (
+        <LoadingModal>
+          <AddLiquiditySuccessModal
+            setAddLiquiditySuccessModalOpen={setAddLiquiditySuccessModalOpen}
+            firstSelectToken={props?.oracleiddata[0]?.firstToken}
+            secondSelectToken={props?.oracleiddata[0]?.secondToken}
+          />
+        </LoadingModal>
+      )}
+      {addLiquidityFailModalOpen && (
+        <LoadingModal>
+          <AddLiquidityFailModal
+            setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
+          />
+        </LoadingModal>
+      )}
     </Flex>
   );
 }
+
+const LoadingModal = styled.div`
+  width: 100vmax;
+  height: 100vmax;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999999999;
+`;

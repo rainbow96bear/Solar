@@ -59,7 +59,7 @@ const LoggedinUser = () => {
           <ul>
             <li>
               <Link to={`/mypage?${account}`}>
-                <div>내 정보</div>
+                <div>My Page</div>
               </Link>
             </li>
 

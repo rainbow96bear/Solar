@@ -23,13 +23,18 @@ export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
   const dispatch = useDispatch();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account.account.account);
   const { web3, login } = useWeb3();
   const { loginK } = useWeb3K();
   const { account } = useAccount();
   const [lpBalance, setLpBalance] = React.useState();
   const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
   const [questionMark, setQuestionMark] = React.useState(0);
+
+  const [withDrawSuccessModalOpen, setWithDrawSuccessModalOpen] =
+    React.useState(false);
+  const [withDrawFailModalOpen, setWithDrawFailModalOpen] =
+    React.useState(false);
 
   React.useEffect(() => {
     if (document.cookie) {
@@ -76,15 +81,22 @@ export default function QuestionModalWithDraw(props) {
       );
       setLpBalance(result);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setWithDrawSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
+      setWithDrawFailModalOpen(true);
     }
   };
 
+  React.useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
+
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -549,8 +561,8 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={e => setWithDrawAmountValue(e.target.value)}
-                onChange={e => {
+                onInput={(e) => setWithDrawAmountValue(e.target.value)}
+                onChange={(e) => {
                   if (+e.target.value > +props.lpBalanceValue) {
                     e.target.value = props.lpBalanceValue;
                   }
@@ -670,6 +682,25 @@ export default function QuestionModalWithDraw(props) {
       ) : (
         <></>
       )}
+      {withDrawSuccessModalOpen && (
+        <LoadingModal>
+          {/* <SwapSuccessModal
+              setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            /> */}
+        </LoadingModal>
+      )}
+      {withDrawFailModalOpen && (
+        <LoadingModal>
+          {/* <SwapFailModal
+              setSwapFailModalOpen={setSwapFailModalOpen}
+              firstSelectToken={firstSelectToken}
+              secondSelectToken={secondSelectToken}
+            /> */}
+          {/* 모달  */}
+        </LoadingModal>
+      )}
     </ModalCover>
   );
 }
@@ -709,6 +740,14 @@ const RemoveModal = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
+`;
+const LoadingModal = styled.div`
+  width: 100vmax;
+  height: 100vmax;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
   left: 0%;
   top: 0%;
   right: 0%;

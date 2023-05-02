@@ -139,7 +139,7 @@ export default function LoginAccount(props) {
                   navigate(`/mypage?${account}`);
                 }}
               >
-                내 정보
+                My Page
               </div>
               {/* </Link> */}
             </li>
