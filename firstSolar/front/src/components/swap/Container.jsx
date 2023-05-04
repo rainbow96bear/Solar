@@ -1,17 +1,34 @@
 import SwapComponent from "./Component";
 import * as React from "react";
 import { useLocation } from "react-router-dom";
-import { oracleIdList } from "../../api/index";
+import { lpBalance, oracleIdList } from "../../api/index";
+import { useSelector } from "react-redux";
+import { useAccount } from "wagmi";
+
 const SwapContainer = () => {
   const params = useLocation().search.replace("?", "");
-  console.log(params);
+  const [oracleId, setOracleId] = React.useState([]);
+  const [balance, setBalance] = React.useState(0);
+  const { address } = useAccount();
+
+  const address2 = useSelector((state) => state.account.account.account);
+
   React.useEffect(() => {
     (async () => {
-      const oracleId = await oracleIdList(params);
-      console.log("oracleIdList", oracleId);
+      try {
+        const oracleId = await oracleIdList(params);
+        setOracleId(oracleId);
+        if (!params.includes("DFS")) {
+          const account = address2 ? address2 : address;
+          const balance = await lpBalance(account, oracleId[0]?.oracleId);
+          setBalance(balance);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     })();
   }, []);
-  return <SwapComponent></SwapComponent>;
+  return <SwapComponent oracleId={oracleId} balance={balance}></SwapComponent>;
 };
 
 export default SwapContainer;

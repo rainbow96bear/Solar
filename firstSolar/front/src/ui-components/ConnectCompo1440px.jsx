@@ -9,15 +9,17 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
+import "../css/Font.css";
 export default function ConnectCompo1440px(props) {
   const { overrides, ...rest } = props;
+
   return (
     <Flex
       display={{
         base: "none",
         small: "none",
         medium: "none",
-        large: "none",
+        large: "flex",
         xl: "flex",
         xxl: "flex",
       }}
@@ -35,13 +37,14 @@ export default function ConnectCompo1440px(props) {
     >
       <motion.div
         style={{
-          width: "55vw",
+          width: "31vw",
           height: "unset",
           borderRadius: "35px",
           backgroundColor: "rgba(0,136,153,0.86)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.05 }}
+        whileHover={{ borderRadius: "13px", scale: 1.05, opacity: 0.88 }}
       >
         <Flex
           gap="10px"
@@ -59,7 +62,7 @@ export default function ConnectCompo1440px(props) {
           {...getOverrideProps(overrides, "Connect40052814")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProMedium"
             fontSize="24px"
             fontWeight="700"
             color="rgba(239,239,239,1)"

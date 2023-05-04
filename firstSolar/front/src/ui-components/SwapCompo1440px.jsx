@@ -7,24 +7,18 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Text } from "@aws-amplify/ui-react";
+import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function SwapCompo1440px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
+  const disbleButton = props?.props?.item?.oracleId?.split("-")[0] == "DFS";
 
   return (
     <Flex
-      display={{
-        base: "none",
-        small: "none",
-        medium: "flex",
-        large: "flex",
-        xl: "flex",
-        xxl: "flex",
-      }}
+      display="flex"
       gap="30px"
       direction="row"
       width="90vw"
@@ -44,8 +38,14 @@ export default function SwapCompo1440px(props) {
           borderRadius: "35px",
           backgroundColor: "rgba(234,0,50,0.55)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.03 }}
+        whileHover={{
+          borderRadius: "13px",
+          backgroundColor: "rgba(0,049,073,0.85)",
+          scale: 1.03,
+          opacity: 0.88,
+        }}
       >
         <Flex
           onClick={() => {
@@ -65,10 +65,10 @@ export default function SwapCompo1440px(props) {
           {...getOverrideProps(overrides, "Connect40052819")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProMedium"
             fontSize="24px"
             fontWeight="700"
-            color="rgba(239,239,239,1)"
+            color="rgba(249,249,249,1)"
             lineHeight="29.045454025268555px"
             textAlign="center"
             display="block"
@@ -97,12 +97,18 @@ export default function SwapCompo1440px(props) {
           borderRadius: "35px",
           backgroundColor: "rgba(255,226,0,0.35)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.03 }}
+        whileHover={{
+          borderRadius: "13px",
+          backgroundColor: "rgba(252,250,242,0.75)",
+          scale: 1.03,
+          opacity: 0.88,
+        }}
       >
         <Flex
           onClick={() => {
-            navigate(`/addliquidity?=${props.props.item.oracleId}`);
+            navigate(`/addliquidity?${props.props.item.oracleId}`);
           }}
           gap="10px"
           direction="row"
@@ -117,8 +123,9 @@ export default function SwapCompo1440px(props) {
           padding="19px 25px 19px 25px"
           {...getOverrideProps(overrides, "Connect40052821")}
         >
-          <Text
-            fontFamily="Inter"
+          <Button
+            border="0px"
+            fontFamily="ffProMedium"
             fontSize="24px"
             fontWeight="700"
             lineHeight="29.045454025268555px"
@@ -137,8 +144,10 @@ export default function SwapCompo1440px(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Add Liquidity"
+            disabled={disbleButton ? false : true}
+            backgroundColor="rgba(255,226,0,0.001)"
             {...getOverrideProps(overrides, "Add Liquidity")}
-          ></Text>
+          ></Button>
         </Flex>
       </motion.div>
     </Flex>

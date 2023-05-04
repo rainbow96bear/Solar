@@ -3,7 +3,9 @@ import axios from "axios";
 import db from "../../models/index";
 import dotenv from "dotenv";
 import { BigNumber } from "@ethersproject/bignumber";
+import { Op } from "sequelize";
 
+import Pool from "../../models/pool";
 import { mainNet } from "../setting";
 import {
   deployed,
@@ -66,6 +68,9 @@ interface detailLp {
   tokenDecimals: number;
   tokenProviderId: string;
   tvl: number;
+  fee: number;
+  firstTokenBalance: number;
+  secondTokenBalance: number;
 }
 
 const router = Router();
@@ -97,6 +102,8 @@ let obj: { from?: string; to?: string; data?: string } = {
   data: "",
 };
 
+let getPool: Pool[];
+
 router.get("/", async (req: Request, res: Response<LPData[]>) => {
   retries = 0;
   const pageIndex: number = parseInt(req.query.pageIndex as string);
@@ -105,55 +112,95 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
       const now: Date = new Date();
       const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
 
-      const getPool = await db.Pool.findAll();
+      getPool = await db.Pool.findAll();
 
       const activeLpList = (
         await axios.get(`https://api.beefy.finance/vaults`)
       ).data.filter((lp: any) => lp.status === "active");
+      let totalLpLength: number = activeLpList.length + getPool.length;
+      let totalLpList: Array<LPData | Pool>;
+      if (pageIndex == 1) {
+        const returnLpList = await Promise.all(
+          activeLpList
+            .slice((pageIndex - 1) * 10 + getPool.length, pageIndex * 10)
+            .map(async (lp: any) => {
+              const lpId: string = lp.id;
+              const oracleId: string = lp.oracleId;
+              const lpChain: number = mainNet[lp.chain];
+              const tokens: Array<string> = lp.assets;
 
-      const totalLpList = [...activeLpList, ...getPool];
+              const [tvlNow, tvlYesterday] = await Promise.all([
+                getTvlData(lpId, oracleId, lpChain),
+                getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+              ]);
 
-      const paginationLpList = await Promise.all(
-        totalLpList
-          .slice((pageIndex - 1) * 10, pageIndex * 10)
-          .map(async (lp: any) => {
-            const lpId: string = lp.id;
-            const oracleId: string = lp.oracleId;
-            const lpChain: number = mainNet[lp.chain];
-            const tokens: Array<string> = lp.assets;
+              const dailyTvlRate: number =
+                ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
 
-            const [tvlNow, tvlYesterday] = await Promise.all([
-              getTvlData(lpId, oracleId, lpChain),
-              getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
-            ]);
+              return {
+                id: lpId,
+                name: lp.name,
+                platformId: lp.platformId,
+                network: lp.network,
+                oracleId: oracleId,
+                status: lp.status,
+                symbol: lp.symbol,
+                tvl: tvlNow,
+                apy:
+                  (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                    .data[lpId] ?? 0,
+                dailyTvlRate,
+                mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+                platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+                tokens,
+                tokenAddress: lp.tokenAddress,
+              };
+            })
+        );
+        totalLpList = [...getPool, ...returnLpList];
+      } else {
+        const returnLpList = await Promise.all(
+          activeLpList
+            .slice((pageIndex - 1) * 10, pageIndex * 10)
+            .map(async (lp: any) => {
+              const lpId: string = lp.id;
+              const oracleId: string = lp.oracleId;
+              const lpChain: number = mainNet[lp.chain];
+              const tokens: Array<string> = lp.assets;
 
-            const dailyTvlRate: number =
-              ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+              const [tvlNow, tvlYesterday] = await Promise.all([
+                getTvlData(lpId, oracleId, lpChain),
+                getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+              ]);
 
-            return {
-              id: lpId,
-              name: lp.name,
-              platformId: lp.platformId,
-              network: lp.network,
-              oracleId: oracleId,
-              status: lp.status,
-              symbol: lp.symbol,
-              tvl: tvlNow,
-              apy:
-                (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
-                  .data[lpId] ?? 0,
-              dailyTvlRate,
-              mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
-              platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
-              tokens,
-              tokenAddress: lp.tokenAddress,
-            };
-          })
-      );
+              const dailyTvlRate: number =
+                ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
 
+              return {
+                id: lpId,
+                name: lp.name,
+                platformId: lp.platformId,
+                network: lp.network,
+                oracleId: oracleId,
+                status: lp.status,
+                symbol: lp.symbol,
+                tvl: tvlNow,
+                apy:
+                  (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                    .data[lpId] ?? 0,
+                dailyTvlRate,
+                mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+                platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+                tokens,
+                tokenAddress: lp.tokenAddress,
+              };
+            })
+        );
+        totalLpList = [...returnLpList];
+      }
       const data: any = {
-        poolListData: paginationLpList,
-        poolListDataLength: totalLpList.length,
+        poolListData: totalLpList,
+        poolListDataLength: totalLpLength,
       };
       res.send(data);
     } catch (error) {
@@ -173,9 +220,13 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
 
 router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
   retries = 0;
-  const networkListUp = async () => {
+  const fileterListUp = async () => {
     try {
-      const { network, dex } = req.body;
+      const {
+        network,
+        dex,
+        pageIndex,
+      }: { network: string; dex: string; pageIndex: number } = req.body;
       const now: Date = new Date();
       const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
 
@@ -188,8 +239,9 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
           ? lp.status === "active" && lp.platformId === dex
           : lp.status === "active"
       );
+      let filterLpList: Array<detailLp | Pool>;
 
-      const data: Array<LPData> = await Promise.all(
+      const returnLpList = await Promise.all(
         activeLpList.map(async (lp: any) => {
           const lpId: string = lp.id;
           const oracleId: string = lp.oracleId;
@@ -225,12 +277,24 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
         })
       );
 
+      if (network) {
+        getPool = await db.Pool.findAll({ where: { network } });
+        filterLpList = [...getPool, ...returnLpList];
+      } else filterLpList = [...returnLpList];
+      const renewalLpList = filterLpList.slice(
+        (pageIndex - 1) * 10,
+        pageIndex * 10
+      );
+      const data: any = {
+        poolListData: renewalLpList,
+        poolListDataLength: filterLpList.length,
+      };
       res.send(data);
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
         await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
-        await networkListUp();
+        await fileterListUp();
       } else {
         console.error(error);
         res.send();
@@ -238,7 +302,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     }
   };
 
-  await networkListUp();
+  await fileterListUp();
 });
 router.post("/check", async (req: Request, res: Response) => {
   const { inputAPI } = req.body;
@@ -253,42 +317,54 @@ router.post("/check", async (req: Request, res: Response) => {
 
 router.post("/detail", async (req: Request, res: Response<detailLp[]>) => {
   const { id } = req.body;
-  console.log("gggg", id);
   try {
     const now: Date = new Date();
     const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
     const detailList = (
       await axios.get(`https://api.beefy.finance/vaults`)
     ).data.filter((lp: any) => lp.status == "active" && lp.oracleId == id);
+    let data: detailLp[];
+    if (!detailList.length)
+      data = await db.Pool.findAll({ where: { oracleId: id } });
+    else {
+      data = await Promise.all(
+        detailList.map(async (lp: any) => {
+          const lpId: string = lp.id;
+          const oracleId: string = lp.oracleId;
+          const lpChain: number = mainNet[lp.chain];
 
-    const data: Array<detailLp> = await Promise.all(
-      detailList.map(async (lp: any) => {
-        const lpId: string = lp.id;
-        const oracleId: string = lp.oracleId;
-        const lpChain: number = mainNet[lp.chain];
+          const [tvlNow, tvlYesterday] = await Promise.all([
+            getTvlData(lpId, oracleId, lpChain),
+            getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+          ]);
 
-        const [tvlNow, tvlYesterday] = await Promise.all([
-          getTvlData(lpId, oracleId, lpChain),
-          getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
-        ]);
+          const dailyTvlRate: number =
+            ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
 
-        const dailyTvlRate: number =
-          ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
-
-        return {
-          ...lp,
-          tvl: tvlNow,
-          apy:
-            (await axios.get(`https://api.beefy.finance/apy?${oracleId}`)).data[
-              lpId
-            ] ?? 0,
-          dailyTvlRate,
-          mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
-          platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
-        };
-      })
-    );
-
+          return {
+            ...lp,
+            tvl: tvlNow,
+            apy:
+              (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                .data[lpId] ?? 0,
+            dailyTvlRate,
+            mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+            platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+            fee:
+              (await axios.get(`https://api.beefy.finance/fees`)).data[lpId]
+                .performance.call ?? 0,
+            firstTokenBalance:
+              (await axios.get(`https://api.beefy.finance/lps/breakdown`)).data[
+                lpId
+              ]?.balances[0] ?? 0,
+            secondTokenBalance:
+              (await axios.get(`https://api.beefy.finance/lps/breakdown`)).data[
+                lpId
+              ]?.balances[1] ?? 0,
+          };
+        })
+      );
+    }
     res.send(data);
   } catch (err) {
     console.log(err);
@@ -301,15 +377,32 @@ router.post("/approveDFS", async (req: Request, res: Response) => {
     const {
       account,
       approveDFSAmount,
-    }: { account: string; approveDFSAmount?: any } = req.body;
+      lpSymbol,
+    }: { account: string; approveDFSAmount?: any; lpSymbol?: string } =
+      req.body;
     const tokenPrice1: BigNumber = BigNumber.from(
       Math.floor(approveDFSAmount * 10 ** 18).toString()
     );
-    obj.from = account;
-    obj.to = process.env.DFS;
-    obj.data = await deployedDFS.methods
-      .approve(process.env.DFS_ETH, tokenPrice1)
-      .encodeABI();
+
+    if (lpSymbol.includes("ETH")) {
+      obj.from = account;
+      obj.to = process.env.DFS;
+      obj.data = await deployedDFS.methods
+        .approve(process.env.DFS_ETH, tokenPrice1)
+        .encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      obj.from = account;
+      obj.to = process.env.DFS;
+      obj.data = await deployedBNB.methods
+        .approve(process.env.DFS_BNB, tokenPrice1)
+        .encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      obj.from = account;
+      obj.to = process.env.DFS;
+      obj.data = await deployedUSDT.methods
+        .approve(process.env.DFS_USDT, tokenPrice1)
+        .encodeABI();
+    }
     res.send(obj);
   } catch (error) {
     console.log(error);
@@ -369,7 +462,6 @@ router.post("/addLiquidity", async (req: Request, res: Response) => {
     const tokenPrice2: BigNumber = BigNumber.from(
       Math.floor(token2 * 10 ** 18).toString()
     );
-
     if (lpSymbol.includes("ETH")) {
       obj.from = account;
       obj.to = process.env.DFS_ETH;
@@ -518,37 +610,150 @@ router.post("/withdraw", async (req: Request, res: Response) => {
 
 router.post("/removeLiquidity", async (req: Request, res: Response) => {
   try {
-    const { account, lpSymbol }: { account: string; lpSymbol?: string } =
-      req.body;
+    const {
+      account,
+      lpSymbol,
+      removeAmount,
+    }: { account: string; lpSymbol?: string; removeAmount?: any } = req.body;
+    const tokenPrice1: BigNumber = BigNumber.from(
+      Math.floor(removeAmount * 10 ** 18).toString()
+    );
     if (lpSymbol.includes("ETH")) {
-      const lpAmount: number = await deployedDFSETH.methods
-        .userLiquidity(account)
-        .call();
       obj.from = account;
       obj.to = process.env.DFS_ETH;
       obj.data = await deployedDFSETH.methods
-        .removeLiquidity(lpAmount)
+        .removeLiquidity(tokenPrice1)
         .encodeABI();
     } else if (lpSymbol.includes("BNB")) {
-      const lpAmount: number = await deployedDFSBNB.methods
-        .userLiquidity(account)
-        .call();
       obj.from = account;
       obj.to = process.env.DFS_BNB;
       obj.data = await deployedDFSBNB.methods
-        .removeLiquidity(lpAmount)
+        .removeLiquidity(tokenPrice1)
         .encodeABI();
     } else if (lpSymbol.includes("USDT")) {
-      const lpAmount: number = await deployedDFSUSDT.methods
-        .userLiquidity(account)
-        .call();
       obj.from = account;
       obj.to = process.env.DFS_USDT;
       obj.data = await deployedDFSUSDT.methods
-        .removeLiquidity(lpAmount)
+        .removeLiquidity(tokenPrice1)
         .encodeABI();
     }
     res.send(obj);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
+router.post("/search", async (req: Request, res: Response) => {
+  try {
+    const { search, pageIndex }: { search: string; pageIndex: number } =
+      req.body;
+    let list: Array<Pool> = [];
+
+    if (search) {
+      const [poolList, activeLpList] = await Promise.all([
+        db.Pool.findAll({
+          where: {
+            [Op.or]: [
+              { name: { [Op.like]: `%${search}%` } },
+              { tokenAddress: { [Op.like]: `%${search}%` } },
+            ],
+          },
+        }),
+        axios.get(`https://api.beefy.finance/vaults`),
+      ]);
+
+      const activeList: any[] = activeLpList?.data.filter(
+        (lp: any) =>
+          lp.status === "active" &&
+          (lp.name?.toLowerCase().includes(search.toLowerCase()) ||
+            lp.tokenAddress?.toLowerCase().includes(search.toLowerCase()))
+      );
+
+      list = [...poolList, ...activeList];
+    } else {
+      const [poolList, activeLpList] = await Promise.all([
+        db.Pool.findAll(),
+        axios.get(`https://api.beefy.finance/vaults`),
+      ]);
+
+      const activeList: any[] = activeLpList?.data.filter(
+        (lp: any) => lp.status === "active"
+      );
+
+      list = [...poolList, ...activeList];
+    }
+    const paginationMyLpList = list.slice((pageIndex - 1) * 10, pageIndex * 10);
+    const data: any = {
+      poolListData: paginationMyLpList,
+      poolListDataLength: list.length,
+    };
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
+router.post("/updatePool", async (req: Request, res: Response) => {
+  try {
+    const { tokenAddress }: { tokenAddress: string } = req.body;
+
+    const pool = await db.Pool.findOne({
+      where: { tokenAddress },
+    });
+
+    if (!pool) {
+      throw new Error(
+        `Pool with address ${tokenAddress} not found in the database`
+      );
+    }
+
+    let firstTokenBalance = pool.firstTokenBalance;
+    let secondTokenBalance = pool.secondTokenBalance;
+    let reserve1: string;
+    let reserve2: string;
+
+    switch (pool.secondToken) {
+      case "ETH":
+        reserve1 = await deployedDFSETH.methods.reserve1().call();
+        reserve2 = await deployedDFSETH.methods.reserve2().call();
+        break;
+      case "USDT":
+        reserve1 = await deployedDFSUSDT.methods.reserve1().call();
+        reserve2 = await deployedDFSUSDT.methods.reserve2().call();
+        break;
+      case "BNB":
+        reserve1 = await deployedDFSBNB.methods.reserve1().call();
+        reserve2 = await deployedDFSBNB.methods.reserve2().call();
+        break;
+      default:
+        break;
+    }
+
+    if (reserve1 != firstTokenBalance || reserve2 != secondTokenBalance) {
+      const tvl = Number(reserve1) + Number(reserve2);
+      await pool.update({
+        firstTokenBalance: reserve1,
+        secondTokenBalance: reserve2,
+        tvl,
+      });
+    }
+    res.end();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("update error");
+  }
+});
+
+router.post("/getLPBalance", async (req: Request, res: Response) => {
+  try {
+    const { pid, account }: { pid: number; account: string } = req.body;
+    const stakingBalance = await deployed.methods
+      .getLPBalance(pid)
+      .call({ from: account });
+
+    res.send(stakingBalance);
   } catch (err) {
     console.log(err);
     res.send(err);

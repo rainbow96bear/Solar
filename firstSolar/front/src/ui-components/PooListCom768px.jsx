@@ -15,39 +15,128 @@ import {
   Pagination,
   usePagination,
 } from "@aws-amplify/ui-react";
-import { useState } from "react";
-import Poolitem768px from "../components/Pool/Poolitem768px";
-import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
-import { ConnectCompo768px, SwapCompo768px } from "../ui-components";
-import { getMainPoolList } from "../api/index.js";
+
+import Poolitem768px from "../components/pool/Poolitem768px";
+import {
+  Netlist768px,
+  Dexlist768px,
+} from "../components/netdexlist/Netdexlist";
+import { motion, LayoutGroup } from "framer-motion";
+import { getMainPoolList, netList, dexlist, dexList } from "../api/index.js";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
+import {
+  mainNet768px1,
+  mainNet768px2,
+  platform768px1,
+  platform768px2,
+} from "../mainNet";
+
+import { useLocation } from "react-router-dom";
+
+const networkArray = [
+  "ethereum",
+  "optimism",
+  "metis",
+  "aurora",
+  "bsc",
+  "kava",
+  "heco",
+  "polygon",
+  "fantom",
+];
+
+const dexArray = [
+  "uniswap",
+  "pancakeswap",
+  "sushi",
+  "quickswap",
+  "linch",
+  "curve",
+  "bnt",
+  "knc",
+  "matcha",
+  "bal",
+];
 
 export default function PooListCom768px(props) {
   const { overrides, ...rest } = props;
+  const didMount = React.useRef(false);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
-  const [pageIndex, setPageIndex] = React.useState(1);
+  const [pageIndex, setPageIndex] = React.useState(
+    Number(queryParams.get("page")) || 1
+  );
+  const [filter, setFilter] = React.useState(String(queryParams.get("filter")));
+
   const [totalPages, setTotalPages] = React.useState(1);
+  const [mainNetList, setMainNetList] = React.useState([]);
+  const [platformList, setPlatformList] = React.useState([]);
+  const [mainNetList1, setMainNetList1] = React.useState([]);
+  const [platformList1, setPlatformList1] = React.useState([]);
+
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    queryParams.set("page", pageIndex);
+    queryParams.set("filter", filter);
+
+    const newUrl = `${location.pathname}?${queryParams?.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [pageIndex, filter, location, queryParams]);
+
   const getPoolList = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
-      const { poolListData, resultTotalPages } = await getMainPoolList(
-        pageIndex
-      );
-      setCurrentPagePoolList(poolListData);
-      setTotalPages(resultTotalPages);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      if (filter == "null") {
+        const { poolListData, resultTotalPages } = await getMainPoolList(
+          pageIndex
+        );
+        setCurrentPagePoolList(poolListData);
+        setTotalPages(resultTotalPages);
+      } else if (filter != "null") {
+        if (networkArray.includes(filter)) {
+          const data = await netList(filter, pageIndex);
+          setCurrentPagePoolList(data.poolListData);
+          setTotalPages(Math.ceil(data.poolListDataLength / 10));
+        } else if (dexArray.includes(filter)) {
+          const data = await dexList(filter, pageIndex);
+
+          setCurrentPagePoolList(data.poolListData);
+          setTotalPages(Math.ceil(data.poolListDataLength / 10));
+        }
+      }
+
+      setTimeout(() => {
+        dispatch(isLoadingThunk({ isLoading: false }));
+      }, 5000);
     } catch (error) {
       dispatch(isLoadingThunk({ isLoading: false }));
       console.error(error);
     }
   };
+
   React.useEffect(() => {
     getPoolList();
   }, [pageIndex]);
+
+  React.useEffect(() => {
+    if (didMount.current == true) {
+      setPageIndex(1);
+    } else if (didMount.current == false) {
+      didMount.current = true;
+    }
+  }, [filter]);
+
+  React.useEffect(() => {
+    setMainNetList(Object.keys(mainNet768px1));
+    setPlatformList(Object.values(platform768px1));
+    setMainNetList1(Object.keys(mainNet768px2));
+    setPlatformList1(Object.values(platform768px2));
+  }, []);
 
   const paginationProps = usePagination({
     totalPages: totalPages,
@@ -99,7 +188,10 @@ export default function PooListCom768px(props) {
                   "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
               }}
               width={{ base: "80vw", medium: "87vw" }}
-              whileHover={{ borderRadius: "75px" }}
+              whileHover={{
+                borderRadius: "75px",
+                backgroundColor: "rgba(247,239,227,0.75)",
+              }}
             >
               <Flex
                 gap="23px"
@@ -116,7 +208,7 @@ export default function PooListCom768px(props) {
                 {...getOverrideProps(overrides, "Networks List39563128")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProLight"
                   fontSize="24px"
                   fontWeight="700"
                   lineHeight="29.045454025268555px"
@@ -164,186 +256,16 @@ export default function PooListCom768px(props) {
                     padding="0px 0px 0px 0px"
                     {...getOverrideProps(overrides, "Frame 3839412790")}
                   >
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 1939412770")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39412771"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2039573430")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573431"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2139573432")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573433"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2239573434")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573435"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2239573434")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573435"
-                        )}
-                      ></Image>
-                    </Flex>
+                    {mainNetList?.map((item, idx) => (
+                      <Netlist768px
+                        key={`Netlist768px-1${idx}`}
+                        item={item}
+                        setFilter={setFilter}
+                        setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        pageIndex={pageIndex}
+                      />
+                    ))}
                   </Flex>
                   <Flex
                     gap="30px"
@@ -360,186 +282,16 @@ export default function PooListCom768px(props) {
                     padding="0px 0px 0px 0px"
                     {...getOverrideProps(overrides, "Frame 3839412790")}
                   >
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 1939412770")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39412771"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2039573430")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573431"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2139573432")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573433"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2239573434")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573435"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2239573434")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573435"
-                        )}
-                      ></Image>
-                    </Flex>
+                    {mainNetList1?.map((item, idx) => (
+                      <Netlist768px
+                        key={`Netlist768px-2${idx}`}
+                        item={item}
+                        pageIndex={pageIndex}
+                        setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        setFilter={setFilter}
+                      />
+                    ))}
                   </Flex>
                 </Flex>
               </Flex>
@@ -555,7 +307,10 @@ export default function PooListCom768px(props) {
                 backgroundImage:
                   "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
               }}
-              whileHover={{ borderRadius: "75px" }}
+              whileHover={{
+                borderRadius: "75px",
+                backgroundColor: "rgba(247,239,227,0.75)",
+              }}
             >
               <Flex
                 gap="23px"
@@ -572,7 +327,7 @@ export default function PooListCom768px(props) {
                 {...getOverrideProps(overrides, "Networks List39563128")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProLight"
                   fontSize="24px"
                   fontWeight="700"
                   lineHeight="29.045454025268555px"
@@ -620,186 +375,15 @@ export default function PooListCom768px(props) {
                     padding="0px 0px 0px 0px"
                     {...getOverrideProps(overrides, "Frame 3839412790")}
                   >
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 1939412770")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39412771"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2039573430")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573431"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2139573432")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573433"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2239573434")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573435"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2239573434")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573435"
-                        )}
-                      ></Image>
-                    </Flex>
+                    {platformList?.map((item, idx) => (
+                      <Dexlist768px
+                        key={`platformList768px-1${idx}`}
+                        item={item}
+                        setCurrentPagePoolList={setCurrentPagePoolList}
+                        setTotalPages={setTotalPages}
+                        pageIndex={pageIndex}
+                      />
+                    ))}
                   </Flex>
                   <Flex
                     gap="30px"
@@ -816,186 +400,13 @@ export default function PooListCom768px(props) {
                     padding="0px 0px 0px 0px"
                     {...getOverrideProps(overrides, "Frame 3839412790")}
                   >
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 1939412770")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39412771"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2039573430")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573431"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2139573432")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573433"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2239573434")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573435"
-                        )}
-                      ></Image>
-                    </Flex>
-                    <Flex
-                      gap="10px"
-                      direction="row"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="center"
-                      grow="1"
-                      shrink="1"
-                      basis="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                      borderRadius="10px"
-                      padding="10px 10px 10px 10px"
-                      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-                      {...getOverrideProps(overrides, "Frame 2239573434")}
-                    >
-                      <Image
-                        width="40px"
-                        height="40px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="35px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:em1OiomfG3g39573435"
-                        )}
-                      ></Image>
-                    </Flex>
+                    {platformList1?.map((item, idx) => (
+                      <Dexlist768px
+                        key={`platformList768px-2${idx}`}
+                        item={item}
+                        setCurrentPagePoolList={setCurrentPagePoolList}
+                      />
+                    ))}
                   </Flex>
                 </Flex>
               </Flex>

@@ -3,10 +3,8 @@ import "./App.css";
 
 // 라이브러리 import
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import { accountThunk } from "./modules/account.js";
 import { useWeb3 } from "./modules/useWeb3";
 import { useWeb3K } from "./modules/useWeb3Kaikas";
 
@@ -19,18 +17,21 @@ import {
 import { Web3Modal } from "@web3modal/react";
 import { configureChains, createClient, useAccount, WagmiConfig } from "wagmi";
 import { arbitrum, mainnet, polygon } from "wagmi/chains";
-import { useWeb3React } from "@web3modal/ethereum";
-import { useWeb3Modal } from "@web3modal/react";
 
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 import FooterContainer from "./components/footer/Container";
-import { Swap320px, Swap768px } from "./ui-components";
 import { connectThunk } from "./modules/connect";
-import UserLoading from "./ui-components/UserLoading";
+import LoadingCompo from "./ui-components/LoadingCompo";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
+import MypageContainer from "./components/mypage/Container";
+import NavigatorContainer from "./components/navigateHome/Container";
+import EmptySearchModal from "./ui-components/EmptySearchModal";
+import { DepositCompletedModal } from "./ui-components";
+import { DepositFaildModal } from "./ui-components";
+import SearchNavigatorContainer from "./components/navigateSearch/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -50,42 +51,25 @@ const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const accountAddress = useSelector((state) => state.account.account.account);
-  const dispatch = useDispatch();
+  const emptySearch = useSelector((state) => state.emptySearch);
 
-  const { web3, account, chainId, login } = useWeb3();
-  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
+  const completeModal = useSelector((state) => state.completeModal);
+  const dispatch = useDispatch();
 
   const accountWagmi = useAccount({
     onConnect({ address, connector, isReconnected }) {
-      console.log("Connected", { address, connector, isReconnected });
+      // console.log("Connected", { address, connector, isReconnected });
     },
     onDisconnect() {
       dispatch(connectThunk({ connect: false }));
     },
   });
 
-  useEffect(() => {
-    console.log("account 변동 되었다.", account);
-    if (document.cookie) {
-      console.log("쿠키가 있으면 로그인");
-      if (document.cookie.split(":")[0] == "metamask") {
-        login();
-        dispatch(accountThunk({ account: account }));
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
-        dispatch(accountThunk({ account: accountK }));
-      }
-    }
-  }, [account]);
-
   return (
     <>
       <WagmiConfig client={wagmiClient}>
         <div className="App">
           <HeaderContainer></HeaderContainer>
-          <ApICon />
           <MainContent>
             <Routes>
               <Route path="/" element={<MainContainer />}></Route>
@@ -94,17 +78,29 @@ function App() {
                 path="/addliquidity"
                 element={<LiquidityContainer />}
               ></Route>
+              <Route path="/mypage" element={<MypageContainer />}></Route>
+              <Route path="/search" element={<MainContainer />} />
+              <Route
+                path="/searchRedirect"
+                element={<SearchNavigatorContainer></SearchNavigatorContainer>}
+              />
+              <Route
+                path="/redirectHome"
+                element={<NavigatorContainer></NavigatorContainer>}
+              ></Route>
             </Routes>
           </MainContent>
           <FooterContainer></FooterContainer>
 
-          {/* 로딩 중에는 로딩 창이 뜨도록 할 것입니다. */}
-          {isLoading ? (
+          {isLoading && (
             <LoadingModal>
-              <UserLoading />
+              <LoadingCompo />
             </LoadingModal>
-          ) : (
-            <></>
+          )}
+          {emptySearch && (
+            <LoadingModal>
+              <EmptySearchModal className="marginT" />
+            </LoadingModal>
           )}
         </div>
       </WagmiConfig>
@@ -126,15 +122,15 @@ const MainContent = styled.div`
 `;
 
 const LoadingModal = styled.div`
-  width: 100vmax;
-  height: 100vmax;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
-  align-items: center;
   left: 0%;
   top: 0%;
   right: 0%;
   justify-content: center;
-  z-index: 999999999;
+  align-items: center;
+  z-index: 9999;
 `;

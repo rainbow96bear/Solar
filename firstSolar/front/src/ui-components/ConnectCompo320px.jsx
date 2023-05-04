@@ -9,6 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
+import "../css/Font.css";
 export default function ConnectCompo320px(props) {
   const { overrides, ...rest } = props;
   return (
@@ -40,8 +41,9 @@ export default function ConnectCompo320px(props) {
           borderRadius: "35px",
           backgroundColor: "rgba(0,136,153,0.86)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          cursor: "pointer",
         }}
-        whileHover={{ borderRadius: "13px", scale: 1.05 }}
+        whileHover={{ borderRadius: "13px", scale: 1.05, opacity: 0.88 }}
       >
         <Flex
           gap="10px"
@@ -59,7 +61,7 @@ export default function ConnectCompo320px(props) {
           {...getOverrideProps(overrides, "Connect40052834")}
         >
           <Text
-            fontFamily="Inter"
+            fontFamily="ffProMedium"
             fontSize="18px"
             fontWeight="700"
             color="rgba(239,239,239,1)"

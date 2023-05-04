@@ -21,11 +21,9 @@ export const useWeb3 = () => {
 
         window.ethereum?.on("accountsChanged", async () => {
           if (window.ethereum) {
-            console.log("계정바뀜");
             const [_account] = await window.ethereum.request({
               method: "eth_requestAccounts",
             });
-            console.log(_account);
             setAccount(_account);
           }
         });
@@ -35,7 +33,7 @@ export const useWeb3 = () => {
         console.log("MetaMask is not exist");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 

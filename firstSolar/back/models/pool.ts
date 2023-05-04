@@ -4,13 +4,18 @@ export default class pool extends Model {
   public tokenAddress!: string;
   public firstToken!: string;
   public secondToken!: string;
-  public lpName!: string;
+  public name!: string;
   public platformId!: string;
   public platformLogo!: string;
   public network!: string;
   public mainNetLogo!: string;
   public apy!: number;
   public tvl!: number;
+  public oracleId!: string;
+  public fee!: number;
+  public firstTokenBalance!: string;
+  public secondTokenBalance!: string;
+
   public static initModel(sequelize: Sequelize) {
     return pool.init(
       {
@@ -51,7 +56,23 @@ export default class pool extends Model {
           allowNull: false,
         },
         tvl: {
-          type: DataTypes.INTEGER.UNSIGNED,
+          type: DataTypes.DECIMAL(30, 0),
+          allowNull: false,
+        },
+        oracleId: {
+          type: DataTypes.STRING(255),
+          allowNull: false,
+        },
+        fee: {
+          type: DataTypes.FLOAT(24),
+          allowNull: false,
+        },
+        firstTokenBalance: {
+          type: DataTypes.DECIMAL(30, 0),
+          allowNull: false,
+        },
+        secondTokenBalance: {
+          type: DataTypes.DECIMAL(30, 0),
           allowNull: false,
         },
       },

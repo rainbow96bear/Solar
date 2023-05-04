@@ -7,8 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo320px, SwapCompo320px } from "../../ui-components";
 import { connectThunk } from "../../modules/connect";
 import { useDispatch } from "react-redux";
+import "../../css/Font.css";
 
-const Poolitem320px = props => {
+const Poolitem320px = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -35,7 +36,10 @@ const Poolitem320px = props => {
             backgroundImage:
               "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
           }}
-          whileHover={{ borderRadius: "75px" }}
+          whileHover={{
+            borderRadius: "75px",
+            backgroundColor: "rgba(247,239,227,0.75)",
+          }}
         >
           <Flex
             gap="15px"
@@ -91,7 +95,7 @@ const Poolitem320px = props => {
                   {...getOverrideProps(overrides, "Frame 84")}
                 >
                   <Text
-                    fontFamily="Inter"
+                    fontFamily="ffProMedium"
                     fontSize="21px"
                     fontWeight="700"
                     lineHeight="25.414772033691406px"
@@ -126,7 +130,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "APY39433721")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="21px"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
@@ -160,7 +164,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "TVL39433724")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="21px"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
@@ -194,7 +198,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Action39433727")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="21px"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
@@ -228,7 +232,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Action39574054")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="21px"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
@@ -262,7 +266,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Action39574056")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="21px"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
@@ -296,7 +300,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Action39574058")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProMedium"
                   fontSize="21px"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
@@ -410,7 +414,7 @@ const Poolitem320px = props => {
                 >
                   <Text
                     children={props.item?.name}
-                    fontFamily="Inter"
+                    fontFamily="ffProMedium"
                     fontSize="11px"
                     fontWeight="700"
                     lineHeight="13.3125px"
@@ -459,15 +463,15 @@ const Poolitem320px = props => {
                       {...getOverrideProps(overrides, "Frame 9")}
                     >
                       <Text
-                        fontFamily="Inter"
-                        fontSize="9px"
+                        fontFamily="ffProLight"
+                        fontSize="11px"
                         fontWeight="700"
                         color="rgba(239,239,239,1)"
                         lineHeight="10.892045021057129px"
                         textAlign="center"
-                        display="block"
+                        display="flex"
                         direction="column"
-                        justifyContent="unset"
+                        justifyContent="center"
                         width="unset"
                         height="15px"
                         gap="unset"
@@ -477,7 +481,7 @@ const Poolitem320px = props => {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="VELOCIMETER"
+                        children={props?.item?.network}
                         {...getOverrideProps(overrides, "VELOCIMETER")}
                       ></Text>
                     </Flex>
@@ -497,31 +501,14 @@ const Poolitem320px = props => {
                       backgroundColor="rgba(0,136,153,0.59)"
                       {...getOverrideProps(overrides, "Frame 8")}
                     >
-                      <Image
-                        width="15px"
-                        height="15px"
-                        display="block"
-                        gap="unset"
-                        alignItems="unset"
-                        justifyContent="unset"
-                        shrink="0"
-                        position="relative"
-                        borderRadius="15px"
-                        padding="0px 0px 0px 0px"
-                        objectFit="cover"
-                        {...getOverrideProps(
-                          overrides,
-                          "unsplash:AYOloXgqjzo39433741"
-                        )}
-                      ></Image>
                       <Text
-                        fontFamily="Inter"
-                        fontSize="9px"
+                        fontFamily="ffProLight"
+                        fontSize="11px"
                         fontWeight="700"
                         color="rgba(239,239,239,1)"
                         lineHeight="10.892045021057129px"
                         textAlign="center"
-                        display="block"
+                        display="flex"
                         direction="column"
                         justifyContent="unset"
                         width="unset"
@@ -534,7 +521,7 @@ const Poolitem320px = props => {
                         position="relative"
                         padding="0px 0px 0px 0px"
                         whiteSpace="pre-wrap"
-                        children="STADER BOOST"
+                        children={props?.item?.platformId}
                         {...getOverrideProps(overrides, "STADER BOOST")}
                       ></Text>
                     </Flex>
@@ -558,7 +545,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "APY39433743")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="10px"
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
@@ -595,7 +582,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "TVL39433745")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="10px"
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
@@ -632,7 +619,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Action39433747")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="10px"
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
@@ -669,7 +656,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Action39574060")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="10px"
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
@@ -685,7 +672,9 @@ const Poolitem320px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`$${props.item?.tvl}`}
+                  children={`$${
+                    parseInt((props?.item?.tvl / 10 ** 18) * 10000) / 10000 || 0
+                  }`}
                   {...getOverrideProps(overrides, "$999,99939574061")}
                 ></Text>
               </Flex>
@@ -706,7 +695,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Action39574062")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="10px"
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
@@ -747,7 +736,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Action39574064")}
               >
                 <Text
-                  fontFamily="Inter"
+                  fontFamily="ffProExtraLight"
                   fontSize="10px"
                   fontWeight="700"
                   lineHeight="12.102272033691406px"

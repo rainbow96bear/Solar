@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
 const request = axios.create({
   baseURL: "http://localhost:8080",
@@ -9,27 +8,355 @@ const request = axios.create({
 });
 
 export const getMainPoolList = async (pageIndex) => {
-  const result = (
-    await request.get("api/defi", { params: { pageIndex: pageIndex } })
-  ).data;
-  const poolListData = result.poolListData;
-  const pageSize = 10; // 한 페이지에 10개의 항목을 보여줄 것이다.
-  const resultLength = result.poolListDataLength; // 풀의 전체갯수
-  const resultTotalPages = Math.ceil(resultLength / pageSize); // 총 몇 페이지나 있는지 구한다.
-  return { poolListData, resultTotalPages };
+  try {
+    const result = (
+      await request.get("api/defi", { params: { pageIndex: pageIndex } })
+    ).data;
+    const poolListData = result.poolListData;
+    const pageSize = 10;
+    const resultLength = result.poolListDataLength;
+    const resultTotalPages = Math.ceil(resultLength / pageSize);
+    return { poolListData, resultTotalPages };
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const oracleIdList = async (_params) => {
-  const result = (await request.post("api/defi/detail", { id: _params })).data;
-
-  return result;
+  try {
+    const result = (await request.post("api/defi/detail", { id: _params }))
+      .data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const logout = async (_walletKind, _account) => {
-  await request.post("api/user/logout", {
-    walletKind: _walletKind,
-    address: _account,
-  });
+  try {
+    await request.post("api/user/logout", {
+      walletKind: _walletKind,
+      address: _account,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  console.log("서버에 로그아웃 요청보냈어");
+export const dexList = async (_item, pageIndex) => {
+  try {
+    const result = (
+      await request.post("api/defi/filter", {
+        dex: _item,
+        pageIndex: pageIndex,
+      })
+    ).data;
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const netList = async (_item, pageIndex) => {
+  try {
+    const result = (
+      await request.post("api/defi/filter", { network: _item, pageIndex })
+    ).data;
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const lpBalance = async (account, symbol) => {
+  try {
+    const result = (
+      await request.post("api/user/lpBalance", {
+        account,
+        symbol,
+      })
+    ).data;
+    return result.balance;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const firstSync = async () => {
+  try {
+    const result = (await request.get("api/sync")).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const mypageList = async (account) => {
+  try {
+    const result = (
+      await request.post("api/sync/mypage", {
+        account,
+      })
+    ).data;
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getConvertPrice = async (tokenKind) => {
+  try {
+    const result = (await request.get("api/sync/datesync")).data;
+    if (tokenKind == "DFS") {
+      const dfs = result.find((item) => item.tokenSlug === "dfs");
+      return {
+        bnb: dfs.ConvertToBNB,
+        eth: dfs.ConvertToETH,
+        usdt: dfs.ConvertToUSDT,
+        tokenPrice: dfs.tokenPrice,
+      };
+    } else if (tokenKind == "ETH") {
+      const eth = result.find((item) => item.tokenSlug === "ethereum");
+      return {
+        bnb: eth.ConvertToBNB,
+        eth: eth.ConvertToETH,
+        usdt: eth.ConvertToUSDT,
+        tokenPrice: eth.tokenPrice,
+      };
+    } else if (tokenKind == "USDT") {
+      const usdt = result.find((item) => item.tokenSlug === "tether");
+      return {
+        bnb: usdt.ConvertToBNB,
+        eth: usdt.ConvertToETH,
+        usdt: usdt.ConvertToUSDT,
+        tokenPrice: usdt.tokenPrice,
+      };
+    } else if (tokenKind == "BNB") {
+      const bnb = result.find((item) => item.tokenSlug === "bnb");
+      return {
+        bnb: bnb.ConvertToBNB,
+        eth: bnb.ConvertToETH,
+        usdt: bnb.ConvertToUSDT,
+        tokenPrice: bnb.tokenPrice,
+      };
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const swapApprove = async (account, tokenName, amount, poolAddress) => {
+  try {
+    const result = await request.post("api/swap/swapApprove", {
+      account,
+      tokenName,
+      amount,
+      poolAddress,
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const swapTransaction = async (
+  account,
+  poolName,
+  amount,
+  tokenName,
+  convertToken
+) => {
+  try {
+    const result = await request.post("api/swap/swapTransaction", {
+      account,
+      poolName,
+      amount,
+      tokenName,
+      convertToken,
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const swapBalance = async (userAddress, firstSelectToken) => {
+  try {
+    const result = (
+      await request.post("api/swap/swapBalance", {
+        account: userAddress,
+      })
+    ).data[0];
+    switch (firstSelectToken) {
+      case "DFS":
+        return result.dfs;
+      case "ETH":
+        return result.eth;
+      case "BNB":
+        return result.bnb;
+      case "USDT":
+        return result.usdt;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const approveDFS = async (account, approveDFSAmount, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/approveDFS", {
+        account,
+        approveDFSAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const approveOtherToken = async (
+  account,
+  approveOtherAmount,
+  lpSymbol
+) => {
+  try {
+    const result = (
+      await request.post("api/defi/approveOtherToken", {
+        account,
+        approveOtherAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const addLiquidity = async (account, token1, token2, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/addLiquidity", {
+        account,
+        token1,
+        token2,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updatePool = async (tokenAddress) => {
+  try {
+    const result = (
+      await request.post("api/defi/updatePool", {
+        tokenAddress,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const approveLp = async (account, approveDepositAmount, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/approveLp", {
+        account,
+        approveDepositAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deposit = async (account, depositAmount, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/deposit", {
+        account,
+        depositAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const withDraw = async (account, withdrawAmount, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/withdraw", {
+        account,
+        withdrawAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getLPBalance = async (pid, account) => {
+  try {
+    const result = (
+      await request.post("api/defi/getLPBalance", {
+        pid,
+        account,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const removeLiquidity = async (account, removeAmount, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/removeLiquidity", {
+        account,
+        removeAmount,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getSearch = async (search, pageIndex) => {
+  try {
+    const result = (
+      await request.post("api/defi/search", {
+        search,
+        pageIndex,
+      })
+    ).data;
+
+    const poolListData = result.poolListData;
+    const pageSize = 10;
+    const resultLength = result.poolListDataLength;
+    const resultTotalPages = Math.ceil(resultLength / pageSize);
+
+    return { poolListData, resultTotalPages };
+  } catch (error) {
+    console.error(error);
+  }
 };
