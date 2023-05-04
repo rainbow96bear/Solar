@@ -37,7 +37,6 @@ export default function SwapTop768px(props) {
       );
       setDate(tempDate);
       setDateString(tempDate?.toLocaleDateString());
-      console.log(props.oracleiddata[0]);
       setFirstLiquidity(
         (parseInt(props?.oracleiddata[0]?.firstTokenBalance / 10 ** 18) *
           100000) /

@@ -94,9 +94,9 @@ export default function PoolListCom1024px(props) {
         } else if (filter != "null") {
           // 필터 있을 때 실행할 코드
         }
-        setTimeout(() => {
-          dispatch(isLoadingThunk({ isLoading: false }));
-        }, 5000);
+        // setTimeout(() => {
+        //   dispatch(isLoadingThunk({ isLoading: false }));
+        // }, 5000);
       } else {
         // 검색이 아니다. 메인 페이지
 
@@ -119,9 +119,9 @@ export default function PoolListCom1024px(props) {
           }
         }
 
-        setTimeout(() => {
-          dispatch(isLoadingThunk({ isLoading: false }));
-        }, 5000);
+        // setTimeout(() => {
+        //   dispatch(isLoadingThunk({ isLoading: false }));
+        // }, 5000);
       }
     } catch (error) {
       dispatch(isLoadingThunk({ isLoading: false }));
@@ -130,7 +130,10 @@ export default function PoolListCom1024px(props) {
   };
 
   React.useEffect(() => {
-    getPoolList();
+    (async () => {
+      await getPoolList();
+      dispatch(isLoadingThunk({ isLoading: false }));
+    })();
   }, [pageIndex]);
 
   React.useEffect(() => {
