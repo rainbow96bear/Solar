@@ -78,7 +78,7 @@ export const lpBalance = async (account, symbol) => {
         symbol,
       })
     ).data;
-    return result.balance;
+    return result;
   } catch (error) {
     console.error(error);
   }
