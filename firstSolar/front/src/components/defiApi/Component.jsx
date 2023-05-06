@@ -1,14 +1,14 @@
-const DefiComponent = ({ testing }) => {
+const DefiComponent = ({ personalSign }) => {
   return (
     <>
       <div>defi API testing</div>
       <button
         onClick={(e) => {
           e.preventDefault();
-          testing();
+          personalSign();
         }}
       >
-        메타마스크 연습
+        서명
       </button>
     </>
   );
