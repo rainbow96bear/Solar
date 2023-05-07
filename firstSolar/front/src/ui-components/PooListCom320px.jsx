@@ -20,7 +20,7 @@ import {
   Netlist320px,
   Dexlist320px,
 } from "../components/netdexlist/Netdexlist";
-import Poolitem320px from "../components/pool/Poolitem320px";
+import Poolitem320px from "../components/Pool/Poolitem320px";
 import { motion, LayoutGroup } from "framer-motion";
 import { dexList, getMainPoolList, netList } from "../api";
 import { useMediaQuery } from "react-responsive";
