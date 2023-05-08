@@ -22,10 +22,9 @@ contract LiquidityPool is ERC20 {
   uint256 public reserve2;
   // State variables for liquidity shares
   uint256 public totalLiquidity;
-  address public DexA;
+
   // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
-  uint256 testnum;
   address public rewardA;
   // Events
   event MintLpToken(address indexed _liquidityProvider, uint256 _sharesMinted);
@@ -57,20 +56,10 @@ contract LiquidityPool is ERC20 {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = IDFS(DFSTokenA);
-    // rwdToken1Amount=0;
-    // rwdToken2Amount=0;
   }
 
   function add(address _rewardA) public rewardLock {
     rewardA = _rewardA;
-  }
-
-  receive() external payable {
-    testnum = testnum + 1;
-  }
-
-  function getTestNum() public view returns (uint256) {
-    return testnum;
   }
 
   // Function to get reserves
@@ -90,30 +79,20 @@ contract LiquidityPool is ERC20 {
   // Internal function to mint liquidity shares
   // lp토큰추가 _to는 lp토큰 받을 사용자의 주소
 
-  function mint(address _to, uint256 _amount) private {
+  function mint(address _to, uint256 _amount) public {
     _mint(_to, _amount);
-    userLiquidity[_to] = balanceOf(_to);
+    userLiquidity[_to] = userLiquidity[_to].add(_amount);
     totalLiquidity = totalSupply();
   }
-
-  // function _mint(address _to, uint256 _amount) private {
-  //   userLiquidity[_to] = balanceOf(_to);
-  //   totalLiquidity += _amount;
-  // }
 
   // Internal function to burn liquidity shares
   // from은 lp토큰 소유한 사용자 주소
 
   function burn(address _from, uint256 _amount) private {
     _burn(_from, _amount);
-    userLiquidity[_from] = balanceOf(_from);
+    userLiquidity[_from] = userLiquidity[_from].sub(_amount);
     totalLiquidity = totalSupply();
   }
-
-  // function _burn(address _from, uint256 _amount) private {
-  //   userLiquidity[_from] -= _amount;
-  //   totalLiquidity -= _amount;
-  // }
 
   // Internal function to update liquidity pool reserves
   function _update(uint256 _reserve1, uint256 _reserve2) private {
@@ -390,8 +369,8 @@ contract LiquidityPool is ERC20 {
         ERC20(address(DFS)).transfer(rewardA, _amountToken1);
       }
     }
-    uint256 rewardOfToken1 = _amountToken1.div(3).mul(4);
-    uint256 rewardOfToken2 = _amountToken2.div(3).mul(4);
+    uint256 rewardOfToken1 = _amountToken1;
+    uint256 rewardOfToken2 = _amountToken2;
     (uint256 _reserve1, uint256 _reserve2) = getReserves();
     uint256 totalDFS = rewardOfToken1.add(
       (rewardOfToken2.mul(_reserve1)).div(_reserve2)
@@ -428,6 +407,39 @@ contract LiquidityPool is ERC20 {
 
     require(_amountOut < reserveOut, "Insufficient Liquidity");
     tokenOut.transfer(msg.sender, _amountOut);
+
+    _update(token1.balanceOf(address(this)), token2.balanceOf(address(this))); // token1과 token2는 각각 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수입니다.
+  }
+
+  function dfsSwap(
+    address _lpAddress,
+    address _tokenIn,
+    uint256 _amountIn
+  ) external returns (uint256 _amountOut) {
+    require(
+      _tokenIn == address(token1) || _tokenIn == address(token2),
+      "Invalid Token Address"
+    );
+
+    (uint256 _reserve1, uint256 _reserve2) = getReserves();
+    (
+      ERC20 tokenIn,
+      ERC20 tokenOut,
+      uint256 reserveIn,
+      uint256 reserveOut
+    ) = _tokenIn == address(token1)
+        ? (token1, token2, _reserve1, _reserve2)
+        : (token2, token1, _reserve2, _reserve1);
+    require(_amountIn > 0, "Insufficient Amount");
+    tokenIn.transferFrom(msg.sender, address(this), _amountIn);
+    uint256 _amountInWithFee = _amountIn;
+
+    _amountOut =
+      (reserveOut * _amountInWithFee) /
+      (reserveIn + _amountInWithFee);
+
+    require(_amountOut < reserveOut, "Insufficient Liquidity");
+    tokenOut.transfer(_lpAddress, _amountOut);
 
     _update(token1.balanceOf(address(this)), token2.balanceOf(address(this))); // token1과 token2는 각각 IERC20 인터페이스를 구현한 토큰 계약을 가리키는 변수입니다.
   }
