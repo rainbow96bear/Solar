@@ -89,6 +89,7 @@ export default function PoolListCom1024px(props) {
             searchData,
             pageIndex
           );
+
           setCurrentPagePoolList(poolListData);
           setTotalPages(resultTotalPages);
         } else if (filter != "null") {

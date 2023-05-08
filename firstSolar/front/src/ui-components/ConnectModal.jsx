@@ -46,10 +46,10 @@ export default function ConnectModal(props) {
 
   const metamaskLogin = async () => {
     try {
+      console.log("111111");
       if (!window.ethereum) {
         return;
       }
-      console.log(window.ethereum);
       await login();
       const [_account] = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -92,9 +92,7 @@ export default function ConnectModal(props) {
   };
   const coinbaseLogin = async () => {
     try {
-      console.log(window.ethereum);
-      console.log(window.web3);
-      console.log(window.web3.currentProvider.isCoinbaseWallet);
+      console.log("2222");
       await loginC();
       // const [_account] = await window.ethereum.request({
       //   method: "eth_requestAccounts",
@@ -117,7 +115,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
