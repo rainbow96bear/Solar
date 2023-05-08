@@ -102,7 +102,6 @@ const LiquidComponent = ({ oracleId, balance }) => {
         <>
           <Addliqud>
             <Flex
-              marginTop="-110px"
               direction={{
                 base: "column",
                 medium: "row",
@@ -203,7 +202,6 @@ const SubWrap = styled(motion.div)`
   font-size: 15px;
   margin-bottom: 50px;
   display: flex;
-  scale: 0.8;
   :last-child {
     border-radius: 0 0 20px 20px;
   }
