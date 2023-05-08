@@ -23,7 +23,7 @@ export default function SwapCompo1440px(props) {
       direction="row"
       width="90vw"
       height="unset"
-      justifyContent="flex-start"
+      justifyContent="center"
       alignItems="center"
       position="relative"
       borderRadius="18px"
@@ -33,7 +33,7 @@ export default function SwapCompo1440px(props) {
     >
       <motion.div
         style={{
-          width: "45vw",
+          width: "31vw",
           height: "unset",
           borderRadius: "35px",
           backgroundColor: "rgba(234,0,50,0.55)",
@@ -92,7 +92,7 @@ export default function SwapCompo1440px(props) {
 
       <motion.div
         style={{
-          width: "45vw",
+          width: "31vw",
           height: "unset",
           borderRadius: "35px",
           backgroundColor: "rgba(255,226,0,0.35)",

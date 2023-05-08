@@ -3,6 +3,7 @@ import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
 import { Sosim } from "../../ui-components";
 import "../../css/Font.css";
+
 const RankListComponent = () => {
   return (
     <>

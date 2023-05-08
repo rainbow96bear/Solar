@@ -195,6 +195,7 @@ export default function PoolListCom1024px(props) {
     }
     return 0;
   };
+
   return (
     <>
       {isDesktop ? (
@@ -282,6 +283,9 @@ export default function PoolListCom1024px(props) {
                     setFilter={setFilter}
                     setCurrentPagePoolList={setCurrentPagePoolList}
                     setTotalPages={setTotalPages}
+                    networkArray={networkArray}
+                    filter={filter}
+                    value={idx}
                   />
                 ))}
               </Flex>
@@ -360,6 +364,8 @@ export default function PoolListCom1024px(props) {
                     setCurrentPagePoolList={setCurrentPagePoolList}
                     setTotalPages={setTotalPages}
                     setFilter={setFilter}
+                    dexArray={dexArray}
+                    filter={filter}
                   />
                 ))}
               </Flex>
@@ -694,7 +700,6 @@ export default function PoolListCom1024px(props) {
                       item={item}
                       length={currentPagePoolList.length}
                       idx={idx}
-                      filter={filter}
                     />
                   ))
               ) : sortTVL == "up" ? (

@@ -11,8 +11,9 @@ import { Flex, Icon, Text } from "@aws-amplify/ui-react";
 import { gsap } from "gsap";
 import { Tween, SplitChars, Reveal } from "react-gsap";
 import { motion } from "framer-motion";
-import "../css/Font.css";
 import styled from "styled-components";
+import "../css/Font.css";
+import "../css/RankList.css";
 
 export default function Sosim(props) {
   const { overrides, ...rest } = props;
@@ -40,7 +41,7 @@ export default function Sosim(props) {
   }, [drop]);
 
   const onEnter = ({ currentTarget }) => {
-    gsap.to(currentTarget, { scale: 0.91 });
+    gsap.to(currentTarget, { scale: 0.94 });
   };
 
   const onLeave = ({ currentTarget }) => {
@@ -74,26 +75,34 @@ export default function Sosim(props) {
 
   return (
     <Flex
+      marginTop={{ base: "30px", large: "0px" }}
       gap="0"
-      direction="row"
-      width="45vw"
+      direction={{ base: "column", small: "row" }}
+      width="100%"
       height="unset"
       justifyContent="flex-start"
-      alignItems="flex-start"
+      alignItems={{ base: "flex-end", small: "flex-start" }}
       position="relative"
       padding="0px 0px 0px 0px"
       boxShadow="31px 19px 21px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
+      backgroundColor={{
+        base: "rgba(126,190,171,1)",
+        small: "rgba(252,253,254,1)",
+      }}
       {...getOverrideProps(overrides, "Sosim")}
       {...rest}
     >
       <Flex
         ref={appRef}
-        backgroundColor="rgba(252,253,254,1)"
+        backgroundColor={{
+          base: "rgba(038,069,061,1)",
+          small: "rgba(252,253,254,1)",
+        }}
         gap="10px"
         direction="column"
-        width="unset"
-        height="unset"
+        width={{ base: "174.15px", small: "unset" }}
+        height={{ base: "unset", small: "unset" }}
         justifyContent="flex-end"
         alignItems="flex-start"
         grow="1"
@@ -125,7 +134,7 @@ export default function Sosim(props) {
           <Text
             style={{ cursor: "pointer" }}
             fontFamily="ffProBook"
-            fontSize="25px"
+            fontSize={{ base: "24px", small: "29px" }}
             fontWeight="800"
             color="rgba(252,253,254,1)"
             lineHeight="42.35795211791992px"
@@ -196,20 +205,6 @@ export default function Sosim(props) {
           backgroundPosition: "center",
         }}
       >
-        {/* <Flex
-          gap="10px"
-          direction="column"
-          width="174.15px"
-          height="450px"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          shrink="0"
-          position="relative"
-          borderRadius="0px 35px 35px 0px"
-          padding="38px 27px 38px 27px"
-          backgroundColor="rgba(252,253,254,1)"
-          {...getOverrideProps(overrides, "Frame 201")}
-        > */}
         <Flex
           gap="14px"
           direction="column"
@@ -570,41 +565,7 @@ export default function Sosim(props) {
             </Flex>
           </Flex>
         </Flex>
-        {/* </Flex> */}
       </motion.div>
     </Flex>
   );
 }
-
-const RankStyle = styled.div`
-  .animation-container {
-    width: 600px;
-    max-width: 90%;
-    margin: 2rem auto;
-    button {
-      font-weight: 100;
-      color: black;
-      font-size: 1rem;
-      width: 100%;
-      display: block;
-      border-radius: 2rem;
-      background: black;
-      outline: none;
-      color: white;
-      cursor: pointer;
-      padding: 2rem;
-    }
-  }
-
-  .boxes {
-    margin: 2rem 0;
-    &-single {
-      height: 4rem;
-      border-radius: 2rem;
-      width: 100%;
-      margin: 2rem 0;
-      background: lightpink;
-      pointer-events: none;
-    }
-  }
-`;
