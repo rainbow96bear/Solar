@@ -204,7 +204,7 @@ export default function LoginAccount(props) {
                     logoutMethod();
                   }}
                 >
-                  Logout
+                  Disconnect
                 </Text>
               </li>
             </ul>
