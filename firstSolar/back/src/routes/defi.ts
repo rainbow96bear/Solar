@@ -760,4 +760,69 @@ router.post("/getLPBalance", async (req: Request, res: Response) => {
     res.send(err);
   }
 });
+
+router.post("/setAutoCompound", async (req: Request, res: Response) => {
+  try {
+    const { account, lpSymbol }: { account: string; lpSymbol?: string } =
+      req.body;
+
+    if (lpSymbol.includes("ETH")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_ETH)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.setAutoCompound(pid).encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_BNB)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.setAutoCompound(pid).encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_USDT)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.setAutoCompound(pid).encodeABI();
+    }
+    res.send(obj);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+
+router.post("/getAutoCompound", async (req: Request, res: Response) => {
+  try {
+    const { account, lpSymbol }: { account: string; lpSymbol?: string } =
+      req.body;
+    let getAutoCompoundStatus: boolean;
+    if (lpSymbol.includes("ETH")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_ETH)
+        .call();
+      const tempData = await deployed.methods.userInfo(pid, account).call();
+      getAutoCompoundStatus = tempData.checkAutoCompounding;
+    } else if (lpSymbol.includes("BNB")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_BNB)
+        .call();
+      const tempData = await deployed.methods.userInfo(pid, account).call();
+      getAutoCompoundStatus = tempData.checkAutoCompounding;
+    } else if (lpSymbol.includes("USDT")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_USDT)
+        .call();
+      const tempData = await deployed.methods.userInfo(pid, account).call();
+      getAutoCompoundStatus = tempData.checkAutoCompounding;
+    }
+    res.send(getAutoCompoundStatus);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 export default router;
