@@ -15,6 +15,8 @@ import { accountThunk } from "../modules/account.js";
 import { loginThunk } from "../modules/login.js";
 import metamaskLogo from "./images/metamaskLogo.jpg";
 import kaikasLogo from "./images/kaikasLogo.jpg";
+import trustLogo from "./images/trustLogo.jpg";
+import coinbaseLogo from "./images/coinbaseLogo.png";
 import axios from "axios";
 import { Web3Button } from "@web3modal/react";
 import { useWeb3 } from "../modules/useWeb3.js";
@@ -22,6 +24,8 @@ import { useWeb3K } from "../modules/useWeb3Kaikas.js";
 import { gsap } from "gsap";
 import { motion } from "framer-motion";
 import logo1 from "./images/6.png";
+import { useWeb3T } from "../modules/useWeb3Trust.js";
+import { useWeb3C } from "../modules/useWeb3Coinbase.js";
 
 export default function ConnectModal(props) {
   const { overrides, ...rest } = props;
@@ -37,11 +41,15 @@ export default function ConnectModal(props) {
   const dispatch = useDispatch();
   const { account, login } = useWeb3();
   const { accountK, loginK } = useWeb3K();
+  const { accountT, loginT } = useWeb3T();
+  const { accountC, loginC } = useWeb3C();
+
   const metamaskLogin = async () => {
     try {
       if (!window.ethereum) {
         return;
       }
+      console.log(window.ethereum);
       await login();
       const [_account] = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -75,6 +83,33 @@ export default function ConnectModal(props) {
     }
   };
 
+  const trustLogin = async () => {
+    try {
+      await loginT();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const coinbaseLogin = async () => {
+    try {
+      console.log(window.ethereum);
+      console.log(window.web3);
+      console.log(window.web3.currentProvider.isCoinbaseWallet);
+      await loginC();
+      // const [_account] = await window.ethereum.request({
+      //   method: "eth_requestAccounts",
+      // });
+      // const data = await axios.post("http://localhost:8080/api/user/login", {
+      //   account: _account,
+      //   walletKind: "coinbase",
+      // });
+      // dispatch(accountThunk({ account: _account }));
+      // dispatch(loginThunk({ login: true }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   React.useEffect(() => {
     document.body.style = `overflow: hidden`;
     return () => (document.body.style = `overflow: auto`);
@@ -82,7 +117,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
@@ -91,7 +126,7 @@ export default function ConnectModal(props) {
         gap="10px"
         direction="column"
         width="500px"
-        height="350px"
+        height="400px"
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
@@ -257,7 +292,7 @@ export default function ConnectModal(props) {
             padding="9px 33px 9px 9px"
             className="cursorPointer"
             onClick={() => {
-              kaikasLogin();
+              trustLogin();
             }}
             {...getOverrideProps(overrides, "ConnectModalKaikas")}
           >
@@ -272,7 +307,7 @@ export default function ConnectModal(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               objectFit="cover"
-              src={kaikasLogo}
+              src={trustLogo}
               {...getOverrideProps(overrides, "kaikasLogo 1")}
             ></Image>
             <Text
@@ -293,7 +328,61 @@ export default function ConnectModal(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Kaikas"
+              children="Trust Wallet"
+              {...getOverrideProps(overrides, "Kaikas")}
+            ></Text>
+          </Flex>
+          <Flex
+            gap="10px"
+            direction="row"
+            width="300px"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            shrink="0"
+            position="relative"
+            border="1px SOLID rgba(220,220,220,1)"
+            borderRadius="10px"
+            padding="9px 33px 9px 9px"
+            className="cursorPointer"
+            onClick={() => {
+              coinbaseLogin();
+            }}
+            {...getOverrideProps(overrides, "ConnectModalKaikas")}
+          >
+            <Image
+              width="40px"
+              height="40px"
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              objectFit="cover"
+              src={coinbaseLogo}
+              {...getOverrideProps(overrides, "kaikasLogo 1")}
+            ></Image>
+            <Text
+              fontFamily="Do Hyeon"
+              fontSize="24px"
+              fontWeight="400"
+              color="rgba(0,0,0,1)"
+              lineHeight="40px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Coinbase Wallet"
               {...getOverrideProps(overrides, "Kaikas")}
             ></Text>
           </Flex>
