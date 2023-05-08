@@ -117,7 +117,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
