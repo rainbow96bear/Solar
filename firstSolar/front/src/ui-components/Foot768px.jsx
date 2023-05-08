@@ -41,11 +41,11 @@ export default function Foot768px(props) {
           style={{
             width: "91vw",
             height: "unset",
-            backgroundColor: "rgba(255,255,255,0.8)",
+            backgroundColor: "rgba(246,247,248,0.8)",
             borderRadius: "21px",
             boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
           }}
           whileHover={{
             borderRadius: "45px",

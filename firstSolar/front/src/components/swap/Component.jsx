@@ -177,6 +177,7 @@ const Swap = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 30px;
+  margin-bottom: 100px;
   align-self: center;
 `;
 

@@ -7,16 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Divider,
-  Flex,
-  Image,
-  Loader,
-  Menu,
-  MenuItem,
-  SearchField,
-  useTheme,
-} from "@aws-amplify/ui-react";
+import { Flex, Image, SearchField } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -33,8 +24,8 @@ import { useMediaQuery } from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 export default function BeforeHeadCom768px(props) {
   const { overrides, ...rest } = props;
-  const login = useSelector((state) => state.login.login.login);
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const login = useSelector(state => state.login.login.login);
+  const connect = useSelector(state => state.connect.connect.connect);
   const { address, isConnecting, isDisconnected } = useAccount();
   const navigate = useNavigate();
 
@@ -48,14 +39,14 @@ export default function BeforeHeadCom768px(props) {
         <Cover>
           <Flex
             display="flex"
-            gap="26px"
+            gap="21px"
             direction="row"
-            width="90vw"
+            width="91vw"
             height="unset"
-            justifyContent="flex-start"
+            justifyContent="center"
             alignItems="center"
             position="relative"
-            padding="0px 0px 0px 0px"
+            padding="5px 15px 5px 15px"
             {...getOverrideProps(overrides, "BeforeHeadCom768px")}
             {...rest}
           >

@@ -13,14 +13,13 @@ export default FooterComponent;
 
 const FooterCompo = styled.div`
   background-color: #f8f8f8;
-  padding: 56px;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  width: 100%;
   justify-content: center;
   align-items: center;
   margin-top: 50px;
-
-  .Footer_innerBox {
-  }
+  padding-bottom: 100px;
+  padding-top: 55px;
+  padding-left: 15px;
 `;
