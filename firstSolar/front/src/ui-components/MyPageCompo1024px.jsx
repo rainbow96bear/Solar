@@ -9,13 +9,14 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyPageList1024px from "../components/myPageList/MyPageList1024px";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { mypageList } from "../api/index";
 import logo from "./images/logo_new.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading";
 import { motion } from "framer-motion";
 import "../css/Font.css";
+import { useAccount } from "wagmi";
 
 export default function MyPageCompo1024px(props) {
   const { overrides, ...rest } = props;
@@ -28,7 +29,9 @@ export default function MyPageCompo1024px(props) {
   const [secondImgToken, setSecondImgToken] = React.useState();
   const dispatch = useDispatch();
   const params = useLocation().search.replace("?", "");
-
+  const navigate = useNavigate();
+  const { account } = useAccount();
+  const account2 = useSelector((state) => state.account.account.account);
   const lpBalanceValue = parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
 
   const isLoadingTrue = () => {
@@ -41,7 +44,6 @@ export default function MyPageCompo1024px(props) {
 
   const mypageLpListUp = async () => {
     try {
-      console.log("mypageLpListUp");
       const myLists = await mypageList(params);
       setMyList(myLists);
     } catch (error) {

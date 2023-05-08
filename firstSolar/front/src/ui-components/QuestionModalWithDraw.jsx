@@ -678,6 +678,8 @@ export default function QuestionModalWithDraw(props) {
         <RemoveModal>
           <YesNoButton768px
             withDrawAmountValue={withDrawAmountValue}
+            lptokenvalue={props?.lptokenvalue}
+            setLpTokenValue={props?.setLpTokenValue}
             setquestionmark={setQuestionMark}
             lpSymbol={props?.lptoken}
             mypagelplistup={props.mypagelplistup}
