@@ -177,7 +177,9 @@ export default function DepositButton1024px(props) {
           lptokenvalue={props.lptokenvalue}
           mypagelplistup={props.mypagelplistup}
           lptoken={props.lptoken}
+          mypageMethod={props?.mypageMethod}
           pid={props?.pid}
+          setLpTokenValue={props.setLpTokenValue}
         ></QuestionModalWithDraw>
       ) : (
         <></>

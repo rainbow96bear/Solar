@@ -21,7 +21,8 @@ const SwapComponent = ({ oracleId, balance }) => {
   const isMobile = useMediaQuery({
     query: "(max-width:1279px)",
   });
-
+  console.log("oracleId : ", oracleId);
+  console.log("balance : ", balance);
   return (
     <>
       {isDesktop ? (

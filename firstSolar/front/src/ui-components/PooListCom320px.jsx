@@ -221,7 +221,7 @@ export default function PooListCom320px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Main Net List"
+                  children="MainNet"
                   {...getOverrideProps(overrides, "Networks List")}
                 ></Text>
                 <Flex
@@ -256,6 +256,7 @@ export default function PooListCom320px(props) {
                       <Netlist320px
                         key={`Netlist320px-1${idx}`}
                         item={item}
+                        filter={filter}
                         setFilter={setFilter}
                         setCurrentPagePoolList={setCurrentPagePoolList}
                         setTotalPages={setTotalPages}
@@ -286,6 +287,7 @@ export default function PooListCom320px(props) {
                         setCurrentPagePoolList={setCurrentPagePoolList}
                         setTotalPages={setTotalPages}
                         setFilter={setFilter}
+                        filter={filter}
                       />
                     ))}
                   </Flex>
@@ -337,7 +339,7 @@ export default function PooListCom320px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Dex List"
+                  children="Dex"
                   {...getOverrideProps(overrides, "Networks List")}
                 ></Text>
                 <Flex
@@ -372,6 +374,7 @@ export default function PooListCom320px(props) {
                       <Dexlist320px
                         key={`Dexlist320px-1${idx}`}
                         item={item}
+                        filter={filter}
                         setCurrentPagePoolList={setCurrentPagePoolList}
                         setTotalPages={setTotalPages}
                         pageIndex={pageIndex}
@@ -397,6 +400,7 @@ export default function PooListCom320px(props) {
                       <Dexlist320px
                         key={`Dexlist320px-2${idx}`}
                         item={item}
+                        filter={filter}
                         setCurrentPagePoolList={setCurrentPagePoolList}
                         setTotalPages={setTotalPages}
                         pageIndex={pageIndex}
@@ -439,7 +443,7 @@ export default function PooListCom320px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={pageNum => {
+                onChange={(pageNum) => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {

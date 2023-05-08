@@ -7,7 +7,14 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, SearchField, Text, View } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Image,
+  SearchField,
+  Text,
+  View,
+} from "@aws-amplify/ui-react";
 import { connectThunk } from "../modules/connect.js";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -26,10 +33,10 @@ import { useMediaQuery } from "react-responsive";
 export default function BeforeHeadCom1024px(props) {
   const { overrides, ...rest } = props;
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
-  const login = useSelector(state => state.login.login.login);
+  const login = useSelector((state) => state.login.login.login);
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = React.useState();
   const { address, isConnecting, isDisconnected } = useAccount();
@@ -41,7 +48,7 @@ export default function BeforeHeadCom1024px(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -52,7 +59,7 @@ export default function BeforeHeadCom1024px(props) {
     };
   }, [view]);
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const inputValue = e.target.value;
     const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
     setInputValue(sanitizedValue);
@@ -147,7 +154,44 @@ export default function BeforeHeadCom1024px(props) {
             {...getOverrideProps(overrides, "SearchField")}
           ></SearchField>
           <Cover>
-            <div className="Header_right">
+            <div
+              className="Header_right"
+              style={{ display: "flex", gap: "20px" }}
+            >
+              <motion.div
+                style={{
+                  width: "45px",
+                  height: "45px",
+                  alignSelf: "center",
+                  borderRadius: "33px",
+                  backgroundColor: "rgba(247,239,227,0.75)",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  backgroundImage:
+                    "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                }}
+                whileHover={{
+                  scale: 0.93,
+                  backgroundColor: "rgba(247,239,227,0.75)",
+                }}
+              >
+                <Button
+                  width="45px"
+                  height="45px"
+                  borderRadius="35px"
+                  alignSelf="center"
+                  shrink="0"
+                  size="small"
+                  isDisabled={false}
+                  fontFamily="ffCondExtraLight"
+                  children="List Reset"
+                  textAlign="center"
+                  fontSize="10px"
+                  onClick={() => {
+                    navigate("/redirectHome");
+                  }}
+                  {...getOverrideProps(overrides, "Button")}
+                ></Button>
+              </motion.div>
               {connect ? (
                 login ? (
                   <LoginAccount></LoginAccount>

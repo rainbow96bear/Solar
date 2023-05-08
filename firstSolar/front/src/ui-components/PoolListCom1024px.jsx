@@ -259,7 +259,7 @@ export default function PoolListCom1024px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Networks List"
+                children="MainNet"
                 {...getOverrideProps(overrides, "Networks List")}
               ></Text>
               <Flex
@@ -280,11 +280,11 @@ export default function PoolListCom1024px(props) {
                     key={`Netlist1024px-${idx}`}
                     item={item}
                     pageIndex={pageIndex}
+                    filter={filter}
                     setFilter={setFilter}
                     setCurrentPagePoolList={setCurrentPagePoolList}
                     setTotalPages={setTotalPages}
                     networkArray={networkArray}
-                    filter={filter}
                     value={idx}
                   />
                 ))}
@@ -339,7 +339,7 @@ export default function PoolListCom1024px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Dex List"
+                children="Dex"
                 {...getOverrideProps(overrides, "Networks List")}
               ></Text>
 
@@ -364,7 +364,6 @@ export default function PoolListCom1024px(props) {
                     setCurrentPagePoolList={setCurrentPagePoolList}
                     setTotalPages={setTotalPages}
                     setFilter={setFilter}
-                    dexArray={dexArray}
                     filter={filter}
                   />
                 ))}
@@ -753,7 +752,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

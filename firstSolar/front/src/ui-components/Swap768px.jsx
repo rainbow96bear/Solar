@@ -38,7 +38,7 @@ export default function Swap768px(props) {
   const { web3K, accountK, chainIdK, loginK } = useWeb3K();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
   const dispatch = useDispatch();
@@ -125,6 +125,24 @@ export default function Swap768px(props) {
   }, [secondSelectToken]);
 
   React.useEffect(() => {
+    if (
+      textareaValue == 0 ||
+      textareaValue == undefined ||
+      textareaValue == null ||
+      textareaValue > userFirstBalance
+    ) {
+      setSwapPossibility(false);
+    } else {
+      if (
+        props?.oracleiddata[0]?.name.includes(firstSelectToken) &&
+        props?.oracleiddata[0]?.name.includes(secondSelectToken)
+      ) {
+        setSwapPossibility(true);
+      } else setSwapPossibility(false);
+    }
+  }, [firstSelectToken, secondSelectToken, textareaValue]);
+
+  React.useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
@@ -159,14 +177,14 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = percentNum => {
+  const setPercentBalance = (percentNum) => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
@@ -177,7 +195,7 @@ export default function Swap768px(props) {
     delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const handleTextareaChange = event => {
+  const handleTextareaChange = (event) => {
     const value = event.target.value;
 
     const filteredValue = value.replace(/[^0-9.\b]/g, "");
@@ -220,7 +238,7 @@ export default function Swap768px(props) {
     }, 1000);
   }
 
-  const delayedFunction2 = num => {
+  const delayedFunction2 = (num) => {
     try {
       if (secondSelectToken == "DFS") {
         setSecondAmountPrice(convertPrice.usdt * num);
@@ -235,18 +253,6 @@ export default function Swap768px(props) {
       console.error(error);
     }
   };
-  React.useEffect(() => {
-    if (
-      textareaValue == 0 ||
-      textareaValue == undefined ||
-      textareaValue == null ||
-      textareaValue > userFirstBalance
-    ) {
-      setSwapPossibility(false);
-    } else {
-      setSwapPossibility(true);
-    }
-  }, [textareaValue]);
 
   const swapMethod = async () => {
     try {
@@ -485,7 +491,19 @@ export default function Swap768px(props) {
           position="relative"
           padding="11px 0px 11px 0px"
           {...getOverrideProps(overrides, "Line")}
-        ></Flex>
+        >
+          <Flex
+            backgroundColor="rgba(234, 0, 50, 0.45)"
+            borderRadius="30px"
+            display={swapPossibility == false ? "flex" : "none"}
+            color="white"
+            width="100%"
+            padding="10px 10px 10px 10px"
+            justifyContent="center"
+          >
+            Swap을 할 수 없습니다. 다시 한 번 검토해주십시오.
+          </Flex>
+        </Flex>
         <Flex
           gap="19px"
           direction="column"
@@ -678,7 +696,7 @@ export default function Swap768px(props) {
                 labelHidden={false}
                 variation="default"
                 value={textareaValue}
-                onChange={e => {
+                onChange={(e) => {
                   if (+e.target.value > +userFirstBalance) {
                     e.target.value = userFirstBalance;
                   }
@@ -686,7 +704,7 @@ export default function Swap768px(props) {
                   handleTextareaChange(e);
                   delayedFunction1(e.target.value);
                 }}
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -1093,7 +1111,7 @@ export default function Swap768px(props) {
                 value={secondAmountPrice ? secondAmountPrice : 0}
                 disabled
                 backgroundColor="transparent"
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}

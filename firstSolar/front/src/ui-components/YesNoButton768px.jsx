@@ -17,11 +17,11 @@ export default function YesNoButton768px(props) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account.account.account);
+  const [render, setRender] = React.useState(false);
   const { web3, login } = useWeb3();
   const { loginK } = useWeb3K();
   const { account } = useAccount();
-
   const removeLiquidityFunc = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
@@ -32,9 +32,10 @@ export default function YesNoButton768px(props) {
       );
 
       const removeTx = await web3.eth.sendTransaction(result2);
-
+      props?.setLpTokenValue(props?.lptokenvalue - props?.withDrawAmountValue);
       dispatch(isLoadingThunk({ isLoading: false }));
       props.setquestionmark(0);
+      navigate("/redirectHome");
     } catch (error) {
       console.error(error);
       dispatch(isLoadingThunk({ isLoading: false }));
