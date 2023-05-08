@@ -21,7 +21,7 @@ import "../css/Font.css";
 export default function LoginAccount(props) {
   const { overrides, ...rest } = props;
   const [view, setView] = React.useState(false);
-  const account = useSelector(state => state.account.account.account);
+  const account = useSelector((state) => state.account.account.account);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const ref = React.useRef();
@@ -32,7 +32,7 @@ export default function LoginAccount(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -238,7 +238,7 @@ export default function LoginAccount(props) {
                     logoutMethod();
                   }}
                 >
-                  Logout
+                  Disconnect
                 </Text>
               </li>
             </ul>
