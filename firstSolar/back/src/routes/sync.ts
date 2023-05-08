@@ -150,4 +150,31 @@ router.get("/datesync", async (req: Request, res: Response) => {
     console.log(error);
   }
 });
+
+router.get("/lastDayOfMonth", async (req: Request, res: Response) => {
+  try {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const today = now.getDate();
+
+    const getLastDayOfMonth = (year: number, month: number): Date => {
+      const nextMonth = month + 1;
+      const nextMonthFirstDay = new Date(year, nextMonth, 1);
+      const lastDayOfMonth: Date = new Date(nextMonthFirstDay.getTime() - 1);
+      return lastDayOfMonth;
+    };
+
+    const lastDayOfMonth = getLastDayOfMonth(year, month);
+
+    console.log("lastDayOfMonth", lastDayOfMonth.getDate());
+    console.log("today", today);
+    if (today == lastDayOfMonth.getDate()) {
+      // airDrop 함수 실행
+    }
+    res.send(lastDayOfMonth);
+  } catch (error) {
+    console.log(error);
+  }
+});
 export default router;
