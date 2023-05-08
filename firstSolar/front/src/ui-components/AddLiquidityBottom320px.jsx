@@ -26,6 +26,8 @@ import { motion } from "framer-motion";
 import AddLiquiditySuccessModal from "./AddLiquiditySuccessModal";
 import AddLiquidityFailModal from "./AddLiquidityFailModal";
 import styled from "styled-components";
+import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
+import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
 
 export default function AddLiquidityBottom320px(props) {
   const { overrides, oracleiddata, ...rest } = props;
@@ -38,7 +40,7 @@ export default function AddLiquidityBottom320px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -683,7 +685,7 @@ export default function AddLiquidityBottom320px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -871,7 +873,7 @@ export default function AddLiquidityBottom320px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }
@@ -910,10 +912,6 @@ export default function AddLiquidityBottom320px(props) {
             position="relative"
             borderRadius="15px"
             padding="13px 73px 13px 73px"
-            style={{
-              cursor: "pointer",
-            }}
-            {...getOverrideProps(overrides, "Frame 76")}
             onClick={async () => {
               if (!addLiquidityPossibility) return;
               await addLiquidtiyFunc();
@@ -921,6 +919,7 @@ export default function AddLiquidityBottom320px(props) {
             style={{
               cursor: addLiquidityPossibility ? "pointer" : "not-allowed",
             }}
+            {...getOverrideProps(overrides, "Frame 76")}
           >
             <Text
               fontFamily="ffProMedium"
@@ -948,7 +947,7 @@ export default function AddLiquidityBottom320px(props) {
       </Flex>
       {addLiquiditySuccessModalOpen && (
         <LoadingModal>
-          <AddLiquiditySuccessModal
+          <AddLiquidityCompletedModals
             setAddLiquiditySuccessModalOpen={setAddLiquiditySuccessModalOpen}
             firstSelectToken={props?.oracleiddata[0]?.firstToken}
             secondSelectToken={props?.oracleiddata[0]?.secondToken}
@@ -957,7 +956,7 @@ export default function AddLiquidityBottom320px(props) {
       )}
       {addLiquidityFailModalOpen && (
         <LoadingModal>
-          <AddLiquidityFailModal
+          <AddLiquidityFaildModal
             setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
           />
         </LoadingModal>

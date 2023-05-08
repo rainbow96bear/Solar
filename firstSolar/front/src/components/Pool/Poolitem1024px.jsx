@@ -56,6 +56,11 @@ const Poolitem1024 = (props) => {
             shrink="0"
             alignSelf="stretch"
             position="relative"
+            style={{
+              backgroundImage: props?.item?.oracleId.includes("DFS")
+                ? "linear-gradient(90deg,rgba(240,198,147,1) 0%,rgba(246,247,248,0.15) 20%)"
+                : "",
+            }}
             borderRadius="18px"
             padding="7px 18px 7px 18px"
             {...getOverrideProps(overrides, "List")}

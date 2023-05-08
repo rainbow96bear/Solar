@@ -27,7 +27,7 @@ export const useWeb3C = () => {
           }
         });
 
-        window.ethereum.publicConfigStore.on("update", () => {
+        window.ethereum.publicConfigStore?.on("update", () => {
           setChainIdC(window.ethereum.networkVersion);
         });
 

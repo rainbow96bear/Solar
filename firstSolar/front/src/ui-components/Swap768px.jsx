@@ -31,6 +31,8 @@ import styled from "styled-components";
 import SwapSuccessModal from "./SwapSuccessModal";
 import SwapFailModal from "./SwapFailModal";
 import "../css/Font.css";
+import SwapCompletedModal from "./SwapCompletedModal";
+import SwapFaildModal from "./SwapFaildModal";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
@@ -44,6 +46,7 @@ export default function Swap768px(props) {
   const dispatch = useDispatch();
   const [textareaValue, setTextAreaValue] = React.useState("");
   const [swapPossibility, setSwapPossibility] = React.useState(false);
+  const [rightPool, setRightPool] = React.useState(false);
   const [questionMark, setQuestionMark] = React.useState(0);
 
   const [swapSuccessModalOpen, setSwapSuccessModalOpen] = React.useState(false);
@@ -129,18 +132,24 @@ export default function Swap768px(props) {
       textareaValue == 0 ||
       textareaValue == undefined ||
       textareaValue == null ||
-      textareaValue > userFirstBalance
+      textareaValue > userFirstBalance ||
+      !props?.oracleiddata[0]?.name.includes(firstSelectToken) ||
+      !props?.oracleiddata[0]?.name.includes(secondSelectToken)
     ) {
       setSwapPossibility(false);
     } else {
-      if (
-        props?.oracleiddata[0]?.name.includes(firstSelectToken) &&
-        props?.oracleiddata[0]?.name.includes(secondSelectToken)
-      ) {
-        setSwapPossibility(true);
-      } else setSwapPossibility(false);
+      setSwapPossibility(true);
     }
   }, [firstSelectToken, secondSelectToken, textareaValue]);
+
+  React.useEffect(() => {
+    if (
+      !props?.oracleiddata[0]?.name.includes(firstSelectToken) ||
+      !props?.oracleiddata[0]?.name.includes(secondSelectToken)
+    ) {
+      setRightPool(false);
+    } else setRightPool(true);
+  }, [firstSelectToken, secondSelectToken]);
 
   React.useEffect(() => {
     if (document.cookie) {
@@ -495,13 +504,13 @@ export default function Swap768px(props) {
           <Flex
             backgroundColor="rgba(234, 0, 50, 0.45)"
             borderRadius="30px"
-            display={swapPossibility == false ? "flex" : "none"}
+            display={rightPool == false ? "flex" : "none"}
             color="white"
             width="100%"
             padding="10px 10px 10px 10px"
             justifyContent="center"
           >
-            Swap을 할 수 없습니다. 다시 한 번 검토해주십시오.
+            Select the appropriate token for the pool.
           </Flex>
         </Flex>
         <Flex
@@ -1184,7 +1193,7 @@ export default function Swap768px(props) {
         )}
         {swapSuccessModalOpen && (
           <LoadingModal>
-            <SwapSuccessModal
+            <SwapCompletedModal
               setSwapSuccessModalOpen={setSwapSuccessModalOpen}
               firstSelectToken={firstSelectToken}
               secondSelectToken={secondSelectToken}
@@ -1193,7 +1202,7 @@ export default function Swap768px(props) {
         )}
         {swapFailModalOpen && (
           <LoadingModal>
-            <SwapFailModal
+            <SwapFaildModal
               setSwapFailModalOpen={setSwapFailModalOpen}
               firstSelectToken={firstSelectToken}
               secondSelectToken={secondSelectToken}

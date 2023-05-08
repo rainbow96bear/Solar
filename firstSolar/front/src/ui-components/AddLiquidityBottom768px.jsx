@@ -26,6 +26,8 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import AddLiquiditySuccessModal from "./AddLiquiditySuccessModal";
 import AddLiquidityFailModal from "./AddLiquidityFailModal";
+import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
+import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
 
 export default function AddLiquidityBottom768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
@@ -39,7 +41,7 @@ export default function AddLiquidityBottom768px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -619,7 +621,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -766,7 +768,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }
@@ -838,7 +840,7 @@ export default function AddLiquidityBottom768px(props) {
       </Flex>
       {addLiquiditySuccessModalOpen && (
         <LoadingModal>
-          <AddLiquiditySuccessModal
+          <AddLiquidityCompletedModal
             setAddLiquiditySuccessModalOpen={setAddLiquiditySuccessModalOpen}
             firstSelectToken={props?.oracleiddata[0]?.firstToken}
             secondSelectToken={props?.oracleiddata[0]?.secondToken}
@@ -847,7 +849,7 @@ export default function AddLiquidityBottom768px(props) {
       )}
       {addLiquidityFailModalOpen && (
         <LoadingModal>
-          <AddLiquidityFailModal
+          <AddLiquidityFaildModal
             setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
           />
         </LoadingModal>

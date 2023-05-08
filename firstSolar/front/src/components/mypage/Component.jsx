@@ -4,8 +4,20 @@ import styled from "styled-components";
 import "../../css/Font.css";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+import { useAccount } from "wagmi";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const MypageComponent = () => {
+  const { account } = useAccount();
+  const account2 = useSelector((state) => state.account.account.account);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (!account && !account2) {
+      navigate("/redirectHome");
+    }
+  }, []);
   const isDesktop = useMediaQuery({
     query: "(min-width:769px)",
   });
