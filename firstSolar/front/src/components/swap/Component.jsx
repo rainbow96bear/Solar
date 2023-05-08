@@ -47,6 +47,7 @@ const SwapComponent = ({ oracleId, balance }) => {
             >
               <motion.div
                 style={{
+                  marginTop: "-158px",
                   height: "unset",
                   borderRadius: "35px",
                   backgroundColor: "rgba(249,249,249,1)",
@@ -76,7 +77,19 @@ const SwapComponent = ({ oracleId, balance }) => {
                     }}
                   >
                     <Swap768px
-                      style={{ marginTop: "75px" }}
+                      style={{
+                        marginTop: "-38px",
+                        height: "unset",
+                        borderRadius: "35px",
+                        backgroundColor: "rgba(249,249,249,1)",
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      }}
+                      whileHover={{
+                        borderRadius: "55px",
+                        scale: 0.9,
+                        backgroundColor: "rgba(249,249,249,0.55)",
+                        boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+                      }}
                       oracleiddata={props}
                       balance={balance}
                     />
@@ -95,7 +108,6 @@ const SwapComponent = ({ oracleId, balance }) => {
             <Flex
               direction={{
                 base: "column",
-                small: "column",
                 medium: "row",
               }}
             >
@@ -113,6 +125,7 @@ const SwapComponent = ({ oracleId, balance }) => {
                     }
                   }}
                   style={{
+                    marginTop: "-110px",
                     height: "unset",
                     borderRadius: "35px",
                     backgroundColor: "rgba(249,249,249,1)",
@@ -142,6 +155,10 @@ const SwapComponent = ({ oracleId, balance }) => {
                       }}
                     >
                       <Swap320px
+                        marginTop={{
+                          base: "-150px",
+                          medium: "0px",
+                        }}
                         style={{
                           height: "unset",
                           borderRadius: "35px",
@@ -177,8 +194,6 @@ const Swap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 100px;
   align-self: center;
 `;
 
@@ -188,12 +203,13 @@ const ItemWrap = styled(motion.div)`
   align-items: center;
   justify-content: space-between;
   background: white;
-  margin-top: 38px;
+  scale: 0.74;
 `;
 
 const SubWrap = styled(motion.div)`
   font-size: 15px;
   display: flex;
+  scale: 0.9;
   :last-child {
     border-radius: 0 0 20px 20px;
   }

@@ -42,6 +42,7 @@ const LiquidComponent = ({ oracleId, balance }) => {
             >
               <motion.div
                 style={{
+                  marginTop: "-158px",
                   height: "unset",
                   borderRadius: "35px",
                   backgroundColor: "rgba(249,249,249,1)",
@@ -71,7 +72,19 @@ const LiquidComponent = ({ oracleId, balance }) => {
                     }}
                   >
                     <AddLiquidityBottom768px
-                      style={{ marginTop: "75px" }}
+                      style={{
+                        marginTop: "-38px",
+                        height: "unset",
+                        borderRadius: "35px",
+                        backgroundColor: "rgba(249,249,249,1)",
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      }}
+                      whileHover={{
+                        borderRadius: "55px",
+                        scale: 0.9,
+                        backgroundColor: "rgba(249,249,249,0.55)",
+                        boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+                      }}
                       oracleiddata={props}
                       balance={balance}
                     />
@@ -88,9 +101,9 @@ const LiquidComponent = ({ oracleId, balance }) => {
         <>
           <Addliqud>
             <Flex
+              marginTop="-110px"
               direction={{
                 base: "column",
-                small: "column",
                 medium: "row",
               }}
             >
@@ -148,7 +161,22 @@ const LiquidComponent = ({ oracleId, balance }) => {
                       }}
                     >
                       <AddLiquidityBottom320px
-                        style={{ marginTop: "75px" }}
+                        marginTop={{
+                          base: "-190px",
+                          medium: "0px",
+                        }}
+                        style={{
+                          height: "unset",
+                          borderRadius: "35px",
+                          backgroundColor: "rgba(249,249,249,1)",
+                          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                        }}
+                        whileHover={{
+                          borderRadius: "55px",
+                          scale: 0.99,
+                          backgroundColor: "rgba(249,249,249,0.55)",
+                          boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+                        }}
                         oracleiddata={props}
                         balance={balance}
                       />
@@ -174,7 +202,6 @@ const Addliqud = styled.div`
   justify-content: center;
   align-self: center;
   margin-top: 30px;
-  margin-bottom: 100px;
 `;
 
 const ItemWrap = styled(motion.div)`
@@ -183,12 +210,13 @@ const ItemWrap = styled(motion.div)`
   align-items: center;
   justify-content: center;
   background: white;
-  margin-top: 38px;
+  scale: 0.74;
 `;
 
 const SubWrap = styled(motion.div)`
   font-size: 15px;
   display: flex;
+  scale: 0.8;
   :last-child {
     border-radius: 0 0 20px 20px;
   }
