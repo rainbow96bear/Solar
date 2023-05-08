@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 export default function SwapCompo1440px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
-  const disbleButton = props?.props?.item?.oracleId?.split("-")[0] == "DFS";
+  const isDFS = props?.props?.item?.oracleId?.split("-")[0] == "DFS";
 
   return (
     <Flex
@@ -108,7 +108,14 @@ export default function SwapCompo1440px(props) {
       >
         <Flex
           onClick={() => {
-            navigate(`/addliquidity?${props.props.item.oracleId}`);
+            const url = isDFS
+              ? `/addliquidity?${props.props.item.oracleId}`
+              : props.props.item.addLiquidityUrl;
+            isDFS
+              ? navigate(url)
+              : url
+              ? window.open(url, "_blank")
+              : window.location.reload();
           }}
           gap="10px"
           direction="row"
@@ -144,7 +151,7 @@ export default function SwapCompo1440px(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Add Liquidity"
-            disabled={disbleButton ? false : true}
+            disabled={false}
             backgroundColor="rgba(255,226,0,0.001)"
             {...getOverrideProps(overrides, "Add Liquidity")}
           ></Button>

@@ -38,14 +38,18 @@ export default function SwapTop768px(props) {
       setDate(tempDate);
       setDateString(tempDate?.toLocaleDateString());
       setFirstLiquidity(
-        (parseInt(props?.oracleiddata[0]?.firstTokenBalance / 10 ** 18) *
-          100000) /
-          100000
+        props?.oracleiddata[0]?.name?.includes("DFS")
+          ? (parseInt(props?.oracleiddata[0]?.firstTokenBalance / 10 ** 18) *
+              100000) /
+              100000
+          : parseInt(props?.oracleiddata[0]?.firstTokenBalance * 1000) / 1000
       );
       setSecondLiquidity(
-        (parseInt(props?.oracleiddata[0]?.secondTokenBalance / 10 ** 18) *
-          100000) /
-          100000
+        props?.oracleiddata[0]?.name?.includes("DFS")
+          ? (parseInt(props?.oracleiddata[0]?.secondTokenBalance / 10 ** 18) *
+              100000) /
+              100000
+          : parseInt(props?.oracleiddata[0]?.secondTokenBalance * 1000) / 1000
       );
       setTimeout(() => {
         dispatch(isLoadingThunk({ isLoading: false }));
@@ -128,9 +132,9 @@ export default function SwapTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.firstToken
+                  props?.oracleiddata[0]?.name?.includes("DFS")
                     ? props?.oracleiddata[0]?.firstToken
-                    : "DFS"
+                    : props?.oracleiddata[0]?.assets[0]
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
               ></Text>
@@ -185,7 +189,7 @@ export default function SwapTop768px(props) {
                 children={
                   props?.oracleiddata[0]?.secondToken
                     ? props?.oracleiddata[0]?.secondToken
-                    : "DFS"
+                    : props?.oracleiddata[0]?.assets[1]
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
               ></Text>
@@ -469,9 +473,9 @@ export default function SwapTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.firstToken
+                  props?.oracleiddata[0]?.name?.includes("DFS")
                     ? props?.oracleiddata[0]?.firstToken
-                    : "DFS"
+                    : props?.oracleiddata[0]?.assets[0]
                 }
                 {...getOverrideProps(overrides, "TokenName40132808")}
               ></Text>
@@ -563,7 +567,7 @@ export default function SwapTop768px(props) {
                 children={
                   props?.oracleiddata[0]?.secondToken
                     ? props?.oracleiddata[0]?.secondToken
-                    : "DFS"
+                    : props?.oracleiddata[0]?.assets[1]
                 }
                 {...getOverrideProps(overrides, "TokenName40132816")}
               ></Text>

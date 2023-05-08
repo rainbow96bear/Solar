@@ -1,4 +1,3 @@
-import { resolve } from "path";
 import db from "../../models/index";
 import price from "./priceList";
 const delay = (ms) => {
@@ -52,6 +51,7 @@ const timeSync = async () => {
               },
             }
           );
+          await delay(5000);
         }
         priceDB = await db.Price.findAll();
 
