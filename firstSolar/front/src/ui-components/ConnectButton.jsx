@@ -62,7 +62,7 @@ export default function ConnectButton(props) {
             position="relative"
             borderRadius="18px"
             padding="0px 0px 0px 0px"
-            backgroundColor="rgba(255,255,255,1)"
+            backgroundColor="rgba(252,253,254,1)"
             {...getOverrideProps(overrides, "Frame 17")}
           >
             <Image
@@ -84,7 +84,7 @@ export default function ConnectButton(props) {
             fontFamily="Kanit"
             fontSize="18px"
             fontWeight="400"
-            color="rgba(255,255,255,1)"
+            color="rgba(252,253,254,1)"
             lineHeight="26.90999984741211px"
             textAlign="center"
             display="block"

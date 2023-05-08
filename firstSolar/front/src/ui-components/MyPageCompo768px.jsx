@@ -145,14 +145,14 @@ export default function MyPageCompo768px(props) {
             width: "71.4vw",
             height: "unset",
             borderRadius: "23px",
-            backgroundColor: "rgba(249,251,250,0.85)",
+            backgroundColor: "rgba(127,190,171,0.85)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
           }}
           whileHover={{
             borderRadius: "55px",
-            backgroundColor: "rgba(0,056,071,0.75)",
+            backgroundColor: "rgba(199,184,151,0.75)",
           }}
         >
           <Flex

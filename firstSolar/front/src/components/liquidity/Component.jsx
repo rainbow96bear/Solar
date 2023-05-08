@@ -174,6 +174,7 @@ const Addliqud = styled.div`
   justify-content: center;
   align-self: center;
   margin-top: 30px;
+  margin-bottom: 100px;
 `;
 
 const ItemWrap = styled(motion.div)`

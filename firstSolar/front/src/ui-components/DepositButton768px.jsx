@@ -22,19 +22,19 @@ export default function DepositButton768px(props) {
       <Flex
         gap="33px"
         direction="row"
-        width="78.1vw"
+        width="100vw"
         height="unset"
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
         borderRadius="35px"
-        padding="31px 63.5px 31px 63.5px"
+        padding="31px 80px 31px 80px"
         {...getOverrideProps(overrides, "DepositButton1024px")}
         {...rest}
       >
         <motion.div
           style={{
-            width: "45vw",
+            width: "50vw",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(255,226,0,0.35)",
@@ -65,7 +65,7 @@ export default function DepositButton768px(props) {
           >
             <Text
               fontFamily="ffProMedium"
-              fontSize="24px"
+              fontSize={{ base: "13px", small: "15px" }}
               fontWeight="700"
               lineHeight="29.045454025268555px"
               textAlign="center"
@@ -94,7 +94,7 @@ export default function DepositButton768px(props) {
 
         <motion.div
           style={{
-            width: "45vw",
+            width: "50vw",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(234,0,50,0.55)",
@@ -125,7 +125,7 @@ export default function DepositButton768px(props) {
           >
             <Text
               fontFamily="ffProMedium"
-              fontSize="24px"
+              fontSize={{ base: "13px", small: "15px" }}
               fontWeight="700"
               color="rgba(244,244,244,1)"
               lineHeight="29.045454025268555px"
