@@ -186,7 +186,7 @@ export default function LoginAccount(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={account}
+                children={account.slice(0, 5) + "..." + account.slice(5)}
                 {...getOverrideProps(overrides, "account")}
               ></Text>
             </AccountCover>

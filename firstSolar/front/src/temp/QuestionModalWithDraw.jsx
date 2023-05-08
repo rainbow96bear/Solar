@@ -737,6 +737,13 @@ const RemoveModal = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  align-items: center;
+  z-index: 88;
 `;
 const LoadingModal = styled.div`
   width: 100vw;
