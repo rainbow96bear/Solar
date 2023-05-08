@@ -203,6 +203,7 @@ const ItemWrap = styled(motion.div)`
 const SubWrap = styled(motion.div)`
   font-size: 15px;
   display: flex;
+  scale: 0.9;
   :last-child {
     border-radius: 0 0 20px 20px;
   }
