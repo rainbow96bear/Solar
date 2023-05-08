@@ -9,16 +9,16 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../css/Font.css";
 import { useAccount } from "wagmi";
 
-const Poolitem1024 = props => {
+const Poolitem1024 = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
   const { address } = useAccount();
 
   const addressResult = address || address2;
   const dispatch = useDispatch();
-  const pageIndex = useSelector(state => state.pageIndex);
+  const pageIndex = useSelector((state) => state.pageIndex);
 
   return (
     <>
@@ -425,8 +425,10 @@ const Poolitem1024 = props => {
                       padding="0px 0px 0px 0px"
                       whiteSpace="pre-wrap"
                       children={`$${
-                        parseInt((props?.item?.tvl / 10 ** 18) * 10000) /
-                          10000 || 0
+                        props?.item?.name?.includes("DFS")
+                          ? parseInt((props?.item?.tvl / 10 ** 18) * 10000) /
+                              10000 || 0
+                          : props?.item?.tvl
                       }`}
                       {...getOverrideProps(overrides, "$999,99939913056")}
                     ></Text>
