@@ -154,6 +154,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
                 platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
                 tokens,
                 tokenAddress: lp.tokenAddress,
+                addLiquidityUrl: lp.addLiquidityUrl,
               };
             })
         );
