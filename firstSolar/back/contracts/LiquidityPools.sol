@@ -22,7 +22,6 @@ contract LiquidityPools is ERC20 {
   uint256 public reserve2;
   // State variables for liquidity shares
   uint256 public totalLiquidity;
-  address public DexA;
   // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
   uint256 testnum;
@@ -91,7 +90,7 @@ contract LiquidityPools is ERC20 {
   // Internal function to mint liquidity shares
   // lp토큰추가 _to는 lp토큰 받을 사용자의 주소
 
-  function mint(address _to, uint256 _amount) private {
+  function mint(address _to, uint256 _amount) public {
     _mint(_to, _amount);
     userLiquidity[_to] = balanceOf(_to);
     totalLiquidity = totalSupply();
@@ -391,8 +390,8 @@ contract LiquidityPools is ERC20 {
         ERC20(address(DFS)).transfer(rewardA, _amountToken1);
       }
     }
-    uint256 rewardOfToken1 = _amountToken1.div(3).mul(4);
-    uint256 rewardOfToken2 = _amountToken2.div(3).mul(4);
+    uint256 rewardOfToken1 = _amountToken1;
+    uint256 rewardOfToken2 = _amountToken2;
     (uint256 _reserve1, uint256 _reserve2) = getReserves();
     uint256 totalDFS = rewardOfToken1.add(
       (rewardOfToken2.mul(_reserve1)).div(_reserve2)
