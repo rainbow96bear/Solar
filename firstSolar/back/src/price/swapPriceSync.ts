@@ -1,5 +1,9 @@
+import { resolve } from "path";
 import db from "../../models/index";
 import price from "./priceList";
+const delay = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 const timeSync = async () => {
   const updateTime = await db.Price.findAll();
   const nowTime = new Date();
@@ -16,6 +20,7 @@ const timeSync = async () => {
         ConvertToBNB: priceDataList[i].convertBNB,
         tokenPrice: priceDataList[i].tokenPrice,
       });
+      await delay(5000);
     }
 
     let priceDB = await db.Price.findAll();
