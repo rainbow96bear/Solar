@@ -13,6 +13,7 @@ import {
   SearchField,
   SwitchField,
   Menu,
+  Button,
   MenuItem,
   Divider,
 } from "@aws-amplify/ui-react";
@@ -24,16 +25,17 @@ import ConnectModal from "./ConnectModal";
 import LoggedinUser from "./LoggedinUser";
 import { useAccount } from "wagmi";
 import LoadingButton768 from "./LoadingButton768";
+import { motion } from "framer-motion";
 import { Web3Button } from "@web3modal/react";
 import { useMediaQuery } from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
-  const login = useSelector(state => state.login.login.login);
+  const login = useSelector((state) => state.login.login.login);
   const { address } = useAccount();
   const navigate = useNavigate();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const isMobile = useMediaQuery({
     query: "(min-width:0px) and (max-width:480px)",
   });
@@ -52,7 +54,7 @@ export default function BeforeHeadCom320px(props) {
               display="flex"
               gap="0px"
               alignItems="unset"
-              justifyContent="unset"
+              justifyContent="space-between"
               position="relative"
               padding="0px 0px 0px 0px"
               {...getOverrideProps(overrides, "BeforeHeadCom320px")}
@@ -61,7 +63,7 @@ export default function BeforeHeadCom320px(props) {
               <Flex
                 gap="0"
                 direction="row"
-                width="320px"
+                // width="320px"
                 height="50px"
                 justifyContent="center"
                 alignItems="center"
@@ -126,18 +128,6 @@ export default function BeforeHeadCom320px(props) {
                       ></Image>
                     </Flex>
                   </Flex>
-                  <Flex
-                    gap="10px"
-                    direction="row"
-                    width="30px"
-                    height="30px"
-                    justifyContent="center"
-                    alignItems="center"
-                    shrink="0"
-                    position="relative"
-                    padding="5px 5px 5px 5px"
-                    {...getOverrideProps(overrides, "Frame 49")}
-                  ></Flex>
                 </Flex>
                 <Flex
                   gap="10px"
@@ -169,7 +159,45 @@ export default function BeforeHeadCom320px(props) {
                     setSearchView(!searchView);
                   }}
                 ></SwitchField>
-                <div className="header_right">
+                <div
+                  className="header_right"
+                  style={{ display: "flex", gap: "20px" }}
+                >
+                  <motion.div
+                    width={{ base: "38px", small: "45px" }}
+                    height={{ base: "38px", small: "45px" }}
+                    style={{
+                      alignSelf: "center",
+                      borderRadius: "35px",
+                      backgroundColor: "rgba(247,239,227,0.75)",
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      backgroundImage:
+                        "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                    }}
+                    whileHover={{
+                      scale: 0.93,
+                      backgroundColor: "rgba(247,239,227,0.75)",
+                    }}
+                  >
+                    <Button
+                      display="flex"
+                      width={{ base: "38px", small: "45px" }}
+                      height={{ base: "38px", small: "45px" }}
+                      borderRadius="35px"
+                      alignSelf="center"
+                      shrink="0"
+                      size="small"
+                      isDisabled={false}
+                      fontFamily="ffCondExtraLight"
+                      children="List Reset"
+                      textAlign="center"
+                      fontSize={{ base: "7px", small: "10px" }}
+                      onClick={() => {
+                        navigate("/redirectHome");
+                      }}
+                      {...getOverrideProps(overrides, "Button")}
+                    ></Button>
+                  </motion.div>
                   {connect ? (
                     login ? (
                       <LoggedinUser></LoggedinUser>

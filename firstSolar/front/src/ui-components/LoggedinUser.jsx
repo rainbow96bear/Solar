@@ -12,10 +12,10 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import "../css/Font.css";
 
-const LoggedinUser = props => {
+const LoggedinUser = (props) => {
   const { overrides, ...rest } = props;
   const [view, setView] = useState(false);
-  const account = useSelector(state => state.account.account.account);
+  const account = useSelector((state) => state.account.account.account);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const LoggedinUser = props => {
   }, [pathname]);
 
   useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -47,41 +47,6 @@ const LoggedinUser = props => {
 
   return (
     <LoggedinUserCover ref={ref}>
-      <motion.div
-        width={{ base: "38px", small: "45px" }}
-        height={{ base: "38px", small: "45px" }}
-        style={{
-          alignSelf: "center",
-          borderRadius: "35px",
-          backgroundColor: "rgba(247,239,227,0.75)",
-          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          backgroundImage:
-            "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
-        }}
-        whileHover={{
-          scale: 0.93,
-          backgroundColor: "rgba(247,239,227,0.75)",
-        }}
-      >
-        <Button
-          display="flex"
-          width={{ base: "38px", small: "45px" }}
-          height={{ base: "38px", small: "45px" }}
-          borderRadius="35px"
-          alignSelf="center"
-          shrink="0"
-          size="small"
-          isDisabled={false}
-          fontFamily="ffCondExtraLight"
-          children="List Reset"
-          textAlign="center"
-          fontSize={{ base: "7px", small: "10px" }}
-          onClick={() => {
-            navigate("/redirectHome");
-          }}
-          {...getOverrideProps(overrides, "Button")}
-        ></Button>
-      </motion.div>
       <motion.div
         width={{ base: "38px", small: "45px" }}
         height={{ base: "38px", small: "45px" }}

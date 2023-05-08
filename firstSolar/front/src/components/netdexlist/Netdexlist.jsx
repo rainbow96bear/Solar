@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { isLoadingThunk } from "../../modules/isLoading";
 import { useDispatch } from "react-redux";
 
-const Netlist1024px = props => {
+const Netlist1024px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -52,6 +52,11 @@ const Netlist1024px = props => {
           alignSelf="stretch"
           position="relative"
           borderRadius="15px"
+          backgroundColor={
+            props?.item == props?.filter
+              ? "rgba(235,069,074,0.85)"
+              : "rgba(248,251,251,0.35)"
+          }
           padding="10px 10px 10px 10px"
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
@@ -76,7 +81,7 @@ const Netlist1024px = props => {
   );
 };
 
-const Dexlist1024px = props => {
+const Dexlist1024px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -124,6 +129,9 @@ const Dexlist1024px = props => {
           position="relative"
           borderRadius="15px"
           padding="10px 10px 10px 10px"
+          backgroundColor={
+            props?.item == props?.filter ? "rgba(0,125,122,0.85)" : ""
+          }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
@@ -147,7 +155,7 @@ const Dexlist1024px = props => {
   );
 };
 
-const Netlist768px = props => {
+const Netlist768px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -194,6 +202,11 @@ const Netlist768px = props => {
           position="relative"
           borderRadius="10px"
           padding="10px 10px 10px 10px"
+          backgroundColor={
+            props?.item == props?.filter
+              ? "rgba(235,069,074,0.85)"
+              : "rgba(248,251,251,0.35)"
+          }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
@@ -217,7 +230,7 @@ const Netlist768px = props => {
   );
 };
 
-const Dexlist768px = props => {
+const Dexlist768px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -264,6 +277,9 @@ const Dexlist768px = props => {
           position="relative"
           borderRadius="10px"
           padding="10px 10px 10px 10px"
+          backgroundColor={
+            props?.item == props?.filter ? "rgba(0,125,122,0.85)" : ""
+          }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
@@ -287,7 +303,7 @@ const Dexlist768px = props => {
   );
 };
 
-const Netlist320px = props => {
+const Netlist320px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
@@ -334,6 +350,11 @@ const Netlist320px = props => {
           position="relative"
           borderRadius="15px"
           padding="10px 10px 10px 10px"
+          backgroundColor={
+            props?.item == props?.filter
+              ? "rgba(235,069,074,0.85)"
+              : "rgba(248,251,251,0.35)"
+          }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
@@ -357,7 +378,7 @@ const Netlist320px = props => {
   );
 };
 
-const Dexlist320px = props => {
+const Dexlist320px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
 
@@ -405,6 +426,9 @@ const Dexlist320px = props => {
           position="relative"
           borderRadius="15px"
           padding="10px 10px 10px 10px"
+          backgroundColor={
+            props?.item == props?.filter ? "rgba(0,125,122,0.85)" : ""
+          }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image

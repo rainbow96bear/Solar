@@ -540,7 +540,7 @@ export default function ConnectModal(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 onClick={() => {
-                  kaikasLogin();
+                  trustLogin();
                 }}
                 {...getOverrideProps(overrides, "Frame 50")}
               >
@@ -548,7 +548,7 @@ export default function ConnectModal(props) {
                   width="25px"
                   height="25px"
                   viewBox={{ minX: 0, minY: 0, width: 25, height: 25 }}
-                  src={kaikasLogo}
+                  src={trustLogo}
                   display="block"
                   gap="unset"
                   alignItems="unset"
@@ -577,11 +577,66 @@ export default function ConnectModal(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Kaikas"
+                  children="Trust Wallet"
                   {...getOverrideProps(overrides, "Deposit")}
                 ></Text>
               </Flex>
-
+              <Flex
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
+                style={{ cursor: "pointer" }}
+                gap="10px"
+                direction="row"
+                width="unset"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="center"
+                shrink="0"
+                alignSelf="stretch"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                onClick={() => {
+                  coinbaseLogin();
+                }}
+                {...getOverrideProps(overrides, "Frame 50")}
+              >
+                <Image
+                  width="25px"
+                  height="25px"
+                  viewBox={{ minX: 0, minY: 0, width: 25, height: 25 }}
+                  src={coinbaseLogo}
+                  display="block"
+                  gap="unset"
+                  alignItems="unset"
+                  justifyContent="unset"
+                  shrink="0"
+                  position="relative"
+                  {...getOverrideProps(overrides, "Vector41212691")}
+                ></Image>
+                <Text
+                  fontFamily="ffProBook"
+                  fontSize="15px"
+                  fontWeight="800"
+                  color="rgba(114,113,113,1)"
+                  lineHeight="18.15340805053711px"
+                  textAlign="left"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  grow="1"
+                  shrink="1"
+                  basis="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children="Coinbase Wallet"
+                  {...getOverrideProps(overrides, "Deposit")}
+                ></Text>
+              </Flex>
               <Flex
                 onMouseEnter={onEnter}
                 onMouseLeave={onLeave}
