@@ -52,7 +52,7 @@ const Poolitem320px = props => {
             alignSelf="stretch"
             position="relative"
             borderRadius="15px"
-            padding="39px 34px 39px 14px"
+            padding="0px 34px 23px 14px"
             {...getOverrideProps(overrides, "PoolItem")}
           >
             <Flex
@@ -82,6 +82,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "lpList")}
               >
                 <Flex
+                  marginTop="35px"
                   gap="10px"
                   direction="row"
                   width="unset"
@@ -116,74 +117,7 @@ const Poolitem320px = props => {
                   ></Text>
                 </Flex>
               </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "APY39433721")}
-              >
-                <Text
-                  fontFamily="ffProMedium"
-                  fontSize="0.7rem"
-                  fontWeight="700"
-                  lineHeight="25.414772033691406px"
-                  textAlign="left"
-                  display="flex"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="WALLET"
-                  {...getOverrideProps(overrides, "WALLET")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "TVL39433724")}
-              >
-                <Text
-                  fontFamily="ffProMedium"
-                  fontSize="0.7rem"
-                  fontWeight="700"
-                  lineHeight="25.414772033691406px"
-                  textAlign="left"
-                  display="flex"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="DEPOSITED"
-                  {...getOverrideProps(overrides, "DEPOSITED")}
-                ></Text>
-              </Flex>
+
               <Flex
                 gap="10px"
                 direction="row"
@@ -350,7 +284,7 @@ const Poolitem320px = props => {
                 {...getOverrideProps(overrides, "Frame 18")}
               >
                 <Flex
-                  gap="-6px"
+                  gap="5px"
                   direction="row"
                   width="unset"
                   height="48px"
@@ -363,8 +297,8 @@ const Poolitem320px = props => {
                 >
                   <Image
                     src={props.item?.mainNetLogo}
-                    width="15px"
-                    height="15px"
+                    width="30px"
+                    height="30px"
                     display="flex"
                     gap="unset"
                     alignItems="unset"
@@ -528,80 +462,7 @@ const Poolitem320px = props => {
                   </Flex>
                 </Flex>
               </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                borderRadius="10px"
-                padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
-                {...getOverrideProps(overrides, "APY39433743")}
-              >
-                <Text
-                  fontFamily="ffProExtraLight"
-                  fontSize="10px"
-                  fontWeight="700"
-                  lineHeight="12.102272033691406px"
-                  textAlign="left"
-                  display="flex"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="0"
-                  {...getOverrideProps(overrides, "039433744")}
-                ></Text>
-              </Flex>
-              <Flex
-                gap="10px"
-                direction="row"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                borderRadius="10px"
-                padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
-                {...getOverrideProps(overrides, "TVL39433745")}
-              >
-                <Text
-                  fontFamily="ffProExtraLight"
-                  fontSize="10px"
-                  fontWeight="700"
-                  lineHeight="12.102272033691406px"
-                  textAlign="left"
-                  display="flex"
-                  direction="column"
-                  justifyContent="unset"
-                  width="unset"
-                  height="unset"
-                  gap="unset"
-                  alignItems="unset"
-                  shrink="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  whiteSpace="pre-wrap"
-                  children="0"
-                  {...getOverrideProps(overrides, "039433746")}
-                ></Text>
-              </Flex>
+
               <Flex
                 gap="10px"
                 direction="row"
@@ -673,7 +534,10 @@ const Poolitem320px = props => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`$${
-                    parseInt((props?.item?.tvl / 10 ** 18) * 10000) / 10000 || 0
+                    props?.item?.name?.includes("DFS")
+                      ? parseInt((props?.item?.tvl / 10 ** 18) * 10000) /
+                          10000 || 0
+                      : props?.item?.tvl
                   }`}
                   {...getOverrideProps(overrides, "$999,99939574061")}
                 ></Text>

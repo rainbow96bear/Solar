@@ -172,7 +172,9 @@ export default function AddLiquidityBottom768px(props) {
     <Flex
       gap="75px"
       direction="column"
-      width="689px"
+      width="38vw"
+      top="45px"
+      right="120px"
       height="unset"
       justifyContent="flex-start"
       alignItems="center"
