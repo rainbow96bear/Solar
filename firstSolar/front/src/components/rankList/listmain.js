@@ -107,7 +107,7 @@ const SkewContainer = styled.div`
   perspective: 500;
   margin-top: 55px;
   margin-bottom: 35px;
-  scale: 0.9;
+  scale: 0.86;
 
   @media only screen and (max-width: 768px) {
     scale: 0.71;
@@ -115,7 +115,7 @@ const SkewContainer = styled.div`
   }
 
   @media only screen and (max-width: 499px) {
-    scale: 0.61;
+    scale: 0.55;
     margin-right: 45px;
   }
 `;

@@ -168,16 +168,16 @@ export default function AddLiquidityBottom320px(props) {
 
   return (
     <Flex
-      gap="24px"
+      gap="10px"
       direction="column"
       width="320px"
       height="unset"
       justifyContent="flex-start"
-      alignItems="flex-start"
+      alignItems="center"
       overflow="hidden"
       position="relative"
       borderRadius="35px"
-      padding="0px 0px 16px 0px"
+      padding="38px 0px 38px 0px"
       {...getOverrideProps(overrides, "AddLiquidityBottom320px")}
       {...rest}
     >
@@ -590,49 +590,6 @@ export default function AddLiquidityBottom320px(props) {
                   }
                   {...getOverrideProps(overrides, "DEX Name40053036")}
                 ></Text>
-                <Flex
-                  gap="5px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  {...getOverrideProps(overrides, "Frame 9940053037")}
-                >
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 840053038")}
-                  ></Image>
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 940053039")}
-                  ></Image>
-                </Flex>
               </Flex>
               <Flex
                 gap="10px"
@@ -778,49 +735,6 @@ export default function AddLiquidityBottom320px(props) {
                   }
                   {...getOverrideProps(overrides, "DEX Name40053047")}
                 ></Text>
-                <Flex
-                  gap="5px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  {...getOverrideProps(overrides, "Frame 9940053048")}
-                >
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 840053049")}
-                  ></Image>
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 940053050")}
-                  ></Image>
-                </Flex>
               </Flex>
               <Flex
                 gap="10px"
@@ -910,9 +824,6 @@ export default function AddLiquidityBottom320px(props) {
             position="relative"
             borderRadius="15px"
             padding="13px 73px 13px 73px"
-            style={{
-              cursor: "pointer",
-            }}
             {...getOverrideProps(overrides, "Frame 76")}
             onClick={async () => {
               if (!addLiquidityPossibility) return;
