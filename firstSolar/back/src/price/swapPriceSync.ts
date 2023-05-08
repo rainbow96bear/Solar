@@ -52,6 +52,7 @@ const timeSync = async () => {
               },
             }
           );
+          await delay(5000);
         }
         priceDB = await db.Price.findAll();
 
