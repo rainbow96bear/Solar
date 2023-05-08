@@ -8,7 +8,14 @@
 import * as React from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text, Icon, TextAreaField } from "@aws-amplify/ui-react";
+import {
+  Flex,
+  Image,
+  Text,
+  Icon,
+  TextAreaField,
+  SwitchField,
+} from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +35,7 @@ export default function QuestionModalDeposit(props) {
   const [balanceChange, setBalanceChange] = React.useState(false);
 
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const [depositAmountValue, setDepositAmountValue] = React.useState(0);
 
   const [depositSuccessModalOpen, setDepositSuccessModalOpen] =
@@ -87,7 +94,7 @@ export default function QuestionModalDeposit(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -197,6 +204,101 @@ export default function QuestionModalDeposit(props) {
           padding="0px 74px 0px 74px"
           {...getOverrideProps(overrides, "Frame 106")}
         >
+          <Flex
+            gap="11px"
+            direction="column"
+            width="unset"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            shrink="0"
+            alignSelf="stretch"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 96")}
+          >
+            <Text
+              fontFamily="ffProLight"
+              fontSize="15px"
+              fontWeight="600"
+              lineHeight="18.15340805053711px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="AUTO COMPOUNDING"
+              {...getOverrideProps(overrides, "CHOOSE TOKEN PAIR")}
+            ></Text>
+            <Flex
+              gap="24px"
+              direction="row"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="center"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              {...getOverrideProps(overrides, "Frame 90")}
+            >
+              <SwitchField
+              // onChange={() => {
+              //   setSearchView(!searchView);
+              // }}
+              ></SwitchField>
+              <Flex
+                gap="5px"
+                direction="row"
+                width="unset"
+                height="unset"
+                justifyContent="center"
+                alignItems="center"
+                grow="0.35"
+                shrink="1"
+                basis="0"
+                position="relative"
+                boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                borderRadius="25px"
+                padding="10px 12px 10px 12px"
+                backgroundColor="rgba(0,136,153,0.59)"
+                {...getOverrideProps(overrides, "Dexname2")}
+              >
+                <Text
+                  fontFamily="ffProExtraLight"
+                  fontSize="17px"
+                  fontWeight="600"
+                  color="rgba(239,239,239,1)"
+                  lineHeight="20.573863983154297px"
+                  textAlign="left"
+                  display="flex"
+                  direction="column"
+                  justifyContent="center"
+                  width="unset"
+                  height="16px"
+                  gap="unset"
+                  alignItems="center"
+                  grow="1"
+                  shrink="1"
+                  basis="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children={"ON"}
+                  {...getOverrideProps(overrides, "DEX Name40822792")}
+                ></Text>
+              </Flex>
+            </Flex>
+          </Flex>
           <Flex
             gap="11px"
             direction="column"
@@ -419,6 +521,7 @@ export default function QuestionModalDeposit(props) {
               </Flex>
             </Flex>
           </Flex>
+
           <Flex
             gap="12px"
             direction="column"
@@ -583,8 +686,8 @@ export default function QuestionModalDeposit(props) {
                 labelHidden={false}
                 variation="default"
                 value={depositAmountValue}
-                onInput={(e) => setDepositAmountValue(e.target.value)}
-                onChange={(e) => {
+                onInput={e => setDepositAmountValue(e.target.value)}
+                onChange={e => {
                   if (+e.target.value > +props.lpBalanceValue) {
                     e.target.value = props.lpBalanceValue;
                   }
