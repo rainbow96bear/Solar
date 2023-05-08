@@ -9,7 +9,7 @@ import { connectThunk } from "../../modules/connect";
 import { useDispatch } from "react-redux";
 import "../../css/Font.css";
 
-const Poolitem320px = (props) => {
+const Poolitem320px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -34,7 +34,7 @@ const Poolitem320px = (props) => {
             backgroundColor: "rgba(249,250,250,0.75)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
           }}
           whileHover={{
             borderRadius: "75px",
@@ -96,11 +96,11 @@ const Poolitem320px = (props) => {
                 >
                   <Text
                     fontFamily="ffProMedium"
-                    fontSize="21px"
+                    fontSize="0.7rem"
                     fontWeight="700"
                     lineHeight="25.414772033691406px"
                     textAlign="left"
-                    display="block"
+                    display="flex"
                     direction="column"
                     justifyContent="unset"
                     width="unset"
@@ -131,11 +131,11 @@ const Poolitem320px = (props) => {
               >
                 <Text
                   fontFamily="ffProMedium"
-                  fontSize="21px"
+                  fontSize="0.7rem"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -165,11 +165,11 @@ const Poolitem320px = (props) => {
               >
                 <Text
                   fontFamily="ffProMedium"
-                  fontSize="21px"
+                  fontSize="0.7rem"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -199,11 +199,11 @@ const Poolitem320px = (props) => {
               >
                 <Text
                   fontFamily="ffProMedium"
-                  fontSize="21px"
+                  fontSize="0.7rem"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -233,11 +233,11 @@ const Poolitem320px = (props) => {
               >
                 <Text
                   fontFamily="ffProMedium"
-                  fontSize="21px"
+                  fontSize="0.7rem"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -267,11 +267,11 @@ const Poolitem320px = (props) => {
               >
                 <Text
                   fontFamily="ffProMedium"
-                  fontSize="21px"
+                  fontSize="0.7rem"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -301,11 +301,11 @@ const Poolitem320px = (props) => {
               >
                 <Text
                   fontFamily="ffProMedium"
-                  fontSize="21px"
+                  fontSize="0.7rem"
                   fontWeight="700"
                   lineHeight="25.414772033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -365,7 +365,7 @@ const Poolitem320px = (props) => {
                     src={props.item?.mainNetLogo}
                     width="15px"
                     height="15px"
-                    display="block"
+                    display="flex"
                     gap="unset"
                     alignItems="unset"
                     justifyContent="unset"
@@ -383,7 +383,7 @@ const Poolitem320px = (props) => {
                     src={props.item?.platformLogo}
                     width="38px"
                     height="38px"
-                    display="block"
+                    display="flex"
                     gap="unset"
                     alignItems="unset"
                     justifyContent="unset"
@@ -419,7 +419,7 @@ const Poolitem320px = (props) => {
                     fontWeight="700"
                     lineHeight="13.3125px"
                     textAlign="center"
-                    display="block"
+                    display="flex"
                     direction="column"
                     justifyContent="unset"
                     width="unset"
@@ -541,7 +541,7 @@ const Poolitem320px = (props) => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "APY39433743")}
               >
                 <Text
@@ -550,7 +550,7 @@ const Poolitem320px = (props) => {
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -578,7 +578,7 @@ const Poolitem320px = (props) => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "TVL39433745")}
               >
                 <Text
@@ -587,7 +587,7 @@ const Poolitem320px = (props) => {
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -615,7 +615,7 @@ const Poolitem320px = (props) => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39433747")}
               >
                 <Text
@@ -624,7 +624,7 @@ const Poolitem320px = (props) => {
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -652,7 +652,7 @@ const Poolitem320px = (props) => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574060")}
               >
                 <Text
@@ -661,7 +661,7 @@ const Poolitem320px = (props) => {
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -691,7 +691,7 @@ const Poolitem320px = (props) => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574062")}
               >
                 <Text
@@ -700,7 +700,7 @@ const Poolitem320px = (props) => {
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"
@@ -732,7 +732,7 @@ const Poolitem320px = (props) => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574064")}
               >
                 <Text
@@ -741,7 +741,7 @@ const Poolitem320px = (props) => {
                   fontWeight="700"
                   lineHeight="12.102272033691406px"
                   textAlign="left"
-                  display="block"
+                  display="flex"
                   direction="column"
                   justifyContent="unset"
                   width="unset"

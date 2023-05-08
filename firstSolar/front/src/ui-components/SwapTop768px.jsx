@@ -23,23 +23,35 @@ export default function SwapTop768px(props) {
   const [date, setDate] = React.useState();
   const [dateString, setDateString] = React.useState();
 
-  const [tokenNumBer, setTokenNumber] = React.useState();
-  const [reducedNumber, setReducedNumber] = React.useState();
+  const [firstLiquidity, setFirstLiquidity] = React.useState();
+  const [secondLiquidity, setSecondLiquidity] = React.useState();
 
   useEffect(() => {
-    dispatch(isLoadingThunk({ isLoading: true }));
-
-    const tempDate = new Date(lastTimeStamp * 1000);
-    setLastTimeStamp(props?.oracleiddata[0]?.lastHarvest);
-    setDate(tempDate);
-    setDateString(tempDate.toLocaleDateString());
-    setTokenNumber(props?.oracleiddata[0]?.firstTokenBalance);
-    setReducedNumber(tokenNumBer?.toString().substring(0, 7));
-
-    setTimeout(() => {
-      dispatch(isLoadingThunk({ isLoading: false }));
-    }, 3000);
-  }, []);
+    (async () => {
+      dispatch(isLoadingThunk({ isLoading: true }));
+      const tempDate = new Date(lastTimeStamp * 1000);
+      setLastTimeStamp(
+        props?.oracleiddata[0]?.lastHarvest
+          ? props?.oracleiddata[0]?.lastHarvest
+          : props?.oracleiddata[0]?.updatedAt.split("T")[0]
+      );
+      setDate(tempDate);
+      setDateString(tempDate?.toLocaleDateString());
+      setFirstLiquidity(
+        (parseInt(props?.oracleiddata[0]?.firstTokenBalance / 10 ** 18) *
+          100000) /
+          100000
+      );
+      setSecondLiquidity(
+        (parseInt(props?.oracleiddata[0]?.secondTokenBalance / 10 ** 18) *
+          100000) /
+          100000
+      );
+      setTimeout(() => {
+        dispatch(isLoadingThunk({ isLoading: false }));
+      }, 3000);
+    })();
+  }, [props.oracleiddata[0]]);
 
   return (
     <>
@@ -56,7 +68,7 @@ export default function SwapTop768px(props) {
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="35px"
         padding="69px 99px 58px 99px"
-        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+        backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
         {...getOverrideProps(overrides, "AddLiquidityTop768px")}
         {...rest}
       >
@@ -369,7 +381,7 @@ export default function SwapTop768px(props) {
           border="3px SOLID rgba(234,0,50,0.45)"
           borderRadius="35px"
           padding="47px 47px 47px 47px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "Frame 11140132818")}
         >
           <Text
@@ -481,7 +493,7 @@ export default function SwapTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={reducedNumber ? `${reducedNumber} K` : "0 K"}
+              children={firstLiquidity ? `${firstLiquidity} K` : "0 K"}
               {...getOverrideProps(overrides, "99,99M40132809")}
             ></Text>
           </Flex>
@@ -573,7 +585,7 @@ export default function SwapTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={reducedNumber ? `${reducedNumber} K` : "0 K"}
+              children={secondLiquidity ? `${secondLiquidity} K` : "0 K"}
               {...getOverrideProps(overrides, "99,99M40132817")}
             ></Text>
           </Flex>
@@ -592,7 +604,7 @@ export default function SwapTop768px(props) {
           borderRadius="35px"
           padding="47px 47px 47px 47px"
           border="3px SOLID rgba(0,136,153,0.59)"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "Frame 121")}
         >
           <Text
@@ -829,7 +841,11 @@ export default function SwapTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Last Harvest"
+                children={`${
+                  props?.oracleiddata[0]?.lastHarvest
+                    ? "Last Harvest"
+                    : "UpdatedAt"
+                }`}
                 {...getOverrideProps(overrides, "Fees 24H")}
               ></Text>
             </Flex>
@@ -868,7 +884,7 @@ export default function SwapTop768px(props) {
                 children={
                   props?.oracleiddata[0]?.lastHarvest
                     ? dateString
-                    : "불러오는 중"
+                    : lastTimeStamp
                 }
                 {...getOverrideProps(overrides, "$99.99M40132843")}
               ></Text>

@@ -8,7 +8,7 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text, Pagination, usePagination } from "@aws-amplify/ui-react";
-import Poolitem1024 from "../components/pool/Poolitem1024px";
+import Poolitem1024 from "../components/pool/Poolitem1024px.jsx";
 import { motion, LayoutGroup } from "framer-motion";
 import {
   Netlist1024px,
@@ -94,9 +94,9 @@ export default function PoolListCom1024px(props) {
         } else if (filter != "null") {
           // 필터 있을 때 실행할 코드
         }
-        setTimeout(() => {
-          dispatch(isLoadingThunk({ isLoading: false }));
-        }, 5000);
+        // setTimeout(() => {
+        //   dispatch(isLoadingThunk({ isLoading: false }));
+        // }, 5000);
       } else {
         // 검색이 아니다. 메인 페이지
 
@@ -119,9 +119,9 @@ export default function PoolListCom1024px(props) {
           }
         }
 
-        setTimeout(() => {
-          dispatch(isLoadingThunk({ isLoading: false }));
-        }, 5000);
+        // setTimeout(() => {
+        //   dispatch(isLoadingThunk({ isLoading: false }));
+        // }, 5000);
       }
     } catch (error) {
       dispatch(isLoadingThunk({ isLoading: false }));
@@ -130,7 +130,10 @@ export default function PoolListCom1024px(props) {
   };
 
   React.useEffect(() => {
-    getPoolList();
+    (async () => {
+      await getPoolList();
+      dispatch(isLoadingThunk({ isLoading: false }));
+    })();
   }, [pageIndex]);
 
   React.useEffect(() => {
@@ -216,7 +219,7 @@ export default function PoolListCom1024px(props) {
               backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
-                "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
             }}
             whileHover={{
               borderRadius: "75px",
@@ -293,7 +296,7 @@ export default function PoolListCom1024px(props) {
               backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
-                "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
             }}
             whileHover={{
               borderRadius: "75px",
@@ -371,7 +374,7 @@ export default function PoolListCom1024px(props) {
               backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
-                "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
             }}
             whileHover={{
               borderRadius: "35px",
@@ -691,6 +694,7 @@ export default function PoolListCom1024px(props) {
                       item={item}
                       length={currentPagePoolList.length}
                       idx={idx}
+                      filter={filter}
                     />
                   ))
               ) : sortTVL == "up" ? (
@@ -744,7 +748,7 @@ export default function PoolListCom1024px(props) {
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
               {...paginationProps}
-              onChange={(pageNum) => {
+              onChange={pageNum => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

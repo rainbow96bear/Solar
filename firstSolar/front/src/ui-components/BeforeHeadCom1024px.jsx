@@ -14,7 +14,7 @@ import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
-
+import { motion } from "framer-motion";
 import LoginAccount from "./LoginAccount.jsx";
 import ConnectModal from "./ConnectModal.jsx";
 import LoadingButton from "./LoadingButton.jsx";
@@ -74,12 +74,12 @@ export default function BeforeHeadCom1024px(props) {
       {isDesktop ? (
         <View
           width="90vw"
-          height="60px"
+          height="unset"
           display="flex"
           alignItems="unset"
           justifyContent="space-between"
           position="relative"
-          padding="0px 0px 0px 0px"
+          padding="10px 5px 10px 5px"
           {...getOverrideProps(overrides, "BeforeHeadCom1024px")}
           {...rest}
         >
@@ -121,7 +121,7 @@ export default function BeforeHeadCom1024px(props) {
             </Flex>
           </Flex>
           <SearchField
-            width="264px"
+            width="464px"
             height="unset"
             placeholder="Search"
             justifyContent="center"

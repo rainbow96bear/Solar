@@ -19,7 +19,7 @@ export default function DepositCompletedModal(props) {
   const { overrides, ...rest } = props;
 
   const dispatch = useDispatch();
-  const completeModal = useSelector((state) => state.completeModal);
+  const completeModal = useSelector(state => state.completeModal);
 
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 0.94 });
@@ -62,7 +62,7 @@ export default function DepositCompletedModal(props) {
       boxShadow="0px 25px 28px rgba(0, 0, 0, 0.25)"
       borderRadius="55px"
       padding="0px 132px 0px 132px"
-      backgroundColor="rgba(255,255,255,1)"
+      backgroundColor="rgba(252,253,254,1)"
       {...getOverrideProps(overrides, "DepositCompletedModal")}
       {...rest}
     >

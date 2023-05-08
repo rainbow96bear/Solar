@@ -9,7 +9,7 @@ import { connectThunk } from "../../modules/connect";
 import { useDispatch } from "react-redux";
 import "../../css/Font.css";
 
-const Poolitem768px = (props) => {
+const Poolitem768px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -33,7 +33,7 @@ const Poolitem768px = (props) => {
             backgroundColor: "rgba(249,250,250,0.75)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
           }}
           whileHover={{
             borderRadius: "75px",
@@ -544,7 +544,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "APY39422826")}
                 >
                   <Text
@@ -581,7 +581,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "TVL39422829")}
                 >
                   <Text
@@ -618,7 +618,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "Action39422832")}
                 >
                   <Text
@@ -657,7 +657,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "Action39574042")}
                 >
                   <Text
@@ -697,7 +697,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "Action39574044")}
                 >
                   <Text
@@ -738,7 +738,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "Action39574046")}
                 >
                   <Text

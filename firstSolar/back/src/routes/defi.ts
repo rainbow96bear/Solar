@@ -117,6 +117,129 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
       const activeLpList = (
         await axios.get(`https://api.beefy.finance/vaults`)
       ).data.filter((lp: any) => lp.status === "active");
+      let totalLpLength: number = activeLpList.length + getPool.length;
+      let totalLpList: Array<LPData | Pool>;
+      if (pageIndex == 1) {
+        const returnLpList = await Promise.all(
+          activeLpList
+            .slice((pageIndex - 1) * 10 + getPool.length, pageIndex * 10)
+            .map(async (lp: any) => {
+              const lpId: string = lp.id;
+              const oracleId: string = lp.oracleId;
+              const lpChain: number = mainNet[lp.chain];
+              const tokens: Array<string> = lp.assets;
+
+              const [tvlNow, tvlYesterday] = await Promise.all([
+                getTvlData(lpId, oracleId, lpChain),
+                getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+              ]);
+
+              const dailyTvlRate: number =
+                ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+
+              return {
+                id: lpId,
+                name: lp.name,
+                platformId: lp.platformId,
+                network: lp.network,
+                oracleId: oracleId,
+                status: lp.status,
+                symbol: lp.symbol,
+                tvl: tvlNow,
+                apy:
+                  (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                    .data[lpId] ?? 0,
+                dailyTvlRate,
+                mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+                platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+                tokens,
+                tokenAddress: lp.tokenAddress,
+              };
+            })
+        );
+        totalLpList = [...getPool, ...returnLpList];
+      } else {
+        const returnLpList = await Promise.all(
+          activeLpList
+            .slice((pageIndex - 1) * 10, pageIndex * 10)
+            .map(async (lp: any) => {
+              const lpId: string = lp.id;
+              const oracleId: string = lp.oracleId;
+              const lpChain: number = mainNet[lp.chain];
+              const tokens: Array<string> = lp.assets;
+
+              const [tvlNow, tvlYesterday] = await Promise.all([
+                getTvlData(lpId, oracleId, lpChain),
+                getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
+              ]);
+
+              const dailyTvlRate: number =
+                ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
+
+              return {
+                id: lpId,
+                name: lp.name,
+                platformId: lp.platformId,
+                network: lp.network,
+                oracleId: oracleId,
+                status: lp.status,
+                symbol: lp.symbol,
+                tvl: tvlNow,
+                apy:
+                  (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                    .data[lpId] ?? 0,
+                dailyTvlRate,
+                mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+                platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+                tokens,
+                tokenAddress: lp.tokenAddress,
+              };
+            })
+        );
+        totalLpList = [...returnLpList];
+      }
+      const data: any = {
+        poolListData: totalLpList,
+        poolListDataLength: totalLpLength,
+      };
+      res.send(data);
+    } catch (error) {
+      if (retries < MAX_RETRIES) {
+        retries++;
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await totalLplListUp();
+      } else {
+        console.error(error);
+        res.send();
+      }
+    }
+  };
+
+  await totalLplListUp();
+});
+
+router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
+  retries = 0;
+  const fileterListUp = async () => {
+    try {
+      const {
+        network,
+        dex,
+        pageIndex,
+      }: { network: string; dex: string; pageIndex: number } = req.body;
+      const now: Date = new Date();
+      const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
+
+      const activeLpList = (
+        await axios.get(`https://api.beefy.finance/vaults`)
+      ).data.filter((lp: any) =>
+        network
+          ? lp.status === "active" && lp.chain === network
+          : dex
+          ? lp.status === "active" && lp.platformId === dex
+          : lp.status === "active"
+      );
+      let filterLpList: Array<detailLp | Pool>;
 
       const returnLpList = await Promise.all(
         activeLpList.map(async (lp: any) => {
@@ -153,105 +276,24 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
           };
         })
       );
-      let totalLpList = [...getPool, ...returnLpList];
-      const renewalLpList = totalLpList.slice(
+
+      if (network) {
+        getPool = await db.Pool.findAll({ where: { network } });
+        filterLpList = [...getPool, ...returnLpList];
+      } else filterLpList = [...returnLpList];
+      const renewalLpList = filterLpList.slice(
         (pageIndex - 1) * 10,
         pageIndex * 10
       );
       const data: any = {
         poolListData: renewalLpList,
-        poolListDataLength: totalLpList.length,
-      };
-      res.send(data);
-    } catch (error) {
-      if (retries < MAX_RETRIES) {
-        retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
-        await totalLplListUp();
-      } else {
-        console.error(error);
-        res.send();
-      }
-    }
-  };
-
-  await totalLplListUp();
-});
-
-router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
-  retries = 0;
-  const fileterListUp = async () => {
-    try {
-      const {
-        network,
-        dex,
-        pageIndex,
-      }: { network: string; dex: string; pageIndex: number } = req.body;
-      const now: Date = new Date();
-      const yesterday: Date = new Date(now.getTime() - ONE_DAY_MS);
-
-      const activeLpList = (
-        await axios.get(`https://api.beefy.finance/vaults`)
-      ).data.filter((lp: any) =>
-        network
-          ? lp.status === "active" && lp.chain === network
-          : dex
-          ? lp.status === "active" && lp.platformId === dex
-          : lp.status === "active"
-      );
-      let filterLpList: Array<detailLp | Pool>;
-
-      if (network) {
-        getPool = await db.Pool.findAll({ where: { network } });
-        filterLpList = [...getPool, ...activeLpList];
-      } else filterLpList = [...activeLpList];
-
-      const paginationFilterLpList = await Promise.all(
-        filterLpList
-          .slice((pageIndex - 1) * 10, pageIndex * 10)
-          .map(async (lp: any) => {
-            const lpId: string = lp.id;
-            const oracleId: string = lp.oracleId;
-            const lpChain: number = mainNet[lp.chain];
-            const tokens: Array<string> = lp.assets;
-
-            const [tvlNow, tvlYesterday] = await Promise.all([
-              getTvlData(lpId, oracleId, lpChain),
-              getTvlData(lpId, oracleId, lpChain, yesterday.getTime()),
-            ]);
-
-            const dailyTvlRate: number =
-              ((tvlNow - tvlYesterday) / tvlYesterday) * 100;
-
-            return {
-              id: lpId,
-              name: lp.name,
-              platformId: lp.platformId,
-              network: lp.network,
-              oracleId: oracleId,
-              status: lp.status,
-              symbol: lp.symbol,
-              tvl: tvlNow,
-              apy:
-                (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
-                  .data[lpId] ?? 0,
-              dailyTvlRate,
-              mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
-              platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
-              tokens,
-              tokenAddress: lp.tokenAddress,
-            };
-          })
-      );
-      const data: any = {
-        poolListData: paginationFilterLpList,
         poolListDataLength: filterLpList.length,
       };
       res.send(data);
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);
