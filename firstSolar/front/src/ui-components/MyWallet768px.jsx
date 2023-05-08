@@ -21,7 +21,7 @@ export default function MyWallet768px(props) {
       position="relative"
       borderRadius="35px"
       padding="42px 17px 42px 17px"
-      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+      backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
       {...getOverrideProps(overrides, "MyWallet768px")}
       {...rest}
     >

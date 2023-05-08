@@ -39,7 +39,7 @@ export default function AddLiquidityBottom768px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -181,7 +181,7 @@ export default function AddLiquidityBottom768px(props) {
       boxShadow="11px 11px 31px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
       padding="71px 0px 71px 0px"
-      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+      backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
       {...getOverrideProps(overrides, "AddLiquidityBottom768px")}
       {...rest}
     >
@@ -619,7 +619,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -766,7 +766,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }

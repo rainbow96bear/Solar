@@ -25,7 +25,7 @@ export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const { web3, login } = useWeb3();
   const { loginK } = useWeb3K();
   const { account } = useAccount();
@@ -98,7 +98,7 @@ export default function QuestionModalWithDraw(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -113,7 +113,7 @@ export default function QuestionModalWithDraw(props) {
         position="relative"
         borderRadius="50px"
         padding="0px 0px 45px 0px"
-        backgroundColor="rgba(255,255,255,1)"
+        backgroundColor="rgba(252,253,254,1)"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         {...getOverrideProps(overrides, "Deposit1024px")}
         {...rest}
@@ -565,8 +565,8 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={(e) => setWithDrawAmountValue(e.target.value)}
-                onChange={(e) => {
+                onInput={e => setWithDrawAmountValue(e.target.value)}
+                onChange={e => {
                   if (+e.target.value > +props.lpBalanceValue) {
                     e.target.value = props.lpBalanceValue;
                   }

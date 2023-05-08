@@ -21,7 +21,7 @@ import { arbitrum, mainnet, polygon } from "wagmi/chains";
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
-import FooterContainer from "./components/footer/Container";
+
 import { connectThunk } from "./modules/connect";
 import LoadingCompo from "./ui-components/LoadingCompo";
 import SwapContainer from "./components/swap/Container";
@@ -29,6 +29,7 @@ import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
 import NavigatorContainer from "./components/navigateHome/Container";
 import EmptySearchModal from "./ui-components/EmptySearchModal";
+
 import { DepositCompletedModal } from "./ui-components";
 import { DepositFaildModal } from "./ui-components";
 import SearchNavigatorContainer from "./components/navigateSearch/Container";
@@ -50,10 +51,10 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
-  const emptySearch = useSelector((state) => state.emptySearch);
+  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
+  const emptySearch = useSelector(state => state.emptySearch);
 
-  const completeModal = useSelector((state) => state.completeModal);
+  const completeModal = useSelector(state => state.completeModal);
   const dispatch = useDispatch();
 
   const accountWagmi = useAccount({
@@ -90,7 +91,6 @@ function App() {
               ></Route>
             </Routes>
           </MainContent>
-          <FooterContainer></FooterContainer>
 
           {isLoading && (
             <LoadingModal>

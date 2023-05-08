@@ -50,3 +50,6 @@ export { default as DepositCompletedModal } from "./DepositCompletedModal";
 export { default as AddLiquiditySuccessModal } from "./AddLiquiditySuccessModal";
 export { default as AddLiquidityFailModal } from "./AddLiquidityFailModal";
 export { default as DepositFaildModal } from "./DepositFaildModal";
+export { default as ConnectCompoRank } from "./ConnectCompoRank";
+export { default as SwapCompoRank } from "./SwapCompoRank";
+export { default as Sosim } from "./Sosim";

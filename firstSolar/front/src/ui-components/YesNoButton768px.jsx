@@ -17,7 +17,7 @@ export default function YesNoButton768px(props) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const { web3, login } = useWeb3();
   const { loginK } = useWeb3K();
   const { account } = useAccount();

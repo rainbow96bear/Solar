@@ -116,7 +116,7 @@ export default function SwapCompo768px(props) {
         >
           <Text
             fontFamily="ffProMedium"
-            fontSize="1.5rem"
+            fontSize={{ base: "1rem", small: "0.82rem" }}
             fontWeight="700"
             lineHeight="29.045454025268555px"
             textAlign="center"

@@ -30,7 +30,7 @@ export default function QuestionModal(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         if (e.target !== e.currentTarget) return;
       }}
     >
@@ -44,7 +44,7 @@ export default function QuestionModal(props) {
         position="relative"
         borderRadius="35px"
         padding="25px 25px 59px 25px"
-        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,1))"
+        backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(252,253,254,1))"
         {...getOverrideProps(overrides, "SelTokken768px")}
         {...rest}
       >
@@ -122,7 +122,7 @@ export default function QuestionModal(props) {
           ></Text>
         </Flex>
 
-        {tokenList.map((item) => (
+        {tokenList.map(item => (
           <Flex
             key={`tokenList-${item}`}
             gap="16px"
