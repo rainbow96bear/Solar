@@ -126,7 +126,7 @@ export default function ConnectModal(props) {
         gap="10px"
         direction="column"
         width="500px"
-        height="350px"
+        height="400px"
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
