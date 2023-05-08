@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ListItem } from "./listitem";
 import { Text } from "@aws-amplify/ui-react";
 import "../../css/Font.css";
+import "../../css/RankList.css";
 
 const ListMain = () => {
   const staticItems = [
@@ -107,6 +108,16 @@ const SkewContainer = styled.div`
   margin-top: 55px;
   margin-bottom: 35px;
   scale: 0.9;
+
+  @media only screen and (max-width: 768px) {
+    scale: 0.71;
+    margin-right: 45px;
+  }
+
+  @media only screen and (max-width: 499px) {
+    scale: 0.61;
+    margin-right: 45px;
+  }
 `;
 
 const Wrapper = styled.div`

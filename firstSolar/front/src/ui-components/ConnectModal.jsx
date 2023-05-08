@@ -117,7 +117,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
@@ -659,8 +659,7 @@ export default function ConnectModal(props) {
             position: "relative",
             borderRadius: "0px 35px 35px 0px",
             padding: "27px 38px 27px 38px",
-            backgroundImage:
-              "linear-gradient(-90deg, rgba(32,32,32,1), rgba(32,32,32,1))",
+            backgroundColor: "rgba(038,069,061,1)",
           }}
           whileHover={{
             backgroundImage: `url(${logo1})`,
@@ -682,8 +681,6 @@ export default function ConnectModal(props) {
             alignSelf="stretch"
             position="relative"
             borderRadius="0px 35px 35px 0px"
-            // padding="27px 38px 27px 38px"
-            // backgroundImage="linear-gradient(-90deg, rgba(32,32,32,1), rgba(32,32,32,1))"
             {...getOverrideProps(overrides, "Frame 202")}
           >
             <Flex
