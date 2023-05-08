@@ -41,6 +41,7 @@ export default function MyPageCompo1024px(props) {
 
   const mypageLpListUp = async () => {
     try {
+      console.log("mypageLpListUp");
       const myLists = await mypageList(params);
       setMyList(myLists);
     } catch (error) {

@@ -21,7 +21,7 @@ import "../css/Font.css";
 export default function LoginAccount(props) {
   const { overrides, ...rest } = props;
   const [view, setView] = React.useState(false);
-  const account = useSelector(state => state.account.account.account);
+  const account = useSelector((state) => state.account.account.account);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const ref = React.useRef();
@@ -32,7 +32,7 @@ export default function LoginAccount(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -53,40 +53,6 @@ export default function LoginAccount(props) {
   };
   return (
     <LoginAccountCover className="LoginAccountCover" ref={ref}>
-      <motion.div
-        style={{
-          width: "45px",
-          height: "45px",
-          alignSelf: "center",
-          borderRadius: "33px",
-          backgroundColor: "rgba(247,239,227,0.75)",
-          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          backgroundImage:
-            "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
-        }}
-        whileHover={{
-          scale: 0.93,
-          backgroundColor: "rgba(247,239,227,0.75)",
-        }}
-      >
-        <Button
-          width="45px"
-          height="45px"
-          borderRadius="35px"
-          alignSelf="center"
-          shrink="0"
-          size="small"
-          isDisabled={false}
-          fontFamily="ffCondExtraLight"
-          children="List Reset"
-          textAlign="center"
-          fontSize="10px"
-          onClick={() => {
-            navigate("/redirectHome");
-          }}
-          {...getOverrideProps(overrides, "Button")}
-        ></Button>
-      </motion.div>
       <motion.div
         style={{
           width: "45px",

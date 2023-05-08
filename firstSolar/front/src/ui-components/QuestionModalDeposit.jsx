@@ -28,7 +28,7 @@ export default function QuestionModalDeposit(props) {
   const [balanceChange, setBalanceChange] = React.useState(false);
 
   const dispatch = useDispatch();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account.account.account);
   const [depositAmountValue, setDepositAmountValue] = React.useState(0);
 
   const [depositSuccessModalOpen, setDepositSuccessModalOpen] =
@@ -87,7 +87,7 @@ export default function QuestionModalDeposit(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -583,8 +583,8 @@ export default function QuestionModalDeposit(props) {
                 labelHidden={false}
                 variation="default"
                 value={depositAmountValue}
-                onInput={e => setDepositAmountValue(e.target.value)}
-                onChange={e => {
+                onInput={(e) => setDepositAmountValue(e.target.value)}
+                onChange={(e) => {
                   if (+e.target.value > +props.lpBalanceValue) {
                     e.target.value = props.lpBalanceValue;
                   }

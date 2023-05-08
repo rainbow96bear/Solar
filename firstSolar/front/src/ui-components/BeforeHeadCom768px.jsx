@@ -7,13 +7,14 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, SearchField } from "@aws-amplify/ui-react";
+import { Button, Flex, Image, SearchField } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import LoginAccount from "./LoginAccount";
 import ConnectModal from "./ConnectModal";
 import ConnectButton from "./ConnectButton";
+import { motion } from "framer-motion";
 import LoadingButton from "./LoadingButton";
 import LoggedinUser from "./LoggedinUser";
 import LoginButton from "./LoginButton";
@@ -24,8 +25,8 @@ import { useMediaQuery } from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 export default function BeforeHeadCom768px(props) {
   const { overrides, ...rest } = props;
-  const login = useSelector(state => state.login.login.login);
-  const connect = useSelector(state => state.connect.connect.connect);
+  const login = useSelector((state) => state.login.login.login);
+  const connect = useSelector((state) => state.connect.connect.connect);
   const { address, isConnecting, isDisconnected } = useAccount();
   const navigate = useNavigate();
 
@@ -137,7 +138,45 @@ export default function BeforeHeadCom768px(props) {
               variation="quiet"
               {...getOverrideProps(overrides, "SearchField")}
             ></SearchField>
-            <div className="header_right">
+            <div
+              className="header_right"
+              style={{ display: "flex", gap: "20px" }}
+            >
+              <motion.div
+                width={{ base: "38px", small: "45px" }}
+                height={{ base: "38px", small: "45px" }}
+                style={{
+                  alignSelf: "center",
+                  borderRadius: "35px",
+                  backgroundColor: "rgba(247,239,227,0.75)",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  backgroundImage:
+                    "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                }}
+                whileHover={{
+                  scale: 0.93,
+                  backgroundColor: "rgba(247,239,227,0.75)",
+                }}
+              >
+                <Button
+                  display="flex"
+                  width={{ base: "38px", small: "45px" }}
+                  height={{ base: "38px", small: "45px" }}
+                  borderRadius="35px"
+                  alignSelf="center"
+                  shrink="0"
+                  size="small"
+                  isDisabled={false}
+                  fontFamily="ffCondExtraLight"
+                  children="List Reset"
+                  textAlign="center"
+                  fontSize={{ base: "7px", small: "10px" }}
+                  onClick={() => {
+                    navigate("/redirectHome");
+                  }}
+                  {...getOverrideProps(overrides, "Button")}
+                ></Button>
+              </motion.div>
               {connect ? (
                 login ? (
                   <LoggedinUser></LoggedinUser>

@@ -225,7 +225,7 @@ export default function PooListCom768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Main Net List"
+                  children="MainNet"
                   {...getOverrideProps(overrides, "Networks List39563127")}
                 ></Text>
                 <Flex
@@ -260,6 +260,7 @@ export default function PooListCom768px(props) {
                       <Netlist768px
                         key={`Netlist768px-1${idx}`}
                         item={item}
+                        filter={filter}
                         setFilter={setFilter}
                         setCurrentPagePoolList={setCurrentPagePoolList}
                         setTotalPages={setTotalPages}
@@ -290,6 +291,7 @@ export default function PooListCom768px(props) {
                         setCurrentPagePoolList={setCurrentPagePoolList}
                         setTotalPages={setTotalPages}
                         setFilter={setFilter}
+                        filter={filter}
                       />
                     ))}
                   </Flex>
@@ -344,7 +346,7 @@ export default function PooListCom768px(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="Dex List"
+                  children="Dex"
                   {...getOverrideProps(overrides, "Networks List39563127")}
                 ></Text>
                 <Flex
@@ -382,6 +384,7 @@ export default function PooListCom768px(props) {
                         setCurrentPagePoolList={setCurrentPagePoolList}
                         setTotalPages={setTotalPages}
                         pageIndex={pageIndex}
+                        filter={filter}
                       />
                     ))}
                   </Flex>
@@ -405,6 +408,7 @@ export default function PooListCom768px(props) {
                         key={`platformList768px-2${idx}`}
                         item={item}
                         setCurrentPagePoolList={setCurrentPagePoolList}
+                        filter={filter}
                       />
                     ))}
                   </Flex>
