@@ -73,7 +73,8 @@ const LiquidComponent = ({ oracleId, balance }) => {
                   >
                     <AddLiquidityBottom768px
                       style={{
-                        marginTop: "-38px",
+                        marginTop: "-18px",
+                        marginLeft: "50px",
                         height: "unset",
                         borderRadius: "35px",
                         backgroundColor: "rgba(249,249,249,1)",
@@ -101,7 +102,6 @@ const LiquidComponent = ({ oracleId, balance }) => {
         <>
           <Addliqud>
             <Flex
-              marginTop="-110px"
               direction={{
                 base: "column",
                 medium: "row",
@@ -117,6 +117,7 @@ const LiquidComponent = ({ oracleId, balance }) => {
                 <motion.div
                   onClick={toggleOpen}
                   style={{
+                    marginTop: "-100px",
                     height: "unset",
                     borderRadius: "35px",
                     backgroundColor: "rgba(249,249,249,1)",
@@ -161,22 +162,6 @@ const LiquidComponent = ({ oracleId, balance }) => {
                       }}
                     >
                       <AddLiquidityBottom320px
-                        marginTop={{
-                          base: "-190px",
-                          medium: "0px",
-                        }}
-                        style={{
-                          height: "unset",
-                          borderRadius: "35px",
-                          backgroundColor: "rgba(249,249,249,1)",
-                          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                        }}
-                        whileHover={{
-                          borderRadius: "55px",
-                          scale: 0.99,
-                          backgroundColor: "rgba(249,249,249,0.55)",
-                          boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
-                        }}
                         oracleiddata={props}
                         balance={balance}
                       />
@@ -215,8 +200,8 @@ const ItemWrap = styled(motion.div)`
 
 const SubWrap = styled(motion.div)`
   font-size: 15px;
+  margin-bottom: 50px;
   display: flex;
-  scale: 0.8;
   :last-child {
     border-radius: 0 0 20px 20px;
   }
