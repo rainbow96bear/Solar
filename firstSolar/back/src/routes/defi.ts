@@ -927,6 +927,7 @@ router.get("/rank", async (req: Request, res: Response) => {
           tvl: tvlNow,
           mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
           platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+          addLiquidityUrl: lp.addLiquidityUrl,
         };
       })
     );

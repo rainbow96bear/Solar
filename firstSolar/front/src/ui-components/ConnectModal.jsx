@@ -47,17 +47,15 @@ export default function ConnectModal(props) {
         return;
       }
       await login();
-      window.ethereum.providers.map(async (item, idx) => {
-        if (item.isMetaMask == true) {
-          const [_account] = await item.request({
-            method: "eth_requestAccounts",
-          });
-
-          const data = await getLogin(_account, "metamask");
-          dispatch(accountThunk({ account: _account }));
-          dispatch(loginThunk({ login: true }));
-        }
+      const [_account] = await window.ethereum.request({
+        method: "eth_requestAccounts",
       });
+      const data = await axios.post("http://localhost:8080/api/user/login", {
+        account: _account,
+        walletKind: "metamask",
+      });
+      dispatch(accountThunk({ account: _account }));
+      dispatch(loginThunk({ login: true }));
     } catch (error) {
       console.error(error);
     }
@@ -111,7 +109,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
@@ -205,7 +203,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault;
                   metamaskLogin();
                 }}
@@ -262,7 +260,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault;
                   trustLogin();
                 }}
@@ -319,7 +317,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault;
                   coinbaseLogin();
                 }}
