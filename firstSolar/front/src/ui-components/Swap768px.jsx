@@ -25,22 +25,22 @@ import {
 } from "../api";
 import { useAccount } from "wagmi";
 import { useWeb3 } from "../modules/useWeb3.js";
-import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import styled from "styled-components";
-import SwapSuccessModal from "./SwapSuccessModal";
-import SwapFailModal from "./SwapFailModal";
 import "../css/Font.css";
 import SwapCompletedModal from "./SwapCompletedModal";
 import SwapFaildModal from "./SwapFaildModal";
+import { useWeb3T } from "../modules/useWeb3Trust";
+import { useWeb3C } from "../modules/useWeb3Coinbase";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
   const { web3, account, chainId, login } = useWeb3();
-  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
+  const { web3T, accountT, chainIdT, loginT } = useWeb3T();
+  const { web3C, accountC, chainIdC, loginC } = useWeb3C();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
   const dispatch = useDispatch();
@@ -155,8 +155,10 @@ export default function Swap768px(props) {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
+      } else if (document.cookie.split(":")[0] == "trust") {
+        loginT();
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        loginC();
       }
     }
   }, []);
@@ -186,14 +188,14 @@ export default function Swap768px(props) {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = percentNum => {
+  const setPercentBalance = (percentNum) => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
@@ -204,7 +206,7 @@ export default function Swap768px(props) {
     delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const handleTextareaChange = event => {
+  const handleTextareaChange = (event) => {
     const value = event.target.value;
 
     const filteredValue = value.replace(/[^0-9.\b]/g, "");
@@ -247,7 +249,7 @@ export default function Swap768px(props) {
     }, 1000);
   }
 
-  const delayedFunction2 = num => {
+  const delayedFunction2 = (num) => {
     try {
       if (secondSelectToken == "DFS") {
         setSecondAmountPrice(convertPrice.usdt * num);
@@ -275,12 +277,14 @@ export default function Swap768px(props) {
           props?.oracleiddata[0].tokenAddress
         )
       ).data;
-
+      console.log("result1 : ", result1);
       let transactionResult;
       if (document.cookie.split(":")[0] == "metamask") {
         transactionResult = await web3.eth.sendTransaction(result1);
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        transactionResult = await web3K.eth.sendTransaction(result1);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        transactionResult = await web3T.eth.sendTransaction(result1);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        transactionResult = await web3C.eth.sendTransaction(result1);
       }
 
       const result2 = (
@@ -295,8 +299,10 @@ export default function Swap768px(props) {
 
       if (document.cookie.split(":")[0] == "metamask") {
         transactionResult = await web3.eth.sendTransaction(result2);
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        transactionResult = await web3K.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        transactionResult = await web3T.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        transactionResult = await web3C.eth.sendTransaction(result2);
       }
 
       const firstBalanceTemp = await swapBalance(
@@ -707,7 +713,7 @@ export default function Swap768px(props) {
                 labelHidden={false}
                 variation="default"
                 value={textareaValue}
-                onChange={e => {
+                onChange={(e) => {
                   if (+e.target.value > +userFirstBalance) {
                     e.target.value = userFirstBalance;
                   }
@@ -715,7 +721,7 @@ export default function Swap768px(props) {
                   handleTextareaChange(e);
                   delayedFunction1(e.target.value);
                 }}
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -1122,7 +1128,7 @@ export default function Swap768px(props) {
                 value={secondAmountPrice ? secondAmountPrice : 0}
                 disabled
                 backgroundColor="transparent"
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432770")}

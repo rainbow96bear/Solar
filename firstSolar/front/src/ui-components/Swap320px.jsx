@@ -25,7 +25,7 @@ import {
 } from "../api";
 import { useAccount } from "wagmi";
 import { useWeb3 } from "../modules/useWeb3.js";
-import { useWeb3K } from "../modules/useWeb3Kaikas";
+
 import { isLoadingThunk } from "../modules/isLoading.js";
 import styled from "styled-components";
 import SwapSuccessModal from "./SwapSuccessModal";
@@ -33,12 +33,15 @@ import "../css/Font.css";
 import SwapFailModal from "./SwapFailModal";
 import SwapCompletedModal from "./SwapCompletedModal";
 import SwapFaildModal from "./SwapFaildModal";
+import { useWeb3T } from "../modules/useWeb3Trust";
+import { useWeb3C } from "../modules/useWeb3Coinbase";
 
 export default function Swap320px(props) {
   const { overrides, ...rest } = props;
 
   const { web3, account, chainId, login } = useWeb3();
-  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
+  const { web3T, accountT, chainIdT, loginT } = useWeb3T();
+  const { web3C, accounCC, chainIdC, loginC } = useWeb3C();
 
   const { address } = useAccount();
   const address2 = useSelector((state) => state.account.account.account);
@@ -156,8 +159,10 @@ export default function Swap320px(props) {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
+      } else if (document.cookie.split(":")[0] == "trust") {
+        loginT();
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        loginC();
       }
     }
   }, []);
@@ -280,8 +285,10 @@ export default function Swap320px(props) {
       let transactionResult;
       if (document.cookie.split(":")[0] == "metamask") {
         transactionResult = await web3.eth.sendTransaction(result1);
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        transactionResult = await web3K.eth.sendTransaction(result1);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        transactionResult = await web3T.eth.sendTransaction(result1);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        transactionResult = await web3C.eth.sendTransaction(result1);
       }
 
       const result2 = (
@@ -296,8 +303,10 @@ export default function Swap320px(props) {
 
       if (document.cookie.split(":")[0] == "metamask") {
         transactionResult = await web3.eth.sendTransaction(result2);
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        transactionResult = await web3K.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        transactionResult = await web3T.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        transactionResult = await web3C.eth.sendTransaction(result2);
       }
 
       const firstBalanceTemp = await swapBalance(

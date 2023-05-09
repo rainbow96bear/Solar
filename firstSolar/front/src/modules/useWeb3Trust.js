@@ -8,28 +8,31 @@ export const useWeb3T = () => {
 
   const loginT = useCallback(async () => {
     try {
-      if (window.trustwallet && window.trustwallet.solana.isTrust) {
-        const _web3 = new Web3(window.trustwallet);
-        setWeb3T(_web3);
-        const [_account] = await window.trustwallet.request({
-          method: "eth_requestAccounts",
-        });
-        if (_account) {
-          setAccountT(_account);
-        }
+      if (window.ethereum) {
+        let _web3;
+        window.ethereum.providers
+          .map(async (item, idx) => {
+            if (item.isTrustWallet == true) {
+              _web3 = new Web3(item);
+              setWeb3T(_web3);
+              const [_account] = await item.enable();
+              if (_account) {
+                setAccountT(_account);
+              }
 
-        window.trustwallet.on("accountsChanged", async () => {
-          if (window.trustwallet) {
-            const [_account] = await window.trustwallet.request({
-              method: "eth_requestAccounts",
-            });
-            setAccountT(_account);
-          }
-        });
+              item.on("accountsChanged", async () => {
+                if (item && item.isTrustWallet) {
+                  const [_account] = await item.enable(0);
+                  setAccountT(_account);
+                }
+              });
 
-        setChainIdT(window.trustwallet.networkVersion);
+              setChainIdT(item.networkVersion);
+            }
+          })
+          .find((item) => item.isTrustWallet == true);
       } else {
-        console.log("Trust Wallet is not exist");
+        throw new Error("Trust Wallet is not exist");
       }
     } catch (error) {
       console.error(error);

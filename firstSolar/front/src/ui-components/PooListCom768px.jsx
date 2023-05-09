@@ -16,7 +16,7 @@ import {
   usePagination,
 } from "@aws-amplify/ui-react";
 
-import Poolitem768px from "../components/pool/Poolitem768px";
+import Poolitem768px from "../components/Pool/Poolitem768px";
 import {
   Netlist768px,
   Dexlist768px,

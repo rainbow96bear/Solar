@@ -7,7 +7,7 @@ const request = axios.create({
   },
 });
 
-export const getMainPoolList = async pageIndex => {
+export const getMainPoolList = async (pageIndex) => {
   try {
     const result = (
       await request.get("api/defi", { params: { pageIndex: pageIndex } })
@@ -22,11 +22,22 @@ export const getMainPoolList = async pageIndex => {
   }
 };
 
-export const oracleIdList = async _params => {
+export const oracleIdList = async (_params) => {
   try {
     const result = (await request.post("api/defi/detail", { id: _params }))
       .data;
     return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getLogin = async (_account, _walletKind) => {
+  try {
+    const data = await axios.post("http://localhost:8080/api/user/login", {
+      account: _account,
+      walletKind: _walletKind,
+    });
   } catch (error) {
     console.error(error);
   }
@@ -93,7 +104,7 @@ export const firstSync = async () => {
   }
 };
 
-export const mypageList = async account => {
+export const mypageList = async (account) => {
   try {
     const result = (
       await request.post("api/sync/mypage", {
@@ -106,11 +117,11 @@ export const mypageList = async account => {
   }
 };
 
-export const getConvertPrice = async tokenKind => {
+export const getConvertPrice = async (tokenKind) => {
   try {
     const result = (await request.get("api/sync/datesync")).data;
     if (tokenKind == "DFS") {
-      const dfs = result.find(item => item.tokenSlug === "dfs");
+      const dfs = result.find((item) => item.tokenSlug === "dfs");
       return {
         bnb: dfs.ConvertToBNB,
         eth: dfs.ConvertToETH,
@@ -118,7 +129,7 @@ export const getConvertPrice = async tokenKind => {
         tokenPrice: dfs.tokenPrice,
       };
     } else if (tokenKind == "ETH") {
-      const eth = result.find(item => item.tokenSlug === "ethereum");
+      const eth = result.find((item) => item.tokenSlug === "ethereum");
       return {
         bnb: eth.ConvertToBNB,
         eth: eth.ConvertToETH,
@@ -126,7 +137,7 @@ export const getConvertPrice = async tokenKind => {
         tokenPrice: eth.tokenPrice,
       };
     } else if (tokenKind == "USDT") {
-      const usdt = result.find(item => item.tokenSlug === "tether");
+      const usdt = result.find((item) => item.tokenSlug === "tether");
       return {
         bnb: usdt.ConvertToBNB,
         eth: usdt.ConvertToETH,
@@ -134,7 +145,7 @@ export const getConvertPrice = async tokenKind => {
         tokenPrice: usdt.tokenPrice,
       };
     } else if (tokenKind == "BNB") {
-      const bnb = result.find(item => item.tokenSlug === "bnb");
+      const bnb = result.find((item) => item.tokenSlug === "bnb");
       return {
         bnb: bnb.ConvertToBNB,
         eth: bnb.ConvertToETH,
@@ -254,7 +265,7 @@ export const addLiquidity = async (account, token1, token2, lpSymbol) => {
   }
 };
 
-export const updatePool = async tokenAddress => {
+export const updatePool = async (tokenAddress) => {
   try {
     const result = (
       await request.post("api/defi/updatePool", {

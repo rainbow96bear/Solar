@@ -14,17 +14,20 @@ import "../css/Font.css";
 import { useDispatch, useSelector } from "react-redux";
 import { approveLp, deposit } from "../api";
 import { useWeb3 } from "../modules/useWeb3";
-import { useWeb3K } from "../modules/useWeb3Kaikas";
+
 import { isLoadingThunk } from "../modules/isLoading";
 import { setCompleteModal } from "../modules/completeModal";
 import DepositCompletedModal from "./DepositCompletedModal";
 import DepositFaildModal from "./DepositFaildModal";
-import { mypageList, getLPBalance } from "../api";
+
+import { useWeb3C } from "../modules/useWeb3Coinbase";
+import { useWeb3T } from "../modules/useWeb3Trust";
 
 export default function QuestionModalDeposit(props) {
   const { overrides, setquestionmark, ...rest } = props;
   const { web3, account, chainId, login } = useWeb3();
-  const { web3K, accountK, loginK } = useWeb3K();
+  const { web3T, accountT, loginT } = useWeb3T();
+  const { web3C, accountC, loginC } = useWeb3C();
   const [balanceChange, setBalanceChange] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -39,11 +42,14 @@ export default function QuestionModalDeposit(props) {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
+      } else if (document.cookie.split(":")[0] == "trust") {
+        loginT();
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        loginC();
       }
     }
   }, []);
+
   const depositFunc = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
@@ -53,7 +59,15 @@ export default function QuestionModalDeposit(props) {
         props?.lptoken
       );
 
-      let transactionResult1 = await web3.eth.sendTransaction(result1);
+      let transactionResult1;
+
+      if (document.cookie.split(":")[0] == "metamask") {
+        transactionResult1 = await web3.eth.sendTransaction(result1);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        transactionResult1 = await web3T.eth.sendTransaction(result1);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        transactionResult1 = await web3C.eth.sendTransaction(result1);
+      }
 
       const result2 = await deposit(
         account2,
@@ -61,7 +75,16 @@ export default function QuestionModalDeposit(props) {
         props?.lptoken
       );
 
-      let transactionResult2 = await web3.eth.sendTransaction(result2);
+      let transactionResult2;
+
+      if (document.cookie.split(":")[0] == "metamask") {
+        transactionResult2 = await web3.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        transactionResult2 = await web3T.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        transactionResult2 = await web3C.eth.sendTransaction(result2);
+      }
+
       setDepositAmountValue(0);
       await props?.mypagelplistup();
       setBalanceChange(!balanceChange);

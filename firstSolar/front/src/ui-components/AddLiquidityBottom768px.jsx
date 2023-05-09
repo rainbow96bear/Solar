@@ -20,7 +20,6 @@ import {
 } from "../api/index";
 import { swapBalance } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
-import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -28,6 +27,8 @@ import AddLiquiditySuccessModal from "./AddLiquiditySuccessModal";
 import AddLiquidityFailModal from "./AddLiquidityFailModal";
 import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
 import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
+import { useWeb3T } from "../modules/useWeb3Trust";
+import { useWeb3C } from "../modules/useWeb3Coinbase";
 
 export default function AddLiquidityBottom768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
@@ -35,7 +36,8 @@ export default function AddLiquidityBottom768px(props) {
   const dispatch = useDispatch();
 
   const { web3, account, chainId, login } = useWeb3();
-  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
+  const { web3T, accountT, chainIdT, loginT } = useWeb3T();
+  const { web3C, accounCC, chainIdC, loginC } = useWeb3C();
 
   const [firstValue, setFirstValue] = React.useState();
   const [secondValue, setSecondValue] = React.useState();
@@ -62,7 +64,15 @@ export default function AddLiquidityBottom768px(props) {
       props?.oracleiddata[0]?.secondToken
     );
     try {
-      const txResult = await web3.eth.sendTransaction(approveDFSTx);
+      let txResult;
+
+      if (document.cookie.split(":")[0] == "metamask") {
+        txResult = await web3.eth.sendTransaction(approveDFSTx);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        txResult = await web3T.eth.sendTransaction(approveDFSTx);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        txResult = await web3C.eth.sendTransaction(approveDFSTx);
+      }
 
       if (txResult) {
         const approveOtherTokenTx = await approveOtherToken(
@@ -71,9 +81,15 @@ export default function AddLiquidityBottom768px(props) {
           props?.oracleiddata[0]?.secondToken
         );
 
-        const pairTxResult = await web3.eth.sendTransaction(
-          approveOtherTokenTx
-        );
+        let pairTxResult;
+        if (document.cookie.split(":")[0] == "metamask") {
+          pairTxResult = await web3.eth.sendTransaction(approveOtherTokenTx);
+        } else if (document.cookie.split(":")[0] == "trust") {
+          pairTxResult = await web3T.eth.sendTransaction(approveOtherTokenTx);
+        } else if (document.cookie.split(":")[0] == "coinbase") {
+          pairTxResult = await web3C.eth.sendTransaction(approveOtherTokenTx);
+        }
+        console.log("pairTxResult : ", pairTxResult);
         if (pairTxResult) {
           const addLiquidityTx = await addLiquidity(
             address2 ? address2 : address,
@@ -82,9 +98,21 @@ export default function AddLiquidityBottom768px(props) {
             props?.oracleiddata[0]?.secondToken
           );
 
-          const addLiquidityTxResult = await web3.eth.sendTransaction(
-            addLiquidityTx
-          );
+          let addLiquidityTxResult;
+          if (document.cookie.split(":")[0] == "metamask") {
+            addLiquidityTxResult = await web3.eth.sendTransaction(
+              addLiquidityTx
+            );
+          } else if (document.cookie.split(":")[0] == "trust") {
+            addLiquidityTxResult = await web3T.eth.sendTransaction(
+              addLiquidityTx
+            );
+          } else if (document.cookie.split(":")[0] == "coinbase") {
+            addLiquidityTxResult = await web3C.eth.sendTransaction(
+              addLiquidityTx
+            );
+          }
+
           await updatePool(props?.oracleiddata[0]?.tokenAddress);
 
           if (addLiquidityTxResult) {
@@ -150,8 +178,10 @@ export default function AddLiquidityBottom768px(props) {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
+      } else if (document.cookie.split(":")[0] == "trust") {
+        loginT();
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        loginC();
       }
     }
   }, []);

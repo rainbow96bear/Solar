@@ -26,17 +26,38 @@ const HeaderContainer = () => {
       try {
         if (!document.cookie) return;
         if (document.cookie.split(":")[0] == "metamask") {
-          const [_account] = await window.ethereum.request({
-            method: "eth_requestAccounts",
+          window.ethereum.providers.map(async (item, idx) => {
+            if (item.isMetaMask == true) {
+              const [_account] = await item.request({
+                method: "eth_requestAccounts",
+              });
+              dispatch(accountThunk({ account: _account }));
+              dispatch(loginThunk({ login: true }));
+              dispatch(connectThunk({ connect: true }));
+            }
           });
-          dispatch(accountThunk({ account: _account }));
-          dispatch(loginThunk({ login: true }));
-          dispatch(connectThunk({ connect: true }));
-        } else if (document.cookie.split(":")[0] == "kaikas") {
-          const kaikasWallet = (await window.klaytn.enable())[0];
-          dispatch(accountThunk({ account: kaikasWallet }));
-          dispatch(loginThunk({ login: true }));
-          dispatch(connectThunk({ connect: true }));
+        } else if (document.cookie.split(":")[0] == "trust") {
+          window.ethereum.providers.map(async (item, idx) => {
+            if (item.isTrustWallet == true) {
+              const [_account] = await item.request({
+                method: "eth_requestAccounts",
+              });
+              dispatch(accountThunk({ account: _account }));
+              dispatch(loginThunk({ login: true }));
+              dispatch(connectThunk({ connect: true }));
+            }
+          });
+        } else if (document.cookie.split(":")[0] == "coinbase") {
+          window.ethereum.providers.map(async (item, idx) => {
+            if (item.isCoinbaseWallet == true) {
+              const [_account] = await item.request({
+                method: "eth_requestAccounts",
+              });
+              dispatch(accountThunk({ account: _account }));
+              dispatch(loginThunk({ login: true }));
+              dispatch(connectThunk({ connect: true }));
+            }
+          });
         }
       } catch (error) {
         console.error(error);

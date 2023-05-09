@@ -13,7 +13,6 @@ import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useWeb3 } from "../modules/useWeb3";
-import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { getLPBalance } from "../api";
 import { useAccount } from "wagmi";
 import { isLoadingThunk } from "../modules/isLoading";
@@ -21,13 +20,17 @@ import { withDraw } from "../api";
 import YesNoButton768px from "./YesNoButton768px";
 import DepositCompletedModal from "./DepositCompletedModal";
 import DepositFaildModal from "./DepositFaildModal";
+import { useWeb3T } from "../modules/useWeb3Trust";
+import { useWeb3C } from "../modules/useWeb3Coinbase";
 export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
   const dispatch = useDispatch();
   const account2 = useSelector((state) => state.account.account.account);
   const { web3, login } = useWeb3();
-  const { loginK } = useWeb3K();
+  const { web3T, loginT } = useWeb3T();
+  const { web3C, loginC } = useWeb3C();
+
   const { account } = useAccount();
   const [lpBalance, setLpBalance] = React.useState();
   const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
@@ -42,8 +45,10 @@ export default function QuestionModalWithDraw(props) {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
+      } else if (document.cookie.split(":")[0] == "trust") {
+        loginT();
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        loginC();
       }
     }
   }, []);
@@ -73,7 +78,14 @@ export default function QuestionModalWithDraw(props) {
         props?.lptoken
       );
 
-      let transactionResult2 = await web3.eth.sendTransaction(result2);
+      let transactionResult2;
+      if (document.cookie.split(":")[0] == "metamask") {
+        transactionResult2 = await web3.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        transactionResult2 = await web3T.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        transactionResult2 = await web3C.eth.sendTransaction(result2);
+      }
       setWithDrawAmountValue(0);
 
       await props.mypagelplistup();
