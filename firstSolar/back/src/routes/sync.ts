@@ -191,9 +191,8 @@ router.get("/lastDayOfMonth", async (req: Request, res: Response) => {
     const lastDayOfMonth = getLastDayOfMonth(year, month);
 
     if (today == lastDayOfMonth.getDate()) {
-      // airDrop 함수 실행
       const distribution = await deployed.methods.allDistribution().encodeABI();
-      // from: 메타마스크 연결될 사람 to: dexCA
+
       res.send({
         status: 200,
         data: {
