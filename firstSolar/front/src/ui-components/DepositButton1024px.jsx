@@ -155,6 +155,7 @@ export default function DepositButton1024px(props) {
       </Flex>
       {questionMark == 1 ? (
         <QuestionModalDeposit
+          autoState={props.autoState}
           setquestionmark={setQuestionMark}
           lpBalanceValue={props.lpBalanceValue}
           mypagelist={props.mypagelist}

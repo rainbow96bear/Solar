@@ -6,11 +6,11 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton1024px } from "../../ui-components";
 import "../../css/Font.css";
 
-const MyPageList1024px = (props) => {
+const MyPageList1024px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
 
+  const toggleOpen = () => setIsOpen(!isOpen);
   const mypageMethod = () => {
     props.setLpTokenValue(props?.item?.LPTokenBalance);
     props.setLpToken(props?.item?.name);
@@ -148,8 +148,8 @@ const MyPageList1024px = (props) => {
                 ></Text>
               </Flex>
               <Flex
-                gap="10px"
-                direction="row"
+                gap="5px"
+                direction="column"
                 width="unset"
                 height="unset"
                 justifyContent="center"
@@ -179,7 +179,27 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="APY"
+                  children="Auto"
+                  {...getOverrideProps(overrides, "APY")}
+                ></Text>
+                <Text
+                  fontFamily="ffProExtraLight"
+                  fontSize="16px"
+                  fontWeight="600"
+                  lineHeight="21.784090042114258px"
+                  textAlign="center"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  shrink="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children="Compounding"
                   {...getOverrideProps(overrides, "APY")}
                 ></Text>
               </Flex>
@@ -454,7 +474,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.item.apy}
+                  children={props?.item?.getAutoCompoundStatus ? "ON" : "OFF"}
                   {...getOverrideProps(overrides, "040702571")}
                 ></Text>
               </Flex>
@@ -635,6 +655,7 @@ const MyPageList1024px = (props) => {
               }}
             >
               <DepositButton1024px
+                autoState={props?.item?.getAutoCompoundStatus}
                 lpBalanceValue={props.lpBalanceValue}
                 mypagelist={props.item}
                 lptokenvalue={props.lptokenvalue}
