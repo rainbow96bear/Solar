@@ -7,15 +7,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { useAccount } from "wagmi";
 import { ConnectCompoRank, SwapCompoRank } from "../../ui-components";
-import { connectThunk } from "../../modules/connect";
 import { useDispatch, useSelector } from "react-redux";
-import logo1 from "../../ui-components/images/logo_new.png";
-import logo2 from "../../ui-components/images/metamaskLogo.jpg";
-
 import "../../css/Font.css";
+import { connectThunk } from "../../modules/connect.js";
+import { isLoadingThunk } from "../../modules/isLoading.js";
 
 const ListItem = ({ content, index }, props) => {
   const { overrides, ...rest } = props;
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const dispatch = useDispatch();
@@ -75,11 +74,11 @@ const ListItem = ({ content, index }, props) => {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="1"
+              children={content.rank}
             ></Text>
-            <Flex gap="8px">
+            <Flex gap="8px" justifyContent="flex-start" alignItems="center">
               <Image
-                src={logo1}
+                src={content.mainNetLogo}
                 width="21px"
                 height="21px"
                 display="flex"
@@ -94,7 +93,7 @@ const ListItem = ({ content, index }, props) => {
                 {...getOverrideProps(overrides, "unsplash:em1OiomfG3g39913189")}
               ></Image>
               <Image
-                src={logo2}
+                src={content.platformLogo}
                 width="21px"
                 height="21px"
                 display="flex"
@@ -112,7 +111,7 @@ const ListItem = ({ content, index }, props) => {
                 letterSpacing="1.5px"
                 color="rgba(54,43,33,0.8)"
                 fontFamily="ffProLight"
-                fontSize="16px"
+                fontSize="12px"
                 fontWeight="500"
                 textAlign="center"
                 display="flex"
@@ -125,7 +124,7 @@ const ListItem = ({ content, index }, props) => {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={content}
+                children={content.name.slice(0, 13)}
               ></Text>
             </Flex>
 
@@ -133,7 +132,7 @@ const ListItem = ({ content, index }, props) => {
               letterSpacing="0.75px"
               color="rgba(54,43,33,0.8)"
               fontFamily="ffProLight"
-              fontSize="16px"
+              fontSize="13px"
               fontWeight="500"
               textAlign="center"
               display="flex"
@@ -146,7 +145,11 @@ const ListItem = ({ content, index }, props) => {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="111ETH"
+              children={
+                content.tvl
+                  ? parseInt((content.tvl / 10 ** 18) * 1000) / 1000
+                  : "로딩 스피너 Dispatch 넣으면 됨"
+              }
             ></Text>
           </motion.div>
         </ItemWrap>
@@ -164,7 +167,7 @@ const ListItem = ({ content, index }, props) => {
                 }}
               >
                 {addressResult ? (
-                  <SwapCompoRank props={props} />
+                  <SwapCompoRank props={(props, content)} />
                 ) : (
                   <ConnectCompoRank
                     onClick={() => {

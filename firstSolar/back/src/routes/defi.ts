@@ -933,9 +933,13 @@ router.get("/rank", async (req: Request, res: Response) => {
 
     lpList = lpList.sort((a, b) => b.tvl - a.tvl).slice(0, 3);
 
-    let rankList = [...getPool, ...lpList];
+    const rankedPools = getPool
+      .map((pool, index) => ({ ...pool.toJSON(), rank: index + 1 }))
+      .concat(
+        lpList.map((lp, index) => ({ ...lp, rank: index + 1 + getPool.length }))
+      );
 
-    res.send(rankList);
+    res.send(rankedPools);
   } catch (error) {
     console.log(error);
     res.send(error);

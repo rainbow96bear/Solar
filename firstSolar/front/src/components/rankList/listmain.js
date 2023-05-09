@@ -1,31 +1,11 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ListItem } from "./listitem";
 import { Text } from "@aws-amplify/ui-react";
 import "../../css/Font.css";
 import "../../css/RankList.css";
 
-const ListMain = () => {
-  const staticItems = [
-    "DFS-ETH",
-    "DFS-BNB",
-    "DFS-BTC",
-    "DFS-BTC",
-    "DFS-BTC",
-    "DFS-BTC",
-  ];
-  const [items, setItems] = useState(staticItems.slice(0, 6));
-  useLayoutEffect(() => {
-    const interval = setInterval(() => {
-      setItems(prev => {
-        const nextTop = prev[prev.length - 1];
-        const newShown = prev.slice(0, prev.length - 1);
-        return [nextTop, ...newShown];
-      });
-    }, 9000);
-    return () => clearInterval(interval);
-  }, []);
-
+const ListMain = ({ items }) => {
   return (
     <SkewContainer>
       <RankName>
@@ -91,10 +71,10 @@ const ListMain = () => {
         <ShadowTop />
         <TransitionContainer>
           <>
-            {items.map(
-              (item, i) =>
-                i !== items.length - 1 && (
-                  <ListItem key={Math.random()} index={i} content={item} />
+            {items?.map(
+              (item, idx) =>
+                idx !== items.length - 1 && (
+                  <ListItem key={Math.random()} index={idx} content={item} />
                 )
             )}
           </>
