@@ -14,9 +14,9 @@ import "../css/Font.css";
 export default function AddLiquidityTop768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
 
-  const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
-  const date = new Date(lastTimeStamp * 1000);
-  const dateString = date.toLocaleDateString();
+  const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest
+    ? props?.oracleiddata[0]?.lastHarvest
+    : props?.oracleiddata[0]?.updatedAt.split("T")[0];
 
   const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
   const reducedNumber = tokenNumBer?.toString().substring(0, 5);
@@ -815,7 +815,11 @@ export default function AddLiquidityTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Last Harvest"
+                children={`${
+                  props?.oracleiddata[0]?.lastHarvest
+                    ? "Last Harvest"
+                    : "UpdatedAt"
+                }`}
                 {...getOverrideProps(overrides, "Fees 24H")}
               ></Text>
             </Flex>
@@ -852,9 +856,11 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.lastHarvest
-                    ? dateString
-                    : "불러오는 중"
+                  !props?.oracleiddata[0]?.name?.includes("DFS")
+                    ? new Date(
+                        props?.oracleiddata[0]?.lastHarvest * 1000
+                      ).toLocaleString()
+                    : lastTimeStamp
                 }
                 {...getOverrideProps(overrides, "$99.99M40132843")}
               ></Text>
