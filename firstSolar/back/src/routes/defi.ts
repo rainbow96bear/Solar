@@ -207,7 +207,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -294,7 +294,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);
