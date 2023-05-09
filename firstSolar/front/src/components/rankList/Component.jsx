@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Sosim } from "../../ui-components";
 import "../../css/Font.css";
 
-const RankListComponent = () => {
+const RankListComponent = ({ items }) => {
   return (
     <>
       <Flex
@@ -46,7 +46,7 @@ const RankListComponent = () => {
             }}
           >
             <Sosim />
-            <ListMain />
+            <ListMain items={items} />
           </Flex>
         </motion.div>
       </Flex>

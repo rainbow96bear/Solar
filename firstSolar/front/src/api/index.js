@@ -360,6 +360,7 @@ export const getSearch = async (search, pageIndex) => {
     console.error(error);
   }
 };
+
 export const setAutoCompound = async (account, lpSymbol) => {
   try {
     const result = (
@@ -368,6 +369,17 @@ export const setAutoCompound = async (account, lpSymbol) => {
         lpSymbol,
       })
     ).data;
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const rankList = async () => {
+  try {
+    const result = (await request.get("api/defi/rank")).data;
+    console.log(result);
 
     return result;
   } catch (error) {

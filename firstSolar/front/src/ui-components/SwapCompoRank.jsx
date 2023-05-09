@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 export default function SwapCompo1440px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
-  const disbleButton = props?.props?.item?.oracleId?.split("-")[0] == "DFS";
+  const disbleButton = props?.props?.oracleId?.split("-")[0] == "DFS";
 
   return (
     <Flex
@@ -51,7 +51,7 @@ export default function SwapCompo1440px(props) {
       >
         <Flex
           onClick={() => {
-            navigate(`/swap?${props.props.item.oracleId}`);
+            navigate(`/swap?${props?.props?.oracleId}`);
           }}
           gap="10px"
           direction="row"
@@ -110,7 +110,7 @@ export default function SwapCompo1440px(props) {
       >
         <Flex
           onClick={() => {
-            navigate(`/addliquidity?${props.props.item.oracleId}`);
+            navigate(`/addliquidity?${props?.props?.oracleId}`);
           }}
           gap="10px"
           direction="row"
