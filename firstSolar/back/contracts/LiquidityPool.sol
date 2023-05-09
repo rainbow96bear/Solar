@@ -23,9 +23,17 @@ contract LiquidityPool is ERC20 {
   // State variables for liquidity shares
   uint256 public totalLiquidity;
 
+  address public DexA;
+
   // mapping(address=>uint256) public DexABalances;
   mapping(address => uint256) public userLiquidity;
   address public rewardA;
+
+  modifier onlyMinter() {
+    require(msg.sender == DexA, "Caller is not the minter");
+    _;
+  }
+
   // Events
   event MintLpToken(address indexed _liquidityProvider, uint256 _sharesMinted);
   // sharesMinted는 lp토큰의 수
@@ -51,11 +59,13 @@ contract LiquidityPool is ERC20 {
     string memory _symbol,
     address _token1,
     address _token2,
-    address DFSTokenA
+    address DFSTokenA,
+    address _DexA
   ) ERC20(_name, _symbol) {
     token1 = ERC20(_token1);
     token2 = ERC20(_token2);
     DFS = IDFS(DFSTokenA);
+    DexA = _DexA;
   }
 
   function add(address _rewardA) public rewardLock {
@@ -78,8 +88,13 @@ contract LiquidityPool is ERC20 {
 
   // Internal function to mint liquidity shares
   // lp토큰추가 _to는 lp토큰 받을 사용자의 주소
+  function minter(address _to, uint256 _amount) public onlyMinter {
+    _mint(_to, _amount);
+    userLiquidity[_to] = userLiquidity[_to].add(_amount);
+    totalLiquidity = totalSupply();
+  }
 
-  function mint(address _to, uint256 _amount) public {
+  function mint(address _to, uint256 _amount) private {
     _mint(_to, _amount);
     userLiquidity[_to] = userLiquidity[_to].add(_amount);
     totalLiquidity = totalSupply();

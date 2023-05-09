@@ -45,12 +45,8 @@ contract Reward {
 
   function sendProfit() public returns (uint256) {
     uint256 balance = rewardToken.balanceOf(address(this));
-    if (balance != 0) {
-      uint256 distributeAmount = balance.mul(2).div(10);
-      rewardToken.transfer(valutA, balance.mul(8).div(10));
-      return distributeAmount;
-    } else {
-      return 0;
-    }
+    uint256 distributeAmount = balance.mul(2).div(10);
+    rewardToken.transfer(valutA, balance.mul(8).div(10));
+    return distributeAmount;
   }
 }

@@ -61,7 +61,7 @@ contract Dex is Ownable {
       PoolInfo storage pool = poolInfo[i];
       // rewardShares(i,pool.lpToken);
       uint256 balance = IReward(pool.rewardA).sendProfit();
-      if(balance!=0){
+      if (balance != 0) {
         for (uint256 j = 0; j < userArr.length; j++) {
           UserInfo storage user = userInfo[i][userArr[j]];
           if (user.amount > 0 && user.shares > 0) {
@@ -86,10 +86,11 @@ contract Dex is Ownable {
                 balance.mul(user.shares).div(10000)
               );
             }
-          } 
+          }
         }
         rewardShares(i, pool.lpToken);
-      } 
+      }
+      rewardShares(i, pool.lpToken);
     }
   }
 

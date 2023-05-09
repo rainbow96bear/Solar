@@ -4,12 +4,9 @@ pragma solidity ^0.8.19;
 interface IReward {
   function rewards() external;
 
-  function autoCompound(
-    address _lpAddress,
-    uint256 _amount
-  ) external returns (uint256);
-
-  function distribution(address _contributor, uint256 _amount) external;
+  function distribution(address, uint256) external;
 
   function sendProfit() external returns (uint256);
+
+  function autoCompound(address, uint256) external returns (uint256);
 }
