@@ -26,6 +26,8 @@ const HeaderContainer = () => {
       try {
         if (!document.cookie) return;
         if (document.cookie.split(":")[0] == "metamask") {
+          console.log("metamask login");
+
           window.ethereum.providers.map(async (item, idx) => {
             if (item.isMetaMask == true) {
               const [_account] = await item.request({
@@ -48,6 +50,7 @@ const HeaderContainer = () => {
             }
           });
         } else if (document.cookie.split(":")[0] == "coinbase") {
+          console.log("coinbase login");
           window.ethereum.providers.map(async (item, idx) => {
             if (item.isCoinbaseWallet == true) {
               const [_account] = await item.request({

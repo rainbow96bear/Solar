@@ -10,32 +10,34 @@ export const useWeb3C = () => {
     try {
       if (window.ethereum) {
         let _web3;
-        window.ethereum.providers
-          .map(async (item, idx) => {
-            if (item.isCoinbaseWallet == true) {
-              _web3 = new Web3(item);
+        if (window.ethereum.providers) {
+          window.ethereum.providers
+            .map(async (item, idx) => {
+              if (item.isCoinbaseWallet == true) {
+                _web3 = new Web3(item);
 
-              setWeb3T(_web3);
-              const [_account] = await item.request({
-                method: "eth_requestAccounts",
-              });
-              if (_account) {
-                setAccountC(_account);
-              }
-
-              item.on("accountsChanged", async () => {
-                if (item && item.isCoinbaseWallet) {
-                  const [_account] = await item.request({
-                    method: "eth_requestAccounts",
-                  });
+                setWeb3T(_web3);
+                const [_account] = await item.request({
+                  method: "eth_requestAccounts",
+                });
+                if (_account) {
                   setAccountC(_account);
                 }
-              });
 
-              setChainIdC(item.networkVersion);
-            }
-          })
-          .find((item) => item.isCoinbaseWallet == true);
+                item.on("accountsChanged", async () => {
+                  if (item && item.isCoinbaseWallet) {
+                    const [_account] = await item.request({
+                      method: "eth_requestAccounts",
+                    });
+                    setAccountC(_account);
+                  }
+                });
+
+                setChainIdC(item.networkVersion);
+              }
+            })
+            .find((item) => item.isCoinbaseWallet == true);
+        } else alert("Update your browser");
       } else {
         throw new Error("Coinbase Wallet is not exist");
       }

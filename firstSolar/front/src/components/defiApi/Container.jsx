@@ -51,13 +51,13 @@ const DefiContainer = () => {
   //   }
   // };
 
-  useEffect(() => {
-    if (document.cookie) {
-      if (document.cookie.split(":")[0] == "metamask") {
-        login();
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (document.cookie) {
+  //     if (document.cookie.split(":")[0] == "metamask") {
+  //       login();
+  //     }
+  //   }
+  // }, []);
 
   return <DefiComponent personalSign={personalSign} />;
 };
