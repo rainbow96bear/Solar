@@ -19,7 +19,7 @@ const ListItem = ({ content, index }, props) => {
   const toggleOpen = () => setIsOpen(!isOpen);
   const dispatch = useDispatch();
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
   const addressResult = address || address2;
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 0.96 });
@@ -146,9 +146,9 @@ const ListItem = ({ content, index }, props) => {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                content.tvl
-                  ? parseInt((content.tvl / 10 ** 18) * 1000) / 1000
-                  : "로딩 스피너 Dispatch 넣으면 됨"
+                content?.name?.includes("DFS")
+                  ? parseInt((content.tvl / 10 ** 15) * 1000) / 1000
+                  : content.tvl
               }
             ></Text>
           </motion.div>
@@ -197,7 +197,7 @@ const Wrapper = styled(motion.div)`
   transform-origin: top;
   transition: all 0.3s;
   animation: ${rotate} 1s ease-out;
-  margin-top: ${props => (props.index === 0 ? "0rem" : "0.5rem")};
+  margin-top: ${(props) => (props.index === 0 ? "0rem" : "0.5rem")};
   border-radius: 4px;
   box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.3);
   font-weight: 600;
