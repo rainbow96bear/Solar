@@ -825,4 +825,42 @@ router.post("/getAutoCompound", async (req: Request, res: Response) => {
     res.send(error);
   }
 });
+
+router.get("/rank", async (req: Request, res: Response) => {
+  try {
+    getPool = await db.Pool.findAll();
+
+    const activeLpList = (
+      await axios.get(`https://api.beefy.finance/vaults`)
+    ).data.filter((lp: any) => lp.status === "active");
+
+    let lpList = await Promise.all(
+      activeLpList.map(async (lp: any) => {
+        const lpId: string = lp.id;
+        const oracleId: string = lp.oracleId;
+        const lpChain: number = mainNet[lp.chain];
+
+        const [tvlNow] = await Promise.all([
+          getTvlData(lpId, oracleId, lpChain),
+        ]);
+        return {
+          oracleId: oracleId,
+          name: lp.name,
+          tvl: tvlNow,
+          mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+          platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+        };
+      })
+    );
+
+    lpList = lpList.sort((a, b) => b.tvl - a.tvl).slice(0, 3);
+
+    let rankList = [...getPool, ...lpList];
+
+    res.send(rankList);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 export default router;
