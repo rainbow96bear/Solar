@@ -20,9 +20,6 @@ export default function SwapTop768px(props) {
 
   const [lastTimeStamp, setLastTimeStamp] = React.useState();
 
-  const [date, setDate] = React.useState();
-  const [dateString, setDateString] = React.useState();
-
   const [firstLiquidity, setFirstLiquidity] = React.useState();
   const [secondLiquidity, setSecondLiquidity] = React.useState();
 
@@ -35,8 +32,6 @@ export default function SwapTop768px(props) {
           ? props?.oracleiddata[0]?.lastHarvest
           : props?.oracleiddata[0]?.updatedAt.split("T")[0]
       );
-      setDate(tempDate);
-      setDateString(tempDate?.toLocaleDateString());
       setFirstLiquidity(
         props?.oracleiddata[0]?.name?.includes("DFS")
           ? (parseInt(props?.oracleiddata[0]?.firstTokenBalance / 10 ** 18) *
@@ -694,12 +689,13 @@ export default function SwapTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.tvl
+                  props?.oracleiddata[0]?.name?.includes("DFS")
                     ? `${
-                        props?.oracleiddata[0]?.tvl?.toString().slice(0, 10) /
-                        100
-                      } `
-                    : 0
+                        (parseInt(props?.oracleiddata[0]?.tvl / 10 ** 18) *
+                          100000) /
+                        100000
+                      } K`
+                    : parseInt(props?.oracleiddata[0]?.tvl * 1000) / 1000
                 }
                 {...getOverrideProps(overrides, "16.82%")}
               ></Text>
@@ -884,8 +880,10 @@ export default function SwapTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.lastHarvest
-                    ? dateString
+                  !props?.oracleiddata[0]?.name?.includes("DFS")
+                    ? new Date(
+                        props?.oracleiddata[0]?.lastHarvest * 1000
+                      ).toLocaleString()
                     : lastTimeStamp
                 }
                 {...getOverrideProps(overrides, "$99.99M40132843")}
