@@ -24,8 +24,8 @@ export default function DepositButton1024px(props) {
         direction="row"
         width="78.1vw"
         height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="center"
+        alignItems="center"
         position="relative"
         borderRadius="35px"
         padding="31px 63.5px 31px 63.5px"
@@ -34,7 +34,7 @@ export default function DepositButton1024px(props) {
       >
         <motion.div
           style={{
-            width: "45vw",
+            width: "31vw",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(255,226,0,0.35)",
@@ -43,7 +43,7 @@ export default function DepositButton1024px(props) {
           }}
           whileHover={{
             borderRadius: "13px",
-            backgroundColor: "rgba(252,250,242,0.75)",
+            backgroundColor: "rgba(247,239,227,0.75)",
             scale: 1.03,
             opacity: 0.88,
           }}
@@ -94,7 +94,7 @@ export default function DepositButton1024px(props) {
 
         <motion.div
           style={{
-            width: "45vw",
+            width: "31vw",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(234,0,50,0.55)",

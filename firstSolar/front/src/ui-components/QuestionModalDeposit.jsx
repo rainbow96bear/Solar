@@ -367,7 +367,7 @@ export default function QuestionModalDeposit(props) {
               {...getOverrideProps(overrides, "Frame 90")}
             >
               <Flex
-                gap="5px"
+                gap="15px"
                 direction="row"
                 width="unset"
                 height="unset"
@@ -421,20 +421,6 @@ export default function QuestionModalDeposit(props) {
                   children={props.mypagelist.firstToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822786")}
                 ></Text>
-                <Image
-                  width="15px"
-                  height="15px"
-                  display="block"
-                  gap="unset"
-                  alignItems="unset"
-                  justifyContent="unset"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="35px"
-                  padding="0px 0px 0px 0px"
-                  objectFit="cover"
-                  {...getOverrideProps(overrides, "ghrgclzzd 840822787")}
-                ></Image>
               </Flex>
               <Flex
                 gap="10px"
@@ -470,7 +456,7 @@ export default function QuestionModalDeposit(props) {
                 ></Text>
               </Flex>
               <Flex
-                gap="5px"
+                gap="15px"
                 direction="row"
                 width="unset"
                 height="unset"
@@ -483,7 +469,7 @@ export default function QuestionModalDeposit(props) {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="25px"
                 padding="10px 12px 10px 12px"
-                backgroundColor="rgba(0,136,153,0.59)"
+                backgroundColor="rgba(255,226,0,0.35)"
                 {...getOverrideProps(overrides, "Dexname2")}
               >
                 <Image
@@ -505,7 +491,7 @@ export default function QuestionModalDeposit(props) {
                   fontFamily="ffProExtraLight"
                   fontSize="17px"
                   fontWeight="600"
-                  color="rgba(239,239,239,1)"
+                  color="rgba(23,21,29,0.85)"
                   lineHeight="20.573863983154297px"
                   textAlign="left"
                   display="block"
@@ -524,20 +510,6 @@ export default function QuestionModalDeposit(props) {
                   children={props.mypagelist.secondToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822792")}
                 ></Text>
-                <Image
-                  width="15px"
-                  height="15px"
-                  display="block"
-                  gap="unset"
-                  alignItems="unset"
-                  justifyContent="unset"
-                  shrink="0"
-                  position="relative"
-                  borderRadius="35px"
-                  padding="0px 0px 0px 0px"
-                  objectFit="cover"
-                  {...getOverrideProps(overrides, "ghrgclzzd 840822793")}
-                ></Image>
               </Flex>
             </Flex>
           </Flex>
@@ -633,7 +605,8 @@ export default function QuestionModalDeposit(props) {
                     {...getOverrideProps(overrides, "ghrgclzzd 740822807")}
                   ></Image>
                   <Text
-                    fontFamily="ffProExtraLight"
+                    letterSpacing="3.5px"
+                    fontFamily="ffProLight"
                     fontSize="17px"
                     fontWeight="600"
                     lineHeight="20.573863983154297px"
@@ -740,7 +713,7 @@ export default function QuestionModalDeposit(props) {
               position="relative"
               boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
               borderRadius="15px"
-              backgroundColor="rgba(255,226,0,0.35)"
+              backgroundColor="rgba(0,136,153,0.59)"
               style={{ cursor: "pointer" }}
               onClick={() => {
                 depositFunc();
@@ -748,8 +721,9 @@ export default function QuestionModalDeposit(props) {
               {...getOverrideProps(overrides, "Frame 103")}
             >
               <Text
+                color="rgba(250,250,250,0.8)"
                 fontFamily="ffProMedium"
-                fontSize="21px"
+                fontSize="26px"
                 fontWeight="700"
                 lineHeight="32.6761360168457px"
                 textAlign="center"
@@ -790,8 +764,8 @@ export default function QuestionModalDeposit(props) {
             >
               <Text
                 fontFamily="ffProBook"
-                color="rgba(250,250,250,1)"
-                fontSize="21px"
+                color="rgba(250,250,250,0.8)"
+                fontSize="26px"
                 fontWeight="700"
                 lineHeight="32.6761360168457px"
                 textAlign="center"

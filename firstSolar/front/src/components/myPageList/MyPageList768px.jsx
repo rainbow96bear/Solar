@@ -11,6 +11,14 @@ const MyPageList768px = props => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
+  const mypageMethod = () => {
+    props.setLpTokenValue(props?.item?.LPTokenBalance);
+    props.setLpToken(props?.item?.name);
+    props.setFirstToken(props?.item?.firstToken);
+    props.setSecondToken(props?.item?.secondToken);
+    props.setFirstImgToken(props?.item?.mainNetLogo);
+    props.setSecondImgToken(props?.item?.platformLogo);
+  };
   return (
     <>
       <ItemWrap
@@ -184,7 +192,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="APY"
+                  children="AUTO"
                   {...getOverrideProps(overrides, "APY")}
                 ></Text>
               </Flex>
@@ -495,7 +503,7 @@ const MyPageList768px = props => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.item.apy}
+                  children={props?.item?.getAutoCompoundStatus ? "ON" : "OFF"}
                   {...getOverrideProps(overrides, "040773348")}
                 ></Text>
               </Flex>
@@ -713,6 +721,7 @@ const MyPageList768px = props => {
               }}
             >
               <DepositButton768px
+                autoState={props?.item?.getAutoCompoundStatus}
                 lpBalanceValue={props.lpBalanceValue}
                 mypagelist={props.item}
                 lptokenvalue={props.lptokenvalue}
@@ -720,6 +729,9 @@ const MyPageList768px = props => {
                 mypagelplistup={props.mypagelplistup}
                 pid={props?.pid}
                 setlptokenvalue={props.setLpTokenValue}
+                mypageMethod={mypageMethod}
+                lpTokenBalance={props?.item?.LPTokenBalance}
+                setLpTokenValue={props.setLpTokenValue}
               />
             </motion.div>
           </SubWrap>

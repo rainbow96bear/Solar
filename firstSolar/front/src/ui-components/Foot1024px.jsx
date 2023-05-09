@@ -88,6 +88,9 @@ export default function Foot1024px(props) {
                 shrink="0"
                 position="relative"
                 padding="10px 10px 10px 10px"
+                onClick={() =>
+                  window.open("http://www.solardesign.co.kr/", "_blank")
+                }
                 {...getOverrideProps(overrides, "Frame 30")}
               >
                 <Image
@@ -122,6 +125,9 @@ export default function Foot1024px(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
+                onClick={() =>
+                  window.open("http://www.solardesign.co.kr/", "_blank")
+                }
                 {...getOverrideProps(overrides, "Frame 47")}
               >
                 <Flex
@@ -282,6 +288,10 @@ export default function Foot1024px(props) {
                   {...getOverrideProps(overrides, "Frame 15541063215")}
                 >
                   <Image
+                    onClick={e => {
+                      e.preventDefault;
+                      window.open("https://github.com/HGWA333/", "_blank");
+                    }}
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
                     style={{ cursor: "pointer" }}
@@ -501,6 +511,9 @@ export default function Foot1024px(props) {
                   {...getOverrideProps(overrides, "Frame 16041063227")}
                 >
                   <Image
+                    onClick={() =>
+                      window.open("https://github.com/Koh-U-Seok/", "_blank")
+                    }
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
                     style={{ cursor: "pointer" }}
@@ -563,6 +576,12 @@ export default function Foot1024px(props) {
                         {...getOverrideProps(overrides, "Frame 19241063231")}
                       >
                         <Flex
+                          onClick={() =>
+                            window.open(
+                              "https://titanium-staircase-359.notion.site/9675fe4e831a41d8aa706e64feded232",
+                              "_blank"
+                            )
+                          }
                           onMouseEnter={onEnter}
                           onMouseLeave={onLeave}
                           style={{ cursor: "pointer" }}
@@ -735,6 +754,9 @@ export default function Foot1024px(props) {
                   {...getOverrideProps(overrides, "Frame 15541063240")}
                 >
                   <Image
+                    onClick={() =>
+                      window.open("https://github.com/JJeonghyun/", "_blank")
+                    }
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
                     style={{ cursor: "pointer" }}
@@ -954,6 +976,9 @@ export default function Foot1024px(props) {
                   {...getOverrideProps(overrides, "Frame 16041063252")}
                 >
                   <Image
+                    onClick={() =>
+                      window.open("https://github.com/LeeJaeHyekk/", "_blank")
+                    }
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
                     style={{ cursor: "pointer" }}
@@ -1034,6 +1059,12 @@ export default function Foot1024px(props) {
                           padding="6px 9px 6px 9px"
                           backgroundColor="rgba(0,136,153,0.59)"
                           {...getOverrideProps(overrides, "Frame 10141063257")}
+                          onClick={() =>
+                            window.open(
+                              "https://familiar-galaxy-e77.notion.site/434348e0bbb843848ad47b6c89db4e90",
+                              "_blank"
+                            )
+                          }
                         >
                           <Image
                             src={logo4}
@@ -1188,6 +1219,9 @@ export default function Foot1024px(props) {
                   {...getOverrideProps(overrides, "Frame 15541063240")}
                 >
                   <Image
+                    onClick={() =>
+                      window.open("https://github.com/pippen11/", "_blank")
+                    }
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
                     style={{ cursor: "pointer" }}
@@ -1407,6 +1441,9 @@ export default function Foot1024px(props) {
                   {...getOverrideProps(overrides, "Frame 16041063252")}
                 >
                   <Image
+                    onClick={() =>
+                      window.open("https://github.com/rainbow96bear/", "_blank")
+                    }
                     onMouseEnter={onEnter}
                     onMouseLeave={onLeave}
                     style={{ cursor: "pointer" }}
