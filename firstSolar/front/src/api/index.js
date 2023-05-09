@@ -360,3 +360,17 @@ export const getSearch = async (search, pageIndex) => {
     console.error(error);
   }
 };
+export const setAutoCompound = async (account, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/setAutoCompound", {
+        account,
+        lpSymbol,
+      })
+    ).data;
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};

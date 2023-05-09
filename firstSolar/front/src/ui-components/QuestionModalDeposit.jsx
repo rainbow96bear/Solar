@@ -26,13 +26,14 @@ import { isLoadingThunk } from "../modules/isLoading";
 import { setCompleteModal } from "../modules/completeModal";
 import DepositCompletedModal from "./DepositCompletedModal";
 import DepositFaildModal from "./DepositFaildModal";
-import { mypageList, getLPBalance } from "../api";
+import { setAutoCompound } from "../api";
 
 export default function QuestionModalDeposit(props) {
   const { overrides, setquestionmark, ...rest } = props;
   const { web3, account, chainId, login } = useWeb3();
   const { web3K, accountK, loginK } = useWeb3K();
   const [balanceChange, setBalanceChange] = React.useState(false);
+  const [autoChange, setAutoChange] = React.useState(props?.autoState);
 
   const dispatch = useDispatch();
   const account2 = useSelector(state => state.account.account.account);
@@ -51,6 +52,7 @@ export default function QuestionModalDeposit(props) {
       }
     }
   }, []);
+
   const depositFunc = async () => {
     try {
       dispatch(isLoadingThunk({ isLoading: true }));
@@ -72,6 +74,22 @@ export default function QuestionModalDeposit(props) {
       setDepositAmountValue(0);
       await props?.mypagelplistup();
       setBalanceChange(!balanceChange);
+
+      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setCompleteModal(true));
+      setDepositSuccessModalOpen(true);
+    } catch (error) {
+      console.error(error);
+      dispatch(isLoadingThunk({ isLoading: false }));
+      setDepositFailModalOpen(true);
+    }
+  };
+  const autoFunc = async () => {
+    try {
+      dispatch(isLoadingThunk({ isLoading: true }));
+      const result1 = await setAutoCompound(account2, props?.lptoken);
+
+      let transactionResult1 = await web3.eth.sendTransaction(result1);
 
       dispatch(isLoadingThunk({ isLoading: false }));
       dispatch(setCompleteModal(true));
@@ -252,9 +270,11 @@ export default function QuestionModalDeposit(props) {
               {...getOverrideProps(overrides, "Frame 90")}
             >
               <SwitchField
-              // onChange={() => {
-              //   setSearchView(!searchView);
-              // }}
+                isChecked={autoChange ? true : false}
+                onClick={e => {
+                  e.preventDefault();
+                  setAutoChange(state => !state);
+                }}
               ></SwitchField>
               <Flex
                 gap="5px"
@@ -293,7 +313,7 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={"ON"}
+                  children={autoChange ? "ON" : "OFF"}
                   {...getOverrideProps(overrides, "DEX Name40822792")}
                 ></Text>
               </Flex>
@@ -763,7 +783,9 @@ export default function QuestionModalDeposit(props) {
               backgroundColor="rgba(32, 32, 32, 0.85)"
               style={{ cursor: "pointer" }}
               overflow="hidden"
-              onClick={() => {}}
+              onClick={() => {
+                autoFunc();
+              }}
               {...getOverrideProps(overrides, "Frame 103")}
             >
               <Text
