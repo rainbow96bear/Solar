@@ -175,7 +175,7 @@ const LoggedinUser = props => {
                   logoutMethod();
                 }}
               >
-                Logout
+                Disconnect
               </div>
             </li>
           </ul>

@@ -87,7 +87,7 @@ export default function Sosim(props) {
       boxShadow="31px 19px 21px rgba(0, 0, 0, 0.25)"
       borderRadius="35px"
       backgroundColor={{
-        base: "rgba(126,190,171,1)",
+        base: "rgba(252,089,0,0.63)",
         small: "rgba(252,253,254,1)",
       }}
       {...getOverrideProps(overrides, "Sosim")}
@@ -310,7 +310,7 @@ export default function Sosim(props) {
                   fontFamily="ffProBook"
                   fontSize="12px"
                   fontWeight="800"
-                  color="rgba(114,113,113,1)"
+                  color="rgba(54,43,33,0.8)"
                   lineHeight="18.15340805053711px"
                   textAlign="left"
                   display="block"
@@ -368,7 +368,7 @@ export default function Sosim(props) {
                   fontFamily="ffProBook"
                   fontSize="12px"
                   fontWeight="800"
-                  color="rgba(114,113,113,1)"
+                  color="rgba(54,43,33,0.8)"
                   lineHeight="18.15340805053711px"
                   textAlign="left"
                   display="block"
@@ -426,7 +426,7 @@ export default function Sosim(props) {
                   fontFamily="ffProBook"
                   fontSize="12px"
                   fontWeight="800"
-                  color="rgba(114,113,113,1)"
+                  color="rgba(54,43,33,0.8)"
                   lineHeight="18.15340805053711px"
                   textAlign="left"
                   display="block"
@@ -484,7 +484,7 @@ export default function Sosim(props) {
                   fontFamily="ffProBook"
                   fontSize="12px"
                   fontWeight="800"
-                  color="rgba(114,113,113,1)"
+                  color="rgba(54,43,33,0.8)"
                   lineHeight="18.15340805053711px"
                   textAlign="left"
                   display="block"
@@ -542,7 +542,7 @@ export default function Sosim(props) {
                   fontFamily="ffProBook"
                   fontSize="12px"
                   fontWeight="800"
-                  color="rgba(114,113,113,1)"
+                  color="rgba(54,43,33,0.8)"
                   lineHeight="18.15340805053711px"
                   textAlign="left"
                   display="block"

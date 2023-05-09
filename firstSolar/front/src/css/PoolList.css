@@ -1,3 +1,9 @@
 .mycompo {
   --amplify-components-button-border-style: none;
 }
+
+.amplify-pagination {
+  --amplify-components-pagination-current-background-color: var(
+    --amplify-colors-red-40
+  );
+}

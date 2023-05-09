@@ -334,7 +334,7 @@ export default function Swap768px(props) {
         position="relative"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="45px"
-        padding="69px 86px 69px 86px"
+        padding="39px 86px 39px 86px"
         backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
         {...getOverrideProps(overrides, "Swap768px")}
         {...rest}
@@ -390,6 +390,7 @@ export default function Swap768px(props) {
             ></Text>
           </Flex>
           <Flex
+            marginTop="4px"
             gap="10px"
             direction="row"
             width="unset"
@@ -491,6 +492,7 @@ export default function Swap768px(props) {
           </Flex>
         </Flex>
         <Flex
+          margin="15px 15px 25px 15px"
           gap="8px"
           direction="column"
           width="unset"
@@ -504,7 +506,7 @@ export default function Swap768px(props) {
           {...getOverrideProps(overrides, "Line")}
         >
           <Flex
-            backgroundColor="rgba(234, 0, 50, 0.45)"
+            backgroundColor="rgba(234, 0, 50, 0.35)"
             borderRadius="30px"
             display={rightPool == false ? "flex" : "none"}
             color="white"
@@ -512,7 +514,29 @@ export default function Swap768px(props) {
             padding="10px 10px 10px 10px"
             justifyContent="center"
           >
-            Select the appropriate token for the pool.
+            <Text
+              color="rgba(250,251,251,0.85)"
+              fontFamily="ffProExtraLight"
+              fontSize="15px"
+              fontWeight="600"
+              lineHeight="22.99431800842285px"
+              textAlign="left"
+              display="flex"
+              direction="row"
+              justifyContent="center"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="center"
+              grow="1"
+              shrink="1"
+              basis="0"
+              alignSelf="stretch"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Select the appropriate token for the pool."
+            ></Text>
           </Flex>
         </Flex>
         <Flex
@@ -693,7 +717,7 @@ export default function Swap768px(props) {
               boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
               borderRadius="15px"
               padding="28px 18px 28px 18px"
-              backgroundColor="rgba(255,226,0,0.35)"
+              backgroundImage="linear-gradient(-7deg, rgba(251,251,250,0.78), rgba(246,247,248,0.15))"
               {...getOverrideProps(overrides, "Frame 6539752830")}
             >
               <TextAreaField
@@ -780,7 +804,7 @@ export default function Swap768px(props) {
                   position="relative"
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,255,253,1)"
+                  backgroundColor="rgba(255, 226, 0, 0.35)"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     setPercentBalance(0.25);
@@ -819,7 +843,7 @@ export default function Swap768px(props) {
                   position="relative"
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,255,253,1)"
+                  backgroundColor="rgba(255, 226, 0, 0.35)"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     setPercentBalance(0.5);
@@ -858,7 +882,7 @@ export default function Swap768px(props) {
                   position="relative"
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,255,253,1)"
+                  backgroundColor="rgba(255, 226, 0, 0.35)"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     setPercentBalance(0.75);
@@ -897,7 +921,7 @@ export default function Swap768px(props) {
                   position="relative"
                   borderRadius="15px"
                   padding="10px 10px 10px 10px"
-                  backgroundColor="rgba(255,255,253,1)"
+                  backgroundColor="rgba(255, 226, 0, 0.35)"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     setPercentBalance(1);
@@ -1106,7 +1130,7 @@ export default function Swap768px(props) {
               boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
               borderRadius="15px"
               padding="28px 18px 28px 18px"
-              backgroundColor="rgba(0,136,153,0.59)"
+              backgroundImage="linear-gradient(-7deg, rgba(251,251,250,0.78), rgba(246,247,248,0.15))"
               {...getOverrideProps(overrides, "Frame 6539752830")}
             >
               <TextAreaField
@@ -1131,6 +1155,7 @@ export default function Swap768px(props) {
           </Flex>
 
           <Button
+            marginTop="15px"
             gap="10px"
             direction="row"
             width="unset"

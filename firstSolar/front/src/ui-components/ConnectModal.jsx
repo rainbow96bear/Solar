@@ -46,7 +46,6 @@ export default function ConnectModal(props) {
 
   const metamaskLogin = async () => {
     try {
-      console.log("111111");
       if (!window.ethereum) {
         return;
       }
@@ -85,6 +84,9 @@ export default function ConnectModal(props) {
 
   const trustLogin = async () => {
     try {
+      if (!window.ethereum) {
+        return;
+      }
       await loginT();
     } catch (error) {
       console.error(error);
@@ -92,7 +94,9 @@ export default function ConnectModal(props) {
   };
   const coinbaseLogin = async () => {
     try {
-      console.log("2222");
+      if (!window.ethereum) {
+        return;
+      }
       await loginC();
       // const [_account] = await window.ethereum.request({
       //   method: "eth_requestAccounts",
@@ -115,7 +119,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
@@ -481,7 +485,8 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={() => {
+                onClick={e => {
+                  e.preventDefault;
                   metamaskLogin();
                 }}
                 {...getOverrideProps(overrides, "Frame 49")}
@@ -537,7 +542,8 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={() => {
+                onClick={e => {
+                  e.preventDefault;
                   trustLogin();
                 }}
                 {...getOverrideProps(overrides, "Frame 50")}
@@ -593,7 +599,8 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={() => {
+                onClick={e => {
+                  e.preventDefault;
                   coinbaseLogin();
                 }}
                 {...getOverrideProps(overrides, "Frame 50")}
