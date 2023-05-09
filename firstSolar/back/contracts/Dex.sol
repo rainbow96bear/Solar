@@ -90,6 +90,7 @@ contract Dex is Ownable {
         }
         rewardShares(i, pool.lpToken);
       }
+      rewardShares(i, pool.lpToken);
     }
   }
 
