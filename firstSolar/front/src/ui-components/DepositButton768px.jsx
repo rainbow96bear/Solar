@@ -43,7 +43,7 @@ export default function DepositButton768px(props) {
           }}
           whileHover={{
             borderRadius: "13px",
-            backgroundColor: "rgba(252,250,242,0.75)",
+            backgroundColor: "rgba(247,239,227,0.75)",
             scale: 1.03,
             opacity: 0.88,
           }}
@@ -155,6 +155,7 @@ export default function DepositButton768px(props) {
       </Flex>
       {questionMark == 1 ? (
         <QuestionModalDeposit
+          autoState={props.autoState}
           setquestionmark={setQuestionMark}
           lpBalanceValue={props.lpBalanceValue}
           mypagelist={props.mypagelist}
@@ -162,6 +163,9 @@ export default function DepositButton768px(props) {
           lptokenvalue={props.lptokenvalue}
           lptoken={props.lptoken}
           setlptokenvalue={props?.setlptokenvalue}
+          mypageMethod={props?.mypageMethod}
+          pid={props?.pid}
+          lpTokenBalance={props?.lpTokenBalance}
         ></QuestionModalDeposit>
       ) : (
         <></>
@@ -174,7 +178,9 @@ export default function DepositButton768px(props) {
           lptokenvalue={props.lptokenvalue}
           mypagelplistup={props.mypagelplistup}
           lptoken={props.lptoken}
+          mypageMethod={props?.mypageMethod}
           pid={props?.pid}
+          setLpTokenValue={props.setLpTokenValue}
         ></QuestionModalWithDraw>
       ) : (
         <></>

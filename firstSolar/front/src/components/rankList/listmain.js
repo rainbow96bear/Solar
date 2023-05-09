@@ -31,6 +31,7 @@ const ListMain = () => {
       <RankName>
         <RankNameList>
           <Text
+            color="rgba(54,43,33,0.8)"
             fontFamily="ffProBook"
             fontSize="16px"
             fontWeight="500"
@@ -48,6 +49,7 @@ const ListMain = () => {
             children="Rank"
           ></Text>
           <Text
+            color="rgba(54,43,33,0.8)"
             paddingRight="35px"
             fontFamily="ffProBook"
             fontSize="16px"
@@ -66,6 +68,7 @@ const ListMain = () => {
             children="Pool"
           ></Text>
           <Text
+            color="rgba(54,43,33,0.8)"
             fontFamily="ffProBook"
             fontSize="16px"
             fontWeight="500"

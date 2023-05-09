@@ -38,8 +38,9 @@ const Poolitem1024 = props => {
             borderRadius: "33px",
             backgroundColor: "rgba(249, 250, 250, 0.75)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            backgroundImage:
-              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+            backgroundImage: props?.item?.oracleId.includes("DFS")
+              ? "linear-gradient(90deg,rgba(252,089,0,0.33) 0%,rgba(246,247,248,0.15) 20%)"
+              : "",
           }}
           whileHover={{
             borderRadius: "75px",
@@ -56,11 +57,6 @@ const Poolitem1024 = props => {
             shrink="0"
             alignSelf="stretch"
             position="relative"
-            style={{
-              backgroundImage: props?.item?.oracleId.includes("DFS")
-                ? "linear-gradient(90deg,rgba(240,198,147,1) 0%,rgba(246,247,248,0.15) 20%)"
-                : "",
-            }}
             borderRadius="18px"
             padding="7px 18px 7px 18px"
             {...getOverrideProps(overrides, "List")}

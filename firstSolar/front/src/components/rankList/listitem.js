@@ -60,6 +60,7 @@ const ListItem = ({ content, index }, props) => {
             }}
           >
             <Text
+              color="rgba(54,43,33,0.8)"
               fontFamily="ffProLight"
               fontSize="16px"
               fontWeight="500"
@@ -108,6 +109,8 @@ const ListItem = ({ content, index }, props) => {
                 {...getOverrideProps(overrides, "unsplash:em1OiomfG3g39913189")}
               ></Image>
               <Text
+                letterSpacing="1.5px"
+                color="rgba(54,43,33,0.8)"
                 fontFamily="ffProLight"
                 fontSize="16px"
                 fontWeight="500"
@@ -127,6 +130,8 @@ const ListItem = ({ content, index }, props) => {
             </Flex>
 
             <Text
+              letterSpacing="0.75px"
+              color="rgba(54,43,33,0.8)"
               fontFamily="ffProLight"
               fontSize="16px"
               fontWeight="500"

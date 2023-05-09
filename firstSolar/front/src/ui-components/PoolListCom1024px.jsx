@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { isLoadingThunk } from "../modules/isLoading.js";
 import { mainNet1024px1, platform } from "../mainNet";
 import { useLocation, useNavigate } from "react-router-dom";
+import "../css/PoolList.css";
 
 const networkArray = [
   "ethereum",
@@ -752,8 +753,9 @@ export default function PoolListCom1024px(props) {
 
           <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
             <Pagination
+              color="red"
               {...paginationProps}
-              onChange={(pageNum) => {
+              onChange={pageNum => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

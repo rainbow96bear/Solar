@@ -25,7 +25,7 @@ export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const { web3, login } = useWeb3();
   const { loginK } = useWeb3K();
   const { account } = useAccount();
@@ -98,7 +98,7 @@ export default function QuestionModalWithDraw(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -137,7 +137,7 @@ export default function QuestionModalWithDraw(props) {
         >
           <Text
             fontFamily="ffProBold"
-            fontSize="28px"
+            fontSize={{ base: "23px", small: "25px", medium: "28px" }}
             fontWeight="700"
             lineHeight="29.045454025268555px"
             textAlign="left"
@@ -244,7 +244,7 @@ export default function QuestionModalWithDraw(props) {
             ></Text>
             <Flex
               gap="24px"
-              direction="row"
+              direction={{ base: "column", small: "column", medium: "row" }}
               width="unset"
               height="unset"
               justifyContent="flex-start"
@@ -256,7 +256,7 @@ export default function QuestionModalWithDraw(props) {
               {...getOverrideProps(overrides, "Frame 90")}
             >
               <Flex
-                gap="5px"
+                gap="15px"
                 direction="row"
                 width="unset"
                 height="unset"
@@ -345,7 +345,7 @@ export default function QuestionModalWithDraw(props) {
                 ></Text>
               </Flex>
               <Flex
-                gap="5px"
+                gap="15px"
                 direction="row"
                 width="unset"
                 height="unset"
@@ -358,7 +358,7 @@ export default function QuestionModalWithDraw(props) {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="25px"
                 padding="10px 12px 10px 12px"
-                backgroundColor="rgba(0,136,153,0.59)"
+                backgroundColor="rgba(255,226,0,0.35)"
                 {...getOverrideProps(overrides, "Dexname2")}
               >
                 <Image
@@ -377,10 +377,10 @@ export default function QuestionModalWithDraw(props) {
                   {...getOverrideProps(overrides, "ghrgclzzd 740822791")}
                 ></Image>
                 <Text
+                  color="rgba(23,21,29,0.85)"
                   fontFamily="ffProExtraLight"
                   fontSize="17px"
                   fontWeight="600"
-                  color="rgba(239,239,239,1)"
                   lineHeight="20.573863983154297px"
                   textAlign="left"
                   display="block"
@@ -493,7 +493,8 @@ export default function QuestionModalWithDraw(props) {
                     {...getOverrideProps(overrides, "ghrgclzzd 740822807")}
                   ></Image>
                   <Text
-                    fontFamily="ffProExtraLight"
+                    letterSpacing="3.5px"
+                    fontFamily="ffProLight"
                     fontSize="17px"
                     fontWeight="600"
                     lineHeight="20.573863983154297px"
@@ -565,8 +566,8 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={(e) => setWithDrawAmountValue(e.target.value)}
-                onChange={(e) => {
+                onInput={e => setWithDrawAmountValue(e.target.value)}
+                onChange={e => {
                   if (+e.target.value > +props.lpBalanceValue) {
                     e.target.value = props.lpBalanceValue;
                   }
@@ -599,7 +600,7 @@ export default function QuestionModalWithDraw(props) {
               position="relative"
               boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
               borderRadius="15px"
-              backgroundColor="rgba(234,0,50,0.45)"
+              backgroundColor="rgba(0,136,153,0.59)"
               style={{ cursor: "pointer" }}
               onClick={() => {
                 withDrawFunc();
@@ -607,10 +608,10 @@ export default function QuestionModalWithDraw(props) {
               {...getOverrideProps(overrides, "Frame 103")}
             >
               <Text
+                color="rgba(250,250,250,0.8)"
                 fontFamily="ffProBook"
                 fontSize="21px"
                 fontWeight="700"
-                color="rgba(244,244,244,1)"
                 lineHeight="32.6761360168457px"
                 textAlign="center"
                 display="block"
@@ -652,7 +653,7 @@ export default function QuestionModalWithDraw(props) {
                 fontFamily="ffProBook"
                 fontSize="21px"
                 fontWeight="700"
-                color="rgba(244,244,244,1)"
+                color="rgba(250,250,250,0.8)"
                 lineHeight="32.6761360168457px"
                 textAlign="center"
                 display="block"
