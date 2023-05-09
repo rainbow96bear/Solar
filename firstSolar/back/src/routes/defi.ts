@@ -650,6 +650,7 @@ router.post("/search", async (req: Request, res: Response) => {
     const { search, pageIndex }: { search: string; pageIndex: number } =
       req.body;
     let list: Array<Pool> = [];
+    let totalListLength: number = 0;
 
     if (search) {
       const [poolList, activeLpList] = await Promise.all([
@@ -671,7 +672,83 @@ router.post("/search", async (req: Request, res: Response) => {
             lp.tokenAddress?.toLowerCase().includes(search.toLowerCase()))
       );
 
-      list = [...poolList, ...activeList];
+      if (search == "eth" || search == "bnb" || search == "usdt") {
+        totalListLength = activeList.length + poolList.length;
+        const newActiveList: any = await Promise.all(
+          activeList
+            .slice(
+              (pageIndex - 1) * 10,
+              pageIndex == 1 ? pageIndex * 10 - 1 : pageIndex * 10
+            )
+            .map(async (lp: any) => {
+              const lpId: string = lp.id;
+              const oracleId: string = lp.oracleId;
+              const lpChain: number = mainNet[lp.chain];
+              const tokens: Array<string> = lp.assets;
+              const [tvlNow] = await Promise.all([
+                getTvlData(lpId, oracleId, lpChain),
+              ]);
+
+              return {
+                id: lpId,
+                name: lp.name,
+                platformId: lp.platformId,
+                network: lp.network,
+                oracleId: oracleId,
+                status: lp.status,
+                symbol: lp.symbol,
+                tvl: tvlNow,
+                apy:
+                  (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                    .data[lpId] ?? 0,
+                mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+                platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+                tokens,
+                tokenAddress: lp.tokenAddress,
+                addLiquidityUrl: lp.addLiquidityUrl,
+              };
+            })
+        );
+        if (pageIndex == 1) {
+          list = [...poolList, ...newActiveList];
+        } else {
+          list = [...newActiveList];
+        }
+      } else {
+        const newActiveList = await Promise.all(
+          activeList
+            .slice((pageIndex - 1) * 10, pageIndex * 10)
+            .map(async (lp: any) => {
+              const lpId: string = lp.id;
+              const oracleId: string = lp.oracleId;
+              const lpChain: number = mainNet[lp.chain];
+              const tokens: Array<string> = lp.assets;
+              const [tvlNow] = await Promise.all([
+                getTvlData(lpId, oracleId, lpChain),
+              ]);
+
+              return {
+                id: lpId,
+                name: lp.name,
+                platformId: lp.platformId,
+                network: lp.network,
+                oracleId: oracleId,
+                status: lp.status,
+                symbol: lp.symbol,
+                tvl: tvlNow,
+                apy:
+                  (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                    .data[lpId] ?? 0,
+                mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+                platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+                tokens,
+                tokenAddress: lp.tokenAddress,
+                addLiquidityUrl: lp.addLiquidityUrl,
+              };
+            })
+        );
+        list = [...poolList, ...newActiveList];
+      }
     } else {
       const [poolList, activeLpList] = await Promise.all([
         db.Pool.findAll(),
@@ -684,11 +761,12 @@ router.post("/search", async (req: Request, res: Response) => {
 
       list = [...poolList, ...activeList];
     }
-    const paginationMyLpList = list.slice((pageIndex - 1) * 10, pageIndex * 10);
+
     const data: any = {
-      poolListData: paginationMyLpList,
-      poolListDataLength: list.length,
+      poolListData: list,
+      poolListDataLength: totalListLength,
     };
+
     res.send(data);
   } catch (err) {
     console.log(err);
