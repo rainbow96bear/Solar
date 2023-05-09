@@ -12,10 +12,10 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import "../css/Font.css";
 
-const LoggedinUser = (props) => {
+const LoggedinUser = props => {
   const { overrides, ...rest } = props;
   const [view, setView] = useState(false);
-  const account = useSelector((state) => state.account.account.account);
+  const account = useSelector(state => state.account.account.account);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const LoggedinUser = (props) => {
   }, [pathname]);
 
   useEffect(() => {
-    const checkIfClickedOutside = (e) => {
+    const checkIfClickedOutside = e => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
