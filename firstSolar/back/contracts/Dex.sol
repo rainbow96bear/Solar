@@ -59,6 +59,7 @@ contract Dex is Ownable {
     for (uint256 i = 0; i < poolInfo.length; i++) {
       address[] storage userArr = userAddress[i];
       PoolInfo storage pool = poolInfo[i];
+      // rewardShares(i,pool.lpToken);
       uint256 balance = IReward(pool.rewardA).sendProfit();
       for (uint256 j = 0; j < userArr.length; j++) {
         UserInfo storage user = userInfo[i][userArr[j]];
@@ -69,18 +70,15 @@ contract Dex is Ownable {
               balance.mul(user.shares).div(10000)
             );
             uint256 totalAmount = pool.lpToken.totalSupply();
-            (uint256 _reserve1, uint256 _reserve2) = ILiquidityPool(
-              address(pool.lpToken)
-            ).getReserves();
-            ILiquidityPool(address(pool.lpToken)).mint(
+            (uint256 _reserve1, ) = ILiquidityPool(address(pool.lpToken))
+              .getReserves();
+            ILiquidityPool(address(pool.lpToken)).minter(
               address(this),
-              (amountOut * totalAmount) / (2 * _reserve2)
+              (amountOut * totalAmount) / (2 * _reserve1)
             );
             user.amount = user.amount.add(
-              (amountOut * totalAmount) / (2 * _reserve2)
+              (amountOut * totalAmount) / (2 * _reserve1)
             );
-
-            rewardShares(i, pool.lpToken);
           } else {
             IReward(pool.rewardA).distribution(
               userArr[j],
@@ -89,6 +87,7 @@ contract Dex is Ownable {
           }
         }
       }
+      rewardShares(i, pool.lpToken);
     }
   }
 
@@ -98,9 +97,12 @@ contract Dex is Ownable {
   }
 
   function rewardShares(uint256 _pid, ERC20 _lpToken) public {
-    UserInfo storage user = userInfo[_pid][msg.sender];
+    address[] storage userArr = userAddress[_pid];
+    for (uint256 j = 0; j < userArr.length; j++) {
+      UserInfo storage user = userInfo[_pid][userArr[j]];
 
-    user.shares = user.amount.mul(10000).div(_lpToken.totalSupply());
+      user.shares = user.amount.mul(10000).div(_lpToken.totalSupply());
+    }
   }
 
   function add(ERC20 _lpToken, address _rewardA) public onlyOwner {
