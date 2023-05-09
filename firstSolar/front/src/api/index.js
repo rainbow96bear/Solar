@@ -32,6 +32,17 @@ export const oracleIdList = async (_params) => {
   }
 };
 
+export const getLogin = async (_account, _walletKind) => {
+  try {
+    const data = await axios.post("http://localhost:8080/api/user/login", {
+      account: _account,
+      walletKind: _walletKind,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const logout = async (_walletKind, _account) => {
   try {
     await request.post("api/user/logout", {

@@ -8,7 +8,7 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text, Pagination, usePagination } from "@aws-amplify/ui-react";
-import Poolitem1024 from "../components/pool/Poolitem1024px.jsx";
+import Poolitem1024 from "../components/Pool/Poolitem1024px.jsx";
 import { motion, LayoutGroup } from "framer-motion";
 import {
   Netlist1024px,

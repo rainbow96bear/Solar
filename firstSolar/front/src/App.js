@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { useWeb3 } from "./modules/useWeb3";
-import { useWeb3K } from "./modules/useWeb3Kaikas";
 
 // walletConenct import
 import {
@@ -51,10 +50,10 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
-  const emptySearch = useSelector(state => state.emptySearch);
+  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
+  const emptySearch = useSelector((state) => state.emptySearch);
 
-  const completeModal = useSelector(state => state.completeModal);
+  const completeModal = useSelector((state) => state.completeModal);
   const dispatch = useDispatch();
 
   const accountWagmi = useAccount({
