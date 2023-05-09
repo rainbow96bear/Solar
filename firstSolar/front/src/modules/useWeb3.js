@@ -10,31 +10,33 @@ export const useWeb3 = () => {
     try {
       if (window.ethereum && window.ethereum.isMetaMask) {
         let _web3;
-        window.ethereum.providers
-          .map(async (item, idx) => {
-            if (item.isMetaMask == true) {
-              _web3 = new Web3(item);
-              setWeb3(_web3);
-              const [_account] = await item.request({
-                method: "eth_requestAccounts",
-              });
-              if (_account) {
-                setAccount(_account);
-              }
-
-              item.on("accountsChanged", async () => {
-                if (item && item.isMetaMask) {
-                  const [_account] = await item.request({
-                    method: "eth_requestAccounts",
-                  });
+        if (window.ethereum.providers) {
+          window.ethereum.providers
+            .map(async (item, idx) => {
+              if (item.isMetaMask == true) {
+                _web3 = new Web3(item);
+                setWeb3(_web3);
+                const [_account] = await item.request({
+                  method: "eth_requestAccounts",
+                });
+                if (_account) {
                   setAccount(_account);
                 }
-              });
 
-              setChainId(item.networkVersion);
-            }
-          })
-          .find((item) => item.isMetaMask == true);
+                item.on("accountsChanged", async () => {
+                  if (item && item.isMetaMask) {
+                    const [_account] = await item.request({
+                      method: "eth_requestAccounts",
+                    });
+                    setAccount(_account);
+                  }
+                });
+
+                setChainId(item.networkVersion);
+              }
+            })
+            .find((item) => item.isMetaMask == true);
+        } else alert(" Update your browser");
       } else {
         throw new Error("MetaMask is not exist");
       }
