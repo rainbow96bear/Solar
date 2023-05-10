@@ -422,7 +422,7 @@ export default function PooListCom768px(props) {
                 initial={{ borderRadius: 25 }}
                 transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
               >
-                {currentPagePoolList.map((item, idx) => (
+                {currentPagePoolList?.map((item, idx) => (
                   <Poolitem768px
                     gap="17px"
                     direction="column"
