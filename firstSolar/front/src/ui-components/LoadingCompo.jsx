@@ -41,7 +41,7 @@ export default function LoadingCompo(props) {
       gap="10px"
       direction="row"
       width="79vw"
-      height="80vh"
+      height="91vh"
       justifyContent="center"
       alignItems="center"
       position="relative"

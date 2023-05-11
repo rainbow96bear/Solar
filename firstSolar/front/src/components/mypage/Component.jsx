@@ -54,6 +54,7 @@ const MypageComponent = ({ myList }) => {
         {isMobile ? (
           <motion.div
             style={{
+              marginLeft: "27px",
               width: "83vw",
               height: "unset",
               backgroundColor: "rgba(246,247,248,0.8)",

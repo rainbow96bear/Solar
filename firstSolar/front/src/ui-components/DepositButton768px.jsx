@@ -24,8 +24,8 @@ export default function DepositButton768px(props) {
         direction="row"
         width="100vw"
         height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="center"
+        alignItems="center"
         position="relative"
         borderRadius="35px"
         padding="31px 80px 31px 80px"
@@ -52,7 +52,7 @@ export default function DepositButton768px(props) {
             gap="10px"
             direction="row"
             width="unset"
-            height="50px"
+            height={{ base: "45px", small: "50px" }}
             justifyContent="flex-end"
             alignItems="center"
             grow="1"
@@ -112,7 +112,7 @@ export default function DepositButton768px(props) {
             gap="10px"
             direction="row"
             width="unset"
-            height="50px"
+            height={{ base: "45px", small: "50px" }}
             justifyContent="flex-end"
             alignItems="center"
             grow="1"
@@ -121,6 +121,7 @@ export default function DepositButton768px(props) {
             position="relative"
             borderRadius="45px"
             padding="19px 25px 19px 25px"
+            overflow="hidden"
             {...getOverrideProps(overrides, "Connect40822713")}
           >
             <Text

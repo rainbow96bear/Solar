@@ -170,7 +170,7 @@ export default function MyPageCompo768px(props) {
             {...getOverrideProps(overrides, "Frame 17340782541")}
           >
             <Flex
-              gap="23px"
+              gap={{ base: "11px", small: "23px" }}
               direction="column"
               width="unset"
               height="unset"
@@ -211,7 +211,7 @@ export default function MyPageCompo768px(props) {
                 >
                   <Text
                     fontFamily="ffProExtraLight"
-                    fontSize={{ base: "18px", small: "18px", medium: "25px" }}
+                    fontSize={{ base: "11px", small: "18px", medium: "25px" }}
                     fontWeight="600"
                     lineHeight="30.25568199157715px"
                     textAlign="center"
@@ -244,7 +244,7 @@ export default function MyPageCompo768px(props) {
                 justifyContent="center"
                 alignItems="center"
                 shrink="0"
-                alignSelf="stretch"
+                alignSelf={{ base: "center", small: "stretch" }}
                 position="relative"
                 padding="0px 0px 0px 0px"
                 {...getOverrideProps(overrides, "Frame 144")}
