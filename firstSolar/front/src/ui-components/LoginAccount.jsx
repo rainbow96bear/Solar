@@ -44,12 +44,10 @@ export default function LoginAccount(props) {
   }, [view]);
 
   const logoutMethod = async () => {
-    console.log(account);
     await logout(document.cookie.split(":")[0], account);
 
     let cookieName = document.cookie.split(":")[0] + ":" + account;
     let cookieValue = "";
-    console.log("cookieName : ", cookieName);
 
     let expiresDate = new Date();
     expiresDate.setTime(expiresDate.getTime() - 1);

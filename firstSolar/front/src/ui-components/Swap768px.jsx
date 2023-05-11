@@ -277,7 +277,6 @@ export default function Swap768px(props) {
           props?.oracleiddata[0].tokenAddress
         )
       ).data;
-      console.log("result1 : ", result1);
       let transactionResult;
       if (document.cookie.split(":")[0] == "metamask") {
         transactionResult = await web3.eth.sendTransaction(result1);

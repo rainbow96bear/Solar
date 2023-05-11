@@ -106,6 +106,7 @@ export default function PoolListCom1024px(props) {
           const { poolListData, resultTotalPages } = await getMainPoolList(
             pageIndex
           );
+          console.log("poolListData : ", poolListData);
           setCurrentPagePoolList(poolListData);
           setTotalPages(resultTotalPages);
         } else if (filter != "null") {
@@ -755,7 +756,7 @@ export default function PoolListCom1024px(props) {
             <Pagination
               color="red"
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

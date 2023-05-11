@@ -390,7 +390,6 @@ export const setAutoCompound = async (account, lpSymbol) => {
 export const rankList = async () => {
   try {
     const result = (await request.get("api/defi/rank")).data;
-    console.log(result);
 
     return result;
   } catch (error) {

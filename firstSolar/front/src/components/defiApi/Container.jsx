@@ -17,11 +17,9 @@ const DefiContainer = () => {
       });
       setSignResult(sign);
       setSignVerify(false);
-      console.log(sign);
       if (sign) console.log("sign On"); // sign을 했을 때 auto-compounding 실행? 요청?
     } catch (err) {
       console.error(err);
-      console.log("No sign");
     }
   };
   // const personalSignVerify = async () => {
