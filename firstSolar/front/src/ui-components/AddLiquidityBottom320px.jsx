@@ -29,9 +29,11 @@ import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
 import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
 import { useWeb3T } from "../modules/useWeb3Trust";
 import { useWeb3C } from "../modules/useWeb3Coinbase";
+import { useNavigate } from "react-router";
 
 export default function AddLiquidityBottom320px(props) {
   const { overrides, oracleiddata, ...rest } = props;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { web3, account, chainId, login } = useWeb3();
@@ -42,7 +44,7 @@ export default function AddLiquidityBottom320px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -147,25 +149,16 @@ export default function AddLiquidityBottom320px(props) {
   React.useEffect(() => {
     (async () => {
       try {
-        const data = await swapBalance(
+        const data1 = await swapBalance(
           address ? address : address2,
           props?.oracleiddata[0]?.firstToken
         );
-        setUserFirstBalance(data);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const data = await swapBalance(
+        const data2 = await swapBalance(
           address ? address : address2,
           props?.oracleiddata[0]?.secondToken
         );
-        setUserSecondBalance(data);
+        setUserFirstBalance(data1);
+        setUserSecondBalance(data2);
       } catch (error) {
         console.error(error);
       }
@@ -181,7 +174,7 @@ export default function AddLiquidityBottom320px(props) {
       } else if (document.cookie.split(":")[0] == "coinbase") {
         loginC();
       }
-    }
+    } else navigate("/redirectHome");
   }, []);
 
   React.useEffect(() => {
@@ -672,7 +665,7 @@ export default function AddLiquidityBottom320px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -817,7 +810,7 @@ export default function AddLiquidityBottom320px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }
