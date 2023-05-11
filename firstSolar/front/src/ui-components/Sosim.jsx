@@ -75,11 +75,11 @@ export default function Sosim(props) {
 
   return (
     <Flex
-      marginTop={{ base: "30px", large: "0px" }}
+      marginTop={{ base: "30px", large: "35px" }}
       gap="0"
       direction={{ base: "column", small: "row" }}
       width="100%"
-      height="unset"
+      height={{ small: "unset", medium: "29vh" }}
       justifyContent="flex-start"
       alignItems={{ base: "flex-end", small: "flex-start" }}
       position="relative"
@@ -102,7 +102,7 @@ export default function Sosim(props) {
         gap="10px"
         direction="column"
         width={{ base: "174.15px", small: "unset" }}
-        height={{ base: "unset", small: "unset" }}
+        height={{ small: "unset", medium: "29vh" }}
         justifyContent="flex-end"
         alignItems="flex-start"
         grow="1"
@@ -134,7 +134,7 @@ export default function Sosim(props) {
           <Text
             style={{ cursor: "pointer" }}
             fontFamily="ffProBook"
-            fontSize={{ base: "24px", small: "29px" }}
+            fontSize={{ base: "24x", small: "29px" }}
             fontWeight="800"
             color="rgba(252,253,254,1)"
             lineHeight="42.35795211791992px"
@@ -156,13 +156,18 @@ export default function Sosim(props) {
           ></Text>
 
           <Text
+            display={{
+              base: "block",
+              small: "none",
+              medium: "none",
+              large: "none",
+            }}
             fontFamily="ffProBook"
             fontSize="12px"
             fontWeight="500"
             color="rgba(252,253,254,1)"
             lineHeight="22.99431800842285px"
             textAlign="left"
-            display="block"
             direction="column"
             justifyContent="unset"
             width="unset"
@@ -189,7 +194,7 @@ export default function Sosim(props) {
           gap: "10px",
           direction: "column",
           width: "174.15px",
-          height: "450px",
+          height: "29vh",
           justifyContent: "flex-start",
           alignItems: "flex-start",
           shrink: "0",
@@ -198,18 +203,12 @@ export default function Sosim(props) {
           padding: "38px 27px 38px 27px",
           backgroundColor: "rgba(252,253,254,1)",
         }}
-        whileHover={{
-          backgroundColor: "rgba(255,217,0,0.65)",
-          boxShadow: "38px 45px 28px rgba(0, 0, 0, 0.25)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
       >
         <Flex
           gap="14px"
           direction="column"
           width="unset"
-          height="unset"
+          height={{ small: "unset", medium: "unset" }}
           justifyContent="flex-start"
           alignItems="flex-start"
           shrink="0"
@@ -232,7 +231,7 @@ export default function Sosim(props) {
             {...getOverrideProps(overrides, "Frame 55")}
           >
             <Text
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "grab" }}
               marginTop="9px"
               marginBottom="17px"
               fontFamily="ffProBold"
@@ -252,10 +251,11 @@ export default function Sosim(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={drop ? "Close" : "Create Click"}
               ref={h1Ref}
-              onClick={() => setDrop(!drop)}
-              {...getOverrideProps(overrides, "CREATE")}
+              children={"Create"}
+              // children={drop ? "Close" : "Create Click"}
+              // onClick={() => setDrop(!drop)}
+              // {...getOverrideProps(overrides, "CREATE")}
             ></Text>
 
             <Flex

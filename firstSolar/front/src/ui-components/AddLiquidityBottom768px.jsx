@@ -201,14 +201,9 @@ export default function AddLiquidityBottom768px(props) {
         medium: "-150px",
         large: "-20px",
       }}
-      right={{
-        small: "23px",
-        medium: "23px",
-        large: "130px",
-      }}
       width={{
-        small: "95vw",
-        medium: "95vw",
+        small: "86vw",
+        medium: "86vw",
         large: "43vw",
       }}
       height="unset"
@@ -833,7 +828,7 @@ export default function AddLiquidityBottom768px(props) {
           <Flex
             gap="10px"
             direction="row"
-            width="unset"
+            width={{ base: "23vw", small: "30vw", medium: "32vw" }}
             height="66px"
             justifyContent="center"
             alignItems="center"
@@ -852,7 +847,7 @@ export default function AddLiquidityBottom768px(props) {
           >
             <Text
               fontFamily="ffProBook"
-              fontSize="28px"
+              fontSize={{ base: "12px", small: "17px", medium: "28px" }}
               fontWeight="700"
               color="rgba(239,239,239,1)"
               lineHeight="33.8863639831543px"

@@ -113,6 +113,8 @@ const SwapComponent = ({ oracleId, balance }) => {
                 base: "column",
                 medium: "row",
               }}
+              alignItems="center"
+              justifyContent="center"
             >
               <ItemWrap
                 layout

@@ -27,17 +27,18 @@ const LiquidComponent = ({ oracleId, balance }) => {
       {isDesktop ? (
         <Addliqud>
           <Flex
+            alignItems="center"
+            justifyContent="center"
             marginLeft="15px"
             gap={{
               small: "100px",
-              medium: "50px",
+              medium: "30px",
             }}
             direction={{
               small: "column",
               medium: "column",
               large: "row",
             }}
-            alignItems="center"
           >
             <ItemWrap
               onClick={toggleOpen}
@@ -80,7 +81,6 @@ const LiquidComponent = ({ oracleId, balance }) => {
                   >
                     <AddLiquidityBottom768px
                       style={{
-                        marginLeft: "50px",
                         height: "unset",
                         borderRadius: "35px",
                         backgroundColor: "rgba(249,249,249,1)",
@@ -111,6 +111,8 @@ const LiquidComponent = ({ oracleId, balance }) => {
                 base: "column",
                 medium: "row",
               }}
+              alignItems="center"
+              justifyContent="center"
             >
               <ItemWrap
                 layout

@@ -42,7 +42,8 @@ const RankListComponent = ({ items }) => {
             alignItems={{ base: "center", large: "center" }}
             padding={{
               base: "20px 30px 20px 30px",
-              large: "50px 50px 15px 50px",
+              small: "9px 50px 9px 50px",
+              large: "9px 50px 9px 50px",
             }}
           >
             <Sosim />

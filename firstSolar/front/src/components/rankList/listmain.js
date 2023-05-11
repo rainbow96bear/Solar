@@ -97,8 +97,16 @@ const SkewContainer = styled.div`
     margin-right: 45px;
   }
 
-  @media only screen and (max-width: 499px) {
-    scale: 0.55;
+  @media only screen and (max-width: 479px) {
+    scale: 0.69;
+    margin-right: 45px;
+  }
+  @media only screen and (max-width: 415px) {
+    scale: 0.6;
+    margin-right: 45px;
+  }
+  @media only screen and (max-width: 375px) {
+    scale: 0.51;
     margin-right: 45px;
   }
 `;

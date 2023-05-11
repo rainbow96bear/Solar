@@ -31,6 +31,8 @@ import { setAutoCompound } from "../api";
 import { useWeb3C } from "../modules/useWeb3Coinbase";
 import { useWeb3T } from "../modules/useWeb3Trust";
 
+import "../css/Modal.css";
+
 export default function QuestionModalDeposit(props) {
   const { overrides, setquestionmark, ...rest } = props;
   const { web3, account, chainId, login } = useWeb3();
@@ -40,7 +42,7 @@ export default function QuestionModalDeposit(props) {
   const [autoChange, setAutoChange] = React.useState(props?.autoState);
 
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const [depositAmountValue, setDepositAmountValue] = React.useState(0);
 
   const [depositSuccessModalOpen, setDepositSuccessModalOpen] =
@@ -135,16 +137,17 @@ export default function QuestionModalDeposit(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
     >
       <Flex
+        className="depositModal"
         gap="38px"
         direction="column"
-        width="53vw"
-        height="unset"
+        width={{ base: "85vw", small: "85vw", medium: "80vw" }}
+        height={{ base: "unset", small: "unset", medium: "unset" }}
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
@@ -152,6 +155,7 @@ export default function QuestionModalDeposit(props) {
         padding="0px 0px 45px 0px"
         backgroundColor="rgba(252,253,254,1)"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        overflow="hidden"
         {...getOverrideProps(overrides, "Deposit1024px")}
         {...rest}
       >
@@ -294,9 +298,9 @@ export default function QuestionModalDeposit(props) {
             >
               <SwitchField
                 isChecked={autoChange ? true : false}
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
-                  setAutoChange((state) => !state);
+                  setAutoChange(state => !state);
                 }}
               ></SwitchField>
               <Flex
@@ -378,7 +382,7 @@ export default function QuestionModalDeposit(props) {
             ></Text>
             <Flex
               gap="24px"
-              direction="row"
+              direction={{ base: "column", small: "row" }}
               width="unset"
               height="unset"
               justifyContent="flex-start"
@@ -558,9 +562,9 @@ export default function QuestionModalDeposit(props) {
               textAlign="left"
               display="block"
               direction="column"
-              justifyContent="unset"
               width="unset"
               height="unset"
+              justifyContent="unset"
               gap="unset"
               alignItems="unset"
               shrink="0"
@@ -579,14 +583,14 @@ export default function QuestionModalDeposit(props) {
               justifyContent="flex-start"
               alignItems="flex-start"
               shrink="0"
-              alignSelf="stretch"
+              alignSelf={{ base: "center", small: "stretch" }}
               position="relative"
               padding="0px 0px 0px 0px"
               {...getOverrideProps(overrides, "Frame 101")}
             >
               <Flex
                 gap="9px"
-                direction="row"
+                direction={{ base: "column", medium: "row" }}
                 width="unset"
                 height="unset"
                 justifyContent="flex-start"
@@ -702,8 +706,8 @@ export default function QuestionModalDeposit(props) {
                 labelHidden={false}
                 variation="default"
                 value={depositAmountValue}
-                onInput={(e) => setDepositAmountValue(e.target.value)}
-                onChange={(e) => {
+                onInput={e => setDepositAmountValue(e.target.value)}
+                onChange={e => {
                   if (+e.target.value > +props.lpBalanceValue) {
                     e.target.value = props.lpBalanceValue;
                   }
@@ -746,7 +750,7 @@ export default function QuestionModalDeposit(props) {
               <Text
                 color="rgba(250,250,250,0.8)"
                 fontFamily="ffProMedium"
-                fontSize="26px"
+                fontSize={{ base: "15px", medium: "20px" }}
                 fontWeight="700"
                 lineHeight="32.6761360168457px"
                 textAlign="center"
@@ -768,7 +772,7 @@ export default function QuestionModalDeposit(props) {
             <Flex
               gap="10px"
               direction="row"
-              width="21vw"
+              width={{ base: "31vw", small: "31vw", medium: "25vw" }}
               height="66px"
               justifyContent="center"
               alignItems="center"
@@ -788,7 +792,7 @@ export default function QuestionModalDeposit(props) {
               <Text
                 fontFamily="ffProBook"
                 color="rgba(250,250,250,0.8)"
-                fontSize="26px"
+                fontSize={{ base: "11px", medium: "20px" }}
                 fontWeight="700"
                 lineHeight="32.6761360168457px"
                 textAlign="center"
