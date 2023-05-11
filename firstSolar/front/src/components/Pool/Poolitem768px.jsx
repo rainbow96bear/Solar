@@ -5,15 +5,21 @@ import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo768px, SwapCompo768px } from "../../ui-components";
-import { connectThunk } from "../../modules/connect";
+import { setConnect } from "../../modules/connect";
 import { useDispatch } from "react-redux";
 import "../../css/Font.css";
+import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem768px = props => {
+const Poolitem768px = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (props?.last == true) dispatch(setIsLoading(false));
+  }, []);
+
   return (
     <>
       <ItemWrap
@@ -648,7 +654,7 @@ const Poolitem768px = props => {
               ) : (
                 <ConnectCompo768px
                   onClick={() => {
-                    dispatch(connectThunk({ connect: true }));
+                    dispatch(setConnect(true));
                   }}
                 />
               )}

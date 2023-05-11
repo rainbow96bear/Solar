@@ -11,7 +11,7 @@ import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useDispatch } from "react-redux";
-import { isLoadingThunk } from "../modules/isLoading";
+import { setIsLoading } from "../modules/isLoading";
 
 export default function SwapTop320px(props) {
   const { overrides, ...rest } = props;
@@ -27,7 +27,7 @@ export default function SwapTop320px(props) {
   const [reducedNumber, setReducedNumber] = React.useState();
 
   React.useEffect(() => {
-    dispatch(isLoadingThunk({ isLoading: true }));
+    dispatch(setIsLoading(true));
 
     const tempDate = new Date(lastTimeStamp * 1000);
     setLastTimeStamp(props?.oracleiddata[0]?.lastHarvest);
@@ -37,7 +37,7 @@ export default function SwapTop320px(props) {
     setReducedNumber(tokenNumBer?.toString().substring(0, 7));
 
     setTimeout(() => {
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
     }, 3000);
   }, []);
 

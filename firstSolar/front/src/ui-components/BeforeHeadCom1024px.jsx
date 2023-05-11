@@ -15,7 +15,7 @@ import {
   Text,
   View,
 } from "@aws-amplify/ui-react";
-import { connectThunk } from "../modules/connect.js";
+import { setConnect } from "../modules/connect.js";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -33,10 +33,10 @@ import { useMediaQuery } from "react-responsive";
 export default function BeforeHeadCom1024px(props) {
   const { overrides, ...rest } = props;
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
-  const login = useSelector(state => state.login.login.login);
+  const login = useSelector((state) => state.login);
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
-  const connect = useSelector(state => state.connect.connect.connect);
+  const connect = useSelector((state) => state.connect);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = React.useState();
   const { address, isConnecting, isDisconnected } = useAccount();
@@ -48,7 +48,7 @@ export default function BeforeHeadCom1024px(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -59,7 +59,7 @@ export default function BeforeHeadCom1024px(props) {
     };
   }, [view]);
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const inputValue = e.target.value;
     const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
     setInputValue(sanitizedValue);
@@ -221,7 +221,7 @@ export default function BeforeHeadCom1024px(props) {
                     padding="19px 11px 19px 11px"
                     backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
                     onClick={() => {
-                      dispatch(connectThunk({ connect: true }));
+                      dispatch(setConnect(true));
                     }}
                     {...getOverrideProps(overrides, "Connect39912872")}
                   >

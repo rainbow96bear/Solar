@@ -8,9 +8,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const HeaderComponent = () => {
-  const connect = useSelector(state => state.connect.connect.connect);
-  const account = useSelector(state => state.account.account.account);
-
   return (
     <Header>
       <BeforeHeadCom1024px></BeforeHeadCom1024px>

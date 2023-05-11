@@ -2,8 +2,8 @@ import { Flex, Image } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { dexList, netList } from "../../api";
 import { motion } from "framer-motion";
-import { isLoadingThunk } from "../../modules/isLoading";
 import { useDispatch } from "react-redux";
+import { setIsLoading } from "../../modules/isLoading";
 
 const Netlist1024px = (props) => {
   const { overrides, ...rest } = props;
@@ -29,15 +29,15 @@ const Netlist1024px = (props) => {
           overflow="hidden"
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
+              dispatch(setIsLoading(true));
               const temp = await netList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
               props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               props.setFilter(props?.item);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -105,15 +105,15 @@ const Dexlist1024px = (props) => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
+              dispatch(setIsLoading(true));
               const temp = await dexList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
               props.setFilter(props?.item);
               props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -178,15 +178,15 @@ const Netlist768px = (props) => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
+              dispatch(setIsLoading(true));
               const temp = await netList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
               props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               props.setFilter(props?.item);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -253,15 +253,15 @@ const Dexlist768px = (props) => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
+              dispatch(setIsLoading(true));
               const temp = await dexList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
               props.setFilter(props?.item);
               props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -326,15 +326,15 @@ const Netlist320px = (props) => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
+              dispatch(setIsLoading(true));
               const temp = await netList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
               props.setFilter(props?.item);
               props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -402,15 +402,15 @@ const Dexlist320px = (props) => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
+              dispatch(setIsLoading(true));
               const temp = await dexList(props?.item, props?.pageIndex);
               props.setCurrentPagePoolList(temp.poolListData);
               props.setFilter(props?.item);
               props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"

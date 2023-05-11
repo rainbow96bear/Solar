@@ -9,8 +9,7 @@ import { useAccount } from "wagmi";
 import { ConnectCompoRank, SwapCompoRank } from "../../ui-components";
 import { useDispatch, useSelector } from "react-redux";
 import "../../css/Font.css";
-import { connectThunk } from "../../modules/connect.js";
-import { isLoadingThunk } from "../../modules/isLoading.js";
+import { setConnect } from "../../modules/connect.js";
 
 const ListItem = ({ content, index }, props) => {
   const { overrides, ...rest } = props;
@@ -19,7 +18,7 @@ const ListItem = ({ content, index }, props) => {
   const toggleOpen = () => setIsOpen(!isOpen);
   const dispatch = useDispatch();
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account);
   const addressResult = address || address2;
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 0.96 });
@@ -171,7 +170,7 @@ const ListItem = ({ content, index }, props) => {
                 ) : (
                   <ConnectCompoRank
                     onClick={() => {
-                      dispatch(connectThunk({ connect: true }));
+                      dispatch(setConnect(true));
                     }}
                   />
                 )}
@@ -197,7 +196,7 @@ const Wrapper = styled(motion.div)`
   transform-origin: top;
   transition: all 0.3s;
   animation: ${rotate} 1s ease-out;
-  margin-top: ${props => (props.index === 0 ? "0rem" : "0.5rem")};
+  margin-top: ${(props) => (props.index === 0 ? "0rem" : "0.5rem")};
   border-radius: 4px;
   box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.3);
   font-weight: 600;

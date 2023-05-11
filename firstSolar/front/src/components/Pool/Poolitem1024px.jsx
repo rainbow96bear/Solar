@@ -1,24 +1,28 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCompo1440px, SwapCompo1440px } from "../../ui-components";
-import { connectThunk } from "../../modules/connect";
+import { setConnect } from "../../modules/connect";
 import { useDispatch, useSelector } from "react-redux";
 import "../../css/Font.css";
 import { useAccount } from "wagmi";
+import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem1024 = props => {
+const Poolitem1024 = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account);
   const { address } = useAccount();
 
   const addressResult = address || address2;
   const dispatch = useDispatch();
-  const pageIndex = useSelector(state => state.pageIndex);
+
+  useEffect(() => {
+    if (props?.last == true) dispatch(setIsLoading(false));
+  }, [props?.item]);
 
   return (
     <>
@@ -535,7 +539,7 @@ const Poolitem1024 = props => {
               ) : (
                 <ConnectCompo1440px
                   onClick={() => {
-                    dispatch(connectThunk({ connect: true }));
+                    dispatch(setConnect(true));
                   }}
                 />
               )}

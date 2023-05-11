@@ -3,21 +3,26 @@ import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
 import "../css/Font.css";
 import "../css/Font.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setOutRedirectModalOpen } from "../modules/outRedirectModalOpen";
 
 export default function OutRedirectModal(props) {
+  const url = useSelector((state) => state.outRedirectModalOpen.url);
+  const dispatch = useDispatch();
   const redirectFunc = () => {
-    window.open(props?.item?.props?.item?.addLiquidityUrl, "_blank");
+    window.open(url, "_blank");
   };
 
   return (
     <Flex
       gap="30px"
       direction="column"
-      width="46vw"
+      // width="46vw"
       height="unset"
       justifyContent="center"
       alignItems="center"
       position="relative"
+      whiteSpace="normal"
       borderRadius="18px"
       padding="41px 50px 41px 50px"
       backgroundColor="rgb(255,255,255)"
@@ -25,7 +30,7 @@ export default function OutRedirectModal(props) {
       <Flex
         gap="10px"
         direction="row"
-        width="unset"
+        width="100%"
         height="unset"
         justifyContent="center"
         alignItems="center"
@@ -45,14 +50,14 @@ export default function OutRedirectModal(props) {
           display="flex"
           direction="column"
           justifyContent="unset"
-          width="unset"
+          width="100%"
           height="unset"
           gap="unset"
           alignItems="unset"
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
+          whiteSpace="normal"
           children="Redirect to Liquidity Additional Site?"
         ></Text>
       </Flex>
@@ -70,6 +75,7 @@ export default function OutRedirectModal(props) {
           style={{
             width: "15vw",
             height: "unset",
+            minWidth: "80px",
             borderRadius: "35px",
             backgroundColor: "rgba(234,0,50,0.55)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -80,13 +86,13 @@ export default function OutRedirectModal(props) {
           <Flex
             onClick={() => {
               redirectFunc();
-              props?.setIsOpen(false);
+              dispatch(setOutRedirectModalOpen({ isOpen: false, url: "" }));
             }}
             gap="10px"
             direction="row"
             width="unset"
             height="50px"
-            justifyContent="flex-end"
+            justifyContent="center"
             alignItems="center"
             grow="1"
             shrink="1"
@@ -122,6 +128,7 @@ export default function OutRedirectModal(props) {
         <motion.div
           style={{
             width: "15vw",
+            minWidth: "80px",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(255,226,0,0.35)",
@@ -132,13 +139,13 @@ export default function OutRedirectModal(props) {
         >
           <Flex
             onClick={() => {
-              props.setIsOpen(false);
+              dispatch(setOutRedirectModalOpen({ isOpen: false, url: "" }));
             }}
             gap="10px"
             direction="row"
             width="unset"
             height="50px"
-            justifyContent="flex-end"
+            justifyContent="center"
             alignItems="center"
             grow="1"
             shrink="1"

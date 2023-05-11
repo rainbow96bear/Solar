@@ -5,10 +5,10 @@ import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo320px, SwapCompo320px } from "../../ui-components";
-import { connectThunk } from "../../modules/connect";
+import { setConnect } from "../../modules/connect";
 import { useDispatch } from "react-redux";
 
-const Poolitem320px = props => {
+const Poolitem320px = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -789,7 +789,7 @@ const Poolitem320px = props => {
               ) : (
                 <ConnectCompo320px
                   onClick={() => {
-                    dispatch(connectThunk({ connect: true }));
+                    dispatch(setConnect(true));
                   }}
                 />
               )}

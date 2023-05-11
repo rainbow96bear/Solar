@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useDispatch } from "react-redux";
-import { connectThunk } from "../modules/connect";
+import { setConnect } from "../modules/connect";
 import walletConnectLogo from "./images/walletConnectLogo.png";
 import styled from "styled-components";
 
@@ -31,7 +31,7 @@ export default function ConnectButton(props) {
         padding="10px 10px 10px 10px"
         className="ConnectButton"
         onClick={() => {
-          dispatch(connectThunk({ connect: true }));
+          dispatch(setConnect(true));
         }}
         {...getOverrideProps(overrides, "ConnectButton")}
         {...rest}

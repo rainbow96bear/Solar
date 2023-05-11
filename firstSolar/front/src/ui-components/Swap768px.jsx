@@ -25,7 +25,7 @@ import {
 } from "../api";
 import { useAccount } from "wagmi";
 import { useWeb3 } from "../modules/useWeb3.js";
-import { isLoadingThunk } from "../modules/isLoading.js";
+import { setIsLoading } from "../modules/isLoading.js";
 import styled from "styled-components";
 import "../css/Font.css";
 import SwapCompletedModal from "./SwapCompletedModal";
@@ -36,13 +36,13 @@ import { useNavigate } from "react-router";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
-  const { web3, account, chainId, login } = useWeb3();
-  const { web3T, accountT, chainIdT, loginT } = useWeb3T();
-  const { web3C, accountC, chainIdC, loginC } = useWeb3C();
+  const { web3, login } = useWeb3();
+  const { web3T, loginT } = useWeb3T();
+  const { web3C, loginC } = useWeb3C();
   const navigate = useNavigate();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector((state) => state.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
   const dispatch = useDispatch();
@@ -73,7 +73,7 @@ export default function Swap768px(props) {
   React.useEffect(() => {
     (async () => {
       try {
-        dispatch(isLoadingThunk({ isLoading: true }));
+        dispatch(setIsLoading(true));
         const { bnb, eth, usdt, tokenPrice } = await getConvertPrice(
           firstSelectToken
         );
@@ -84,11 +84,11 @@ export default function Swap768px(props) {
         setSecondAmountPrice(0);
 
         setTimeout(() => {
-          dispatch(isLoadingThunk({ isLoading: false }));
+          dispatch(setIsLoading(false));
         }, 2000);
       } catch (error) {
         console.error(error);
-        dispatch(isLoadingThunk({ isLoading: false }));
+        dispatch(setIsLoading(false));
       }
     })();
   }, [firstSelectToken]);
@@ -269,7 +269,7 @@ export default function Swap768px(props) {
 
   const swapMethod = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
 
       const result1 = (
         await swapApprove(
@@ -318,12 +318,12 @@ export default function Swap768px(props) {
       );
       setUserSecondBalance(secondBalanceTemp);
       setTextAreaValue("");
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
 
       setSwapSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setSwapFailModalOpen(true);
     }
   };

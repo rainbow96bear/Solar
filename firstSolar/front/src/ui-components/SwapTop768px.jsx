@@ -12,7 +12,7 @@ import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { isLoadingThunk } from "../modules/isLoading.js";
+import { setIsLoading } from "../modules/isLoading.js";
 
 export default function SwapTop768px(props) {
   const { overrides, ...rest } = props;
@@ -25,7 +25,7 @@ export default function SwapTop768px(props) {
 
   useEffect(() => {
     (async () => {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
       const tempDate = new Date(lastTimeStamp * 1000);
       setLastTimeStamp(
         props?.oracleiddata[0]?.lastHarvest
@@ -47,7 +47,7 @@ export default function SwapTop768px(props) {
           : parseInt(props?.oracleiddata[0]?.secondTokenBalance * 1000) / 1000
       );
       setTimeout(() => {
-        dispatch(isLoadingThunk({ isLoading: false }));
+        dispatch(setIsLoading(false));
       }, 3000);
     })();
   }, [props.oracleiddata[0]]);

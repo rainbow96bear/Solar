@@ -10,11 +10,14 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { setOutRedirectModalOpen } from "../modules/outRedirectModalOpen";
 
 export default function SwapCompo1440px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
   const isDFS = props?.props?.oracleId?.split("-")[0] == "DFS";
+  const dispatch = useDispatch();
 
   return (
     <Flex
@@ -116,7 +119,12 @@ export default function SwapCompo1440px(props) {
             isDFS
               ? navigate(url)
               : url
-              ? window.open(url, "_blank")
+              ? dispatch(
+                  setOutRedirectModalOpen({
+                    isOpen: true,
+                    url: url,
+                  })
+                )
               : window.location.reload();
           }}
           gap="10px"

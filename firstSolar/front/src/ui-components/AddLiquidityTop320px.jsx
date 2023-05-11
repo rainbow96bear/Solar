@@ -11,7 +11,7 @@ import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useDispatch } from "react-redux";
-import { isLoadingThunk } from "../modules/isLoading";
+import { setIsLoading } from "../modules/isLoading";
 
 export default function AddLiquidityTop320px(props) {
   const { overrides, ...rest } = props;
@@ -25,10 +25,10 @@ export default function AddLiquidityTop320px(props) {
   const reducedNumber = tokenNumBer?.toString().substring(0, 7);
 
   React.useEffect(() => {
-    dispatch(isLoadingThunk({ isLoading: true }));
+    dispatch(setIsLoading(true));
 
     setTimeout(() => {
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
     }, 1500);
   }, []);
   return (

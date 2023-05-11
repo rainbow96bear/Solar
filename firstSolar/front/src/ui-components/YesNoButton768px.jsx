@@ -8,18 +8,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useWeb3 } from "../modules/useWeb3";
 
 import { useAccount } from "wagmi";
-import { isLoadingThunk } from "../modules/isLoading";
 import { removeLiquidity } from "../api";
 import "../css/Font.css";
 import { useWeb3T } from "../modules/useWeb3Trust";
 import { useWeb3C } from "../modules/useWeb3Coinbase";
+import { setIsLoading } from "../modules/isLoading";
 
 export default function YesNoButton768px(props) {
   const { overrides, ...rest } = props;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector((state) => state.account);
   const [render, setRender] = React.useState(false);
   const { web3, login } = useWeb3();
   const { web3T, loginT } = useWeb3T();
@@ -27,7 +27,7 @@ export default function YesNoButton768px(props) {
   const { account } = useAccount();
   const removeLiquidityFunc = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
       const result2 = await removeLiquidity(
         account2 ? account2 : account,
         props?.withDrawAmountValue,
@@ -44,12 +44,12 @@ export default function YesNoButton768px(props) {
       }
 
       props?.setLpTokenValue(props?.lptokenvalue - props?.withDrawAmountValue);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       props.setquestionmark(0);
       navigate("/redirectHome");
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
     }
   };
 

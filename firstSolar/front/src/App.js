@@ -21,7 +21,7 @@ import { arbitrum, mainnet, polygon } from "wagmi/chains";
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 
-import { connectThunk } from "./modules/connect";
+import { setConnect } from "./modules/connect";
 import LoadingCompo from "./ui-components/LoadingCompo";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
@@ -29,7 +29,7 @@ import MypageContainer from "./components/mypage/Container";
 import NavigatorContainer from "./components/navigateHome/Container";
 import EmptySearchModal from "./ui-components/EmptySearchModal";
 
-import { DepositCompletedModal } from "./ui-components";
+import { DepositCompletedModal, OutRedirectModal } from "./ui-components";
 import { DepositFaildModal } from "./ui-components";
 import SearchNavigatorContainer from "./components/navigateSearch/Container";
 
@@ -50,10 +50,13 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector(state => state.isLoading.isLoading.isLoading);
-  const emptySearch = useSelector(state => state.emptySearch);
+  const isLoading = useSelector((state) => state.isLoading);
+  const emptySearch = useSelector((state) => state.emptySearch);
 
-  const completeModal = useSelector(state => state.completeModal);
+  const completeModal = useSelector((state) => state.completeModal);
+  const outRedirectModalOpen = useSelector(
+    (state) => state.outRedirectModalOpen.isOpen
+  );
   const dispatch = useDispatch();
 
   const accountWagmi = useAccount({
@@ -61,7 +64,7 @@ function App() {
       // console.log("Connected", { address, connector, isReconnected });
     },
     onDisconnect() {
-      dispatch(connectThunk({ connect: false }));
+      dispatch(setConnect(false));
     },
   });
 
@@ -101,6 +104,11 @@ function App() {
               <EmptySearchModal className="marginT" />
             </LoadingModal>
           )}
+          {outRedirectModalOpen && (
+            <LoadingModal>
+              <OutRedirectModal />
+            </LoadingModal>
+          )}
         </div>
       </WagmiConfig>
       <Web3Modal
@@ -132,4 +140,6 @@ const LoadingModal = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  padding-left: 10px;
+  padding-right: 10px;
 `;

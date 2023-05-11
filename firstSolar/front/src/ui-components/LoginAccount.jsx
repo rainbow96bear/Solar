@@ -11,9 +11,9 @@ import { Divider, Flex, Icon, Text, Button } from "@aws-amplify/ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { connectThunk } from "../modules/connect";
-import { accountThunk } from "../modules/account";
-import { loginThunk } from "../modules/login";
+import { setConnect } from "../modules/connect";
+import { setAccount } from "../modules/account";
+import { setLogin } from "../modules/login";
 import { logout } from "../api";
 import { motion } from "framer-motion";
 import "../css/Font.css";
@@ -21,7 +21,7 @@ import "../css/Font.css";
 export default function LoginAccount(props) {
   const { overrides, ...rest } = props;
   const [view, setView] = React.useState(false);
-  const account = useSelector(state => state.account.account.account);
+  const account = useSelector((state) => state.account);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const ref = React.useRef();
@@ -32,7 +32,7 @@ export default function LoginAccount(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -59,9 +59,9 @@ export default function LoginAccount(props) {
       "; expires=" +
       expiresDate.toGMTString() +
       "; path=/";
-    dispatch(connectThunk({ connect: false }));
-    dispatch(loginThunk({ false: false }));
-    dispatch(accountThunk({ account: "" }));
+    dispatch(setConnect(false));
+    dispatch(setLogin(false));
+    dispatch(setAccount(""));
     navigate("/");
   };
   return (
