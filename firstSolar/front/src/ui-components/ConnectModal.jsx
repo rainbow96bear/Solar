@@ -119,10 +119,10 @@ export default function ConnectModal(props) {
       <Flex
         gap="0"
         direction="row"
-        width="50vw"
+        width={{ base: "25vw", small: "50vw" }}
         height="unset"
-        justifyContent="flex-start"
-        alignItems="stretch"
+        justifyContent={{ base: "center", small: "flex-start" }}
+        alignItems={{ base: "stretch", small: "stretch" }}
         position="relative"
         padding="0px 0px 0px 0px"
         boxShadow="4px 37px 27px rgba(0, 0, 0, 0.25)"
@@ -469,8 +469,8 @@ export default function ConnectModal(props) {
               style={{ cursor: "pointer" }}
               backgroundColor="rgba(247,239,227,1)"
               direction="row"
-              width="unset"
-              height="unset"
+              width={{ base: "21px", small: "unset" }}
+              height={{ base: "21px", small: "unset" }}
               justifyContent="flex-end"
               alignItems="center"
               alignSelf="flex-end"
@@ -485,8 +485,9 @@ export default function ConnectModal(props) {
               {...getOverrideProps(overrides, "XIcon")}
             >
               <Icon
-                width="27px"
-                height="27px"
+                width={{ base: "13px", small: "27px" }}
+                height={{ base: "13px", small: "27px" }}
+                right={{ base: "-7px", small: "0px" }}
                 viewBox={{ minX: 0, minY: 0, width: 20, height: 20 }}
                 paths={[
                   {

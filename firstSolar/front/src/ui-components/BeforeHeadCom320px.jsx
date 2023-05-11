@@ -32,10 +32,10 @@ import { Link, useNavigate } from "react-router-dom";
 export default function BeforeHeadCom320px(props) {
   const { overrides, ...rest } = props;
   const [searchView, setSearchView] = React.useState(false);
-  const login = useSelector((state) => state.login.login.login);
+  const login = useSelector(state => state.login.login.login);
   const { address } = useAccount();
   const navigate = useNavigate();
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const connect = useSelector(state => state.connect.connect.connect);
   const isMobile = useMediaQuery({
     query: "(min-width:0px) and (max-width:480px)",
   });
@@ -152,8 +152,8 @@ export default function BeforeHeadCom320px(props) {
                   style={{ display: "flex", gap: "20px" }}
                 >
                   <motion.div
-                    width="45px"
-                    height={{ base: "38px", small: "45px" }}
+                    width={{ base: "49px", small: "49px" }}
+                    height={{ base: "49px", small: "49px" }}
                     style={{
                       alignSelf: "center",
                       borderRadius: "35px",
@@ -169,8 +169,8 @@ export default function BeforeHeadCom320px(props) {
                   >
                     <Button
                       display="flex"
-                      width="45px"
-                      height={{ base: "38px", small: "45px" }}
+                      width={{ base: "49px", small: "49px" }}
+                      height={{ base: "49px", small: "49px" }}
                       borderRadius="35px"
                       alignSelf="center"
                       shrink="0"
@@ -179,29 +179,29 @@ export default function BeforeHeadCom320px(props) {
                       fontFamily="ffCondExtraLight"
                       children="List Reset"
                       textAlign="center"
-                      fontSize={{ base: "7px", small: "10px" }}
+                      fontSize={{ base: "7px", small: "7px" }}
                       onClick={() => {
                         navigate("/redirectHome");
                       }}
                       {...getOverrideProps(overrides, "Button")}
                     ></Button>
                   </motion.div>
-                  {connect ? (
-                    login ? (
-                      <LoggedinUser></LoggedinUser>
-                    ) : address ? (
-                      <Web3Button></Web3Button>
+                  <Flex alignItems="center">
+                    {connect ? (
+                      login ? (
+                        <LoggedinUser></LoggedinUser>
+                      ) : address ? (
+                        <Web3Button></Web3Button>
+                      ) : (
+                        <>
+                          <ConnectModal></ConnectModal>
+                          <LoadingButton768></LoadingButton768>
+                        </>
+                      )
                     ) : (
-                      <>
-                        <ConnectModal></ConnectModal>
-                        <LoadingButton768></LoadingButton768>
-                      </>
-                    )
-                  ) : (
-                    <div className="Header_connect">
                       <LoginButton></LoginButton>
-                    </div>
-                  )}
+                    )}
+                  </Flex>
                 </div>
               </Flex>
             </Flex>

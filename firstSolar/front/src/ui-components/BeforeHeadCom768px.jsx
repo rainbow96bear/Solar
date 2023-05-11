@@ -25,8 +25,8 @@ import { useMediaQuery } from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 export default function BeforeHeadCom768px(props) {
   const { overrides, ...rest } = props;
-  const login = useSelector((state) => state.login.login.login);
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const login = useSelector(state => state.login.login.login);
+  const connect = useSelector(state => state.connect.connect.connect);
   const { address, isConnecting, isDisconnected } = useAccount();
   const navigate = useNavigate();
 
@@ -143,8 +143,8 @@ export default function BeforeHeadCom768px(props) {
               style={{ display: "flex", gap: "20px" }}
             >
               <motion.div
-                width={{ base: "38px", small: "45px" }}
-                height={{ base: "38px", small: "45px" }}
+                width={{ base: "49px", small: "49px" }}
+                height={{ base: "49px", small: "49px" }}
                 style={{
                   alignSelf: "center",
                   borderRadius: "35px",
@@ -160,8 +160,8 @@ export default function BeforeHeadCom768px(props) {
               >
                 <Button
                   display="flex"
-                  width={{ base: "38px", small: "45px" }}
-                  height={{ base: "38px", small: "45px" }}
+                  width={{ base: "49px", small: "49px" }}
+                  height={{ base: "49px", small: "49px" }}
                   borderRadius="35px"
                   alignSelf="center"
                   shrink="0"
@@ -170,7 +170,7 @@ export default function BeforeHeadCom768px(props) {
                   fontFamily="ffCondExtraLight"
                   children="List Reset"
                   textAlign="center"
-                  fontSize={{ base: "7px", small: "10px" }}
+                  fontSize={{ base: "7px", small: "7px" }}
                   onClick={() => {
                     navigate("/redirectHome");
                   }}

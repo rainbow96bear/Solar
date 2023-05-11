@@ -21,7 +21,7 @@ import "../css/Font.css";
 export default function LoginAccount(props) {
   const { overrides, ...rest } = props;
   const [view, setView] = React.useState(false);
-  const account = useSelector((state) => state.account.account.account);
+  const account = useSelector(state => state.account.account.account);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const ref = React.useRef();
@@ -32,7 +32,7 @@ export default function LoginAccount(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = (e) => {
+    const checkIfClickedOutside = e => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -68,8 +68,8 @@ export default function LoginAccount(props) {
     <LoginAccountCover className="LoginAccountCover" ref={ref}>
       <motion.div
         style={{
-          width: "45px",
-          height: "45px",
+          width: "49px",
+          height: "49px",
           alignSelf: "center",
           borderRadius: "33px",
           backgroundColor: "rgba(247,239,227,0.75)",
@@ -83,15 +83,16 @@ export default function LoginAccount(props) {
         }}
       >
         <Button
-          width="45px"
-          height="45px"
+          textAlign="center"
+          width="49px"
+          height="49px"
           borderRadius="35px"
           alignSelf="center"
           shrink="0"
           size="small"
           isDisabled={false}
           fontFamily="ffCondExtraLight"
-          children="MyPage"
+          children="My Page"
           fontSize="10px"
           onClick={() => {
             navigate(`/mypage?${account}`);
