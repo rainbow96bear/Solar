@@ -1,12 +1,27 @@
 import styled from "styled-components";
 import { Foot1024px, Foot768px, Foot320px } from "../../ui-components";
+import { Flex } from "@aws-amplify/ui-react";
 
 const FooterComponent = () => {
   return (
-    <FooterCompo>
+    <Flex
+      display={{ small: "none", medium: "flex" }}
+      style={{
+        backgroundColor: "#f8f8f8",
+        textAlign: "center",
+        display: "flex",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "50px",
+        paddingBottom: "100px",
+        paddingTop: "55px",
+        paddingLeft: "15px",
+      }}
+    >
       <Foot1024px />
       <Foot768px />
-    </FooterCompo>
+    </Flex>
   );
 };
 export default FooterComponent;

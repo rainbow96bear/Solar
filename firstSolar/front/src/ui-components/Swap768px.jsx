@@ -32,12 +32,14 @@ import SwapCompletedModal from "./SwapCompletedModal";
 import SwapFaildModal from "./SwapFaildModal";
 import { useWeb3T } from "../modules/useWeb3Trust";
 import { useWeb3C } from "../modules/useWeb3Coinbase";
+import { useNavigate } from "react-router";
 
 export default function Swap768px(props) {
   const { overrides, ...rest } = props;
   const { web3, account, chainId, login } = useWeb3();
   const { web3T, accountT, chainIdT, loginT } = useWeb3T();
   const { web3C, accountC, chainIdC, loginC } = useWeb3C();
+  const navigate = useNavigate();
 
   const { address } = useAccount();
   const address2 = useSelector((state) => state.account.account.account);
@@ -160,7 +162,7 @@ export default function Swap768px(props) {
       } else if (document.cookie.split(":")[0] == "coinbase") {
         loginC();
       }
-    }
+    } else navigate("/redirectHome");
   }, []);
 
   const allowedKeys = [
