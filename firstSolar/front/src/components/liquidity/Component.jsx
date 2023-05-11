@@ -15,11 +15,11 @@ const LiquidComponent = ({ oracleId, balance }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const isDesktop = useMediaQuery({
-    query: "(min-width:1280px)",
+    query: "(min-width:500px)",
   });
 
   const isMobile = useMediaQuery({
-    query: "(max-width:1279px)",
+    query: "(max-width:499px)",
   });
 
   return (
@@ -27,10 +27,17 @@ const LiquidComponent = ({ oracleId, balance }) => {
       {isDesktop ? (
         <Addliqud>
           <Flex
+            marginLeft="15px"
+            gap={{
+              small: "100px",
+              medium: "50px",
+            }}
             direction={{
+              small: "column",
               medium: "column",
               large: "row",
             }}
+            alignItems="center"
           >
             <ItemWrap
               onClick={toggleOpen}
@@ -73,7 +80,6 @@ const LiquidComponent = ({ oracleId, balance }) => {
                   >
                     <AddLiquidityBottom768px
                       style={{
-                        marginTop: "-18px",
                         marginLeft: "50px",
                         height: "unset",
                         borderRadius: "35px",
@@ -116,7 +122,7 @@ const LiquidComponent = ({ oracleId, balance }) => {
                 <motion.div
                   onClick={toggleOpen}
                   style={{
-                    marginTop: "-100px",
+                    marginTop: "-150px",
                     height: "unset",
                     borderRadius: "35px",
                     backgroundColor: "rgba(249,249,249,1)",
@@ -148,6 +154,7 @@ const LiquidComponent = ({ oracleId, balance }) => {
                         ease: [0.43, 0.13, 0.23, 0.96],
                       }}
                       style={{
+                        marginTop: "-90px",
                         height: "unset",
                         borderRadius: "35px",
                         backgroundColor: "rgba(249,249,249,1)",

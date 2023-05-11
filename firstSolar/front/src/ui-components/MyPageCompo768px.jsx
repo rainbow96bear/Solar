@@ -18,8 +18,8 @@ import { motion } from "framer-motion";
 import "../css/Font.css";
 
 export default function MyPageCompo768px(props) {
-  const { overrides, ...rest } = props;
-  const [myList, setMyList] = React.useState([]);
+  const { overrides, myList, ...rest } = props;
+  // const [myList, setMyList] = React.useState([]);
   const [lpTokenValue, setLpTokenValue] = React.useState();
   const [lpToken, setLpToken] = React.useState();
   const [firstToken, setFirstToken] = React.useState();

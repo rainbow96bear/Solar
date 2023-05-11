@@ -325,16 +325,32 @@ export default function Swap768px(props) {
       <Flex
         gap="10px"
         direction="column"
-        top="30px"
-        right="80px"
-        width="34vw"
+        top={{
+          small: "-230px",
+          medium: "-150px",
+          large: "-15px",
+        }}
+        right={{
+          small: "0px",
+          medium: "0px",
+          large: "100px",
+        }}
+        width={{
+          small: "90vw",
+          medium: "90vw",
+          large: "43vw",
+        }}
         height="unset"
         justifyContent="flex-start"
         alignItems="center"
         position="relative"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="45px"
-        padding="39px 86px 39px 86px"
+        padding={{
+          small: "27px 43px 27px 43px",
+          medium: "27px 43px 27px 43px",
+          large: "39px 86px 39px 86px",
+        }}
         backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
         {...getOverrideProps(overrides, "Swap768px")}
         {...rest}
@@ -510,14 +526,19 @@ export default function Swap768px(props) {
             borderRadius="30px"
             display={rightPool == false ? "flex" : "none"}
             color="white"
-            width="100%"
+            width={{
+              base: "55vw",
+              small: "75vw",
+              medium: "45vw",
+              large: "38vw",
+            }}
             padding="10px 10px 10px 10px"
             justifyContent="center"
           >
             <Text
               color="rgba(250,251,251,0.85)"
               fontFamily="ffProExtraLight"
-              fontSize="15px"
+              fontSize={{ base: "15px", small: "15px", medium: "13.5px" }}
               fontWeight="600"
               lineHeight="22.99431800842285px"
               textAlign="left"

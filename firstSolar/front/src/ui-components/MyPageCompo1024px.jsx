@@ -31,7 +31,7 @@ export default function MyPageCompo1024px(props) {
   const params = useLocation().search.replace("?", "");
   const navigate = useNavigate();
   const { account } = useAccount();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const lpBalanceValue = parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
 
   const isLoadingTrue = () => {

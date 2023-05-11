@@ -9,7 +9,6 @@ import "../../css/Font.css";
 const MyPageList1024px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleOpen = () => setIsOpen(!isOpen);
   const mypageMethod = () => {
     props.setLpTokenValue(props?.item?.LPTokenBalance);
