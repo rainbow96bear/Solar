@@ -443,7 +443,7 @@ export default function PooListCom320px(props) {
             >
               <Pagination
                 {...paginationProps}
-                onChange={(pageNum) => {
+                onChange={pageNum => {
                   setPageIndex(pageNum);
                 }}
                 onNext={() => {
