@@ -10,9 +10,9 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Icon, Image, Text } from "@aws-amplify/ui-react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { connectThunk } from "../modules/connect.js";
-import { accountThunk } from "../modules/account.js";
-import { loginThunk } from "../modules/login.js";
+import { setConnect } from "../modules/connect.js";
+import { setAccount } from "../modules/account.js";
+import { setLogin } from "../modules/login.js";
 import metamaskLogo from "./images/metamaskLogo.jpg";
 import trustLogo from "./images/trustLogo.jpg";
 import coinbaseLogo from "./images/coinbaseLogo.png";
@@ -54,8 +54,8 @@ export default function ConnectModal(props) {
         account: _account,
         walletKind: "metamask",
       });
-      dispatch(accountThunk({ account: _account }));
-      dispatch(loginThunk({ login: true }));
+      dispatch(setAccount(_account));
+      dispatch(setLogin(true));
     } catch (error) {
       console.error(error);
     }
@@ -73,8 +73,8 @@ export default function ConnectModal(props) {
           if (!document.cookie) {
             const data = await getLogin(_account, "trust");
           }
-          dispatch(accountThunk({ account: _account }));
-          dispatch(loginThunk({ login: true }));
+          dispatch(setAccount({ account: _account }));
+          dispatch(setLogin(true));
         }
       });
     } catch (error) {
@@ -95,8 +95,8 @@ export default function ConnectModal(props) {
           if (!document.cookie) {
             const data = await getLogin(_account, "coinbase");
           }
-          dispatch(accountThunk({ account: _account }));
-          dispatch(loginThunk({ login: true }));
+          dispatch(setAccount({ account: _account }));
+          dispatch(setLogin(true));
         }
       });
     } catch (error) {
@@ -111,9 +111,9 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
-        dispatch(connectThunk({ connect: false }));
+        dispatch(setConnect(false));
       }}
     >
       <Flex
@@ -205,7 +205,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault;
                   metamaskLogin();
                 }}
@@ -262,7 +262,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault;
                   trustLogin();
                 }}
@@ -319,7 +319,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault;
                   coinbaseLogin();
                 }}
@@ -480,7 +480,7 @@ export default function ConnectModal(props) {
               borderRadius="30px"
               className="cursorPointer"
               onClick={() => {
-                dispatch(connectThunk({ connect: false }));
+                dispatch(setConnect(false));
               }}
               {...getOverrideProps(overrides, "XIcon")}
             >

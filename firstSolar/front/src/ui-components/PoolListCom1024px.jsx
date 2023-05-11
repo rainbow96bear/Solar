@@ -17,9 +17,9 @@ import {
 import { getMainPoolList, netList, dexList, getSearch } from "../api/index.js";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
-import { isLoadingThunk } from "../modules/isLoading.js";
+import { setIsLoading } from "../modules/isLoading.js";
 import { mainNet1024px1, platform } from "../mainNet";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../css/PoolList.css";
 
 const networkArray = [
@@ -70,7 +70,6 @@ export default function PoolListCom1024px(props) {
   const [sortAPY, setSortAPY] = React.useState("down");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     queryParams.set("page", pageIndex);
@@ -82,7 +81,7 @@ export default function PoolListCom1024px(props) {
 
   const getPoolList = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
       if (searchData != "null") {
         // 검색이다.
         if (filter == "null") {
@@ -96,17 +95,11 @@ export default function PoolListCom1024px(props) {
         } else if (filter != "null") {
           // 필터 있을 때 실행할 코드
         }
-        // setTimeout(() => {
-        //   dispatch(isLoadingThunk({ isLoading: false }));
-        // }, 5000);
       } else {
-        // 검색이 아니다. 메인 페이지
-
         if (filter == "null") {
           const { poolListData, resultTotalPages } = await getMainPoolList(
             pageIndex
           );
-          console.log("poolListData : ", poolListData);
           setCurrentPagePoolList(poolListData);
           setTotalPages(resultTotalPages);
         } else if (filter != "null") {
@@ -123,11 +116,11 @@ export default function PoolListCom1024px(props) {
         }
 
         // setTimeout(() => {
-        //   dispatch(isLoadingThunk({ isLoading: false }));
+        //   dispatch(setIsLoading(false));
         // }, 5000);
       }
     } catch (error) {
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       console.error(error);
     }
   };
@@ -135,7 +128,6 @@ export default function PoolListCom1024px(props) {
   React.useEffect(() => {
     (async () => {
       await getPoolList();
-      dispatch(isLoadingThunk({ isLoading: false }));
     })();
   }, [pageIndex]);
 
@@ -681,6 +673,9 @@ export default function PoolListCom1024px(props) {
                       item={item}
                       length={currentPagePoolList.length}
                       idx={idx}
+                      last={
+                        idx == currentPagePoolList.length - 1 ? true : false
+                      }
                     />
                   ))
               ) : sortAPY == "down" ? (
@@ -702,6 +697,9 @@ export default function PoolListCom1024px(props) {
                       item={item}
                       length={currentPagePoolList.length}
                       idx={idx}
+                      last={
+                        idx == currentPagePoolList.length - 1 ? true : false
+                      }
                     />
                   ))
               ) : sortTVL == "up" ? (
@@ -723,6 +721,9 @@ export default function PoolListCom1024px(props) {
                       item={item}
                       length={currentPagePoolList.length}
                       idx={idx}
+                      last={
+                        idx == currentPagePoolList.length - 1 ? true : false
+                      }
                     />
                   ))
               ) : sortTVL == "down" ? (
@@ -744,6 +745,9 @@ export default function PoolListCom1024px(props) {
                       item={item}
                       length={currentPagePoolList.length}
                       idx={idx}
+                      last={
+                        idx == currentPagePoolList.length - 1 ? true : false
+                      }
                     />
                   ))
               ) : (
@@ -756,7 +760,7 @@ export default function PoolListCom1024px(props) {
             <Pagination
               color="red"
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

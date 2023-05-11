@@ -13,7 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { mypageList } from "../api/index";
 import logo from "./images/logo_new.png";
 import { useDispatch, useSelector } from "react-redux";
-import { isLoadingThunk } from "../modules/isLoading";
+import { setIsLoading } from "../modules/isLoading";
 import { motion } from "framer-motion";
 import "../css/Font.css";
 import { useAccount } from "wagmi";
@@ -31,15 +31,15 @@ export default function MyPageCompo1024px(props) {
   const params = useLocation().search.replace("?", "");
   const navigate = useNavigate();
   const { account } = useAccount();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account);
   const lpBalanceValue = parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
 
   const isLoadingTrue = () => {
-    dispatch(isLoadingThunk({ isLoading: true }));
+    dispatch(setIsLoading(true));
   };
 
   const isLoadingFalse = () => {
-    dispatch(isLoadingThunk({ isLoading: false }));
+    dispatch(setIsLoading(false));
   };
 
   const mypageLpListUp = async () => {

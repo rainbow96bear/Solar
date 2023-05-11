@@ -26,7 +26,7 @@ import {
 import { useAccount } from "wagmi";
 import { useWeb3 } from "../modules/useWeb3.js";
 
-import { isLoadingThunk } from "../modules/isLoading.js";
+import { setIsLoading } from "../modules/isLoading.js";
 import styled from "styled-components";
 import SwapSuccessModal from "./SwapSuccessModal";
 import "../css/Font.css";
@@ -47,7 +47,7 @@ export default function Swap320px(props) {
   const { web3C, accounCC, chainIdC, loginC } = useWeb3C();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector((state) => state.account);
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ export default function Swap320px(props) {
   React.useEffect(() => {
     (async () => {
       try {
-        dispatch(isLoadingThunk({ isLoading: true }));
+        dispatch(setIsLoading(true));
         const { bnb, eth, usdt, tokenPrice } = await getConvertPrice(
           firstSelectToken
         );
@@ -89,11 +89,11 @@ export default function Swap320px(props) {
         setSecondAmountPrice(0);
 
         setTimeout(() => {
-          dispatch(isLoadingThunk({ isLoading: false }));
+          dispatch(setIsLoading(false));
         }, 2000);
       } catch (error) {
         console.error(error);
-        dispatch(isLoadingThunk({ isLoading: false }));
+        dispatch(setIsLoading(false));
       }
     })();
   }, [firstSelectToken]);
@@ -274,7 +274,7 @@ export default function Swap320px(props) {
 
   const swapMethod = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
 
       const result1 = (
         await swapApprove(
@@ -324,12 +324,12 @@ export default function Swap320px(props) {
       );
       setUserSecondBalance(secondBalanceTemp);
       setTextAreaValue("");
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
 
       setSwapSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setSwapFailModalOpen(true);
     }
   };

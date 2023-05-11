@@ -13,12 +13,15 @@ import { useNavigate } from "react-router-dom";
 import "../css/Font.css";
 import styled from "styled-components";
 import OutRedirectModal from "./OutRedirectModal";
+import { useDispatch } from "react-redux";
+import { setOutRedirectModalOpen } from "../modules/outRedirectModalOpen";
 
 export default function SwapCompo320px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
   const isDFS = props?.props?.item?.oracleId?.split("-")[0] == "DFS";
-  const [isOpen, setIsOpen] = React.useState(false);
+  const dispatch = useDispatch();
+
   return (
     <Flex
       display="flex"
@@ -106,7 +109,7 @@ export default function SwapCompo320px(props) {
             isDFS
               ? navigate(url)
               : url
-              ? setIsOpen(true)
+              ? dispatch(setOutRedirectModalOpen({ isOpen: true, url: url }))
               : window.location.reload();
           }}
           gap="10px"
@@ -147,14 +150,6 @@ export default function SwapCompo320px(props) {
           ></Text>
         </Flex>
       </motion.div>
-      {isOpen && (
-        <RedirectModal>
-          <OutRedirectModal
-            item={props}
-            setIsOpen={setIsOpen}
-          ></OutRedirectModal>
-        </RedirectModal>
-      )}
     </Flex>
   );
 }

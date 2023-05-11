@@ -1,89 +1,36 @@
 import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import "../css/Font.css";
 import "../css/Font.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useWeb3 } from "../modules/useWeb3";
+import { setOutRedirectModalOpen } from "../modules/outRedirectModalOpen";
 
-import { useAccount } from "wagmi";
-import { removeLiquidity } from "../api";
-import "../css/Font.css";
-import { useWeb3T } from "../modules/useWeb3Trust";
-import { useWeb3C } from "../modules/useWeb3Coinbase";
-import { setIsLoading } from "../modules/isLoading";
-
-export default function YesNoButton768px(props) {
-  const { overrides, ...rest } = props;
-
-  const navigate = useNavigate();
+export default function OutRedirectModal(props) {
+  const url = useSelector((state) => state.outRedirectModalOpen.url);
   const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account);
-  const [render, setRender] = React.useState(false);
-  const { web3, login } = useWeb3();
-  const { web3T, loginT } = useWeb3T();
-  const { web3C, loginC } = useWeb3C();
-  const { account } = useAccount();
-  const removeLiquidityFunc = async () => {
-    try {
-      dispatch(setIsLoading(true));
-      const result2 = await removeLiquidity(
-        account2 ? account2 : account,
-        props?.withDrawAmountValue,
-        props?.lpSymbol
-      );
-
-      let removeTx;
-      if (document.cookie.split(":")[0] == "metamask") {
-        removeTx = await web3.eth.sendTransaction(result2);
-      } else if (document.cookie.split(":")[0] == "trust") {
-        removeTx = await web3T.eth.sendTransaction(result2);
-      } else if (document.cookie.split(":")[0] == "coinbase") {
-        removeTx = await web3C.eth.sendTransaction(result2);
-      }
-
-      props?.setLpTokenValue(props?.lptokenvalue - props?.withDrawAmountValue);
-      dispatch(setIsLoading(false));
-      props.setquestionmark(0);
-      navigate("/redirectHome");
-    } catch (error) {
-      console.error(error);
-      dispatch(setIsLoading(false));
-    }
+  const redirectFunc = () => {
+    window.open(url, "_blank");
   };
-
-  React.useEffect(() => {
-    if (document.cookie) {
-      if (document.cookie.split(":")[0] == "metamask") {
-        login();
-      } else if (document.cookie.split(":")[0] == "trust") {
-        loginT();
-      } else if (document.cookie.split(":")[0] == "coinbase") {
-        loginC();
-      }
-    }
-  }, []);
 
   return (
     <Flex
       gap="30px"
       direction="column"
-      width="46vw"
+      // width="46vw"
       height="unset"
       justifyContent="center"
       alignItems="center"
       position="relative"
+      whiteSpace="normal"
       borderRadius="18px"
       padding="41px 50px 41px 50px"
       backgroundColor="rgb(255,255,255)"
-      {...getOverrideProps(overrides, "YesNoButton768px")}
-      {...rest}
     >
       <Flex
         gap="10px"
         direction="row"
-        width="unset"
+        width="100%"
         height="unset"
         justifyContent="center"
         alignItems="center"
@@ -93,7 +40,6 @@ export default function YesNoButton768px(props) {
         alignSelf="stretch"
         position="relative"
         padding="19px 19px 19px 19px"
-        {...getOverrideProps(overrides, "Frame 9740822812")}
       >
         <Text
           fontFamily="ffCondExtraLight"
@@ -104,16 +50,15 @@ export default function YesNoButton768px(props) {
           display="flex"
           direction="column"
           justifyContent="unset"
-          width="unset"
+          width="100%"
           height="unset"
           gap="unset"
           alignItems="unset"
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          whiteSpace="pre-wrap"
-          children="Do you want to remove the liquidity pool?"
-          {...getOverrideProps(overrides, "Balance : 040822813")}
+          whiteSpace="normal"
+          children="Redirect to Liquidity Additional Site?"
         ></Text>
       </Flex>
 
@@ -130,6 +75,7 @@ export default function YesNoButton768px(props) {
           style={{
             width: "15vw",
             height: "unset",
+            minWidth: "80px",
             borderRadius: "35px",
             backgroundColor: "rgba(234,0,50,0.55)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -139,13 +85,14 @@ export default function YesNoButton768px(props) {
         >
           <Flex
             onClick={() => {
-              removeLiquidityFunc();
+              redirectFunc();
+              dispatch(setOutRedirectModalOpen({ isOpen: false, url: "" }));
             }}
             gap="10px"
             direction="row"
             width="unset"
             height="50px"
-            justifyContent="flex-end"
+            justifyContent="center"
             alignItems="center"
             grow="1"
             shrink="1"
@@ -153,7 +100,6 @@ export default function YesNoButton768px(props) {
             position="relative"
             borderRadius="45px"
             padding="19px 25px 19px 25px"
-            {...getOverrideProps(overrides, "Connect40052829")}
           >
             <Text
               fontFamily="ffProMedium"
@@ -176,13 +122,13 @@ export default function YesNoButton768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Yes"
-              {...getOverrideProps(overrides, "Swap")}
             ></Text>
           </Flex>
         </motion.div>
         <motion.div
           style={{
             width: "15vw",
+            minWidth: "80px",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(255,226,0,0.35)",
@@ -193,13 +139,13 @@ export default function YesNoButton768px(props) {
         >
           <Flex
             onClick={() => {
-              props.setquestionmark(0);
+              dispatch(setOutRedirectModalOpen({ isOpen: false, url: "" }));
             }}
             gap="10px"
             direction="row"
             width="unset"
             height="50px"
-            justifyContent="flex-end"
+            justifyContent="center"
             alignItems="center"
             grow="1"
             shrink="1"
@@ -208,7 +154,6 @@ export default function YesNoButton768px(props) {
             borderRadius="45px"
             padding="19px 25px 19px 25px"
             overflow="hidden"
-            {...getOverrideProps(overrides, "Connect40052831")}
           >
             <Text
               fontFamily="ffProMedium"
@@ -230,7 +175,6 @@ export default function YesNoButton768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="No"
-              {...getOverrideProps(overrides, "Add Liquidity")}
             ></Text>
           </Flex>
         </motion.div>

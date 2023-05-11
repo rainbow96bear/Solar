@@ -25,8 +25,8 @@ import { useMediaQuery } from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 export default function BeforeHeadCom768px(props) {
   const { overrides, ...rest } = props;
-  const login = useSelector((state) => state.login.login.login);
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const login = useSelector((state) => state.login);
+  const connect = useSelector((state) => state.connect);
   const { address, isConnecting, isDisconnected } = useAccount();
   const navigate = useNavigate();
 
