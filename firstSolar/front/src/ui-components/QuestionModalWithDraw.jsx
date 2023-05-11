@@ -22,6 +22,8 @@ import DepositCompletedModal from "./DepositCompletedModal";
 import DepositFaildModal from "./DepositFaildModal";
 import { useWeb3T } from "../modules/useWeb3Trust";
 import { useWeb3C } from "../modules/useWeb3Coinbase";
+import "../css/Modal.css";
+
 export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
@@ -116,10 +118,11 @@ export default function QuestionModalWithDraw(props) {
       }}
     >
       <Flex
+        className="withModal"
         gap="38px"
         direction="column"
-        width="53vw"
-        height="unset"
+        width={{ base: "85vw", small: "85vw", medium: "80vw" }}
+        height={{ base: "unset", small: "unset", medium: "unset" }}
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
@@ -179,7 +182,6 @@ export default function QuestionModalWithDraw(props) {
             shrink="0"
             position="relative"
             padding="5px 5px 5px 5px"
-            className="cursorPointer"
             style={{ cursor: "pointer" }}
             {...getOverrideProps(overrides, "XIcon")}
           >
@@ -463,7 +465,7 @@ export default function QuestionModalWithDraw(props) {
             >
               <Flex
                 gap="9px"
-                direction="row"
+                direction={{ base: "column", medium: "row" }}
                 width="unset"
                 height="unset"
                 justifyContent="flex-start"
@@ -622,7 +624,7 @@ export default function QuestionModalWithDraw(props) {
               <Text
                 color="rgba(250,250,250,0.8)"
                 fontFamily="ffProBook"
-                fontSize="21px"
+                fontSize={{ base: "10px", medium: "20px" }}
                 fontWeight="700"
                 lineHeight="32.6761360168457px"
                 textAlign="center"
@@ -644,7 +646,7 @@ export default function QuestionModalWithDraw(props) {
             <Flex
               gap="10px"
               direction="row"
-              width="21vw"
+              width={{ base: "29vw", small: "25vw" }}
               height="66px"
               justifyContent="center"
               alignItems="center"
@@ -663,7 +665,7 @@ export default function QuestionModalWithDraw(props) {
             >
               <Text
                 fontFamily="ffProBook"
-                fontSize="21px"
+                fontSize={{ base: "10px", medium: "20px" }}
                 fontWeight="700"
                 color="rgba(250,250,250,0.8)"
                 lineHeight="32.6761360168457px"
