@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const HeaderComponent = () => {
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const account = useSelector((state) => state.account.account.account);
+  const connect = useSelector(state => state.connect.connect.connect);
+  const account = useSelector(state => state.account.account.account);
 
   return (
     <Header>
@@ -26,6 +26,7 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   border-bottom: 1px solid gainsboro;
+  padding: 13px 0px 13px 0px;
 `;
 
 const Menu = styled.div`

@@ -15,8 +15,8 @@ const LoginButton = props => {
       }}
     >
       <motion.div
-        width={{ base: "45px", small: "65px" }}
-        height={{ base: "35px", small: "45px" }}
+        width={{ base: "49px", small: "49px" }}
+        height={{ base: "49px", small: "49px" }}
         style={{
           alignSelf: "center",
           borderRadius: "33px",
@@ -31,8 +31,8 @@ const LoginButton = props => {
         }}
       >
         <Button
-          width={{ base: "55px", small: "65px" }}
-          height={{ base: "35px", small: "45px" }}
+          width={{ base: "49px", small: "49px" }}
+          height={{ base: "49px", small: "49px" }}
           borderRadius="35px"
           alignSelf="center"
           shrink="0"
@@ -41,7 +41,7 @@ const LoginButton = props => {
           fontFamily="ffCondExtraLight"
           children="Connect"
           textAlign="center"
-          fontSize={{ base: "9px", small: "11px" }}
+          fontSize={{ base: "7px", small: "7px" }}
           {...getOverrideProps(overrides, "Button")}
         ></Button>
       </motion.div>

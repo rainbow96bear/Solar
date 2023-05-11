@@ -62,8 +62,8 @@ const LoggedinUser = props => {
   return (
     <LoggedinUserCover ref={ref}>
       <motion.div
-        width={{ base: "38px", small: "45px" }}
-        height={{ base: "38px", small: "45px" }}
+        width={{ base: "49px", small: "49px" }}
+        height={{ base: "49px", small: "49px" }}
         style={{
           alignSelf: "center",
           borderRadius: "33px",
@@ -78,16 +78,17 @@ const LoggedinUser = props => {
         }}
       >
         <Button
-          width="50px"
-          height={{ base: "38px", small: "45px" }}
+          textAlign="center"
+          width={{ base: "49px", small: "49px" }}
+          height={{ base: "49px", small: "49px" }}
           borderRadius="35px"
           alignSelf="center"
           shrink="0"
           size="small"
           isDisabled={false}
           fontFamily="ffCondExtraLight"
-          children="MyPage"
-          fontSize={{ base: "7px", small: "10px" }}
+          children="My Page"
+          fontSize={{ base: "7px", small: "7px" }}
           onClick={() => {
             navigate(`/mypage?${account}`);
           }}
@@ -95,8 +96,8 @@ const LoggedinUser = props => {
         ></Button>
       </motion.div>
       <motion.div
-        width={{ base: "38px", small: "45px" }}
-        height={{ base: "38px", small: "45px" }}
+        width={{ base: "49px", small: "49px" }}
+        height={{ base: "49px", small: "49px" }}
         style={{
           alignSelf: "center",
           borderRadius: "33px",
@@ -111,8 +112,8 @@ const LoggedinUser = props => {
         }}
       >
         <Button
-          width="px"
-          height={{ base: "38px", small: "45px" }}
+          width={{ base: "49px", small: "49px" }}
+          height={{ base: "49px", small: "49px" }}
           borderRadius="35px"
           alignSelf="center"
           shrink="0"
