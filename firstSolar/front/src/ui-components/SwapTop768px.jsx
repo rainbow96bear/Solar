@@ -57,7 +57,11 @@ export default function SwapTop768px(props) {
       <Flex
         gap="49px"
         direction="column"
-        width="45vw"
+        width={{
+          small: "115vw",
+          medium: "110vw",
+          large: "50vw",
+        }}
         height="unset"
         justifyContent="flex-start"
         alignItems="flex-start"

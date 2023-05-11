@@ -73,7 +73,7 @@ const ListMain = ({ items }) => {
           <>
             {items?.map(
               (item, idx) =>
-                idx !== items.length - 1 && (
+                idx !== items?.length - 1 && (
                   <ListItem key={Math.random()} index={idx} content={item} />
                 )
             )}
