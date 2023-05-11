@@ -54,10 +54,10 @@ npm run start:dev
 
 <br>
 
-- 새로운 탈중앙화 혁신의 한축인 Defi에는 Eth, bsc, polygon 등 많은 메인넷이 존재한다
-- 각 메인넷들마다 Defi Dapp들이 존재하고 있다. 다만 너무 많은 Defi 사이트들이 있기에 사용자들 사이에서 더 좋은 APY, APR을 제공하는 곳을 찾기에는 많은 어려움이 발생한다
+- 새로운 탈중앙화 혁신의 한축인 Defi에는 eth, bsc, polygon 등 많은 메인넷이 존재한다
+- 각 메인넷들마다 Defi Dapp들이 존재하고 있다. 다만 너무 많은 Defi 사이트들이 있기에 사용자들 사이에서 더 좋은 APY을 제공하는 곳을 찾기에는 많은 어려움이 발생한다
 - 이에 우리들은 Dex Defi들의 API를 연동한 하나의 Dapp에서 통합적으로 Defi들은 Scan할 수 있는 사이트를 구축하여 메인넷별로 쉽게 관련 정보들은 찾을 수 있도록 한다
-- 추가적으로 Defi를 연동함에 따라 Deposit, Withdraw, Claim, Auto-Compounding vaults 시 일정 수수료를 Scan사이트에 지불하게 함으로써 사이트 운영이 지속적으로 원활하게 운영이 가능
+- 추가적으로 Defi를 연동함에 따라 Deposit, Withdraw, Auto-Compounding vaults 시 일정 수수료를 Scan사이트에 지불하게 함으로써 사이트 운영이 지속적으로 원활하게 운영이 가능
 - Scan 사이트내에 자체 Token을 발행하여 Staking을 통한 보상을 Airdrop 해주는 기능으로 사용자들의 이용을 유도한다
 
  <br>
@@ -79,12 +79,12 @@ npm run start:dev
 ## :satellite: Project Main Function
 
 - 메타마스크 등 사용자들의 사용 빈도가 높은 다양한 지갑들의 Connect Wallet 기능(모바일에서도 원활한 작동이 가능하게 작업하는게 중요)
-  - 클레이튼은 Kaikas Wallet의 점유율이 높으므로 연동 필요
+  - Metamask, Trust, coinBase Wallet 등 다양한 지갑 연동
 - Defi API 연동에서 제공하는 연동/프로토 타입이므로 Fress로 진행 가능
-- Staking 기능 APY, APR을 유동성 pool의 상황에 맞춰서 유동적으로 변경되게 하며 Scan 사이트에서 발행한 Token Airdrop 기능
-- Defi에 사용자가 Deposit, Withdraw, Claim을 할 때 일정 수수료가 지정된 Wallet으로 지불되는 기능과 일정한 Token이 사용자에게 Airdrop되는 기능
+- Staking 기능 APY을 유동성 pool의 상황에 맞춰서 유동적으로 변경되게 하며 Scan 사이트에서 발행한 Token Airdrop 기능
+- Defi에 사용자가 Deposit, Withdraw 할 때 일정 수수료가 지정된 Wallet으로 지불되는 기능과 일정한 Token이 사용자에게 Airdrop되는 기능
 - 메인넷 별 Deif 상품들에 대한 필터링 기능
-- 이외 부가적인 기능들 필요
+- 원하는 LP의 이름이나 CA를 검색해서 해당 LP들의 목록을 한눈에 볼 수있도록 하는 검색 기능
 
 <br>
 
