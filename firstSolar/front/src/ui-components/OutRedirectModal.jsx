@@ -6,7 +6,6 @@ import "../css/Font.css";
 
 export default function OutRedirectModal(props) {
   const redirectFunc = () => {
-    console.log(props?.item?.props?.item?.addLiquidityUrl);
     window.open(props?.item?.props?.item?.addLiquidityUrl, "_blank");
   };
 

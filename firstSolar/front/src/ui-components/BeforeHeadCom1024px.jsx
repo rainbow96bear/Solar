@@ -33,10 +33,10 @@ import { useMediaQuery } from "react-responsive";
 export default function BeforeHeadCom1024px(props) {
   const { overrides, ...rest } = props;
   const { isOpen, open, close, setDefaultChain } = useWeb3Modal();
-  const login = useSelector((state) => state.login.login.login);
+  const login = useSelector(state => state.login.login.login);
   const [view, setView] = React.useState(false);
   const dispatch = useDispatch();
-  const connect = useSelector((state) => state.connect.connect.connect);
+  const connect = useSelector(state => state.connect.connect.connect);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = React.useState();
   const { address, isConnecting, isDisconnected } = useAccount();
@@ -48,7 +48,7 @@ export default function BeforeHeadCom1024px(props) {
   }, [pathname]);
 
   React.useEffect(() => {
-    const checkIfClickedOutside = (e) => {
+    const checkIfClickedOutside = e => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -59,7 +59,7 @@ export default function BeforeHeadCom1024px(props) {
     };
   }, [view]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const inputValue = e.target.value;
     const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
     setInputValue(sanitizedValue);
@@ -160,8 +160,8 @@ export default function BeforeHeadCom1024px(props) {
             >
               <motion.div
                 style={{
-                  width: "45px",
-                  height: "45px",
+                  width: "49px",
+                  height: "49px",
                   alignSelf: "center",
                   borderRadius: "33px",
                   backgroundColor: "rgba(247,239,227,0.75)",
@@ -175,8 +175,8 @@ export default function BeforeHeadCom1024px(props) {
                 }}
               >
                 <Button
-                  width="45px"
-                  height="45px"
+                  width="49px"
+                  height="49px"
                   borderRadius="35px"
                   alignSelf="center"
                   shrink="0"
