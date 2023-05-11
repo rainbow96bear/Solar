@@ -8,9 +8,9 @@ import { useAccount } from "wagmi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const MypageComponent = () => {
+const MypageComponent = ({ myList }) => {
   const { account } = useAccount();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector(state => state.account.account.account);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -45,7 +45,7 @@ const MypageComponent = () => {
               backgroundColor: "rgba(247,239,227,0.75)",
             }}
           >
-            <MyPageCompo1024px></MyPageCompo1024px>
+            <MyPageCompo1024px myList={myList}></MyPageCompo1024px>
           </motion.div>
         ) : (
           <></>
@@ -67,7 +67,7 @@ const MypageComponent = () => {
               backgroundColor: "rgba(247,239,227,0.75)",
             }}
           >
-            <MyPageCompo768px></MyPageCompo768px>
+            <MyPageCompo768px myList={myList}></MyPageCompo768px>
           </motion.div>
         ) : (
           <></>
@@ -85,18 +85,4 @@ const MypPage = styled.div`
   justify-content: center;
   margin-top: 30px;
   align-self: center;
-`;
-
-const LoadingModal = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  position: fixed;
-  left: 0%;
-  top: 0%;
-  right: 0%;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
 `;

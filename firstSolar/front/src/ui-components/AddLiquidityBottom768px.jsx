@@ -43,7 +43,7 @@ export default function AddLiquidityBottom768px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account.account.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -204,9 +204,21 @@ export default function AddLiquidityBottom768px(props) {
     <Flex
       gap="75px"
       direction="column"
-      width="38vw"
-      top="45px"
-      right="120px"
+      top={{
+        small: "-205px",
+        medium: "-150px",
+        large: "-20px",
+      }}
+      right={{
+        small: "23px",
+        medium: "23px",
+        large: "130px",
+      }}
+      width={{
+        small: "95vw",
+        medium: "95vw",
+        large: "43vw",
+      }}
       height="unset"
       justifyContent="flex-start"
       alignItems="center"
@@ -653,7 +665,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -800,7 +812,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }

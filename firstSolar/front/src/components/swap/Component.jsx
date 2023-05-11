@@ -9,27 +9,34 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flex } from "@aws-amplify/ui-react";
 import { useMediaQuery } from "react-responsive";
+import "../../css/Swap.css";
 
 const SwapComponent = ({ oracleId, balance }) => {
   const props = oracleId;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
   const isDesktop = useMediaQuery({
-    query: "(min-width:1280px)",
+    query: "(min-width:500px)",
   });
 
   const isMobile = useMediaQuery({
-    query: "(max-width:1279px)",
+    query: "(max-width:499px)",
   });
   return (
     <>
       {isDesktop ? (
         <Swap>
           <Flex
+            gap={{
+              small: "100px",
+              medium: "50px",
+            }}
             direction={{
+              small: "column",
               medium: "column",
               large: "row",
             }}
+            alignItems="center"
           >
             <ItemWrap
               onClick={() => {
@@ -149,12 +156,8 @@ const SwapComponent = ({ oracleId, balance }) => {
                         duration: 0.25,
                         ease: [0.43, 0.13, 0.23, 0.96],
                       }}
-                      marginTop={{
-                        base: "-100px",
-                        medium: "90px",
-                      }}
                       style={{
-                        marginTop: "30px",
+                        marginTop: "-100px",
                         height: "unset",
                         borderRadius: "35px",
                         backgroundColor: "rgba(249,249,249,1)",
@@ -188,6 +191,7 @@ const Swap = styled.div`
   flex-direction: row;
   justify-content: center;
   align-self: center;
+  margin-bottom: 50px;
 `;
 
 const ItemWrap = styled(motion.div)`

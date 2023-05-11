@@ -756,7 +756,7 @@ export default function PoolListCom1024px(props) {
             <Pagination
               color="red"
               {...paginationProps}
-              onChange={(pageNum) => {
+              onChange={pageNum => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {

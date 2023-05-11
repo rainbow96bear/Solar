@@ -111,7 +111,7 @@ export default function ConnectModal(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         if (e.target !== e.currentTarget) return;
         dispatch(connectThunk({ connect: false }));
       }}
@@ -205,7 +205,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault;
                   metamaskLogin();
                 }}
@@ -262,7 +262,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault;
                   trustLogin();
                 }}
@@ -319,7 +319,7 @@ export default function ConnectModal(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault;
                   coinbaseLogin();
                 }}
