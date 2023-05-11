@@ -1,48 +1,15 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-const promiseTime = (count) => {
-  return new Promise((resolve, reject) => {
-    try {
-      setTimeout(() => {
-        resolve(count);
-      }, 100);
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
-
-export const accountThunk = createAsyncThunk(
-  "account/accountThunk",
-  async (account) => {
-    return await promiseTime(account);
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const accountSlice = createSlice({
   name: "account",
-  initialState: { isLoading: false, account: "" },
+  initialState: "",
   reducers: {
     setAccount: (state, action) => {
-      return action.payload.account;
+      return action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(accountThunk.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(accountThunk.fulfilled, (state, action) => {
-        state.account = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(accountThunk.rejected, (state, action) => {
-        state.isLoading = undefined;
-      });
   },
 });
 
-export const action = accountSlice.actions;
-export const reducer = accountSlice.reducer;
+export const { setAccount } = accountSlice.actions;
 
-export default accountSlice;
+export default accountSlice.reducer;

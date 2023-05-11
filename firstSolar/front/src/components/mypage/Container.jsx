@@ -1,24 +1,24 @@
 import * as React from "react";
 import { useAccount } from "wagmi";
-import { isLoadingThunk } from "../../modules/isLoading";
 import MypageComponent from "./Component";
 import { mypageList } from "../../api/index";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setIsLoading } from "../../modules/isLoading";
 
 const MypageContainer = () => {
   const [myList, setMyList] = React.useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { account } = useAccount();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account);
   const params = useLocation().search.replace("?", "");
   const isLoadingTrue = () => {
-    dispatch(isLoadingThunk({ isLoading: true }));
+    dispatch(setIsLoading(true));
   };
 
   const isLoadingFalse = () => {
-    dispatch(isLoadingThunk({ isLoading: false }));
+    dispatch(setIsLoading(false));
   };
 
   const mypageLpListUp = async () => {

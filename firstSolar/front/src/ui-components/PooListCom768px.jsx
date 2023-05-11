@@ -25,7 +25,7 @@ import { motion, LayoutGroup } from "framer-motion";
 import { getMainPoolList, netList, dexlist, dexList } from "../api/index.js";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
-import { isLoadingThunk } from "../modules/isLoading.js";
+import { setIsLoading } from "../modules/isLoading.js";
 import {
   mainNet768px1,
   mainNet768px2,
@@ -90,7 +90,7 @@ export default function PooListCom768px(props) {
 
   const getPoolList = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
       if (filter == "null") {
         const { poolListData, resultTotalPages } = await getMainPoolList(
           pageIndex
@@ -111,10 +111,10 @@ export default function PooListCom768px(props) {
       }
 
       setTimeout(() => {
-        dispatch(isLoadingThunk({ isLoading: false }));
+        dispatch(setIsLoading(false));
       }, 5000);
     } catch (error) {
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       console.error(error);
     }
   };
@@ -436,6 +436,7 @@ export default function PooListCom768px(props) {
                     padding="0px 0px 0px 0px"
                     key={`PoolList768px-${idx}`}
                     item={item}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
                   />
                 ))}
               </motion.div>

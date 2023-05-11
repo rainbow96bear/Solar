@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const MypageComponent = ({ myList }) => {
   const { account } = useAccount();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account);
   const navigate = useNavigate();
 
   React.useEffect(() => {

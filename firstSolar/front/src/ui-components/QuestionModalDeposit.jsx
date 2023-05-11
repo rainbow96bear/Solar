@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { approveLp, deposit } from "../api";
 import { useWeb3 } from "../modules/useWeb3";
 
-import { isLoadingThunk } from "../modules/isLoading";
+import { setIsLoading } from "../modules/isLoading";
 import { setCompleteModal } from "../modules/completeModal";
 import DepositCompletedModal from "./DepositCompletedModal";
 import DepositFaildModal from "./DepositFaildModal";
@@ -42,7 +42,7 @@ export default function QuestionModalDeposit(props) {
   const [autoChange, setAutoChange] = React.useState(props?.autoState);
 
   const dispatch = useDispatch();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account);
   const [depositAmountValue, setDepositAmountValue] = React.useState(0);
 
   const [depositSuccessModalOpen, setDepositSuccessModalOpen] =
@@ -63,7 +63,7 @@ export default function QuestionModalDeposit(props) {
 
   const depositFunc = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
       const result1 = await approveLp(
         account2,
         +depositAmountValue,
@@ -100,28 +100,28 @@ export default function QuestionModalDeposit(props) {
       await props?.mypagelplistup();
       setBalanceChange(!balanceChange);
 
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       dispatch(setCompleteModal(true));
       setDepositSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setDepositFailModalOpen(true);
     }
   };
   const autoFunc = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
       const result1 = await setAutoCompound(account2, props?.lptoken);
 
       let transactionResult1 = await web3.eth.sendTransaction(result1);
 
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       dispatch(setCompleteModal(true));
       setDepositSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setDepositFailModalOpen(true);
     }
   };
@@ -137,7 +137,7 @@ export default function QuestionModalDeposit(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -298,9 +298,9 @@ export default function QuestionModalDeposit(props) {
             >
               <SwitchField
                 isChecked={autoChange ? true : false}
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
-                  setAutoChange(state => !state);
+                  setAutoChange((state) => !state);
                 }}
               ></SwitchField>
               <Flex
@@ -706,8 +706,8 @@ export default function QuestionModalDeposit(props) {
                 labelHidden={false}
                 variation="default"
                 value={depositAmountValue}
-                onInput={e => setDepositAmountValue(e.target.value)}
-                onChange={e => {
+                onInput={(e) => setDepositAmountValue(e.target.value)}
+                onChange={(e) => {
                   if (+e.target.value > +props.lpBalanceValue) {
                     e.target.value = props.lpBalanceValue;
                   }

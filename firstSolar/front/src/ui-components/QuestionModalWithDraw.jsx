@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useWeb3 } from "../modules/useWeb3";
 import { getLPBalance } from "../api";
 import { useAccount } from "wagmi";
-import { isLoadingThunk } from "../modules/isLoading";
+import { setIsLoading } from "../modules/isLoading";
 import { withDraw } from "../api";
 import YesNoButton768px from "./YesNoButton768px";
 import DepositCompletedModal from "./DepositCompletedModal";
@@ -28,7 +28,7 @@ export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
 
   const dispatch = useDispatch();
-  const account2 = useSelector(state => state.account.account.account);
+  const account2 = useSelector((state) => state.account);
   const { web3, login } = useWeb3();
   const { web3T, loginT } = useWeb3T();
   const { web3C, loginC } = useWeb3C();
@@ -72,7 +72,7 @@ export default function QuestionModalWithDraw(props) {
 
   const withDrawFunc = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
 
       const result2 = await withDraw(
         account2 ? account2 : account,
@@ -96,11 +96,11 @@ export default function QuestionModalWithDraw(props) {
         account ? account : account2
       );
       setLpBalance(result);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setWithDrawSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setWithDrawFailModalOpen(true);
     }
   };
@@ -112,7 +112,7 @@ export default function QuestionModalWithDraw(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -580,8 +580,8 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={e => setWithDrawAmountValue(e.target.value)}
-                onChange={e => {
+                onInput={(e) => setWithDrawAmountValue(e.target.value)}
+                onChange={(e) => {
                   if (+e.target.value > +props.lpBalanceValue) {
                     e.target.value = props.lpBalanceValue;
                   }

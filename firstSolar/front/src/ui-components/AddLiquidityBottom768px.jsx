@@ -20,7 +20,6 @@ import {
 } from "../api/index";
 import { swapBalance } from "../api";
 import { useWeb3 } from "../modules/useWeb3.js";
-import { isLoadingThunk } from "../modules/isLoading.js";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import AddLiquiditySuccessModal from "./AddLiquiditySuccessModal";
@@ -30,6 +29,7 @@ import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
 import { useWeb3T } from "../modules/useWeb3Trust";
 import { useWeb3C } from "../modules/useWeb3Coinbase";
 import { useNavigate } from "react-router";
+import { setIsLoading } from "../modules/isLoading";
 
 export default function AddLiquidityBottom768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
@@ -44,7 +44,7 @@ export default function AddLiquidityBottom768px(props) {
   const [secondValue, setSecondValue] = React.useState();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account.account.account);
+  const address2 = useSelector((state) => state.account);
 
   const [userFirstBalance, setUserFirstBalance] = React.useState(0);
   const [userSecondBalance, setUserSecondBalance] = React.useState(0);
@@ -58,7 +58,7 @@ export default function AddLiquidityBottom768px(props) {
     React.useState(false);
 
   const addLiquidtiyFunc = async () => {
-    dispatch(isLoadingThunk({ isLoading: true }));
+    dispatch(setIsLoading(true));
     const approveDFSTx = await approveDFS(
       address2 ? address2 : address,
       firstValue,
@@ -90,7 +90,6 @@ export default function AddLiquidityBottom768px(props) {
         } else if (document.cookie.split(":")[0] == "coinbase") {
           pairTxResult = await web3C.eth.sendTransaction(approveOtherTokenTx);
         }
-        console.log("pairTxResult : ", pairTxResult);
         if (pairTxResult) {
           const addLiquidityTx = await addLiquidity(
             address2 ? address2 : address,
@@ -135,14 +134,14 @@ export default function AddLiquidityBottom768px(props) {
             setUserSecondBalance(secondBalanceTemp);
             setFirstValue(0);
             setSecondValue(0);
-            dispatch(isLoadingThunk({ isLoading: false }));
+            dispatch(setIsLoading(false));
             setAddLiquiditySuccessModalOpen(true);
           }
         }
       }
     } catch (err) {
       console.error(err);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setAddLiquidityFailModalOpen(true);
     }
   };
@@ -652,7 +651,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -799,7 +798,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }

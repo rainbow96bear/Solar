@@ -139,7 +139,6 @@ router.post("/swapBalance", async (req: Request, res: Response) => {
       usdt,
       bnb,
     });
-
     res.send(myTokenBalance);
   } catch (error) {
     console.log(error);

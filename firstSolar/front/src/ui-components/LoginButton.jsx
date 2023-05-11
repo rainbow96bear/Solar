@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import "../css/Font.css";
 import { useDispatch, useSelector } from "react-redux";
-import { connectThunk } from "../modules/connect.js";
+import { setConnect } from "../modules/connect.js";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { motion } from "framer-motion";
 import { Button } from "@aws-amplify/ui-react";
-const LoginButton = props => {
+const LoginButton = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
     <WalletIcon
       onClick={() => {
-        dispatch(connectThunk({ connect: true }));
+        dispatch(setConnect(true));
       }}
     >
       <motion.div

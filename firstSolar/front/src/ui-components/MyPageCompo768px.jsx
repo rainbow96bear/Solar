@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import { mypageList } from "../api/index";
 import logo from "./images/logo_new.png";
 import { useDispatch } from "react-redux";
-import { isLoadingThunk } from "../modules/isLoading";
+import { setIsLoading } from "../modules/isLoading";
 import { motion } from "framer-motion";
 import "../css/Font.css";
 
@@ -32,23 +32,23 @@ export default function MyPageCompo768px(props) {
   const lpBalanceValue = parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
 
   const isLoadingTrue = () => {
-    dispatch(isLoadingThunk({ isLoading: true }));
+    dispatch(setIsLoading(true));
   };
   const isLoadingFalse = () => {
-    dispatch(isLoadingThunk({ isLoading: false }));
+    dispatch(setIsLoading(false));
   };
 
   const mypageLpListUp = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
       const myLists = await mypageList(params);
       setMyList(myLists);
       setTimeout(() => {
-        dispatch(isLoadingThunk({ isLoading: false }));
+        dispatch(setIsLoading(false));
       }, 1500);
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
     }
   };
   React.useEffect(() => {
