@@ -70,8 +70,9 @@ export default function ConnectModal(props) {
       window.ethereum.providers.map(async (item, idx) => {
         if (item.isTrustWallet == true) {
           const [_account] = await item.enable();
-
-          const data = await getLogin(_account, "trust");
+          if (!document.cookie) {
+            const data = await getLogin(_account, "trust");
+          }
           dispatch(accountThunk({ account: _account }));
           dispatch(loginThunk({ login: true }));
         }
@@ -91,8 +92,9 @@ export default function ConnectModal(props) {
           const [_account] = await item.request({
             method: "eth_requestAccounts",
           });
-
-          const data = await getLogin(_account, "coinbase");
+          if (!document.cookie) {
+            const data = await getLogin(_account, "coinbase");
+          }
           dispatch(accountThunk({ account: _account }));
           dispatch(loginThunk({ login: true }));
         }

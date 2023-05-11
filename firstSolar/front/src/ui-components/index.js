@@ -57,3 +57,4 @@ export { default as SwapCompletedModal } from "./SwapCompletedModal";
 export { default as SwapFaildModal } from "./SwapFaildModal";
 export { default as AddLiquidityCompletedModal } from "./AddLiquidityCompletedModal";
 export { default as AddLiquidityFaildModal } from "./AddLiquidityFaildModal";
+export { default as OutRedirectModal } from "./OutRedirectModal";

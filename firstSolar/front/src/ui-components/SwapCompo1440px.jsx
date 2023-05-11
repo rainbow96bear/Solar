@@ -10,11 +10,14 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import styled from "styled-components";
+import OutRedirectModal from "./OutRedirectModal";
 
 export default function SwapCompo1440px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
   const isDFS = props?.props?.item?.oracleId?.split("-")[0] == "DFS";
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <Flex
@@ -114,7 +117,7 @@ export default function SwapCompo1440px(props) {
             isDFS
               ? navigate(url)
               : url
-              ? window.open(url, "_blank")
+              ? setIsOpen(true)
               : window.location.reload();
           }}
           gap="10px"
@@ -157,6 +160,30 @@ export default function SwapCompo1440px(props) {
           ></Button>
         </Flex>
       </motion.div>
+
+      {isOpen && (
+        <RedirectModal>
+          <OutRedirectModal
+            item={props}
+            setIsOpen={setIsOpen}
+          ></OutRedirectModal>
+        </RedirectModal>
+      )}
     </Flex>
   );
 }
+
+const RedirectModal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  align-items: center;
+  z-index: 88;
+`;

@@ -46,6 +46,19 @@ export default function LoginAccount(props) {
   const logoutMethod = async () => {
     await logout(document.cookie.split(":")[0], account);
 
+    let cookieName = document.cookie.split(":")[0] + ":" + account;
+    let cookieValue = "";
+
+    let expiresDate = new Date();
+    expiresDate.setTime(expiresDate.getTime() - 1);
+
+    document.cookie =
+      cookieName +
+      "=" +
+      cookieValue +
+      "; expires=" +
+      expiresDate.toGMTString() +
+      "; path=/";
     dispatch(connectThunk({ connect: false }));
     dispatch(loginThunk({ false: false }));
     dispatch(accountThunk({ account: "" }));
