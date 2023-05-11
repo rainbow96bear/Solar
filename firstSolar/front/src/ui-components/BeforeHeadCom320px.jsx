@@ -129,18 +129,6 @@ export default function BeforeHeadCom320px(props) {
                     </Flex>
                   </Flex>
                 </Flex>
-                <Flex
-                  gap="10px"
-                  direction="row"
-                  width="30px"
-                  height="30px"
-                  justifyContent="center"
-                  alignItems="center"
-                  shrink="0"
-                  position="relative"
-                  padding="10px 10px 10px 10px"
-                  {...getOverrideProps(overrides, "Frame 49")}
-                ></Flex>
               </Flex>
               <Flex
                 gap="10px"
@@ -164,7 +152,7 @@ export default function BeforeHeadCom320px(props) {
                   style={{ display: "flex", gap: "20px" }}
                 >
                   <motion.div
-                    width={{ base: "38px", small: "45px" }}
+                    width="45px"
                     height={{ base: "38px", small: "45px" }}
                     style={{
                       alignSelf: "center",
@@ -181,7 +169,7 @@ export default function BeforeHeadCom320px(props) {
                   >
                     <Button
                       display="flex"
-                      width={{ base: "38px", small: "45px" }}
+                      width="45px"
                       height={{ base: "38px", small: "45px" }}
                       borderRadius="35px"
                       alignSelf="center"

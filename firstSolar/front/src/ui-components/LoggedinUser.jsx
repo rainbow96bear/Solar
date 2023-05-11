@@ -12,10 +12,10 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import "../css/Font.css";
 
-const LoggedinUser = props => {
+const LoggedinUser = (props) => {
   const { overrides, ...rest } = props;
   const [view, setView] = useState(false);
-  const account = useSelector(state => state.account.account.account);
+  const account = useSelector((state) => state.account.account.account);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const LoggedinUser = props => {
   }, [pathname]);
 
   useEffect(() => {
-    const checkIfClickedOutside = e => {
+    const checkIfClickedOutside = (e) => {
       if (view && ref.current && !ref.current.contains(e.target)) {
         setView(false);
       }
@@ -36,8 +36,22 @@ const LoggedinUser = props => {
     };
   }, [view]);
 
-  const logoutMethod = () => {
-    logout(document.cookie.split(":")[0], account);
+  const logoutMethod = async () => {
+    await logout(document.cookie.split(":")[0], account);
+
+    let cookieName = document.cookie.split(":")[0] + ":" + account;
+    let cookieValue = "";
+
+    let expiresDate = new Date();
+    expiresDate.setTime(expiresDate.getTime() - 1);
+
+    document.cookie =
+      cookieName +
+      "=" +
+      cookieValue +
+      "; expires=" +
+      expiresDate.toGMTString() +
+      "; path=/";
 
     dispatch(connectThunk({ connect: false }));
     dispatch(loginThunk({ false: false }));
@@ -64,7 +78,7 @@ const LoggedinUser = props => {
         }}
       >
         <Button
-          width={{ base: "38px", small: "45px" }}
+          width="50px"
           height={{ base: "38px", small: "45px" }}
           borderRadius="35px"
           alignSelf="center"
@@ -97,7 +111,7 @@ const LoggedinUser = props => {
         }}
       >
         <Button
-          width={{ base: "38px", small: "45px" }}
+          width="px"
           height={{ base: "38px", small: "45px" }}
           borderRadius="35px"
           alignSelf="center"
