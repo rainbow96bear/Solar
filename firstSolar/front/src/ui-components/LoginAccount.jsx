@@ -133,7 +133,7 @@ export default function LoginAccount(props) {
           <Flex
             gap="10px"
             direction="row"
-            width="10vw"
+            width="188px"
             height="unset"
             justifyContent="space-between"
             alignItems="center"
@@ -152,12 +152,11 @@ export default function LoginAccount(props) {
                 fontWeight="400"
                 color="rgba(0,0,0,1)"
                 lineHeight="20px"
-                textAlign="center"
+                textAlign="left"
                 display="block"
                 direction="column"
                 justifyContent="unset"
                 letterSpacing="1.65px"
-                width="165px  "
                 height="unset"
                 gap="unset"
                 alignItems="unset"
@@ -165,7 +164,11 @@ export default function LoginAccount(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={account.slice(0, 5) + "..." + account.slice(5)}
+                children={
+                  account.slice(0, 5) +
+                  "..." +
+                  account.slice(account.length - 4, account.length)
+                }
                 {...getOverrideProps(overrides, "account")}
               ></Text>
             </AccountCover>
@@ -238,8 +241,10 @@ const LoginAccountCover = styled.div`
 `;
 
 const AccountCover = styled.div`
+  flex: 1;
   text-overflow: ellipsis;
   overflow: hidden;
+  gap: 10px;
   white-space: nowrap;
   p {
     text-overflow: ellipsis;
@@ -247,12 +252,12 @@ const AccountCover = styled.div`
 `;
 
 const MenuDropDown = styled.div`
+  width: 188px;
   border: 1px dashed gainsboro;
   border-radius: 10px;
   position: absolute;
   top: 65px;
   right: 16px;
-  width: 10vw;
   display: flex;
   align-items: center;
   justify-content: center;

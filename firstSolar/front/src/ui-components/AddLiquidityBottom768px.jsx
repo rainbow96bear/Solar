@@ -29,10 +29,11 @@ import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
 import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
 import { useWeb3T } from "../modules/useWeb3Trust";
 import { useWeb3C } from "../modules/useWeb3Coinbase";
+import { useNavigate } from "react-router";
 
 export default function AddLiquidityBottom768px(props) {
   const { overrides, oracleiddata, ...rest } = props;
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { web3, account, chainId, login } = useWeb3();
@@ -149,25 +150,16 @@ export default function AddLiquidityBottom768px(props) {
   React.useEffect(() => {
     (async () => {
       try {
-        const data = await swapBalance(
+        const data1 = await swapBalance(
           address ? address : address2,
           props?.oracleiddata[0]?.firstToken
         );
-        setUserFirstBalance(data);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const data = await swapBalance(
+        const data2 = await swapBalance(
           address ? address : address2,
           props?.oracleiddata[0]?.secondToken
         );
-        setUserSecondBalance(data);
+        setUserFirstBalance(data1);
+        setUserSecondBalance(data2);
       } catch (error) {
         console.error(error);
       }
@@ -183,7 +175,7 @@ export default function AddLiquidityBottom768px(props) {
       } else if (document.cookie.split(":")[0] == "coinbase") {
         loginC();
       }
-    }
+    } else navigate("/redirectHome");
   }, []);
 
   React.useEffect(() => {
