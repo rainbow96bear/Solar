@@ -387,6 +387,20 @@ export const setAutoCompound = async (account, lpSymbol) => {
   }
 };
 
+export const getAutoCompound = async (account, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/getAutoCompound", {
+        account,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const rankList = async () => {
   try {
     const result = (await request.get("api/defi/rank")).data;

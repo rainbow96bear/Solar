@@ -67,8 +67,7 @@ export default function MyPageCompo768px(props) {
       borderRadius="38px"
       padding="38px 38px 38px 38px"
       {...getOverrideProps(overrides, "MyPageCompo768px")}
-      {...rest}
-    >
+      {...rest}>
       <Flex
         gap="0"
         direction="column"
@@ -81,8 +80,7 @@ export default function MyPageCompo768px(props) {
         position="relative"
         borderRadius="27px"
         padding="21px 21px 21px 21px"
-        {...getOverrideProps(overrides, "Frame 17340773365")}
-      >
+        {...getOverrideProps(overrides, "Frame 17340773365")}>
         <Flex
           gap="0"
           direction="row"
@@ -96,8 +94,7 @@ export default function MyPageCompo768px(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 14240773366")}
-        >
+          {...getOverrideProps(overrides, "Frame 14240773366")}>
           <Text
             fontFamily="ffProMedium"
             fontSize={{ base: "21px", small: "24px", medium: "35px" }}
@@ -118,8 +115,7 @@ export default function MyPageCompo768px(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="My Liquidity List"
-            {...getOverrideProps(overrides, "My Liquidity List")}
-          ></Text>
+            {...getOverrideProps(overrides, "My Liquidity List")}></Text>
         </Flex>
       </Flex>
       <Flex
@@ -133,8 +129,7 @@ export default function MyPageCompo768px(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 174")}
-      >
+        {...getOverrideProps(overrides, "Frame 174")}>
         <motion.div
           layout
           style={{
@@ -153,8 +148,7 @@ export default function MyPageCompo768px(props) {
           whileHover={{
             borderRadius: "55px",
             backgroundColor: "rgba(199,184,151,0.75)",
-          }}
-        >
+          }}>
           <Flex
             gap="27px"
             direction="column"
@@ -167,8 +161,7 @@ export default function MyPageCompo768px(props) {
             position="relative"
             borderRadius="35px"
             padding="8px 0px 8px 0px"
-            {...getOverrideProps(overrides, "Frame 17340782541")}
-          >
+            {...getOverrideProps(overrides, "Frame 17340782541")}>
             <Flex
               gap={{ base: "11px", small: "23px" }}
               direction="column"
@@ -181,8 +174,7 @@ export default function MyPageCompo768px(props) {
               position="relative"
               borderRadius="27px"
               padding="21px 34px 21px 34px"
-              {...getOverrideProps(overrides, "Frame 16340782542")}
-            >
+              {...getOverrideProps(overrides, "Frame 16340782542")}>
               <Flex
                 gap="0"
                 direction="column"
@@ -194,8 +186,7 @@ export default function MyPageCompo768px(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 14340782549")}
-              >
+                {...getOverrideProps(overrides, "Frame 14340782549")}>
                 <Flex
                   gap="10px"
                   direction="row"
@@ -207,8 +198,7 @@ export default function MyPageCompo768px(props) {
                   alignSelf="stretch"
                   position="relative"
                   padding="10px 10px 10px 10px"
-                  {...getOverrideProps(overrides, "Frame 16940782552")}
-                >
+                  {...getOverrideProps(overrides, "Frame 16940782552")}>
                   <Text
                     fontFamily="ffProExtraLight"
                     fontSize={{ base: "11px", small: "18px", medium: "25px" }}
@@ -232,8 +222,7 @@ export default function MyPageCompo768px(props) {
                     children={`Balance : ${
                       lpTokenValue?.slice(0, 7) / 1000000 || 0
                     } ${lpToken || ""} `}
-                    {...getOverrideProps(overrides, "Balance : 0")}
-                  ></Text>
+                    {...getOverrideProps(overrides, "Balance : 0")}></Text>
                 </Flex>
               </Flex>
               <Flex
@@ -247,8 +236,7 @@ export default function MyPageCompo768px(props) {
                 alignSelf={{ base: "center", small: "stretch" }}
                 position="relative"
                 padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 144")}
-              >
+                {...getOverrideProps(overrides, "Frame 144")}>
                 <Flex
                   gap="5px"
                   direction="row"
@@ -263,8 +251,7 @@ export default function MyPageCompo768px(props) {
                   borderRadius="25px"
                   padding="11px 13px 11px 13px"
                   backgroundColor="rgba(255,255,252,1)"
-                  {...getOverrideProps(overrides, "Dexname1")}
-                >
+                  {...getOverrideProps(overrides, "Dexname1")}>
                   <Image
                     width="28px"
                     height="28px"
@@ -278,8 +265,10 @@ export default function MyPageCompo768px(props) {
                     padding="0px 0px 0px 0px"
                     objectFit="cover"
                     src={firstImgToken || logo}
-                    {...getOverrideProps(overrides, "ghrgclzzd 740892945")}
-                  ></Image>
+                    {...getOverrideProps(
+                      overrides,
+                      "ghrgclzzd 740892945"
+                    )}></Image>
                   <Text
                     fontFamily="ffProExtraLight"
                     fontSize={{ base: "15px", small: "15px", medium: "19px" }}
@@ -300,8 +289,7 @@ export default function MyPageCompo768px(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={firstToken || "select list"}
-                    {...getOverrideProps(overrides, "DEX Name40892946")}
-                  ></Text>
+                    {...getOverrideProps(overrides, "DEX Name40892946")}></Text>
                 </Flex>
                 <Flex
                   gap="10px"
@@ -313,8 +301,7 @@ export default function MyPageCompo768px(props) {
                   shrink="0"
                   position="relative"
                   padding="10px 10px 10px 10px"
-                  {...getOverrideProps(overrides, "Frame 91")}
-                >
+                  {...getOverrideProps(overrides, "Frame 91")}>
                   <Text
                     fontFamily="ffProExtraLight"
                     fontSize="33px"
@@ -333,8 +320,7 @@ export default function MyPageCompo768px(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children="+"
-                    {...getOverrideProps(overrides, "+")}
-                  ></Text>
+                    {...getOverrideProps(overrides, "+")}></Text>
                 </Flex>
                 <Flex
                   gap="5px"
@@ -350,8 +336,7 @@ export default function MyPageCompo768px(props) {
                   borderRadius="25px"
                   padding="11px 13px 11px 13px"
                   backgroundColor="rgba(255,226,0,0.35)"
-                  {...getOverrideProps(overrides, "Dexname2")}
-                >
+                  {...getOverrideProps(overrides, "Dexname2")}>
                   <Image
                     src={secondImgToken || logo}
                     width="28px"
@@ -365,8 +350,10 @@ export default function MyPageCompo768px(props) {
                     borderRadius="35px"
                     padding="0px 0px 0px 0px"
                     objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 740892950")}
-                  ></Image>
+                    {...getOverrideProps(
+                      overrides,
+                      "ghrgclzzd 740892950"
+                    )}></Image>
                   <Text
                     fontFamily="ffProExtraLight"
                     fontSize="17px"
@@ -386,8 +373,7 @@ export default function MyPageCompo768px(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={secondToken || "select list"}
-                  ></Text>
+                    children={secondToken || "select list"}></Text>
                 </Flex>
               </Flex>
             </Flex>
@@ -404,8 +390,7 @@ export default function MyPageCompo768px(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 17140773334")}
-        >
+          {...getOverrideProps(overrides, "Frame 17140773334")}>
           {myList?.map((item, idx) => (
             <MyPageList768px
               key={`MyPageList768px-2${idx}`}
@@ -422,6 +407,10 @@ export default function MyPageCompo768px(props) {
               lptoken={lpToken}
               mypagelplistup={mypageLpListUp}
               lpBalanceValue={lpBalanceValue}
+              getAutoCompoundStatusFunc={props?.getAutoCompoundStatusFunc}
+              isOpen={props?.isOpen}
+              toggleOpen={props?.toggleOpen}
+              autoCompoundStatus={props?.autoCompoundStatus}
             />
           ))}
         </Flex>

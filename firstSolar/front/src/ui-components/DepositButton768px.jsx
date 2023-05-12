@@ -30,8 +30,7 @@ export default function DepositButton768px(props) {
         borderRadius="35px"
         padding="31px 80px 31px 80px"
         {...getOverrideProps(overrides, "DepositButton1024px")}
-        {...rest}
-      >
+        {...rest}>
         <motion.div
           style={{
             width: "50vw",
@@ -46,8 +45,7 @@ export default function DepositButton768px(props) {
             backgroundColor: "rgba(247,239,227,0.75)",
             scale: 1.03,
             opacity: 0.88,
-          }}
-        >
+          }}>
           <Flex
             gap="10px"
             direction="row"
@@ -61,8 +59,7 @@ export default function DepositButton768px(props) {
             position="relative"
             borderRadius="45px"
             padding="19px 25px 19px 25px"
-            {...getOverrideProps(overrides, "Connect40822711")}
-          >
+            {...getOverrideProps(overrides, "Connect40822711")}>
             <Text
               fontFamily="ffProMedium"
               fontSize={{ base: "13px", small: "15px" }}
@@ -87,8 +84,7 @@ export default function DepositButton768px(props) {
                 setQuestionMark(1);
               }}
               style={{ cursor: "pointer" }}
-              {...getOverrideProps(overrides, "Deposit")}
-            ></Text>
+              {...getOverrideProps(overrides, "Deposit")}></Text>
           </Flex>
         </motion.div>
 
@@ -106,8 +102,7 @@ export default function DepositButton768px(props) {
             scale: 1.03,
             opacity: 0.88,
             backgroundColor: "rgba(0,056,071,0.75)",
-          }}
-        >
+          }}>
           <Flex
             gap="10px"
             direction="row"
@@ -122,8 +117,7 @@ export default function DepositButton768px(props) {
             borderRadius="45px"
             padding="19px 25px 19px 25px"
             overflow="hidden"
-            {...getOverrideProps(overrides, "Connect40822713")}
-          >
+            {...getOverrideProps(overrides, "Connect40822713")}>
             <Text
               fontFamily="ffProMedium"
               fontSize={{ base: "13px", small: "15px" }}
@@ -149,8 +143,7 @@ export default function DepositButton768px(props) {
                 setQuestionMark(2);
               }}
               style={{ cursor: "pointer" }}
-              {...getOverrideProps(overrides, "With Draw")}
-            ></Text>
+              {...getOverrideProps(overrides, "With Draw")}></Text>
           </Flex>
         </motion.div>
       </Flex>
@@ -167,7 +160,8 @@ export default function DepositButton768px(props) {
           mypageMethod={props?.mypageMethod}
           pid={props?.pid}
           lpTokenBalance={props?.lpTokenBalance}
-        ></QuestionModalDeposit>
+          getAutoCompoundStatusFunc={props?.getAutoCompoundStatusFunc}
+          auto={props?.auto}></QuestionModalDeposit>
       ) : (
         <></>
       )}
@@ -181,8 +175,7 @@ export default function DepositButton768px(props) {
           lptoken={props.lptoken}
           mypageMethod={props?.mypageMethod}
           pid={props?.pid}
-          setLpTokenValue={props.setLpTokenValue}
-        ></QuestionModalWithDraw>
+          setLpTokenValue={props.setLpTokenValue}></QuestionModalWithDraw>
       ) : (
         <></>
       )}

@@ -8,7 +8,13 @@ import { useAccount } from "wagmi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const MypageComponent = ({ myList }) => {
+const MypageComponent = ({
+  myList,
+  getAutoCompoundStatusFunc,
+  isOpen,
+  toggleOpen,
+  autoCompoundStatus,
+}) => {
   const { account } = useAccount();
   const account2 = useSelector((state) => state.account);
   const navigate = useNavigate();
@@ -43,9 +49,13 @@ const MypageComponent = ({ myList }) => {
             whileHover={{
               borderRadius: "55px",
               backgroundColor: "rgba(247,239,227,0.75)",
-            }}
-          >
-            <MyPageCompo1024px myList={myList}></MyPageCompo1024px>
+            }}>
+            <MyPageCompo1024px
+              myList={myList}
+              getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+              isOpen={isOpen}
+              toggleOpen={toggleOpen}
+              autoCompoundStatus={autoCompoundStatus}></MyPageCompo1024px>
           </motion.div>
         )}
 
@@ -64,9 +74,13 @@ const MypageComponent = ({ myList }) => {
             whileHover={{
               borderRadius: "55px",
               backgroundColor: "rgba(247,239,227,0.75)",
-            }}
-          >
-            <MyPageCompo768px myList={myList}></MyPageCompo768px>
+            }}>
+            <MyPageCompo768px
+              myList={myList}
+              getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+              isOpen={isOpen}
+              toggleOpen={toggleOpen}
+              autoCompoundStatus={autoCompoundStatus}></MyPageCompo768px>
           </motion.div>
         )}
       </MypPage>

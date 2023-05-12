@@ -39,7 +39,7 @@ export default function QuestionModalDeposit(props) {
   const { web3T, accountT, loginT } = useWeb3T();
   const { web3C, accountC, loginC } = useWeb3C();
   const [balanceChange, setBalanceChange] = React.useState(false);
-  const [autoChange, setAutoChange] = React.useState(props?.autoState);
+  const [autoChange, setAutoChange] = React.useState(props?.auto);
 
   const dispatch = useDispatch();
   const account2 = useSelector((state) => state.account);
@@ -97,7 +97,7 @@ export default function QuestionModalDeposit(props) {
       }
 
       setDepositAmountValue(0);
-      await props?.mypagelplistup();
+
       setBalanceChange(!balanceChange);
 
       dispatch(setIsLoading(false));
@@ -115,7 +115,7 @@ export default function QuestionModalDeposit(props) {
       const result1 = await setAutoCompound(account2, props?.lptoken);
 
       let transactionResult1 = await web3.eth.sendTransaction(result1);
-
+      await props?.getAutoCompoundStatusFunc();
       dispatch(setIsLoading(false));
       dispatch(setCompleteModal(true));
       setDepositSuccessModalOpen(true);
@@ -140,8 +140,7 @@ export default function QuestionModalDeposit(props) {
       onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
-      }}
-    >
+      }}>
       <Flex
         className="depositModal"
         gap="38px"
@@ -157,8 +156,7 @@ export default function QuestionModalDeposit(props) {
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         overflow="hidden"
         {...getOverrideProps(overrides, "Deposit1024px")}
-        {...rest}
-      >
+        {...rest}>
         <Flex
           gap="10px"
           direction="row"
@@ -174,8 +172,7 @@ export default function QuestionModalDeposit(props) {
             borderBottom: "1px dashed rgba(255,226,0,0.35)",
             borderWidth: "2px",
           }}
-          {...getOverrideProps(overrides, "Frame 105")}
-        >
+          {...getOverrideProps(overrides, "Frame 105")}>
           <Text
             fontFamily="ffProBold"
             fontSize="28px"
@@ -196,8 +193,7 @@ export default function QuestionModalDeposit(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Deposit"
-            {...getOverrideProps(overrides, "Deposit40822779")}
-          ></Text>
+            {...getOverrideProps(overrides, "Deposit40822779")}></Text>
           <Flex
             gap="10px"
             direction="row"
@@ -210,8 +206,7 @@ export default function QuestionModalDeposit(props) {
             padding="5px 5px 5px 5px"
             className="cursorPointer"
             style={{ cursor: "pointer" }}
-            {...getOverrideProps(overrides, "XIcon")}
-          >
+            {...getOverrideProps(overrides, "XIcon")}>
             <Icon
               width="20px"
               height="20px"
@@ -232,8 +227,7 @@ export default function QuestionModalDeposit(props) {
               onClick={() => {
                 setquestionmark(0);
               }}
-              {...getOverrideProps(overrides, "Vector")}
-            ></Icon>
+              {...getOverrideProps(overrides, "Vector")}></Icon>
           </Flex>
         </Flex>
         <Flex
@@ -247,8 +241,7 @@ export default function QuestionModalDeposit(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 74px 0px 74px"
-          {...getOverrideProps(overrides, "Frame 106")}
-        >
+          {...getOverrideProps(overrides, "Frame 106")}>
           <Flex
             gap="11px"
             direction="column"
@@ -260,8 +253,7 @@ export default function QuestionModalDeposit(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 96")}
-          >
+            {...getOverrideProps(overrides, "Frame 96")}>
             <Text
               fontFamily="ffProLight"
               fontSize="15px"
@@ -281,8 +273,7 @@ export default function QuestionModalDeposit(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="AUTO COMPOUNDING"
-              {...getOverrideProps(overrides, "CHOOSE TOKEN PAIR")}
-            ></Text>
+              {...getOverrideProps(overrides, "CHOOSE TOKEN PAIR")}></Text>
             <Flex
               gap="24px"
               direction="row"
@@ -294,15 +285,13 @@ export default function QuestionModalDeposit(props) {
               alignSelf="stretch"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 90")}
-            >
+              {...getOverrideProps(overrides, "Frame 90")}>
               <SwitchField
-                isChecked={autoChange ? true : false}
+                isChecked={props?.auto ? true : false}
                 onClick={(e) => {
                   e.preventDefault();
                   setAutoChange((state) => !state);
-                }}
-              ></SwitchField>
+                }}></SwitchField>
               <Flex
                 gap="5px"
                 direction="row"
@@ -318,8 +307,7 @@ export default function QuestionModalDeposit(props) {
                 borderRadius="25px"
                 padding="10px 12px 10px 12px"
                 backgroundColor="rgba(0,136,153,0.59)"
-                {...getOverrideProps(overrides, "Dexname2")}
-              >
+                {...getOverrideProps(overrides, "Dexname2")}>
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize="17px"
@@ -340,9 +328,8 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={autoChange ? "ON" : "OFF"}
-                  {...getOverrideProps(overrides, "DEX Name40822792")}
-                ></Text>
+                  children={props?.auto ? "ON" : "OFF"}
+                  {...getOverrideProps(overrides, "DEX Name40822792")}></Text>
               </Flex>
             </Flex>
           </Flex>
@@ -357,8 +344,7 @@ export default function QuestionModalDeposit(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 96")}
-          >
+            {...getOverrideProps(overrides, "Frame 96")}>
             <Text
               fontFamily="ffProLight"
               fontSize="15px"
@@ -378,8 +364,7 @@ export default function QuestionModalDeposit(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="TOKEN PAIR"
-              {...getOverrideProps(overrides, "CHOOSE TOKEN PAIR")}
-            ></Text>
+              {...getOverrideProps(overrides, "CHOOSE TOKEN PAIR")}></Text>
             <Flex
               gap="24px"
               direction={{ base: "column", small: "row" }}
@@ -391,8 +376,7 @@ export default function QuestionModalDeposit(props) {
               alignSelf="stretch"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 90")}
-            >
+              {...getOverrideProps(overrides, "Frame 90")}>
               <Flex
                 gap="15px"
                 direction="row"
@@ -408,8 +392,7 @@ export default function QuestionModalDeposit(props) {
                 borderRadius="25px"
                 padding="10px 12px 10px 12px"
                 backgroundColor="rgba(234,0,50,0.45)"
-                {...getOverrideProps(overrides, "Dexname140822784")}
-              >
+                {...getOverrideProps(overrides, "Dexname140822784")}>
                 <Image
                   width="28px"
                   height="28px"
@@ -423,8 +406,10 @@ export default function QuestionModalDeposit(props) {
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
                   src={props.mypagelist.mainNetLogo || logo}
-                  {...getOverrideProps(overrides, "ghrgclzzd 740822785")}
-                ></Image>
+                  {...getOverrideProps(
+                    overrides,
+                    "ghrgclzzd 740822785"
+                  )}></Image>
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize="17px"
@@ -446,8 +431,7 @@ export default function QuestionModalDeposit(props) {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={props.mypagelist.firstToken || "불러오는 중"}
-                  {...getOverrideProps(overrides, "DEX Name40822786")}
-                ></Text>
+                  {...getOverrideProps(overrides, "DEX Name40822786")}></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -459,8 +443,7 @@ export default function QuestionModalDeposit(props) {
                 shrink="0"
                 position="relative"
                 padding="10px 10px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 91")}
-              >
+                {...getOverrideProps(overrides, "Frame 91")}>
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize="33px"
@@ -479,8 +462,7 @@ export default function QuestionModalDeposit(props) {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children="+"
-                  {...getOverrideProps(overrides, "+")}
-                ></Text>
+                  {...getOverrideProps(overrides, "+")}></Text>
               </Flex>
               <Flex
                 gap="15px"
@@ -497,8 +479,7 @@ export default function QuestionModalDeposit(props) {
                 borderRadius="25px"
                 padding="10px 12px 10px 12px"
                 backgroundColor="rgba(255,226,0,0.35)"
-                {...getOverrideProps(overrides, "Dexname2")}
-              >
+                {...getOverrideProps(overrides, "Dexname2")}>
                 <Image
                   width="28px"
                   height="28px"
@@ -512,8 +493,10 @@ export default function QuestionModalDeposit(props) {
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
                   src={props.mypagelist.platformLogo || logo}
-                  {...getOverrideProps(overrides, "ghrgclzzd 740822791")}
-                ></Image>
+                  {...getOverrideProps(
+                    overrides,
+                    "ghrgclzzd 740822791"
+                  )}></Image>
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize="17px"
@@ -535,8 +518,7 @@ export default function QuestionModalDeposit(props) {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={props.mypagelist.secondToken || "불러오는 중"}
-                  {...getOverrideProps(overrides, "DEX Name40822792")}
-                ></Text>
+                  {...getOverrideProps(overrides, "DEX Name40822792")}></Text>
               </Flex>
             </Flex>
           </Flex>
@@ -552,8 +534,7 @@ export default function QuestionModalDeposit(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 102")}
-          >
+            {...getOverrideProps(overrides, "Frame 102")}>
             <Text
               fontFamily="ffProLight"
               fontSize="15px"
@@ -573,8 +554,7 @@ export default function QuestionModalDeposit(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="DEPOSIT AMOUNT"
-              {...getOverrideProps(overrides, "DEPOSIT AMOUNT")}
-            ></Text>
+              {...getOverrideProps(overrides, "DEPOSIT AMOUNT")}></Text>
             <Flex
               gap="9px"
               direction="column"
@@ -586,8 +566,7 @@ export default function QuestionModalDeposit(props) {
               alignSelf={{ base: "center", small: "stretch" }}
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 101")}
-            >
+              {...getOverrideProps(overrides, "Frame 101")}>
               <Flex
                 gap="9px"
                 direction={{ base: "column", medium: "row" }}
@@ -599,8 +578,7 @@ export default function QuestionModalDeposit(props) {
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 98")}
-              >
+                {...getOverrideProps(overrides, "Frame 98")}>
                 <Flex
                   gap="5px"
                   direction="row"
@@ -614,8 +592,7 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   borderRadius="25px"
                   padding="11px 0px 11px 0px"
-                  {...getOverrideProps(overrides, "Dexname140822806")}
-                >
+                  {...getOverrideProps(overrides, "Dexname140822806")}>
                   <Image
                     width="28px"
                     height="28px"
@@ -629,8 +606,10 @@ export default function QuestionModalDeposit(props) {
                     padding="0px 0px 0px 0px"
                     objectFit="cover"
                     src={props.mypagelist.mainNetLogo || logo}
-                    {...getOverrideProps(overrides, "ghrgclzzd 740822807")}
-                  ></Image>
+                    {...getOverrideProps(
+                      overrides,
+                      "ghrgclzzd 740822807"
+                    )}></Image>
                   <Text
                     letterSpacing="3.5px"
                     fontFamily="ffProLight"
@@ -652,8 +631,7 @@ export default function QuestionModalDeposit(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={props?.lptoken || "불러오는 중"}
-                    {...getOverrideProps(overrides, "DEX Name40822808")}
-                  ></Text>
+                    {...getOverrideProps(overrides, "DEX Name40822808")}></Text>
                 </Flex>
                 <Flex
                   gap="10px"
@@ -668,8 +646,7 @@ export default function QuestionModalDeposit(props) {
                   alignSelf="stretch"
                   position="relative"
                   padding="10px 10px 10px 10px"
-                  {...getOverrideProps(overrides, "Frame 9740822812")}
-                >
+                  {...getOverrideProps(overrides, "Frame 9740822812")}>
                   <Text
                     fontFamily="ffProExtraLight"
                     fontSize="13px"
@@ -691,8 +668,10 @@ export default function QuestionModalDeposit(props) {
                       parseInt((props?.lptokenvalue / 10 ** 18) * 10000) /
                         10000 || 0
                     }`}
-                    {...getOverrideProps(overrides, "Balance : 040822813")}
-                  ></Text>
+                    {...getOverrideProps(
+                      overrides,
+                      "Balance : 040822813"
+                    )}></Text>
                 </Flex>
               </Flex>
               <TextAreaField
@@ -713,8 +692,10 @@ export default function QuestionModalDeposit(props) {
                   }
                   setDepositAmountValue(e.target.value);
                 }}
-                {...getOverrideProps(overrides, "TextAreaField40822814")}
-              ></TextAreaField>
+                {...getOverrideProps(
+                  overrides,
+                  "TextAreaField40822814"
+                )}></TextAreaField>
             </Flex>
           </Flex>
           <Flex
@@ -726,8 +707,7 @@ export default function QuestionModalDeposit(props) {
             shrink="0"
             alignSelf="stretch"
             position="relative"
-            padding="0px 0px 0px 0px"
-          >
+            padding="0px 0px 0px 0px">
             <Flex
               gap="10px"
               direction="row"
@@ -745,8 +725,7 @@ export default function QuestionModalDeposit(props) {
               onClick={() => {
                 depositFunc();
               }}
-              {...getOverrideProps(overrides, "Frame 103")}
-            >
+              {...getOverrideProps(overrides, "Frame 103")}>
               <Text
                 color="rgba(250,250,250,0.8)"
                 fontFamily="ffProMedium"
@@ -766,8 +745,7 @@ export default function QuestionModalDeposit(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children="Deposit"
-                {...getOverrideProps(overrides, "Deposit40822827")}
-              ></Text>
+                {...getOverrideProps(overrides, "Deposit40822827")}></Text>
             </Flex>
             <Flex
               gap="10px"
@@ -787,8 +765,7 @@ export default function QuestionModalDeposit(props) {
               onClick={() => {
                 autoFunc();
               }}
-              {...getOverrideProps(overrides, "Frame 103")}
-            >
+              {...getOverrideProps(overrides, "Frame 103")}>
               <Text
                 fontFamily="ffProBook"
                 color="rgba(250,250,250,0.8)"
@@ -808,8 +785,7 @@ export default function QuestionModalDeposit(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children="Auto Compounding"
-                {...getOverrideProps(overrides, "Deposit40822827")}
-              ></Text>
+                {...getOverrideProps(overrides, "Deposit40822827")}></Text>
             </Flex>
           </Flex>
         </Flex>
@@ -817,15 +793,17 @@ export default function QuestionModalDeposit(props) {
       {depositSuccessModalOpen && (
         <LoadingModal>
           <DepositCompletedModal
-            setDepositSuccessModalOpen={setDepositSuccessModalOpen}
-          ></DepositCompletedModal>
+            setDepositSuccessModalOpen={
+              setDepositSuccessModalOpen
+            }></DepositCompletedModal>
         </LoadingModal>
       )}
       {depositFailModalOpen && (
         <LoadingModal>
           <DepositFaildModal
-            setDepositFailModalOpen={setDepositFailModalOpen}
-          ></DepositFaildModal>
+            setDepositFailModalOpen={
+              setDepositFailModalOpen
+            }></DepositFaildModal>
         </LoadingModal>
       )}
     </ModalCover>
