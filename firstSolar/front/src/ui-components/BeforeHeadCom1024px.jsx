@@ -5,7 +5,6 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Button,
@@ -16,9 +15,8 @@ import {
   View,
 } from "@aws-amplify/ui-react";
 import { setConnect } from "../modules/connect.js";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { motion } from "framer-motion";
@@ -26,49 +24,20 @@ import LoginAccount from "./LoginAccount.jsx";
 import ConnectModal from "./ConnectModal.jsx";
 import LoadingButton from "./LoadingButton.jsx";
 import { Web3Button } from "@web3modal/react";
-import { useWeb3Modal } from "@web3modal/react";
-import { useAccount } from "wagmi";
 
 export default function BeforeHeadCom1024px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    handleInputChange,
+    handleSearch,
+    inputValue,
+    navigate,
+    dispatch,
+    address,
+    ...rest
+  } = props;
   const login = useSelector((state) => state.login);
-  const [view, setView] = React.useState(false);
-  const dispatch = useDispatch();
   const connect = useSelector((state) => state.connect);
-  const navigate = useNavigate();
-  const [inputValue, setInputValue] = React.useState();
-  const { address, isConnecting, isDisconnected } = useAccount();
-  const { pathname } = useLocation();
-  const ref = React.useRef();
-
-  React.useEffect(() => {
-    setView(false);
-  }, [pathname]);
-
-  React.useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (view && ref.current && !ref.current.contains(e.target)) {
-        setView(false);
-      }
-    };
-    document.addEventListener("click", checkIfClickedOutside);
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [view]);
-
-  const handleInputChange = (e) => {
-    const inputValue = e.target.value;
-    const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
-    setInputValue(sanitizedValue);
-  };
-
-  const handleSearch = () => {
-    const searchQuery = encodeURIComponent(inputValue);
-    navigate("/searchRedirect", { state: { searchData: searchQuery } });
-
-    setInputValue("");
-  };
 
   return (
     <View

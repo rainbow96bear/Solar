@@ -5,7 +5,6 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Flex,
@@ -20,19 +19,14 @@ import { useSelector } from "react-redux";
 import LoginButton from "./LoginButton";
 import ConnectModal from "./ConnectModal";
 import LoggedinUser from "./LoggedinUser";
-import { useAccount } from "wagmi";
 import LoadingButton768 from "./LoadingButton768";
 import { motion } from "framer-motion";
 import { Web3Button } from "@web3modal/react";
-import { useNavigate } from "react-router-dom";
 export default function BeforeHeadCom320px(props) {
-  const { overrides, ...rest } = props;
-  const [searchView, setSearchView] = React.useState(false);
+  const { overrides, searchView, setSearchView, address, navigate, ...rest } =
+    props;
   const login = useSelector((state) => state.login);
-  const { address } = useAccount();
-  const navigate = useNavigate();
   const connect = useSelector((state) => state.connect);
-
   return (
     <Cover>
       <Flex
