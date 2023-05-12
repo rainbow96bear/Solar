@@ -714,8 +714,8 @@ export default function QuestionModalDeposit(props) {
                 value={depositAmountValue}
                 onInput={(e) => setDepositAmountValue(e.target.value)}
                 onChange={(e) => {
-                  if (+e.target.value > +props.lpBalanceValue) {
-                    e.target.value = props.lpBalanceValue;
+                  if (+e.target.value > +props.lptokenvalue) {
+                    e.target.value = props.lptokenvalue;
                   }
                   setDepositAmountValue(e.target.value);
                 }}

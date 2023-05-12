@@ -5,61 +5,34 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { useState, useEffect } from "react";
-
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyPageList1024px from "../components/myPageList/MyPageList1024px";
-import { useLocation, useNavigate } from "react-router-dom";
-import { mypageList } from "../api/index";
 import logo from "./images/logo_new.png";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsLoading } from "../modules/isLoading";
 import { motion } from "framer-motion";
 import "../css/Font.css";
-import { useAccount } from "wagmi";
 
 export default function MyPageCompo1024px(props) {
-  const { overrides, ...rest } = props;
-  const [myList, setMyList] = useState([]);
-  const [lpTokenValue, setLpTokenValue] = useState();
-  const [lpToken, setLpToken] = useState();
-  const [firstToken, setFirstToken] = useState();
-  const [secondToken, setSecondToken] = useState();
-  const [firstImgToken, setFirstImgToken] = useState();
-  const [secondImgToken, setSecondImgToken] = useState();
-
-  const dispatch = useDispatch();
-  const params = useLocation().search.replace("?", "");
-  const navigate = useNavigate();
-  const { account } = useAccount();
-  const account2 = useSelector((state) => state.account);
-  const lpBalanceValue = parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
-
-  const isLoadingTrue = () => {
-    dispatch(setIsLoading(true));
-  };
-
-  const isLoadingFalse = () => {
-    dispatch(setIsLoading(false));
-  };
-
-  const mypageLpListUp = async () => {
-    try {
-      const myLists = await mypageList(params);
-      setMyList(myLists);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    (async () => {
-      isLoadingTrue();
-      await mypageLpListUp();
-      isLoadingFalse();
-    })();
-  }, []);
+  const {
+    overrides,
+    myList,
+    getAutoCompoundStatusFunc,
+    autoCompoundStatus,
+    mypageLpListUp,
+    lpTokenValue,
+    lpToken,
+    firstToken,
+    secondToken,
+    firstImgToken,
+    secondImgToken,
+    setLpTokenValue,
+    setLpToken,
+    setFirstToken,
+    setSecondToken,
+    setFirstImgToken,
+    setSecondImgToken,
+    ...rest
+  } = props;
 
   return (
     <Flex
@@ -382,7 +355,6 @@ export default function MyPageCompo1024px(props) {
             </Flex>
           </Flex>
         </motion.div>
-
         {myList?.map((item, idx) => (
           <MyPageList1024px
             key={`MyPageList1024px-2${idx}`}
@@ -395,14 +367,11 @@ export default function MyPageCompo1024px(props) {
             setSecondToken={setSecondToken}
             setFirstImgToken={setFirstImgToken}
             setSecondImgToken={setSecondImgToken}
-            lptokenvalue={lpTokenValue}
-            lptoken={lpToken}
-            mypagelplistup={mypageLpListUp}
-            lpBalanceValue={lpBalanceValue}
-            getAutoCompoundStatusFunc={props?.getAutoCompoundStatusFunc}
-            isOpen={props?.isOpen}
-            toggleOpen={props?.toggleOpen}
-            autoCompoundStatus={props?.autoCompoundStatus}
+            lpTokenValue={lpTokenValue}
+            lpToken={lpToken}
+            mypageLpListUp={mypageLpListUp}
+            getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+            autoCompoundStatus={autoCompoundStatus}
           />
         ))}
       </Flex>
