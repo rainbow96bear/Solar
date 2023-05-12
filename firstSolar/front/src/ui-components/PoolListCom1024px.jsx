@@ -145,6 +145,7 @@ export default function PoolListCom1024px(props) {
   }, [filter]);
 
   React.useEffect(() => {
+    console.log("1024px");
     setMainNetList(Object.keys(mainNet1024px1));
     setPlatformList(Object.values(platform));
   }, []);
@@ -756,7 +757,7 @@ export default function PoolListCom1024px(props) {
             <Pagination
               color="red"
               {...paginationProps}
-              onChange={pageNum => {
+              onChange={(pageNum) => {
                 setPageIndex(pageNum);
               }}
               onNext={() => {
