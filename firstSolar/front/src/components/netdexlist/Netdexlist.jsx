@@ -9,75 +9,73 @@ const Netlist1024px = (props) => {
   const { overrides, ...rest } = props;
   const dispatch = useDispatch();
   return (
-    <>
-      <motion.div
-        style={{
-          width: "45vw",
-          height: "unset",
-          borderRadius: "35px",
-          backgroundColor: "rgba(248,251,251,0.35)",
-          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          cursor: "pointer",
-        }}
-        whileHover={{
-          borderRadius: "13px",
-          scale: 1.15,
-          backgroundColor: "rgba(235,069,074,0.85)",
-        }}
-      >
-        <Flex
-          overflow="hidden"
-          onClick={async () => {
-            try {
-              dispatch(setIsLoading(true));
-              const temp = await netList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              props.setFilter(props?.item);
-              dispatch(setIsLoading(false));
-            } catch (error) {
-              console.error(error);
-              dispatch(setIsLoading(false));
-            }
-          }}
-          gap="10px"
-          direction="row"
-          width="unset"
-          height="unset"
-          justifyContent="center"
-          alignItems="center"
-          grow="1"
-          shrink="1"
-          basis="0"
-          alignSelf="stretch"
-          position="relative"
-          borderRadius="15px"
-          backgroundColor={
-            props?.item == props?.filter
-              ? "rgba(235,069,074,0.85)"
-              : "rgba(248,251,251,0.35)"
+    <motion.div
+      style={{
+        width: "45vw",
+        height: "unset",
+        borderRadius: "35px",
+        backgroundColor: "rgba(248,251,251,0.35)",
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+        cursor: "pointer",
+      }}
+      whileHover={{
+        borderRadius: "13px",
+        scale: 1.15,
+        backgroundColor: "rgba(235,069,074,0.85)",
+      }}
+    >
+      <Flex
+        overflow="hidden"
+        onClick={async () => {
+          try {
+            dispatch(setIsLoading(true));
+            const temp = await netList(props?.item, props?.pageIndex);
+            props.setCurrentPagePoolList(temp.poolListData);
+            props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+            props.setFilter(props?.item);
+            dispatch(setIsLoading(false));
+          } catch (error) {
+            console.error(error);
+            dispatch(setIsLoading(false));
           }
-          padding="10px 10px 10px 10px"
-          {...getOverrideProps(overrides, "Frame 1939913188")}
-        >
-          <Image
-            src={`/imgs/mainNet/${props?.item}.jpg`}
-            width="38px"
-            height="38px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            shrink="0"
-            position="relative"
-            borderRadius="20px"
-            padding="0px 0px 0px 0px"
-            objectFit="cover"
-            {...getOverrideProps(overrides, "unsplash:em1OiomfG3g39913189")}
-          ></Image>
-        </Flex>
-      </motion.div>
-    </>
+        }}
+        gap="10px"
+        direction="row"
+        width="unset"
+        height="unset"
+        justifyContent="center"
+        alignItems="center"
+        grow="1"
+        shrink="1"
+        basis="0"
+        alignSelf="stretch"
+        position="relative"
+        borderRadius="15px"
+        backgroundColor={
+          props?.item == props?.filter
+            ? "rgba(235,069,074,0.85)"
+            : "rgba(248,251,251,0.35)"
+        }
+        padding="10px 10px 10px 10px"
+        {...getOverrideProps(overrides, "Frame 1939913188")}
+      >
+        <Image
+          src={`/imgs/mainNet/${props?.item}.jpg`}
+          width="38px"
+          height="38px"
+          display="block"
+          gap="unset"
+          alignItems="unset"
+          justifyContent="unset"
+          shrink="0"
+          position="relative"
+          borderRadius="20px"
+          padding="0px 0px 0px 0px"
+          objectFit="cover"
+          {...getOverrideProps(overrides, "unsplash:em1OiomfG3g39913189")}
+        ></Image>
+      </Flex>
+    </motion.div>
   );
 };
 
