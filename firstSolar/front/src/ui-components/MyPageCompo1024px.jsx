@@ -5,8 +5,6 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { useState, useEffect } from "react";
-
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyPageList1024px from "../components/myPageList/MyPageList1024px";
