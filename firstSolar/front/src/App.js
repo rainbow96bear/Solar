@@ -1,11 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 // 라이브러리 import
 import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import { useWeb3 } from "./modules/useWeb3";
 
 // walletConenct import
 import {
@@ -14,23 +12,20 @@ import {
   w3mProvider,
 } from "@web3modal/ethereum";
 import { Web3Modal } from "@web3modal/react";
-import { configureChains, createClient, useAccount, WagmiConfig } from "wagmi";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { arbitrum, mainnet, polygon } from "wagmi/chains";
 
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
 
-import { setConnect } from "./modules/connect";
-import LoadingCompo from "./ui-components/LoadingCompo";
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
 import NavigatorContainer from "./components/navigateHome/Container";
 import EmptySearchModal from "./ui-components/EmptySearchModal";
 
-import { DepositCompletedModal, OutRedirectModal } from "./ui-components";
-import { DepositFaildModal } from "./ui-components";
+import { OutRedirectModal } from "./ui-components";
 import SearchNavigatorContainer from "./components/navigateSearch/Container";
 import FooterContainer from "./components/footer/Container";
 
@@ -51,23 +46,11 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector((state) => state.isLoading);
   const emptySearch = useSelector((state) => state.emptySearch);
 
-  const completeModal = useSelector((state) => state.completeModal);
   const outRedirectModalOpen = useSelector(
     (state) => state.outRedirectModalOpen.isOpen
   );
-  const dispatch = useDispatch();
-
-  const accountWagmi = useAccount({
-    onConnect({ address, connector, isReconnected }) {
-      // console.log("Connected", { address, connector, isReconnected });
-    },
-    onDisconnect() {
-      dispatch(setConnect(false));
-    },
-  });
 
   return (
     <>
@@ -95,11 +78,6 @@ function App() {
             </Routes>
           </MainContent>
           <FooterContainer />
-          {/* {isLoading && (
-            <LoadingModal>
-              <LoadingCompo />
-            </LoadingModal>
-          )} */}
           {emptySearch && (
             <LoadingModal>
               <EmptySearchModal className="marginT" />

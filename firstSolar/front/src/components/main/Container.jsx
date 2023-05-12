@@ -26,33 +26,10 @@ import {
   mainNet768px2,
   platform768px1,
   platform768px2,
+  networkArray,
+  dexArray,
 } from "../../mainNet";
 let interval;
-
-const networkArray = [
-  "ethereum",
-  "optimism",
-  "metis",
-  "aurora",
-  "bsc",
-  "kava",
-  "heco",
-  "polygon",
-  "fantom",
-];
-
-const dexArray = [
-  "uniswap",
-  "pancakeswap",
-  "sushi",
-  "quickswap",
-  "linch",
-  "curve",
-  "bnt",
-  "knc",
-  "matcha",
-  "bal",
-];
 
 const MainContainer = () => {
   const [items, setItems] = useState([]);
@@ -115,35 +92,6 @@ const MainContainer = () => {
   const [sortAPY, setSortAPY] = useState("down");
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    queryParams.set("page", pageIndex);
-    queryParams.set("filter", filter);
-
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
-    window.history.replaceState(null, "", newUrl);
-  }, [pageIndex, filter, queryParams]);
-
-  useEffect(() => {
-    (async () => {
-      await getPoolList();
-    })();
-  }, [pageIndex]);
-
-  useEffect(() => {
-    if (didMount.current) setPageIndex(1);
-    else didMount.current = true;
-  }, [filter]);
-
-  useEffect(() => {
-    oracleId();
-    setMainNetList(Object.keys(mainNet1024px1));
-    setMainNetList1(Object.keys(mainNet768px2));
-    setMainNetList2(Object.keys(mainNet768px1));
-    setPlatformList(Object.values(platform));
-    setPlatformList1(Object.values(platform768px2));
-    setPlatformList2(Object.values(platform768px1));
-  }, []);
 
   const paginationProps = usePagination({
     totalPages: totalPages,
@@ -219,6 +167,36 @@ const MainContainer = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    oracleId();
+    setMainNetList(Object.keys(mainNet1024px1));
+    setMainNetList1(Object.keys(mainNet768px2));
+    setMainNetList2(Object.keys(mainNet768px1));
+    setPlatformList(Object.values(platform));
+    setPlatformList1(Object.values(platform768px2));
+    setPlatformList2(Object.values(platform768px1));
+  }, []);
+
+  useEffect(() => {
+    queryParams.set("page", pageIndex);
+    queryParams.set("filter", filter);
+
+    const newUrl = `${location.pathname}?${queryParams.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [pageIndex, filter, queryParams]);
+
+  useEffect(() => {
+    (async () => {
+      await getPoolList();
+    })();
+  }, [pageIndex]);
+
+  useEffect(() => {
+    if (didMount.current) setPageIndex(1);
+    else didMount.current = true;
+  }, [filter]);
+
   return (
     <Main>
       <RankListCContainer items={items}></RankListCContainer>
