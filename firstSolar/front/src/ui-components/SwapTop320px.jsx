@@ -15,12 +15,10 @@ import { setIsLoading } from "../modules/isLoading";
 
 export default function SwapTop320px(props) {
   const { overrides, ...rest } = props;
-
   const dispatch = useDispatch();
 
   const [lastTimeStamp, setLastTimeStamp] = React.useState();
 
-  const [date, setDate] = React.useState();
   const [dateString, setDateString] = React.useState();
 
   const [tokenNumBer, setTokenNumber] = React.useState();
@@ -31,7 +29,6 @@ export default function SwapTop320px(props) {
 
     const tempDate = new Date(lastTimeStamp * 1000);
     setLastTimeStamp(props?.oracleiddata[0]?.lastHarvest);
-    setDate(tempDate);
     setDateString(tempDate.toLocaleDateString());
     setTokenNumber(props?.oracleiddata[0]?.firstTokenBalance);
     setReducedNumber(tokenNumBer?.toString().substring(0, 7));

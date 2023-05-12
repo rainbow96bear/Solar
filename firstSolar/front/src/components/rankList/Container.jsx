@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import RankListComponent from "./Component";
 import { rankList } from "../../api/index";
+import { useEffect, useState } from "react";
 
 let interval;
 const RankListCContainer = () => {

@@ -20,10 +20,6 @@ const Poolitem1024 = (props) => {
   const addressResult = address || address2;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (props?.last == true) dispatch(setIsLoading(false));
-  }, [props?.item]);
-
   return (
     <>
       <ItemWrap
