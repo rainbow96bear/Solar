@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Flex } from "@aws-amplify/ui-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,16 +11,43 @@ import {
   AddLiquidityTop320px,
   AddLiquidityTop768px,
 } from "../../ui-components";
-import { oracleIdList } from "../../api/index";
+import {
+  addLiquidity,
+  approveDFS,
+  approveOtherToken,
+  oracleIdList,
+  swapBalance,
+  updatePool,
+} from "../../api/index";
+import { useWeb3 } from "../../modules/useWeb3";
+import { useWeb3T } from "../../modules/useWeb3Trust";
+import { useWeb3C } from "../../modules/useWeb3Coinbase";
+import { useAccount } from "wagmi";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsLoading } from "../../modules/isLoading";
 
 const LiquidityContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [oracleId, setOracleId] = useState([]);
   const [balance, setBalance] = useState(0);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { web3, account, chainId, login } = useWeb3();
+  const { web3T, accountT, chainIdT, loginT } = useWeb3T();
+  const { web3C, accounCC, chainIdC, loginC } = useWeb3C();
 
   const params = useLocation().search.replace("?", "");
 
   const toggleOpen = () => setIsOpen(!isOpen);
+
+  const lastTimeStamp = oracleId[0]?.lastHarvest
+    ? oracleId[0]?.lastHarvest
+    : oracleId[0]?.updatedAt.split("T")[0];
+
+  const tokenNumBer = oracleId[0]?.firstTokenBalance;
+  const reducedNumber = tokenNumBer?.toString().substring(0, 5);
+
   const isDesktop = useMediaQuery({
     query: "(min-width:500px)",
   });
@@ -28,6 +55,34 @@ const LiquidityContainer = () => {
   const isMobile = useMediaQuery({
     query: "(max-width:499px)",
   });
+
+  const [firstValue, setFirstValue] = useState();
+  const [secondValue, setSecondValue] = useState();
+
+  const { address } = useAccount();
+  const address2 = useSelector((state) => state.account);
+
+  const [userFirstBalance, setUserFirstBalance] = useState(0);
+  const [userSecondBalance, setUserSecondBalance] = useState(0);
+
+  const [addLiquidityPossibility, setAddLiquidityPossibility] = useState(false);
+
+  const [addLiquiditySuccessModalOpen, setAddLiquiditySuccessModalOpen] =
+    useState(false);
+  const [addLiquidityFailModalOpen, setAddLiquidityFailModalOpen] =
+    useState(false);
+
+  useEffect(() => {
+    if (document.cookie) {
+      if (document.cookie.split(":")[0] == "metamask") {
+        login();
+      } else if (document.cookie.split(":")[0] == "trust") {
+        loginT();
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        loginC();
+      }
+    } else navigate("/redirectHome");
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -38,6 +93,125 @@ const LiquidityContainer = () => {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (!address2) return;
+        const data1 = await swapBalance(
+          address2 ? address2 : address,
+          oracleId[0]?.firstToken
+        );
+        const data2 = await swapBalance(
+          address2 ? address2 : address,
+          oracleId[0]?.secondToken
+        );
+        setUserFirstBalance(data1);
+        setUserSecondBalance(data2);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [address2, oracleId]);
+
+  useEffect(() => {
+    if (
+      +firstValue <= +userFirstBalance &&
+      +secondValue <= +userSecondBalance &&
+      firstValue == secondValue &&
+      firstValue != 0 &&
+      secondValue != 0 &&
+      firstValue != undefined &&
+      secondValue != undefined
+    ) {
+      setAddLiquidityPossibility(true);
+    } else setAddLiquidityPossibility(false);
+  }, [firstValue, secondValue]);
+
+  const addLiquidtiyFunc = async () => {
+    dispatch(setIsLoading(true));
+    const approveDFSTx = await approveDFS(
+      address2 ? address2 : address,
+      firstValue,
+      oracleId[0]?.secondToken
+    );
+    try {
+      let txResult;
+
+      if (document.cookie.split(":")[0] == "metamask") {
+        txResult = await web3.eth.sendTransaction(approveDFSTx);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        txResult = await web3T.eth.sendTransaction(approveDFSTx);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        txResult = await web3C.eth.sendTransaction(approveDFSTx);
+      }
+
+      if (txResult) {
+        const approveOtherTokenTx = await approveOtherToken(
+          address2 ? address2 : address,
+          secondValue,
+          oracleId[0]?.secondToken
+        );
+
+        let pairTxResult;
+        if (document.cookie.split(":")[0] == "metamask") {
+          pairTxResult = await web3.eth.sendTransaction(approveOtherTokenTx);
+        } else if (document.cookie.split(":")[0] == "trust") {
+          pairTxResult = await web3T.eth.sendTransaction(approveOtherTokenTx);
+        } else if (document.cookie.split(":")[0] == "coinbase") {
+          pairTxResult = await web3C.eth.sendTransaction(approveOtherTokenTx);
+        }
+        if (pairTxResult) {
+          const addLiquidityTx = await addLiquidity(
+            address2 ? address2 : address,
+            firstValue,
+            secondValue,
+            oracleId[0]?.secondToken
+          );
+
+          let addLiquidityTxResult;
+          if (document.cookie.split(":")[0] == "metamask") {
+            addLiquidityTxResult = await web3.eth.sendTransaction(
+              addLiquidityTx
+            );
+          } else if (document.cookie.split(":")[0] == "trust") {
+            addLiquidityTxResult = await web3T.eth.sendTransaction(
+              addLiquidityTx
+            );
+          } else if (document.cookie.split(":")[0] == "coinbase") {
+            addLiquidityTxResult = await web3C.eth.sendTransaction(
+              addLiquidityTx
+            );
+          }
+
+          await updatePool(oracleId[0]?.tokenAddress);
+
+          if (addLiquidityTxResult) {
+            const firstBalanceTemp = await swapBalance(
+              address ? address : address2,
+              oracleId[0]?.firstToken ? oracleId[0]?.firstToken : "DFS"
+            );
+
+            setUserFirstBalance(firstBalanceTemp);
+
+            const secondBalanceTemp = await swapBalance(
+              address ? address : address2,
+              oracleId[0]?.secondToken ? oracleId[0]?.secondToken : "ETH"
+            );
+            setUserSecondBalance(secondBalanceTemp);
+            setFirstValue(0);
+            setSecondValue(0);
+            dispatch(setIsLoading(false));
+            setAddLiquiditySuccessModalOpen(true);
+          }
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      dispatch(setIsLoading(false));
+      setAddLiquidityFailModalOpen(true);
+    }
+  };
 
   return (
     <>
@@ -83,6 +257,9 @@ const LiquidityContainer = () => {
                 <AddLiquidityTop768px
                   oracleiddata={oracleId}
                   balance={balance}
+                  lastTimeStamp={lastTimeStamp}
+                  tokenNumBer={tokenNumBer}
+                  reducedNumber={reducedNumber}
                 />
               </motion.div>
             </ItemWrap>
@@ -111,8 +288,26 @@ const LiquidityContainer = () => {
                         backgroundColor: "rgba(249,249,249,0.55)",
                         boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
                       }}
+                      addLiquidityPossibility={addLiquidityPossibility}
+                      addLiquidityFunc={addLiquidtiyFunc}
                       oracleiddata={oracleId}
                       balance={balance}
+                      userFirstBalance={userFirstBalance}
+                      firstValue={firstValue}
+                      setFirstValue={setFirstValue}
+                      userSecondBalance={userSecondBalance}
+                      secondValue={secondValue}
+                      setSecondValue={setSecondValue}
+                      addLiquiditySuccessModalOpen={
+                        addLiquiditySuccessModalOpen
+                      }
+                      setAddLiquiditySuccessModalOpen={
+                        setAddLiquiditySuccessModalOpen
+                      }
+                      addLiquidityFailModalOpen={addLiquidityFailModalOpen}
+                      setAddLiquidityFailModalOpen={
+                        setAddLiquidityFailModalOpen
+                      }
                     />
                   </motion.div>
                 </SubWrap>
@@ -157,6 +352,9 @@ const LiquidityContainer = () => {
                 <AddLiquidityTop320px
                   oracleiddata={oracleId}
                   balance={balance}
+                  lastTimeStamp={lastTimeStamp}
+                  tokenNumBer={tokenNumBer}
+                  reducedNumber={reducedNumber}
                 />
               </motion.div>
             </ItemWrap>
@@ -187,7 +385,25 @@ const LiquidityContainer = () => {
                   >
                     <AddLiquidityBottom320px
                       oracleiddata={oracleId}
+                      addLiquidityPossibility={addLiquidityPossibility}
+                      addLiquidityFunc={addLiquidtiyFunc}
                       balance={balance}
+                      userFirstBalance={userFirstBalance}
+                      firstValue={firstValue}
+                      setFirstValue={setFirstValue}
+                      userSecondBalance={userSecondBalance}
+                      secondValue={secondValue}
+                      setSecondValue={setSecondValue}
+                      addLiquiditySuccessModalOpen={
+                        addLiquiditySuccessModalOpen
+                      }
+                      setAddLiquiditySuccessModalOpen={
+                        setAddLiquiditySuccessModalOpen
+                      }
+                      addLiquidityFailModalOpen={addLiquidityFailModalOpen}
+                      setAddLiquidityFailModalOpen={
+                        setAddLiquidityFailModalOpen
+                      }
                     />
                   </motion.div>
                 </SubWrap>

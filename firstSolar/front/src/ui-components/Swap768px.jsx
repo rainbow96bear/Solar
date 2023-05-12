@@ -19,7 +19,36 @@ import { useSelector } from "react-redux";
 import LoadingCompo from "./LoadingCompo";
 
 export default function Swap768px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    oracleiddata,
+    balance,
+    userFirstBalance,
+    userSecondBalance,
+    firstSelectToken,
+    setFirstSelectToken,
+    secondSelectToken,
+    setSecondSelectToken,
+    firstAmountPrice,
+    secondAmountPrice,
+    questionMark,
+    setQuestionMark,
+    textareaValue,
+    setTextAreaValue,
+    handleTextareaChange,
+    handleKeyPress,
+    delayedFunction1,
+    delayedFunction2,
+    setPercentBalance,
+    swapPossibility,
+    swapMethod,
+    swapSuccessModalOpen,
+    setSwapSuccessModalOpen,
+    swapFailModalOpen,
+    setSwapFailModalOpen,
+    rightPool,
+    ...rest
+  } = props;
   const isLoading = useSelector((state) => state.isLoading);
 
   return (
@@ -187,11 +216,11 @@ export default function Swap768px(props) {
               borderRadius="35px"
               padding="0px 0px 0px 0px"
               objectFit="cover"
-              src={props?.oracleiddata[0]?.mainNetLogo}
+              src={oracleiddata[0]?.mainNetLogo}
               {...getOverrideProps(overrides, "ghrgclzzd 4")}
             ></Image>
             <Image
-              src={props?.oracleiddata[0]?.platformLogo}
+              src={oracleiddata[0]?.platformLogo}
               width="38.66px"
               height="35px"
               display="block"
@@ -225,7 +254,7 @@ export default function Swap768px(props) {
         <Flex
           backgroundColor="rgba(234, 0, 50, 0.35)"
           borderRadius="30px"
-          display={props?.rightPool == false ? "flex" : "none"}
+          display={rightPool == false ? "flex" : "none"}
           color="white"
           width={{
             base: "55vw",
@@ -315,7 +344,7 @@ export default function Swap768px(props) {
               {...getOverrideProps(overrides, "Frame 7239752875")}
             >
               <Image
-                src={props?.oracleiddata[0]?.mainNetLogo}
+                src={oracleiddata[0]?.mainNetLogo}
                 width="25px"
                 height="25px"
                 display="block"
@@ -349,10 +378,10 @@ export default function Swap768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={props?.firstSelectToken}
+                children={firstSelectToken}
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  props?.setQuestionMark(1);
+                  setQuestionMark(1);
                 }}
                 {...getOverrideProps(overrides, "DexName39752856")}
               ></Text>
@@ -374,7 +403,7 @@ export default function Swap768px(props) {
                 <svg
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    props?.setQuestionMark(1);
+                    setQuestionMark(1);
                   }}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 320 512"
@@ -419,7 +448,7 @@ export default function Swap768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={`Balance : ${
-                  props?.userFirstBalance ? props?.userFirstBalance : 0
+                  userFirstBalance ? userFirstBalance : 0
                 }`}
                 {...getOverrideProps(overrides, "Balance : 039752863")}
               ></Text>
@@ -452,17 +481,17 @@ export default function Swap768px(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
-              value={props?.textareaValue}
+              value={textareaValue}
               onChange={(e) => {
-                if (+e.target.value > +props?.userFirstBalance) {
-                  e.target.value = props?.userFirstBalance;
+                if (+e.target.value > +userFirstBalance) {
+                  e.target.value = userFirstBalance;
                 }
-                props?.setTextAreaValue(e.target.value);
-                props?.handleTextareaChange(e);
-                props?.delayedFunction1(e.target.value);
+                setTextAreaValue(e.target.value);
+                handleTextareaChange(e);
+                delayedFunction1(e.target.value);
               }}
               onKeyPress={(e) => {
-                props?.handleKeyPress(e);
+                handleKeyPress(e);
               }}
               {...getOverrideProps(overrides, "TextAreaField40432770")}
             ></TextAreaField>
@@ -498,7 +527,7 @@ export default function Swap768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={props?.firstAmountPrice ? props?.firstAmountPrice : 0}
+                children={firstAmountPrice ? firstAmountPrice : 0}
                 {...getOverrideProps(overrides, "12312312312312312339752827")}
               ></Text>
             </Flex>
@@ -529,7 +558,7 @@ export default function Swap768px(props) {
                 backgroundColor="rgba(255, 226, 0, 0.35)"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  props?.setPercentBalance(0.25);
+                  setPercentBalance(0.25);
                 }}
                 {...getOverrideProps(overrides, "Frame 8039814040")}
               >
@@ -568,7 +597,7 @@ export default function Swap768px(props) {
                 backgroundColor="rgba(255, 226, 0, 0.35)"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  props?.setPercentBalance(0.5);
+                  setPercentBalance(0.5);
                 }}
                 {...getOverrideProps(overrides, "Frame 8139814043")}
               >
@@ -607,7 +636,7 @@ export default function Swap768px(props) {
                 backgroundColor="rgba(255, 226, 0, 0.35)"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  props?.setPercentBalance(0.75);
+                  setPercentBalance(0.75);
                 }}
                 {...getOverrideProps(overrides, "Frame 8239814045")}
               >
@@ -646,7 +675,7 @@ export default function Swap768px(props) {
                 backgroundColor="rgba(255, 226, 0, 0.35)"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  props?.setPercentBalance(1);
+                  setPercentBalance(1);
                 }}
                 {...getOverrideProps(overrides, "Frame 8339814047")}
               >
@@ -728,7 +757,7 @@ export default function Swap768px(props) {
               {...getOverrideProps(overrides, "Frame 7239752875")}
             >
               <Image
-                src={props?.oracleiddata[0]?.platformLogo}
+                src={oracleiddata[0]?.platformLogo}
                 width="25px"
                 height="25px"
                 display="block"
@@ -762,10 +791,10 @@ export default function Swap768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={props?.secondSelectToken}
+                children={secondSelectToken}
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  props?.setQuestionMark(2);
+                  setQuestionMark(2);
                 }}
                 {...getOverrideProps(overrides, "DexName39752856")}
               ></Text>
@@ -787,7 +816,7 @@ export default function Swap768px(props) {
                 <svg
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    props?.setQuestionMark(2);
+                    setQuestionMark(2);
                   }}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 320 512"
@@ -832,7 +861,7 @@ export default function Swap768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={`Balance : ${
-                  props?.userSecondBalance ? props?.userSecondBalance : 0
+                  userSecondBalance ? userSecondBalance : 0
                 }`}
                 {...getOverrideProps(overrides, "Balance : 039752863")}
               ></Text>
@@ -865,11 +894,11 @@ export default function Swap768px(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
-              value={props?.secondAmountPrice ? props?.secondAmountPrice : 0}
+              value={secondAmountPrice ? secondAmountPrice : 0}
               disabled
               backgroundColor="transparent"
               onKeyPress={(e) => {
-                props?.handleKeyPress(e);
+                handleKeyPress(e);
               }}
               {...getOverrideProps(overrides, "TextAreaField40432770")}
             ></TextAreaField>
@@ -891,18 +920,16 @@ export default function Swap768px(props) {
           borderRadius="15px"
           padding="13px 73px 13px 73px"
           backgroundColor={
-            props?.swapPossibility
-              ? "rgba(234,0,50,0.45)"
-              : "rgba(230,230,230,1)"
+            swapPossibility ? "rgba(234,0,50,0.45)" : "rgba(230,230,230,1)"
           }
           border="0px"
-          disabled={!props?.swapPossibility}
+          disabled={!swapPossibility}
           style={{
-            cursor: props?.swapPossibility ? "pointer" : "not-allowed",
+            cursor: swapPossibility ? "pointer" : "not-allowed",
           }}
           onClick={async () => {
-            if (!props?.swapPossibility) return;
-            await props?.swapMethod();
+            if (!swapPossibility) return;
+            await swapMethod();
           }}
           {...getOverrideProps(overrides, "Frame 63")}
         >
@@ -929,36 +956,36 @@ export default function Swap768px(props) {
           />
         </Button>
       </Flex>
-      {props?.questionMark == 1 ? (
+      {questionMark == 1 ? (
         <QuestionModalTop
-          setquestionmark={props?.setQuestionMark}
-          secondselecttoken={props?.secondSelectToken}
-          setfirstselecttoken={props?.setFirstSelectToken}
+          setquestionmark={setQuestionMark}
+          secondselecttoken={secondSelectToken}
+          setfirstselecttoken={setFirstSelectToken}
         ></QuestionModalTop>
-      ) : props?.questionMark == 2 ? (
+      ) : questionMark == 2 ? (
         <QuestionModalBottom
-          setquestionmark={props?.setQuestionMark}
-          firstselecttoken={props?.firstSelectToken}
-          setsecondselecttoken={props?.setSecondSelectToken}
+          setquestionmark={setQuestionMark}
+          firstselecttoken={firstSelectToken}
+          setsecondselecttoken={setSecondSelectToken}
         ></QuestionModalBottom>
       ) : (
         <></>
       )}
-      {props?.swapSuccessModalOpen && (
+      {swapSuccessModalOpen && (
         <LoadingModal>
           <SwapCompletedModal
-            setSwapSuccessModalOpen={props?.setSwapSuccessModalOpen}
-            firstSelectToken={props?.firstSelectToken}
-            secondSelectToken={props?.secondSelectToken}
+            setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+            firstSelectToken={firstSelectToken}
+            secondSelectToken={secondSelectToken}
           />
         </LoadingModal>
       )}
-      {props?.swapFailModalOpen && (
+      {swapFailModalOpen && (
         <LoadingModal>
           <SwapFaildModal
-            setSwapFailModalOpen={props?.setSwapFailModalOpen}
-            firstSelectToken={props?.firstSelectToken}
-            secondSelectToken={props?.secondSelectToken}
+            setSwapFailModalOpen={setSwapFailModalOpen}
+            firstSelectToken={firstSelectToken}
+            secondSelectToken={secondSelectToken}
           />
         </LoadingModal>
       )}

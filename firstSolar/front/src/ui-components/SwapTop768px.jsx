@@ -1,21 +1,19 @@
-/***************************************************************************
- * The contents of this file were generated with Amplify Studio.           *
- * Please refrain from making any modifications to this file.              *
- * Any changes to this file will be overwritten when running amplify pull. *
- **************************************************************************/
-
-/* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { setIsLoading } from "../modules/isLoading.js";
 
 export default function SwapTop768px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    oracleiddata,
+    balance,
+    firstLiquidity,
+    secondLiquidity,
+    lastTimeStamp,
+    ...rest
+  } = props;
   return (
     <Flex
       gap="49px"
@@ -92,9 +90,9 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.name?.includes("DFS")
-                  ? props?.oracleiddata[0]?.firstToken
-                  : props?.oracleiddata[0]?.assets[0]
+                oracleiddata[0]?.name?.includes("DFS")
+                  ? oracleiddata[0]?.firstToken
+                  : oracleiddata[0]?.assets[0]
               }
               {...getOverrideProps(overrides, "TokenName40162900")}
             ></Text>
@@ -147,9 +145,9 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.secondToken
-                  ? props?.oracleiddata[0]?.secondToken
-                  : props?.oracleiddata[0]?.assets[1]
+                oracleiddata[0]?.secondToken
+                  ? oracleiddata[0]?.secondToken
+                  : oracleiddata[0]?.assets[1]
               }
               {...getOverrideProps(overrides, "TokenName40162900")}
             ></Text>
@@ -183,8 +181,8 @@ export default function SwapTop768px(props) {
           >
             <Image
               src={
-                props?.oracleiddata[0]?.mainNetLogo
-                  ? props?.oracleiddata[0]?.mainNetLogo
+                oracleiddata[0]?.mainNetLogo
+                  ? oracleiddata[0]?.mainNetLogo
                   : logo
               }
               width="30px"
@@ -218,9 +216,7 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.network
-                  ? props?.oracleiddata[0]?.network
-                  : "Solar"
+                oracleiddata[0]?.network ? oracleiddata[0]?.network : "Solar"
               }
               {...getOverrideProps(overrides, "TokenName40162892")}
             ></Text>
@@ -252,8 +248,8 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               objectFit="cover"
               src={
-                props?.oracleiddata[0]?.platformLogo
-                  ? props?.oracleiddata[0]?.platformLogo
+                oracleiddata[0]?.platformLogo
+                  ? oracleiddata[0]?.platformLogo
                   : logo
               }
               {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
@@ -276,8 +272,8 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.platformId
-                  ? props?.oracleiddata[0]?.platformId
+                oracleiddata[0]?.platformId
+                  ? oracleiddata[0]?.platformId
                   : "Solar"
               }
               {...getOverrideProps(overrides, "TokenName40162900")}
@@ -321,10 +317,8 @@ export default function SwapTop768px(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children={
-              props?.oracleiddata[0]?.apy
-                ? `APY :  ${
-                    Math.round(props?.oracleiddata[0]?.apy * 10000) / 10000
-                  } %`
+              oracleiddata[0]?.apy
+                ? `APY :  ${Math.round(oracleiddata[0]?.apy * 10000) / 10000} %`
                 : "APY :  0%"
             }
             {...getOverrideProps(overrides, "99.99%")}
@@ -409,8 +403,8 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               objectFit="cover"
               src={
-                props?.oracleiddata[0]?.mainNetLogo
-                  ? props?.oracleiddata[0]?.mainNetLogo
+                oracleiddata[0]?.mainNetLogo
+                  ? oracleiddata[0]?.mainNetLogo
                   : logo
               }
               {...getOverrideProps(overrides, "ghrgclzzd 940132806")}
@@ -433,9 +427,9 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.name?.includes("DFS")
-                  ? props?.oracleiddata[0]?.firstToken
-                  : props?.oracleiddata[0]?.assets[0]
+                oracleiddata[0]?.name?.includes("DFS")
+                  ? oracleiddata[0]?.firstToken
+                  : oracleiddata[0]?.assets[0]
               }
               {...getOverrideProps(overrides, "TokenName40132808")}
             ></Text>
@@ -457,9 +451,7 @@ export default function SwapTop768px(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={
-              props?.firstLiquidity ? `${props?.firstLiquidity} K` : "0 K"
-            }
+            children={firstLiquidity ? `${firstLiquidity} K` : "0 K"}
             {...getOverrideProps(overrides, "99,99M40132809")}
           ></Text>
         </Flex>
@@ -503,8 +495,8 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               objectFit="cover"
               src={
-                props?.oracleiddata[0]?.platformLogo
-                  ? props?.oracleiddata[0]?.platformLogo
+                oracleiddata[0]?.platformLogo
+                  ? oracleiddata[0]?.platformLogo
                   : logo
               }
               {...getOverrideProps(overrides, "ghrgclzzd 940132815")}
@@ -527,9 +519,9 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.secondToken
-                  ? props?.oracleiddata[0]?.secondToken
-                  : props?.oracleiddata[0]?.assets[1]
+                oracleiddata[0]?.secondToken
+                  ? oracleiddata[0]?.secondToken
+                  : oracleiddata[0]?.assets[1]
               }
               {...getOverrideProps(overrides, "TokenName40132816")}
             ></Text>
@@ -551,9 +543,7 @@ export default function SwapTop768px(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={
-              props?.secondLiquidity ? `${props?.secondLiquidity} K` : "0 K"
-            }
+            children={secondLiquidity ? `${secondLiquidity} K` : "0 K"}
             {...getOverrideProps(overrides, "99,99M40132817")}
           ></Text>
         </Flex>
@@ -660,13 +650,12 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.name?.includes("DFS")
+                oracleiddata[0]?.name?.includes("DFS")
                   ? `${
-                      (parseInt(props?.oracleiddata[0]?.tvl / 10 ** 18) *
-                        100000) /
+                      (parseInt(oracleiddata[0]?.tvl / 10 ** 18) * 100000) /
                       100000
                     } K`
-                  : parseInt(props?.oracleiddata[0]?.tvl * 1000) / 1000
+                  : parseInt(oracleiddata[0]?.tvl * 1000) / 1000
               }
               {...getOverrideProps(overrides, "16.82%")}
             ></Text>
@@ -754,10 +743,9 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.dailyTvlRate
+                oracleiddata[0]?.dailyTvlRate
                   ? `${
-                      Math.round(props?.oracleiddata[0]?.dailyTvlRate * 10000) /
-                      10000
+                      Math.round(oracleiddata[0]?.dailyTvlRate * 10000) / 10000
                     } %`
                   : 0
               }
@@ -810,9 +798,7 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={`${
-                props?.oracleiddata[0]?.lastHarvest
-                  ? "Last Harvest"
-                  : "UpdatedAt"
+                oracleiddata[0]?.lastHarvest ? "Last Harvest" : "UpdatedAt"
               }`}
               {...getOverrideProps(overrides, "Fees 24H")}
             ></Text>
@@ -850,11 +836,11 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                !props?.oracleiddata[0]?.name?.includes("DFS")
+                !oracleiddata[0]?.name?.includes("DFS")
                   ? new Date(
-                      props?.oracleiddata[0]?.lastHarvest * 1000
+                      oracleiddata[0]?.lastHarvest * 1000
                     ).toLocaleString()
-                  : props?.lastTimeStamp
+                  : lastTimeStamp
               }
               {...getOverrideProps(overrides, "$99.99M40132843")}
             ></Text>
@@ -940,11 +926,7 @@ export default function SwapTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={
-                props?.oracleiddata[0]?.fee
-                  ? `${props?.oracleiddata[0]?.fee}%`
-                  : 0
-              }
+              children={oracleiddata[0]?.fee ? `${oracleiddata[0]?.fee}%` : 0}
               {...getOverrideProps(overrides, "$99.99M40132843")}
             ></Text>
           </Flex>
