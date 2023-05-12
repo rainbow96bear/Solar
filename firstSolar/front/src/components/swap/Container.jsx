@@ -68,6 +68,11 @@ const SwapContainer = () => {
   const [firstLiquidity, setFirstLiquidity] = useState();
   const [secondLiquidity, setSecondLiquidity] = useState();
 
+  const [tokenNumBer, setTokenNumber] = useState();
+  const [reducedNumber, setReducedNumber] = useState();
+
+  const [dateString, setDateString] = useState();
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -82,6 +87,7 @@ const SwapContainer = () => {
 
   useEffect(() => {
     (async () => {
+      if (!address2 || !oracleId) return;
       try {
         const oracleId = await oracleIdList(params);
         setOracleId(oracleId);
@@ -94,7 +100,7 @@ const SwapContainer = () => {
         console.error(error);
       }
     })();
-  }, []);
+  }, [address2]);
 
   useEffect(() => {
     (async () => {
@@ -105,6 +111,7 @@ const SwapContainer = () => {
           ? oracleId[0]?.lastHarvest
           : oracleId[0]?.updatedAt.split("T")[0]
       );
+      setDateString(tempDate.toLocaleDateString());
       setFirstLiquidity(
         oracleId[0]?.name?.includes("DFS")
           ? (parseInt(oracleId[0]?.firstTokenBalance / 10 ** 18) * 100000) /
@@ -117,6 +124,8 @@ const SwapContainer = () => {
               100000
           : parseInt(oracleId[0]?.secondTokenBalance * 1000) / 1000
       );
+      setTokenNumber(oracleId[0]?.firstTokenBalance);
+      setReducedNumber(tokenNumBer?.toString().substring(0, 7));
       setTimeout(() => {
         dispatch(setIsLoading(false));
       }, 3000);
@@ -166,7 +175,7 @@ const SwapContainer = () => {
         console.error(error);
       }
     })();
-  }, [firstSelectToken]);
+  }, [firstSelectToken, oracleId]);
 
   useEffect(() => {
     (async () => {
@@ -180,7 +189,7 @@ const SwapContainer = () => {
         console.error(error);
       }
     })();
-  }, [secondSelectToken]);
+  }, [secondSelectToken, oracleId]);
 
   useEffect(() => {
     if (
@@ -199,12 +208,12 @@ const SwapContainer = () => {
 
   useEffect(() => {
     if (
-      !oracleId[0]?.name.includes(firstSelectToken) ||
-      !oracleId[0]?.name.includes(secondSelectToken)
+      !oracleId[0]?.name?.includes(firstSelectToken) ||
+      !oracleId[0]?.name?.includes(secondSelectToken)
     ) {
       setRightPool(false);
     } else setRightPool(true);
-  }, [firstSelectToken, secondSelectToken]);
+  }, [firstSelectToken, secondSelectToken, oracleId]);
 
   useEffect(() => {
     if (document.cookie) {
@@ -399,7 +408,7 @@ const SwapContainer = () => {
           >
             <ItemWrap
               onClick={() => {
-                if (oracleId[0].name.includes("DFS")) {
+                if (oracleId[0]?.name?.includes("DFS")) {
                   toggleOpen();
                 }
               }}
@@ -527,7 +536,15 @@ const SwapContainer = () => {
                   boxShadow: "-18px 25px 28px rgba(0, 0, 0, 0.25)",
                 }}
               >
-                <SwapTop320px oracleiddata={oracleId} balance={balance} />
+                <SwapTop320px
+                  oracleiddata={oracleId}
+                  balance={balance}
+                  firstLiquidity={firstLiquidity}
+                  secondLiquidity={secondLiquidity}
+                  lastTimeStamp={lastTimeStamp}
+                  reducedNumber={reducedNumber}
+                  dateString={dateString}
+                />
               </motion.div>
             </ItemWrap>
             <AnimatePresence>
@@ -555,7 +572,32 @@ const SwapContainer = () => {
                       boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
                     }}
                   >
-                    <Swap320px oracleiddata={oracleId} balance={balance} />
+                    <Swap320px
+                      oracleiddata={oracleId}
+                      balance={balance}
+                      userFirstBalance={userFirstBalance}
+                      userSecondBalance={userSecondBalance}
+                      firstSelectToken={firstSelectToken}
+                      secondSelectToken={secondSelectToken}
+                      firstAmountPrice={firstAmountPrice}
+                      secondAmountPrice={secondAmountPrice}
+                      questionMark={questionMark}
+                      setQuestionMark={setQuestionMark}
+                      textareaValue={textareaValue}
+                      setTextAreaValue={setTextAreaValue}
+                      handleTextareaChange={handleTextareaChange}
+                      handleKeyPress={handleKeyPress}
+                      delayedFunction1={delayedFunction1}
+                      delayedFunction2={delayedFunction2}
+                      setPercentBalance={setPercentBalance}
+                      swapPossibility={swapPossibility}
+                      swapMethod={swapMethod}
+                      swapSuccessModalOpen={swapSuccessModalOpen}
+                      setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+                      swapFailModalOpen={swapFailModalOpen}
+                      setSwapFailModalOpen={setSwapFailModalOpen}
+                      rightPool={rightPool}
+                    />
                   </motion.div>
                 </SubWrap>
               )}

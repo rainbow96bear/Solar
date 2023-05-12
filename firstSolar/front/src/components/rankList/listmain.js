@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ListItem } from "./listitem";
-import { Text } from "@aws-amplify/ui-react";
+import { Flex, Loader, Text } from "@aws-amplify/ui-react";
 import "../../css/Font.css";
 import "../../css/RankList.css";
+import isLoading from "../../modules/isLoading";
 
-const ListMain = ({ items }) => {
+const ListMain = ({ items, isLoading }) => {
   return (
     <SkewContainer>
       <RankName>
@@ -70,8 +70,12 @@ const ListMain = ({ items }) => {
       <Wrapper>
         <ShadowTop />
         <TransitionContainer>
-          <>
-            {items?.map(
+          {isLoading ? (
+            <Flex height="100%" justifyContent="center" alignItems="center">
+              <Loader width="80px" height="80px"></Loader>
+            </Flex>
+          ) : (
+            items?.map(
               (item, idx) =>
                 idx !== items?.length - 1 && (
                   <ListItem
@@ -80,8 +84,8 @@ const ListMain = ({ items }) => {
                     content={item}
                   />
                 )
-            )}
-          </>
+            )
+          )}
         </TransitionContainer>
         <ShadowBottom />
       </Wrapper>
