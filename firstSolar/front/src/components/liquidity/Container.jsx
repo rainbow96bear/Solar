@@ -1,30 +1,38 @@
-import * as React from "react";
-import LiquidComponent from "./Component";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { lpBalance, oracleIdList } from "../../api/index";
-import { useSelector } from "react-redux";
-import { useAccount } from "wagmi";
+import styled from "styled-components";
+import { Flex } from "@aws-amplify/ui-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
+
+import {
+  AddLiquidityBottom320px,
+  AddLiquidityBottom768px,
+  AddLiquidityTop320px,
+  AddLiquidityTop768px,
+} from "../../ui-components";
+import { oracleIdList } from "../../api/index";
 
 const LiquidityContainer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [oracleId, setOracleId] = useState([]);
+  const [balance, setBalance] = useState(0);
+
   const params = useLocation().search.replace("?", "");
 
-  const [oracleId, setOracleId] = React.useState([]);
-  const [balance, setBalance] = React.useState(0);
-  const { address } = useAccount();
+  const toggleOpen = () => setIsOpen(!isOpen);
+  const isDesktop = useMediaQuery({
+    query: "(min-width:500px)",
+  });
 
-  const address2 = useSelector((state) => state.account);
+  const isMobile = useMediaQuery({
+    query: "(max-width:499px)",
+  });
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       try {
-        const oracleId = await oracleIdList(params);
-        setOracleId(oracleId);
-        if (!params.includes("DFS")) {
-          const account = address2 ? address2 : address;
-
-          const balance = await lpBalance(account, oracleId[0].oracleId);
-          setBalance(balance);
-        }
+        setOracleId(await oracleIdList(params));
       } catch (error) {
         console.error(error);
       }
@@ -32,8 +40,190 @@ const LiquidityContainer = () => {
   }, []);
 
   return (
-    <LiquidComponent oracleId={oracleId} balance={balance}></LiquidComponent>
+    <>
+      {isDesktop && (
+        <Addliqud>
+          <Flex
+            alignItems="center"
+            justifyContent="center"
+            marginLeft="15px"
+            gap={{
+              small: "100px",
+              medium: "30px",
+            }}
+            direction={{
+              small: "column",
+              medium: "column",
+              large: "row",
+            }}
+          >
+            <ItemWrap
+              onClick={toggleOpen}
+              layout
+              transition={{
+                duration: 0.2,
+                ease: [0.43, 0.13, 0.23, 0.96],
+              }}
+            >
+              <motion.div
+                style={{
+                  marginTop: "-158px",
+                  height: "unset",
+                  borderRadius: "35px",
+                  backgroundColor: "rgba(249,249,249,1)",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                }}
+                whileHover={{
+                  borderRadius: "55px",
+                  scale: 0.99,
+                  backgroundColor: "rgba(249,249,249,0.55)",
+                  boxShadow: "-18px 25px 28px rgba(0, 0, 0, 0.25)",
+                }}
+              >
+                <AddLiquidityTop768px
+                  oracleiddata={oracleId}
+                  balance={balance}
+                />
+              </motion.div>
+            </ItemWrap>
+            <AnimatePresence>
+              {isOpen && (
+                <SubWrap>
+                  <motion.div
+                    layout
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.25,
+                      ease: [0.43, 0.13, 0.23, 0.96],
+                    }}
+                  >
+                    <AddLiquidityBottom768px
+                      style={{
+                        height: "unset",
+                        borderRadius: "35px",
+                        backgroundColor: "rgba(249,249,249,1)",
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      }}
+                      whileHover={{
+                        borderRadius: "55px",
+                        backgroundColor: "rgba(249,249,249,0.55)",
+                        boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+                      }}
+                      oracleiddata={oracleId}
+                      balance={balance}
+                    />
+                  </motion.div>
+                </SubWrap>
+              )}
+            </AnimatePresence>
+          </Flex>
+        </Addliqud>
+      )}
+      {isMobile && (
+        <Addliqud>
+          <Flex
+            direction={{
+              base: "column",
+              medium: "row",
+            }}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <ItemWrap
+              layout
+              transition={{
+                duration: 0.2,
+                ease: [0.43, 0.13, 0.23, 0.96],
+              }}
+            >
+              <motion.div
+                onClick={toggleOpen}
+                style={{
+                  marginTop: "-150px",
+                  height: "unset",
+                  borderRadius: "35px",
+                  backgroundColor: "rgba(249,249,249,1)",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                }}
+                whileHover={{
+                  borderRadius: "55px",
+                  scale: 0.99,
+                  backgroundColor: "rgba(249,249,249,0.55)",
+                  boxShadow: "-18px 25px 28px rgba(0, 0, 0, 0.25)",
+                }}
+              >
+                <AddLiquidityTop320px
+                  oracleiddata={oracleId}
+                  balance={balance}
+                />
+              </motion.div>
+            </ItemWrap>
+            <AnimatePresence>
+              {isOpen && (
+                <SubWrap>
+                  <motion.div
+                    layout
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.25,
+                      ease: [0.43, 0.13, 0.23, 0.96],
+                    }}
+                    style={{
+                      marginTop: "-90px",
+                      height: "unset",
+                      borderRadius: "35px",
+                      backgroundColor: "rgba(249,249,249,1)",
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                    }}
+                    whileHover={{
+                      borderRadius: "55px",
+                      backgroundColor: "rgba(249,249,249,0.55)",
+                      boxShadow: "10px 10px 20px rgba(0, 20, 0, 0.25)",
+                    }}
+                  >
+                    <AddLiquidityBottom320px
+                      oracleiddata={oracleId}
+                      balance={balance}
+                    />
+                  </motion.div>
+                </SubWrap>
+              )}
+            </AnimatePresence>
+          </Flex>
+        </Addliqud>
+      )}
+    </>
   );
 };
 
 export default LiquidityContainer;
+
+const Addliqud = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  margin-top: 30px;
+`;
+
+const ItemWrap = styled(motion.div)`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  scale: 0.74;
+`;
+
+const SubWrap = styled(motion.div)`
+  font-size: 15px;
+  margin-bottom: 50px;
+  display: flex;
+  :last-child {
+    border-radius: 0 0 20px 20px;
+  }
+`;
