@@ -7,184 +7,18 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Text, Pagination, usePagination } from "@aws-amplify/ui-react";
+import { Flex, Text, Pagination } from "@aws-amplify/ui-react";
 import Poolitem1024 from "../components/Pool/Poolitem1024px.jsx";
 import { motion, LayoutGroup } from "framer-motion";
 import {
   Netlist1024px,
   Dexlist1024px,
 } from "../components/netdexlist/Netdexlist";
-import { getMainPoolList, netList, dexList, getSearch } from "../api/index.js";
-import { useDispatch } from "react-redux";
-import { setIsLoading } from "../modules/isLoading.js";
-import { mainNet1024px1, platform } from "../mainNet";
-import { useLocation } from "react-router-dom";
+
 import "../css/PoolList.css";
-
-const networkArray = [
-  "ethereum",
-  "optimism",
-  "metis",
-  "aurora",
-  "bsc",
-  "kava",
-  "heco",
-  "polygon",
-  "fantom",
-];
-
-const dexArray = [
-  "uniswap",
-  "pancakeswap",
-  "sushi",
-  "quickswap",
-  "linch",
-  "curve",
-  "bnt",
-  "knc",
-  "matcha",
-  "bal",
-];
 
 export default function PoolListCom1024px(props) {
   const { overrides, ...rest } = props;
-  const didMount = React.useRef(false);
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-
-  const [currentPagePoolList, setCurrentPagePoolList] = React.useState([]);
-  const [pageIndex, setPageIndex] = React.useState(
-    Number(queryParams.get("page")) || 1
-  );
-  const [filter, setFilter] = React.useState(String(queryParams.get("filter")));
-  const [searchData, setSearchData] = React.useState(
-    String(queryParams.get("searchData"))
-  );
-
-  const [totalPages, setTotalPages] = React.useState(1);
-  const [mainNetList, setMainNetList] = React.useState([]);
-  const [platformList, setPlatformList] = React.useState([]);
-
-  const [sortTVL, setSortTVL] = React.useState("down");
-  const [sortAPY, setSortAPY] = React.useState("down");
-
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    queryParams.set("page", pageIndex);
-    queryParams.set("filter", filter);
-
-    const newUrl = `${location.pathname}?${queryParams.toString()}`;
-    window.history.replaceState(null, "", newUrl);
-  }, [pageIndex, filter, queryParams]);
-
-  const getPoolList = async () => {
-    try {
-      dispatch(setIsLoading(true));
-      if (searchData != "null") {
-        // 검색이다.
-        if (filter == "null") {
-          const { poolListData, resultTotalPages } = await getSearch(
-            searchData,
-            pageIndex
-          );
-
-          setCurrentPagePoolList(poolListData);
-          setTotalPages(resultTotalPages);
-        } else if (filter != "null") {
-          // 필터 있을 때 실행할 코드
-        }
-      } else {
-        if (filter == "null") {
-          const { poolListData, resultTotalPages } = await getMainPoolList(
-            pageIndex
-          );
-          setCurrentPagePoolList(poolListData);
-          setTotalPages(resultTotalPages);
-        } else if (filter != "null") {
-          if (networkArray.includes(filter)) {
-            const data = await netList(filter, pageIndex);
-            setCurrentPagePoolList(data.poolListData);
-            setTotalPages(Math.ceil(data.poolListDataLength / 10));
-          } else if (dexArray.includes(filter)) {
-            const data = await dexList(filter, pageIndex);
-
-            setCurrentPagePoolList(data.poolListData);
-            setTotalPages(Math.ceil(data.poolListDataLength / 10));
-          }
-        }
-
-        // setTimeout(() => {
-        //   dispatch(setIsLoading(false));
-        // }, 5000);
-      }
-    } catch (error) {
-      dispatch(setIsLoading(false));
-      console.error(error);
-    }
-  };
-
-  React.useEffect(() => {
-    (async () => {
-      await getPoolList();
-    })();
-  }, [pageIndex]);
-
-  React.useEffect(() => {
-    if (didMount.current) setPageIndex(1);
-    else didMount.current = true;
-  }, [filter]);
-
-  React.useEffect(() => {
-    setMainNetList(Object.keys(mainNet1024px1));
-    setPlatformList(Object.values(platform));
-  }, []);
-
-  const paginationProps = usePagination({
-    totalPages: totalPages,
-    currentPage: pageIndex,
-    siblingCount: 2,
-  });
-
-  const aesAPY = (a, b) => {
-    if (a.apy < b.apy) {
-      return -1;
-    }
-    if (a.apy > b.apy) {
-      return 1;
-    }
-    return 0;
-  };
-
-  const descAPY = (a, b) => {
-    if (a.apy > b.apy) {
-      return -1;
-    }
-    if (a.apy < b.apy) {
-      return 1;
-    }
-    return 0;
-  };
-
-  const aesTVL = (a, b) => {
-    if (a.tvl < b.tvl) {
-      return -1;
-    }
-    if (a.tvl > b.tvl) {
-      return 1;
-    }
-    return 0;
-  };
-
-  const descTVL = (a, b) => {
-    if (a.tvl > b.tvl) {
-      return -1;
-    }
-    if (a.tvl < b.tvl) {
-      return 1;
-    }
-    return 0;
-  };
 
   return (
     <Flex
@@ -263,16 +97,16 @@ export default function PoolListCom1024px(props) {
             padding="10px 10px 10px 10px"
             {...getOverrideProps(overrides, "NetWork List39913187")}
           >
-            {mainNetList?.map((item, idx) => (
+            {props?.mainNetList?.map((item, idx) => (
               <Netlist1024px
                 key={`Netlist1024px-${idx}`}
                 item={item}
-                pageIndex={pageIndex}
-                filter={filter}
-                setFilter={setFilter}
-                setCurrentPagePoolList={setCurrentPagePoolList}
-                setTotalPages={setTotalPages}
-                networkArray={networkArray}
+                pageIndex={props?.pageIndex}
+                filter={props?.filter}
+                setFilter={props?.setFilter}
+                setCurrentPagePoolList={props?.setCurrentPagePoolList}
+                setTotalPages={props?.setTotalPages}
+                networkArray={props?.networkArray}
                 value={idx}
               />
             ))}
@@ -344,15 +178,15 @@ export default function PoolListCom1024px(props) {
             padding="10px 10px 10px 10px"
             {...getOverrideProps(overrides, "NetWork List39913187")}
           >
-            {platformList?.map((item, idx) => (
+            {props?.platformList?.map((item, idx) => (
               <Dexlist1024px
                 key={`Dexlist1024px-${idx}`}
                 item={item}
-                pageIndex={pageIndex}
-                setCurrentPagePoolList={setCurrentPagePoolList}
-                setTotalPages={setTotalPages}
-                setFilter={setFilter}
-                filter={filter}
+                pageIndex={props?.pageIndex}
+                setCurrentPagePoolList={props?.setCurrentPagePoolList}
+                setTotalPages={props?.setTotalPages}
+                setFilter={props?.setFilter}
+                filter={props?.filter}
               />
             ))}
           </Flex>
@@ -502,10 +336,14 @@ export default function PoolListCom1024px(props) {
                 basis="0"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  setSortAPY(
-                    sortAPY == "down" ? "up" : sortAPY == "up" ? "down" : "up"
+                  props?.setSortAPY(
+                    props?.sortAPY == "down"
+                      ? "up"
+                      : props?.sortAPY == "up"
+                      ? "down"
+                      : "up"
                   );
-                  setSortTVL(undefined);
+                  props?.setSortTVL(undefined);
                 }}
               >
                 <Text
@@ -549,10 +387,14 @@ export default function PoolListCom1024px(props) {
                   alignItems: "center",
                 }}
                 onClick={() => {
-                  setSortTVL(
-                    sortTVL == "down" ? "up" : sortTVL == "up" ? "down" : "up"
+                  props?.setSortTVL(
+                    props?.sortTVL == "down"
+                      ? "up"
+                      : props?.sortTVL == "up"
+                      ? "down"
+                      : "up"
                   );
-                  setSortAPY(undefined);
+                  props?.setSortAPY(undefined);
                 }}
               >
                 <Text
@@ -639,9 +481,9 @@ export default function PoolListCom1024px(props) {
           initial={{ borderRadius: 25 }}
           transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
         >
-          {sortAPY == "up" ? (
-            currentPagePoolList
-              ?.sort(aesAPY)
+          {props?.sortAPY == "up" ? (
+            props?.currentPagePoolList
+              ?.sort(props?.aesAPY)
               .map((item, idx) => (
                 <Poolitem1024
                   gap="17px"
@@ -656,14 +498,16 @@ export default function PoolListCom1024px(props) {
                   padding="0px 0px 0px 0px"
                   key={`PoolList1024px-${idx}`}
                   item={item}
-                  length={currentPagePoolList.length}
+                  length={props?.currentPagePoolList.length}
                   idx={idx}
-                  last={idx == currentPagePoolList.length - 1 ? true : false}
+                  last={
+                    idx == props?.currentPagePoolList.length - 1 ? true : false
+                  }
                 />
               ))
-          ) : sortAPY == "down" ? (
-            currentPagePoolList
-              ?.sort(descAPY)
+          ) : props?.sortAPY == "down" ? (
+            props?.currentPagePoolList
+              ?.sort(props?.descAPY)
               .map((item, idx) => (
                 <Poolitem1024
                   gap="17px"
@@ -678,14 +522,16 @@ export default function PoolListCom1024px(props) {
                   padding="0px 0px 0px 0px"
                   key={`PoolList1024px-${idx}`}
                   item={item}
-                  length={currentPagePoolList.length}
+                  length={props?.currentPagePoolList.length}
                   idx={idx}
-                  last={idx == currentPagePoolList.length - 1 ? true : false}
+                  last={
+                    idx == props?.currentPagePoolList.length - 1 ? true : false
+                  }
                 />
               ))
-          ) : sortTVL == "up" ? (
-            currentPagePoolList
-              ?.sort(aesTVL)
+          ) : props?.sortTVL == "up" ? (
+            props?.currentPagePoolList
+              ?.sort(props?.aesTVL)
               .map((item, idx) => (
                 <Poolitem1024
                   gap="17px"
@@ -700,14 +546,16 @@ export default function PoolListCom1024px(props) {
                   padding="0px 0px 0px 0px"
                   key={`PoolList1024px-${idx}`}
                   item={item}
-                  length={currentPagePoolList.length}
+                  length={props?.currentPagePoolList.length}
                   idx={idx}
-                  last={idx == currentPagePoolList.length - 1 ? true : false}
+                  last={
+                    idx == props?.currentPagePoolList.length - 1 ? true : false
+                  }
                 />
               ))
-          ) : sortTVL == "down" ? (
-            currentPagePoolList
-              ?.sort(descTVL)
+          ) : props?.sortTVL == "down" ? (
+            props?.currentPagePoolList
+              ?.sort(props?.descTVL)
               .map((item, idx) => (
                 <Poolitem1024
                   gap="17px"
@@ -722,9 +570,11 @@ export default function PoolListCom1024px(props) {
                   padding="0px 0px 0px 0px"
                   key={`PoolList1024px-${idx}`}
                   item={item}
-                  length={currentPagePoolList.length}
+                  length={props?.currentPagePoolList.length}
                   idx={idx}
-                  last={idx == currentPagePoolList.length - 1 ? true : false}
+                  last={
+                    idx == props?.currentPagePoolList.length - 1 ? true : false
+                  }
                 />
               ))
           ) : (
@@ -736,15 +586,15 @@ export default function PoolListCom1024px(props) {
       <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
         <Pagination
           color="red"
-          {...paginationProps}
+          {...props?.paginationProps}
           onChange={(pageNum) => {
             setPageIndex(pageNum);
           }}
           onNext={() => {
-            setPageIndex(pageIndex + 1);
+            setPageIndex(props?.pageIndex + 1);
           }}
           onPrevious={() => {
-            setPageIndex(pageIndex - 1);
+            setPageIndex(props?.pageIndex - 1);
           }}
         />
       </Flex>
