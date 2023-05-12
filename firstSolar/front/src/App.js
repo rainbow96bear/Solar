@@ -32,6 +32,7 @@ import EmptySearchModal from "./ui-components/EmptySearchModal";
 import { DepositCompletedModal, OutRedirectModal } from "./ui-components";
 import { DepositFaildModal } from "./ui-components";
 import SearchNavigatorContainer from "./components/navigateSearch/Container";
+import FooterContainer from "./components/footer/Container";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
@@ -93,7 +94,7 @@ function App() {
               ></Route>
             </Routes>
           </MainContent>
-
+          <FooterContainer />
           {isLoading && (
             <LoadingModal>
               <LoadingCompo />
