@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import RankListComponent from "./Component";
 import { rankList } from "../../api/index";
 import { useDispatch } from "react-redux";

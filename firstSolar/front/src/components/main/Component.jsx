@@ -6,11 +6,11 @@ import {
 } from "../../ui-components";
 import RankListCContainer from "../rankList/Container";
 import FooterContainer from "../footer/Container";
-const MainComponent = () => {
+const MainComponent = ({ items }) => {
   return (
     <>
       <Main>
-        <RankListCContainer></RankListCContainer>
+        <RankListCContainer items={items}></RankListCContainer>
         <PooListCom320px></PooListCom320px>
         <PooListCom768px></PooListCom768px>
         <PoolListCom1024px></PoolListCom1024px>
