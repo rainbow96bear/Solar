@@ -83,8 +83,6 @@ const MypageComponent = ({
             <MyPageCompo768px
               myList={myList}
               getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
-              isOpen={isOpen}
-              toggleOpen={toggleOpen}
               autoCompoundStatus={autoCompoundStatus}
             ></MyPageCompo768px>
           </motion.div>

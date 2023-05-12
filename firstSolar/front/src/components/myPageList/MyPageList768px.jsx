@@ -11,6 +11,9 @@ const MyPageList768px = (props) => {
   const { overrides, ...rest } = props;
   const [auto, setAuto] = useState();
   const account2 = useSelector((state) => state.account);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleOpen = () => setIsOpen(!isOpen);
+
   const mypageMethod = () => {
     props.setLpTokenValue(props?.item?.LPTokenBalance);
     props.setLpToken(props?.item?.name);
@@ -32,10 +35,11 @@ const MyPageList768px = (props) => {
         transition={{
           duration: 0.2,
           ease: [0.43, 0.13, 0.23, 0.96],
-        }}>
+        }}
+      >
         <motion.div
           onClick={() => {
-            props?.toggleOpen();
+            toggleOpen();
             props.setLpTokenValue(props?.item?.LPTokenBalance);
             props.setLpToken(props?.item?.name);
             props.setFirstToken(props?.item?.firstToken);
@@ -57,7 +61,8 @@ const MyPageList768px = (props) => {
           whileHover={{
             borderRadius: "39px",
             backgroundColor: "rgba(199,184,151,0.75)",
-          }}>
+          }}
+        >
           <Flex
             gap="0"
             direction="row"
@@ -74,7 +79,8 @@ const MyPageList768px = (props) => {
               small: "21px 34px 21px 34px",
               medium: "21px 34px 21px 34px",
             }}
-            {...getOverrideProps(overrides, "Frame 16340773335")}>
+            {...getOverrideProps(overrides, "Frame 16340773335")}
+          >
             <Flex
               gap="0"
               direction="column"
@@ -86,7 +92,8 @@ const MyPageList768px = (props) => {
               alignSelf="stretch"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 14240773336")}>
+              {...getOverrideProps(overrides, "Frame 14240773336")}
+            >
               <Flex
                 gap="10px"
                 direction="row"
@@ -100,7 +107,8 @@ const MyPageList768px = (props) => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 0px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 176")}>
+                {...getOverrideProps(overrides, "Frame 176")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -120,7 +128,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children="No."
-                  {...getOverrideProps(overrides, "No.")}></Text>
+                  {...getOverrideProps(overrides, "No.")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -135,7 +144,8 @@ const MyPageList768px = (props) => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 0px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 177")}>
+                {...getOverrideProps(overrides, "Frame 177")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -156,7 +166,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children="POOL"
-                  {...getOverrideProps(overrides, "POOL")}></Text>
+                  {...getOverrideProps(overrides, "POOL")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -171,7 +182,8 @@ const MyPageList768px = (props) => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 0px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 178")}>
+                {...getOverrideProps(overrides, "Frame 178")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -191,7 +203,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children="AUTO"
-                  {...getOverrideProps(overrides, "APY")}></Text>
+                  {...getOverrideProps(overrides, "APY")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -206,7 +219,8 @@ const MyPageList768px = (props) => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 0px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 179")}>
+                {...getOverrideProps(overrides, "Frame 179")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -226,7 +240,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children="TVL"
-                  {...getOverrideProps(overrides, "TVL")}></Text>
+                  {...getOverrideProps(overrides, "TVL")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -241,7 +256,8 @@ const MyPageList768px = (props) => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 0px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 180")}>
+                {...getOverrideProps(overrides, "Frame 180")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -261,7 +277,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children="FEE"
-                  {...getOverrideProps(overrides, "FEE")}></Text>
+                  {...getOverrideProps(overrides, "FEE")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -276,7 +293,8 @@ const MyPageList768px = (props) => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 0px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 181")}>
+                {...getOverrideProps(overrides, "Frame 181")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -296,7 +314,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`MY ${props?.item?.oracleId.split("-")[0]}`}
-                  {...getOverrideProps(overrides, "DFS")}></Text>
+                  {...getOverrideProps(overrides, "DFS")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -311,7 +330,8 @@ const MyPageList768px = (props) => {
                 alignSelf="stretch"
                 position="relative"
                 padding="10px 0px 10px 10px"
-                {...getOverrideProps(overrides, "Frame 182")}>
+                {...getOverrideProps(overrides, "Frame 182")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -331,7 +351,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`MY ${props?.item?.oracleId.split("-")[1]}`}
-                  {...getOverrideProps(overrides, "ETH")}></Text>
+                  {...getOverrideProps(overrides, "ETH")}
+                ></Text>
               </Flex>
             </Flex>
             <Flex
@@ -347,7 +368,8 @@ const MyPageList768px = (props) => {
               alignSelf="stretch"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 14340773342")}>
+              {...getOverrideProps(overrides, "Frame 14340773342")}
+            >
               <Flex
                 gap="10px"
                 direction="row"
@@ -370,7 +392,8 @@ const MyPageList768px = (props) => {
                   marginRight: "10px",
                 }}
                 padding="9px 0px 9px 0px"
-                {...getOverrideProps(overrides, "Frame 165")}>
+                {...getOverrideProps(overrides, "Frame 165")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -393,7 +416,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={props.idx + 1}
-                  {...getOverrideProps(overrides, "1")}></Text>
+                  {...getOverrideProps(overrides, "1")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -417,7 +441,8 @@ const MyPageList768px = (props) => {
                   marginRight: "10px",
                 }}
                 padding="9px 0px 9px 0px"
-                {...getOverrideProps(overrides, "Frame 16940773345")}>
+                {...getOverrideProps(overrides, "Frame 16940773345")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -440,7 +465,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={props.item.name}
-                  {...getOverrideProps(overrides, "DFS-ETH")}></Text>
+                  {...getOverrideProps(overrides, "DFS-ETH")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -464,7 +490,8 @@ const MyPageList768px = (props) => {
                   marginRight: "10px",
                 }}
                 padding="9px 0px 9px 0px"
-                {...getOverrideProps(overrides, "Frame 166")}>
+                {...getOverrideProps(overrides, "Frame 166")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -487,7 +514,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={auto ? "ON" : "OFF"}
-                  {...getOverrideProps(overrides, "040773348")}></Text>
+                  {...getOverrideProps(overrides, "040773348")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -511,7 +539,8 @@ const MyPageList768px = (props) => {
                   marginRight: "10px",
                 }}
                 padding="9px 0px 9px 0px"
-                {...getOverrideProps(overrides, "Frame 167")}>
+                {...getOverrideProps(overrides, "Frame 167")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -534,7 +563,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`${props?.item?.tvl.slice(0, 10) / 100}`}
-                  {...getOverrideProps(overrides, "040773350")}></Text>
+                  {...getOverrideProps(overrides, "040773350")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -558,7 +588,8 @@ const MyPageList768px = (props) => {
                   marginRight: "10px",
                 }}
                 padding="9px 0px 9px 0px"
-                {...getOverrideProps(overrides, "Frame 168")}>
+                {...getOverrideProps(overrides, "Frame 168")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -581,7 +612,8 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`${props.item.fee}%`}
-                  {...getOverrideProps(overrides, "0.3%")}></Text>
+                  {...getOverrideProps(overrides, "0.3%")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -605,7 +637,8 @@ const MyPageList768px = (props) => {
                   marginRight: "10px",
                 }}
                 padding="9px 0px 9px 0px"
-                {...getOverrideProps(overrides, "Frame 170")}>
+                {...getOverrideProps(overrides, "Frame 170")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -630,7 +663,8 @@ const MyPageList768px = (props) => {
                   children={`${
                     Math.floor(props?.item?.DFSTokenBalance.slice(0, 6)) / 100
                   } `}
-                  {...getOverrideProps(overrides, "040892928")}></Text>
+                  {...getOverrideProps(overrides, "040892928")}
+                ></Text>
               </Flex>
               <Flex
                 gap="10px"
@@ -650,7 +684,8 @@ const MyPageList768px = (props) => {
                   marginRight: "10px",
                 }}
                 padding="9px 0px 9px 0px"
-                {...getOverrideProps(overrides, "Frame 17140892929")}>
+                {...getOverrideProps(overrides, "Frame 17140892929")}
+              >
                 <Text
                   fontFamily="ffProExtraLight"
                   fontSize={{ base: "0.7rem", small: "18px", medium: "21px" }}
@@ -675,14 +710,15 @@ const MyPageList768px = (props) => {
                   children={`${
                     Math.floor(props?.item?.OtherTokenBalance.slice(0, 6)) / 100
                   } `}
-                  {...getOverrideProps(overrides, "040892930")}></Text>
+                  {...getOverrideProps(overrides, "040892930")}
+                ></Text>
               </Flex>
             </Flex>
           </Flex>
         </motion.div>
       </ItemWrap>
       <AnimatePresence>
-        {props?.isOpen && (
+        {isOpen && (
           <SubWrap>
             <motion.div
               layout
@@ -692,7 +728,8 @@ const MyPageList768px = (props) => {
               transition={{
                 duration: 0.25,
                 ease: [0.43, 0.13, 0.23, 0.96],
-              }}>
+              }}
+            >
               <DepositButton768px
                 autoState={props?.item?.getAutoCompoundStatus}
                 lpBalanceValue={props.lpBalanceValue}
