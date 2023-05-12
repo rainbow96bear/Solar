@@ -1,37 +1,28 @@
-import * as React from "react";
 import { MyPageCompo1024px, MyPageCompo768px } from "../../ui-components";
 import styled from "styled-components";
 import "../../css/Font.css";
 import { motion } from "framer-motion";
-import { useMediaQuery } from "react-responsive";
-import { useAccount } from "wagmi";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const MypageComponent = ({
   myList,
   getAutoCompoundStatusFunc,
-  isOpen,
-  toggleOpen,
   autoCompoundStatus,
+  isDesktop,
+  isMobile,
+  mypageLpListUp,
+  lpTokenValue,
+  lpToken,
+  firstToken,
+  secondToken,
+  firstImgToken,
+  secondImgToken,
+  setLpTokenValue,
+  setLpToken,
+  setFirstToken,
+  setSecondToken,
+  setFirstImgToken,
+  setSecondImgToken,
 }) => {
-  const { account } = useAccount();
-  const account2 = useSelector((state) => state.account);
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!account && !account2) {
-      navigate("/redirectHome");
-    }
-  }, []);
-  const isDesktop = useMediaQuery({
-    query: "(min-width:769px)",
-  });
-
-  const isMobile = useMediaQuery({
-    query: "(max-width:768px)",
-  });
-
   return (
     <>
       <MypPage>
@@ -49,13 +40,26 @@ const MypageComponent = ({
             whileHover={{
               borderRadius: "55px",
               backgroundColor: "rgba(247,239,227,0.75)",
-            }}>
+            }}
+          >
             <MyPageCompo1024px
               myList={myList}
               getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
-              isOpen={isOpen}
-              toggleOpen={toggleOpen}
-              autoCompoundStatus={autoCompoundStatus}></MyPageCompo1024px>
+              autoCompoundStatus={autoCompoundStatus}
+              mypageLpListUp={mypageLpListUp}
+              lpTokenValue={lpTokenValue}
+              lpToken={lpToken}
+              firstToken={firstToken}
+              secondToken={secondToken}
+              firstImgToken={firstImgToken}
+              secondImgToken={secondImgToken}
+              setLpTokenValue={setLpTokenValue}
+              setLpToken={setLpToken}
+              setFirstToken={setFirstToken}
+              setSecondToken={setSecondToken}
+              setFirstImgToken={setFirstImgToken}
+              setSecondImgToken={setSecondImgToken}
+            ></MyPageCompo1024px>
           </motion.div>
         )}
 
@@ -74,13 +78,15 @@ const MypageComponent = ({
             whileHover={{
               borderRadius: "55px",
               backgroundColor: "rgba(247,239,227,0.75)",
-            }}>
+            }}
+          >
             <MyPageCompo768px
               myList={myList}
               getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
               isOpen={isOpen}
               toggleOpen={toggleOpen}
-              autoCompoundStatus={autoCompoundStatus}></MyPageCompo768px>
+              autoCompoundStatus={autoCompoundStatus}
+            ></MyPageCompo768px>
           </motion.div>
         )}
       </MypPage>

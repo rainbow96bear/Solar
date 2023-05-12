@@ -1,62 +1,86 @@
-import * as React from "react";
-import { useAccount } from "wagmi";
-import MypageComponent from "./Component";
-import { mypageList } from "../../api/index";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
+import { useAccount } from "wagmi";
+
+import MypageComponent from "./Component";
+import { mypageList } from "../../api/index";
 import { setIsLoading } from "../../modules/isLoading";
-import { useState } from "react";
-import { getAutoCompound } from "../../api/index";
 
 const MypageContainer = () => {
-  const [autoCompoundStatus, setAutoCompoundState] = React.useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const [autoCompoundStatus, setAutoCompoundState] = useState(false);
+  const [myList, setMyList] = useState([]);
+  const [lpTokenValue, setLpTokenValue] = useState();
+  const [lpToken, setLpToken] = useState();
+  const [firstToken, setFirstToken] = useState();
+  const [secondToken, setSecondToken] = useState();
+  const [firstImgToken, setFirstImgToken] = useState();
+  const [secondImgToken, setSecondImgToken] = useState();
+
+  const dispatch = useDispatch();
+  const params = useLocation().search.replace("?", "");
+  const { account } = useAccount();
+  const account2 = useSelector((state) => state.account);
+  const navigate = useNavigate();
 
   const getAutoCompoundStatusFunc = async () => {
     try {
-      const myLists = await mypageList(params);
-      setMyList(myLists);
+      setMyList(await mypageList(params));
       setAutoCompoundState(!autoCompoundStatus);
     } catch (error) {
       console.error(error);
     }
   };
-  const [myList, setMyList] = React.useState([]);
-  const dispatch = useDispatch();
-  const params = useLocation().search.replace("?", "");
-  const isLoadingTrue = () => {
-    dispatch(setIsLoading(true));
-  };
-
-  const isLoadingFalse = () => {
-    dispatch(setIsLoading(false));
-  };
 
   const mypageLpListUp = async () => {
     try {
-      const myLists = await mypageList(params);
-      setMyList(myLists);
+      setMyList(await mypageList(params));
     } catch (error) {
       console.error(error);
     }
   };
 
-  React.useEffect(() => {
+  const isDesktop = useMediaQuery({
+    query: "(min-width:769px)",
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(max-width:768px)",
+  });
+
+  useEffect(() => {
     (async () => {
-      isLoadingTrue();
+      dispatch(setIsLoading(true));
       await mypageLpListUp();
-      isLoadingFalse();
+      dispatch(setIsLoading(false));
     })();
+    if (!account && !account2) {
+      navigate("/redirectHome");
+    }
   }, []);
 
   return (
     <MypageComponent
       myList={myList}
       getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
-      isOpen={isOpen}
-      toggleOpen={toggleOpen}
-      autoCompoundStatus={autoCompoundStatus}></MypageComponent>
+      autoCompoundStatus={autoCompoundStatus}
+      isDesktop={isDesktop}
+      isMobile={isMobile}
+      mypageLpListUp={mypageLpListUp}
+      lpTokenValue={lpTokenValue}
+      lpToken={lpToken}
+      firstToken={firstToken}
+      secondToken={secondToken}
+      firstImgToken={firstImgToken}
+      secondImgToken={secondImgToken}
+      setLpTokenValue={setLpTokenValue}
+      setLpToken={setLpToken}
+      setFirstToken={setFirstToken}
+      setSecondToken={setSecondToken}
+      setFirstImgToken={setFirstImgToken}
+      setSecondImgToken={setSecondImgToken}
+    ></MypageComponent>
   );
 };
 
