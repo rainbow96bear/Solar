@@ -89,10 +89,6 @@ const MainContainer = () => {
     }, 10000);
   };
 
-  useEffect(() => {
-    oracleId();
-  }, []);
-
   const didMount = useRef(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -140,6 +136,7 @@ const MainContainer = () => {
   }, [filter]);
 
   useEffect(() => {
+    oracleId();
     setMainNetList(Object.keys(mainNet1024px1));
     setMainNetList1(Object.keys(mainNet768px2));
     setMainNetList2(Object.keys(mainNet768px1));
@@ -155,42 +152,26 @@ const MainContainer = () => {
   });
 
   const aesAPY = (a, b) => {
-    if (a.apy < b.apy) {
-      return -1;
-    }
-    if (a.apy > b.apy) {
-      return 1;
-    }
+    if (a.apy < b.apy) return -1;
+    if (a.apy > b.apy) return 1;
     return 0;
   };
 
   const descAPY = (a, b) => {
-    if (a.apy > b.apy) {
-      return -1;
-    }
-    if (a.apy < b.apy) {
-      return 1;
-    }
+    if (a.apy > b.apy) return -1;
+    if (a.apy < b.apy) return 1;
     return 0;
   };
 
   const aesTVL = (a, b) => {
-    if (a.tvl < b.tvl) {
-      return -1;
-    }
-    if (a.tvl > b.tvl) {
-      return 1;
-    }
+    if (a.tvl < b.tvl) return -1;
+    if (a.tvl > b.tvl) return 1;
     return 0;
   };
 
   const descTVL = (a, b) => {
-    if (a.tvl > b.tvl) {
-      return -1;
-    }
-    if (a.tvl < b.tvl) {
-      return 1;
-    }
+    if (a.tvl > b.tvl) return -1;
+    if (a.tvl < b.tvl) return 1;
     return 0;
   };
 

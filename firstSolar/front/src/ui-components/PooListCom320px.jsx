@@ -5,17 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Flex,
-  Image,
-  Text,
-  Pagination,
-  usePagination,
-  View,
-} from "@aws-amplify/ui-react";
+import { Flex, Text, Pagination, View } from "@aws-amplify/ui-react";
 import {
   Netlist320px,
   Dexlist320px,
@@ -24,7 +16,21 @@ import Poolitem320px from "../components/Pool/Poolitem320px";
 import { motion, LayoutGroup } from "framer-motion";
 
 export default function PooListCom320px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    mainNetList,
+    mainNetList1,
+    pageIndex,
+    filter,
+    currentPagePoolList,
+    setCurrentPagePoolList,
+    setTotalPages,
+    networkArray,
+    platformList,
+    platformList1,
+    paginationProps,
+    ...rest
+  } = props;
 
   return (
     <View
