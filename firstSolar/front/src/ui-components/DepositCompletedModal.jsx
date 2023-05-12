@@ -5,7 +5,8 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import { useEffect, useState } from "react";
+
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Text, View, Image } from "@aws-amplify/ui-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +17,7 @@ import logo1 from "./images/1.png";
 import logo2 from "./images/5.png";
 
 export default function DepositCompletedModal(props) {
-  const { overrides, ...rest } = props;
-
-  const dispatch = useDispatch();
-  const completeModal = useSelector(state => state.completeModal);
+  const { overrides, setDepositSuccessModalOpen, modalText, ...rest } = props;
 
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 0.94 });
@@ -29,15 +27,15 @@ export default function DepositCompletedModal(props) {
     gsap.to(currentTarget, { scale: 1 });
   };
 
-  const [timer, setTimer] = React.useState(6); // 초기 값: 5초
+  const [timer, setTimer] = useState(6); // 초기 값: 5초
   let intervalId;
-  React.useEffect(() => {
+  useEffect(() => {
     if (timer > 0) {
       intervalId = setInterval(() => {
         setTimer(timer - 1);
       }, 1000);
     } else {
-      props?.setDepositSuccessModalOpen(false);
+      setDepositSuccessModalOpen(false);
     }
 
     return () => {
@@ -45,7 +43,7 @@ export default function DepositCompletedModal(props) {
     };
   }, [timer]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.style = `overflow: hidden`;
     return () => (document.body.style = `overflow: auto`);
   }, []);
@@ -100,7 +98,7 @@ export default function DepositCompletedModal(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Deposit Completed"
+          children={`${modalText} Completed`}
           {...getOverrideProps(overrides, "Deposit Completed")}
         ></Text>
         <Text
@@ -230,7 +228,7 @@ export default function DepositCompletedModal(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Deposit"
+                children={modalText}
                 {...getOverrideProps(overrides, "Deposit")}
               ></Text>
             </Flex>
@@ -284,7 +282,7 @@ export default function DepositCompletedModal(props) {
         variation="primary"
         children="OK"
         onClick={() => {
-          props?.setDepositSuccessModalOpen(false);
+          setDepositSuccessModalOpen(false);
           clearInterval(intervalId);
         }}
         {...getOverrideProps(overrides, "Button")}

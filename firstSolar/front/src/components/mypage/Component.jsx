@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect } from "react";
 import { MyPageCompo1024px, MyPageCompo768px } from "../../ui-components";
 import styled from "styled-components";
 import "../../css/Font.css";
@@ -19,7 +19,7 @@ const MypageComponent = ({
   const account2 = useSelector((state) => state.account);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!account && !account2) {
       navigate("/redirectHome");
     }
@@ -49,13 +49,15 @@ const MypageComponent = ({
             whileHover={{
               borderRadius: "55px",
               backgroundColor: "rgba(247,239,227,0.75)",
-            }}>
+            }}
+          >
             <MyPageCompo1024px
               myList={myList}
               getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
               isOpen={isOpen}
               toggleOpen={toggleOpen}
-              autoCompoundStatus={autoCompoundStatus}></MyPageCompo1024px>
+              autoCompoundStatus={autoCompoundStatus}
+            ></MyPageCompo1024px>
           </motion.div>
         )}
 
@@ -74,13 +76,15 @@ const MypageComponent = ({
             whileHover={{
               borderRadius: "55px",
               backgroundColor: "rgba(247,239,227,0.75)",
-            }}>
+            }}
+          >
             <MyPageCompo768px
               myList={myList}
               getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
               isOpen={isOpen}
               toggleOpen={toggleOpen}
-              autoCompoundStatus={autoCompoundStatus}></MyPageCompo768px>
+              autoCompoundStatus={autoCompoundStatus}
+            ></MyPageCompo768px>
           </motion.div>
         )}
       </MypPage>

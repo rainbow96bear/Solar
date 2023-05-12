@@ -17,10 +17,10 @@ import logo1 from "./images/1.png";
 import logo2 from "./images/5.png";
 
 export default function DepositFaildModal(props) {
-  const { overrides, ...rest } = props;
+  const { overrides, setDepositFailModalOpen, modalText, ...rest } = props;
 
   const dispatch = useDispatch();
-  const completeModal = useSelector(state => state.completeModal);
+  const completeModal = useSelector((state) => state.completeModal);
 
   const onEnter = ({ currentTarget }) => {
     gsap.to(currentTarget, { scale: 0.94 });
@@ -38,7 +38,7 @@ export default function DepositFaildModal(props) {
         setTimer(timer - 1);
       }, 1000);
     } else {
-      props?.setDepositFailModalOpen(false);
+      setDepositFailModalOpen(false);
     }
 
     return () => {
@@ -101,7 +101,7 @@ export default function DepositFaildModal(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Deposit Faild"
+          children={`${modalText} Faild`}
           {...getOverrideProps(overrides, "Deposit Completed")}
         ></Text>
         <Text
@@ -231,7 +231,7 @@ export default function DepositFaildModal(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Deposit"
+                children={modalText}
                 {...getOverrideProps(overrides, "Deposit")}
               ></Text>
             </Flex>
@@ -285,7 +285,7 @@ export default function DepositFaildModal(props) {
         variation="primary"
         children="OK"
         onClick={() => {
-          props?.setDepositFailModalOpen(false);
+          setDepositFailModalOpen(false);
           clearInterval(intervalId);
         }}
         {...getOverrideProps(overrides, "Button")}
