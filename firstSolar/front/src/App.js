@@ -35,7 +35,7 @@ import SearchNavigatorContainer from "./components/navigateSearch/Container";
 import FooterContainer from "./components/footer/Container";
 
 const chains = [arbitrum, mainnet, polygon];
-const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
+const projectId = process.env.REACT_APP_PROJECT_ID;
 
 const explorerExcludedWalletIds = "ALL";
 const { provider } = configureChains(chains, [

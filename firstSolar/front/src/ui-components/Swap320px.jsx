@@ -16,323 +16,43 @@ import {
 } from "@aws-amplify/ui-react";
 import QuestionModalTop320px from "./QuestionModalTop320px";
 import QuestionModalBottom320px from "./QuestionModalBottom320px";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getConvertPrice,
-  swapApprove,
-  swapBalance,
-  swapTransaction,
-} from "../api";
-import { useAccount } from "wagmi";
-import { useWeb3 } from "../modules/useWeb3.js";
-
-import { setIsLoading } from "../modules/isLoading.js";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import SwapSuccessModal from "./SwapSuccessModal";
 import "../css/Font.css";
-import SwapFailModal from "./SwapFailModal";
 import SwapCompletedModal from "./SwapCompletedModal";
 import SwapFaildModal from "./SwapFaildModal";
-import { useWeb3T } from "../modules/useWeb3Trust";
-import { useWeb3C } from "../modules/useWeb3Coinbase";
-import { useNavigate } from "react-router";
+import LoadingCompo from "./LoadingCompo";
 
 export default function Swap320px(props) {
-  const { overrides, ...rest } = props;
-
-  const navigate = useNavigate();
-
-  const { web3, account, chainId, login } = useWeb3();
-  const { web3T, accountT, chainIdT, loginT } = useWeb3T();
-  const { web3C, accounCC, chainIdC, loginC } = useWeb3C();
-
-  const { address } = useAccount();
-  const address2 = useSelector((state) => state.account);
-  const [userFirstBalance, setUserFirstBalance] = React.useState(0);
-  const [userSecondBalance, setUserSecondBalance] = React.useState(0);
-  const dispatch = useDispatch();
-  const [textareaValue, setTextAreaValue] = React.useState("");
-  const [swapPossibility, setSwapPossibility] = React.useState(false);
-  const [rightPool, setRightPool] = React.useState(false);
-  const [questionMark, setQuestionMark] = React.useState(0);
-
-  const [swapSuccessModalOpen, setSwapSuccessModalOpen] = React.useState(false);
-  const [swapFailModalOpen, setSwapFailModalOpen] = React.useState(false);
-
-  const [convertPrice, setConvertPrice] = React.useState({
-    bnb: "",
-    eth: "",
-    usdt: "",
-  });
-
-  const [firstAmountPrice, setFirstAmountPrice] = React.useState(0);
-  const [secondAmountPrice, setSecondAmountPrice] = React.useState(0);
-
-  const [firstSelectToken, setFirstSelectToken] = React.useState("DFS");
-  const [firstSelectTokenPrice, setFirstSelectTokenPrice] = React.useState(0);
-
-  const [secondSelectToken, setSecondSelectToken] = React.useState("ETH");
-  const [secondSelectTokenPrice, setSecondSelectTokenPrice] =
-    React.useState("");
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        dispatch(setIsLoading(true));
-        const { bnb, eth, usdt, tokenPrice } = await getConvertPrice(
-          firstSelectToken
-        );
-        setConvertPrice({ bnb: bnb, eth: eth, usdt: usdt });
-        setFirstSelectTokenPrice(tokenPrice);
-        setTextAreaValue(0);
-        setFirstAmountPrice(0);
-        setSecondAmountPrice(0);
-
-        setTimeout(() => {
-          dispatch(setIsLoading(false));
-        }, 2000);
-      } catch (error) {
-        console.error(error);
-        dispatch(setIsLoading(false));
-      }
-    })();
-  }, [firstSelectToken]);
-
-  React.useEffect(() => {
-    if (firstSelectToken == "DFS") {
-      setSecondSelectToken("ETH");
-    } else if (firstSelectToken != "DFS") {
-      setSecondSelectToken("DFS");
-    }
-  }, [firstSelectToken]);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const data = await swapBalance(
-          address ? address : address2,
-          firstSelectToken
-        );
-        setUserFirstBalance(data);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, [firstSelectToken]);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const data = await swapBalance(
-          address ? address : address2,
-          secondSelectToken
-        );
-        setUserSecondBalance(data);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, [secondSelectToken]);
-
-  React.useEffect(() => {
-    if (
-      textareaValue == 0 ||
-      textareaValue == undefined ||
-      textareaValue == null ||
-      textareaValue > userFirstBalance ||
-      !props?.oracleiddata[0]?.name.includes(firstSelectToken) ||
-      !props?.oracleiddata[0]?.name.includes(secondSelectToken)
-    ) {
-      setSwapPossibility(false);
-    } else {
-      setSwapPossibility(true);
-    }
-  }, [firstSelectToken, secondSelectToken, textareaValue]);
-
-  React.useEffect(() => {
-    if (
-      !props?.oracleiddata[0]?.name.includes(firstSelectToken) ||
-      !props?.oracleiddata[0]?.name.includes(secondSelectToken)
-    ) {
-      setRightPool(false);
-    } else setRightPool(true);
-  }, [firstSelectToken, secondSelectToken]);
-
-  React.useEffect(() => {
-    if (document.cookie) {
-      if (document.cookie.split(":")[0] == "metamask") {
-        login();
-      } else if (document.cookie.split(":")[0] == "trust") {
-        loginT();
-      } else if (document.cookie.split(":")[0] == "coinbase") {
-        loginC();
-      }
-    } else navigate("/redirectHome");
-  }, []);
-
-  const allowedKeys = [
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9", // 0-9
-    "Numpad0",
-    "Numpad1",
-    "Numpad2",
-    "Numpad3",
-    "Numpad4",
-    "Numpad5",
-    "Numpad6",
-    "Numpad7",
-    "Numpad8",
-    "Numpad9", // 키보드 상단의 0-9
-    ".", // 소수점
-    "Backspace", // 백스페이스
-  ];
-
-  const handleKeyPress = (e) => {
-    const keyCode = e.key;
-    if (!allowedKeys.includes(keyCode)) {
-      e.preventDefault();
-    }
-  };
-
-  const setPercentBalance = (percentNum) => {
-    if (
-      userFirstBalance == 0 &&
-      userFirstBalance == undefined &&
-      userFirstBalance == null
-    )
-      return;
-    setTextAreaValue(userFirstBalance * percentNum);
-    delayedFunction1(userFirstBalance * percentNum);
-  };
-
-  const handleTextareaChange = (event) => {
-    const value = event.target.value;
-
-    const filteredValue = value.replace(/[^0-9.\b]/g, "");
-
-    if (
-      filteredValue.length > 1 &&
-      filteredValue.startsWith("0") &&
-      !filteredValue.startsWith("0.")
-    ) {
-      setTextAreaValue(filteredValue.slice(1));
-    } else {
-      const dotIndex = filteredValue.indexOf(".");
-      const lastDotIndex = filteredValue.lastIndexOf(".");
-      if (dotIndex !== -1 && dotIndex !== lastDotIndex) {
-        const newValue =
-          filteredValue.substring(0, dotIndex) +
-          filteredValue.substring(dotIndex + 1);
-        setTextAreaValue(newValue);
-      } else {
-        setTextAreaValue(filteredValue);
-      }
-    }
-  };
-  let timerId = null;
-
-  function delayedFunction1(num) {
-    if (timerId) {
-      clearTimeout(timerId);
-    }
-
-    timerId = setTimeout(() => {
-      try {
-        setFirstAmountPrice(num * firstSelectTokenPrice);
-        delayedFunction2(num);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        timerId = null;
-      }
-    }, 1000);
-  }
-
-  const delayedFunction2 = (num) => {
-    try {
-      if (secondSelectToken == "DFS") {
-        setSecondAmountPrice(convertPrice.usdt * num);
-      } else if (secondSelectToken == "ETH") {
-        setSecondAmountPrice(convertPrice.eth * num);
-      } else if (secondSelectToken == "BNB") {
-        setSecondAmountPrice(convertPrice.bnb * num);
-      } else if (secondSelectToken == "USDT") {
-        setSecondAmountPrice(convertPrice.usdt * num);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const swapMethod = async () => {
-    try {
-      dispatch(setIsLoading(true));
-
-      const result1 = (
-        await swapApprove(
-          address ? address : address2,
-          firstSelectToken.toLowerCase(),
-          textareaValue,
-          props?.oracleiddata[0].tokenAddress
-        )
-      ).data;
-
-      let transactionResult;
-      if (document.cookie.split(":")[0] == "metamask") {
-        transactionResult = await web3.eth.sendTransaction(result1);
-      } else if (document.cookie.split(":")[0] == "trust") {
-        transactionResult = await web3T.eth.sendTransaction(result1);
-      } else if (document.cookie.split(":")[0] == "coinbase") {
-        transactionResult = await web3C.eth.sendTransaction(result1);
-      }
-
-      const result2 = (
-        await swapTransaction(
-          address ? address : address2,
-          props?.oracleiddata[0].oracleId,
-          +textareaValue,
-          firstSelectToken.toLowerCase(),
-          secondSelectToken.toLowerCase()
-        )
-      ).data;
-
-      if (document.cookie.split(":")[0] == "metamask") {
-        transactionResult = await web3.eth.sendTransaction(result2);
-      } else if (document.cookie.split(":")[0] == "trust") {
-        transactionResult = await web3T.eth.sendTransaction(result2);
-      } else if (document.cookie.split(":")[0] == "coinbase") {
-        transactionResult = await web3C.eth.sendTransaction(result2);
-      }
-
-      const firstBalanceTemp = await swapBalance(
-        address ? address : address2,
-        firstSelectToken
-      );
-      setUserFirstBalance(firstBalanceTemp);
-
-      const secondBalanceTemp = await swapBalance(
-        address ? address : address2,
-        secondSelectToken
-      );
-      setUserSecondBalance(secondBalanceTemp);
-      setTextAreaValue("");
-      dispatch(setIsLoading(false));
-
-      setSwapSuccessModalOpen(true);
-    } catch (error) {
-      console.error(error);
-      dispatch(setIsLoading(false));
-      setSwapFailModalOpen(true);
-    }
-  };
+  const {
+    overrides,
+    oracleiddata,
+    balance,
+    userFirstBalance,
+    userSecondBalance,
+    firstSelectToken,
+    secondSelectToken,
+    firstAmountPrice,
+    secondAmountPrice,
+    questionMark,
+    setQuestionMark,
+    textareaValue,
+    setTextAreaValue,
+    handleTextareaChange,
+    handleKeyPress,
+    delayedFunction1,
+    delayedFunction2,
+    setPercentBalance,
+    swapPossibility,
+    swapMethod,
+    swapSuccessModalOpen,
+    setSwapSuccessModalOpen,
+    swapFailModalOpen,
+    setSwapFailModalOpen,
+    rightPool,
+    ...rest
+  } = props;
+  const isLoading = useSelector((state) => state.isLoading);
 
   return (
     <>
@@ -477,11 +197,11 @@ export default function Swap320px(props) {
                 borderRadius="15px"
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
-                src={props?.oracleiddata[0]?.mainNetLogo}
+                src={oracleiddata[0]?.mainNetLogo}
                 {...getOverrideProps(overrides, "ghrgclzzd 4")}
               ></Image>
               <Image
-                src={props?.oracleiddata[0]?.platformLogo}
+                src={oracleiddata[0]?.platformLogo}
                 width="20.83px"
                 height="25px"
                 display="block"
@@ -653,7 +373,7 @@ export default function Swap320px(props) {
                     {...getOverrideProps(overrides, "Frame 6939942750")}
                   >
                     <Image
-                      src={props?.oracleiddata[0]?.mainNetLogo}
+                      src={oracleiddata[0]?.mainNetLogo}
                       width="25px"
                       height="25px"
                       display="block"
@@ -1087,7 +807,7 @@ export default function Swap320px(props) {
                     {...getOverrideProps(overrides, "Frame 6939942778")}
                   >
                     <Image
-                      src={props?.oracleiddata[0]?.platformLogo}
+                      src={oracleiddata[0]?.platformLogo}
                       width="25px"
                       height="25px"
                       display="block"
@@ -1268,7 +988,9 @@ export default function Swap320px(props) {
               swapPossibility ? "rgba(234,0,50,0.45)" : "rgba(230,230,230,1)"
             }
             disabled={!swapPossibility}
-            style={{ cursor: swapPossibility ? "pointer" : "not-allowed" }}
+            style={{
+              cursor: swapPossibility ? "pointer" : "not-allowed",
+            }}
             onClick={async () => {
               if (!swapPossibility) return;
               await swapMethod();
@@ -1329,6 +1051,11 @@ export default function Swap320px(props) {
               firstSelectToken={firstSelectToken}
               secondSelectToken={secondSelectToken}
             />
+          </LoadingModal>
+        )}
+        {isLoading && (
+          <LoadingModal>
+            <LoadingCompo />
           </LoadingModal>
         )}
       </Flex>

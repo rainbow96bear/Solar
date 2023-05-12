@@ -14,23 +14,16 @@ import { useDispatch } from "react-redux";
 import { setIsLoading } from "../modules/isLoading";
 
 export default function AddLiquidityTop320px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    oracleiddata,
+    balance,
+    lastTimeStamp,
+    tokenNumber,
+    reducedNumber,
+    ...rest
+  } = props;
 
-  const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
-  const date = new Date(lastTimeStamp * 1000);
-  const dateString = date.toLocaleDateString();
-
-  const dispatch = useDispatch();
-  const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
-  const reducedNumber = tokenNumBer?.toString().substring(0, 7);
-
-  React.useEffect(() => {
-    dispatch(setIsLoading(true));
-
-    setTimeout(() => {
-      dispatch(setIsLoading(false));
-    }, 1500);
-  }, []);
   return (
     <>
       <Flex
@@ -126,8 +119,8 @@ export default function AddLiquidityTop320px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.firstToken
-                  ? props?.oracleiddata[0]?.firstToken
+                oracleiddata[0]?.firstToken
+                  ? oracleiddata[0]?.firstToken
                   : "DFS"
               }
               {...getOverrideProps(overrides, "TokenName40162904")}
@@ -184,8 +177,8 @@ export default function AddLiquidityTop320px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.secondToken
-                  ? props?.oracleiddata[0]?.secondToken
+                oracleiddata[0]?.secondToken
+                  ? oracleiddata[0]?.secondToken
                   : "DFS"
               }
               {...getOverrideProps(overrides, "TokenName40162908")}
@@ -228,9 +221,9 @@ export default function AddLiquidityTop320px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.apy
+                oracleiddata[0]?.apy
                   ? `APY :  ${
-                      Math.round(props?.oracleiddata[0]?.apy * 10000) / 10000
+                      Math.round(oracleiddata[0]?.apy * 10000) / 10000
                     } %`
                   : "APY :  0%"
               }
@@ -314,8 +307,8 @@ export default function AddLiquidityTop320px(props) {
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
                 src={
-                  props?.oracleiddata[0]?.mainNetLogo
-                    ? props?.oracleiddata[0]?.mainNetLogo
+                  oracleiddata[0]?.mainNetLogo
+                    ? oracleiddata[0]?.mainNetLogo
                     : logo
                 }
                 {...getOverrideProps(overrides, "ghrgclzzd 940162854")}
@@ -338,8 +331,8 @@ export default function AddLiquidityTop320px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.firstToken
-                    ? props?.oracleiddata[0]?.firstToken
+                  oracleiddata[0]?.firstToken
+                    ? oracleiddata[0]?.firstToken
                     : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40162855")}
@@ -405,8 +398,8 @@ export default function AddLiquidityTop320px(props) {
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
                 src={
-                  props?.oracleiddata[0]?.platformLogo
-                    ? props?.oracleiddata[0]?.platformLogo
+                  oracleiddata[0]?.platformLogo
+                    ? oracleiddata[0]?.platformLogo
                     : logo
                 }
                 {...getOverrideProps(overrides, "ghrgclzzd 940162883")}
@@ -429,8 +422,8 @@ export default function AddLiquidityTop320px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.secondToken
-                    ? props?.oracleiddata[0]?.secondToken
+                  oracleiddata[0]?.secondToken
+                    ? oracleiddata[0]?.secondToken
                     : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40162884")}
@@ -537,8 +530,8 @@ export default function AddLiquidityTop320px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.tvl
-                    ? `${props?.oracleiddata[0]?.tvl.slice(0, 10) / 100} `
+                  oracleiddata[0]?.tvl
+                    ? `${oracleiddata[0]?.tvl.slice(0, 10) / 100} `
                     : 0
                 }
                 {...getOverrideProps(overrides, "16.82%")}
@@ -623,11 +616,10 @@ export default function AddLiquidityTop320px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.dailyTvlRate
+                  oracleiddata[0]?.dailyTvlRate
                     ? `${
-                        Math.round(
-                          props?.oracleiddata[0]?.dailyTvlRate * 10000
-                        ) / 10000
+                        Math.round(oracleiddata[0]?.dailyTvlRate * 10000) /
+                        10000
                       } %`
                     : 0
                 }
@@ -713,9 +705,7 @@ export default function AddLiquidityTop320px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.lastHarvest
-                    ? dateString
-                    : "불러오는 중"
+                  oracleiddata[0]?.lastHarvest ? dateString : "불러오는 중"
                 }
                 {...getOverrideProps(overrides, "262.40%")}
               ></Text>
@@ -798,11 +788,7 @@ export default function AddLiquidityTop320px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.fee
-                    ? `${props?.oracleiddata[0]?.fee}%`
-                    : 0
-                }
+                children={oracleiddata[0]?.fee ? `${oracleiddata[0]?.fee}%` : 0}
                 {...getOverrideProps(overrides, "262.40%")}
               ></Text>
             </Flex>

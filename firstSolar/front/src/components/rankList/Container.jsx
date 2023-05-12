@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 import RankListComponent from "./Component";
 import { rankList } from "../../api/index";
-import { useEffect, useState } from "react";
 
 let interval;
 const RankListCContainer = () => {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const oracleId = async () => {
     try {
+      setIsLoading(true);
       const oracleId = await rankList();
       setItems(oracleId);
+      setIsLoading(false);
       intervalFunc();
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -30,7 +34,9 @@ const RankListCContainer = () => {
     oracleId();
   }, []);
 
-  return <RankListComponent items={items}></RankListComponent>;
+  return (
+    <RankListComponent items={items} isLoading={isLoading}></RankListComponent>
+  );
 };
 
 export default RankListCContainer;
