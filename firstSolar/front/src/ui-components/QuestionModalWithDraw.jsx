@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, Icon, TextAreaField } from "@aws-amplify/ui-react";
@@ -26,7 +26,7 @@ import "../css/Modal.css";
 
 export default function QuestionModalWithDraw(props) {
   const { overrides, setquestionmark, ...rest } = props;
-
+  const [modalText, setModalText] = useState();
   const dispatch = useDispatch();
   const account2 = useSelector((state) => state.account);
   const { web3, login } = useWeb3();
@@ -34,16 +34,15 @@ export default function QuestionModalWithDraw(props) {
   const { web3C, loginC } = useWeb3C();
 
   const { account } = useAccount();
-  const [lpBalance, setLpBalance] = React.useState();
-  const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
-  const [questionMark, setQuestionMark] = React.useState(0);
+  const [lpBalance, setLpBalance] = useState();
+  const [withDrawAmountValue, setWithDrawAmountValue] = useState(0);
+  const [questionMark, setQuestionMark] = useState(0);
 
   const [withDrawSuccessModalOpen, setWithDrawSuccessModalOpen] =
-    React.useState(false);
-  const [withDrawFailModalOpen, setWithDrawFailModalOpen] =
-    React.useState(false);
+    useState(false);
+  const [withDrawFailModalOpen, setWithDrawFailModalOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
@@ -55,7 +54,7 @@ export default function QuestionModalWithDraw(props) {
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       try {
         const result = await getLPBalance(
@@ -73,7 +72,7 @@ export default function QuestionModalWithDraw(props) {
   const withDrawFunc = async () => {
     try {
       dispatch(setIsLoading(true));
-
+      setModalText("With Draw");
       const result2 = await withDraw(
         account2 ? account2 : account,
         withDrawAmountValue,
@@ -105,7 +104,7 @@ export default function QuestionModalWithDraw(props) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.style = `overflow: hidden`;
     return () => (document.body.style = `overflow: auto`);
   }, []);
@@ -708,6 +707,7 @@ export default function QuestionModalWithDraw(props) {
         <LoadingModal>
           <DepositCompletedModal
             setDepositSuccessModalOpen={setWithDrawSuccessModalOpen}
+            modalText={modalText}
           ></DepositCompletedModal>
         </LoadingModal>
       )}
@@ -715,6 +715,7 @@ export default function QuestionModalWithDraw(props) {
         <LoadingModal>
           <DepositFaildModal
             setDepositFailModalOpen={setWithDrawFailModalOpen}
+            modalText={modalText}
           ></DepositFaildModal>
         </LoadingModal>
       )}
