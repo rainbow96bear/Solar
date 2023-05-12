@@ -1,8 +1,16 @@
-import styled from "styled-components";
-import { Foot1024px, Foot768px, Foot320px } from "../../ui-components";
+import { Foot1024px, Foot768px } from "../../ui-components";
 import { Flex } from "@aws-amplify/ui-react";
+import { useMediaQuery } from "react-responsive";
 
 const FooterComponent = () => {
+  const isDesktop = useMediaQuery({
+    query: "(min-width:1545px) and (max-width:3080px)",
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(min-width:481px) and (max-width:1544px)",
+  });
+
   return (
     <Flex
       display={{ small: "none", medium: "flex" }}
@@ -19,22 +27,9 @@ const FooterComponent = () => {
         paddingLeft: "15px",
       }}
     >
-      <Foot1024px />
-      <Foot768px />
+      {isDesktop && <Foot1024px />}
+      {isTablet && <Foot768px />}
     </Flex>
   );
 };
 export default FooterComponent;
-
-const FooterCompo = styled.div`
-  background-color: #f8f8f8;
-  text-align: center;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-  padding-bottom: 100px;
-  padding-top: 55px;
-  padding-left: 15px;
-`;

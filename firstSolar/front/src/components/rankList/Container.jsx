@@ -1,11 +1,9 @@
 import RankListComponent from "./Component";
 import { rankList } from "../../api/index";
-import { useDispatch } from "react-redux";
 
 let interval;
 const RankListCContainer = () => {
   const [items, setItems] = useState([]);
-  const dispatch = useDispatch();
   const oracleId = async () => {
     try {
       const oracleId = await rankList();

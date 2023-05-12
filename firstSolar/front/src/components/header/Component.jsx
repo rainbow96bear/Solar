@@ -4,15 +4,25 @@ import {
   BeforeHeadCom320px,
   BeforeHeadCom768px,
 } from "../../ui-components";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useMediaQuery } from "react-responsive";
 const HeaderComponent = () => {
+  const isDesktop = useMediaQuery({
+    query: "(min-width:992px)",
+  });
+
+  const isTablet = useMediaQuery({
+    query: "(min-width:481px) and (max-width:991px)",
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(min-width:0px) and (max-width:480px)",
+  });
+
   return (
     <Header>
-      <BeforeHeadCom1024px></BeforeHeadCom1024px>
-      <BeforeHeadCom768px></BeforeHeadCom768px>
-      <BeforeHeadCom320px></BeforeHeadCom320px>
+      {isDesktop && <BeforeHeadCom1024px />}
+      {isTablet && <BeforeHeadCom768px />}
+      {isMobile && <BeforeHeadCom320px />}
     </Header>
   );
 };

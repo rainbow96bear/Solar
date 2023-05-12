@@ -8,7 +8,7 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
-import { useMediaQuery } from "react-responsive";
+
 import logo1 from "./images/1.png";
 import logo2 from "./images/2.png";
 import logo3 from "./images/3.png";
@@ -30,43 +30,102 @@ export default function Foot1024px(props) {
     gsap.to(currentTarget, { scale: 1 });
   };
 
-  const isDesktop = useMediaQuery({
-    query: "(min-width:1545px) and (max-width:3080px)",
-  });
-
   return (
-    <>
-      {isDesktop ? (
-        <motion.div
-          style={{
-            width: "89vw",
-            height: "unset",
-            backgroundColor: "rgba(246,247,248,0.8)",
-            boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
-            borderRadius: "27px",
-            backgroundImage:
-              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
-          }}
-          whileHover={{
-            borderRadius: "55px",
-            backgroundColor: "rgba(0,056,071,0.75)",
-          }}
+    <motion.div
+      style={{
+        width: "89vw",
+        height: "unset",
+        backgroundColor: "rgba(246,247,248,0.8)",
+        boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
+        borderRadius: "27px",
+        backgroundImage:
+          "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+      }}
+      whileHover={{
+        borderRadius: "55px",
+        backgroundColor: "rgba(0,056,071,0.75)",
+      }}
+    >
+      <Flex
+        gap="35px"
+        direction="row"
+        width="89vw"
+        height="unset"
+        justifyContent="flex-start"
+        alignItems="center"
+        position="relative"
+        borderRadius="35px"
+        padding="45px 35px 45px 35px"
+        {...getOverrideProps(overrides, "Foot1024px")}
+        {...rest}
+      >
+        <Flex
+          gap="23px"
+          direction="column"
+          width="unset"
+          height="unset"
+          justifyContent="center"
+          alignItems="center"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 31")}
         >
           <Flex
-            gap="35px"
-            direction="row"
-            width="89vw"
+            gap="10px"
+            direction="column"
+            width="unset"
             height="unset"
-            justifyContent="flex-start"
+            justifyContent="center"
             alignItems="center"
+            shrink="0"
             position="relative"
-            borderRadius="35px"
-            padding="45px 35px 45px 35px"
-            {...getOverrideProps(overrides, "Foot1024px")}
-            {...rest}
+            padding="10px 10px 10px 10px"
+            onClick={() =>
+              window.open("http://www.solardesign.co.kr/", "_blank")
+            }
+            {...getOverrideProps(overrides, "Frame 30")}
+          >
+            <Image
+              onMouseEnter={onEnter}
+              onMouseLeave={onLeave}
+              style={{ cursor: "pointer" }}
+              src={solarLogo}
+              width="140px"
+              height="140px"
+              display="flex"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              shrink="0"
+              position="relative"
+              border="10px SOLID rgba(255,226,0,0.35)"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="70px"
+              padding="0px 0px 0px 0px"
+              objectFit="cover"
+              {...getOverrideProps(overrides, "ghrgclzzd 2")}
+            ></Image>
+          </Flex>
+          <Flex
+            gap="6px"
+            direction="column"
+            width="unset"
+            height="113px"
+            justifyContent="center"
+            alignItems="center"
+            shrink="0"
+            alignSelf="stretch"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            onClick={() =>
+              window.open("http://www.solardesign.co.kr/", "_blank")
+            }
+            {...getOverrideProps(overrides, "Frame 47")}
           >
             <Flex
-              gap="23px"
+              gap="1px"
               direction="column"
               width="unset"
               height="unset"
@@ -76,1582 +135,1477 @@ export default function Foot1024px(props) {
               alignSelf="stretch"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 31")}
+              {...getOverrideProps(overrides, "Frame 28")}
             >
-              <Flex
-                gap="10px"
+              <Text
+                fontFamily="ffProExtraLight"
+                fontSize="18px"
+                fontWeight="700"
+                lineHeight="27px"
+                textAlign="center"
+                display="flex"
                 direction="column"
+                justifyContent="unset"
                 width="unset"
                 height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                position="relative"
-                padding="10px 10px 10px 10px"
-                onClick={() =>
-                  window.open("http://www.solardesign.co.kr/", "_blank")
-                }
-                {...getOverrideProps(overrides, "Frame 30")}
-              >
-                <Image
-                  onMouseEnter={onEnter}
-                  onMouseLeave={onLeave}
-                  style={{ cursor: "pointer" }}
-                  src={solarLogo}
-                  width="140px"
-                  height="140px"
-                  display="flex"
-                  gap="unset"
-                  alignItems="unset"
-                  justifyContent="unset"
-                  shrink="0"
-                  position="relative"
-                  border="10px SOLID rgba(255,226,0,0.35)"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="70px"
-                  padding="0px 0px 0px 0px"
-                  objectFit="cover"
-                  {...getOverrideProps(overrides, "ghrgclzzd 2")}
-                ></Image>
-              </Flex>
-              <Flex
-                gap="6px"
-                direction="column"
-                width="unset"
-                height="113px"
-                justifyContent="center"
-                alignItems="center"
+                gap="unset"
+                alignItems="unset"
                 shrink="0"
                 alignSelf="stretch"
                 position="relative"
                 padding="0px 0px 0px 0px"
-                onClick={() =>
-                  window.open("http://www.solardesign.co.kr/", "_blank")
-                }
-                {...getOverrideProps(overrides, "Frame 47")}
-              >
-                <Flex
-                  gap="1px"
-                  direction="column"
-                  width="unset"
-                  height="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  {...getOverrideProps(overrides, "Frame 28")}
-                >
-                  <Text
-                    fontFamily="ffProExtraLight"
-                    fontSize="18px"
-                    fontWeight="700"
-                    lineHeight="27px"
-                    textAlign="center"
-                    display="flex"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="unset"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="Solar Project Team"
-                    {...getOverrideProps(overrides, "Solar Project Team")}
-                  ></Text>
-                  <Text
-                    fontFamily="ffProExtraLight"
-                    fontSize="11px"
-                    fontWeight="700"
-                    lineHeight="16.5px"
-                    textAlign="center"
-                    display="flex"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="unset"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="23.04.01 ~ 23.05.22"
-                    {...getOverrideProps(overrides, "23.04.11 ~ 23.05.23")}
-                  ></Text>
-                </Flex>
-                <Flex
-                  onMouseEnter={onEnter}
-                  onMouseLeave={onLeave}
-                  style={{ cursor: "pointer" }}
-                  gap="6px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  position="relative"
-                  boxShadow="-3px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="25px"
-                  padding="6px 9px 6px 9px"
-                  backgroundColor="rgba(234,0,50,0.45)"
-                  {...getOverrideProps(overrides, "Frame 27")}
-                >
-                  <Image
-                    src={solarLogo}
-                    width="23px"
-                    height="23px"
-                    display="flex"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="23px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 341052697")}
-                  ></Image>
-                  <Text
-                    fontFamily="ffProExtraLight"
-                    fontSize="10px"
-                    fontWeight="700"
-                    lineHeight="15px"
-                    textAlign="left"
-                    display="flex"
-                    direction="column"
-                    justifyContent="unset"
-                    width="unset"
-                    height="unset"
-                    gap="unset"
-                    alignItems="unset"
-                    shrink="0"
-                    position="relative"
-                    padding="0px 0px 0px 0px"
-                    whiteSpace="pre-wrap"
-                    children="@SolarDesign"
-                    color="rgba(251,250,250,0.91)"
-                    {...getOverrideProps(overrides, "@SolarDesign")}
-                  ></Text>
-                </Flex>
-              </Flex>
+                whiteSpace="pre-wrap"
+                children="Solar Project Team"
+                {...getOverrideProps(overrides, "Solar Project Team")}
+              ></Text>
+              <Text
+                fontFamily="ffProExtraLight"
+                fontSize="11px"
+                fontWeight="700"
+                lineHeight="16.5px"
+                textAlign="center"
+                display="flex"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="unset"
+                gap="unset"
+                alignItems="unset"
+                shrink="0"
+                alignSelf="stretch"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="23.04.01 ~ 23.05.22"
+                {...getOverrideProps(overrides, "23.04.11 ~ 23.05.23")}
+              ></Text>
             </Flex>
             <Flex
-              gap="40px"
+              onMouseEnter={onEnter}
+              onMouseLeave={onLeave}
+              style={{ cursor: "pointer" }}
+              gap="6px"
               direction="row"
               width="unset"
               height="unset"
               justifyContent="center"
               alignItems="center"
-              grow="1"
-              shrink="1"
-              basis="0"
               position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 19741063213")}
+              boxShadow="-3px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="25px"
+              padding="6px 9px 6px 9px"
+              backgroundColor="rgba(234,0,50,0.45)"
+              {...getOverrideProps(overrides, "Frame 27")}
             >
+              <Image
+                src={solarLogo}
+                width="23px"
+                height="23px"
+                display="flex"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                shrink="0"
+                position="relative"
+                borderRadius="23px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "ghrgclzzd 341052697")}
+              ></Image>
+              <Text
+                fontFamily="ffProExtraLight"
+                fontSize="10px"
+                fontWeight="700"
+                lineHeight="15px"
+                textAlign="left"
+                display="flex"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="unset"
+                gap="unset"
+                alignItems="unset"
+                shrink="0"
+                position="relative"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="@SolarDesign"
+                color="rgba(251,250,250,0.91)"
+                {...getOverrideProps(overrides, "@SolarDesign")}
+              ></Text>
+            </Flex>
+          </Flex>
+        </Flex>
+        <Flex
+          gap="40px"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="center"
+          alignItems="center"
+          grow="1"
+          shrink="1"
+          basis="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 19741063213")}
+        >
+          <Flex
+            gap="38px"
+            direction="column"
+            width="unset"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 195")}
+          >
+            <Flex
+              gap="0"
+              direction="column"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              overflow="hidden"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="25px"
+              padding="0px 0px 0px 0px"
+              backgroundColor="rgb(255,255,255)"
+              {...getOverrideProps(overrides, "Frame 15541063215")}
+            >
+              <Image
+                onClick={(e) => {
+                  e.preventDefault;
+                  window.open("https://github.com/HGWA333/", "_blank");
+                }}
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
+                style={{ cursor: "pointer" }}
+                src={logo1}
+                width="unset"
+                height="296px"
+                display="flex"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="25px 25px 0px 0px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "nft (1) 341063216")}
+              ></Image>
               <Flex
-                gap="38px"
+                gap="10px"
                 direction="column"
                 width="unset"
                 height="unset"
                 justifyContent="flex-start"
                 alignItems="flex-start"
-                grow="1"
-                shrink="1"
-                basis="0"
+                overflow="hidden"
+                shrink="0"
+                alignSelf="stretch"
                 position="relative"
-                padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 195")}
+                borderRadius="0px 0px 15px 15px"
+                padding="9px 11px 13px 11px"
+                backgroundColor="rgba(252,252,252,1)"
+                {...getOverrideProps(overrides, "Frame 11641063217")}
               >
                 <Flex
-                  gap="0"
+                  gap="8px"
                   direction="column"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
+                  justifyContent="center"
                   alignItems="flex-start"
-                  overflow="hidden"
                   shrink="0"
                   alignSelf="stretch"
                   position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="25px"
-                  padding="0px 0px 0px 0px"
-                  backgroundColor="rgb(255,255,255)"
-                  {...getOverrideProps(overrides, "Frame 15541063215")}
+                  padding="0px 12px 0px 0px"
+                  {...getOverrideProps(overrides, "Frame 11541063218")}
                 >
-                  <Image
-                    onClick={e => {
-                      e.preventDefault;
-                      window.open("https://github.com/HGWA333/", "_blank");
-                    }}
-                    onMouseEnter={onEnter}
-                    onMouseLeave={onLeave}
-                    style={{ cursor: "pointer" }}
-                    src={logo1}
-                    width="unset"
-                    height="296px"
-                    display="flex"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    grow="1"
-                    shrink="1"
-                    basis="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    borderRadius="25px 25px 0px 0px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "nft (1) 341063216")}
-                  ></Image>
                   <Flex
-                    gap="10px"
-                    direction="column"
-                    width="unset"
+                    gap="6px"
+                    direction="row"
+                    width="297px"
                     height="unset"
                     justifyContent="flex-start"
                     alignItems="flex-start"
-                    overflow="hidden"
                     shrink="0"
-                    alignSelf="stretch"
                     position="relative"
-                    borderRadius="0px 0px 15px 15px"
-                    padding="9px 11px 13px 11px"
-                    backgroundColor="rgba(252,252,252,1)"
-                    {...getOverrideProps(overrides, "Frame 11641063217")}
+                    padding="0px 0px 0px 0px"
+                    {...getOverrideProps(overrides, "Frame 19241063219")}
                   >
                     <Flex
-                      gap="8px"
-                      direction="column"
+                      onMouseEnter={onEnter}
+                      onMouseLeave={onLeave}
+                      style={{ cursor: "pointer" }}
+                      gap="10px"
+                      direction="row"
                       width="unset"
                       height="unset"
-                      justifyContent="center"
-                      alignItems="flex-start"
-                      shrink="0"
-                      alignSelf="stretch"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
                       position="relative"
-                      padding="0px 12px 0px 0px"
-                      {...getOverrideProps(overrides, "Frame 11541063218")}
+                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      backgroundColor="rgba(255,226,0,0.35)"
+                      {...getOverrideProps(overrides, "Frame 10141063220")}
                     >
-                      <Flex
-                        gap="6px"
-                        direction="row"
-                        width="297px"
-                        height="unset"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
+                      <Image
+                        src={logo1}
+                        width="30px"
+                        height="30px"
+                        display="flex"
+                        gap="unset"
+                        alignItems="unset"
+                        justifyContent="unset"
                         shrink="0"
                         position="relative"
+                        borderRadius="23px"
                         padding="0px 0px 0px 0px"
-                        {...getOverrideProps(overrides, "Frame 19241063219")}
-                      >
-                        <Flex
-                          onMouseEnter={onEnter}
-                          onMouseLeave={onLeave}
-                          style={{ cursor: "pointer" }}
-                          gap="10px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          backgroundColor="rgba(255,226,0,0.35)"
-                          {...getOverrideProps(overrides, "Frame 10141063220")}
-                        >
-                          <Image
-                            src={logo1}
-                            width="30px"
-                            height="30px"
-                            display="flex"
-                            gap="unset"
-                            alignItems="unset"
-                            justifyContent="unset"
-                            shrink="0"
-                            position="relative"
-                            borderRadius="23px"
-                            padding="0px 0px 0px 0px"
-                            objectFit="cover"
-                            {...getOverrideProps(
-                              overrides,
-                              "ghrgclzzd 341063221"
-                            )}
-                          ></Image>
-                          <Text
-                            fontFamily="ffProLight"
-                            fontSize="9px"
-                            fontWeight="700"
-                            lineHeight="13.5px"
-                            textAlign="left"
-                            display="flex"
-                            direction="column"
-                            justifyContent="unset"
-                            width="unset"
-                            height="unset"
-                            gap="unset"
-                            alignItems="unset"
-                            grow="1"
-                            shrink="1"
-                            basis="0"
-                            position="relative"
-                            padding="0px 0px 0px 0px"
-                            whiteSpace="pre-wrap"
-                            children="@HGWA333"
-                            {...getOverrideProps(overrides, "HGWA333")}
-                          ></Text>
-                        </Flex>
-                        <Flex
-                          gap="6px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          {...getOverrideProps(overrides, "Frame 10641063223")}
-                        ></Flex>
-                      </Flex>
-                      <Flex
-                        gap="1px"
+                        objectFit="cover"
+                        {...getOverrideProps(overrides, "ghrgclzzd 341063221")}
+                      ></Image>
+                      <Text
+                        fontFamily="ffProLight"
+                        fontSize="9px"
+                        fontWeight="700"
+                        lineHeight="13.5px"
+                        textAlign="left"
+                        display="flex"
                         direction="column"
+                        justifyContent="unset"
                         width="unset"
                         height="unset"
-                        justifyContent="center"
-                        alignItems="flex-start"
-                        shrink="0"
-                        alignSelf="stretch"
+                        gap="unset"
+                        alignItems="unset"
+                        grow="1"
+                        shrink="1"
+                        basis="0"
                         position="relative"
-                        padding="0px 0px 0px 3px"
-                        {...getOverrideProps(overrides, "Frame 10541063224")}
-                      >
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="10px"
-                          fontWeight="700"
-                          color="rgba(86,86,86,1)"
-                          lineHeight="15px"
-                          textAlign="left"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="FrontEnd"
-                          {...getOverrideProps(overrides, "FrontEnd41063225")}
-                        ></Text>
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="12px"
-                          fontWeight="700"
-                          lineHeight="18px"
-                          textAlign="right"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="최 원 겸"
-                          {...getOverrideProps(
-                            overrides,
-                            "\uCD5C \uC6D0 \uACB8"
-                          )}
-                        ></Text>
-                      </Flex>
+                        padding="0px 0px 0px 0px"
+                        whiteSpace="pre-wrap"
+                        children="@HGWA333"
+                        {...getOverrideProps(overrides, "HGWA333")}
+                      ></Text>
                     </Flex>
+                    <Flex
+                      gap="6px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      {...getOverrideProps(overrides, "Frame 10641063223")}
+                    ></Flex>
                   </Flex>
-                </Flex>
-                <Flex
-                  gap="0"
-                  direction="column"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  overflow="hidden"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="25px"
-                  padding="0px 0px 0px 0px"
-                  backgroundColor="rgb(255,255,255)"
-                  {...getOverrideProps(overrides, "Frame 16041063227")}
-                >
-                  <Image
-                    onClick={() =>
-                      window.open("https://github.com/Koh-U-Seok/", "_blank")
-                    }
-                    onMouseEnter={onEnter}
-                    onMouseLeave={onLeave}
-                    style={{ cursor: "pointer" }}
-                    src={logo2}
-                    width="unset"
-                    height="296px"
-                    display="flex"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    grow="1"
-                    shrink="1"
-                    basis="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    borderRadius="25px 25px 0px 0px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "nft (1) 341063228")}
-                  ></Image>
                   <Flex
-                    gap="10px"
+                    gap="1px"
                     direction="column"
                     width="unset"
                     height="unset"
-                    justifyContent="flex-start"
+                    justifyContent="center"
                     alignItems="flex-start"
-                    overflow="hidden"
                     shrink="0"
                     alignSelf="stretch"
                     position="relative"
-                    borderRadius="0px 0px 15px 15px"
-                    padding="9px 11px 13px 11px"
-                    backgroundColor="rgba(252,252,252,1)"
-                    {...getOverrideProps(overrides, "Frame 11641063229")}
+                    padding="0px 0px 0px 3px"
+                    {...getOverrideProps(overrides, "Frame 10541063224")}
                   >
-                    <Flex
-                      gap="8px"
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="10px"
+                      fontWeight="700"
+                      color="rgba(86,86,86,1)"
+                      lineHeight="15px"
+                      textAlign="left"
+                      display="flex"
                       direction="column"
+                      justifyContent="unset"
                       width="unset"
                       height="unset"
-                      justifyContent="center"
-                      alignItems="flex-start"
+                      gap="unset"
+                      alignItems="unset"
                       shrink="0"
                       alignSelf="stretch"
                       position="relative"
-                      padding="0px 12px 0px 0px"
-                      {...getOverrideProps(overrides, "Frame 11541063230")}
-                    >
-                      <Flex
-                        gap="6px"
-                        direction="row"
-                        width="297px"
-                        height="unset"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        shrink="0"
-                        position="relative"
-                        padding="0px 0px 0px 0px"
-                        {...getOverrideProps(overrides, "Frame 19241063231")}
-                      >
-                        <Flex
-                          onClick={() =>
-                            window.open(
-                              "https://titanium-staircase-359.notion.site/9675fe4e831a41d8aa706e64feded232",
-                              "_blank"
-                            )
-                          }
-                          onMouseEnter={onEnter}
-                          onMouseLeave={onLeave}
-                          style={{ cursor: "pointer" }}
-                          gap="10px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          backgroundColor="rgba(0,136,153,0.59)"
-                          {...getOverrideProps(overrides, "Frame 10141063232")}
-                        >
-                          <Image
-                            src={logo2}
-                            width="30px"
-                            height="30px"
-                            display="flex"
-                            gap="unset"
-                            alignItems="unset"
-                            justifyContent="unset"
-                            shrink="0"
-                            position="relative"
-                            borderRadius="23px"
-                            padding="0px 0px 0px 0px"
-                            objectFit="cover"
-                            {...getOverrideProps(
-                              overrides,
-                              "ghrgclzzd 341063233"
-                            )}
-                          ></Image>
-                          <Text
-                            fontFamily="ffProLight"
-                            fontSize="9px"
-                            fontWeight="700"
-                            lineHeight="13.5px"
-                            textAlign="left"
-                            display="flex"
-                            direction="column"
-                            justifyContent="unset"
-                            width="unset"
-                            height="unset"
-                            gap="unset"
-                            alignItems="unset"
-                            grow="1"
-                            shrink="1"
-                            basis="0"
-                            position="relative"
-                            padding="0px 0px 0px 0px"
-                            whiteSpace="pre-wrap"
-                            children="@Koh-U-Seok"
-                            {...getOverrideProps(overrides, "@Koh-U-Seok")}
-                          ></Text>
-                        </Flex>
-                        <Flex
-                          gap="6px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          {...getOverrideProps(overrides, "Frame 10641063235")}
-                        ></Flex>
-                      </Flex>
-                      <Flex
-                        gap="1px"
-                        direction="column"
-                        width="unset"
-                        height="unset"
-                        justifyContent="center"
-                        alignItems="flex-start"
-                        shrink="0"
-                        alignSelf="stretch"
-                        position="relative"
-                        padding="0px 0px 0px 3px"
-                        {...getOverrideProps(overrides, "Frame 10541063236")}
-                      >
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="10px"
-                          fontWeight="700"
-                          color="rgba(86,86,86,1)"
-                          lineHeight="15px"
-                          textAlign="left"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="FrontEnd"
-                          {...getOverrideProps(overrides, "FrontEnd41063237")}
-                        ></Text>
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="12px"
-                          fontWeight="700"
-                          lineHeight="18px"
-                          textAlign="right"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="고 우 석"
-                          {...getOverrideProps(
-                            overrides,
-                            "\uACE0 \uC6B0 \uC11D"
-                          )}
-                        ></Text>
-                      </Flex>
-                    </Flex>
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="FrontEnd"
+                      {...getOverrideProps(overrides, "FrontEnd41063225")}
+                    ></Text>
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="12px"
+                      fontWeight="700"
+                      lineHeight="18px"
+                      textAlign="right"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="최 원 겸"
+                      {...getOverrideProps(overrides, "\uCD5C \uC6D0 \uACB8")}
+                    ></Text>
                   </Flex>
                 </Flex>
               </Flex>
+            </Flex>
+            <Flex
+              gap="0"
+              direction="column"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              overflow="hidden"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="25px"
+              padding="0px 0px 0px 0px"
+              backgroundColor="rgb(255,255,255)"
+              {...getOverrideProps(overrides, "Frame 16041063227")}
+            >
+              <Image
+                onClick={() =>
+                  window.open("https://github.com/Koh-U-Seok/", "_blank")
+                }
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
+                style={{ cursor: "pointer" }}
+                src={logo2}
+                width="unset"
+                height="296px"
+                display="flex"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="25px 25px 0px 0px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "nft (1) 341063228")}
+              ></Image>
               <Flex
-                gap="38px"
+                gap="10px"
                 direction="column"
                 width="unset"
                 height="unset"
                 justifyContent="flex-start"
                 alignItems="flex-start"
-                grow="1"
-                shrink="1"
-                basis="0"
+                overflow="hidden"
+                shrink="0"
+                alignSelf="stretch"
                 position="relative"
-                padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 196")}
+                borderRadius="0px 0px 15px 15px"
+                padding="9px 11px 13px 11px"
+                backgroundColor="rgba(252,252,252,1)"
+                {...getOverrideProps(overrides, "Frame 11641063229")}
               >
                 <Flex
-                  gap="0"
+                  gap="8px"
                   direction="column"
                   width="unset"
                   height="unset"
-                  justifyContent="flex-start"
+                  justifyContent="center"
                   alignItems="flex-start"
-                  overflow="hidden"
                   shrink="0"
                   alignSelf="stretch"
                   position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="25px"
-                  padding="0px 0px 0px 0px"
-                  backgroundColor="rgb(255,255,255)"
-                  {...getOverrideProps(overrides, "Frame 15541063240")}
+                  padding="0px 12px 0px 0px"
+                  {...getOverrideProps(overrides, "Frame 11541063230")}
                 >
-                  <Image
-                    onClick={() =>
-                      window.open("https://github.com/JJeonghyun/", "_blank")
-                    }
-                    onMouseEnter={onEnter}
-                    onMouseLeave={onLeave}
-                    style={{ cursor: "pointer" }}
-                    src={logo3}
-                    width="unset"
-                    height="296px"
-                    display="flex"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    grow="1"
-                    shrink="1"
-                    basis="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    borderRadius="25px 25px 0px 0px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "nft (1) 341063241")}
-                  ></Image>
                   <Flex
-                    gap="10px"
-                    direction="column"
-                    width="unset"
+                    gap="6px"
+                    direction="row"
+                    width="297px"
                     height="unset"
                     justifyContent="flex-start"
                     alignItems="flex-start"
-                    overflow="hidden"
                     shrink="0"
-                    alignSelf="stretch"
                     position="relative"
-                    borderRadius="0px 0px 15px 15px"
-                    padding="9px 11px 13px 11px"
-                    backgroundColor="rgba(252,252,252,1)"
-                    {...getOverrideProps(overrides, "Frame 11641063242")}
+                    padding="0px 0px 0px 0px"
+                    {...getOverrideProps(overrides, "Frame 19241063231")}
                   >
                     <Flex
-                      gap="8px"
-                      direction="column"
+                      onClick={() =>
+                        window.open(
+                          "https://titanium-staircase-359.notion.site/9675fe4e831a41d8aa706e64feded232",
+                          "_blank"
+                        )
+                      }
+                      onMouseEnter={onEnter}
+                      onMouseLeave={onLeave}
+                      style={{ cursor: "pointer" }}
+                      gap="10px"
+                      direction="row"
                       width="unset"
                       height="unset"
-                      justifyContent="center"
-                      alignItems="flex-start"
-                      shrink="0"
-                      alignSelf="stretch"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
                       position="relative"
-                      padding="0px 12px 0px 0px"
-                      {...getOverrideProps(overrides, "Frame 11541063243")}
+                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      backgroundColor="rgba(0,136,153,0.59)"
+                      {...getOverrideProps(overrides, "Frame 10141063232")}
                     >
-                      <Flex
-                        gap="6px"
-                        direction="row"
-                        width="297px"
-                        height="unset"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
+                      <Image
+                        src={logo2}
+                        width="30px"
+                        height="30px"
+                        display="flex"
+                        gap="unset"
+                        alignItems="unset"
+                        justifyContent="unset"
                         shrink="0"
                         position="relative"
+                        borderRadius="23px"
                         padding="0px 0px 0px 0px"
-                        {...getOverrideProps(overrides, "Frame 19241063244")}
-                      >
-                        <Flex
-                          onMouseEnter={onEnter}
-                          onMouseLeave={onLeave}
-                          style={{ cursor: "pointer" }}
-                          gap="10px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          backgroundColor="rgba(255,226,0,0.35)"
-                          {...getOverrideProps(overrides, "Frame 10141063245")}
-                        >
-                          <Image
-                            src={logo3}
-                            width="30px"
-                            height="30px"
-                            display="flex"
-                            gap="unset"
-                            alignItems="unset"
-                            justifyContent="unset"
-                            shrink="0"
-                            position="relative"
-                            borderRadius="23px"
-                            padding="0px 0px 0px 0px"
-                            objectFit="cover"
-                            {...getOverrideProps(
-                              overrides,
-                              "ghrgclzzd 341063246"
-                            )}
-                          ></Image>
-                          <Text
-                            fontFamily="ffProLight"
-                            fontSize="9px"
-                            fontWeight="700"
-                            lineHeight="13.5px"
-                            textAlign="left"
-                            display="flex"
-                            direction="column"
-                            justifyContent="unset"
-                            width="unset"
-                            height="unset"
-                            gap="unset"
-                            alignItems="unset"
-                            grow="1"
-                            shrink="1"
-                            basis="0"
-                            position="relative"
-                            padding="0px 0px 0px 0px"
-                            whiteSpace="pre-wrap"
-                            children="@JJeonghyun"
-                            {...getOverrideProps(overrides, "@JJeonghyun")}
-                          ></Text>
-                        </Flex>
-                        <Flex
-                          gap="6px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          {...getOverrideProps(overrides, "Frame 10641063248")}
-                        ></Flex>
-                      </Flex>
-                      <Flex
-                        gap="1px"
+                        objectFit="cover"
+                        {...getOverrideProps(overrides, "ghrgclzzd 341063233")}
+                      ></Image>
+                      <Text
+                        fontFamily="ffProLight"
+                        fontSize="9px"
+                        fontWeight="700"
+                        lineHeight="13.5px"
+                        textAlign="left"
+                        display="flex"
                         direction="column"
+                        justifyContent="unset"
                         width="unset"
                         height="unset"
-                        justifyContent="center"
-                        alignItems="flex-start"
-                        shrink="0"
-                        alignSelf="stretch"
+                        gap="unset"
+                        alignItems="unset"
+                        grow="1"
+                        shrink="1"
+                        basis="0"
                         position="relative"
-                        padding="0px 0px 0px 3px"
-                        {...getOverrideProps(overrides, "Frame 10541063249")}
-                      >
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="10px"
-                          fontWeight="700"
-                          color="rgba(86,86,86,1)"
-                          lineHeight="15px"
-                          textAlign="left"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="BackEnd"
-                          {...getOverrideProps(overrides, "BackEnd41063250")}
-                        ></Text>
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="12px"
-                          fontWeight="700"
-                          lineHeight="18px"
-                          textAlign="right"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="장 정 현"
-                          {...getOverrideProps(
-                            overrides,
-                            "\uC7A5 \uC815 \uD604"
-                          )}
-                        ></Text>
-                      </Flex>
+                        padding="0px 0px 0px 0px"
+                        whiteSpace="pre-wrap"
+                        children="@Koh-U-Seok"
+                        {...getOverrideProps(overrides, "@Koh-U-Seok")}
+                      ></Text>
                     </Flex>
+                    <Flex
+                      gap="6px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      {...getOverrideProps(overrides, "Frame 10641063235")}
+                    ></Flex>
                   </Flex>
-                </Flex>
-                <Flex
-                  gap="0"
-                  direction="column"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  overflow="hidden"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="25px"
-                  padding="0px 0px 0px 0px"
-                  backgroundColor="rgb(255,255,255)"
-                  {...getOverrideProps(overrides, "Frame 16041063252")}
-                >
-                  <Image
-                    onClick={() =>
-                      window.open("https://github.com/LeeJaeHyekk/", "_blank")
-                    }
-                    onMouseEnter={onEnter}
-                    onMouseLeave={onLeave}
-                    style={{ cursor: "pointer" }}
-                    src={logo4}
-                    width="unset"
-                    height="296px"
-                    display="flex"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    grow="1"
-                    shrink="1"
-                    basis="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    borderRadius="25px 25px 0px 0px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "nft (1) 341063253")}
-                  ></Image>
                   <Flex
-                    gap="10px"
+                    gap="1px"
                     direction="column"
                     width="unset"
                     height="unset"
-                    justifyContent="flex-start"
+                    justifyContent="center"
                     alignItems="flex-start"
-                    overflow="hidden"
                     shrink="0"
                     alignSelf="stretch"
                     position="relative"
-                    borderRadius="0px 0px 15px 15px"
-                    padding="9px 11px 13px 11px"
-                    backgroundColor="rgba(252,252,252,1)"
-                    {...getOverrideProps(overrides, "Frame 11641063254")}
+                    padding="0px 0px 0px 3px"
+                    {...getOverrideProps(overrides, "Frame 10541063236")}
                   >
-                    <Flex
-                      gap="8px"
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="10px"
+                      fontWeight="700"
+                      color="rgba(86,86,86,1)"
+                      lineHeight="15px"
+                      textAlign="left"
+                      display="flex"
                       direction="column"
+                      justifyContent="unset"
                       width="unset"
                       height="unset"
-                      justifyContent="center"
-                      alignItems="flex-start"
+                      gap="unset"
+                      alignItems="unset"
                       shrink="0"
                       alignSelf="stretch"
                       position="relative"
-                      padding="0px 12px 0px 0px"
-                      {...getOverrideProps(overrides, "Frame 11541063255")}
-                    >
-                      <Flex
-                        gap="6px"
-                        direction="row"
-                        width="297px"
-                        height="unset"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        shrink="0"
-                        position="relative"
-                        padding="0px 0px 0px 0px"
-                        {...getOverrideProps(overrides, "Frame 19241063256")}
-                      >
-                        <Flex
-                          onMouseEnter={onEnter}
-                          onMouseLeave={onLeave}
-                          style={{ cursor: "pointer" }}
-                          gap="10px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          backgroundColor="rgba(0,136,153,0.59)"
-                          {...getOverrideProps(overrides, "Frame 10141063257")}
-                          onClick={() =>
-                            window.open(
-                              "https://familiar-galaxy-e77.notion.site/434348e0bbb843848ad47b6c89db4e90",
-                              "_blank"
-                            )
-                          }
-                        >
-                          <Image
-                            src={logo4}
-                            width="30px"
-                            height="30px"
-                            display="flex"
-                            gap="unset"
-                            alignItems="unset"
-                            justifyContent="unset"
-                            shrink="0"
-                            position="relative"
-                            borderRadius="23px"
-                            padding="0px 0px 0px 0px"
-                            objectFit="cover"
-                            {...getOverrideProps(
-                              overrides,
-                              "ghrgclzzd 341063258"
-                            )}
-                          ></Image>
-                          <Text
-                            fontFamily="ffProExtraLight"
-                            fontSize="9px"
-                            fontWeight="700"
-                            lineHeight="13.5px"
-                            textAlign="left"
-                            display="flex"
-                            direction="column"
-                            justifyContent="unset"
-                            width="unset"
-                            height="unset"
-                            gap="unset"
-                            alignItems="unset"
-                            grow="1"
-                            shrink="1"
-                            basis="0"
-                            position="relative"
-                            padding="0px 0px 0px 0px"
-                            whiteSpace="pre-wrap"
-                            children="@JaeHyuk"
-                            {...getOverrideProps(overrides, "@JaeHyuk")}
-                          ></Text>
-                        </Flex>
-                        <Flex
-                          gap="6px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          {...getOverrideProps(overrides, "Frame 10641063260")}
-                        ></Flex>
-                      </Flex>
-                      <Flex
-                        gap="1px"
-                        direction="column"
-                        width="unset"
-                        height="unset"
-                        justifyContent="center"
-                        alignItems="flex-start"
-                        shrink="0"
-                        alignSelf="stretch"
-                        position="relative"
-                        padding="0px 0px 0px 3px"
-                        {...getOverrideProps(overrides, "Frame 10541063261")}
-                      >
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="10px"
-                          fontWeight="700"
-                          color="rgba(86,86,86,1)"
-                          lineHeight="15px"
-                          textAlign="left"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="BackEnd"
-                          {...getOverrideProps(overrides, "BackEnd41063262")}
-                        ></Text>
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="12px"
-                          fontWeight="700"
-                          lineHeight="18px"
-                          textAlign="right"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="이 재 혁"
-                          {...getOverrideProps(
-                            overrides,
-                            "\uC774 \uC7AC \uD601"
-                          )}
-                        ></Text>
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-              <Flex
-                gap="38px"
-                direction="column"
-                width="unset"
-                height="unset"
-                justifyContent="flex-start"
-                alignItems="flex-start"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                {...getOverrideProps(overrides, "Frame 196")}
-              >
-                <Flex
-                  gap="0"
-                  direction="column"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  overflow="hidden"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="25px"
-                  padding="0px 0px 0px 0px"
-                  backgroundColor="rgb(255,255,255)"
-                  {...getOverrideProps(overrides, "Frame 15541063240")}
-                >
-                  <Image
-                    onClick={() =>
-                      window.open("https://github.com/pippen11/", "_blank")
-                    }
-                    onMouseEnter={onEnter}
-                    onMouseLeave={onLeave}
-                    style={{ cursor: "pointer" }}
-                    src={logo5}
-                    width="unset"
-                    height="296px"
-                    display="flex"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    grow="1"
-                    shrink="1"
-                    basis="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    borderRadius="25px 25px 0px 0px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "nft (1) 341063241")}
-                  ></Image>
-                  <Flex
-                    gap="10px"
-                    direction="column"
-                    width="unset"
-                    height="unset"
-                    justifyContent="flex-start"
-                    alignItems="flex-start"
-                    overflow="hidden"
-                    shrink="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    borderRadius="0px 0px 15px 15px"
-                    padding="9px 11px 13px 11px"
-                    backgroundColor="rgba(252,252,252,1)"
-                    {...getOverrideProps(overrides, "Frame 11641063242")}
-                  >
-                    <Flex
-                      gap="8px"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="FrontEnd"
+                      {...getOverrideProps(overrides, "FrontEnd41063237")}
+                    ></Text>
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="12px"
+                      fontWeight="700"
+                      lineHeight="18px"
+                      textAlign="right"
+                      display="flex"
                       direction="column"
+                      justifyContent="unset"
                       width="unset"
                       height="unset"
-                      justifyContent="center"
-                      alignItems="flex-start"
+                      gap="unset"
+                      alignItems="unset"
                       shrink="0"
                       alignSelf="stretch"
                       position="relative"
-                      padding="0px 12px 0px 0px"
-                      {...getOverrideProps(overrides, "Frame 11541063243")}
-                    >
-                      <Flex
-                        gap="6px"
-                        direction="row"
-                        width="297px"
-                        height="unset"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        shrink="0"
-                        position="relative"
-                        padding="0px 0px 0px 0px"
-                        {...getOverrideProps(overrides, "Frame 19241063244")}
-                      >
-                        <Flex
-                          onMouseEnter={onEnter}
-                          onMouseLeave={onLeave}
-                          style={{ cursor: "pointer" }}
-                          gap="10px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          backgroundColor="rgba(255,226,0,0.35)"
-                          {...getOverrideProps(overrides, "Frame 10141063245")}
-                        >
-                          <Image
-                            src={logo5}
-                            width="30px"
-                            height="30px"
-                            display="flex"
-                            gap="unset"
-                            alignItems="unset"
-                            justifyContent="unset"
-                            shrink="0"
-                            position="relative"
-                            borderRadius="23px"
-                            padding="0px 0px 0px 0px"
-                            objectFit="cover"
-                            {...getOverrideProps(
-                              overrides,
-                              "ghrgclzzd 341063246"
-                            )}
-                          ></Image>
-                          <Text
-                            fontFamily="ffProLight"
-                            fontSize="9px"
-                            fontWeight="700"
-                            lineHeight="13.5px"
-                            textAlign="left"
-                            display="flex"
-                            direction="column"
-                            justifyContent="unset"
-                            width="unset"
-                            height="unset"
-                            gap="unset"
-                            alignItems="unset"
-                            grow="1"
-                            shrink="1"
-                            basis="0"
-                            position="relative"
-                            padding="0px 0px 0px 0px"
-                            whiteSpace="pre-wrap"
-                            children="@pippen11"
-                            {...getOverrideProps(overrides, "@JJeonghyun")}
-                          ></Text>
-                        </Flex>
-                        <Flex
-                          gap="6px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          {...getOverrideProps(overrides, "Frame 10641063248")}
-                        ></Flex>
-                      </Flex>
-                      <Flex
-                        gap="1px"
-                        direction="column"
-                        width="unset"
-                        height="unset"
-                        justifyContent="center"
-                        alignItems="flex-start"
-                        shrink="0"
-                        alignSelf="stretch"
-                        position="relative"
-                        padding="0px 0px 0px 3px"
-                        {...getOverrideProps(overrides, "Frame 10541063249")}
-                      >
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="10px"
-                          fontWeight="700"
-                          color="rgba(86,86,86,1)"
-                          lineHeight="15px"
-                          textAlign="left"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="BackEnd"
-                          {...getOverrideProps(overrides, "BackEnd41063250")}
-                        ></Text>
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="12px"
-                          fontWeight="700"
-                          lineHeight="18px"
-                          textAlign="right"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="신 상 목"
-                          {...getOverrideProps(
-                            overrides,
-                            "\uC7A5 \uC815 \uD604"
-                          )}
-                        ></Text>
-                      </Flex>
-                    </Flex>
-                  </Flex>
-                </Flex>
-                <Flex
-                  gap="0"
-                  direction="column"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  overflow="hidden"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  borderRadius="25px"
-                  padding="0px 0px 0px 0px"
-                  backgroundColor="rgb(255,255,255)"
-                  {...getOverrideProps(overrides, "Frame 16041063252")}
-                >
-                  <Image
-                    onClick={() =>
-                      window.open("https://github.com/rainbow96bear/", "_blank")
-                    }
-                    onMouseEnter={onEnter}
-                    onMouseLeave={onLeave}
-                    style={{ cursor: "pointer" }}
-                    src={logo6}
-                    width="unset"
-                    height="296px"
-                    display="flex"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    grow="1"
-                    shrink="1"
-                    basis="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    borderRadius="25px 25px 0px 0px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "nft (1) 341063253")}
-                  ></Image>
-                  <Flex
-                    gap="10px"
-                    direction="column"
-                    width="unset"
-                    height="unset"
-                    justifyContent="flex-start"
-                    alignItems="flex-start"
-                    overflow="hidden"
-                    shrink="0"
-                    alignSelf="stretch"
-                    position="relative"
-                    borderRadius="0px 0px 15px 15px"
-                    padding="9px 11px 13px 11px"
-                    backgroundColor="rgba(252,252,252,1)"
-                    {...getOverrideProps(overrides, "Frame 11641063254")}
-                  >
-                    <Flex
-                      gap="8px"
-                      direction="column"
-                      width="unset"
-                      height="unset"
-                      justifyContent="center"
-                      alignItems="flex-start"
-                      shrink="0"
-                      alignSelf="stretch"
-                      position="relative"
-                      padding="0px 12px 0px 0px"
-                      {...getOverrideProps(overrides, "Frame 11541063255")}
-                    >
-                      <Flex
-                        gap="6px"
-                        direction="row"
-                        width="297px"
-                        height="unset"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        shrink="0"
-                        position="relative"
-                        padding="0px 0px 0px 0px"
-                        {...getOverrideProps(overrides, "Frame 19241063256")}
-                      >
-                        <Flex
-                          onMouseEnter={onEnter}
-                          onMouseLeave={onLeave}
-                          style={{ cursor: "pointer" }}
-                          gap="10px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="center"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                          borderRadius="25px"
-                          padding="6px 25px 6px 25px"
-                          backgroundColor="rgba(0,136,153,0.59)"
-                          {...getOverrideProps(overrides, "Frame 10141063257")}
-                        >
-                          <Image
-                            src={logo6}
-                            width="30px"
-                            height="30px"
-                            display="flex"
-                            gap="unset"
-                            alignItems="unset"
-                            justifyContent="unset"
-                            shrink="0"
-                            position="relative"
-                            borderRadius="23px"
-                            padding="0px 0px 0px 0px"
-                            objectFit="cover"
-                            {...getOverrideProps(
-                              overrides,
-                              "ghrgclzzd 341063258"
-                            )}
-                          ></Image>
-                          <Text
-                            fontFamily="ffProLight"
-                            fontSize="9px"
-                            fontWeight="700"
-                            lineHeight="13.5px"
-                            textAlign="left"
-                            display="flex"
-                            direction="column"
-                            justifyContent="unset"
-                            width="unset"
-                            height="unset"
-                            gap="unset"
-                            alignItems="unset"
-                            grow="1"
-                            shrink="1"
-                            basis="0"
-                            position="relative"
-                            padding="0px 0px 0px 0px"
-                            whiteSpace="pre-wrap"
-                            children="@rainbow96bear"
-                            {...getOverrideProps(overrides, "@JaeHyuk")}
-                          ></Text>
-                        </Flex>
-                        <Flex
-                          gap="6px"
-                          direction="row"
-                          width="unset"
-                          height="unset"
-                          justifyContent="flex-start"
-                          alignItems="center"
-                          grow="1"
-                          shrink="1"
-                          basis="0"
-                          position="relative"
-                          borderRadius="25px"
-                          padding="6px 9px 6px 9px"
-                          {...getOverrideProps(overrides, "Frame 10641063260")}
-                        ></Flex>
-                      </Flex>
-                      <Flex
-                        gap="1px"
-                        direction="column"
-                        width="unset"
-                        height="unset"
-                        justifyContent="center"
-                        alignItems="flex-start"
-                        shrink="0"
-                        alignSelf="stretch"
-                        position="relative"
-                        padding="0px 0px 0px 3px"
-                        {...getOverrideProps(overrides, "Frame 10541063261")}
-                      >
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="10px"
-                          fontWeight="700"
-                          color="rgba(86,86,86,1)"
-                          lineHeight="15px"
-                          textAlign="left"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="BackEnd"
-                          {...getOverrideProps(overrides, "BackEnd41063262")}
-                        ></Text>
-                        <Text
-                          fontFamily="ffProExtraLight"
-                          fontSize="12px"
-                          fontWeight="700"
-                          lineHeight="18px"
-                          textAlign="right"
-                          display="flex"
-                          direction="column"
-                          justifyContent="unset"
-                          width="unset"
-                          height="unset"
-                          gap="unset"
-                          alignItems="unset"
-                          shrink="0"
-                          alignSelf="stretch"
-                          position="relative"
-                          padding="0px 0px 0px 0px"
-                          whiteSpace="pre-wrap"
-                          children="김 성 진"
-                          {...getOverrideProps(
-                            overrides,
-                            "\uC774 \uC7AC \uD601"
-                          )}
-                        ></Text>
-                      </Flex>
-                    </Flex>
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="고 우 석"
+                      {...getOverrideProps(overrides, "\uACE0 \uC6B0 \uC11D")}
+                    ></Text>
                   </Flex>
                 </Flex>
               </Flex>
             </Flex>
           </Flex>
-        </motion.div>
-      ) : (
-        <></>
-      )}
-    </>
+          <Flex
+            gap="38px"
+            direction="column"
+            width="unset"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 196")}
+          >
+            <Flex
+              gap="0"
+              direction="column"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              overflow="hidden"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="25px"
+              padding="0px 0px 0px 0px"
+              backgroundColor="rgb(255,255,255)"
+              {...getOverrideProps(overrides, "Frame 15541063240")}
+            >
+              <Image
+                onClick={() =>
+                  window.open("https://github.com/JJeonghyun/", "_blank")
+                }
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
+                style={{ cursor: "pointer" }}
+                src={logo3}
+                width="unset"
+                height="296px"
+                display="flex"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="25px 25px 0px 0px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "nft (1) 341063241")}
+              ></Image>
+              <Flex
+                gap="10px"
+                direction="column"
+                width="unset"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                overflow="hidden"
+                shrink="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="0px 0px 15px 15px"
+                padding="9px 11px 13px 11px"
+                backgroundColor="rgba(252,252,252,1)"
+                {...getOverrideProps(overrides, "Frame 11641063242")}
+              >
+                <Flex
+                  gap="8px"
+                  direction="column"
+                  width="unset"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="flex-start"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  padding="0px 12px 0px 0px"
+                  {...getOverrideProps(overrides, "Frame 11541063243")}
+                >
+                  <Flex
+                    gap="6px"
+                    direction="row"
+                    width="297px"
+                    height="unset"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                    shrink="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    {...getOverrideProps(overrides, "Frame 19241063244")}
+                  >
+                    <Flex
+                      onMouseEnter={onEnter}
+                      onMouseLeave={onLeave}
+                      style={{ cursor: "pointer" }}
+                      gap="10px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      backgroundColor="rgba(255,226,0,0.35)"
+                      {...getOverrideProps(overrides, "Frame 10141063245")}
+                    >
+                      <Image
+                        src={logo3}
+                        width="30px"
+                        height="30px"
+                        display="flex"
+                        gap="unset"
+                        alignItems="unset"
+                        justifyContent="unset"
+                        shrink="0"
+                        position="relative"
+                        borderRadius="23px"
+                        padding="0px 0px 0px 0px"
+                        objectFit="cover"
+                        {...getOverrideProps(overrides, "ghrgclzzd 341063246")}
+                      ></Image>
+                      <Text
+                        fontFamily="ffProLight"
+                        fontSize="9px"
+                        fontWeight="700"
+                        lineHeight="13.5px"
+                        textAlign="left"
+                        display="flex"
+                        direction="column"
+                        justifyContent="unset"
+                        width="unset"
+                        height="unset"
+                        gap="unset"
+                        alignItems="unset"
+                        grow="1"
+                        shrink="1"
+                        basis="0"
+                        position="relative"
+                        padding="0px 0px 0px 0px"
+                        whiteSpace="pre-wrap"
+                        children="@JJeonghyun"
+                        {...getOverrideProps(overrides, "@JJeonghyun")}
+                      ></Text>
+                    </Flex>
+                    <Flex
+                      gap="6px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      {...getOverrideProps(overrides, "Frame 10641063248")}
+                    ></Flex>
+                  </Flex>
+                  <Flex
+                    gap="1px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 3px"
+                    {...getOverrideProps(overrides, "Frame 10541063249")}
+                  >
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="10px"
+                      fontWeight="700"
+                      color="rgba(86,86,86,1)"
+                      lineHeight="15px"
+                      textAlign="left"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="BackEnd"
+                      {...getOverrideProps(overrides, "BackEnd41063250")}
+                    ></Text>
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="12px"
+                      fontWeight="700"
+                      lineHeight="18px"
+                      textAlign="right"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="장 정 현"
+                      {...getOverrideProps(overrides, "\uC7A5 \uC815 \uD604")}
+                    ></Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Flex
+              gap="0"
+              direction="column"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              overflow="hidden"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="25px"
+              padding="0px 0px 0px 0px"
+              backgroundColor="rgb(255,255,255)"
+              {...getOverrideProps(overrides, "Frame 16041063252")}
+            >
+              <Image
+                onClick={() =>
+                  window.open("https://github.com/LeeJaeHyekk/", "_blank")
+                }
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
+                style={{ cursor: "pointer" }}
+                src={logo4}
+                width="unset"
+                height="296px"
+                display="flex"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="25px 25px 0px 0px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "nft (1) 341063253")}
+              ></Image>
+              <Flex
+                gap="10px"
+                direction="column"
+                width="unset"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                overflow="hidden"
+                shrink="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="0px 0px 15px 15px"
+                padding="9px 11px 13px 11px"
+                backgroundColor="rgba(252,252,252,1)"
+                {...getOverrideProps(overrides, "Frame 11641063254")}
+              >
+                <Flex
+                  gap="8px"
+                  direction="column"
+                  width="unset"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="flex-start"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  padding="0px 12px 0px 0px"
+                  {...getOverrideProps(overrides, "Frame 11541063255")}
+                >
+                  <Flex
+                    gap="6px"
+                    direction="row"
+                    width="297px"
+                    height="unset"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                    shrink="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    {...getOverrideProps(overrides, "Frame 19241063256")}
+                  >
+                    <Flex
+                      onMouseEnter={onEnter}
+                      onMouseLeave={onLeave}
+                      style={{ cursor: "pointer" }}
+                      gap="10px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      backgroundColor="rgba(0,136,153,0.59)"
+                      {...getOverrideProps(overrides, "Frame 10141063257")}
+                      onClick={() =>
+                        window.open(
+                          "https://familiar-galaxy-e77.notion.site/434348e0bbb843848ad47b6c89db4e90",
+                          "_blank"
+                        )
+                      }
+                    >
+                      <Image
+                        src={logo4}
+                        width="30px"
+                        height="30px"
+                        display="flex"
+                        gap="unset"
+                        alignItems="unset"
+                        justifyContent="unset"
+                        shrink="0"
+                        position="relative"
+                        borderRadius="23px"
+                        padding="0px 0px 0px 0px"
+                        objectFit="cover"
+                        {...getOverrideProps(overrides, "ghrgclzzd 341063258")}
+                      ></Image>
+                      <Text
+                        fontFamily="ffProExtraLight"
+                        fontSize="9px"
+                        fontWeight="700"
+                        lineHeight="13.5px"
+                        textAlign="left"
+                        display="flex"
+                        direction="column"
+                        justifyContent="unset"
+                        width="unset"
+                        height="unset"
+                        gap="unset"
+                        alignItems="unset"
+                        grow="1"
+                        shrink="1"
+                        basis="0"
+                        position="relative"
+                        padding="0px 0px 0px 0px"
+                        whiteSpace="pre-wrap"
+                        children="@JaeHyuk"
+                        {...getOverrideProps(overrides, "@JaeHyuk")}
+                      ></Text>
+                    </Flex>
+                    <Flex
+                      gap="6px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      {...getOverrideProps(overrides, "Frame 10641063260")}
+                    ></Flex>
+                  </Flex>
+                  <Flex
+                    gap="1px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 3px"
+                    {...getOverrideProps(overrides, "Frame 10541063261")}
+                  >
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="10px"
+                      fontWeight="700"
+                      color="rgba(86,86,86,1)"
+                      lineHeight="15px"
+                      textAlign="left"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="BackEnd"
+                      {...getOverrideProps(overrides, "BackEnd41063262")}
+                    ></Text>
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="12px"
+                      fontWeight="700"
+                      lineHeight="18px"
+                      textAlign="right"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="이 재 혁"
+                      {...getOverrideProps(overrides, "\uC774 \uC7AC \uD601")}
+                    ></Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
+          </Flex>
+          <Flex
+            gap="38px"
+            direction="column"
+            width="unset"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 196")}
+          >
+            <Flex
+              gap="0"
+              direction="column"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              overflow="hidden"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="25px"
+              padding="0px 0px 0px 0px"
+              backgroundColor="rgb(255,255,255)"
+              {...getOverrideProps(overrides, "Frame 15541063240")}
+            >
+              <Image
+                onClick={() =>
+                  window.open("https://github.com/pippen11/", "_blank")
+                }
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
+                style={{ cursor: "pointer" }}
+                src={logo5}
+                width="unset"
+                height="296px"
+                display="flex"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="25px 25px 0px 0px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "nft (1) 341063241")}
+              ></Image>
+              <Flex
+                gap="10px"
+                direction="column"
+                width="unset"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                overflow="hidden"
+                shrink="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="0px 0px 15px 15px"
+                padding="9px 11px 13px 11px"
+                backgroundColor="rgba(252,252,252,1)"
+                {...getOverrideProps(overrides, "Frame 11641063242")}
+              >
+                <Flex
+                  gap="8px"
+                  direction="column"
+                  width="unset"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="flex-start"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  padding="0px 12px 0px 0px"
+                  {...getOverrideProps(overrides, "Frame 11541063243")}
+                >
+                  <Flex
+                    gap="6px"
+                    direction="row"
+                    width="297px"
+                    height="unset"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                    shrink="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    {...getOverrideProps(overrides, "Frame 19241063244")}
+                  >
+                    <Flex
+                      onMouseEnter={onEnter}
+                      onMouseLeave={onLeave}
+                      style={{ cursor: "pointer" }}
+                      gap="10px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      backgroundColor="rgba(255,226,0,0.35)"
+                      {...getOverrideProps(overrides, "Frame 10141063245")}
+                    >
+                      <Image
+                        src={logo5}
+                        width="30px"
+                        height="30px"
+                        display="flex"
+                        gap="unset"
+                        alignItems="unset"
+                        justifyContent="unset"
+                        shrink="0"
+                        position="relative"
+                        borderRadius="23px"
+                        padding="0px 0px 0px 0px"
+                        objectFit="cover"
+                        {...getOverrideProps(overrides, "ghrgclzzd 341063246")}
+                      ></Image>
+                      <Text
+                        fontFamily="ffProLight"
+                        fontSize="9px"
+                        fontWeight="700"
+                        lineHeight="13.5px"
+                        textAlign="left"
+                        display="flex"
+                        direction="column"
+                        justifyContent="unset"
+                        width="unset"
+                        height="unset"
+                        gap="unset"
+                        alignItems="unset"
+                        grow="1"
+                        shrink="1"
+                        basis="0"
+                        position="relative"
+                        padding="0px 0px 0px 0px"
+                        whiteSpace="pre-wrap"
+                        children="@pippen11"
+                        {...getOverrideProps(overrides, "@JJeonghyun")}
+                      ></Text>
+                    </Flex>
+                    <Flex
+                      gap="6px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      {...getOverrideProps(overrides, "Frame 10641063248")}
+                    ></Flex>
+                  </Flex>
+                  <Flex
+                    gap="1px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 3px"
+                    {...getOverrideProps(overrides, "Frame 10541063249")}
+                  >
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="10px"
+                      fontWeight="700"
+                      color="rgba(86,86,86,1)"
+                      lineHeight="15px"
+                      textAlign="left"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="BackEnd"
+                      {...getOverrideProps(overrides, "BackEnd41063250")}
+                    ></Text>
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="12px"
+                      fontWeight="700"
+                      lineHeight="18px"
+                      textAlign="right"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="신 상 목"
+                      {...getOverrideProps(overrides, "\uC7A5 \uC815 \uD604")}
+                    ></Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
+            <Flex
+              gap="0"
+              direction="column"
+              width="unset"
+              height="unset"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              overflow="hidden"
+              shrink="0"
+              alignSelf="stretch"
+              position="relative"
+              boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              borderRadius="25px"
+              padding="0px 0px 0px 0px"
+              backgroundColor="rgb(255,255,255)"
+              {...getOverrideProps(overrides, "Frame 16041063252")}
+            >
+              <Image
+                onClick={() =>
+                  window.open("https://github.com/rainbow96bear/", "_blank")
+                }
+                onMouseEnter={onEnter}
+                onMouseLeave={onLeave}
+                style={{ cursor: "pointer" }}
+                src={logo6}
+                width="unset"
+                height="296px"
+                display="flex"
+                gap="unset"
+                alignItems="unset"
+                justifyContent="unset"
+                grow="1"
+                shrink="1"
+                basis="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="25px 25px 0px 0px"
+                padding="0px 0px 0px 0px"
+                objectFit="cover"
+                {...getOverrideProps(overrides, "nft (1) 341063253")}
+              ></Image>
+              <Flex
+                gap="10px"
+                direction="column"
+                width="unset"
+                height="unset"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                overflow="hidden"
+                shrink="0"
+                alignSelf="stretch"
+                position="relative"
+                borderRadius="0px 0px 15px 15px"
+                padding="9px 11px 13px 11px"
+                backgroundColor="rgba(252,252,252,1)"
+                {...getOverrideProps(overrides, "Frame 11641063254")}
+              >
+                <Flex
+                  gap="8px"
+                  direction="column"
+                  width="unset"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="flex-start"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  padding="0px 12px 0px 0px"
+                  {...getOverrideProps(overrides, "Frame 11541063255")}
+                >
+                  <Flex
+                    gap="6px"
+                    direction="row"
+                    width="297px"
+                    height="unset"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
+                    shrink="0"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    {...getOverrideProps(overrides, "Frame 19241063256")}
+                  >
+                    <Flex
+                      onMouseEnter={onEnter}
+                      onMouseLeave={onLeave}
+                      style={{ cursor: "pointer" }}
+                      gap="10px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="center"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                      borderRadius="25px"
+                      padding="6px 25px 6px 25px"
+                      backgroundColor="rgba(0,136,153,0.59)"
+                      {...getOverrideProps(overrides, "Frame 10141063257")}
+                    >
+                      <Image
+                        src={logo6}
+                        width="30px"
+                        height="30px"
+                        display="flex"
+                        gap="unset"
+                        alignItems="unset"
+                        justifyContent="unset"
+                        shrink="0"
+                        position="relative"
+                        borderRadius="23px"
+                        padding="0px 0px 0px 0px"
+                        objectFit="cover"
+                        {...getOverrideProps(overrides, "ghrgclzzd 341063258")}
+                      ></Image>
+                      <Text
+                        fontFamily="ffProLight"
+                        fontSize="9px"
+                        fontWeight="700"
+                        lineHeight="13.5px"
+                        textAlign="left"
+                        display="flex"
+                        direction="column"
+                        justifyContent="unset"
+                        width="unset"
+                        height="unset"
+                        gap="unset"
+                        alignItems="unset"
+                        grow="1"
+                        shrink="1"
+                        basis="0"
+                        position="relative"
+                        padding="0px 0px 0px 0px"
+                        whiteSpace="pre-wrap"
+                        children="@rainbow96bear"
+                        {...getOverrideProps(overrides, "@JaeHyuk")}
+                      ></Text>
+                    </Flex>
+                    <Flex
+                      gap="6px"
+                      direction="row"
+                      width="unset"
+                      height="unset"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      grow="1"
+                      shrink="1"
+                      basis="0"
+                      position="relative"
+                      borderRadius="25px"
+                      padding="6px 9px 6px 9px"
+                      {...getOverrideProps(overrides, "Frame 10641063260")}
+                    ></Flex>
+                  </Flex>
+                  <Flex
+                    gap="1px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 3px"
+                    {...getOverrideProps(overrides, "Frame 10541063261")}
+                  >
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="10px"
+                      fontWeight="700"
+                      color="rgba(86,86,86,1)"
+                      lineHeight="15px"
+                      textAlign="left"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="BackEnd"
+                      {...getOverrideProps(overrides, "BackEnd41063262")}
+                    ></Text>
+                    <Text
+                      fontFamily="ffProExtraLight"
+                      fontSize="12px"
+                      fontWeight="700"
+                      lineHeight="18px"
+                      textAlign="right"
+                      display="flex"
+                      direction="column"
+                      justifyContent="unset"
+                      width="unset"
+                      height="unset"
+                      gap="unset"
+                      alignItems="unset"
+                      shrink="0"
+                      alignSelf="stretch"
+                      position="relative"
+                      padding="0px 0px 0px 0px"
+                      whiteSpace="pre-wrap"
+                      children="김 성 진"
+                      {...getOverrideProps(overrides, "\uC774 \uC7AC \uD601")}
+                    ></Text>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
+    </motion.div>
   );
 }

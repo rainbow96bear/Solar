@@ -34,7 +34,6 @@ export { default as Swap320px } from "./Swap320px";
 export { default as Swap768px } from "./Swap768px";
 export { default as SwapTop320px } from "./SwapTop320px";
 export { default as SwapTop768px } from "./SwapTop768px";
-export { default as Footer } from "./Footer";
 export { default as SwapCompo1440px } from "./SwapCompo1440px";
 export { default as SetNetwork768px } from "./SetNetwork768px";
 export { default as AddLiquidityBottom320px } from "./AddLiquidityBottom320px";

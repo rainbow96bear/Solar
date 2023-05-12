@@ -29,7 +29,7 @@ const MypageComponent = ({ myList }) => {
   return (
     <>
       <MypPage>
-        {isDesktop ? (
+        {isDesktop && (
           <motion.div
             style={{
               width: "83vw",
@@ -47,11 +47,9 @@ const MypageComponent = ({ myList }) => {
           >
             <MyPageCompo1024px myList={myList}></MyPageCompo1024px>
           </motion.div>
-        ) : (
-          <></>
         )}
 
-        {isMobile ? (
+        {isMobile && (
           <motion.div
             style={{
               marginLeft: "27px",
@@ -70,8 +68,6 @@ const MypageComponent = ({ myList }) => {
           >
             <MyPageCompo768px myList={myList}></MyPageCompo768px>
           </motion.div>
-        ) : (
-          <></>
         )}
       </MypPage>
     </>
