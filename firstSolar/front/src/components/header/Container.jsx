@@ -19,40 +19,6 @@ const HeaderContainer = () => {
         dispatch(setAccount(_account));
         dispatch(setLogin(true));
         dispatch(setConnect(true));
-        // if (document.cookie.split(":")[0] == "metamask") {
-        //   window.ethereum.providers.map(async (item, idx) => {
-        //     if (item.isMetaMask == true) {
-        //       const [_account] = await item.request({
-        //         method: "eth_requestAccounts",
-        //       });
-        //       dispatch(setAccount(_account));
-        //       dispatch(setLogin(true));
-        //       dispatch(setConnect( true ));
-        //     }
-        //   });
-        // } else if (document.cookie.split(":")[0] == "trust") {
-        //   window.ethereum.providers.map(async (item, idx) => {
-        //     if (item.isTrustWallet == true) {
-        //       const [_account] = await item.request({
-        //         method: "eth_requestAccounts",
-        //       });
-        //       dispatch(setAccount(_account));
-        //       dispatch(setLogin(true));
-        //       dispatch(setConnect(true ));
-        //     }
-        //   });
-        // } else if (document.cookie.split(":")[0] == "coinbase") {
-        //   window.ethereum.providers.map(async (item, idx) => {
-        //     if (item.isCoinbaseWallet == true) {
-        //       const [_account] = await item.request({
-        //         method: "eth_requestAccounts",
-        //       });
-        //       dispatch(setAccount(_account));
-        //       dispatch(setLogin(true));
-        //       dispatch(setConnect(true ));
-        //     }
-        //   });
-        // }
       } catch (error) {
         console.error(error);
       }

@@ -95,11 +95,11 @@ function App() {
             </Routes>
           </MainContent>
           <FooterContainer />
-          {isLoading && (
+          {/* {isLoading && (
             <LoadingModal>
               <LoadingCompo />
             </LoadingModal>
-          )}
+          )} */}
           {emptySearch && (
             <LoadingModal>
               <EmptySearchModal className="marginT" />
