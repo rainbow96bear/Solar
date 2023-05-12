@@ -131,7 +131,6 @@ export default function PooListCom768px(props) {
   }, [filter]);
 
   React.useEffect(() => {
-    console.log("768px");
     setMainNetList(Object.keys(mainNet768px1));
     setPlatformList(Object.values(platform768px1));
     setMainNetList1(Object.keys(mainNet768px2));

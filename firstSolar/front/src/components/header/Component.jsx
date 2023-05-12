@@ -5,7 +5,16 @@ import {
   BeforeHeadCom768px,
 } from "../../ui-components";
 import { useMediaQuery } from "react-responsive";
-const HeaderComponent = () => {
+const HeaderComponent = ({
+  handleSearch,
+  handleInputChange,
+  inputValue,
+  navigate,
+  dispatch,
+  address,
+  searchView,
+  setSearchView,
+}) => {
   const isDesktop = useMediaQuery({
     query: "(min-width:992px)",
   });
@@ -20,9 +29,25 @@ const HeaderComponent = () => {
 
   return (
     <Header>
-      {isDesktop && <BeforeHeadCom1024px />}
-      {isTablet && <BeforeHeadCom768px />}
-      {isMobile && <BeforeHeadCom320px />}
+      {isDesktop && (
+        <BeforeHeadCom1024px
+          handleSearch={handleSearch}
+          handleInputChange={handleInputChange}
+          inputValue={inputValue}
+          navigate={navigate}
+          dispatch={dispatch}
+          address={address}
+        />
+      )}
+      {isTablet && <BeforeHeadCom768px address={address} navigate={navigate} />}
+      {isMobile && (
+        <BeforeHeadCom320px
+          searchView={searchView}
+          setSearchView={setSearchView}
+          address={address}
+          navigate={navigate}
+        />
+      )}
     </Header>
   );
 };
