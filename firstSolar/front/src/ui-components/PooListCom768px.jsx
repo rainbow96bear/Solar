@@ -5,8 +5,6 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text, Pagination } from "@aws-amplify/ui-react";
 
@@ -18,7 +16,21 @@ import {
 import { motion, LayoutGroup } from "framer-motion";
 
 export default function PooListCom768px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    mainNetList,
+    mainNetList1,
+    pageIndex,
+    filter,
+    currentPagePoolList,
+    setCurrentPagePoolList,
+    setTotalPages,
+    networkArray,
+    platformList,
+    platformList1,
+    paginationProps,
+    ...rest
+  } = props;
 
   return (
     <Flex
