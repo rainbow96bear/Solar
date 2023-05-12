@@ -5,55 +5,36 @@
  **************************************************************************/
 
 /* eslint-disable */
-import { useState, useEffect } from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyPageList768px from "../components/myPageList/MyPageList768px";
-import { useLocation } from "react-router-dom";
-import { mypageList } from "../api/index";
 import logo from "./images/logo_new.png";
-import { useDispatch } from "react-redux";
-import { setIsLoading } from "../modules/isLoading";
 import { motion } from "framer-motion";
 import "../css/Font.css";
 
 export default function MyPageCompo768px(props) {
-  const { overrides, myList, setMyList, ...rest } = props;
-
-  const [lpTokenValue, setLpTokenValue] = useState();
-  const [lpToken, setLpToken] = useState();
-  const [firstToken, setFirstToken] = useState();
-  const [secondToken, setSecondToken] = useState();
-  const [firstImgToken, setFirstImgToken] = useState();
-  const [secondImgToken, setSecondImgToken] = useState();
-  const dispatch = useDispatch();
-  const params = useLocation().search.replace("?", "");
-
-  const lpBalanceValue = parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
-
-  const isLoadingTrue = () => {
-    dispatch(setIsLoading(true));
-  };
-  const isLoadingFalse = () => {
-    dispatch(setIsLoading(false));
-  };
-
-  const mypageLpListUp = async () => {
-    try {
-      dispatch(setIsLoading(true));
-      const myLists = await mypageList(params);
-      setMyList(myLists);
-      setTimeout(() => {
-        dispatch(setIsLoading(false));
-      }, 1500);
-    } catch (error) {
-      console.error(error);
-      dispatch(setIsLoading(false));
-    }
-  };
-  useEffect(() => {
-    mypageLpListUp();
-  }, []);
+  const {
+    overrides,
+    myList,
+    getAutoCompoundStatusFunc,
+    autoCompoundStatus,
+    mypageLpListUp,
+    lpTokenValue,
+    lpToken,
+    firstToken,
+    secondToken,
+    firstImgToken,
+    secondImgToken,
+    setLpTokenValue,
+    setLpToken,
+    setFirstToken,
+    setSecondToken,
+    setFirstImgToken,
+    setSecondImgToken,
+    dispatch,
+    navigate,
+    ...rest
+  } = props;
 
   return (
     <Flex
@@ -421,11 +402,10 @@ export default function MyPageCompo768px(props) {
               lptokenvalue={lpTokenValue}
               lptoken={lpToken}
               mypagelplistup={mypageLpListUp}
-              lpBalanceValue={lpBalanceValue}
-              getAutoCompoundStatusFunc={props?.getAutoCompoundStatusFunc}
-              isOpen={props?.isOpen}
-              toggleOpen={props?.toggleOpen}
-              autoCompoundStatus={props?.autoCompoundStatus}
+              getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+              autoCompoundStatus={autoCompoundStatus}
+              dispatch={dispatch}
+              navigate={navigate}
             />
           ))}
         </Flex>

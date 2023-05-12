@@ -22,6 +22,8 @@ const MypageComponent = ({
   setSecondToken,
   setFirstImgToken,
   setSecondImgToken,
+  dispatch,
+  navigate,
 }) => {
   return (
     <>
@@ -59,6 +61,8 @@ const MypageComponent = ({
               setSecondToken={setSecondToken}
               setFirstImgToken={setFirstImgToken}
               setSecondImgToken={setSecondImgToken}
+              dispatch={dispatch}
+              navigate={navigate}
             ></MyPageCompo1024px>
           </motion.div>
         )}
@@ -84,6 +88,21 @@ const MypageComponent = ({
               myList={myList}
               getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
               autoCompoundStatus={autoCompoundStatus}
+              mypageLpListUp={mypageLpListUp}
+              lpTokenValue={lpTokenValue}
+              lpToken={lpToken}
+              firstToken={firstToken}
+              secondToken={secondToken}
+              firstImgToken={firstImgToken}
+              secondImgToken={secondImgToken}
+              setLpTokenValue={setLpTokenValue}
+              setLpToken={setLpToken}
+              setFirstToken={setFirstToken}
+              setSecondToken={setSecondToken}
+              setFirstImgToken={setFirstImgToken}
+              setSecondImgToken={setSecondImgToken}
+              dispatch={dispatch}
+              navigate={navigate}
             ></MyPageCompo768px>
           </motion.div>
         )}

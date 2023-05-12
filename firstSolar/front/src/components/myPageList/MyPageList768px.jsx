@@ -5,30 +5,50 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton768px } from "../../ui-components";
 import "../../css/Font.css";
 import { getAutoCompound } from "../../api";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 const MyPageList768px = (props) => {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    setLpTokenValue,
+    setLpToken,
+    setFirstToken,
+    setSecondToken,
+    setFirstImgToken,
+    setSecondImgToken,
+    LPTokenBalance,
+    item,
+    autoCompoundStatus,
+    pid,
+    getAutoCompoundStatusFunc,
+    lpTokenValue,
+    idx,
+    lpToken,
+    mypageLpListUp,
+    dispatch,
+    navigate,
+    ...rest
+  } = props;
   const [auto, setAuto] = useState();
   const account2 = useSelector((state) => state.account);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
   const mypageMethod = () => {
-    props.setLpTokenValue(props?.item?.LPTokenBalance);
-    props.setLpToken(props?.item?.name);
-    props.setFirstToken(props?.item?.firstToken);
-    props.setSecondToken(props?.item?.secondToken);
-    props.setFirstImgToken(props?.item?.mainNetLogo);
-    props.setSecondImgToken(props?.item?.platformLogo);
+    setLpTokenValue(item?.LPTokenBalance);
+    setLpToken(item?.name);
+    setFirstToken(item?.firstToken);
+    setSecondToken(item?.secondToken);
+    setFirstImgToken(item?.mainNetLogo);
+    setSecondImgToken(item?.platformLogo);
   };
   const checkAuto = async () => {
-    const result = await getAutoCompound(account2, props.item.name);
+    const result = await getAutoCompound(account2, item.name);
     setAuto(result);
   };
   useEffect(() => {
     checkAuto();
-  }, [props?.autoCompoundStatus]);
+  }, [autoCompoundStatus]);
   return (
     <>
       <ItemWrap
@@ -40,12 +60,7 @@ const MyPageList768px = (props) => {
         <motion.div
           onClick={() => {
             toggleOpen();
-            props.setLpTokenValue(props?.item?.LPTokenBalance);
-            props.setLpToken(props?.item?.name);
-            props.setFirstToken(props?.item?.firstToken);
-            props.setSecondToken(props?.item?.secondToken);
-            props.setFirstImgToken(props?.item?.mainNetLogo);
-            props.setSecondImgToken(props?.item?.platformLogo);
+            mypageMethod();
           }}
           layout
           style={{
@@ -313,7 +328,7 @@ const MyPageList768px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`MY ${props?.item?.oracleId.split("-")[0]}`}
+                  children={`MY ${item?.oracleId.split("-")[0]}`}
                   {...getOverrideProps(overrides, "DFS")}
                 ></Text>
               </Flex>
@@ -350,7 +365,7 @@ const MyPageList768px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`MY ${props?.item?.oracleId.split("-")[1]}`}
+                  children={`MY ${item?.oracleId.split("-")[1]}`}
                   {...getOverrideProps(overrides, "ETH")}
                 ></Text>
               </Flex>
@@ -415,7 +430,7 @@ const MyPageList768px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.idx + 1}
+                  children={idx + 1}
                   {...getOverrideProps(overrides, "1")}
                 ></Text>
               </Flex>
@@ -464,7 +479,7 @@ const MyPageList768px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.item.name}
+                  children={item.name}
                   {...getOverrideProps(overrides, "DFS-ETH")}
                 ></Text>
               </Flex>
@@ -562,7 +577,7 @@ const MyPageList768px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${props?.item?.tvl.slice(0, 10) / 100}`}
+                  children={`${item?.tvl.slice(0, 10) / 100}`}
                   {...getOverrideProps(overrides, "040773350")}
                 ></Text>
               </Flex>
@@ -611,7 +626,7 @@ const MyPageList768px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${props.item.fee}%`}
+                  children={`${item.fee}%`}
                   {...getOverrideProps(overrides, "0.3%")}
                 ></Text>
               </Flex>
@@ -661,7 +676,7 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`${
-                    Math.floor(props?.item?.DFSTokenBalance.slice(0, 6)) / 100
+                    Math.floor(item?.DFSTokenBalance.slice(0, 6)) / 100
                   } `}
                   {...getOverrideProps(overrides, "040892928")}
                 ></Text>
@@ -708,7 +723,7 @@ const MyPageList768px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`${
-                    Math.floor(props?.item?.OtherTokenBalance.slice(0, 6)) / 100
+                    Math.floor(item?.OtherTokenBalance.slice(0, 6)) / 100
                   } `}
                   {...getOverrideProps(overrides, "040892930")}
                 ></Text>
@@ -731,19 +746,19 @@ const MyPageList768px = (props) => {
               }}
             >
               <DepositButton768px
-                autoState={props?.item?.getAutoCompoundStatus}
-                lpBalanceValue={props.lpBalanceValue}
-                mypagelist={props.item}
-                lptokenvalue={props.lptokenvalue}
-                lptoken={props.lptoken}
-                mypagelplistup={props.mypagelplistup}
-                pid={props?.pid}
-                setlptokenvalue={props.setLpTokenValue}
+                autoState={item?.getAutoCompoundStatus}
+                mypageList={item}
+                lpTokenValue={lpTokenValue}
+                lpToken={lpToken}
+                mypageLpListUp={mypageLpListUp}
+                pid={pid}
+                setLpTokenValue={setLpTokenValue}
                 mypageMethod={mypageMethod}
-                lpTokenBalance={props?.item?.LPTokenBalance}
-                setLpTokenValue={props.setLpTokenValue}
-                getAutoCompoundStatusFunc={props?.getAutoCompoundStatusFunc}
+                lpTokenBalance={item?.LPTokenBalance}
+                getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
                 auto={auto}
+                dispatch={dispatch}
+                navigate={navigate}
               />
             </motion.div>
           </SubWrap>

@@ -143,6 +143,7 @@ router.post("/mypage", async (req: Request, res: Response) => {
     res.send(filterPool);
   } catch (error) {
     console.log(error);
+    res.send();
   }
 });
 router.get("/datesync", async (req: Request, res: Response) => {
@@ -171,6 +172,7 @@ router.get("/datesync", async (req: Request, res: Response) => {
     }, timeUntilNextUpdate);
   } catch (error) {
     console.log(error);
+    res.send();
   }
 });
 
@@ -206,6 +208,7 @@ router.get("/lastDayOfMonth", async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.log(error);
+    res.send();
   }
 });
 export default router;

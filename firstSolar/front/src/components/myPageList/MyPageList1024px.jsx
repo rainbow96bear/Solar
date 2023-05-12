@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton1024px } from "../../ui-components";
@@ -26,6 +26,8 @@ const MyPageList1024px = (props) => {
     idx,
     lpToken,
     mypageLpListUp,
+    dispatch,
+    navigate,
     ...rest
   } = props;
   const [auto, setAuto] = useState();
@@ -43,7 +45,6 @@ const MyPageList1024px = (props) => {
   };
   const checkAuto = async () => {
     const result = await getAutoCompound(account2, item.name);
-    console.log("component", result);
     setAuto(result);
   };
   useEffect(() => {
@@ -686,17 +687,18 @@ const MyPageList1024px = (props) => {
             >
               <DepositButton1024px
                 autoState={item?.getAutoCompoundStatus}
-                mypagelist={item}
-                lptokenvalue={lpTokenValue}
-                lptoken={lpToken}
-                mypagelplistup={mypageLpListUp}
+                mypageList={item}
+                lpTokenValue={lpTokenValue}
+                lpToken={lpToken}
+                mypageLpListUp={mypageLpListUp}
                 pid={pid}
-                setlptokenvalue={setLpTokenValue}
+                setLpTokenValue={setLpTokenValue}
                 mypageMethod={mypageMethod}
                 lpTokenBalance={item?.LPTokenBalance}
-                setLpTokenValue={setLpTokenValue}
                 getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
                 auto={auto}
+                dispatch={dispatch}
+                navigate={navigate}
               />
             </motion.div>
           </SubWrap>

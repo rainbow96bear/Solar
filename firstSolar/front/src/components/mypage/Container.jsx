@@ -19,10 +19,10 @@ const MypageContainer = () => {
   const [secondImgToken, setSecondImgToken] = useState();
 
   const dispatch = useDispatch();
-  const params = useLocation().search.replace("?", "");
-  const { account } = useAccount();
-  const account2 = useSelector((state) => state.account);
   const navigate = useNavigate();
+  const { account } = useAccount();
+  const params = useLocation().search.replace("?", "");
+  const account2 = useSelector((state) => state.account);
 
   const getAutoCompoundStatusFunc = async () => {
     try {
@@ -80,6 +80,8 @@ const MypageContainer = () => {
       setSecondToken={setSecondToken}
       setFirstImgToken={setFirstImgToken}
       setSecondImgToken={setSecondImgToken}
+      dispatch={dispatch}
+      navigate={navigate}
     ></MypageComponent>
   );
 };

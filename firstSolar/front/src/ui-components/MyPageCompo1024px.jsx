@@ -31,6 +31,8 @@ export default function MyPageCompo1024px(props) {
     setSecondToken,
     setFirstImgToken,
     setSecondImgToken,
+    dispatch,
+    navigate,
     ...rest
   } = props;
 
@@ -372,6 +374,8 @@ export default function MyPageCompo1024px(props) {
             mypageLpListUp={mypageLpListUp}
             getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
             autoCompoundStatus={autoCompoundStatus}
+            dispatch={dispatch}
+            navigate={navigate}
           />
         ))}
       </Flex>

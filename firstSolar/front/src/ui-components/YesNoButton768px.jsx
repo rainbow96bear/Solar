@@ -1,10 +1,9 @@
-import * as React from "react";
+import { useEffect } from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import "../css/Font.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useWeb3 } from "../modules/useWeb3";
 
 import { useAccount } from "wagmi";
@@ -15,12 +14,21 @@ import { useWeb3C } from "../modules/useWeb3Coinbase";
 import { setIsLoading } from "../modules/isLoading";
 
 export default function YesNoButton768px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    withDrawAmountValue,
+    lpTokenValue,
+    setLpTokenValue,
+    setRemoveQuestion,
+    lpSymbol,
+    mypageLpListUp,
+    mypageMethod,
+    dispatch,
+    navigate,
+    ...rest
+  } = props;
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const account2 = useSelector((state) => state.account);
-  const [render, setRender] = React.useState(false);
   const { web3, login } = useWeb3();
   const { web3T, loginT } = useWeb3T();
   const { web3C, loginC } = useWeb3C();
@@ -30,8 +38,8 @@ export default function YesNoButton768px(props) {
       dispatch(setIsLoading(true));
       const result2 = await removeLiquidity(
         account2 ? account2 : account,
-        props?.withDrawAmountValue,
-        props?.lpSymbol
+        withDrawAmountValue,
+        lpSymbol
       );
 
       let removeTx;
@@ -43,9 +51,9 @@ export default function YesNoButton768px(props) {
         removeTx = await web3C.eth.sendTransaction(result2);
       }
 
-      props?.setLpTokenValue(props?.lptokenvalue - props?.withDrawAmountValue);
+      setLpTokenValue(lpTokenValue - withDrawAmountValue);
       dispatch(setIsLoading(false));
-      props.setquestionmark(0);
+      setRemoveQuestion(0);
       navigate("/redirectHome");
     } catch (error) {
       console.error(error);
@@ -53,7 +61,7 @@ export default function YesNoButton768px(props) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
@@ -193,7 +201,7 @@ export default function YesNoButton768px(props) {
         >
           <Flex
             onClick={() => {
-              props.setquestionmark(0);
+              setRemoveQuestion(0);
             }}
             gap="10px"
             direction="row"

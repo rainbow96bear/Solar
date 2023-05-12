@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
@@ -35,25 +35,40 @@ import "../css/Modal.css";
 import LoadingCompo from "./LoadingCompo";
 
 export default function QuestionModalDeposit(props) {
-  const { overrides, setquestionmark, ...rest } = props;
+  const {
+    overrides,
+    autoState,
+    setQuestionMark,
+    mypageList,
+    mypageLpListUp,
+    lpTokenValue,
+    lpToken,
+    setLpTokenValue,
+    mypageMethod,
+    pid,
+    lpTokenBalance,
+    getAutoCompoundStatusFunc,
+    auto,
+    dispatch,
+    navigate,
+    ...rest
+  } = props;
   const { web3, account, chainId, login } = useWeb3();
   const { web3T, accountT, loginT } = useWeb3T();
   const { web3C, accountC, loginC } = useWeb3C();
-  const [balanceChange, setBalanceChange] = React.useState(false);
-  const [autoChange, setAutoChange] = React.useState(props?.auto);
-  const [modalText, setModalText] = React.useState("");
+  const [balanceChange, setBalanceChange] = useState(false);
+  const [autoChange, setAutoChange] = useState(auto);
+  const [modalText, setModalText] = useState("");
 
-  const dispatch = useDispatch();
   const account2 = useSelector((state) => state.account);
   const isLoading = useSelector((state) => state.isLoading);
 
-  const [depositAmountValue, setDepositAmountValue] = React.useState(0);
+  const [depositAmountValue, setDepositAmountValue] = useState(0);
 
-  const [depositSuccessModalOpen, setDepositSuccessModalOpen] =
-    React.useState(false);
-  const [depositFailModalOpen, setDepositFailModalOpen] = React.useState(false);
+  const [depositSuccessModalOpen, setDepositSuccessModalOpen] = useState(false);
+  const [depositFailModalOpen, setDepositFailModalOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
@@ -69,11 +84,7 @@ export default function QuestionModalDeposit(props) {
     try {
       dispatch(setIsLoading(true));
       setModalText("Deposit");
-      const result1 = await approveLp(
-        account2,
-        +depositAmountValue,
-        props?.lptoken
-      );
+      const result1 = await approveLp(account2, +depositAmountValue, lpToken);
 
       let transactionResult1;
 
@@ -85,11 +96,7 @@ export default function QuestionModalDeposit(props) {
         transactionResult1 = await web3C.eth.sendTransaction(result1);
       }
 
-      const result2 = await deposit(
-        account2,
-        +depositAmountValue,
-        props?.lptoken
-      );
+      const result2 = await deposit(account2, +depositAmountValue, lpToken);
 
       let transactionResult2;
 
@@ -118,10 +125,10 @@ export default function QuestionModalDeposit(props) {
     try {
       setModalText("Auto Compounding");
       dispatch(setIsLoading(true));
-      const result1 = await setAutoCompound(account2, props?.lptoken);
+      const result1 = await setAutoCompound(account2, lpToken);
 
       let transactionResult1 = await web3.eth.sendTransaction(result1);
-      await props?.getAutoCompoundStatusFunc();
+      await getAutoCompoundStatusFunc();
       dispatch(setIsLoading(false));
       dispatch(setCompleteModal(true));
       setDepositSuccessModalOpen(true);
@@ -132,11 +139,11 @@ export default function QuestionModalDeposit(props) {
     }
   };
 
-  React.useEffect(() => {
-    props?.mypageMethod();
+  useEffect(() => {
+    mypageMethod();
   }, [balanceChange]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.style = `overflow: hidden`;
     return () => (document.body.style = `overflow: auto`);
   }, []);
@@ -236,7 +243,7 @@ export default function QuestionModalDeposit(props) {
               shrink="0"
               position="relative"
               onClick={() => {
-                setquestionmark(0);
+                setQuestionMark(0);
               }}
               {...getOverrideProps(overrides, "Vector")}
             ></Icon>
@@ -303,7 +310,7 @@ export default function QuestionModalDeposit(props) {
               {...getOverrideProps(overrides, "Frame 90")}
             >
               <SwitchField
-                isChecked={props?.auto ? true : false}
+                isChecked={auto ? true : false}
                 onClick={(e) => {
                   e.preventDefault();
                   setAutoChange((state) => !state);
@@ -346,7 +353,7 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props?.auto ? "ON" : "OFF"}
+                  children={auto ? "ON" : "OFF"}
                   {...getOverrideProps(overrides, "DEX Name40822792")}
                 ></Text>
               </Flex>
@@ -428,7 +435,7 @@ export default function QuestionModalDeposit(props) {
                   borderRadius="35px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
-                  src={props.mypagelist.mainNetLogo || logo}
+                  src={mypageList.mainNetLogo || logo}
                   {...getOverrideProps(overrides, "ghrgclzzd 740822785")}
                 ></Image>
                 <Text
@@ -451,7 +458,7 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.mypagelist.firstToken || "불러오는 중"}
+                  children={mypageList.firstToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822786")}
                 ></Text>
               </Flex>
@@ -517,7 +524,7 @@ export default function QuestionModalDeposit(props) {
                   borderRadius="35px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
-                  src={props.mypagelist.platformLogo || logo}
+                  src={mypageList.platformLogo || logo}
                   {...getOverrideProps(overrides, "ghrgclzzd 740822791")}
                 ></Image>
                 <Text
@@ -540,7 +547,7 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.mypagelist.secondToken || "불러오는 중"}
+                  children={mypageList.secondToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822792")}
                 ></Text>
               </Flex>
@@ -634,7 +641,7 @@ export default function QuestionModalDeposit(props) {
                     borderRadius="35px"
                     padding="0px 0px 0px 0px"
                     objectFit="cover"
-                    src={props.mypagelist.mainNetLogo || logo}
+                    src={mypageList.mainNetLogo || logo}
                     {...getOverrideProps(overrides, "ghrgclzzd 740822807")}
                   ></Image>
                   <Text
@@ -657,7 +664,7 @@ export default function QuestionModalDeposit(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={props?.lptoken || "불러오는 중"}
+                    children={lpToken || "불러오는 중"}
                     {...getOverrideProps(overrides, "DEX Name40822808")}
                   ></Text>
                 </Flex>
@@ -694,8 +701,7 @@ export default function QuestionModalDeposit(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={`Balance :${
-                      parseInt((props?.lptokenvalue / 10 ** 18) * 10000) /
-                        10000 || 0
+                      parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000 || 0
                     }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>
@@ -714,8 +720,8 @@ export default function QuestionModalDeposit(props) {
                 value={depositAmountValue}
                 onInput={(e) => setDepositAmountValue(e.target.value)}
                 onChange={(e) => {
-                  if (+e.target.value > +props.lptokenvalue) {
-                    e.target.value = props.lptokenvalue;
+                  if (+e.target.value > +lpTokenValue) {
+                    e.target.value = lpTokenValue;
                   }
                   setDepositAmountValue(e.target.value);
                 }}

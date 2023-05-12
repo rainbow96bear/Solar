@@ -17,7 +17,23 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 export default function DepositButton1024px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    autoState,
+    mypageList,
+    lpTokenValue,
+    lpToken,
+    mypageLpListUp,
+    pid,
+    setLpTokenValue,
+    mypageMethod,
+    lpTokenBalance,
+    getAutoCompoundStatusFunc,
+    auto,
+    dispatch,
+    navigate,
+    ...rest
+  } = props;
   const isLoading = useSelector((state) => state.isLoading);
   const [questionMark, setQuestionMark] = useState(0);
 
@@ -159,32 +175,32 @@ export default function DepositButton1024px(props) {
       </Flex>
       {questionMark == 1 && (
         <QuestionModalDeposit
-          autoState={props?.autoState}
-          setquestionmark={setQuestionMark}
-          lpBalanceValue={props.lpBalanceValue}
-          mypagelist={props.mypagelist}
-          mypagelplistup={props.mypagelplistup}
-          lptokenvalue={props.lptokenvalue}
-          lptoken={props.lptoken}
-          setlptokenvalue={props?.setlptokenvalue}
-          mypageMethod={props?.mypageMethod}
-          pid={props?.pid}
-          lpTokenBalance={props?.lpTokenBalance}
-          getAutoCompoundStatusFunc={props?.getAutoCompoundStatusFunc}
-          auto={props?.auto}
+          autoState={autoState}
+          setQuestionMark={setQuestionMark}
+          mypageList={mypageList}
+          mypageLpListUp={mypageLpListUp}
+          lpTokenValue={lpTokenValue}
+          lpToken={lpToken}
+          setLpTokenValue={setLpTokenValue}
+          mypageMethod={mypageMethod}
+          pid={pid}
+          lpTokenBalance={lpTokenBalance}
+          getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+          auto={auto}
         ></QuestionModalDeposit>
       )}
       {questionMark == 2 && (
         <QuestionModalWithDraw
-          setquestionmark={setQuestionMark}
-          lpBalanceValue={props.lpBalanceValue}
-          mypagelist={props.mypagelist}
-          lptokenvalue={props.lptokenvalue}
-          mypagelplistup={props.mypagelplistup}
-          lptoken={props.lptoken}
-          mypageMethod={props?.mypageMethod}
-          pid={props?.pid}
-          setLpTokenValue={props.setLpTokenValue}
+          setQuestionMark={setQuestionMark}
+          mypageList={mypageList}
+          lpTokenValue={lpTokenValue}
+          mypageLpListUp={mypageLpListUp}
+          lpToken={lpToken}
+          mypageMethod={mypageMethod}
+          pid={pid}
+          setLpTokenValue={setLpTokenValue}
+          dispatch={dispatch}
+          navigate={navigate}
         ></QuestionModalWithDraw>
       )}
       {isLoading && (
