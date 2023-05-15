@@ -213,7 +213,7 @@ export default function BeforeHeadCom320px(props) {
                   placeholder="Search"
                   justifyContent="center"
                   position="absolute"
-                  top="55px"
+                  top="75px"
                   alignItems="center"
                   isDisabled={false}
                   labelHidden={false}
