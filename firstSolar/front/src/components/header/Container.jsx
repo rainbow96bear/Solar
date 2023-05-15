@@ -22,7 +22,7 @@ const HeaderContainer = () => {
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
-    setInputValue(sanitizedValue);
+    setInputValue((prevInputValue) => sanitizedValue);
   };
 
   const handleSearch = () => {

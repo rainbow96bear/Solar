@@ -23,6 +23,7 @@ import DepositFaildModal from "./DepositFaildModal";
 import { useWeb3T } from "../modules/useWeb3Trust";
 import { useWeb3C } from "../modules/useWeb3Coinbase";
 import "../css/Modal.css";
+import LoadingCompo from "./LoadingCompo";
 
 export default function QuestionModalWithDraw(props) {
   const {
@@ -39,6 +40,8 @@ export default function QuestionModalWithDraw(props) {
     navigate,
     ...rest
   } = props;
+
+  const isLoading = useSelector((state) => state.isLoading);
   const [modalText, setModalText] = useState();
   const account2 = useSelector((state) => state.account);
   const { web3, login } = useWeb3();
@@ -582,8 +585,12 @@ export default function QuestionModalWithDraw(props) {
                 value={withDrawAmountValue}
                 onInput={(e) => setWithDrawAmountValue(e.target.value)}
                 onChange={(e) => {
-                  if (+e.target.value > +lpTokenValue) {
-                    e.target.value = lpTokenValue;
+                  if (
+                    +e.target.value >
+                    parseInt((lpBalance / 10 ** 18) * 10000) / 10000
+                  ) {
+                    e.target.value =
+                      parseInt((lpBalance / 10 ** 18) * 10000) / 10000;
                   }
                   setWithDrawAmountValue(e.target.value);
                 }}
@@ -720,6 +727,11 @@ export default function QuestionModalWithDraw(props) {
             setDepositFailModalOpen={setWithDrawFailModalOpen}
             modalText={modalText}
           ></DepositFaildModal>
+        </LoadingModal>
+      )}
+      {isLoading && (
+        <LoadingModal>
+          <LoadingCompo />
         </LoadingModal>
       )}
     </ModalCover>

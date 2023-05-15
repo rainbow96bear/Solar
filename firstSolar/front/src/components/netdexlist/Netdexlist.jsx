@@ -6,7 +6,18 @@ import { useDispatch } from "react-redux";
 import { setIsLoading } from "../../modules/isLoading";
 
 const Netlist1024px = (props) => {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    item,
+    pageIndex,
+    filter,
+    setFilter,
+    setCurrentPagePoolList,
+    setTotalPages,
+    networkArray,
+    value,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <motion.div
@@ -29,10 +40,10 @@ const Netlist1024px = (props) => {
         onClick={async () => {
           try {
             dispatch(setIsLoading(true));
-            const temp = await netList(props?.item, props?.pageIndex);
-            props.setCurrentPagePoolList(temp.poolListData);
-            props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-            props.setFilter(props?.item);
+            const temp = await netList(item, pageIndex);
+            setCurrentPagePoolList(temp.poolListData);
+            setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+            setFilter(item);
             dispatch(setIsLoading(false));
           } catch (error) {
             console.error(error);
@@ -52,15 +63,13 @@ const Netlist1024px = (props) => {
         position="relative"
         borderRadius="15px"
         backgroundColor={
-          props?.item == props?.filter
-            ? "rgba(235,069,074,0.85)"
-            : "rgba(248,251,251,0.35)"
+          item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
         }
         padding="10px 10px 10px 10px"
         {...getOverrideProps(overrides, "Frame 1939913188")}
       >
         <Image
-          src={`/imgs/mainNet/${props?.item}.jpg`}
+          src={`/imgs/mainNet/${item}.jpg`}
           width="38px"
           height="38px"
           display="block"
@@ -80,7 +89,16 @@ const Netlist1024px = (props) => {
 };
 
 const Dexlist1024px = (props) => {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    item,
+    pageIndex,
+    setCurrentPagePoolList,
+    setTotalPages,
+    setFilter,
+    filter,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -104,10 +122,10 @@ const Dexlist1024px = (props) => {
           onClick={async () => {
             try {
               dispatch(setIsLoading(true));
-              const temp = await dexList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setFilter(props?.item);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              const temp = await dexList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
@@ -127,13 +145,11 @@ const Dexlist1024px = (props) => {
           position="relative"
           borderRadius="15px"
           padding="10px 10px 10px 10px"
-          backgroundColor={
-            props?.item == props?.filter ? "rgba(0,125,122,0.85)" : ""
-          }
+          backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/platform/${props?.item}.jpg`}
+            src={`/imgs/platform/${item}.jpg`}
             width="38px"
             height="38px"
             display="block"
@@ -154,7 +170,16 @@ const Dexlist1024px = (props) => {
 };
 
 const Netlist768px = (props) => {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    item,
+    filter,
+    setFilter,
+    setCurrentPagePoolList,
+    setTotalPages,
+    pageIndex,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -177,10 +202,10 @@ const Netlist768px = (props) => {
           onClick={async () => {
             try {
               dispatch(setIsLoading(true));
-              const temp = await netList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              props.setFilter(props?.item);
+              const temp = await netList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              setFilter(item);
               dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
@@ -201,14 +226,12 @@ const Netlist768px = (props) => {
           borderRadius="10px"
           padding="10px 10px 10px 10px"
           backgroundColor={
-            props?.item == props?.filter
-              ? "rgba(235,069,074,0.85)"
-              : "rgba(248,251,251,0.35)"
+            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
           }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/mainNet/${props?.item}.jpg`}
+            src={`/imgs/mainNet/${item}.jpg`}
             width="40px"
             height="40px"
             display="block"
@@ -229,7 +252,16 @@ const Netlist768px = (props) => {
 };
 
 const Dexlist768px = (props) => {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    item,
+    setCurrentPagePoolList,
+    setTotalPages,
+    setFilter,
+    pageIndex,
+    filter,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -252,10 +284,10 @@ const Dexlist768px = (props) => {
           onClick={async () => {
             try {
               dispatch(setIsLoading(true));
-              const temp = await dexList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setFilter(props?.item);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              const temp = await dexList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
@@ -275,13 +307,11 @@ const Dexlist768px = (props) => {
           position="relative"
           borderRadius="10px"
           padding="10px 10px 10px 10px"
-          backgroundColor={
-            props?.item == props?.filter ? "rgba(0,125,122,0.85)" : ""
-          }
+          backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/platform/${props?.item}.jpg`}
+            src={`/imgs/platform/${item}.jpg`}
             width="40px"
             height="40px"
             display="block"
@@ -302,7 +332,16 @@ const Dexlist768px = (props) => {
 };
 
 const Netlist320px = (props) => {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    item,
+    filter,
+    setFilter,
+    setCurrentPagePoolList,
+    setTotalPages,
+    pageIndex,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -325,10 +364,10 @@ const Netlist320px = (props) => {
           onClick={async () => {
             try {
               dispatch(setIsLoading(true));
-              const temp = await netList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setFilter(props?.item);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              const temp = await netList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
@@ -349,14 +388,12 @@ const Netlist320px = (props) => {
           borderRadius="15px"
           padding="10px 10px 10px 10px"
           backgroundColor={
-            props?.item == props?.filter
-              ? "rgba(235,069,074,0.85)"
-              : "rgba(248,251,251,0.35)"
+            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
           }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/mainNet/${props?.item}.jpg`}
+            src={`/imgs/mainNet/${item}.jpg`}
             width="38px"
             height="38px"
             display="block"
@@ -377,7 +414,16 @@ const Netlist320px = (props) => {
 };
 
 const Dexlist320px = (props) => {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    item,
+    filter,
+    setFilter,
+    setCurrentPagePoolList,
+    setTotalPages,
+    pageIndex,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
 
   return (
@@ -401,10 +447,10 @@ const Dexlist320px = (props) => {
           onClick={async () => {
             try {
               dispatch(setIsLoading(true));
-              const temp = await dexList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setFilter(props?.item);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              const temp = await dexList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
               dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
@@ -424,13 +470,11 @@ const Dexlist320px = (props) => {
           position="relative"
           borderRadius="15px"
           padding="10px 10px 10px 10px"
-          backgroundColor={
-            props?.item == props?.filter ? "rgba(0,125,122,0.85)" : ""
-          }
+          backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/platform/${props?.item}.jpg`}
+            src={`/imgs/platform/${item}.jpg`}
             width="38px"
             height="38px"
             display="block"
