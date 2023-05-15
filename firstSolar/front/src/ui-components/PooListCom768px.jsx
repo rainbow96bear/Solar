@@ -21,7 +21,9 @@ export default function PooListCom768px(props) {
     mainNetList,
     mainNetList1,
     pageIndex,
+    setPageIndex,
     filter,
+    setFilter,
     currentPagePoolList,
     setCurrentPagePoolList,
     setTotalPages,
@@ -138,15 +140,15 @@ export default function PooListCom768px(props) {
                 padding="0px 0px 0px 0px"
                 {...getOverrideProps(overrides, "Frame 3839412790")}
               >
-                {props?.mainNetList?.map((item, idx) => (
+                {mainNetList?.map((item, idx) => (
                   <Netlist768px
                     key={`Netlist768px-1${idx}`}
                     item={item}
-                    filter={props?.filter}
-                    setFilter={props?.setFilter}
-                    setCurrentPagePoolList={props?.setCurrentPagePoolList}
-                    setTotalPages={props?.setTotalPages}
-                    pageIndex={props?.pageIndex}
+                    filter={filter}
+                    setFilter={setFilter}
+                    setCurrentPagePoolList={setCurrentPagePoolList}
+                    setTotalPages={setTotalPages}
+                    pageIndex={pageIndex}
                   />
                 ))}
               </Flex>
@@ -165,15 +167,15 @@ export default function PooListCom768px(props) {
                 padding="0px 0px 0px 0px"
                 {...getOverrideProps(overrides, "Frame 3839412790")}
               >
-                {props?.mainNetList1?.map((item, idx) => (
+                {mainNetList1?.map((item, idx) => (
                   <Netlist768px
                     key={`Netlist768px-2${idx}`}
                     item={item}
-                    pageIndex={props?.pageIndex}
-                    setCurrentPagePoolList={props?.setCurrentPagePoolList}
-                    setTotalPages={props?.setTotalPages}
-                    setFilter={props?.setFilter}
-                    filter={props?.filter}
+                    pageIndex={pageIndex}
+                    setCurrentPagePoolList={setCurrentPagePoolList}
+                    setTotalPages={setTotalPages}
+                    setFilter={setFilter}
+                    filter={filter}
                   />
                 ))}
               </Flex>
@@ -259,14 +261,15 @@ export default function PooListCom768px(props) {
                 padding="0px 0px 0px 0px"
                 {...getOverrideProps(overrides, "Frame 3839412790")}
               >
-                {props?.platformList?.map((item, idx) => (
+                {platformList?.map((item, idx) => (
                   <Dexlist768px
                     key={`platformList768px-1${idx}`}
                     item={item}
-                    setCurrentPagePoolList={props?.setCurrentPagePoolList}
-                    setTotalPages={props?.setTotalPages}
-                    pageIndex={props?.pageIndex}
-                    filter={props?.filter}
+                    setCurrentPagePoolList={setCurrentPagePoolList}
+                    setTotalPages={setTotalPages}
+                    setFilter={setFilter}
+                    pageIndex={pageIndex}
+                    filter={filter}
                   />
                 ))}
               </Flex>
@@ -285,12 +288,12 @@ export default function PooListCom768px(props) {
                 padding="0px 0px 0px 0px"
                 {...getOverrideProps(overrides, "Frame 3839412790")}
               >
-                {props?.platformList1?.map((item, idx) => (
+                {platformList1?.map((item, idx) => (
                   <Dexlist768px
                     key={`platformList768px-2${idx}`}
                     item={item}
-                    setCurrentPagePoolList={props?.setCurrentPagePoolList}
-                    filter={props?.filter}
+                    setCurrentPagePoolList={setCurrentPagePoolList}
+                    filter={filter}
                   />
                 ))}
               </Flex>
@@ -304,7 +307,7 @@ export default function PooListCom768px(props) {
             initial={{ borderRadius: 25 }}
             transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
-            {props?.currentPagePoolList?.map((item, idx) => (
+            {currentPagePoolList?.map((item, idx) => (
               <Poolitem768px
                 gap="17px"
                 direction="column"
@@ -318,24 +321,22 @@ export default function PooListCom768px(props) {
                 padding="0px 0px 0px 0px"
                 key={`PoolList768px-${idx}`}
                 item={item}
-                last={
-                  idx == props?.currentPagePoolList.length - 1 ? true : false
-                }
+                last={idx == currentPagePoolList.length - 1 ? true : false}
               />
             ))}
           </motion.div>
         </LayoutGroup>
         <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
           <Pagination
-            {...props?.paginationProps}
+            {...paginationProps}
             onChange={(pageNum) => {
               setPageIndex(pageNum);
             }}
             onNext={() => {
-              setPageIndex(props?.pageIndex + 1);
+              setPageIndex(pageIndex + 1);
             }}
             onPrevious={() => {
-              setPageIndex(props?.pageIndex - 1);
+              setPageIndex(pageIndex - 1);
             }}
           />
         </Flex>
