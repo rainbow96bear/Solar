@@ -35,6 +35,7 @@ import "../css/Modal.css";
 import LoadingCompo from "./LoadingCompo";
 
 export default function QuestionModalDeposit(props) {
+  const dispatch = useDispatch();
   const {
     overrides,
     autoState,
@@ -49,7 +50,6 @@ export default function QuestionModalDeposit(props) {
     lpTokenBalance,
     getAutoCompoundStatusFunc,
     auto,
-    dispatch,
     navigate,
     ...rest
   } = props;
@@ -67,8 +67,8 @@ export default function QuestionModalDeposit(props) {
 
   const [depositSuccessModalOpen, setDepositSuccessModalOpen] = useState(false);
   const [depositFailModalOpen, setDepositFailModalOpen] = useState(false);
-
   useEffect(() => {
+    console.log(mypageList);
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
@@ -129,9 +129,10 @@ export default function QuestionModalDeposit(props) {
 
       let transactionResult1 = await web3.eth.sendTransaction(result1);
       await getAutoCompoundStatusFunc();
-      dispatch(setIsLoading(false));
+
       dispatch(setCompleteModal(true));
       setDepositSuccessModalOpen(true);
+      dispatch(setIsLoading(false));
     } catch (error) {
       console.error(error);
       dispatch(setIsLoading(false));
@@ -160,7 +161,7 @@ export default function QuestionModalDeposit(props) {
         gap="38px"
         direction="column"
         width={{ base: "85vw", small: "85vw", medium: "80vw" }}
-        height={{ base: "unset", small: "unset", medium: "unset" }}
+        // height="100%"
         justifyContent="flex-start"
         alignItems="flex-start"
         position="relative"
@@ -168,7 +169,7 @@ export default function QuestionModalDeposit(props) {
         padding="0px 0px 45px 0px"
         backgroundColor="rgba(252,253,254,1)"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        overflow="hidden"
+        overflow=""
         {...getOverrideProps(overrides, "Deposit1024px")}
         {...rest}
       >
@@ -458,7 +459,7 @@ export default function QuestionModalDeposit(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={mypageList.firstToken || "불러오는 중"}
+                  children={mypageList?.firstToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822786")}
                 ></Text>
               </Flex>
@@ -856,10 +857,13 @@ const ModalCover = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
+  padding-top: 20px;
   position: fixed;
   left: 0%;
   top: 0%;
   right: 0%;
+  bottom: 0%;
+  overflow: auto;
   justify-content: center;
   align-items: center;
   z-index: 88;

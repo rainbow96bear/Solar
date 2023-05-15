@@ -8,8 +8,12 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
 import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
+import { useSelector } from "react-redux";
+import LoadingCompo from "./LoadingCompo";
 
 export default function AddLiquidityBottom768px(props) {
+  const isLoading = useSelector((state) => state.isLoading);
+
   const {
     overrides,
     addLiquidityPossibility,
@@ -720,6 +724,11 @@ export default function AddLiquidityBottom768px(props) {
           <AddLiquidityFaildModal
             setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
           />
+        </LoadingModal>
+      )}
+      {isLoading && (
+        <LoadingModal>
+          <LoadingCompo />
         </LoadingModal>
       )}
     </Flex>

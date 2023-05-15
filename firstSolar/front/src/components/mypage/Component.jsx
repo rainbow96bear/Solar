@@ -22,92 +22,93 @@ const MypageComponent = ({
   setSecondToken,
   setFirstImgToken,
   setSecondImgToken,
-  dispatch,
   navigate,
+  isLoading2,
+  setIsLoading2,
 }) => {
   return (
-    <>
-      <MypPage>
-        {isDesktop && (
-          <motion.div
-            style={{
-              width: "83vw",
-              height: "unset",
-              backgroundColor: "rgba(246,247,248,0.8)",
-              boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
-              borderRadius: "25px",
-              backgroundImage:
-                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
-            }}
-            whileHover={{
-              borderRadius: "55px",
-              backgroundColor: "rgba(247,239,227,0.75)",
-            }}
-          >
-            <MyPageCompo1024px
-              myList={myList}
-              getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
-              autoCompoundStatus={autoCompoundStatus}
-              mypageLpListUp={mypageLpListUp}
-              lpTokenValue={lpTokenValue}
-              lpToken={lpToken}
-              firstToken={firstToken}
-              secondToken={secondToken}
-              firstImgToken={firstImgToken}
-              secondImgToken={secondImgToken}
-              setLpTokenValue={setLpTokenValue}
-              setLpToken={setLpToken}
-              setFirstToken={setFirstToken}
-              setSecondToken={setSecondToken}
-              setFirstImgToken={setFirstImgToken}
-              setSecondImgToken={setSecondImgToken}
-              dispatch={dispatch}
-              navigate={navigate}
-            ></MyPageCompo1024px>
-          </motion.div>
-        )}
+    <MypPage>
+      {isDesktop && (
+        <motion.div
+          style={{
+            width: "83vw",
+            height: "unset",
+            backgroundColor: "rgba(246,247,248,0.8)",
+            boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
+            borderRadius: "25px",
+            backgroundImage:
+              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+          }}
+          whileHover={{
+            borderRadius: "55px",
+            backgroundColor: "rgba(247,239,227,0.75)",
+          }}
+        >
+          <MyPageCompo1024px
+            myList={myList}
+            getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+            autoCompoundStatus={autoCompoundStatus}
+            mypageLpListUp={mypageLpListUp}
+            lpTokenValue={lpTokenValue}
+            lpToken={lpToken}
+            firstToken={firstToken}
+            secondToken={secondToken}
+            firstImgToken={firstImgToken}
+            secondImgToken={secondImgToken}
+            setLpTokenValue={setLpTokenValue}
+            setLpToken={setLpToken}
+            setFirstToken={setFirstToken}
+            setSecondToken={setSecondToken}
+            setFirstImgToken={setFirstImgToken}
+            setSecondImgToken={setSecondImgToken}
+            navigate={navigate}
+            isLoading2={isLoading2}
+            setIsLoading2={setIsLoading2}
+          ></MyPageCompo1024px>
+        </motion.div>
+      )}
 
-        {isMobile && (
-          <motion.div
-            style={{
-              marginLeft: "27px",
-              width: "83vw",
-              height: "unset",
-              backgroundColor: "rgba(246,247,248,0.8)",
-              boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
-              borderRadius: "25px",
-              backgroundImage:
-                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
-            }}
-            whileHover={{
-              borderRadius: "55px",
-              backgroundColor: "rgba(247,239,227,0.75)",
-            }}
-          >
-            <MyPageCompo768px
-              myList={myList}
-              getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
-              autoCompoundStatus={autoCompoundStatus}
-              mypageLpListUp={mypageLpListUp}
-              lpTokenValue={lpTokenValue}
-              lpToken={lpToken}
-              firstToken={firstToken}
-              secondToken={secondToken}
-              firstImgToken={firstImgToken}
-              secondImgToken={secondImgToken}
-              setLpTokenValue={setLpTokenValue}
-              setLpToken={setLpToken}
-              setFirstToken={setFirstToken}
-              setSecondToken={setSecondToken}
-              setFirstImgToken={setFirstImgToken}
-              setSecondImgToken={setSecondImgToken}
-              dispatch={dispatch}
-              navigate={navigate}
-            ></MyPageCompo768px>
-          </motion.div>
-        )}
-      </MypPage>
-    </>
+      {isMobile && (
+        <motion.div
+          style={{
+            marginLeft: "27px",
+            width: "83vw",
+            height: "unset",
+            backgroundColor: "rgba(246,247,248,0.8)",
+            boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
+            borderRadius: "25px",
+            backgroundImage:
+              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+          }}
+          whileHover={{
+            borderRadius: "55px",
+            backgroundColor: "rgba(247,239,227,0.75)",
+          }}
+        >
+          <MyPageCompo768px
+            myList={myList}
+            getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+            autoCompoundStatus={autoCompoundStatus}
+            mypageLpListUp={mypageLpListUp}
+            lpTokenValue={lpTokenValue}
+            lpToken={lpToken}
+            firstToken={firstToken}
+            secondToken={secondToken}
+            firstImgToken={firstImgToken}
+            secondImgToken={secondImgToken}
+            setLpTokenValue={setLpTokenValue}
+            setLpToken={setLpToken}
+            setFirstToken={setFirstToken}
+            setSecondToken={setSecondToken}
+            setFirstImgToken={setFirstImgToken}
+            setSecondImgToken={setSecondImgToken}
+            navigate={navigate}
+            isLoading2={isLoading2}
+            setIsLoading2={setIsLoading2}
+          ></MyPageCompo768px>
+        </motion.div>
+      )}
+    </MypPage>
   );
 };
 

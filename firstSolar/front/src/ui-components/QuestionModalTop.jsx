@@ -8,12 +8,10 @@
 import * as React from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text, Icon } from "@aws-amplify/ui-react";
+import { Flex, Text, Icon } from "@aws-amplify/ui-react";
 
 export default function QuestionModal(props) {
-  const { overrides, setquestionmark, ...rest } = props;
-
-  const setfirstselecttoken = props?.setfirstselecttoken;
+  const { overrides, setQuestionMark, setFirstSelectToken, ...rest } = props;
 
   const tokenList = ["DFS", "ETH", "USDT", "BNB"];
   const tokenListDescription = [
@@ -28,7 +26,7 @@ export default function QuestionModal(props) {
   }, []);
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         if (e.target !== e.currentTarget) return;
       }}
     >
@@ -60,7 +58,7 @@ export default function QuestionModal(props) {
           className="cursorPointer"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            props?.setquestionmark(0);
+            setQuestionMark(0);
           }}
           {...getOverrideProps(overrides, "XIcon")}
         >
@@ -121,7 +119,7 @@ export default function QuestionModal(props) {
           ></Text>
         </Flex>
 
-        {tokenList.map(item => (
+        {tokenList.map((item) => (
           <Flex
             key={`tokenList-${item}`}
             gap="16px"
@@ -137,8 +135,8 @@ export default function QuestionModal(props) {
             backgroundColor="rgba(255,226,0,0.35)"
             style={{ cursor: "pointer" }}
             onClick={() => {
-              props?.setquestionmark(0);
-              setfirstselecttoken(item);
+              setQuestionMark(0);
+              setFirstSelectToken(item);
             }}
             {...getOverrideProps(overrides, "MapList40632581")}
           >

@@ -7,8 +7,11 @@ import "../css/Font.css";
 import styled from "styled-components";
 import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
 import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
+import { useSelector } from "react-redux";
+import LoadingCompo from "./LoadingCompo";
 
 export default function AddLiquidityBottom320px(props) {
+  const isLoading = useSelector((state) => state.isLoading);
   const {
     overrides,
     oracleiddata,
@@ -733,6 +736,11 @@ export default function AddLiquidityBottom320px(props) {
           <AddLiquidityFaildModal
             setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
           />
+        </LoadingModal>
+      )}
+      {isLoading && (
+        <LoadingModal>
+          <LoadingCompo />
         </LoadingModal>
       )}
     </Flex>
