@@ -17,7 +17,7 @@ const MypageContainer = () => {
   const [secondToken, setSecondToken] = useState();
   const [firstImgToken, setFirstImgToken] = useState();
   const [secondImgToken, setSecondImgToken] = useState();
-
+  const [isLoading2, setIsLoading2] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { account } = useAccount();
@@ -35,7 +35,9 @@ const MypageContainer = () => {
 
   const mypageLpListUp = async () => {
     try {
+      setIsLoading2(true);
       setMyList(await mypageList(params));
+      setIsLoading2(false);
     } catch (error) {
       console.error(error);
     }
@@ -51,9 +53,7 @@ const MypageContainer = () => {
 
   useEffect(() => {
     (async () => {
-      dispatch(setIsLoading(true));
       await mypageLpListUp();
-      dispatch(setIsLoading(false));
     })();
     if (!account && !account2) {
       navigate("/redirectHome");
@@ -80,8 +80,9 @@ const MypageContainer = () => {
       setSecondToken={setSecondToken}
       setFirstImgToken={setFirstImgToken}
       setSecondImgToken={setSecondImgToken}
-      dispatch={dispatch}
       navigate={navigate}
+      isLoading2={isLoading2}
+      setIsLoading2={setIsLoading2}
     ></MypageComponent>
   );
 };

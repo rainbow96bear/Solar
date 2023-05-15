@@ -10,8 +10,6 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
-import { useDispatch } from "react-redux";
-import { setIsLoading } from "../modules/isLoading";
 
 export default function AddLiquidityTop320px(props) {
   const {

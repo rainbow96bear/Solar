@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Sosim } from "../../ui-components";
 import "../../css/Font.css";
 
-const RankListComponent = ({ items, isLoading }) => {
+const RankListComponent = ({ items, isLoading2 }) => {
   return (
     <Flex
       justifyContent="center"
@@ -47,7 +47,7 @@ const RankListComponent = ({ items, isLoading }) => {
           }}
         >
           <Sosim />
-          <ListMain items={items} isLoading={isLoading} />
+          <ListMain items={items} isLoading2={isLoading2} />
         </Flex>
       </motion.div>
     </Flex>

@@ -25,15 +25,17 @@ const MyPageList768px = (props) => {
     idx,
     lpToken,
     mypageLpListUp,
-    dispatch,
+
     navigate,
+    isLoading2,
+    setIsLoading2,
     ...rest
   } = props;
   const [auto, setAuto] = useState();
   const account2 = useSelector((state) => state.account);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-
+  console.log(lpToken, item?.name);
   const mypageMethod = () => {
     setLpTokenValue(item?.LPTokenBalance);
     setLpToken(item?.name);
@@ -757,8 +759,9 @@ const MyPageList768px = (props) => {
                 lpTokenBalance={item?.LPTokenBalance}
                 getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
                 auto={auto}
-                dispatch={dispatch}
                 navigate={navigate}
+                isLoading2={isLoading2}
+                setIsLoading2={setIsLoading2}
               />
             </motion.div>
           </SubWrap>

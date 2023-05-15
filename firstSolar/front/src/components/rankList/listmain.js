@@ -3,9 +3,8 @@ import { ListItem } from "./listitem";
 import { Flex, Loader, Text } from "@aws-amplify/ui-react";
 import "../../css/Font.css";
 import "../../css/RankList.css";
-import isLoading from "../../modules/isLoading";
 
-const ListMain = ({ items, isLoading }) => {
+const ListMain = ({ items, isLoading2 }) => {
   return (
     <SkewContainer>
       <RankName>
@@ -70,7 +69,7 @@ const ListMain = ({ items, isLoading }) => {
       <Wrapper>
         <ShadowTop />
         <TransitionContainer>
-          {isLoading ? (
+          {isLoading2 ? (
             <Flex height="100%" justifyContent="center" alignItems="center">
               <Loader width="80px" height="80px"></Loader>
             </Flex>

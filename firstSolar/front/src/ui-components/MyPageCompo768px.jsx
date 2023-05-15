@@ -6,11 +6,12 @@
 
 /* eslint-disable */
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Flex, Image, Loader, Text } from "@aws-amplify/ui-react";
 import MyPageList768px from "../components/myPageList/MyPageList768px";
 import logo from "./images/logo_new.png";
 import { motion } from "framer-motion";
 import "../css/Font.css";
+import { useSelector } from "react-redux";
 
 export default function MyPageCompo768px(props) {
   const {
@@ -31,11 +32,13 @@ export default function MyPageCompo768px(props) {
     setSecondToken,
     setFirstImgToken,
     setSecondImgToken,
-    dispatch,
     navigate,
+    isLoading2,
+    setIsLoading2,
     ...rest
   } = props;
 
+  const isLoading = useSelector((state) => state.isLoading);
   return (
     <Flex
       gap="31px"
@@ -387,27 +390,34 @@ export default function MyPageCompo768px(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Frame 17140773334")}
         >
-          {myList?.map((item, idx) => (
-            <MyPageList768px
-              key={`MyPageList768px-2${idx}`}
-              pid={myList[idx]?.lpPidNumber}
-              item={item}
-              idx={idx}
-              setLpToken={setLpToken}
-              setLpTokenValue={setLpTokenValue}
-              setFirstToken={setFirstToken}
-              setSecondToken={setSecondToken}
-              setFirstImgToken={setFirstImgToken}
-              setSecondImgToken={setSecondImgToken}
-              lptokenvalue={lpTokenValue}
-              lptoken={lpToken}
-              mypagelplistup={mypageLpListUp}
-              getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
-              autoCompoundStatus={autoCompoundStatus}
-              dispatch={dispatch}
-              navigate={navigate}
-            />
-          ))}
+          {isLoading2 ? (
+            <Flex minHeight="500px" alignItems="center">
+              <Loader width="80px" height="80px" />
+            </Flex>
+          ) : (
+            myList?.map((item, idx) => (
+              <MyPageList768px
+                key={`MyPageList768px-2${idx}`}
+                pid={myList[idx]?.lpPidNumber}
+                item={item}
+                idx={idx}
+                setLpToken={setLpToken}
+                setLpTokenValue={setLpTokenValue}
+                setFirstToken={setFirstToken}
+                setSecondToken={setSecondToken}
+                setFirstImgToken={setFirstImgToken}
+                setSecondImgToken={setSecondImgToken}
+                lpTokenValue={lpTokenValue}
+                lpToken={lpToken}
+                mypageLpListUp={mypageLpListUp}
+                getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+                autoCompoundStatus={autoCompoundStatus}
+                navigate={navigate}
+                isLoading2={isLoading2}
+                setIsLoading2={setIsLoading2}
+              />
+            ))
+          )}
         </Flex>
       </Flex>
     </Flex>

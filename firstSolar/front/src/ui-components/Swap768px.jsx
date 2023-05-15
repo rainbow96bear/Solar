@@ -958,15 +958,15 @@ export default function Swap768px(props) {
       </Flex>
       {questionMark == 1 ? (
         <QuestionModalTop
-          setquestionmark={setQuestionMark}
+          setQuestionMark={setQuestionMark}
           secondselecttoken={secondSelectToken}
-          setfirstselecttoken={setFirstSelectToken}
+          setFirstSelectToken={setFirstSelectToken}
         ></QuestionModalTop>
       ) : questionMark == 2 ? (
         <QuestionModalBottom
-          setquestionmark={setQuestionMark}
-          firstselecttoken={firstSelectToken}
-          setsecondselecttoken={setSecondSelectToken}
+          setQuestionMark={setQuestionMark}
+          firstSelectToken={firstSelectToken}
+          setSecondSelectToken={setSecondSelectToken}
         ></QuestionModalBottom>
       ) : (
         <></>

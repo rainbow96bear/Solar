@@ -471,7 +471,9 @@ const SwapContainer = () => {
                       balance={balance}
                       userFirstBalance={userFirstBalance}
                       userSecondBalance={userSecondBalance}
+                      setFirstSelectToken={setFirstSelectToken}
                       firstSelectToken={firstSelectToken}
+                      setSecondSelectToken={setSecondSelectToken}
                       secondSelectToken={secondSelectToken}
                       firstAmountPrice={firstAmountPrice}
                       secondAmountPrice={secondAmountPrice}
@@ -577,7 +579,9 @@ const SwapContainer = () => {
                       balance={balance}
                       userFirstBalance={userFirstBalance}
                       userSecondBalance={userSecondBalance}
+                      setFirstSelectToken={setFirstSelectToken}
                       firstSelectToken={firstSelectToken}
+                      setSecondSelectToken={setSecondSelectToken}
                       secondSelectToken={secondSelectToken}
                       firstAmountPrice={firstAmountPrice}
                       secondAmountPrice={secondAmountPrice}
