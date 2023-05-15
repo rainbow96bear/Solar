@@ -23,8 +23,18 @@ import LoadingButton768 from "./LoadingButton768";
 import { motion } from "framer-motion";
 import { Web3Button } from "@web3modal/react";
 export default function BeforeHeadCom320px(props) {
-  const { overrides, searchView, setSearchView, address, navigate, ...rest } =
-    props;
+  const {
+    overrides,
+    searchView,
+    setSearchView,
+    handleInputChange,
+    handleSearch,
+    inputValue,
+    navigate,
+    dispatch,
+    address,
+    ...rest
+  } = props;
   const login = useSelector((state) => state.login);
   const connect = useSelector((state) => state.connect);
   return (
@@ -32,6 +42,7 @@ export default function BeforeHeadCom320px(props) {
       <Flex
         display="flex"
         direction="column"
+        justifyContent="space-around"
         height={searchView ? "100px" : "48px"}
       >
         <Flex
@@ -197,12 +208,22 @@ export default function BeforeHeadCom320px(props) {
               height="33px"
               placeholder="Search"
               justifyContent="center"
-              position="absolute"
+              // position="absolute"
               top="55px"
               alignItems="center"
               isDisabled={false}
               labelHidden={false}
               variation="quiet"
+              value={inputValue}
+              onSubmit={() => {
+                if (inputValue?.match(/\S/g)) {
+                  handleSearch();
+                  return;
+                } else {
+                  alert("검색어를 입력하세요");
+                }
+              }}
+              onChange={handleInputChange}
             ></SearchField>
           )}
         </Flex>

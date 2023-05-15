@@ -20,9 +20,9 @@ const HeaderContainer = () => {
   const { address } = useAccount();
 
   const handleInputChange = (e) => {
-    const inputValue = e.target.value;
-    const sanitizedValue = inputValue.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, "");
-    setInputValue((prevInputValue) => sanitizedValue);
+    if (e.target.value.match(/[^0-9A-Za-z]/g)) {
+      setInputValue(e.target.value.replace(/[^0-9A-Za-z]/g, ""));
+    } else setInputValue(e.target.value);
   };
 
   const handleSearch = () => {
