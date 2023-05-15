@@ -203,6 +203,12 @@ const MainContainer = () => {
   }, [pageIndex]);
 
   useEffect(() => {
+    (async () => {
+      await oracleId();
+    })();
+  }, [searchData]);
+
+  useEffect(() => {
     if (didMount.current) setPageIndex(1);
     else didMount.current = true;
   }, [filter]);
