@@ -34,6 +34,8 @@ let interval;
 const MainContainer = () => {
   const [items, setItems] = useState([]);
   const isLoading = useSelector((state) => state.isLoading);
+  const [isLoading2, setIsLoading2] = useState(false);
+
   const isMobile = useMediaQuery({
     query: "(min-width:0px) and (max-width:480px)",
   });
@@ -47,9 +49,11 @@ const MainContainer = () => {
   });
   const oracleId = async () => {
     try {
+      setIsLoading2(true);
       clearInterval(interval);
       const oracleId = await rankList();
       setItems(oracleId);
+      setIsLoading2(false);
       intervalFunc();
     } catch (error) {
       console.error(error);
@@ -199,7 +203,10 @@ const MainContainer = () => {
 
   return (
     <Main>
-      <RankListCContainer items={items}></RankListCContainer>
+      <RankListCContainer
+        items={items}
+        isLoading2={isLoading2}
+      ></RankListCContainer>
       {isLoading ? (
         <Flex minHeight="500px" alignItems="center">
           <Loader width="80px" height="80px" />

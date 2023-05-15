@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import QuestionModalDeposit from "./QuestionModalDeposit";
 import QuestionModalWithDraw from "./QuestionModalWithDraw";
 import "../css/Font.css";
+import { useDispatch } from "react-redux";
 
 export default function DepositButton768px(props) {
   const {
@@ -27,12 +28,14 @@ export default function DepositButton768px(props) {
     lpTokenBalance,
     getAutoCompoundStatusFunc,
     auto,
-    dispatch,
     navigate,
+    isLoading2,
+    setIsLoading2,
     ...rest
   } = props;
 
   const [questionMark, setQuestionMark] = useState(0);
+  const dispatch = useDispatch();
   return (
     <>
       <Flex
@@ -184,7 +187,6 @@ export default function DepositButton768px(props) {
           lpTokenBalance={lpTokenBalance}
           getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
           auto={auto}
-          dispatch={dispatch}
           navigate={navigate}
         ></QuestionModalDeposit>
       ) : (

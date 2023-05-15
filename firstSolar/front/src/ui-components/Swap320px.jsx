@@ -30,7 +30,9 @@ export default function Swap320px(props) {
     balance,
     userFirstBalance,
     userSecondBalance,
+    setFirstSelectToken,
     firstSelectToken,
+    setSecondSelectToken,
     secondSelectToken,
     firstAmountPrice,
     secondAmountPrice,
@@ -1022,15 +1024,14 @@ export default function Swap320px(props) {
         </Flex>
         {questionMark == 1 ? (
           <QuestionModalTop320px
-            setquestionmark={setQuestionMark}
-            secondselecttoken={secondSelectToken}
-            setfirstselecttoken={setFirstSelectToken}
+            setQuestionMark={setQuestionMark}
+            setFirstSelectToken={setFirstSelectToken}
           ></QuestionModalTop320px>
         ) : questionMark == 2 ? (
           <QuestionModalBottom320px
-            setquestionmark={setQuestionMark}
-            firstselecttoken={firstSelectToken}
-            setsecondselecttoken={setSecondSelectToken}
+            setQuestionMark={setQuestionMark}
+            firstSelectToken={firstSelectToken}
+            setSecondSelectToken={setSecondSelectToken}
           ></QuestionModalBottom320px>
         ) : (
           <></>

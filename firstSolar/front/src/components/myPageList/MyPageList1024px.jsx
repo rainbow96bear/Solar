@@ -26,8 +26,9 @@ const MyPageList1024px = (props) => {
     idx,
     lpToken,
     mypageLpListUp,
-    dispatch,
     navigate,
+    isLoading2,
+    setIsLoading2,
     ...rest
   } = props;
   const [auto, setAuto] = useState();
@@ -697,7 +698,6 @@ const MyPageList1024px = (props) => {
                 lpTokenBalance={item?.LPTokenBalance}
                 getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
                 auto={auto}
-                dispatch={dispatch}
                 navigate={navigate}
               />
             </motion.div>

@@ -8,7 +8,6 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, TextAreaField, Icon } from "@aws-amplify/ui-react";
-import QuestionModalBottom from "./QuestionModalDeposit";
 
 export default function Deposit1024px(props) {
   const { overrides, ...rest } = props;
