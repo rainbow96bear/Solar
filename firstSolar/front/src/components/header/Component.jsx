@@ -39,13 +39,26 @@ const HeaderComponent = ({
           address={address}
         />
       )}
-      {isTablet && <BeforeHeadCom768px address={address} navigate={navigate} />}
+      {isTablet && (
+        <BeforeHeadCom768px
+          handleSearch={handleSearch}
+          handleInputChange={handleInputChange}
+          inputValue={inputValue}
+          navigate={navigate}
+          dispatch={dispatch}
+          address={address}
+        />
+      )}
       {isMobile && (
         <BeforeHeadCom320px
           searchView={searchView}
           setSearchView={setSearchView}
-          address={address}
+          handleSearch={handleSearch}
+          handleInputChange={handleInputChange}
+          inputValue={inputValue}
           navigate={navigate}
+          dispatch={dispatch}
+          address={address}
         />
       )}
     </Header>

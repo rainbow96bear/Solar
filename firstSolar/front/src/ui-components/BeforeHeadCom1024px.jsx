@@ -104,7 +104,7 @@ export default function BeforeHeadCom1024px(props) {
         variation="quiet"
         value={inputValue}
         onSubmit={() => {
-          if (inputValue.match(/\S/g)) {
+          if (inputValue?.match(/\S/g)) {
             handleSearch();
             return;
           } else {
