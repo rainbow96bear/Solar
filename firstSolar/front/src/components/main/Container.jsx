@@ -218,7 +218,9 @@ const MainContainer = () => {
               mainNetList={mainNetList2}
               mainNetList1={mainNetList1}
               pageIndex={pageIndex}
+              setPageIndex={setPageIndex}
               filter={filter}
+              setFilter={setFilter}
               currentPagePoolList={currentPagePoolList}
               setCurrentPagePoolList={setCurrentPagePoolList}
               setTotalPages={setTotalPages}
@@ -233,7 +235,9 @@ const MainContainer = () => {
               mainNetList={mainNetList2}
               mainNetList1={mainNetList1}
               pageIndex={pageIndex}
+              setPageIndex={setPageIndex}
               filter={filter}
+              setFilter={setFilter}
               currentPagePoolList={currentPagePoolList}
               setCurrentPagePoolList={setCurrentPagePoolList}
               setTotalPages={setTotalPages}
@@ -247,7 +251,9 @@ const MainContainer = () => {
             <PoolListCom1024px
               mainNetList={mainNetList}
               pageIndex={pageIndex}
+              setPageIndex={setPageIndex}
               filter={filter}
+              setFilter={setFilter}
               currentPagePoolList={currentPagePoolList}
               setCurrentPagePoolList={setCurrentPagePoolList}
               setTotalPages={setTotalPages}

@@ -35,9 +35,7 @@ const MypageContainer = () => {
 
   const mypageLpListUp = async () => {
     try {
-      setIsLoading2(true);
       setMyList(await mypageList(params));
-      setIsLoading2(false);
     } catch (error) {
       console.error(error);
     }
@@ -53,7 +51,9 @@ const MypageContainer = () => {
 
   useEffect(() => {
     (async () => {
+      setIsLoading2(true);
       await mypageLpListUp();
+      setIsLoading2(false);
     })();
     if (!account && !account2) {
       navigate("/redirectHome");

@@ -21,6 +21,7 @@ export default function PoolListCom1024px(props) {
     overrides,
     mainNetList,
     pageIndex,
+    setPageIndex,
     filter,
     setFilter,
     setCurrentPagePoolList,

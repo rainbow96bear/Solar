@@ -109,7 +109,7 @@ export default function QuestionModalDeposit(props) {
       }
 
       setDepositAmountValue(0);
-
+      await mypageLpListUp();
       setBalanceChange(!balanceChange);
 
       dispatch(setIsLoading(false));
@@ -721,8 +721,12 @@ export default function QuestionModalDeposit(props) {
                 value={depositAmountValue}
                 onInput={(e) => setDepositAmountValue(e.target.value)}
                 onChange={(e) => {
-                  if (+e.target.value > +lpTokenValue) {
-                    e.target.value = lpTokenValue;
+                  if (
+                    +e.target.value >
+                    parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000
+                  ) {
+                    e.target.value =
+                      parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
                   }
                   setDepositAmountValue(e.target.value);
                 }}
