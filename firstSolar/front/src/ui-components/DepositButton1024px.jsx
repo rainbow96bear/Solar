@@ -30,7 +30,6 @@ export default function DepositButton1024px(props) {
     lpTokenBalance,
     getAutoCompoundStatusFunc,
     auto,
-    dispatch,
     navigate,
     ...rest
   } = props;
@@ -199,7 +198,6 @@ export default function DepositButton1024px(props) {
           mypageMethod={mypageMethod}
           pid={pid}
           setLpTokenValue={setLpTokenValue}
-          dispatch={dispatch}
           navigate={navigate}
         ></QuestionModalWithDraw>
       )}

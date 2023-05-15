@@ -11,7 +11,7 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, Icon, TextAreaField } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useWeb3 } from "../modules/useWeb3";
 import { getLPBalance } from "../api";
 import { useAccount } from "wagmi";
@@ -36,7 +36,6 @@ export default function QuestionModalWithDraw(props) {
     mypageMethod,
     pid,
     setLpTokenValue,
-    dispatch,
     navigate,
     ...rest
   } = props;
@@ -48,6 +47,7 @@ export default function QuestionModalWithDraw(props) {
   const { web3T, loginT } = useWeb3T();
   const { web3C, loginC } = useWeb3C();
   const { account } = useAccount();
+  const dispatch = useDispatch();
 
   const [lpBalance, setLpBalance] = useState();
   const [withDrawAmountValue, setWithDrawAmountValue] = useState(0);
