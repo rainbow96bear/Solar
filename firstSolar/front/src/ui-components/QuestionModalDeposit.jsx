@@ -60,8 +60,8 @@ export default function QuestionModalDeposit(props) {
   const [autoChange, setAutoChange] = useState(auto);
   const [modalText, setModalText] = useState("");
 
-  const account2 = useSelector(state => state.account);
-  const isLoading = useSelector(state => state.isLoading);
+  const account2 = useSelector((state) => state.account);
+  const isLoading = useSelector((state) => state.isLoading);
 
   const [depositAmountValue, setDepositAmountValue] = useState(0);
 
@@ -151,7 +151,7 @@ export default function QuestionModalDeposit(props) {
 
   return (
     <ModalCover
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -312,9 +312,9 @@ export default function QuestionModalDeposit(props) {
             >
               <SwitchField
                 isChecked={auto ? true : false}
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
-                  setAutoChange(state => !state);
+                  setAutoChange((state) => !state);
                 }}
               ></SwitchField>
               <Flex
@@ -719,8 +719,8 @@ export default function QuestionModalDeposit(props) {
                 labelHidden={false}
                 variation="default"
                 value={depositAmountValue}
-                onInput={e => setDepositAmountValue(e.target.value)}
-                onChange={e => {
+                onInput={(e) => setDepositAmountValue(e.target.value)}
+                onChange={(e) => {
                   if (
                     +e.target.value >
                     parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000
