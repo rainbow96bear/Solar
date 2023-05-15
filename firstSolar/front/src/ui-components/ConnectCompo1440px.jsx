@@ -15,7 +15,7 @@ import { gsap } from "gsap";
 import { Tween, SplitChars, Reveal } from "react-gsap";
 import { Suspense, useState } from "react";
 import { motion, MotionConfig, useMotionValue } from "framer-motion";
-import { BurgerShapes } from "../components/button/BurgerShapes";
+import { RocketShapes } from "../components/button/RocketShapes";
 import { transition } from "../components/button/settings";
 
 export default function ConnectCompo1440px(props) {
@@ -89,8 +89,8 @@ export default function ConnectCompo1440px(props) {
           onTap={() => setIsPress(false)}
           onTapCancel={() => setIsPress(false)}
           onPointerMove={e => {
-            mouseX.set(e.clientX - bounds.x - bounds.width / 2);
-            mouseY.set(e.clientY - bounds.y - bounds.height / 2);
+            mouseX.set(e.clientX - bounds.x - bounds.width / 1.23);
+            mouseY.set(e.clientY - bounds.y - bounds.height / 1.17);
           }}
         >
           <motion.div
@@ -120,7 +120,7 @@ export default function ConnectCompo1440px(props) {
               }}
             >
               <Suspense fallback={null}>
-                <BurgerShapes
+                <RocketShapes
                   isHover={isHover}
                   isPress={isPress}
                   mouseX={mouseX}
