@@ -167,7 +167,7 @@ export default function BeforeHeadCom1024px(props) {
                   backgroundColor: "rgba(247,239,227,0.75)",
                   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                   backgroundImage:
-                    "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                    "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
                 }}
                 whileHover={{
                   scale: 0.93,
@@ -206,6 +206,7 @@ export default function BeforeHeadCom1024px(props) {
               ) : (
                 <div className="Header_connect">
                   <Flex
+                    marginTop="5px"
                     gap="10px"
                     direction="row"
                     width="133px"
@@ -217,9 +218,9 @@ export default function BeforeHeadCom1024px(props) {
                     left="85.64%"
                     right="1.37%"
                     boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                    backgroundColor="#D0576B"
                     borderRadius="45px"
                     padding="19px 11px 19px 11px"
-                    backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
                     onClick={() => {
                       dispatch(connectThunk({ connect: true }));
                     }}
@@ -264,8 +265,8 @@ export default function BeforeHeadCom1024px(props) {
 const Cover = styled.div`
   display: flex;
   align-items: center;
-
   .Header_connect {
+    justify-content: center;
     cursor: pointer;
   }
   .Header_connect:hover {

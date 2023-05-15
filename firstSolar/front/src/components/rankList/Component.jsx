@@ -26,7 +26,7 @@ const RankListComponent = ({ items }) => {
             backgroundColor: "rgba(249, 250, 250, 0.75)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+              "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
             zIndex: "10",
             overflow: "hidden",
           }}

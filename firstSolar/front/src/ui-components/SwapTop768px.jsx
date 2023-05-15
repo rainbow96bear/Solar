@@ -382,7 +382,7 @@ export default function SwapTop768px(props) {
           border="3px SOLID rgba(234,0,50,0.45)"
           borderRadius="35px"
           padding="47px 47px 47px 47px"
-          backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "Frame 11140132818")}
         >
           <Text
@@ -605,7 +605,7 @@ export default function SwapTop768px(props) {
           borderRadius="35px"
           padding="47px 47px 47px 47px"
           border="3px SOLID rgba(0,136,153,0.59)"
-          backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "Frame 121")}
         >
           <Text

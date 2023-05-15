@@ -29,10 +29,10 @@ const LiquidComponent = ({ oracleId, balance }) => {
           <Flex
             alignItems="center"
             justifyContent="center"
-            marginLeft="15px"
             gap={{
               small: "100px",
               medium: "30px",
+              large: "0px",
             }}
             direction={{
               small: "column",

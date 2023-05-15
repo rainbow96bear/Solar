@@ -141,7 +141,7 @@ export default function ConnectModal(props) {
           position="relative"
           borderRadius="35px 0px 0px 35px"
           padding="38px 27px 38px 27px"
-          backgroundColor="rgba(252,253,254,1)"
+          backgroundColor="#FDFCF5"
           {...getOverrideProps(overrides, "Frame 201")}
         >
           <Flex
@@ -526,7 +526,7 @@ export default function ConnectModal(props) {
                 fontFamily="ffProBook"
                 fontSize="25px"
                 fontWeight="800"
-                color="rgba(252,253,254,1)"
+                color="#FDFCF5"
                 lineHeight="42.35795211791992px"
                 textAlign="left"
                 display="block"
@@ -548,7 +548,7 @@ export default function ConnectModal(props) {
                 fontFamily="ffProBook"
                 fontSize="12px"
                 fontWeight="500"
-                color="rgba(252,253,254,1)"
+                color="#FDFCF5"
                 lineHeight="22.99431800842285px"
                 textAlign="left"
                 display="block"

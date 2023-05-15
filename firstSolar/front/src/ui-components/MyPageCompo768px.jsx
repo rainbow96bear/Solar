@@ -26,6 +26,16 @@ export default function MyPageCompo768px(props) {
   const [secondToken, setSecondToken] = React.useState();
   const [firstImgToken, setFirstImgToken] = React.useState();
   const [secondImgToken, setSecondImgToken] = React.useState();
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   const dispatch = useDispatch();
   const params = useLocation().search.replace("?", "");
 
@@ -57,6 +67,8 @@ export default function MyPageCompo768px(props) {
 
   return (
     <Flex
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       gap="31px"
       direction="column"
       width="unset"
@@ -98,28 +110,55 @@ export default function MyPageCompo768px(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Frame 14240773366")}
         >
-          <Text
-            fontFamily="ffProMedium"
-            fontSize={{ base: "21px", small: "24px", medium: "35px" }}
-            fontWeight="600"
-            lineHeight="42.35795211791992px"
-            textAlign="center"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="My Liquidity List"
-            {...getOverrideProps(overrides, "My Liquidity List")}
-          ></Text>
+          {isHovered ? (
+            <Text
+              color="#373C38"
+              fontFamily="ffProMedium"
+              fontSize={{ base: "21px", small: "24px", medium: "35px" }}
+              fontWeight="600"
+              lineHeight="42.35795211791992px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="My Liquidity List"
+              {...getOverrideProps(overrides, "My Liquidity List")}
+            ></Text>
+          ) : (
+            <Text
+              color="#F7EFE3"
+              fontFamily="ffProMedium"
+              fontSize={{ base: "21px", small: "24px", medium: "35px" }}
+              fontWeight="600"
+              lineHeight="42.35795211791992px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="My Liquidity List"
+              {...getOverrideProps(overrides, "My Liquidity List")}
+            ></Text>
+          )}
         </Flex>
       </Flex>
       <Flex
@@ -145,14 +184,14 @@ export default function MyPageCompo768px(props) {
             width: "71.4vw",
             height: "unset",
             borderRadius: "23px",
-            backgroundColor: "rgba(127,190,171,0.85)",
+            backgroundColor: "#F7EFE3",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+              "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
           }}
           whileHover={{
             borderRadius: "55px",
-            backgroundColor: "rgba(199,184,151,0.75)",
+            backgroundColor: "rgba(0,056,071,0.75)",
           }}
         >
           <Flex

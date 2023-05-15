@@ -24,7 +24,7 @@ export default function Deposit1024px(props) {
       position="relative"
       borderRadius="50px"
       padding="0px 0px 45px 0px"
-      backgroundColor="rgba(252,253,254,1)"
+      backgroundColor="#FDFCF5"
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       {...getOverrideProps(overrides, "Deposit1024px")}
       {...rest}

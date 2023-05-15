@@ -223,7 +223,7 @@ export default function PoolListCom1024px(props) {
               backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
-                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
             }}
             whileHover={{
               borderRadius: "75px",
@@ -303,7 +303,7 @@ export default function PoolListCom1024px(props) {
               backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
-                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
             }}
             whileHover={{
               borderRadius: "75px",
@@ -382,7 +382,7 @@ export default function PoolListCom1024px(props) {
               backgroundColor: "rgba(248,251,251,0.35)",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               backgroundImage:
-                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
             }}
             whileHover={{
               borderRadius: "35px",
@@ -752,7 +752,12 @@ export default function PoolListCom1024px(props) {
             </motion.div>
           </LayoutGroup>
 
-          <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
+          <Flex
+            width="88vw"
+            justifyContent="center"
+            alignItems="center"
+            padding="30px 0px 0px 0px"
+          >
             <Pagination
               color="red"
               {...paginationProps}

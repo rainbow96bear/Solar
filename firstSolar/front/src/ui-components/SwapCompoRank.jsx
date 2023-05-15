@@ -44,7 +44,7 @@ export default function SwapCompo1440px(props) {
         }}
         whileHover={{
           borderRadius: "13px",
-          backgroundColor: "rgba(0,049,073,0.85)",
+          backgroundColor: "#5AB5B2",
           scale: 0.95,
           opacity: 0.88,
         }}
@@ -103,7 +103,7 @@ export default function SwapCompo1440px(props) {
         }}
         whileHover={{
           borderRadius: "13px",
-          backgroundColor: "rgba(252,250,242,0.75)",
+          backgroundColor: "#F7EFE3",
           scale: 0.95,
           opacity: 0.88,
         }}
@@ -132,7 +132,7 @@ export default function SwapCompo1440px(props) {
           padding="19px 25px 19px 25px"
           {...getOverrideProps(overrides, "Connect40052821")}
         >
-          <Button
+          <Text
             border="0px"
             fontFamily="ffProMedium"
             fontSize="17px"
@@ -152,11 +152,10 @@ export default function SwapCompo1440px(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Add Liquidity"
-            disabled={false}
+            children="Liquidity"
             backgroundColor="rgba(255,226,0,0.001)"
             {...getOverrideProps(overrides, "Add Liquidity")}
-          ></Button>
+          ></Text>
         </Flex>
       </motion.div>
     </Flex>

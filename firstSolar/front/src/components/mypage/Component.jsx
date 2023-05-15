@@ -34,11 +34,11 @@ const MypageComponent = ({ myList }) => {
             style={{
               width: "83vw",
               height: "unset",
-              backgroundColor: "rgba(246,247,248,0.8)",
+              backgroundColor: "#003A47",
               boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
               borderRadius: "25px",
               backgroundImage:
-                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
             }}
             whileHover={{
               borderRadius: "55px",
@@ -57,11 +57,11 @@ const MypageComponent = ({ myList }) => {
               marginLeft: "27px",
               width: "83vw",
               height: "unset",
-              backgroundColor: "rgba(246,247,248,0.8)",
+              backgroundColor: "#003A47",
               boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
               borderRadius: "25px",
               backgroundImage:
-                "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+                "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
             }}
             whileHover={{
               borderRadius: "55px",

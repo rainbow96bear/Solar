@@ -44,7 +44,7 @@ export default function QuestionModal(props) {
         position="relative"
         borderRadius="35px"
         padding="25px 25px 59px 25px"
-        backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(252,253,254,1))"
+        backgroundImage="linear-gradient(-7deg, #FDFCF5, #FDFCF5)"
         {...getOverrideProps(overrides, "SelTokken768px")}
         {...rest}
       >

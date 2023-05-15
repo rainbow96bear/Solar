@@ -28,7 +28,7 @@ export default function Foot320px(props) {
           boxShadow="38px 38px 29px rgba(0, 0, 0, 0.25)"
           borderRadius="55px"
           padding="45px 35px 45px 35px"
-          backgroundColor="rgba(252,253,254,1)"
+          backgroundColor="#FDFCF5"
           {...getOverrideProps(overrides, "Foot320px")}
           {...rest}
         >

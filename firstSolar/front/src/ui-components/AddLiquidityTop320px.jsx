@@ -251,7 +251,7 @@ export default function AddLiquidityTop320px(props) {
           border="1.8px SOLID rgba(255,226,0,0.35)"
           borderRadius="35px"
           padding="23.200000047683716px 48.200000047683716px 23.200000047683716px 48.200000047683716px"
-          backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "Frame 11340162850")}
         >
           <Text
@@ -470,7 +470,7 @@ export default function AddLiquidityTop320px(props) {
           border="1.8px SOLID rgba(0,136,153,0.59)"
           borderRadius="35px"
           padding="23.200000047683716px 48.200000047683716px 23.200000047683716px 48.200000047683716px"
-          backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.55))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.55))"
           {...getOverrideProps(overrides, "Frame 11440162862")}
         >
           <Flex

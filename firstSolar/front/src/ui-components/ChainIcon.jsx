@@ -47,7 +47,7 @@ export default function ChainIcon(props) {
           border="1px SOLID rgba(0,0,0,1)"
           borderRadius="200px"
           padding="0px 0px 0px 0px"
-          backgroundColor="rgba(252,253,254,1)"
+          backgroundColor="#FDFCF5"
           {...getOverrideProps(overrides, "Rectangle 1")}
         ></View>
       </Flex>

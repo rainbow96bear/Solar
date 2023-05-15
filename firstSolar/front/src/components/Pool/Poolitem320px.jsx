@@ -477,7 +477,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39433747")}
               >
                 <Text
@@ -514,7 +514,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574060")}
               >
                 <Text
@@ -556,7 +556,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574062")}
               >
                 <Text
@@ -597,7 +597,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574064")}
               >
                 <Text

@@ -43,7 +43,7 @@ export default function QuestionModal(props) {
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="55px"
         padding="53px 58px 53px 58px"
-        backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(252,253,254,1))"
+        backgroundImage="linear-gradient(-7deg, #FDFCF5, #FDFCF5)"
         {...getOverrideProps(overrides, "SelTokken768px")}
         {...rest}
       >
