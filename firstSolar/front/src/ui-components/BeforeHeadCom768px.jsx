@@ -17,7 +17,16 @@ import LoginButton from "./LoginButton";
 import { Web3Button } from "@web3modal/react";
 import LoadingButton768 from "./LoadingButton768";
 export default function BeforeHeadCom768px(props) {
-  const { overrides, address, navigate, ...rest } = props;
+  const {
+    overrides,
+    handleInputChange,
+    handleSearch,
+    inputValue,
+    navigate,
+    dispatch,
+    address,
+    ...rest
+  } = props;
   const login = useSelector((state) => state.login);
   const connect = useSelector((state) => state.connect);
   return (
@@ -117,6 +126,16 @@ export default function BeforeHeadCom768px(props) {
           isDisabled={false}
           labelHidden={false}
           variation="quiet"
+          value={inputValue}
+          onSubmit={() => {
+            if (inputValue?.match(/\S/g)) {
+              handleSearch();
+              return;
+            } else {
+              alert("검색어를 입력하세요");
+            }
+          }}
+          onChange={handleInputChange}
           {...getOverrideProps(overrides, "SearchField")}
         ></SearchField>
         <div className="header_right" style={{ display: "flex", gap: "20px" }}>

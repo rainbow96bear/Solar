@@ -103,6 +103,12 @@ const MainContainer = () => {
     siblingCount: 2,
   });
 
+  const paginationPropsMobile = usePagination({
+    totalPages: totalPages,
+    currentPage: pageIndex,
+    siblingCount: 0,
+  });
+
   const aesAPY = (a, b) => {
     if (a.apy < b.apy) return -1;
     if (a.apy > b.apy) return 1;
@@ -227,7 +233,7 @@ const MainContainer = () => {
               networkArray={networkArray}
               platformList={platformList2}
               platformList1={platformList1}
-              paginationProps={paginationProps}
+              paginationProps={paginationPropsMobile}
             />
           )}
           {isTablet && (
