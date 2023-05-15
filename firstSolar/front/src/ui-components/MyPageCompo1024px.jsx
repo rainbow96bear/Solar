@@ -39,10 +39,12 @@ export default function MyPageCompo1024px(props) {
     ...rest
   } = props;
 
-  const isLoading = useSelector((state) => state.isLoading);
+  const isLoading = useSelector(state => state.isLoading);
 
   return (
     <Flex
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       gap="31px"
       direction="column"
       width="83vw"
@@ -82,28 +84,55 @@ export default function MyPageCompo1024px(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Frame 14240762657")}
         >
-          <Text
-            fontFamily="ffProBlack"
-            fontSize="43px"
-            fontWeight="600"
-            lineHeight="52.039772033691406px"
-            textAlign="center"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="58px"
-            gap="unset"
-            alignItems="unset"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="My Liquidity List"
-            {...getOverrideProps(overrides, "My Liquidity List")}
-          ></Text>
+          {isHovered ? (
+            <Text
+              color="#373C38"
+              fontFamily="ffProBlack"
+              fontSize="43px"
+              fontWeight="600"
+              lineHeight="52.039772033691406px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="58px"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="My Liquidity List"
+              {...getOverrideProps(overrides, "My Liquidity List")}
+            ></Text>
+          ) : (
+            <Text
+              color="#F7EFE3"
+              fontFamily="ffProBlack"
+              fontSize="43px"
+              fontWeight="600"
+              lineHeight="52.039772033691406px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="58px"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="My Liquidity List"
+              {...getOverrideProps(overrides, "My Liquidity List")}
+            ></Text>
+          )}
         </Flex>
       </Flex>
       <Flex
@@ -125,10 +154,10 @@ export default function MyPageCompo1024px(props) {
             width: "78.4vw",
             height: "unset",
             borderRadius: "33px",
-            backgroundColor: "rgba(249,251,250,0.85)",
+            backgroundColor: "#F7EFE3",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+              "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
           }}
           whileHover={{
             borderRadius: "75px",

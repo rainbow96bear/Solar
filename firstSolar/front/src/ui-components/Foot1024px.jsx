@@ -282,7 +282,7 @@ export default function Foot1024px(props) {
               {...getOverrideProps(overrides, "Frame 15541063215")}
             >
               <Image
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault;
                   window.open("https://github.com/HGWA333/", "_blank");
                 }}

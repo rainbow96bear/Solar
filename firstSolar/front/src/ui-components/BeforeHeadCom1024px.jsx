@@ -36,8 +36,8 @@ export default function BeforeHeadCom1024px(props) {
     address,
     ...rest
   } = props;
-  const login = useSelector((state) => state.login);
-  const connect = useSelector((state) => state.connect);
+  const login = useSelector(state => state.login);
+  const connect = useSelector(state => state.connect);
 
   return (
     <View
@@ -218,8 +218,8 @@ export default function BeforeHeadCom1024px(props) {
 const Cover = styled.div`
   display: flex;
   align-items: center;
-
   .Header_connect {
+    justify-content: center;
     cursor: pointer;
   }
   .Header_connect:hover {

@@ -329,7 +329,7 @@ export default function PooListCom768px(props) {
         <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
           <Pagination
             {...paginationProps}
-            onChange={(pageNum) => {
+            onChange={pageNum => {
               setPageIndex(pageNum);
             }}
             onNext={() => {

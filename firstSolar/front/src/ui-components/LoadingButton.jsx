@@ -29,6 +29,6 @@ const Loading = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: rgba(32, 32, 32, 0.85);
+    background-color: #d0576b;
   }
 `;
