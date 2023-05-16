@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import "../../css/Font.css";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem320px = (props) => {
+const Poolitem320px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -44,7 +44,7 @@ const Poolitem320px = (props) => {
           }}
           whileHover={{
             borderRadius: "75px",
-            backgroundColor: "rgba(247,239,227,0.75)",
+            backgroundColor: "#F6F7F8",
           }}
         >
           <Flex
