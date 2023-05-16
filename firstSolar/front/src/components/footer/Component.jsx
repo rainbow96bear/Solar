@@ -15,16 +15,15 @@ const FooterComponent = () => {
     <Flex
       display={{ small: "none", medium: "flex" }}
       style={{
-        backgroundColor: "#f8f8f8",
         textAlign: "center",
         display: "flex",
-        width: "100%",
+        width: "91vw",
         justifyContent: "center",
         alignItems: "center",
         marginTop: "50px",
         paddingBottom: "100px",
         paddingTop: "55px",
-        paddingLeft: "15px",
+        paddingLeft: "55px",
       }}
     >
       {isDesktop && <Foot1024px />}

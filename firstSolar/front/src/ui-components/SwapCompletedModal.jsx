@@ -62,7 +62,7 @@ export default function SwapCompletedModal(props) {
       boxShadow="0px 25px 28px rgba(0, 0, 0, 0.25)"
       borderRadius="55px"
       padding="0px 132px 0px 132px"
-      backgroundColor="rgba(252,253,254,1)"
+      backgroundColor="#FDFCF5"
       {...getOverrideProps(overrides, "SwapCompletedModal")}
       {...rest}
     >

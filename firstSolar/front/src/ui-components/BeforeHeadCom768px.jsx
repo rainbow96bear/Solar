@@ -27,8 +27,8 @@ export default function BeforeHeadCom768px(props) {
     address,
     ...rest
   } = props;
-  const login = useSelector((state) => state.login);
-  const connect = useSelector((state) => state.connect);
+  const login = useSelector(state => state.login);
+  const connect = useSelector(state => state.connect);
   return (
     <Cover>
       <Flex

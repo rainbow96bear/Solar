@@ -46,10 +46,10 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const emptySearch = useSelector((state) => state.emptySearch);
+  const emptySearch = useSelector(state => state.emptySearch);
 
   const outRedirectModalOpen = useSelector(
-    (state) => state.outRedirectModalOpen.isOpen
+    state => state.outRedirectModalOpen.isOpen
   );
 
   return (
@@ -77,7 +77,7 @@ function App() {
               ></Route>
             </Routes>
           </MainContent>
-          <FooterContainer />
+          {/* <FooterContainer /> */}
           {emptySearch && (
             <LoadingModal>
               <EmptySearchModal className="marginT" />

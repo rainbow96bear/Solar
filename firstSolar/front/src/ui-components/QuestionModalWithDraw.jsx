@@ -40,9 +40,9 @@ export default function QuestionModalWithDraw(props) {
     ...rest
   } = props;
 
-  const isLoading = useSelector((state) => state.isLoading);
+  const isLoading = useSelector(state => state.isLoading);
   const [modalText, setModalText] = useState();
-  const account2 = useSelector((state) => state.account);
+  const account2 = useSelector(state => state.account);
   const { web3, login } = useWeb3();
   const { web3T, loginT } = useWeb3T();
   const { web3C, loginC } = useWeb3C();
@@ -115,7 +115,7 @@ export default function QuestionModalWithDraw(props) {
 
   return (
     <ModalCover
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
@@ -131,7 +131,7 @@ export default function QuestionModalWithDraw(props) {
         position="relative"
         borderRadius="50px"
         padding="0px 0px 45px 0px"
-        backgroundColor="rgba(252,253,254,1)"
+        backgroundColor="#FDFCF5"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         {...getOverrideProps(overrides, "Deposit1024px")}
         {...rest}
@@ -583,8 +583,8 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={(e) => setWithDrawAmountValue(e.target.value)}
-                onChange={(e) => {
+                onInput={e => setWithDrawAmountValue(e.target.value)}
+                onChange={e => {
                   if (
                     +e.target.value >
                     parseInt((lpBalance / 10 ** 18) * 10000) / 10000

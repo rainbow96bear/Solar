@@ -75,7 +75,7 @@ export default function LoginAccount(props) {
           backgroundColor: "rgba(247,239,227,0.75)",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           backgroundImage:
-            "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+            "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
         }}
         whileHover={{
           scale: 0.93,
@@ -124,7 +124,7 @@ export default function LoginAccount(props) {
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundColor: "rgba(241,231,217,1)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))",
+              "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
           }}
           whileHover={{
             scale: 0.98,

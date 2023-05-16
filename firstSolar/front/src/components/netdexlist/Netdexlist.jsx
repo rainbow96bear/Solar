@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Netlist1024px = (props) => {
+const Netlist1024px = props => {
   const {
     overrides,
     item,
@@ -20,75 +20,77 @@ const Netlist1024px = (props) => {
   } = props;
   const dispatch = useDispatch();
   return (
-    <motion.div
-      style={{
-        width: "45vw",
-        height: "unset",
-        borderRadius: "35px",
-        backgroundColor: "rgba(248,251,251,0.35)",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-        cursor: "pointer",
-      }}
-      whileHover={{
-        borderRadius: "13px",
-        scale: 1.15,
-        backgroundColor: "rgba(235,069,074,0.85)",
-      }}
-    >
-      <Flex
-        overflow="hidden"
-        onClick={async () => {
-          try {
-            dispatch(setIsLoading(true));
-            const temp = await netList(item, pageIndex);
-            setCurrentPagePoolList(temp.poolListData);
-            setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-            setFilter(item);
-            dispatch(setIsLoading(false));
-          } catch (error) {
-            console.error(error);
-            dispatch(setIsLoading(false));
-          }
+    <>
+      <motion.div
+        style={{
+          width: "45vw",
+          height: "unset",
+          borderRadius: "35px",
+          backgroundColor: "rgba(248,251,251,0.35)",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          cursor: "pointer",
         }}
-        gap="10px"
-        direction="row"
-        width="unset"
-        height="unset"
-        justifyContent="center"
-        alignItems="center"
-        grow="1"
-        shrink="1"
-        basis="0"
-        alignSelf="stretch"
-        position="relative"
-        borderRadius="15px"
-        backgroundColor={
-          item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
-        }
-        padding="10px 10px 10px 10px"
-        {...getOverrideProps(overrides, "Frame 1939913188")}
+        whileHover={{
+          borderRadius: "13px",
+          scale: 1.15,
+          backgroundColor: "#D0576B",
+        }}
       >
-        <Image
-          src={`/imgs/mainNet/${item}.jpg`}
-          width="38px"
-          height="38px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          shrink="0"
+        <Flex
+          overflow="hidden"
+          onClick={async () => {
+            try {
+              dispatch(setIsLoading({ isLoading: true }));
+              const temp = await netList(item, pageIndex);
+              props.setCurrentPagePoolList(temp.poolListData);
+              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              props.setFilter(item);
+              dispatch(setIsLoading({ isLoading: false }));
+            } catch (error) {
+              console.error(error);
+              dispatch(setIsLoading({ isLoading: false }));
+            }
+          }}
+          gap="10px"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="center"
+          alignItems="center"
+          grow="1"
+          shrink="1"
+          basis="0"
+          alignSelf="stretch"
           position="relative"
-          borderRadius="20px"
-          padding="0px 0px 0px 0px"
-          objectFit="cover"
-          {...getOverrideProps(overrides, "unsplash:em1OiomfG3g39913189")}
-        ></Image>
-      </Flex>
-    </motion.div>
+          borderRadius="13px"
+          backgroundColor={
+            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
+          }
+          padding="10px 10px 10px 10px"
+          {...getOverrideProps(overrides, "Frame 1939913188")}
+        >
+          <Image
+            src={`/imgs/mainNet/${item}.jpg`}
+            width="38px"
+            height="38px"
+            display="block"
+            gap="unset"
+            alignItems="unset"
+            justifyContent="unset"
+            shrink="0"
+            position="relative"
+            borderRadius="20px"
+            padding="0px 0px 0px 0px"
+            objectFit="cover"
+            {...getOverrideProps(overrides, "unsplash:em1OiomfG3g39913189")}
+          ></Image>
+        </Flex>
+      </motion.div>
+    </>
   );
 };
 
-const Dexlist1024px = (props) => {
+const Dexlist1024px = props => {
   const {
     overrides,
     item,
@@ -108,7 +110,6 @@ const Dexlist1024px = (props) => {
           height: "unset",
           borderRadius: "35px",
           backgroundColor: "rgba(5,3,2,0.75)",
-
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           cursor: "pointer",
         }}
@@ -143,9 +144,9 @@ const Dexlist1024px = (props) => {
           basis="0"
           alignSelf="stretch"
           position="relative"
-          borderRadius="15px"
+          borderRadius="13px"
           padding="10px 10px 10px 10px"
-          backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
+          backgroundColor={item == filter ? "rgba(0,125,122,1)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
@@ -169,15 +170,15 @@ const Dexlist1024px = (props) => {
   );
 };
 
-const Netlist768px = (props) => {
+const Netlist768px = props => {
   const {
     overrides,
     item,
-    filter,
-    setFilter,
+    pageIndex,
     setCurrentPagePoolList,
     setTotalPages,
-    pageIndex,
+    setFilter,
+    filter,
     ...rest
   } = props;
   const dispatch = useDispatch();
@@ -251,7 +252,7 @@ const Netlist768px = (props) => {
   );
 };
 
-const Dexlist768px = (props) => {
+const Dexlist768px = props => {
   const {
     overrides,
     item,
@@ -331,15 +332,15 @@ const Dexlist768px = (props) => {
   );
 };
 
-const Netlist320px = (props) => {
+const Netlist320px = props => {
   const {
     overrides,
     item,
-    filter,
-    setFilter,
     setCurrentPagePoolList,
     setTotalPages,
+    setFilter,
     pageIndex,
+    filter,
     ...rest
   } = props;
   const dispatch = useDispatch();
@@ -385,7 +386,7 @@ const Netlist320px = (props) => {
           basis="0"
           alignSelf="stretch"
           position="relative"
-          borderRadius="15px"
+          borderRadius="13px"
           padding="10px 10px 10px 10px"
           backgroundColor={
             item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
@@ -413,15 +414,15 @@ const Netlist320px = (props) => {
   );
 };
 
-const Dexlist320px = (props) => {
+const Dexlist320px = props => {
   const {
     overrides,
     item,
-    filter,
-    setFilter,
     setCurrentPagePoolList,
     setTotalPages,
+    setFilter,
     pageIndex,
+    filter,
     ...rest
   } = props;
   const dispatch = useDispatch();
@@ -468,7 +469,7 @@ const Dexlist320px = (props) => {
           basis="0"
           alignSelf="stretch"
           position="relative"
-          borderRadius="15px"
+          borderRadius="13px"
           padding="10px 10px 10px 10px"
           backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}

@@ -22,7 +22,7 @@ export default function SwapCompo1440px(props) {
   return (
     <Flex
       display="flex"
-      gap="30px"
+      gap="55px"
       direction="row"
       width="90vw"
       height="unset"
@@ -36,6 +36,7 @@ export default function SwapCompo1440px(props) {
     >
       <motion.div
         style={{
+          marginTop: "27px",
           width: "31vw",
           height: "unset",
           borderRadius: "35px",
@@ -45,7 +46,7 @@ export default function SwapCompo1440px(props) {
         }}
         whileHover={{
           borderRadius: "13px",
-          backgroundColor: "rgba(0,049,073,0.85)",
+          backgroundColor: "#5AB5B2",
           scale: 1.03,
           opacity: 0.88,
         }}
@@ -95,6 +96,7 @@ export default function SwapCompo1440px(props) {
 
       <motion.div
         style={{
+          marginTop: "27px",
           width: "31vw",
           height: "unset",
           borderRadius: "35px",
@@ -104,7 +106,7 @@ export default function SwapCompo1440px(props) {
         }}
         whileHover={{
           borderRadius: "13px",
-          backgroundColor: "rgba(252,250,242,0.75)",
+          backgroundColor: "#F7EFE3",
           scale: 1.03,
           opacity: 0.88,
         }}

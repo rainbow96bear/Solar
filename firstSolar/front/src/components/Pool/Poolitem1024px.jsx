@@ -10,11 +10,11 @@ import "../../css/Font.css";
 import { useAccount } from "wagmi";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem1024 = (props) => {
+const Poolitem1024 = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  const address2 = useSelector((state) => state.account);
+  const address2 = useSelector(state => state.account);
   const { address } = useAccount();
 
   const addressResult = address || address2;
@@ -33,14 +33,15 @@ const Poolitem1024 = (props) => {
           onClick={toggleOpen}
           layout
           style={{
+            zIndex: "1",
             width: "89vw",
             height: "unset",
             borderRadius: "33px",
-            backgroundColor: "rgba(249, 250, 250, 0.75)",
+            backgroundColor: "rgba(249, 250, 250, 1)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage: props?.item?.oracleId.includes("DFS")
               ? "linear-gradient(90deg,rgba(252,089,0,0.33) 0%,rgba(246,247,248,0.15) 20%)"
-              : "",
+              : "rgba(249, 250, 250, 1)",
           }}
           whileHover={{
             borderRadius: "75px",
@@ -533,11 +534,7 @@ const Poolitem1024 = (props) => {
               {addressResult ? (
                 <SwapCompo1440px props={props} />
               ) : (
-                <ConnectCompo1440px
-                  onClick={() => {
-                    dispatch(setConnect(true));
-                  }}
-                />
+                <ConnectCompo1440px />
               )}
             </motion.div>
           </SubWrap>
@@ -563,7 +560,4 @@ const SubWrap = styled(motion.div)`
   :last-child {
     border-radius: 0 0 20px 20px;
   }
-`;
-const Disble = styled.div`
-  display: hidden;
 `;

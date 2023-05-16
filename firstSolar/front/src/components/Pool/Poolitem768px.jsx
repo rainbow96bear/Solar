@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import "../../css/Font.css";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem768px = (props) => {
+const Poolitem768px = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -44,7 +44,7 @@ const Poolitem768px = (props) => {
           }}
           whileHover={{
             borderRadius: "75px",
-            backgroundColor: "rgba(247,239,227,0.75)",
+            backgroundColor: "#F6F7F8",
           }}
         >
           <Flex
@@ -485,7 +485,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+                  backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "Action39422832")}
                 >
                   <Text
@@ -524,7 +524,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+                  backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "Action39574042")}
                 >
                   <Text
@@ -566,7 +566,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+                  backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "Action39574044")}
                 >
                   <Text
@@ -607,7 +607,7 @@ const Poolitem768px = (props) => {
                   boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                   borderRadius="10px"
                   padding="10px 10px 10px 10px"
-                  backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+                  backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                   {...getOverrideProps(overrides, "Action39574046")}
                 >
                   <Text
