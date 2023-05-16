@@ -17,12 +17,15 @@ import { Suspense, useState } from "react";
 import { motion, MotionConfig, useMotionValue } from "framer-motion";
 import { RocketShapes } from "../components/button/RocketShapes";
 import { transition } from "../components/button/settings";
+import { useDispatch } from "react-redux";
+import { setConnect } from "../modules/connect";
 
 export default function ConnectCompo1440px(props) {
   const { overrides, ...rest } = props;
   const [ref, bounds] = useMeasure({ scroll: false });
   const [isHover, setIsHover] = useState(false);
   const [isPress, setIsPress] = useState(false);
+  const dispatch = useDispatch();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const resetMousePosition = () => {
@@ -131,6 +134,9 @@ export default function ConnectCompo1440px(props) {
           </motion.div>
 
           <motion.div
+            onClick={() => {
+              dispatch(setConnect({ connect: true }));
+            }}
             variants={{ hover: { scale: 0.85 }, press: { scale: 1.1 } }}
             style={{
               width: "31vw",

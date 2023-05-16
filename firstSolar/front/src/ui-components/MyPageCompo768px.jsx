@@ -5,6 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
+import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Loader, Text } from "@aws-amplify/ui-react";
 import MyPageList768px from "../components/myPageList/MyPageList768px";
@@ -37,6 +38,14 @@ export default function MyPageCompo768px(props) {
     setIsLoading2,
     ...rest
   } = props;
+  const [isHovered, setIsHovered] = React.useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   const isLoading = useSelector(state => state.isLoading);
   return (

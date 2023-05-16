@@ -748,8 +748,8 @@ export default function AddLiquidityBottom320px(props) {
 }
 
 const LoadingModal = styled.div`
-  width: 100vmax;
-  height: 100vmax;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
