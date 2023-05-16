@@ -502,7 +502,7 @@ export default function PoolListCom1024px(props) {
       ) : (
         <LayoutGroup>
           <motion.div
-            style={{ height: " 219vh" }}
+            style={{ height: "219vh" }}
             layout
             initial={{ borderRadius: 25 }}
             transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
@@ -515,6 +515,7 @@ export default function PoolListCom1024px(props) {
                     gap="17px"
                     direction="column"
                     width="unset"
+                    height="unset"
                     justifyContent="center"
                     alignItems="center"
                     shrink="0"
@@ -525,6 +526,7 @@ export default function PoolListCom1024px(props) {
                     item={item}
                     length={currentPagePoolList.length}
                     idx={idx}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
                   />
                 ))
             ) : sortAPY == "down" ? (
@@ -535,6 +537,7 @@ export default function PoolListCom1024px(props) {
                     gap="17px"
                     direction="column"
                     width="unset"
+                    height="unset"
                     justifyContent="center"
                     alignItems="center"
                     shrink="0"
@@ -545,6 +548,7 @@ export default function PoolListCom1024px(props) {
                     item={item}
                     length={currentPagePoolList.length}
                     idx={idx}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
                   />
                 ))
             ) : sortTVL == "up" ? (
@@ -555,6 +559,7 @@ export default function PoolListCom1024px(props) {
                     gap="17px"
                     direction="column"
                     width="unset"
+                    height="unset"
                     justifyContent="center"
                     alignItems="center"
                     shrink="0"
@@ -565,6 +570,7 @@ export default function PoolListCom1024px(props) {
                     item={item}
                     length={currentPagePoolList.length}
                     idx={idx}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
                   />
                 ))
             ) : sortTVL == "down" ? (
@@ -575,6 +581,7 @@ export default function PoolListCom1024px(props) {
                     gap="17px"
                     direction="column"
                     width="unset"
+                    height="unset"
                     justifyContent="center"
                     alignItems="center"
                     shrink="0"
@@ -585,6 +592,7 @@ export default function PoolListCom1024px(props) {
                     item={item}
                     length={currentPagePoolList.length}
                     idx={idx}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
                   />
                 ))
             ) : (

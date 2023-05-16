@@ -41,7 +41,8 @@ const Netlist1024px = (props) => {
           onClick={async () => {
             try {
               dispatch(setIsLoading(true));
-              const temp = await dexList(item, pageIndex);
+              const temp = await netList(item, pageIndex);
+
               setCurrentPagePoolList(temp.poolListData);
               setFilter(item);
               setTotalPages(Math.ceil(temp.poolListDataLength / 10));
@@ -124,6 +125,7 @@ const Dexlist1024px = (props) => {
             try {
               dispatch(setIsLoading(true));
               const temp = await dexList(item, pageIndex);
+
               setCurrentPagePoolList(temp.poolListData);
               setFilter(item);
               setTotalPages(Math.ceil(temp.poolListDataLength / 10));

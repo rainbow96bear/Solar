@@ -68,7 +68,6 @@ export default function QuestionModalDeposit(props) {
   const [depositSuccessModalOpen, setDepositSuccessModalOpen] = useState(false);
   const [depositFailModalOpen, setDepositFailModalOpen] = useState(false);
   useEffect(() => {
-    console.log(mypageList);
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();

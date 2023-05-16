@@ -105,7 +105,6 @@ const SwapContainer = () => {
   useEffect(() => {
     (async () => {
       dispatch(setIsLoading(true));
-      console.log("oracleId[0] : ", oracleId[0]);
       const tempDate = new Date(lastTimeStamp * 1000);
       setLastTimeStamp(
         oracleId[0]?.lastHarvest
