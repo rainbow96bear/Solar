@@ -150,26 +150,40 @@ export default function QuestionModalDeposit(props) {
   }, []);
 
   return (
-    <ModalCover
+    <Flex
       onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
+      width="100vw"
+      height="100vh"
+      backgroundColor="rgba(0, 0, 0, 0.4)"
+      position="fixed"
+      left="0%"
+      top="0%"
+      right="0%"
+      bottom="0%"
+      overflow="auto"
+      style={{ zIndex: "88" }}
     >
       <Flex
-        className="depositModal"
         gap="38px"
         direction="column"
         width={{ base: "85vw", small: "85vw", medium: "80vw" }}
-        // height="100%"
         justifyContent="flex-start"
         alignItems="flex-start"
-        position="relative"
+        position="absolute"
+        left="50%"
+        top="50%"
+        style={{
+          transform: "translate(-50%,-50%)",
+          maxHeight: "calc(100vh - 40px)",
+        }}
         borderRadius="50px"
         padding="0px 0px 45px 0px"
         backgroundColor="#FDFCF5"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        overflow=""
+        overflow="auto"
         {...getOverrideProps(overrides, "Deposit1024px")}
         {...rest}
       >
@@ -852,40 +866,9 @@ export default function QuestionModalDeposit(props) {
           <LoadingCompo />
         </LoadingModal>
       )}
-    </ModalCover>
+    </Flex>
   );
 }
-
-const ModalCover = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  padding-top: 20px;
-  position: fixed;
-  left: 0%;
-  top: 0%;
-  right: 0%;
-  bottom: 0%;
-  overflow: auto;
-  justify-content: center;
-  align-items: center;
-  z-index: 88;
-
-  .ConnectModal {
-    display: flex;
-    justify-content: center;
-
-    .cursorPointer {
-      cursor: pointer;
-    }
-  }
-  .Web3Button {
-    button {
-      background-color: orange !import;
-    }
-  }
-`;
 
 const LoadingModal = styled.div`
   width: 100vw;

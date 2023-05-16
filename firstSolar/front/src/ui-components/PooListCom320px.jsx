@@ -7,13 +7,14 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Text, Pagination, View } from "@aws-amplify/ui-react";
+import { Flex, Text, Pagination, View, Loader } from "@aws-amplify/ui-react";
 import {
   Netlist320px,
   Dexlist320px,
 } from "../components/netdexlist/Netdexlist";
 import Poolitem320px from "../components/Pool/Poolitem320px";
 import { motion, LayoutGroup } from "framer-motion";
+import { useSelector } from "react-redux";
 
 export default function PooListCom320px(props) {
   const {
@@ -34,6 +35,7 @@ export default function PooListCom320px(props) {
     ...rest
   } = props;
 
+  const isLoading = useSelector((state) => state.isLoading);
   return (
     <View
       display="flex"
@@ -299,30 +301,41 @@ export default function PooListCom320px(props) {
           </Flex>
         </motion.div>
 
-        <LayoutGroup>
-          <motion.div
-            layout
-            initial={{ borderRadius: 25 }}
-            transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+        {isLoading ? (
+          <Flex
+            minHeight="500px"
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
           >
-            {currentPagePoolList?.map((item, idx) => (
-              <Poolitem320px
-                gap="17px"
-                direction="column"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                key={`PoolList320px-${idx}`}
-                item={item}
-              />
-            ))}
-          </motion.div>
-        </LayoutGroup>
+            <Loader width="80px" height="80px" />
+          </Flex>
+        ) : (
+          <LayoutGroup>
+            <motion.div
+              layout
+              initial={{ borderRadius: 25 }}
+              transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+            >
+              {currentPagePoolList?.map((item, idx) => (
+                <Poolitem320px
+                  gap="17px"
+                  direction="column"
+                  width="unset"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="center"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  key={`PoolList320px-${idx}`}
+                  item={item}
+                />
+              ))}
+            </motion.div>
+          </LayoutGroup>
+        )}
 
         <Flex width="88vw" justifyContent="center" padding="30px 0px 50px 0px">
           <Pagination

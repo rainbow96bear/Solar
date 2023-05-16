@@ -356,7 +356,22 @@ export default function SwapTop320px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={reducedNumber ? `${reducedNumber} K` : "0 K"}
+              children={
+                !isNaN(oracleiddata[0]?.firstTokenBalance)
+                  ? oracleiddata[0]?.name?.includes("DFS")
+                    ? `${
+                        (parseInt(
+                          oracleiddata[0]?.firstTokenBalance / 10 ** 18
+                        ) *
+                          100000) /
+                        100000
+                      } K`
+                    : `${
+                        parseInt(oracleiddata[0]?.firstTokenBalance * 1000) /
+                        1000
+                      } K`
+                  : "0 K"
+              }
               {...getOverrideProps(overrides, "99,99M40162856")}
             ></Text>
           </Flex>
@@ -447,7 +462,22 @@ export default function SwapTop320px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={reducedNumber ? `${reducedNumber} K` : "0 K"}
+              children={
+                !isNaN(oracleiddata[0]?.secondTokenBalance)
+                  ? oracleiddata[0]?.name?.includes("DFS")
+                    ? `${
+                        (parseInt(
+                          oracleiddata[0]?.secondTokenBalance / 10 ** 18
+                        ) *
+                          100000) /
+                        100000
+                      } K`
+                    : `${
+                        parseInt(oracleiddata[0]?.secondTokenBalance * 1000) /
+                        1000
+                      } K`
+                  : "0 K"
+              }
               {...getOverrideProps(overrides, "99,99M40162885")}
             ></Text>
           </Flex>

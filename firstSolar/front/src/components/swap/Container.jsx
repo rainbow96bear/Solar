@@ -105,6 +105,7 @@ const SwapContainer = () => {
   useEffect(() => {
     (async () => {
       dispatch(setIsLoading(true));
+      console.log("oracleId[0] : ", oracleId[0]);
       const tempDate = new Date(lastTimeStamp * 1000);
       setLastTimeStamp(
         oracleId[0]?.lastHarvest
@@ -125,6 +126,7 @@ const SwapContainer = () => {
           : parseInt(oracleId[0]?.secondTokenBalance * 1000) / 1000
       );
       setTokenNumber(oracleId[0]?.firstTokenBalance);
+
       setReducedNumber(tokenNumBer?.toString().substring(0, 7));
       setTimeout(() => {
         dispatch(setIsLoading(false));

@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Text, Pagination } from "@aws-amplify/ui-react";
+import { Flex, Text, Pagination, Loader } from "@aws-amplify/ui-react";
 
 import Poolitem768px from "../components/Pool/Poolitem768px";
 import {
@@ -34,6 +34,7 @@ export default function PooListCom768px(props) {
     ...rest
   } = props;
 
+  const isLoading = useSelector((state) => state.isLoading);
   return (
     <Flex
       display="flex"
@@ -301,31 +302,42 @@ export default function PooListCom768px(props) {
           </Flex>
         </motion.div>
 
-        <LayoutGroup>
-          <motion.div
-            layout
-            initial={{ borderRadius: 25 }}
-            transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+        {isLoading ? (
+          <Flex
+            minHeight="500px"
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
           >
-            {currentPagePoolList?.map((item, idx) => (
-              <Poolitem768px
-                gap="17px"
-                direction="column"
-                width="unset"
-                height="unset"
-                justifyContent="center"
-                alignItems="center"
-                shrink="0"
-                alignSelf="stretch"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                key={`PoolList768px-${idx}`}
-                item={item}
-                last={idx == currentPagePoolList.length - 1 ? true : false}
-              />
-            ))}
-          </motion.div>
-        </LayoutGroup>
+            <Loader width="80px" height="80px" />
+          </Flex>
+        ) : (
+          <LayoutGroup>
+            <motion.div
+              layout
+              initial={{ borderRadius: 25 }}
+              transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+            >
+              {currentPagePoolList?.map((item, idx) => (
+                <Poolitem768px
+                  gap="17px"
+                  direction="column"
+                  width="unset"
+                  height="unset"
+                  justifyContent="center"
+                  alignItems="center"
+                  shrink="0"
+                  alignSelf="stretch"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  key={`PoolList768px-${idx}`}
+                  item={item}
+                  last={idx == currentPagePoolList.length - 1 ? true : false}
+                />
+              ))}
+            </motion.div>
+          </LayoutGroup>
+        )}
         <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
           <Pagination
             {...paginationProps}
