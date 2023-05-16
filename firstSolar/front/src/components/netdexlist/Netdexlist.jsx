@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Netlist1024px = props => {
+const Netlist1024px = (props) => {
   const {
     overrides,
     item,
@@ -40,12 +40,13 @@ const Netlist1024px = props => {
           overflow="hidden"
           onClick={async () => {
             try {
-              dispatch(setIsLoading({ isLoading: true }));
+              dispatch(setIsLoading(true));
               const temp = await netList(item, pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              props.setFilter(item);
-              dispatch(setIsLoading({ isLoading: false }));
+
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
               dispatch(setIsLoading({ isLoading: false }));
@@ -90,7 +91,7 @@ const Netlist1024px = props => {
   );
 };
 
-const Dexlist1024px = props => {
+const Dexlist1024px = (props) => {
   const {
     overrides,
     item,
@@ -124,6 +125,7 @@ const Dexlist1024px = props => {
             try {
               dispatch(setIsLoading(true));
               const temp = await dexList(item, pageIndex);
+
               setCurrentPagePoolList(temp.poolListData);
               setFilter(item);
               setTotalPages(Math.ceil(temp.poolListDataLength / 10));
@@ -170,7 +172,7 @@ const Dexlist1024px = props => {
   );
 };
 
-const Netlist768px = props => {
+const Netlist768px = (props) => {
   const {
     overrides,
     item,
@@ -252,7 +254,7 @@ const Netlist768px = props => {
   );
 };
 
-const Dexlist768px = props => {
+const Dexlist768px = (props) => {
   const {
     overrides,
     item,
@@ -332,7 +334,7 @@ const Dexlist768px = props => {
   );
 };
 
-const Netlist320px = props => {
+const Netlist320px = (props) => {
   const {
     overrides,
     item,
@@ -414,7 +416,7 @@ const Netlist320px = props => {
   );
 };
 
-const Dexlist320px = props => {
+const Dexlist320px = (props) => {
   const {
     overrides,
     item,

@@ -44,7 +44,7 @@ router.post("/logout", async (req: Request, res: Response) => {
     const walletKind: string = req.body.walletKind;
     const address: string = req.body.address;
     const cookieName = walletKind + ":" + address;
-    console.log(cookieName);
+
     res.cookie(cookieName, "", { expires: new Date(0) });
     res.end();
   } catch (error) {

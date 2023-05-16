@@ -35,7 +35,7 @@ const MyPageList768px = (props) => {
   const account2 = useSelector((state) => state.account);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  console.log(lpToken, item?.name);
+
   const mypageMethod = () => {
     setLpTokenValue(item?.LPTokenBalance);
     setLpToken(item?.name);

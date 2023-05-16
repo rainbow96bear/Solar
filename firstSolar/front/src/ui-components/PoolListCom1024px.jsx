@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Text, Pagination } from "@aws-amplify/ui-react";
+import { Flex, Text, Pagination, Loader } from "@aws-amplify/ui-react";
 import Poolitem1024 from "../components/Pool/Poolitem1024px.jsx";
 import { motion, LayoutGroup } from "framer-motion";
 import {
@@ -16,6 +16,7 @@ import {
 
 import "../css/PoolList.css";
 import FooterContainer from "../components/footer/Container";
+import { useSelector } from "react-redux";
 
 export default function PoolListCom1024px(props) {
   const {
@@ -42,6 +43,7 @@ export default function PoolListCom1024px(props) {
     ...rest
   } = props;
 
+  const isLoading = useSelector((state) => state.isLoading);
   return (
     <Flex
       display="flex"
@@ -488,124 +490,142 @@ export default function PoolListCom1024px(props) {
           </Flex>
         </Flex>
       </motion.div>
-
-      <LayoutGroup>
-        <motion.div
-          style={{ height: " 219vh" }}
-          layout
-          initial={{ borderRadius: 25 }}
-          transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+      {isLoading ? (
+        <Flex
+          minHeight="500px"
+          alignItems="center"
+          justifyContent="center"
+          width="100%"
         >
-          {sortAPY == "up" ? (
-            currentPagePoolList
-              ?.sort(aesAPY)
-              .map((item, idx) => (
-                <Poolitem1024
-                  gap="17px"
-                  direction="column"
-                  width="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  key={`PoolList1024px-${idx}`}
-                  item={item}
-                  length={currentPagePoolList.length}
-                  idx={idx}
-                />
-              ))
-          ) : sortAPY == "down" ? (
-            currentPagePoolList
-              ?.sort(descAPY)
-              .map((item, idx) => (
-                <Poolitem1024
-                  gap="17px"
-                  direction="column"
-                  width="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  key={`PoolList1024px-${idx}`}
-                  item={item}
-                  length={currentPagePoolList.length}
-                  idx={idx}
-                />
-              ))
-          ) : sortTVL == "up" ? (
-            currentPagePoolList
-              ?.sort(aesTVL)
-              .map((item, idx) => (
-                <Poolitem1024
-                  gap="17px"
-                  direction="column"
-                  width="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  key={`PoolList1024px-${idx}`}
-                  item={item}
-                  length={currentPagePoolList.length}
-                  idx={idx}
-                />
-              ))
-          ) : sortTVL == "down" ? (
-            currentPagePoolList
-              ?.sort(descTVL)
-              .map((item, idx) => (
-                <Poolitem1024
-                  gap="17px"
-                  direction="column"
-                  width="unset"
-                  justifyContent="center"
-                  alignItems="center"
-                  shrink="0"
-                  alignSelf="stretch"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  key={`PoolList1024px-${idx}`}
-                  item={item}
-                  length={currentPagePoolList.length}
-                  idx={idx}
-                />
-              ))
-          ) : (
-            <></>
-          )}
-          <Flex
-            width="86vw"
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            alignSelf="center"
-            padding="50px 0px 0px 0px"
+          <Loader width="80px" height="80px" />
+        </Flex>
+      ) : (
+        <LayoutGroup>
+          <motion.div
+            style={{ height: "219vh" }}
+            layout
+            initial={{ borderRadius: 25 }}
+            transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
           >
-            <Pagination
-              width="100vw"
-              color="red"
-              {...paginationProps}
-              onChange={pageNum => {
-                setPageIndex(pageNum);
-              }}
-              onNext={() => {
-                setPageIndex(pageIndex + 1);
-              }}
-              onPrevious={() => {
-                setPageIndex(pageIndex - 1);
-              }}
-            />
+            {sortAPY == "up" ? (
+              currentPagePoolList
+                ?.sort(aesAPY)
+                .map((item, idx) => (
+                  <Poolitem1024
+                    gap="17px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="center"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    key={`PoolList1024px-${idx}`}
+                    item={item}
+                    length={currentPagePoolList.length}
+                    idx={idx}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
+                  />
+                ))
+            ) : sortAPY == "down" ? (
+              currentPagePoolList
+                ?.sort(descAPY)
+                .map((item, idx) => (
+                  <Poolitem1024
+                    gap="17px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="center"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    key={`PoolList1024px-${idx}`}
+                    item={item}
+                    length={currentPagePoolList.length}
+                    idx={idx}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
+                  />
+                ))
+            ) : sortTVL == "up" ? (
+              currentPagePoolList
+                ?.sort(aesTVL)
+                .map((item, idx) => (
+                  <Poolitem1024
+                    gap="17px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="center"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    key={`PoolList1024px-${idx}`}
+                    item={item}
+                    length={currentPagePoolList.length}
+                    idx={idx}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
+                  />
+                ))
+            ) : sortTVL == "down" ? (
+              currentPagePoolList
+                ?.sort(descTVL)
+                .map((item, idx) => (
+                  <Poolitem1024
+                    gap="17px"
+                    direction="column"
+                    width="unset"
+                    height="unset"
+                    justifyContent="center"
+                    alignItems="center"
+                    shrink="0"
+                    alignSelf="stretch"
+                    position="relative"
+                    padding="0px 0px 0px 0px"
+                    key={`PoolList1024px-${idx}`}
+                    item={item}
+                    length={currentPagePoolList.length}
+                    idx={idx}
+                    last={idx == currentPagePoolList.length - 1 ? true : false}
+                  />
+                ))
+            ) : (
+              <></>
+            )}
+            <Flex
+              width="86vw"
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              alignSelf="center"
+              padding="50px 0px 0px 0px"
+            >
+              <Pagination
+                width="100vw"
+                color="red"
+                {...paginationProps}
+                onChange={(pageNum) => {
+                  setPageIndex(pageNum);
+                }}
+                onNext={() => {
+                  setPageIndex(pageIndex + 1);
+                }}
+                onPrevious={() => {
+                  setPageIndex(pageIndex - 1);
+                }}
+              />
 
-            <FooterContainer />
-          </Flex>
-        </motion.div>
-      </LayoutGroup>
+              <FooterContainer />
+            </Flex>
+          </motion.div>
+        </LayoutGroup>
+      )}
     </Flex>
   );
 }

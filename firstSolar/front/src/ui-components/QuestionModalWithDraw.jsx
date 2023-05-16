@@ -40,9 +40,9 @@ export default function QuestionModalWithDraw(props) {
     ...rest
   } = props;
 
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector((state) => state.isLoading);
   const [modalText, setModalText] = useState();
-  const account2 = useSelector(state => state.account);
+  const account2 = useSelector((state) => state.account);
   const { web3, login } = useWeb3();
   const { web3T, loginT } = useWeb3T();
   const { web3C, loginC } = useWeb3C();
@@ -113,26 +113,46 @@ export default function QuestionModalWithDraw(props) {
     }
   };
 
+  useEffect(() => {
+    document.body.style = `overflow: hidden`;
+    return () => (document.body.style = `overflow: auto`);
+  }, []);
+
   return (
-    <ModalCover
-      onClick={e => {
+    <Flex
+      onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
+      width="100vw"
+      height="100vh"
+      backgroundColor="rgba(0, 0, 0, 0.4)"
+      position="fixed"
+      left="0%"
+      top="0%"
+      right="0%"
+      bottom="0%"
+      overflow="auto"
+      style={{ zIndex: "88" }}
     >
       <Flex
-        className="withModal"
         gap="38px"
         direction="column"
         width={{ base: "85vw", small: "85vw", medium: "80vw" }}
-        height={{ base: "unset", small: "unset", medium: "unset" }}
         justifyContent="flex-start"
         alignItems="flex-start"
-        position="relative"
+        position="absolute"
+        left="50%"
+        top="50%"
+        style={{
+          transform: "translate(-50%,-50%)",
+          maxHeight: "calc(100vh - 40px)",
+        }}
         borderRadius="50px"
         padding="0px 0px 45px 0px"
         backgroundColor="#FDFCF5"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        overflow="auto"
         {...getOverrideProps(overrides, "Deposit1024px")}
         {...rest}
       >
@@ -583,8 +603,8 @@ export default function QuestionModalWithDraw(props) {
                 labelHidden={false}
                 variation="default"
                 value={withDrawAmountValue}
-                onInput={e => setWithDrawAmountValue(e.target.value)}
-                onChange={e => {
+                onInput={(e) => setWithDrawAmountValue(e.target.value)}
+                onChange={(e) => {
                   if (
                     +e.target.value >
                     parseInt((lpBalance / 10 ** 18) * 10000) / 10000
@@ -734,37 +754,9 @@ export default function QuestionModalWithDraw(props) {
           <LoadingCompo />
         </LoadingModal>
       )}
-    </ModalCover>
+    </Flex>
   );
 }
-
-const ModalCover = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  position: fixed;
-  left: 0%;
-  top: 0%;
-  right: 0%;
-  justify-content: center;
-  align-items: center;
-  z-index: 88;
-
-  .ConnectModal {
-    display: flex;
-    justify-content: center;
-
-    .cursorPointer {
-      cursor: pointer;
-    }
-  }
-  .Web3Button {
-    button {
-      background-color: orange !import;
-    }
-  }
-`;
 
 const RemoveModal = styled.div`
   width: 100vw;
