@@ -11,12 +11,7 @@ export function MoonShapes({ isHover, isPress, mouseX, mouseY }) {
   const lightRotateY = useSmoothTransform(mouseX, spring, mouseToLightRotation);
 
   return (
-    <Canvas
-      style={{ position: "absolute", width: "100%", height: "100%" }}
-      shadows
-      dpr={[1, 2]}
-      resize={{ scroll: false, offsetSize: true }}
-    >
+    <Canvas shadows dpr={[1, 2]} resize={{ scroll: false, offsetSize: true }}>
       <Camera mouseX={mouseX} mouseY={mouseY} />
       <MotionConfig transition={transition}>
         <motion.group

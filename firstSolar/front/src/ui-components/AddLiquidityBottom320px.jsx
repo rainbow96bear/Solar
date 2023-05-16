@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import LoadingCompo from "./LoadingCompo";
 
 export default function AddLiquidityBottom320px(props) {
-  const isLoading = useSelector((state) => state.isLoading);
+  const isLoading = useSelector(state => state.isLoading);
   const {
     overrides,
     oracleiddata,
@@ -505,7 +505,7 @@ export default function AddLiquidityBottom320px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -650,7 +650,7 @@ export default function AddLiquidityBottom320px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }

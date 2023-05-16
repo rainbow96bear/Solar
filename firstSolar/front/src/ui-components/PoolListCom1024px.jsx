@@ -580,7 +580,7 @@ export default function PoolListCom1024px(props) {
             <></>
           )}
           <Flex
-            width="100vw"
+            width="86vw"
             direction="column"
             justifyContent="center"
             alignItems="center"
@@ -589,7 +589,6 @@ export default function PoolListCom1024px(props) {
           >
             <Pagination
               width="100vw"
-              marginRight={{ medium: "0px", large: "240px" }}
               color="red"
               {...paginationProps}
               onChange={pageNum => {

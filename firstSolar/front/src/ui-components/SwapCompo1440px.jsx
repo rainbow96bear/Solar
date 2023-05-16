@@ -22,7 +22,7 @@ export default function SwapCompo1440px(props) {
   return (
     <Flex
       display="flex"
-      gap="30px"
+      gap="55px"
       direction="row"
       width="90vw"
       height="unset"
@@ -36,6 +36,7 @@ export default function SwapCompo1440px(props) {
     >
       <motion.div
         style={{
+          marginTop: "27px",
           width: "31vw",
           height: "unset",
           borderRadius: "35px",
@@ -95,6 +96,7 @@ export default function SwapCompo1440px(props) {
 
       <motion.div
         style={{
+          marginTop: "27px",
           width: "31vw",
           height: "unset",
           borderRadius: "35px",

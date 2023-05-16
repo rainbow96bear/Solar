@@ -54,7 +54,7 @@ export default function Swap320px(props) {
     rightPool,
     ...rest
   } = props;
-  const isLoading = useSelector((state) => state.isLoading);
+  const isLoading = useSelector(state => state.isLoading);
 
   return (
     <>
@@ -515,7 +515,7 @@ export default function Swap320px(props) {
                 labelHidden={false}
                 variation="default"
                 value={textareaValue}
-                onChange={(e) => {
+                onChange={e => {
                   if (+e.target.value > +userFirstBalance) {
                     e.target.value = userFirstBalance;
                   }
@@ -523,7 +523,7 @@ export default function Swap320px(props) {
                   handleTextareaChange(e);
                   delayedFunction1(e.target.value);
                 }}
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432785")}
@@ -951,7 +951,7 @@ export default function Swap320px(props) {
                 value={secondAmountPrice ? secondAmountPrice : 0}
                 disabled
                 backgroundColor="transparent"
-                onKeyPress={(e) => {
+                onKeyPress={e => {
                   handleKeyPress(e);
                 }}
                 {...getOverrideProps(overrides, "TextAreaField40432792")}
