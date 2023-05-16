@@ -119,7 +119,7 @@ export default function MyPageCompo1024px(props) {
             ></Text>
           ) : (
             <Text
-              color="#F7EFE3"
+              color="#00A497"
               fontFamily="ffProBlack"
               fontSize="43px"
               fontWeight="600"
