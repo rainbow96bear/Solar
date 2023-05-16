@@ -20,7 +20,7 @@
 
 <br>
 
-- 배포 : [SolarProject](solar.jaeko.block7.errorcode.help)
+- 배포 : [SolarProject](http://solar.jaeko.block7.errorcode.help)
 
 <br>
 
@@ -103,7 +103,6 @@ npm run start:dev
 - 메인넷 별 Deif 상품들에 대한 필터링 기능
 - 원하는 LP의 이름이나 CA를 검색해서 해당 LP들의 목록을 한눈에 볼 수있도록 하는 검색 기능
 
-
 <br>
 
 ---
@@ -119,7 +118,6 @@ npm run start:dev
 | Smart Contract               | Api를 통해 연결된 Defi 상품에 대해 Deposit을 하면 해당 pool의 스마트컨트랙을 불러오기 전에 scan 사이트의 스마트 컨트랙상에서 수수료 지불(지정된 Wallet으로 자동 전송)에 대한 컨트랙을 approve한 후 api를 통해 해당 pool의 스마트 컨트랙 진행 (Withdraw, Claim, Auto-compounding vaults 동일하게 처리)과 DFS 의 Airdrop 을 처리하는 스마트 컨트랙 .\*주의: 기본적으로 deposit을 할 때 Auto-compounding vaults 기능은 작동되게 설정해놓고 USER가 미작동을 선택하면 이에 대한 스마트 컨트랙은 진행되지 않게 해야 함. |
 | Token 발행 관련              | 테스트넷용 Token은 직접 발행<br> 메인넷용 BEP20 Token은 발행(토큰명: Defiscan , 심볼: DFS )하여 제공 예정.                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Staking and Swap             | DFS/USDT , DFS/ETH , DFS/BNB 3개의 pair로 LP(liquidity pool)토큰을 생성하여 이를 통해 DFS Airdrop과 Swap 시 나오는 수수료를 USER에게 제공 등                                                                                                                                                                                                                                                                                                                                                                      |
-
 
 <br>
 
@@ -150,7 +148,6 @@ npm run start:dev
 <img src="https://img.shields.io/badge/googlesheets-34A853?style=flat&logo=googlesheets&logoColor=white"/>
 <img src="https://img.shields.io/badge/filezilla-BF0000?style=flat&logo=filezilla&logoColor=white"/>
 <img src="https://img.shields.io/badge/ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white"/>
-
 
 - Solidity(Smart Contract)
 - AWS(EC2 (싱가폴 리전))
