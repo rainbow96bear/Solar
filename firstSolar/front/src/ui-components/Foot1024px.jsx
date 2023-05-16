@@ -39,11 +39,12 @@ export default function Foot1024px(props) {
       {isDesktop ? (
         <motion.div
           style={{
-            width: "89vw",
+            width: "91vw",
             height: "unset",
             backgroundColor: "#F7EFE3",
             boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
             borderRadius: "27px",
+            marginRight: "255px",
             backgroundImage:
               "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
           }}

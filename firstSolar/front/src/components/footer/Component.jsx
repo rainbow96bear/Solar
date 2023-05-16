@@ -10,7 +10,7 @@ const FooterComponent = () => {
         backgroundColor: "#f8f8f8",
         textAlign: "center",
         display: "flex",
-        width: "100%",
+        width: "200vw",
         justifyContent: "center",
         alignItems: "center",
         marginTop: "50px",

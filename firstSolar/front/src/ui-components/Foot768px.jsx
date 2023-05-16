@@ -42,6 +42,7 @@ export default function Foot768px(props) {
             width: "91vw",
             height: "unset",
             backgroundColor: "#F7EFE3",
+            marginRight: "155px",
             borderRadius: "21px",
             boxShadow: "38px 38px 29px rgba(0, 0, 0, 0.25)",
             backgroundImage:

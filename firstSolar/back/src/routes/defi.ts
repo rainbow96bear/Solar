@@ -207,7 +207,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -294,7 +294,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);
@@ -905,45 +905,58 @@ router.post("/getAutoCompound", async (req: Request, res: Response) => {
 });
 
 router.get("/rank", async (req: Request, res: Response) => {
-  try {
-    getPool = await db.Pool.findAll();
+  retries = 0;
+  const rankLpListUp = async () => {
+    try {
+      getPool = await db.Pool.findAll();
 
-    const activeLpList = (
-      await axios.get(`https://api.beefy.finance/vaults`)
-    ).data.filter((lp: any) => lp.status === "active");
+      const activeLpList = (
+        await axios.get(`https://api.beefy.finance/vaults`)
+      ).data.filter((lp: any) => lp.status === "active");
 
-    let lpList = await Promise.all(
-      activeLpList.map(async (lp: any) => {
-        const lpId: string = lp.id;
-        const oracleId: string = lp.oracleId;
-        const lpChain: number = mainNet[lp.chain];
+      let lpList = await Promise.all(
+        activeLpList.map(async (lp: any) => {
+          const lpId: string = lp.id;
+          const oracleId: string = lp.oracleId;
+          const lpChain: number = mainNet[lp.chain];
 
-        const [tvlNow] = await Promise.all([
-          getTvlData(lpId, oracleId, lpChain),
-        ]);
-        return {
-          oracleId: oracleId,
-          name: lp.name,
-          tvl: tvlNow,
-          mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
-          platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
-          addLiquidityUrl: lp.addLiquidityUrl,
-        };
-      })
-    );
-
-    lpList = lpList.sort((a, b) => b.tvl - a.tvl).slice(0, 3);
-
-    const rankedPools = getPool
-      .map((pool, index) => ({ ...pool.toJSON(), rank: index + 1 }))
-      .concat(
-        lpList.map((lp, index) => ({ ...lp, rank: index + 1 + getPool.length }))
+          const [tvlNow] = await Promise.all([
+            getTvlData(lpId, oracleId, lpChain),
+          ]);
+          return {
+            oracleId: oracleId,
+            name: lp.name,
+            tvl: tvlNow,
+            mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+            platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+            addLiquidityUrl: lp.addLiquidityUrl,
+          };
+        })
       );
 
-    res.send(rankedPools);
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
+      lpList = lpList.sort((a, b) => b.tvl - a.tvl).slice(0, 3);
+
+      const rankedPools = getPool
+        .map((pool, index) => ({ ...pool.toJSON(), rank: index + 1 }))
+        .concat(
+          lpList.map((lp, index) => ({
+            ...lp,
+            rank: index + 1 + getPool.length,
+          }))
+        );
+
+      res.send(rankedPools);
+    } catch (error) {
+      if (retries < MAX_RETRIES) {
+        retries++;
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await rankLpListUp();
+      } else {
+        console.error(error);
+        res.send();
+      }
+    }
+  };
+  await rankLpListUp();
 });
 export default router;

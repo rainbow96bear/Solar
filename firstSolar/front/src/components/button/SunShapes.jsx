@@ -33,7 +33,7 @@ export function SunShapes({ isHover, isPress, mouseX, mouseY }) {
             hover: { z: isPress ? -0.9 : 0 },
           }}
         >
-          <Sun position={[0.01, -0.14, 0]} />
+          <Sun position={[0.01, 0.03, 0]} />
         </motion.group>
       </MotionConfig>
     </Canvas>

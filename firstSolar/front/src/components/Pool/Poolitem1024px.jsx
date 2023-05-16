@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCompo1440px, SwapCompo1440px } from "../../ui-components";
-import { connectThunk } from "../../modules/connect";
 import { useDispatch, useSelector } from "react-redux";
 import "../../css/Font.css";
 import { useAccount } from "wagmi";
@@ -17,8 +16,6 @@ const Poolitem1024 = props => {
   const { address } = useAccount();
 
   const addressResult = address || address2;
-  const dispatch = useDispatch();
-  const pageIndex = useSelector(state => state.pageIndex);
 
   return (
     <>
@@ -534,11 +531,7 @@ const Poolitem1024 = props => {
               {addressResult ? (
                 <SwapCompo1440px props={props} />
               ) : (
-                <ConnectCompo1440px
-                  onClick={() => {
-                    dispatch(connectThunk({ connect: true }));
-                  }}
-                />
+                <ConnectCompo1440px />
               )}
             </motion.div>
           </SubWrap>
@@ -564,7 +557,4 @@ const SubWrap = styled(motion.div)`
   :last-child {
     border-radius: 0 0 20px 20px;
   }
-`;
-const Disble = styled.div`
-  display: hidden;
 `;
