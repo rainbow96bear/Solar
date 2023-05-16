@@ -82,3 +82,27 @@ export const platform768px2 = {
   matcha: "matcha",
   bal: "bal",
 };
+export const networkArray = [
+  "ethereum",
+  "optimism",
+  "metis",
+  "aurora",
+  "bsc",
+  "kava",
+  "heco",
+  "polygon",
+  "fantom",
+];
+
+export const dexArray = [
+  "uniswap",
+  "pancakeswap",
+  "sushi",
+  "quickswap",
+  "linch",
+  "curve",
+  "bnt",
+  "knc",
+  "matcha",
+  "bal",
+];

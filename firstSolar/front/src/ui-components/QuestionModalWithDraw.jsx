@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, Icon, TextAreaField } from "@aws-amplify/ui-react";
@@ -13,48 +13,66 @@ import logo from "./images/logo_new.png";
 import "../css/Font.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useWeb3 } from "../modules/useWeb3";
-import { useWeb3K } from "../modules/useWeb3Kaikas";
 import { getLPBalance } from "../api";
 import { useAccount } from "wagmi";
-import { isLoadingThunk } from "../modules/isLoading";
+import { setIsLoading } from "../modules/isLoading";
 import { withDraw } from "../api";
 import YesNoButton768px from "./YesNoButton768px";
 import DepositCompletedModal from "./DepositCompletedModal";
 import DepositFaildModal from "./DepositFaildModal";
-export default function QuestionModalWithDraw(props) {
-  const { overrides, setquestionmark, ...rest } = props;
+import { useWeb3T } from "../modules/useWeb3Trust";
+import { useWeb3C } from "../modules/useWeb3Coinbase";
+import "../css/Modal.css";
+import LoadingCompo from "./LoadingCompo";
 
-  const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+export default function QuestionModalWithDraw(props) {
+  const {
+    overrides,
+    setQuestionMark,
+    mypageList,
+    lpTokenValue,
+    mypageLpListUp,
+    lpToken,
+    mypageMethod,
+    pid,
+    setLpTokenValue,
+    navigate,
+    ...rest
+  } = props;
+
+  const isLoading = useSelector((state) => state.isLoading);
+  const [modalText, setModalText] = useState();
+  const account2 = useSelector((state) => state.account);
   const { web3, login } = useWeb3();
-  const { loginK } = useWeb3K();
+  const { web3T, loginT } = useWeb3T();
+  const { web3C, loginC } = useWeb3C();
   const { account } = useAccount();
-  const [lpBalance, setLpBalance] = React.useState();
-  const [withDrawAmountValue, setWithDrawAmountValue] = React.useState(0);
-  const [questionMark, setQuestionMark] = React.useState(0);
+  const dispatch = useDispatch();
+
+  const [lpBalance, setLpBalance] = useState();
+  const [withDrawAmountValue, setWithDrawAmountValue] = useState(0);
+  const [removeQuestion, setRemoveQuestion] = useState(0);
 
   const [withDrawSuccessModalOpen, setWithDrawSuccessModalOpen] =
-    React.useState(false);
-  const [withDrawFailModalOpen, setWithDrawFailModalOpen] =
-    React.useState(false);
+    useState(false);
+  const [withDrawFailModalOpen, setWithDrawFailModalOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
+      } else if (document.cookie.split(":")[0] == "trust") {
+        loginT();
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        loginC();
       }
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       try {
-        const result = await getLPBalance(
-          props?.pid,
-          account ? account : account2
-        );
+        const result = await getLPBalance(pid, account ? account : account2);
 
         setLpBalance(result);
       } catch (error) {
@@ -65,56 +83,76 @@ export default function QuestionModalWithDraw(props) {
 
   const withDrawFunc = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
-
+      dispatch(setIsLoading(true));
+      setModalText("With Draw");
       const result2 = await withDraw(
         account2 ? account2 : account,
         withDrawAmountValue,
-        props?.lptoken
+        lpToken
       );
 
-      let transactionResult2 = await web3.eth.sendTransaction(result2);
+      let transactionResult2;
+      if (document.cookie.split(":")[0] == "metamask") {
+        transactionResult2 = await web3.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        transactionResult2 = await web3T.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        transactionResult2 = await web3C.eth.sendTransaction(result2);
+      }
       setWithDrawAmountValue(0);
 
-      await props.mypagelplistup();
-      const result = await getLPBalance(
-        props?.pid,
-        account ? account : account2
-      );
+      await mypageLpListUp();
+      const result = await getLPBalance(pid, account ? account : account2);
       setLpBalance(result);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setWithDrawSuccessModalOpen(true);
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
       setWithDrawFailModalOpen(true);
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.style = `overflow: hidden`;
     return () => (document.body.style = `overflow: auto`);
   }, []);
 
   return (
-    <ModalCover
+    <Flex
       onClick={(e) => {
         e.preventDefault;
         if (e.target !== e.currentTarget) return;
       }}
+      width="100vw"
+      height="100vh"
+      backgroundColor="rgba(0, 0, 0, 0.4)"
+      position="fixed"
+      left="0%"
+      top="0%"
+      right="0%"
+      bottom="0%"
+      overflow="auto"
+      style={{ zIndex: "88" }}
     >
       <Flex
         gap="38px"
         direction="column"
-        width="53vw"
-        height="unset"
+        width={{ base: "85vw", small: "85vw", medium: "80vw" }}
         justifyContent="flex-start"
         alignItems="flex-start"
-        position="relative"
+        position="absolute"
+        left="50%"
+        top="50%"
+        style={{
+          transform: "translate(-50%,-50%)",
+          maxHeight: "calc(100vh - 40px)",
+        }}
         borderRadius="50px"
         padding="0px 0px 45px 0px"
-        backgroundColor="rgba(255,255,255,1)"
+        backgroundColor="#FDFCF5"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+        overflow="auto"
         {...getOverrideProps(overrides, "Deposit1024px")}
         {...rest}
       >
@@ -137,7 +175,7 @@ export default function QuestionModalWithDraw(props) {
         >
           <Text
             fontFamily="ffProBold"
-            fontSize="28px"
+            fontSize={{ base: "23px", small: "25px", medium: "28px" }}
             fontWeight="700"
             lineHeight="29.045454025268555px"
             textAlign="left"
@@ -167,7 +205,6 @@ export default function QuestionModalWithDraw(props) {
             shrink="0"
             position="relative"
             padding="5px 5px 5px 5px"
-            className="cursorPointer"
             style={{ cursor: "pointer" }}
             {...getOverrideProps(overrides, "XIcon")}
           >
@@ -189,7 +226,7 @@ export default function QuestionModalWithDraw(props) {
               shrink="0"
               position="relative"
               onClick={() => {
-                setquestionmark(0);
+                setQuestionMark(0);
               }}
               {...getOverrideProps(overrides, "Vector")}
             ></Icon>
@@ -244,7 +281,7 @@ export default function QuestionModalWithDraw(props) {
             ></Text>
             <Flex
               gap="24px"
-              direction="row"
+              direction={{ base: "column", small: "column", medium: "row" }}
               width="unset"
               height="unset"
               justifyContent="flex-start"
@@ -256,7 +293,7 @@ export default function QuestionModalWithDraw(props) {
               {...getOverrideProps(overrides, "Frame 90")}
             >
               <Flex
-                gap="5px"
+                gap="15px"
                 direction="row"
                 width="unset"
                 height="unset"
@@ -284,7 +321,7 @@ export default function QuestionModalWithDraw(props) {
                   borderRadius="35px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
-                  src={props.mypagelist.mainNetLogo || logo}
+                  src={mypageList.mainNetLogo || logo}
                   {...getOverrideProps(overrides, "ghrgclzzd 740822785")}
                 ></Image>
                 <Text
@@ -307,7 +344,7 @@ export default function QuestionModalWithDraw(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.mypagelist.firstToken || "불러오는 중"}
+                  children={mypageList.firstToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822786")}
                 ></Text>
               </Flex>
@@ -345,7 +382,7 @@ export default function QuestionModalWithDraw(props) {
                 ></Text>
               </Flex>
               <Flex
-                gap="5px"
+                gap="15px"
                 direction="row"
                 width="unset"
                 height="unset"
@@ -358,7 +395,7 @@ export default function QuestionModalWithDraw(props) {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="25px"
                 padding="10px 12px 10px 12px"
-                backgroundColor="rgba(0,136,153,0.59)"
+                backgroundColor="rgba(255,226,0,0.35)"
                 {...getOverrideProps(overrides, "Dexname2")}
               >
                 <Image
@@ -373,14 +410,14 @@ export default function QuestionModalWithDraw(props) {
                   borderRadius="35px"
                   padding="0px 0px 0px 0px"
                   objectFit="cover"
-                  src={props.mypagelist.platformLogo || logo}
+                  src={mypageList.platformLogo || logo}
                   {...getOverrideProps(overrides, "ghrgclzzd 740822791")}
                 ></Image>
                 <Text
+                  color="rgba(23,21,29,0.85)"
                   fontFamily="ffProExtraLight"
                   fontSize="17px"
                   fontWeight="600"
-                  color="rgba(239,239,239,1)"
                   lineHeight="20.573863983154297px"
                   textAlign="left"
                   display="block"
@@ -396,7 +433,7 @@ export default function QuestionModalWithDraw(props) {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.mypagelist.secondToken || "불러오는 중"}
+                  children={mypageList.secondToken || "불러오는 중"}
                   {...getOverrideProps(overrides, "DEX Name40822792")}
                 ></Text>
               </Flex>
@@ -451,7 +488,7 @@ export default function QuestionModalWithDraw(props) {
             >
               <Flex
                 gap="9px"
-                direction="row"
+                direction={{ base: "column", medium: "row" }}
                 width="unset"
                 height="unset"
                 justifyContent="flex-start"
@@ -489,11 +526,12 @@ export default function QuestionModalWithDraw(props) {
                     borderRadius="35px"
                     padding="0px 0px 0px 0px"
                     objectFit="cover"
-                    src={props.mypagelist.mainNetLogo || logo}
+                    src={mypageList.mainNetLogo || logo}
                     {...getOverrideProps(overrides, "ghrgclzzd 740822807")}
                   ></Image>
                   <Text
-                    fontFamily="ffProExtraLight"
+                    letterSpacing="3.5px"
+                    fontFamily="ffProLight"
                     fontSize="17px"
                     fontWeight="600"
                     lineHeight="20.573863983154297px"
@@ -511,7 +549,7 @@ export default function QuestionModalWithDraw(props) {
                     position="relative"
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
-                    children={props?.lptoken || "불러오는 중"}
+                    children={lpToken || "불러오는 중"}
                     {...getOverrideProps(overrides, "DEX Name40822808")}
                   ></Text>
                 </Flex>
@@ -567,8 +605,12 @@ export default function QuestionModalWithDraw(props) {
                 value={withDrawAmountValue}
                 onInput={(e) => setWithDrawAmountValue(e.target.value)}
                 onChange={(e) => {
-                  if (+e.target.value > +props.lpBalanceValue) {
-                    e.target.value = props.lpBalanceValue;
+                  if (
+                    +e.target.value >
+                    parseInt((lpBalance / 10 ** 18) * 10000) / 10000
+                  ) {
+                    e.target.value =
+                      parseInt((lpBalance / 10 ** 18) * 10000) / 10000;
                   }
                   setWithDrawAmountValue(e.target.value);
                 }}
@@ -599,7 +641,7 @@ export default function QuestionModalWithDraw(props) {
               position="relative"
               boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
               borderRadius="15px"
-              backgroundColor="rgba(234,0,50,0.45)"
+              backgroundColor="rgba(0,136,153,0.59)"
               style={{ cursor: "pointer" }}
               onClick={() => {
                 withDrawFunc();
@@ -607,10 +649,10 @@ export default function QuestionModalWithDraw(props) {
               {...getOverrideProps(overrides, "Frame 103")}
             >
               <Text
+                color="rgba(250,250,250,0.8)"
                 fontFamily="ffProBook"
-                fontSize="21px"
+                fontSize={{ base: "10px", medium: "20px" }}
                 fontWeight="700"
-                color="rgba(244,244,244,1)"
                 lineHeight="32.6761360168457px"
                 textAlign="center"
                 display="block"
@@ -631,7 +673,7 @@ export default function QuestionModalWithDraw(props) {
             <Flex
               gap="10px"
               direction="row"
-              width="21vw"
+              width={{ base: "29vw", small: "25vw" }}
               height="66px"
               justifyContent="center"
               alignItems="center"
@@ -644,15 +686,15 @@ export default function QuestionModalWithDraw(props) {
               style={{ cursor: "pointer" }}
               overflow="hidden"
               onClick={() => {
-                setQuestionMark(1);
+                setRemoveQuestion(1);
               }}
               {...getOverrideProps(overrides, "Frame 103")}
             >
               <Text
                 fontFamily="ffProBook"
-                fontSize="21px"
+                fontSize={{ base: "10px", medium: "20px" }}
                 fontWeight="700"
-                color="rgba(244,244,244,1)"
+                color="rgba(250,250,250,0.8)"
                 lineHeight="32.6761360168457px"
                 textAlign="center"
                 display="block"
@@ -674,12 +716,18 @@ export default function QuestionModalWithDraw(props) {
         </Flex>
       </Flex>
 
-      {questionMark == 1 ? (
+      {removeQuestion == 1 ? (
         <RemoveModal>
           <YesNoButton768px
             withDrawAmountValue={withDrawAmountValue}
-            setquestionmark={setQuestionMark}
-            lpSymbol={props?.lptoken}
+            lpTokenValue={lpTokenValue}
+            setLpTokenValue={setLpTokenValue}
+            setRemoveQuestion={setRemoveQuestion}
+            lpSymbol={lpToken}
+            mypageLpListUp={mypageLpListUp}
+            mypageMethod={mypageMethod}
+            dispatch={dispatch}
+            navigate={navigate}
           />
         </RemoveModal>
       ) : (
@@ -689,6 +737,7 @@ export default function QuestionModalWithDraw(props) {
         <LoadingModal>
           <DepositCompletedModal
             setDepositSuccessModalOpen={setWithDrawSuccessModalOpen}
+            modalText={modalText}
           ></DepositCompletedModal>
         </LoadingModal>
       )}
@@ -696,40 +745,18 @@ export default function QuestionModalWithDraw(props) {
         <LoadingModal>
           <DepositFaildModal
             setDepositFailModalOpen={setWithDrawFailModalOpen}
+            modalText={modalText}
           ></DepositFaildModal>
         </LoadingModal>
       )}
-    </ModalCover>
+      {isLoading && (
+        <LoadingModal>
+          <LoadingCompo />
+        </LoadingModal>
+      )}
+    </Flex>
   );
 }
-
-const ModalCover = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  position: fixed;
-  left: 0%;
-  top: 0%;
-  right: 0%;
-  justify-content: center;
-  align-items: center;
-  z-index: 88;
-
-  .ConnectModal {
-    display: flex;
-    justify-content: center;
-
-    .cursorPointer {
-      cursor: pointer;
-    }
-  }
-  .Web3Button {
-    button {
-      background-color: orange !import;
-    }
-  }
-`;
 
 const RemoveModal = styled.div`
   width: 100vw;
@@ -737,6 +764,13 @@ const RemoveModal = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  align-items: center;
+  z-index: 88;
 `;
 const LoadingModal = styled.div`
   width: 100vw;

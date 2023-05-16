@@ -57,6 +57,7 @@ router.post("/mypage", async (req: Request, res: Response) => {
       let OtherTokenBalance: number = 0;
       let pool: Pool | null = null;
       let lpPidNumber: number = 0;
+      let getAutoCompoundStatus: boolean;
 
       if (poolInfo[i][0] == process.env.DFS_ETH) {
         LPTokenBalance = await deployedDFSETH.methods
@@ -74,6 +75,13 @@ router.post("/mypage", async (req: Request, res: Response) => {
           .balanceOf(userAddress)
           .call();
         lpPidNumber = i;
+        const pid: number = await deployed.methods
+          .getPid(process.env.DFS_ETH)
+          .call();
+        const tempData = await deployed.methods
+          .userInfo(pid, userAddress)
+          .call();
+        getAutoCompoundStatus = tempData.checkAutoCompounding;
       } else if (poolInfo[i][0] == process.env.DFS_USDT) {
         LPTokenBalance = await deployedDFSUSDT.methods
           .balanceOf(userAddress)
@@ -90,6 +98,13 @@ router.post("/mypage", async (req: Request, res: Response) => {
           .balanceOf(userAddress)
           .call();
         lpPidNumber = i;
+        const pid: number = await deployed.methods
+          .getPid(process.env.DFS_USDT)
+          .call();
+        const tempData = await deployed.methods
+          .userInfo(pid, userAddress)
+          .call();
+        getAutoCompoundStatus = tempData.checkAutoCompounding;
       } else if (poolInfo[i][0] == process.env.DFS_BNB) {
         LPTokenBalance = await deployedDFSBNB.methods
           .balanceOf(userAddress)
@@ -106,6 +121,13 @@ router.post("/mypage", async (req: Request, res: Response) => {
           .balanceOf(userAddress)
           .call();
         lpPidNumber = i;
+        const pid: number = await deployed.methods
+          .getPid(process.env.DFS_BNB)
+          .call();
+        const tempData = await deployed.methods
+          .userInfo(pid, userAddress)
+          .call();
+        getAutoCompoundStatus = tempData.checkAutoCompounding;
       }
 
       if (pool) {
@@ -113,6 +135,7 @@ router.post("/mypage", async (req: Request, res: Response) => {
         pool.dataValues.OtherTokenBalance = OtherTokenBalance;
         pool.dataValues.LPTokenBalance = LPTokenBalance; // balance를 객체 원소에 추가
         pool.dataValues.lpPidNumber = lpPidNumber;
+        pool.dataValues.getAutoCompoundStatus = getAutoCompoundStatus;
         filterPool.push(pool);
       }
     }
@@ -120,6 +143,7 @@ router.post("/mypage", async (req: Request, res: Response) => {
     res.send(filterPool);
   } catch (error) {
     console.log(error);
+    res.send();
   }
 });
 router.get("/datesync", async (req: Request, res: Response) => {
@@ -148,6 +172,43 @@ router.get("/datesync", async (req: Request, res: Response) => {
     }, timeUntilNextUpdate);
   } catch (error) {
     console.log(error);
+    res.send();
+  }
+});
+
+router.get("/lastDayOfMonth", async (req: Request, res: Response) => {
+  try {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const today = now.getDate();
+
+    const getLastDayOfMonth = (year: number, month: number): Date => {
+      const nextMonth = month + 1;
+      const nextMonthFirstDay = new Date(year, nextMonth, 1);
+      const lastDayOfMonth: Date = new Date(nextMonthFirstDay.getTime() - 1);
+      return lastDayOfMonth;
+    };
+
+    const lastDayOfMonth = getLastDayOfMonth(year, month);
+
+    if (today == lastDayOfMonth.getDate()) {
+      const distribution = await deployed.methods.allDistribution().encodeABI();
+
+      res.send({
+        status: 200,
+        data: {
+          from: req.body.account,
+          to: process.env.DEX,
+          data: distribution,
+        },
+      });
+    } else {
+      res.send({ status: 404, data: "Today is not the last day" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.send();
   }
 });
 export default router;

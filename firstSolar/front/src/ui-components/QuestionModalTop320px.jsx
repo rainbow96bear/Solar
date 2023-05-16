@@ -11,9 +11,13 @@ import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text, Icon } from "@aws-amplify/ui-react";
 
 export default function QuestionModal(props) {
-  const { overrides, setquestionmark, ...rest } = props;
-
-  const setfirstselecttoken = props?.setfirstselecttoken;
+  const {
+    overrides,
+    setQuestionMark,
+    secondSelectToken,
+    setFirstSelectToken,
+    ...rest
+  } = props;
 
   const tokenList = ["DFS", "ETH", "USDT", "BNB"];
   const tokenListDescription = [
@@ -44,7 +48,7 @@ export default function QuestionModal(props) {
         position="relative"
         borderRadius="35px"
         padding="25px 25px 59px 25px"
-        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,1))"
+        backgroundImage="linear-gradient(-7deg, #FDFCF5, #FDFCF5)"
         {...getOverrideProps(overrides, "SelTokken768px")}
         {...rest}
       >
@@ -61,7 +65,7 @@ export default function QuestionModal(props) {
           className="cursorPointer"
           style={{ cursor: "pointer" }}
           onClick={() => {
-            props?.setquestionmark(0);
+            setQuestionMark(0);
           }}
           {...getOverrideProps(overrides, "XIcon")}
         >
@@ -138,8 +142,8 @@ export default function QuestionModal(props) {
             backgroundColor="rgba(255,226,0,0.35)"
             style={{ cursor: "pointer" }}
             onClick={() => {
-              props?.setquestionmark(0);
-              setfirstselecttoken(item);
+              setQuestionMark(0);
+              setFirstSelectToken(item);
             }}
             {...getOverrideProps(overrides, "MapList40632581")}
           >

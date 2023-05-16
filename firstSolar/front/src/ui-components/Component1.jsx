@@ -37,7 +37,7 @@ export default function Component1(props) {
         right="0%"
         borderRadius="8px"
         padding="10px 10px 10px 10px"
-        backgroundImage="linear-gradient(39deg, rgba(255,226,0,0.15), rgba(255,255,255,0.38), rgba(231,97,164,0.15))"
+        backgroundImage="linear-gradient(39deg, rgba(255,226,0,0.15), rgba(246,247,248,0.38), rgba(231,97,164,0.15))"
         {...getOverrideProps(overrides, "Button")}
       >
         <Text
@@ -123,7 +123,7 @@ export default function Component1(props) {
               position="relative"
               borderRadius="24px"
               padding="10px 10px 10px 10px"
-              backgroundColor="rgba(255,255,255,0.8)"
+              backgroundColor="rgba(246,247,248,0.8)"
               {...getOverrideProps(overrides, "SelCoin39722748")}
             >
               <Flex
@@ -382,7 +382,7 @@ export default function Component1(props) {
               position="relative"
               borderRadius="24px"
               padding="10px 10px 10px 10px"
-              backgroundColor="rgba(255,255,255,0.8)"
+              backgroundColor="rgba(246,247,248,0.8)"
               {...getOverrideProps(overrides, "SelCoin39732788")}
             >
               <Flex

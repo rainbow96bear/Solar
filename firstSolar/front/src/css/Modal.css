@@ -1,0 +1,14 @@
+.depositModal {
+  scale: 0.69;
+
+  @media only screen and (min-width: 768px) {
+    scale: 1;
+  }
+}
+
+.withModal {
+  scale: 0.74;
+  @media only screen and (min-width: 768px) {
+    scale: 1;
+  }
+}

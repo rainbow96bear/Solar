@@ -1,24 +1,56 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { DepositButton1024px } from "../../ui-components";
 import "../../css/Font.css";
+import { getAutoCompound } from "../../api";
+import { useEffect, useState } from "react";
 
 const MyPageList1024px = (props) => {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    setLpTokenValue,
+    setLpToken,
+    setFirstToken,
+    setSecondToken,
+    setFirstImgToken,
+    setSecondImgToken,
+    LPTokenBalance,
+    item,
+    autoCompoundStatus,
+    pid,
+    getAutoCompoundStatusFunc,
+    lpTokenValue,
+    idx,
+    lpToken,
+    mypageLpListUp,
+    navigate,
+    isLoading2,
+    setIsLoading2,
+    ...rest
+  } = props;
+  const [auto, setAuto] = useState();
+  const account2 = useSelector((state) => state.account);
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
 
   const mypageMethod = () => {
-    props.setLpTokenValue(props?.item?.LPTokenBalance);
-    props.setLpToken(props?.item?.name);
-    props.setFirstToken(props?.item?.firstToken);
-    props.setSecondToken(props?.item?.secondToken);
-    props.setFirstImgToken(props?.item?.mainNetLogo);
-    props.setSecondImgToken(props?.item?.platformLogo);
+    setLpTokenValue(item?.LPTokenBalance);
+    setLpToken(item?.name);
+    setFirstToken(item?.firstToken);
+    setSecondToken(item?.secondToken);
+    setFirstImgToken(item?.mainNetLogo);
+    setSecondImgToken(item?.platformLogo);
   };
+  const checkAuto = async () => {
+    const result = await getAutoCompound(account2, item.name);
+    setAuto(result);
+  };
+  useEffect(() => {
+    checkAuto();
+  }, [autoCompoundStatus]);
   return (
     <>
       <ItemWrap
@@ -40,7 +72,7 @@ const MyPageList1024px = (props) => {
             backgroundColor: "rgba(249,251,250,0.85)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+              "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
           }}
           whileHover={{
             borderRadius: "75px",
@@ -148,8 +180,8 @@ const MyPageList1024px = (props) => {
                 ></Text>
               </Flex>
               <Flex
-                gap="10px"
-                direction="row"
+                gap="5px"
+                direction="column"
                 width="unset"
                 height="unset"
                 justifyContent="center"
@@ -179,7 +211,27 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children="APY"
+                  children="Auto"
+                  {...getOverrideProps(overrides, "APY")}
+                ></Text>
+                <Text
+                  fontFamily="ffProExtraLight"
+                  fontSize="16px"
+                  fontWeight="600"
+                  lineHeight="21.784090042114258px"
+                  textAlign="center"
+                  display="block"
+                  direction="column"
+                  justifyContent="unset"
+                  width="unset"
+                  height="unset"
+                  gap="unset"
+                  alignItems="unset"
+                  shrink="0"
+                  position="relative"
+                  padding="0px 0px 0px 0px"
+                  whiteSpace="pre-wrap"
+                  children="Compounding"
                   {...getOverrideProps(overrides, "APY")}
                 ></Text>
               </Flex>
@@ -287,7 +339,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`MY ${props?.item?.oracleId.split("-")[0]}`}
+                  children={`MY ${item?.oracleId.split("-")[0]}`}
                   {...getOverrideProps(overrides, "DFS")}
                 ></Text>
               </Flex>
@@ -323,7 +375,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`MY ${props?.item?.oracleId.split("-")[1]}`}
+                  children={`MY ${item?.oracleId.split("-")[1]}`}
                   {...getOverrideProps(overrides, "ETH")}
                 ></Text>
               </Flex>
@@ -376,7 +428,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.idx + 1}
+                  children={idx + 1}
                   {...getOverrideProps(overrides, "1")}
                 ></Text>
               </Flex>
@@ -415,7 +467,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.item.name}
+                  children={item.name}
                   {...getOverrideProps(overrides, "DFS-ETH")}
                 ></Text>
               </Flex>
@@ -454,7 +506,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={props.item.apy}
+                  children={auto ? "ON" : "OFF"}
                   {...getOverrideProps(overrides, "040702571")}
                 ></Text>
               </Flex>
@@ -493,7 +545,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${props?.item?.tvl.slice(0, 10) / 100}`}
+                  children={`${item?.tvl.slice(0, 10) / 100}`}
                   {...getOverrideProps(overrides, "040702572")}
                 ></Text>
               </Flex>
@@ -532,7 +584,7 @@ const MyPageList1024px = (props) => {
                   position="relative"
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
-                  children={`${props.item.fee}%`}
+                  children={`${item.fee}%`}
                   {...getOverrideProps(overrides, "0.3%")}
                 ></Text>
               </Flex>
@@ -572,7 +624,7 @@ const MyPageList1024px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`${
-                    Math.floor(props?.item?.DFSTokenBalance.slice(0, 6)) / 100
+                    Math.floor(item?.DFSTokenBalance.slice(0, 6)) / 100
                   } `}
                   {...getOverrideProps(overrides, "040892897")}
                 ></Text>
@@ -612,7 +664,7 @@ const MyPageList1024px = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`${
-                    Math.floor(props?.item?.OtherTokenBalance.slice(0, 6)) / 100
+                    Math.floor(item?.OtherTokenBalance.slice(0, 6)) / 100
                   } `}
                   {...getOverrideProps(overrides, "040892899")}
                 ></Text>
@@ -635,15 +687,18 @@ const MyPageList1024px = (props) => {
               }}
             >
               <DepositButton1024px
-                lpBalanceValue={props.lpBalanceValue}
-                mypagelist={props.item}
-                lptokenvalue={props.lptokenvalue}
-                lptoken={props.lptoken}
-                mypagelplistup={props.mypagelplistup}
-                pid={props?.pid}
-                setlptokenvalue={props.setLpTokenValue}
+                autoState={item?.getAutoCompoundStatus}
+                mypageList={item}
+                lpTokenValue={lpTokenValue}
+                lpToken={lpToken}
+                mypageLpListUp={mypageLpListUp}
+                pid={pid}
+                setLpTokenValue={setLpTokenValue}
                 mypageMethod={mypageMethod}
-                lpTokenBalance={props?.item?.LPTokenBalance}
+                lpTokenBalance={item?.LPTokenBalance}
+                getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+                auto={auto}
+                navigate={navigate}
               />
             </motion.div>
           </SubWrap>

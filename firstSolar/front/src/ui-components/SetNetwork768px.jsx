@@ -22,7 +22,7 @@ export default function SetNetwork768px(props) {
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       borderRadius="30px"
       padding="38px 20px 38px 20px"
-      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+      backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
       {...getOverrideProps(overrides, "SetNetwork768px")}
       {...rest}
     >
@@ -118,7 +118,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39792940")}
         >
           <Flex
@@ -202,7 +202,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39793380")}
         >
           <Flex
@@ -286,7 +286,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39793385")}
         >
           <Flex
@@ -370,7 +370,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39793435")}
         >
           <Flex
@@ -454,7 +454,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39793440")}
         >
           <Flex
@@ -538,7 +538,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39793445")}
         >
           <Flex
@@ -622,7 +622,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39793450")}
         >
           <Flex
@@ -706,7 +706,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39793455")}
         >
           <Flex
@@ -790,7 +790,7 @@ export default function SetNetwork768px(props) {
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           borderRadius="21px"
           padding="10px 10px 10px 10px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "NetworkName39793460")}
         >
           <Flex

@@ -1,12 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 // 라이브러리 import
 import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import { useWeb3 } from "./modules/useWeb3";
-import { useWeb3K } from "./modules/useWeb3Kaikas";
 
 // walletConenct import
 import {
@@ -15,26 +12,25 @@ import {
   w3mProvider,
 } from "@web3modal/ethereum";
 import { Web3Modal } from "@web3modal/react";
-import { configureChains, createClient, useAccount, WagmiConfig } from "wagmi";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { arbitrum, mainnet, polygon } from "wagmi/chains";
 
 // 컴포넌트 import
 import HeaderContainer from "./components/header/Container";
 import MainContainer from "./components/main/Container";
-import FooterContainer from "./components/footer/Container";
-import { connectThunk } from "./modules/connect";
-import LoadingCompo from "./ui-components/LoadingCompo";
+
 import SwapContainer from "./components/swap/Container";
 import LiquidityContainer from "./components/liquidity/Container";
 import MypageContainer from "./components/mypage/Container";
 import NavigatorContainer from "./components/navigateHome/Container";
 import EmptySearchModal from "./ui-components/EmptySearchModal";
-import { DepositCompletedModal } from "./ui-components";
-import { DepositFaildModal } from "./ui-components";
+
+import { OutRedirectModal } from "./ui-components";
 import SearchNavigatorContainer from "./components/navigateSearch/Container";
+import FooterContainer from "./components/footer/Container";
 
 const chains = [arbitrum, mainnet, polygon];
-const projectId = "33e35c4e1e0d029fde76e4633b08ab6e";
+const projectId = process.env.REACT_APP_PROJECT_ID;
 
 const explorerExcludedWalletIds = "ALL";
 const { provider } = configureChains(chains, [
@@ -50,20 +46,11 @@ const wagmiClient = createClient({
 const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
-  const isLoading = useSelector((state) => state.isLoading.isLoading.isLoading);
-  const emptySearch = useSelector((state) => state.emptySearch);
+  const emptySearch = useSelector(state => state.emptySearch);
 
-  const completeModal = useSelector((state) => state.completeModal);
-  const dispatch = useDispatch();
-
-  const accountWagmi = useAccount({
-    onConnect({ address, connector, isReconnected }) {
-      // console.log("Connected", { address, connector, isReconnected });
-    },
-    onDisconnect() {
-      dispatch(connectThunk({ connect: false }));
-    },
-  });
+  const outRedirectModalOpen = useSelector(
+    state => state.outRedirectModalOpen.isOpen
+  );
 
   return (
     <>
@@ -90,16 +77,15 @@ function App() {
               ></Route>
             </Routes>
           </MainContent>
-          <FooterContainer></FooterContainer>
-
-          {isLoading && (
-            <LoadingModal>
-              <LoadingCompo />
-            </LoadingModal>
-          )}
+          {/* <FooterContainer /> */}
           {emptySearch && (
             <LoadingModal>
               <EmptySearchModal className="marginT" />
+            </LoadingModal>
+          )}
+          {outRedirectModalOpen && (
+            <LoadingModal>
+              <OutRedirectModal />
             </LoadingModal>
           )}
         </div>
@@ -133,4 +119,6 @@ const LoadingModal = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  padding-left: 10px;
+  padding-right: 10px;
 `;

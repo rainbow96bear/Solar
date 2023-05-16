@@ -40,7 +40,7 @@ export default function SwapFailModal(props) {
       boxShadow="-50px 38px 38px rgba(0, 0.08627451211214066, 0.03921568766236305, 0.10000000149011612)"
       borderRadius="63.06201636791229px"
       z-index="9999"
-      backgroundColor="rgba(255,255,255,1)"
+      backgroundColor="#FDFCF5"
       padding="20px 20px 20px 20px"
       className="LoadingBox"
     >

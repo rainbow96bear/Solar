@@ -8,28 +8,29 @@ export const useWeb3 = () => {
 
   const login = useCallback(async () => {
     try {
-      if (window.ethereum) {
-        const _web3 = new Web3(window.ethereum);
-        setWeb3(_web3);
-        const [_account] = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        if (_account) {
-          setAccount(_account);
-        }
-
-        window.ethereum.on("accountsChanged", async () => {
-          if (window.ethereum) {
-            const [_account] = await window.ethereum.request({
-              method: "eth_requestAccounts",
-            });
+      if (window.ethereum && window.ethereum.isMetaMask) {
+        let _web3;
+        if (window.ethereum.isMetaMask) {
+          _web3 = new Web3(window.ethereum);
+          setWeb3(_web3);
+          const [_account] = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          if (_account) {
             setAccount(_account);
           }
-        });
-
-        setChainId(window.ethereum.networkVersion);
+          window.ethereum.on("accountsChanged", async () => {
+            if (window.ethereum && window.ethereum.isMetaMask) {
+              const [_account] = await window.ethereum.request({
+                method: "eth_requestAccounts",
+              });
+              setAccount(_account);
+            }
+          });
+          setChainId(window.ethereum.networkVersion);
+        }
       } else {
-        console.log("MetaMask is not exist");
+        throw new Error("MetaMask is not exist");
       }
     } catch (error) {
       console.error(error);

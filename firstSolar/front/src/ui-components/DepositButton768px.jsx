@@ -5,36 +5,55 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import { useState } from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
 import QuestionModalDeposit from "./QuestionModalDeposit";
 import QuestionModalWithDraw from "./QuestionModalWithDraw";
 import "../css/Font.css";
+import { useDispatch } from "react-redux";
 
 export default function DepositButton768px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    autoState,
+    mypageList,
+    lpTokenValue,
+    lpToken,
+    mypageLpListUp,
+    pid,
+    setLpTokenValue,
+    mypageMethod,
+    lpTokenBalance,
+    getAutoCompoundStatusFunc,
+    auto,
+    navigate,
+    isLoading2,
+    setIsLoading2,
+    ...rest
+  } = props;
 
-  const [questionMark, setQuestionMark] = React.useState(0);
+  const [questionMark, setQuestionMark] = useState(0);
+  const dispatch = useDispatch();
   return (
     <>
       <Flex
         gap="33px"
         direction="row"
-        width="78.1vw"
+        width="100vw"
         height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="center"
+        alignItems="center"
         position="relative"
         borderRadius="35px"
-        padding="31px 63.5px 31px 63.5px"
+        padding="31px 80px 31px 80px"
         {...getOverrideProps(overrides, "DepositButton1024px")}
         {...rest}
       >
         <motion.div
           style={{
-            width: "45vw",
+            width: "50vw",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(255,226,0,0.35)",
@@ -43,7 +62,7 @@ export default function DepositButton768px(props) {
           }}
           whileHover={{
             borderRadius: "13px",
-            backgroundColor: "rgba(252,250,242,0.75)",
+            backgroundColor: "rgba(247,239,227,0.75)",
             scale: 1.03,
             opacity: 0.88,
           }}
@@ -52,7 +71,7 @@ export default function DepositButton768px(props) {
             gap="10px"
             direction="row"
             width="unset"
-            height="50px"
+            height={{ base: "45px", small: "50px" }}
             justifyContent="flex-end"
             alignItems="center"
             grow="1"
@@ -65,7 +84,7 @@ export default function DepositButton768px(props) {
           >
             <Text
               fontFamily="ffProMedium"
-              fontSize="24px"
+              fontSize={{ base: "13px", small: "15px" }}
               fontWeight="700"
               lineHeight="29.045454025268555px"
               textAlign="center"
@@ -94,7 +113,7 @@ export default function DepositButton768px(props) {
 
         <motion.div
           style={{
-            width: "45vw",
+            width: "50vw",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(234,0,50,0.55)",
@@ -112,7 +131,7 @@ export default function DepositButton768px(props) {
             gap="10px"
             direction="row"
             width="unset"
-            height="50px"
+            height={{ base: "45px", small: "50px" }}
             justifyContent="flex-end"
             alignItems="center"
             grow="1"
@@ -121,11 +140,12 @@ export default function DepositButton768px(props) {
             position="relative"
             borderRadius="45px"
             padding="19px 25px 19px 25px"
+            overflow="hidden"
             {...getOverrideProps(overrides, "Connect40822713")}
           >
             <Text
               fontFamily="ffProMedium"
-              fontSize="24px"
+              fontSize={{ base: "13px", small: "15px" }}
               fontWeight="700"
               color="rgba(244,244,244,1)"
               lineHeight="29.045454025268555px"
@@ -155,26 +175,35 @@ export default function DepositButton768px(props) {
       </Flex>
       {questionMark == 1 ? (
         <QuestionModalDeposit
-          setquestionmark={setQuestionMark}
-          lpBalanceValue={props.lpBalanceValue}
-          mypagelist={props.mypagelist}
-          mypagelplistup={props.mypagelplistup}
-          lptokenvalue={props.lptokenvalue}
-          lptoken={props.lptoken}
-          setlptokenvalue={props?.setlptokenvalue}
+          autoState={autoState}
+          setQuestionMark={setQuestionMark}
+          mypageList={mypageList}
+          mypageLpListUp={mypageLpListUp}
+          lpTokenValue={lpTokenValue}
+          lpToken={lpToken}
+          setLpTokenValue={setLpTokenValue}
+          mypageMethod={mypageMethod}
+          pid={pid}
+          lpTokenBalance={lpTokenBalance}
+          getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+          auto={auto}
+          navigate={navigate}
         ></QuestionModalDeposit>
       ) : (
         <></>
       )}
       {questionMark == 2 ? (
         <QuestionModalWithDraw
-          setquestionmark={setQuestionMark}
-          lpBalanceValue={props.lpBalanceValue}
-          mypagelist={props.mypagelist}
-          lptokenvalue={props.lptokenvalue}
-          mypagelplistup={props.mypagelplistup}
-          lptoken={props.lptoken}
-          pid={props?.pid}
+          setQuestionMark={setQuestionMark}
+          mypageList={mypageList}
+          lpTokenValue={lpTokenValue}
+          mypageLpListUp={mypageLpListUp}
+          lpToken={lpToken}
+          mypageMethod={mypageMethod}
+          pid={pid}
+          setLpTokenValue={setLpTokenValue}
+          dispatch={dispatch}
+          navigate={navigate}
         ></QuestionModalWithDraw>
       ) : (
         <></>

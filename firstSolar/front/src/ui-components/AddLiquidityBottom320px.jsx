@@ -1,183 +1,48 @@
-/***************************************************************************
- * The contents of this file were generated with Amplify Studio.           *
- * Please refrain from making any modifications to this file.              *
- * Any changes to this file will be overwritten when running amplify pull. *
- **************************************************************************/
-
-/* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { motion } from "framer-motion";
 import { Flex, Image, Text, TextAreaField } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
-import { useAccount } from "wagmi";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  approveDFS,
-  approveOtherToken,
-  addLiquidity,
-  updatePool,
-} from "../api/index";
-import { swapBalance } from "../api";
-import { useWeb3 } from "../modules/useWeb3.js";
-import { useWeb3K } from "../modules/useWeb3Kaikas";
-import { isLoadingThunk } from "../modules/isLoading.js";
-import { motion } from "framer-motion";
-import AddLiquiditySuccessModal from "./AddLiquiditySuccessModal";
-import AddLiquidityFailModal from "./AddLiquidityFailModal";
 import styled from "styled-components";
+import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
+import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
+import { useSelector } from "react-redux";
+import LoadingCompo from "./LoadingCompo";
 
 export default function AddLiquidityBottom320px(props) {
-  const { overrides, oracleiddata, ...rest } = props;
-  const dispatch = useDispatch();
-
-  const { web3, account, chainId, login } = useWeb3();
-  const { web3K, accountK, chainIdK, loginK } = useWeb3K();
-
-  const [firstValue, setFirstValue] = React.useState();
-  const [secondValue, setSecondValue] = React.useState();
-
-  const { address } = useAccount();
-  const address2 = useSelector((state) => state.account.account.account);
-
-  const [userFirstBalance, setUserFirstBalance] = React.useState(0);
-  const [userSecondBalance, setUserSecondBalance] = React.useState(0);
-
-  const [addLiquidityPossibility, setAddLiquidityPossibility] =
-    React.useState(false);
-
-  const [addLiquiditySuccessModalOpen, setAddLiquiditySuccessModalOpen] =
-    React.useState(false);
-  const [addLiquidityFailModalOpen, setAddLiquidityFailModalOpen] =
-    React.useState(false);
-
-  const addLiquidtiyFunc = async () => {
-    dispatch(isLoadingThunk({ isLoading: true }));
-    const approveDFSTx = await approveDFS(
-      address2 ? address2 : address,
-      firstValue,
-      props?.oracleiddata[0]?.secondToken
-    );
-    try {
-      const txResult = await web3.eth.sendTransaction(approveDFSTx);
-
-      if (txResult) {
-        const approveOtherTokenTx = await approveOtherToken(
-          address2 ? address2 : address,
-          secondValue,
-          props?.oracleiddata[0]?.secondToken
-        );
-
-        const pairTxResult = await web3.eth.sendTransaction(
-          approveOtherTokenTx
-        );
-        if (pairTxResult) {
-          const addLiquidityTx = await addLiquidity(
-            address2 ? address2 : address,
-            firstValue,
-            secondValue,
-            props?.oracleiddata[0]?.secondToken
-          );
-
-          const addLiquidityTxResult = await web3.eth.sendTransaction(
-            addLiquidityTx
-          );
-          await updatePool(props?.oracleiddata[0]?.tokenAddress);
-
-          if (addLiquidityTxResult) {
-            const firstBalanceTemp = await swapBalance(
-              address ? address : address2,
-              props?.oracleiddata[0]?.firstToken
-                ? props?.oracleiddata[0]?.firstToken
-                : "DFS"
-            );
-            setUserFirstBalance(firstBalanceTemp);
-
-            const secondBalanceTemp = await swapBalance(
-              address ? address : address2,
-              props?.oracleiddata[0]?.secondToken
-                ? props?.oracleiddata[0]?.secondToken
-                : "ETH"
-            );
-            setUserSecondBalance(secondBalanceTemp);
-            setFirstValue(0);
-            setSecondValue(0);
-            dispatch(isLoadingThunk({ isLoading: false }));
-            setAddLiquiditySuccessModalOpen(true);
-          }
-        }
-      }
-    } catch (err) {
-      console.error(err);
-      dispatch(isLoadingThunk({ isLoading: false }));
-      setAddLiquidityFailModalOpen(true);
-    }
-  };
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const data = await swapBalance(
-          address ? address : address2,
-          props?.oracleiddata[0]?.firstToken
-        );
-        setUserFirstBalance(data);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        const data = await swapBalance(
-          address ? address : address2,
-          props?.oracleiddata[0]?.secondToken
-        );
-        setUserSecondBalance(data);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    if (document.cookie) {
-      if (document.cookie.split(":")[0] == "metamask") {
-        login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
-      }
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (
-      +firstValue <= +userFirstBalance &&
-      +secondValue <= +userSecondBalance &&
-      firstValue == secondValue &&
-      firstValue != 0 &&
-      secondValue != 0 &&
-      firstValue != undefined &&
-      secondValue != undefined
-    ) {
-      setAddLiquidityPossibility(true);
-    } else setAddLiquidityPossibility(false);
-  }, [firstValue, secondValue]);
+  const isLoading = useSelector(state => state.isLoading);
+  const {
+    overrides,
+    oracleiddata,
+    addLiquidityPossibility,
+    addLiquidityFunc,
+    balance,
+    userFirstBalance,
+    firstValue,
+    setFirstValue,
+    userSecondBalance,
+    secondValue,
+    setSecondValue,
+    addLiquiditySuccessModalOpen,
+    setAddLiquiditySuccessModalOpen,
+    addLiquidityFailModalOpen,
+    setAddLiquidityFailModalOpen,
+    ...rest
+  } = props;
 
   return (
     <Flex
-      gap="24px"
+      gap="10px"
       direction="column"
       width="320px"
       height="unset"
       justifyContent="flex-start"
-      alignItems="flex-start"
+      alignItems="center"
       overflow="hidden"
       position="relative"
       borderRadius="35px"
-      padding="0px 0px 16px 0px"
+      padding="38px 0px 38px 0px"
       {...getOverrideProps(overrides, "AddLiquidityBottom320px")}
       {...rest}
     >
@@ -590,49 +455,6 @@ export default function AddLiquidityBottom320px(props) {
                   }
                   {...getOverrideProps(overrides, "DEX Name40053036")}
                 ></Text>
-                <Flex
-                  gap="5px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  {...getOverrideProps(overrides, "Frame 9940053037")}
-                >
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 840053038")}
-                  ></Image>
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 940053039")}
-                  ></Image>
-                </Flex>
               </Flex>
               <Flex
                 gap="10px"
@@ -683,7 +505,7 @@ export default function AddLiquidityBottom320px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -778,49 +600,6 @@ export default function AddLiquidityBottom320px(props) {
                   }
                   {...getOverrideProps(overrides, "DEX Name40053047")}
                 ></Text>
-                <Flex
-                  gap="5px"
-                  direction="row"
-                  width="unset"
-                  height="unset"
-                  justifyContent="flex-start"
-                  alignItems="flex-start"
-                  grow="1"
-                  shrink="1"
-                  basis="0"
-                  position="relative"
-                  padding="0px 0px 0px 0px"
-                  {...getOverrideProps(overrides, "Frame 9940053048")}
-                >
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 840053049")}
-                  ></Image>
-                  <Image
-                    width="15px"
-                    height="15px"
-                    display="block"
-                    gap="unset"
-                    alignItems="unset"
-                    justifyContent="unset"
-                    shrink="0"
-                    position="relative"
-                    borderRadius="35px"
-                    padding="0px 0px 0px 0px"
-                    objectFit="cover"
-                    {...getOverrideProps(overrides, "ghrgclzzd 940053050")}
-                  ></Image>
-                </Flex>
               </Flex>
               <Flex
                 gap="10px"
@@ -871,7 +650,7 @@ export default function AddLiquidityBottom320px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }
@@ -910,17 +689,14 @@ export default function AddLiquidityBottom320px(props) {
             position="relative"
             borderRadius="15px"
             padding="13px 73px 13px 73px"
-            style={{
-              cursor: "pointer",
-            }}
-            {...getOverrideProps(overrides, "Frame 76")}
             onClick={async () => {
               if (!addLiquidityPossibility) return;
-              await addLiquidtiyFunc();
+              await addLiquidityFunc();
             }}
             style={{
               cursor: addLiquidityPossibility ? "pointer" : "not-allowed",
             }}
+            {...getOverrideProps(overrides, "Frame 76")}
           >
             <Text
               fontFamily="ffProMedium"
@@ -948,7 +724,7 @@ export default function AddLiquidityBottom320px(props) {
       </Flex>
       {addLiquiditySuccessModalOpen && (
         <LoadingModal>
-          <AddLiquiditySuccessModal
+          <AddLiquidityCompletedModal
             setAddLiquiditySuccessModalOpen={setAddLiquiditySuccessModalOpen}
             firstSelectToken={props?.oracleiddata[0]?.firstToken}
             secondSelectToken={props?.oracleiddata[0]?.secondToken}
@@ -957,9 +733,14 @@ export default function AddLiquidityBottom320px(props) {
       )}
       {addLiquidityFailModalOpen && (
         <LoadingModal>
-          <AddLiquidityFailModal
+          <AddLiquidityFaildModal
             setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
           />
+        </LoadingModal>
+      )}
+      {isLoading && (
+        <LoadingModal>
+          <LoadingCompo />
         </LoadingModal>
       )}
     </Flex>
@@ -967,8 +748,8 @@ export default function AddLiquidityBottom320px(props) {
 }
 
 const LoadingModal = styled.div`
-  width: 100vmax;
-  height: 100vmax;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   position: fixed;

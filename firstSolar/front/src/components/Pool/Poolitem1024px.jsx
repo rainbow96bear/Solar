@@ -1,24 +1,24 @@
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCompo1440px, SwapCompo1440px } from "../../ui-components";
-import { connectThunk } from "../../modules/connect";
+import { setConnect } from "../../modules/connect";
 import { useDispatch, useSelector } from "react-redux";
 import "../../css/Font.css";
 import { useAccount } from "wagmi";
+import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem1024 = (props) => {
+const Poolitem1024 = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  const address2 = useSelector((state) => state.account.account.account);
+  const address2 = useSelector(state => state.account);
   const { address } = useAccount();
 
   const addressResult = address || address2;
   const dispatch = useDispatch();
-  const pageIndex = useSelector((state) => state.pageIndex);
 
   return (
     <>
@@ -33,13 +33,15 @@ const Poolitem1024 = (props) => {
           onClick={toggleOpen}
           layout
           style={{
+            zIndex: "1",
             width: "89vw",
             height: "unset",
             borderRadius: "33px",
-            backgroundColor: "rgba(249, 250, 250, 0.75)",
+            backgroundColor: "rgba(249, 250, 250, 1)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            backgroundImage:
-              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+            backgroundImage: props?.item?.oracleId.includes("DFS")
+              ? "linear-gradient(90deg,rgba(252,089,0,0.33) 0%,rgba(246,247,248,0.15) 20%)"
+              : "rgba(249, 250, 250, 1)",
           }}
           whileHover={{
             borderRadius: "75px",
@@ -57,7 +59,7 @@ const Poolitem1024 = (props) => {
             alignSelf="stretch"
             position="relative"
             borderRadius="18px"
-            padding="30px 18px 30px 18px"
+            padding="7px 18px 7px 18px"
             {...getOverrideProps(overrides, "List")}
           >
             <Flex
@@ -74,7 +76,7 @@ const Poolitem1024 = (props) => {
               {...getOverrideProps(overrides, "Frame 11")}
             >
               <Flex
-                gap="-6px"
+                gap="8px"
                 direction="row"
                 width="unset"
                 height="48px"
@@ -88,8 +90,8 @@ const Poolitem1024 = (props) => {
               >
                 <Image
                   src={props?.item?.mainNetLogo}
-                  width="15px"
-                  height="15px"
+                  width="28px"
+                  height="28px"
                   display="block"
                   gap="unset"
                   alignItems="unset"
@@ -189,7 +191,7 @@ const Poolitem1024 = (props) => {
                   >
                     <Text
                       fontFamily="ffProExtraLight"
-                      fontSize="8px"
+                      fontSize="13px"
                       fontWeight="500"
                       color="rgba(239,239,239,1)"
                       lineHeight="9.681818008422852px"
@@ -230,7 +232,7 @@ const Poolitem1024 = (props) => {
                   >
                     <Text
                       fontFamily="ffProExtraLight"
-                      fontSize="8px"
+                      fontSize="13px"
                       fontWeight="500"
                       lineHeight="9.681818008422852px"
                       textAlign="center"
@@ -421,7 +423,10 @@ const Poolitem1024 = (props) => {
                   padding="0px 0px 0px 0px"
                   whiteSpace="pre-wrap"
                   children={`$${
-                    parseInt((props?.item?.tvl / 10 ** 18) * 10000) / 10000 || 0
+                    props?.item?.name?.includes("DFS")
+                      ? parseInt((props?.item?.tvl / 10 ** 18) * 10000) /
+                          10000 || 0
+                      : props?.item?.tvl
                   }`}
                   {...getOverrideProps(overrides, "$999,99939913056")}
                 ></Text>
@@ -529,11 +534,7 @@ const Poolitem1024 = (props) => {
               {addressResult ? (
                 <SwapCompo1440px props={props} />
               ) : (
-                <ConnectCompo1440px
-                  onClick={() => {
-                    dispatch(connectThunk({ connect: true }));
-                  }}
-                />
+                <ConnectCompo1440px />
               )}
             </motion.div>
           </SubWrap>

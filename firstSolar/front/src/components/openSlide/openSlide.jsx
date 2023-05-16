@@ -5,10 +5,10 @@ import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo320px, SwapCompo320px } from "../../ui-components";
-import { connectThunk } from "../../modules/connect";
+import { setConnect } from "../../modules/connect";
 import { useDispatch } from "react-redux";
 
-const Poolitem320px = props => {
+const Poolitem320px = (props) => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -33,7 +33,7 @@ const Poolitem320px = props => {
             backgroundColor: "rgba(249,250,250,0.75)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+              "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
           }}
           whileHover={{ borderRadius: "75px" }}
         >
@@ -554,7 +554,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "APY39433743")}
               >
                 <Text
@@ -591,7 +591,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "TVL39433745")}
               >
                 <Text
@@ -628,7 +628,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39433747")}
               >
                 <Text
@@ -665,7 +665,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574060")}
               >
                 <Text
@@ -702,7 +702,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574062")}
               >
                 <Text
@@ -743,7 +743,7 @@ const Poolitem320px = props => {
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 borderRadius="10px"
                 padding="10px 10px 10px 10px"
-                backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+                backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
                 {...getOverrideProps(overrides, "Action39574064")}
               >
                 <Text
@@ -789,7 +789,7 @@ const Poolitem320px = props => {
               ) : (
                 <ConnectCompo320px
                   onClick={() => {
-                    dispatch(connectThunk({ connect: true }));
+                    dispatch(setConnect(true));
                   }}
                 />
               )}

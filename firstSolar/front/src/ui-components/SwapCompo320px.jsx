@@ -11,10 +11,17 @@ import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "../css/Font.css";
+import styled from "styled-components";
+import OutRedirectModal from "./OutRedirectModal";
+import { useDispatch } from "react-redux";
+import { setOutRedirectModalOpen } from "../modules/outRedirectModalOpen";
 
 export default function SwapCompo320px(props) {
   const { overrides, ...rest } = props;
   const navigate = useNavigate();
+  const isDFS = props?.props?.item?.oracleId?.split("-")[0] == "DFS";
+  const dispatch = useDispatch();
+
   return (
     <Flex
       display="flex"
@@ -96,7 +103,14 @@ export default function SwapCompo320px(props) {
       >
         <Flex
           onClick={() => {
-            navigate(`/addliquidity?${props.props.item.oracleId}`);
+            const url = isDFS
+              ? `/addliquidity?${props.props.item.oracleId}`
+              : props.props.item.addLiquidityUrl;
+            isDFS
+              ? navigate(url)
+              : url
+              ? dispatch(setOutRedirectModalOpen({ isOpen: true, url: url }))
+              : window.location.reload();
           }}
           gap="10px"
           direction="row"
@@ -139,3 +153,18 @@ export default function SwapCompo320px(props) {
     </Flex>
   );
 }
+
+const RedirectModal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  align-items: center;
+  z-index: 88;
+`;

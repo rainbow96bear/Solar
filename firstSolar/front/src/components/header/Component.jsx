@@ -4,18 +4,63 @@ import {
   BeforeHeadCom320px,
   BeforeHeadCom768px,
 } from "../../ui-components";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
+const HeaderComponent = ({
+  handleSearch,
+  handleInputChange,
+  inputValue,
+  navigate,
+  dispatch,
+  address,
+  searchView,
+  setSearchView,
+}) => {
+  const isDesktop = useMediaQuery({
+    query: "(min-width:992px)",
+  });
 
-const HeaderComponent = () => {
-  const connect = useSelector((state) => state.connect.connect.connect);
-  const account = useSelector((state) => state.account.account.account);
+  const isTablet = useMediaQuery({
+    query: "(min-width:481px) and (max-width:991px)",
+  });
+
+  const isMobile = useMediaQuery({
+    query: "(min-width:0px) and (max-width:480px)",
+  });
 
   return (
     <Header>
-      <BeforeHeadCom1024px></BeforeHeadCom1024px>
-      <BeforeHeadCom768px></BeforeHeadCom768px>
-      <BeforeHeadCom320px></BeforeHeadCom320px>
+      {isDesktop && (
+        <BeforeHeadCom1024px
+          handleSearch={handleSearch}
+          handleInputChange={handleInputChange}
+          inputValue={inputValue}
+          navigate={navigate}
+          dispatch={dispatch}
+          address={address}
+        />
+      )}
+      {isTablet && (
+        <BeforeHeadCom768px
+          handleSearch={handleSearch}
+          handleInputChange={handleInputChange}
+          inputValue={inputValue}
+          navigate={navigate}
+          dispatch={dispatch}
+          address={address}
+        />
+      )}
+      {isMobile && (
+        <BeforeHeadCom320px
+          searchView={searchView}
+          setSearchView={setSearchView}
+          handleSearch={handleSearch}
+          handleInputChange={handleInputChange}
+          inputValue={inputValue}
+          navigate={navigate}
+          dispatch={dispatch}
+          address={address}
+        />
+      )}
     </Header>
   );
 };
@@ -26,6 +71,7 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   border-bottom: 1px solid gainsboro;
+  padding: 13px 0px 13px 0px;
 `;
 
 const Menu = styled.div`

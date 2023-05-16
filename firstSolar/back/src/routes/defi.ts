@@ -154,6 +154,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
                 platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
                 tokens,
                 tokenAddress: lp.tokenAddress,
+                addLiquidityUrl: lp.addLiquidityUrl,
               };
             })
         );
@@ -206,7 +207,7 @@ router.get("/", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
         await totalLplListUp();
       } else {
         console.error(error);
@@ -293,7 +294,7 @@ router.post("/filter", async (req: Request, res: Response<LPData[]>) => {
     } catch (error) {
       if (retries < MAX_RETRIES) {
         retries++;
-        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
         await fileterListUp();
       } else {
         console.error(error);
@@ -649,6 +650,7 @@ router.post("/search", async (req: Request, res: Response) => {
     const { search, pageIndex }: { search: string; pageIndex: number } =
       req.body;
     let list: Array<Pool> = [];
+    let totalListLength: number = 0;
 
     if (search) {
       const [poolList, activeLpList] = await Promise.all([
@@ -670,7 +672,83 @@ router.post("/search", async (req: Request, res: Response) => {
             lp.tokenAddress?.toLowerCase().includes(search.toLowerCase()))
       );
 
-      list = [...poolList, ...activeList];
+      if (search == "eth" || search == "bnb" || search == "usdt") {
+        totalListLength = activeList.length + poolList.length;
+        const newActiveList: any = await Promise.all(
+          activeList
+            .slice(
+              (pageIndex - 1) * 10,
+              pageIndex == 1 ? pageIndex * 10 - 1 : pageIndex * 10
+            )
+            .map(async (lp: any) => {
+              const lpId: string = lp.id;
+              const oracleId: string = lp.oracleId;
+              const lpChain: number = mainNet[lp.chain];
+              const tokens: Array<string> = lp.assets;
+              const [tvlNow] = await Promise.all([
+                getTvlData(lpId, oracleId, lpChain),
+              ]);
+
+              return {
+                id: lpId,
+                name: lp.name,
+                platformId: lp.platformId,
+                network: lp.network,
+                oracleId: oracleId,
+                status: lp.status,
+                symbol: lp.symbol,
+                tvl: tvlNow,
+                apy:
+                  (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                    .data[lpId] ?? 0,
+                mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+                platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+                tokens,
+                tokenAddress: lp.tokenAddress,
+                addLiquidityUrl: lp.addLiquidityUrl,
+              };
+            })
+        );
+        if (pageIndex == 1) {
+          list = [...poolList, ...newActiveList];
+        } else {
+          list = [...newActiveList];
+        }
+      } else {
+        const newActiveList = await Promise.all(
+          activeList
+            .slice((pageIndex - 1) * 10, pageIndex * 10)
+            .map(async (lp: any) => {
+              const lpId: string = lp.id;
+              const oracleId: string = lp.oracleId;
+              const lpChain: number = mainNet[lp.chain];
+              const tokens: Array<string> = lp.assets;
+              const [tvlNow] = await Promise.all([
+                getTvlData(lpId, oracleId, lpChain),
+              ]);
+
+              return {
+                id: lpId,
+                name: lp.name,
+                platformId: lp.platformId,
+                network: lp.network,
+                oracleId: oracleId,
+                status: lp.status,
+                symbol: lp.symbol,
+                tvl: tvlNow,
+                apy:
+                  (await axios.get(`https://api.beefy.finance/apy?${oracleId}`))
+                    .data[lpId] ?? 0,
+                mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+                platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+                tokens,
+                tokenAddress: lp.tokenAddress,
+                addLiquidityUrl: lp.addLiquidityUrl,
+              };
+            })
+        );
+        list = [...poolList, ...newActiveList];
+      }
     } else {
       const [poolList, activeLpList] = await Promise.all([
         db.Pool.findAll(),
@@ -683,11 +761,12 @@ router.post("/search", async (req: Request, res: Response) => {
 
       list = [...poolList, ...activeList];
     }
-    const paginationMyLpList = list.slice((pageIndex - 1) * 10, pageIndex * 10);
+
     const data: any = {
-      poolListData: paginationMyLpList,
-      poolListDataLength: list.length,
+      poolListData: list,
+      poolListDataLength: totalListLength,
     };
+
     res.send(data);
   } catch (err) {
     console.log(err);
@@ -758,5 +837,126 @@ router.post("/getLPBalance", async (req: Request, res: Response) => {
     console.log(err);
     res.send(err);
   }
+});
+
+router.post("/setAutoCompound", async (req: Request, res: Response) => {
+  try {
+    const { account, lpSymbol }: { account: string; lpSymbol?: string } =
+      req.body;
+
+    if (lpSymbol.includes("ETH")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_ETH)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.setAutoCompound(pid).encodeABI();
+    } else if (lpSymbol.includes("BNB")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_BNB)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.setAutoCompound(pid).encodeABI();
+    } else if (lpSymbol.includes("USDT")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_USDT)
+        .call();
+      obj.from = account;
+      obj.to = process.env.DEX;
+      obj.data = await deployed.methods.setAutoCompound(pid).encodeABI();
+    }
+    res.send(obj);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+
+router.post("/getAutoCompound", async (req: Request, res: Response) => {
+  try {
+    const { account, lpSymbol }: { account: string; lpSymbol?: string } =
+      req.body;
+    let getAutoCompoundStatus: boolean;
+    if (lpSymbol.includes("ETH")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_ETH)
+        .call();
+      const tempData = await deployed.methods.userInfo(pid, account).call();
+      getAutoCompoundStatus = tempData.checkAutoCompounding;
+    } else if (lpSymbol.includes("BNB")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_BNB)
+        .call();
+      const tempData = await deployed.methods.userInfo(pid, account).call();
+      getAutoCompoundStatus = tempData.checkAutoCompounding;
+    } else if (lpSymbol.includes("USDT")) {
+      const pid: number = await deployed.methods
+        .getPid(process.env.DFS_USDT)
+        .call();
+      const tempData = await deployed.methods.userInfo(pid, account).call();
+      getAutoCompoundStatus = tempData.checkAutoCompounding;
+    }
+    res.send(getAutoCompoundStatus);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
+
+router.get("/rank", async (req: Request, res: Response) => {
+  retries = 0;
+  const rankLpListUp = async () => {
+    try {
+      getPool = await db.Pool.findAll();
+
+      const activeLpList = (
+        await axios.get(`https://api.beefy.finance/vaults`)
+      ).data.filter((lp: any) => lp.status === "active");
+
+      let lpList = await Promise.all(
+        activeLpList.map(async (lp: any) => {
+          const lpId: string = lp.id;
+          const oracleId: string = lp.oracleId;
+          const lpChain: number = mainNet[lp.chain];
+
+          const [tvlNow] = await Promise.all([
+            getTvlData(lpId, oracleId, lpChain),
+          ]);
+          return {
+            oracleId: oracleId,
+            name: lp.name,
+            tvl: tvlNow,
+            mainNetLogo: `/imgs/mainNet/${lp.network}.jpg`,
+            platformLogo: `/imgs/platform/${lp.platformId}.jpg`,
+            addLiquidityUrl: lp.addLiquidityUrl,
+          };
+        })
+      );
+
+      lpList = lpList.sort((a, b) => b.tvl - a.tvl).slice(0, 3);
+
+      const rankedPools = getPool
+        .map((pool, index) => ({ ...pool.toJSON(), rank: index + 1 }))
+        .concat(
+          lpList.map((lp, index) => ({
+            ...lp,
+            rank: index + 1 + getPool.length,
+          }))
+        );
+
+      res.send(rankedPools);
+    } catch (error) {
+      if (retries < MAX_RETRIES) {
+        retries++;
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+        await rankLpListUp();
+      } else {
+        console.error(error);
+        res.send();
+      }
+    }
+  };
+  await rankLpListUp();
 });
 export default router;

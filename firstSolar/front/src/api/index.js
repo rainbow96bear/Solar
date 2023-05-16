@@ -32,6 +32,17 @@ export const oracleIdList = async (_params) => {
   }
 };
 
+export const getLogin = async (_account, _walletKind) => {
+  try {
+    const data = await axios.post("http://localhost:8080/api/user/login", {
+      account: _account,
+      walletKind: _walletKind,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const logout = async (_walletKind, _account) => {
   try {
     await request.post("api/user/logout", {
@@ -78,7 +89,7 @@ export const lpBalance = async (account, symbol) => {
         symbol,
       })
     ).data;
-    return result.balance;
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -350,12 +361,51 @@ export const getSearch = async (search, pageIndex) => {
       })
     ).data;
 
-    const poolListData = result.poolListData;
+    const poolListData = await result.poolListData;
     const pageSize = 10;
-    const resultLength = result.poolListDataLength;
+    const resultLength = await result.poolListDataLength;
     const resultTotalPages = Math.ceil(resultLength / pageSize);
 
     return { poolListData, resultTotalPages };
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const setAutoCompound = async (account, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/setAutoCompound", {
+        account,
+        lpSymbol,
+      })
+    ).data;
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getAutoCompound = async (account, lpSymbol) => {
+  try {
+    const result = (
+      await request.post("api/defi/getAutoCompound", {
+        account,
+        lpSymbol,
+      })
+    ).data;
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const rankList = async () => {
+  try {
+    const result = (await request.get("api/defi/rank")).data;
+
+    return result;
   } catch (error) {
     console.error(error);
   }

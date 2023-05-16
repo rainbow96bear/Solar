@@ -5,38 +5,40 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
 
 export default function AddLiquidityTop768px(props) {
-  const { overrides, oracleiddata, ...rest } = props;
-
-  const lastTimeStamp = props?.oracleiddata[0]?.lastHarvest;
-  const date = new Date(lastTimeStamp * 1000);
-  const dateString = date.toLocaleDateString();
-
-  const tokenNumBer = props?.oracleiddata[0]?.firstTokenBalance;
-  const reducedNumber = tokenNumBer?.toString().substring(0, 5);
+  const {
+    overrides,
+    oracleiddata,
+    balance,
+    lastTimeStamp,
+    tokenNumBer,
+    reducedNumber,
+    ...rest
+  } = props;
 
   return (
     <>
       <Flex
         gap="49px"
         direction="column"
-        width="45vw"
+        width={{
+          small: "115vw",
+          medium: "110vw",
+          large: "50vw",
+        }}
         height="unset"
         justifyContent="flex-start"
         alignItems="flex-start"
         alignSelf="stretch"
         overflow="hidden"
         position="relative"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="35px"
         padding="69px 99px 58px 99px"
-        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
         {...getOverrideProps(overrides, "AddLiquidityTop768px")}
         {...rest}
       >
@@ -96,8 +98,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.firstToken
-                    ? props?.oracleiddata[0]?.firstToken
+                  oracleiddata[0]?.firstToken
+                    ? oracleiddata[0]?.firstToken
                     : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
@@ -151,8 +153,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.secondToken
-                    ? props?.oracleiddata[0]?.secondToken
+                  oracleiddata[0]?.secondToken
+                    ? oracleiddata[0]?.secondToken
                     : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
@@ -187,8 +189,8 @@ export default function AddLiquidityTop768px(props) {
             >
               <Image
                 src={
-                  props?.oracleiddata[0]?.mainNetLogo
-                    ? props?.oracleiddata[0]?.mainNetLogo
+                  oracleiddata[0]?.mainNetLogo
+                    ? oracleiddata[0]?.mainNetLogo
                     : logo
                 }
                 width="30px"
@@ -222,9 +224,7 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.network
-                    ? props?.oracleiddata[0]?.network
-                    : "Solar"
+                  oracleiddata[0]?.network ? oracleiddata[0]?.network : "Solar"
                 }
                 {...getOverrideProps(overrides, "TokenName40162892")}
               ></Text>
@@ -256,8 +256,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
                 src={
-                  props?.oracleiddata[0]?.platformLogo
-                    ? props?.oracleiddata[0]?.platformLogo
+                  oracleiddata[0]?.platformLogo
+                    ? oracleiddata[0]?.platformLogo
                     : logo
                 }
                 {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
@@ -280,8 +280,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.platformId
-                    ? props?.oracleiddata[0]?.platformId
+                  oracleiddata[0]?.platformId
+                    ? oracleiddata[0]?.platformId
                     : "Solar"
                 }
                 {...getOverrideProps(overrides, "TokenName40162900")}
@@ -325,9 +325,9 @@ export default function AddLiquidityTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.apy
+                oracleiddata[0]?.apy
                   ? `APY :  ${
-                      Math.round(props?.oracleiddata[0]?.apy * 10000) / 10000
+                      Math.round(oracleiddata[0]?.apy * 10000) / 10000
                     } %`
                   : "APY :  0%"
               }
@@ -349,7 +349,7 @@ export default function AddLiquidityTop768px(props) {
           border="3px SOLID rgba(234,0,50,0.45)"
           borderRadius="35px"
           padding="47px 47px 47px 47px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "Frame 11140132818")}
         >
           <Text
@@ -413,8 +413,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
                 src={
-                  props?.oracleiddata[0]?.mainNetLogo
-                    ? props?.oracleiddata[0]?.mainNetLogo
+                  oracleiddata[0]?.mainNetLogo
+                    ? oracleiddata[0]?.mainNetLogo
                     : logo
                 }
                 {...getOverrideProps(overrides, "ghrgclzzd 940132806")}
@@ -437,8 +437,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.firstToken
-                    ? props?.oracleiddata[0]?.firstToken
+                  oracleiddata[0]?.firstToken
+                    ? oracleiddata[0]?.firstToken
                     : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40132808")}
@@ -463,7 +463,7 @@ export default function AddLiquidityTop768px(props) {
               whiteSpace="pre-wrap"
               children={
                 reducedNumber
-                  ? `${props?.oracleiddata[0]?.firstTokenBalance.slice(0, 6)} K`
+                  ? `${oracleiddata[0]?.firstTokenBalance.slice(0, 6)} K`
                   : "0 K"
               }
               {...getOverrideProps(overrides, "99,99M40132809")}
@@ -509,8 +509,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 objectFit="cover"
                 src={
-                  props?.oracleiddata[0]?.platformLogo
-                    ? props?.oracleiddata[0]?.platformLogo
+                  oracleiddata[0]?.platformLogo
+                    ? oracleiddata[0]?.platformLogo
                     : logo
                 }
                 {...getOverrideProps(overrides, "ghrgclzzd 940132815")}
@@ -533,8 +533,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.secondToken
-                    ? props?.oracleiddata[0]?.secondToken
+                  oracleiddata[0]?.secondToken
+                    ? oracleiddata[0]?.secondToken
                     : "DFS"
                 }
                 {...getOverrideProps(overrides, "TokenName40132816")}
@@ -559,10 +559,7 @@ export default function AddLiquidityTop768px(props) {
               whiteSpace="pre-wrap"
               children={
                 reducedNumber
-                  ? `${props?.oracleiddata[0]?.secondTokenBalance.slice(
-                      0,
-                      6
-                    )} K`
+                  ? `${oracleiddata[0]?.secondTokenBalance.slice(0, 6)} K`
                   : "0 K"
               }
               {...getOverrideProps(overrides, "99,99M40132817")}
@@ -583,7 +580,7 @@ export default function AddLiquidityTop768px(props) {
           borderRadius="35px"
           padding="47px 47px 47px 47px"
           border="3px SOLID rgba(0,136,153,0.59)"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+          backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
           {...getOverrideProps(overrides, "Frame 121")}
         >
           <Text
@@ -671,8 +668,8 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.tvl
-                    ? `${props?.oracleiddata[0]?.tvl.slice(0, 10) / 100} `
+                  oracleiddata[0]?.tvl
+                    ? `${oracleiddata[0]?.tvl.slice(0, 10) / 100} `
                     : 0
                 }
                 {...getOverrideProps(overrides, "16.82%")}
@@ -761,11 +758,10 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.dailyTvlRate
+                  oracleiddata[0]?.dailyTvlRate
                     ? `${
-                        Math.round(
-                          props?.oracleiddata[0]?.dailyTvlRate * 10000
-                        ) / 10000
+                        Math.round(oracleiddata[0]?.dailyTvlRate * 10000) /
+                        10000
                       } %`
                     : 0
                 }
@@ -817,7 +813,9 @@ export default function AddLiquidityTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Last Harvest"
+                children={`${
+                  oracleiddata[0]?.lastHarvest ? "Last Harvest" : "UpdatedAt"
+                }`}
                 {...getOverrideProps(overrides, "Fees 24H")}
               ></Text>
             </Flex>
@@ -854,9 +852,11 @@ export default function AddLiquidityTop768px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  props?.oracleiddata[0]?.lastHarvest
-                    ? dateString
-                    : "불러오는 중"
+                  !oracleiddata[0]?.name?.includes("DFS")
+                    ? new Date(
+                        oracleiddata[0]?.lastHarvest * 1000
+                      ).toLocaleString()
+                    : lastTimeStamp
                 }
                 {...getOverrideProps(overrides, "$99.99M40132843")}
               ></Text>
@@ -942,11 +942,7 @@ export default function AddLiquidityTop768px(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.fee
-                    ? `${props?.oracleiddata[0]?.fee}%`
-                    : 0
-                }
+                children={oracleiddata[0]?.fee ? `${oracleiddata[0]?.fee}%` : 0}
                 {...getOverrideProps(overrides, "$99.99M40132843")}
               ></Text>
             </Flex>

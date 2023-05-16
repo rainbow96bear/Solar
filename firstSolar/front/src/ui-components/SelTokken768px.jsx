@@ -22,7 +22,7 @@ export default function SelTokken768px(props) {
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       borderRadius="55px"
       padding="53px 58px 53px 58px"
-      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+      backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
       {...getOverrideProps(overrides, "SelTokken768px")}
       {...rest}
     >
@@ -150,7 +150,7 @@ export default function SelTokken768px(props) {
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="25px"
             padding="10px 12px 10px 12px"
-            backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+            backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
             {...getOverrideProps(overrides, "Dexname140432841")}
           >
             <Image
@@ -204,7 +204,7 @@ export default function SelTokken768px(props) {
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="25px"
             padding="10px 12px 10px 12px"
-            backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+            backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
             {...getOverrideProps(overrides, "Dexname140432854")}
           >
             <Image
@@ -258,7 +258,7 @@ export default function SelTokken768px(props) {
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="25px"
             padding="10px 12px 10px 12px"
-            backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+            backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
             {...getOverrideProps(overrides, "Dexname140432857")}
           >
             <Image
@@ -312,7 +312,7 @@ export default function SelTokken768px(props) {
             boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             borderRadius="25px"
             padding="10px 12px 10px 12px"
-            backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+            backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
             {...getOverrideProps(overrides, "Dexname140432860")}
           >
             <Image

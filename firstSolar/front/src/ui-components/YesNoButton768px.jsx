@@ -1,52 +1,74 @@
-import * as React from "react";
+import { useEffect } from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import "../css/Font.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useWeb3 } from "../modules/useWeb3";
-import { useWeb3K } from "../modules/useWeb3Kaikas";
+
 import { useAccount } from "wagmi";
-import { isLoadingThunk } from "../modules/isLoading";
 import { removeLiquidity } from "../api";
 import "../css/Font.css";
+import { useWeb3T } from "../modules/useWeb3Trust";
+import { useWeb3C } from "../modules/useWeb3Coinbase";
+import { setIsLoading } from "../modules/isLoading";
 
 export default function YesNoButton768px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    withDrawAmountValue,
+    lpTokenValue,
+    setLpTokenValue,
+    setRemoveQuestion,
+    lpSymbol,
+    mypageLpListUp,
+    mypageMethod,
+    dispatch,
+    navigate,
+    ...rest
+  } = props;
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const account2 = useSelector((state) => state.account.account.account);
+  const account2 = useSelector((state) => state.account);
   const { web3, login } = useWeb3();
-  const { loginK } = useWeb3K();
+  const { web3T, loginT } = useWeb3T();
+  const { web3C, loginC } = useWeb3C();
   const { account } = useAccount();
-
   const removeLiquidityFunc = async () => {
     try {
-      dispatch(isLoadingThunk({ isLoading: true }));
+      dispatch(setIsLoading(true));
       const result2 = await removeLiquidity(
         account2 ? account2 : account,
-        props?.withDrawAmountValue,
-        props?.lpSymbol
+        withDrawAmountValue,
+        lpSymbol
       );
 
-      const removeTx = await web3.eth.sendTransaction(result2);
+      let removeTx;
+      if (document.cookie.split(":")[0] == "metamask") {
+        removeTx = await web3.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "trust") {
+        removeTx = await web3T.eth.sendTransaction(result2);
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        removeTx = await web3C.eth.sendTransaction(result2);
+      }
 
-      dispatch(isLoadingThunk({ isLoading: false }));
-      props.setquestionmark(0);
+      setLpTokenValue(lpTokenValue - withDrawAmountValue);
+      dispatch(setIsLoading(false));
+      setRemoveQuestion(0);
+      navigate("/redirectHome");
     } catch (error) {
       console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
+      dispatch(setIsLoading(false));
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
         login();
-      } else if (document.cookie.split(":")[0] == "kaikas") {
-        loginK();
+      } else if (document.cookie.split(":")[0] == "trust") {
+        loginT();
+      } else if (document.cookie.split(":")[0] == "coinbase") {
+        loginC();
       }
     }
   }, []);
@@ -179,7 +201,7 @@ export default function YesNoButton768px(props) {
         >
           <Flex
             onClick={() => {
-              props.setquestionmark(0);
+              setRemoveQuestion(0);
             }}
             gap="10px"
             direction="row"

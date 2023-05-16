@@ -5,18 +5,37 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import { useState } from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Text } from "@aws-amplify/ui-react";
 import { motion } from "framer-motion";
 import QuestionModalDeposit from "./QuestionModalDeposit";
 import QuestionModalWithDraw from "./QuestionModalWithDraw";
 import "../css/Font.css";
+import LoadingCompo from "./LoadingCompo";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 export default function DepositButton1024px(props) {
-  const { overrides, ...rest } = props;
+  const {
+    overrides,
+    autoState,
+    mypageList,
+    lpTokenValue,
+    lpToken,
+    mypageLpListUp,
+    pid,
+    setLpTokenValue,
+    mypageMethod,
+    lpTokenBalance,
+    getAutoCompoundStatusFunc,
+    auto,
+    navigate,
+    ...rest
+  } = props;
+  const isLoading = useSelector((state) => state.isLoading);
+  const [questionMark, setQuestionMark] = useState(0);
 
-  const [questionMark, setQuestionMark] = React.useState(0);
   return (
     <>
       <Flex
@@ -24,8 +43,8 @@ export default function DepositButton1024px(props) {
         direction="row"
         width="78.1vw"
         height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="center"
+        alignItems="center"
         position="relative"
         borderRadius="35px"
         padding="31px 63.5px 31px 63.5px"
@@ -34,7 +53,7 @@ export default function DepositButton1024px(props) {
       >
         <motion.div
           style={{
-            width: "45vw",
+            width: "31vw",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(255,226,0,0.35)",
@@ -43,7 +62,7 @@ export default function DepositButton1024px(props) {
           }}
           whileHover={{
             borderRadius: "13px",
-            backgroundColor: "rgba(252,250,242,0.75)",
+            backgroundColor: "rgba(247,239,227,0.75)",
             scale: 1.03,
             opacity: 0.88,
           }}
@@ -94,7 +113,7 @@ export default function DepositButton1024px(props) {
 
         <motion.div
           style={{
-            width: "45vw",
+            width: "31vw",
             height: "unset",
             borderRadius: "35px",
             backgroundColor: "rgba(234,0,50,0.55)",
@@ -153,35 +172,54 @@ export default function DepositButton1024px(props) {
           </Flex>
         </motion.div>
       </Flex>
-      {questionMark == 1 ? (
+      {questionMark == 1 && (
         <QuestionModalDeposit
-          setquestionmark={setQuestionMark}
-          lpBalanceValue={props.lpBalanceValue}
-          mypagelist={props.mypagelist}
-          mypagelplistup={props.mypagelplistup}
-          lptokenvalue={props.lptokenvalue}
-          lptoken={props.lptoken}
-          setlptokenvalue={props?.setlptokenvalue}
-          mypageMethod={props?.mypageMethod}
-          pid={props?.pid}
-          lpTokenBalance={props?.lpTokenBalance}
+          autoState={autoState}
+          setQuestionMark={setQuestionMark}
+          mypageList={mypageList}
+          mypageLpListUp={mypageLpListUp}
+          lpTokenValue={lpTokenValue}
+          lpToken={lpToken}
+          setLpTokenValue={setLpTokenValue}
+          mypageMethod={mypageMethod}
+          pid={pid}
+          lpTokenBalance={lpTokenBalance}
+          getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+          auto={auto}
         ></QuestionModalDeposit>
-      ) : (
-        <></>
       )}
-      {questionMark == 2 ? (
+      {questionMark == 2 && (
         <QuestionModalWithDraw
-          setquestionmark={setQuestionMark}
-          lpBalanceValue={props.lpBalanceValue}
-          mypagelist={props.mypagelist}
-          lptokenvalue={props.lptokenvalue}
-          mypagelplistup={props.mypagelplistup}
-          lptoken={props.lptoken}
-          pid={props?.pid}
+          setQuestionMark={setQuestionMark}
+          mypageList={mypageList}
+          lpTokenValue={lpTokenValue}
+          mypageLpListUp={mypageLpListUp}
+          lpToken={lpToken}
+          mypageMethod={mypageMethod}
+          pid={pid}
+          setLpTokenValue={setLpTokenValue}
+          navigate={navigate}
         ></QuestionModalWithDraw>
-      ) : (
-        <></>
+      )}
+      {isLoading && (
+        <LoadingModal>
+          <LoadingCompo />
+        </LoadingModal>
       )}
     </>
   );
 }
+
+const LoadingModal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999;
+`;

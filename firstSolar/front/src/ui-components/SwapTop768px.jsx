@@ -1,149 +1,86 @@
-/***************************************************************************
- * The contents of this file were generated with Amplify Studio.           *
- * Please refrain from making any modifications to this file.              *
- * Any changes to this file will be overwritten when running amplify pull. *
- **************************************************************************/
-
-/* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import logo from "./images/logo_new.png";
 import "../css/Font.css";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { isLoadingThunk } from "../modules/isLoading.js";
 
 export default function SwapTop768px(props) {
-  const { overrides, ...rest } = props;
-  const dispatch = useDispatch();
-
-  const [lastTimeStamp, setLastTimeStamp] = React.useState();
-
-  const [date, setDate] = React.useState();
-  const [dateString, setDateString] = React.useState();
-
-  const [firstLiquidity, setFirstLiquidity] = React.useState();
-  const [secondLiquidity, setSecondLiquidity] = React.useState();
-
-  useEffect(() => {
-    (async () => {
-      dispatch(isLoadingThunk({ isLoading: true }));
-      const tempDate = new Date(lastTimeStamp * 1000);
-      setLastTimeStamp(
-        props?.oracleiddata[0]?.lastHarvest
-          ? props?.oracleiddata[0]?.lastHarvest
-          : props?.oracleiddata[0]?.updatedAt.split("T")[0]
-      );
-      setDate(tempDate);
-      setDateString(tempDate?.toLocaleDateString());
-      setFirstLiquidity(
-        (parseInt(props?.oracleiddata[0]?.firstTokenBalance / 10 ** 18) *
-          100000) /
-          100000
-      );
-      setSecondLiquidity(
-        (parseInt(props?.oracleiddata[0]?.secondTokenBalance / 10 ** 18) *
-          100000) /
-          100000
-      );
-      setTimeout(() => {
-        dispatch(isLoadingThunk({ isLoading: false }));
-      }, 3000);
-    })();
-  }, [props.oracleiddata[0]]);
-
+  const {
+    overrides,
+    oracleiddata,
+    balance,
+    firstLiquidity,
+    secondLiquidity,
+    lastTimeStamp,
+    ...rest
+  } = props;
   return (
-    <>
+    <Flex
+      gap="49px"
+      direction="column"
+      width={{
+        small: "115vw",
+        medium: "110vw",
+        large: "50vw",
+      }}
+      height="unset"
+      justifyContent="flex-start"
+      alignItems="flex-start"
+      alignSelf="stretch"
+      overflow="hidden"
+      position="relative"
+      borderRadius="35px"
+      padding="69px 99px 58px 99px"
+      {...getOverrideProps(overrides, "AddLiquidityTop768px")}
+      {...rest}
+    >
       <Flex
-        gap="49px"
+        gap="25px"
         direction="column"
-        width="45vw"
+        width="unset"
         height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        justifyContent="center"
+        alignItems="center"
+        shrink="0"
         alignSelf="stretch"
-        overflow="hidden"
         position="relative"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        borderRadius="35px"
-        padding="69px 99px 58px 99px"
-        backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-        {...getOverrideProps(overrides, "AddLiquidityTop768px")}
-        {...rest}
+        padding="0px 0px 0px 0px"
+        {...getOverrideProps(overrides, "Frame 120")}
       >
         <Flex
-          gap="25px"
-          direction="column"
+          marginTop="23px"
+          marginBottom="15px"
+          gap="16px"
+          direction="row"
           width="unset"
           height="unset"
-          justifyContent="center"
-          alignItems="center"
+          justifyContent="flex-start"
+          alignItems="flex-start"
           shrink="0"
-          alignSelf="stretch"
+          alignSelf="center"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 120")}
+          {...getOverrideProps(overrides, "Frame 123")}
         >
           <Flex
-            marginTop="23px"
-            marginBottom="15px"
-            gap="16px"
-            direction="row"
             width="unset"
             height="unset"
-            justifyContent="flex-start"
-            alignItems="flex-start"
+            justifyContent="center"
+            alignItems="center"
             shrink="0"
-            alignSelf="center"
+            alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 123")}
           >
-            <Flex
-              width="unset"
-              height="unset"
-              justifyContent="center"
-              alignItems="center"
-              shrink="0"
-              alignSelf="stretch"
-              position="relative"
-              padding="0px 0px 0px 0px"
-            >
-              <Text
-                fontFamily="ffProMedium"
-                fontSize="38px"
-                fontWeight="900"
-                lineHeight="21.784090042114258px"
-                textAlign="center"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.firstToken
-                    ? props?.oracleiddata[0]?.firstToken
-                    : "DFS"
-                }
-                {...getOverrideProps(overrides, "TokenName40162900")}
-              ></Text>
-            </Flex>
             <Text
               fontFamily="ffProMedium"
               fontSize="38px"
-              fontWeight="600"
-              lineHeight="30.25568199157715px"
-              textAlign="left"
+              fontWeight="900"
+              lineHeight="21.784090042114258px"
+              textAlign="center"
               display="block"
               direction="column"
-              justifyContent="center"
+              justifyContent="unset"
               width="unset"
               height="unset"
               gap="unset"
@@ -152,200 +89,676 @@ export default function SwapTop768px(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="-"
-              {...getOverrideProps(overrides, "-")}
+              children={
+                oracleiddata[0]?.name?.includes("DFS")
+                  ? oracleiddata[0]?.firstToken
+                  : oracleiddata[0]?.assets[0]
+              }
+              {...getOverrideProps(overrides, "TokenName40162900")}
             ></Text>
-            <Flex
-              width="unset"
-              height="unset"
-              justifyContent="center"
-              alignItems="center"
-              shrink="0"
-              alignSelf="stretch"
-              position="relative"
-              padding="0px 0px 0px 0px"
-            >
-              <Text
-                fontFamily="ffProMedium"
-                fontSize="38px"
-                fontWeight="900"
-                lineHeight="21.784090042114258px"
-                textAlign="center"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.secondToken
-                    ? props?.oracleiddata[0]?.secondToken
-                    : "DFS"
-                }
-                {...getOverrideProps(overrides, "TokenName40162900")}
-              ></Text>
-            </Flex>
           </Flex>
-
-          <Flex
-            gap="34px"
+          <Text
+            fontFamily="ffProMedium"
+            fontSize="38px"
+            fontWeight="600"
+            lineHeight="30.25568199157715px"
+            textAlign="left"
+            display="block"
             direction="column"
+            justifyContent="center"
             width="unset"
             height="unset"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            overflow="hidden"
+            gap="unset"
+            alignItems="unset"
             shrink="0"
-            alignSelf="center"
             position="relative"
-          >
-            <Flex
-              gap="16px"
-              direction="row"
-              width="unset"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              shrink="0"
-              alignSelf="stretch"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 122")}
-            >
-              <Image
-                src={
-                  props?.oracleiddata[0]?.mainNetLogo
-                    ? props?.oracleiddata[0]?.mainNetLogo
-                    : logo
-                }
-                width="30px"
-                height="30px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="35px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                {...getOverrideProps(overrides, "ghrgclzzd 1040162888")}
-              ></Image>
-              <Text
-                fontFamily="ffProExtraLight"
-                fontSize="28px"
-                fontWeight="800"
-                lineHeight="21.784090042114258px"
-                textAlign="center"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.network
-                    ? props?.oracleiddata[0]?.network
-                    : "Solar"
-                }
-                {...getOverrideProps(overrides, "TokenName40162892")}
-              ></Text>
-            </Flex>
-
-            <Flex
-              gap="16px"
-              direction="row"
-              width="unset"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              shrink="0"
-              alignSelf="stretch"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 123")}
-            >
-              <Image
-                width="30px"
-                height="30px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="35px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                src={
-                  props?.oracleiddata[0]?.platformLogo
-                    ? props?.oracleiddata[0]?.platformLogo
-                    : logo
-                }
-                {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
-              ></Image>
-              <Text
-                fontFamily="ffProExtraLight"
-                fontSize="28px"
-                fontWeight="600"
-                lineHeight="21.784090042114258px"
-                textAlign="center"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.platformId
-                    ? props?.oracleiddata[0]?.platformId
-                    : "Solar"
-                }
-                {...getOverrideProps(overrides, "TokenName40162900")}
-              ></Text>
-            </Flex>
-          </Flex>
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="-"
+            {...getOverrideProps(overrides, "-")}
+          ></Text>
           <Flex
-            gap="10px"
+            width="unset"
+            height="unset"
+            justifyContent="center"
+            alignItems="center"
+            shrink="0"
+            alignSelf="stretch"
+            position="relative"
+            padding="0px 0px 0px 0px"
+          >
+            <Text
+              fontFamily="ffProMedium"
+              fontSize="38px"
+              fontWeight="900"
+              lineHeight="21.784090042114258px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={
+                oracleiddata[0]?.secondToken
+                  ? oracleiddata[0]?.secondToken
+                  : oracleiddata[0]?.assets[1]
+              }
+              {...getOverrideProps(overrides, "TokenName40162900")}
+            ></Text>
+          </Flex>
+        </Flex>
+
+        <Flex
+          gap="34px"
+          direction="column"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          overflow="hidden"
+          shrink="0"
+          alignSelf="center"
+          position="relative"
+        >
+          <Flex
+            gap="16px"
             direction="row"
             width="unset"
             height="unset"
             justifyContent="flex-start"
             alignItems="flex-start"
             shrink="0"
-            alignSelf="center"
+            alignSelf="stretch"
             position="relative"
-            borderRadius="15px"
-            backgroundColor="rgba(255,226,0,0.35)"
-            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            padding="13px 13px 13px 13px"
-            {...getOverrideProps(overrides, "Frame 119")}
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 122")}
           >
+            <Image
+              src={
+                oracleiddata[0]?.mainNetLogo
+                  ? oracleiddata[0]?.mainNetLogo
+                  : logo
+              }
+              width="30px"
+              height="30px"
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              shrink="0"
+              position="relative"
+              borderRadius="35px"
+              padding="0px 0px 0px 0px"
+              objectFit="cover"
+              {...getOverrideProps(overrides, "ghrgclzzd 1040162888")}
+            ></Image>
             <Text
-              fontFamily="ffCondExtraLight"
-              fontSize="21px"
-              fontWeight="600"
-              lineHeight="25.414772033691406px"
+              fontFamily="ffProExtraLight"
+              fontSize="28px"
+              fontWeight="800"
+              lineHeight="21.784090042114258px"
               textAlign="center"
               display="block"
               direction="column"
               justifyContent="unset"
-              alignSelf="center"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={
+                oracleiddata[0]?.network ? oracleiddata[0]?.network : "Solar"
+              }
+              {...getOverrideProps(overrides, "TokenName40162892")}
+            ></Text>
+          </Flex>
+
+          <Flex
+            gap="16px"
+            direction="row"
+            width="unset"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            shrink="0"
+            alignSelf="stretch"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 123")}
+          >
+            <Image
+              width="30px"
+              height="30px"
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              shrink="0"
+              position="relative"
+              borderRadius="35px"
+              padding="0px 0px 0px 0px"
+              objectFit="cover"
+              src={
+                oracleiddata[0]?.platformLogo
+                  ? oracleiddata[0]?.platformLogo
+                  : logo
+              }
+              {...getOverrideProps(overrides, "ghrgclzzd 1040162899")}
+            ></Image>
+            <Text
+              fontFamily="ffProExtraLight"
+              fontSize="28px"
+              fontWeight="600"
+              lineHeight="21.784090042114258px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={
+                oracleiddata[0]?.platformId
+                  ? oracleiddata[0]?.platformId
+                  : "Solar"
+              }
+              {...getOverrideProps(overrides, "TokenName40162900")}
+            ></Text>
+          </Flex>
+        </Flex>
+        <Flex
+          gap="10px"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          shrink="0"
+          alignSelf="center"
+          position="relative"
+          borderRadius="15px"
+          backgroundColor="rgba(255,226,0,0.35)"
+          boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+          padding="13px 13px 13px 13px"
+          {...getOverrideProps(overrides, "Frame 119")}
+        >
+          <Text
+            fontFamily="ffCondExtraLight"
+            fontSize="21px"
+            fontWeight="600"
+            lineHeight="25.414772033691406px"
+            textAlign="center"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            alignSelf="center"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children={
+              oracleiddata[0]?.apy
+                ? `APY :  ${Math.round(oracleiddata[0]?.apy * 10000) / 10000} %`
+                : "APY :  0%"
+            }
+            {...getOverrideProps(overrides, "99.99%")}
+          ></Text>
+        </Flex>
+      </Flex>
+      <Flex
+        gap="34px"
+        direction="column"
+        width="unset"
+        height="unset"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        overflow="hidden"
+        shrink="0"
+        alignSelf="stretch"
+        position="relative"
+        border="3px SOLID rgba(234,0,50,0.45)"
+        borderRadius="35px"
+        padding="47px 47px 47px 47px"
+        backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+        {...getOverrideProps(overrides, "Frame 11140132818")}
+      >
+        <Text
+          fontFamily="ffProBlack"
+          fontSize="31px"
+          fontWeight="900"
+          lineHeight="29.045454025268555px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="ToTal Tokens Locked"
+          {...getOverrideProps(overrides, "ToTal Tokens Locked40132805")}
+        ></Text>
+        <Flex
+          gap="102px"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="flex-end"
+          shrink="0"
+          alignSelf="flex-start"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 10940132812")}
+        >
+          <Flex
+            gap="7px"
+            direction="row"
+            width="unset"
+            height="unset"
+            justifyContent="center"
+            alignItems="center"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 10840132811")}
+          >
+            <Image
+              width="30px"
+              height="30px"
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              shrink="0"
+              position="relative"
+              borderRadius="15px"
+              padding="0px 0px 0px 0px"
+              objectFit="cover"
+              src={
+                oracleiddata[0]?.mainNetLogo
+                  ? oracleiddata[0]?.mainNetLogo
+                  : logo
+              }
+              {...getOverrideProps(overrides, "ghrgclzzd 940132806")}
+            ></Image>
+            <Text
+              fontFamily="ffCondBold"
+              fontSize="18px"
+              fontWeight="700"
+              lineHeight="21.784090042114258px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={
+                oracleiddata[0]?.name?.includes("DFS")
+                  ? oracleiddata[0]?.firstToken
+                  : oracleiddata[0]?.assets[0]
+              }
+              {...getOverrideProps(overrides, "TokenName40132808")}
+            ></Text>
+          </Flex>
+          <Text
+            fontFamily="ffCondExtraLight"
+            fontSize="18px"
+            fontWeight="700"
+            lineHeight="21.784090042114258px"
+            textAlign="center"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children={
+              !isNaN(oracleiddata[0]?.firstTokenBalance)
+                ? oracleiddata[0]?.name?.includes("DFS")
+                  ? `${
+                      (parseInt(oracleiddata[0]?.firstTokenBalance / 10 ** 18) *
+                        100000) /
+                      100000
+                    } K`
+                  : `${
+                      parseInt(oracleiddata[0]?.firstTokenBalance * 1000) / 1000
+                    } K`
+                : "0 K"
+            }
+            {...getOverrideProps(overrides, "99,99M40132809")}
+          ></Text>
+        </Flex>
+        <Flex
+          gap="102px"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="flex-end"
+          shrink="0"
+          alignSelf="flex-start"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 11040132813")}
+        >
+          <Flex
+            gap="7px"
+            direction="row"
+            width="unset"
+            height="unset"
+            justifyContent="center"
+            alignItems="center"
+            grow="1"
+            shrink="1"
+            basis="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 10840132814")}
+          >
+            <Image
+              width="30px"
+              height="30px"
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              shrink="0"
+              position="relative"
+              borderRadius="15px"
+              padding="0px 0px 0px 0px"
+              objectFit="cover"
+              src={
+                oracleiddata[0]?.platformLogo
+                  ? oracleiddata[0]?.platformLogo
+                  : logo
+              }
+              {...getOverrideProps(overrides, "ghrgclzzd 940132815")}
+            ></Image>
+            <Text
+              fontFamily="ffCondBold"
+              fontSize="18px"
+              fontWeight="700"
+              lineHeight="21.784090042114258px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={
+                oracleiddata[0]?.secondToken
+                  ? oracleiddata[0]?.secondToken
+                  : oracleiddata[0]?.assets[1]
+              }
+              {...getOverrideProps(overrides, "TokenName40132816")}
+            ></Text>
+          </Flex>
+          <Text
+            fontFamily="ffCondExtraLight"
+            fontSize="18px"
+            fontWeight="700"
+            lineHeight="21.784090042114258px"
+            textAlign="center"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children={
+              !isNaN(oracleiddata[0]?.secondTokenBalance)
+                ? oracleiddata[0]?.name?.includes("DFS")
+                  ? `${
+                      (parseInt(
+                        oracleiddata[0]?.secondTokenBalance / 10 ** 18
+                      ) *
+                        100000) /
+                      100000
+                    } K`
+                  : `${
+                      parseInt(oracleiddata[0]?.secondTokenBalance * 1000) /
+                      1000
+                    } K`
+                : "0 K"
+            }
+            {...getOverrideProps(overrides, "99,99M40132817")}
+          ></Text>
+        </Flex>
+      </Flex>
+      <Flex
+        gap="34px"
+        direction="column"
+        width="unset"
+        height="unset"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        overflow="hidden"
+        shrink="0"
+        alignSelf="stretch"
+        position="relative"
+        borderRadius="35px"
+        padding="47px 47px 47px 47px"
+        border="3px SOLID rgba(0,136,153,0.59)"
+        backgroundImage="linear-gradient(-7deg, rgba(252,253,254,1), rgba(246,247,248,0.15))"
+        {...getOverrideProps(overrides, "Frame 121")}
+      >
+        <Text
+          fontFamily="ffProBlack"
+          fontSize="31px"
+          fontWeight="00"
+          lineHeight="29.045454025268555px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="ToTal Infomation"
+          {...getOverrideProps(overrides, "ToTal Tokens Locked40652644")}
+        ></Text>
+        <Flex
+          gap="15px"
+          direction="column"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 116")}
+        >
+          <Text
+            fontFamily="ffProBook"
+            fontSize="21px"
+            fontWeight="700"
+            lineHeight="25.414772033691406px"
+            textAlign="center"
+            display="block"
+            direction="column"
+            justifyContent="unset"
+            width="unset"
+            height="unset"
+            gap="unset"
+            alignItems="unset"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            whiteSpace="pre-wrap"
+            children="TVL"
+            {...getOverrideProps(overrides, "TVL")}
+          ></Text>
+          <Flex
+            gap="172px"
+            direction="row"
+            width="390px"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-end"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 11040132831")}
+          >
+            <Text
+              fontFamily="ffCondExtraLight"
+              fontSize="18px"
+              fontWeight="700"
+              color="rgba(234,0,50,0.45)"
+              lineHeight="21.784090042114258px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children={
+                oracleiddata[0]?.name?.includes("DFS")
+                  ? `${
+                      (parseInt(oracleiddata[0]?.tvl / 10 ** 18) * 100000) /
+                      100000
+                    } K`
+                  : parseInt(oracleiddata[0]?.tvl * 1000) / 1000
+              }
+              {...getOverrideProps(overrides, "16.82%")}
+            ></Text>
+          </Flex>
+        </Flex>
+        <Flex
+          gap="15px"
+          direction="column"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 117")}
+        >
+          <Flex
+            gap="172px"
+            direction="row"
+            width="390px"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-end"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 112")}
+          >
+            <Text
+              fontFamily="ffProBook"
+              fontSize="21px"
+              fontWeight="700"
+              lineHeight="25.414772033691406px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="Daily TVl Rate"
+              {...getOverrideProps(overrides, "Volume 24H")}
+            ></Text>
+          </Flex>
+
+          <Flex
+            gap="172px"
+            direction="row"
+            width="390px"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-end"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 113")}
+          >
+            <Text
+              fontFamily="ffCondExtraLight"
+              fontSize="18px"
+              fontWeight="700"
+              color="rgba(234,0,50,0.45)"
+              lineHeight="21.784090042114258px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
               width="unset"
               height="unset"
               gap="unset"
@@ -357,296 +770,47 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                props?.oracleiddata[0]?.apy
-                  ? `APY :  ${
-                      Math.round(props?.oracleiddata[0]?.apy * 10000) / 10000
+                oracleiddata[0]?.dailyTvlRate
+                  ? `${
+                      Math.round(oracleiddata[0]?.dailyTvlRate * 10000) / 10000
                     } %`
-                  : "APY :  0%"
+                  : 0
               }
-              {...getOverrideProps(overrides, "99.99%")}
+              {...getOverrideProps(overrides, "262.40%")}
             ></Text>
           </Flex>
         </Flex>
         <Flex
-          gap="34px"
+          gap="15px"
           direction="column"
           width="unset"
           height="unset"
           justifyContent="flex-start"
           alignItems="flex-start"
-          overflow="hidden"
           shrink="0"
           alignSelf="stretch"
           position="relative"
-          border="3px SOLID rgba(234,0,50,0.45)"
-          borderRadius="35px"
-          padding="47px 47px 47px 47px"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-          {...getOverrideProps(overrides, "Frame 11140132818")}
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 118")}
         >
-          <Text
-            fontFamily="ffProBlack"
-            fontSize="31px"
-            fontWeight="900"
-            lineHeight="29.045454025268555px"
-            textAlign="left"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="ToTal Tokens Locked"
-            {...getOverrideProps(overrides, "ToTal Tokens Locked40132805")}
-          ></Text>
           <Flex
-            gap="102px"
+            gap="172px"
             direction="row"
-            width="unset"
+            width="390px"
             height="unset"
             justifyContent="flex-start"
             alignItems="flex-end"
             shrink="0"
-            alignSelf="flex-start"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 10940132812")}
-          >
-            <Flex
-              gap="7px"
-              direction="row"
-              width="unset"
-              height="unset"
-              justifyContent="center"
-              alignItems="center"
-              grow="1"
-              shrink="1"
-              basis="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 10840132811")}
-            >
-              <Image
-                width="30px"
-                height="30px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="15px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                src={
-                  props?.oracleiddata[0]?.mainNetLogo
-                    ? props?.oracleiddata[0]?.mainNetLogo
-                    : logo
-                }
-                {...getOverrideProps(overrides, "ghrgclzzd 940132806")}
-              ></Image>
-              <Text
-                fontFamily="ffCondBold"
-                fontSize="18px"
-                fontWeight="700"
-                lineHeight="21.784090042114258px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.firstToken
-                    ? props?.oracleiddata[0]?.firstToken
-                    : "DFS"
-                }
-                {...getOverrideProps(overrides, "TokenName40132808")}
-              ></Text>
-            </Flex>
-            <Text
-              fontFamily="ffCondExtraLight"
-              fontSize="18px"
-              fontWeight="700"
-              lineHeight="21.784090042114258px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children={firstLiquidity ? `${firstLiquidity} K` : "0 K"}
-              {...getOverrideProps(overrides, "99,99M40132809")}
-            ></Text>
-          </Flex>
-          <Flex
-            gap="102px"
-            direction="row"
-            width="unset"
-            height="unset"
-            justifyContent="flex-start"
-            alignItems="flex-end"
-            shrink="0"
-            alignSelf="flex-start"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 11040132813")}
-          >
-            <Flex
-              gap="7px"
-              direction="row"
-              width="unset"
-              height="unset"
-              justifyContent="center"
-              alignItems="center"
-              grow="1"
-              shrink="1"
-              basis="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 10840132814")}
-            >
-              <Image
-                width="30px"
-                height="30px"
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                shrink="0"
-                position="relative"
-                borderRadius="15px"
-                padding="0px 0px 0px 0px"
-                objectFit="cover"
-                src={
-                  props?.oracleiddata[0]?.platformLogo
-                    ? props?.oracleiddata[0]?.platformLogo
-                    : logo
-                }
-                {...getOverrideProps(overrides, "ghrgclzzd 940132815")}
-              ></Image>
-              <Text
-                fontFamily="ffCondBold"
-                fontSize="18px"
-                fontWeight="700"
-                lineHeight="21.784090042114258px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.secondToken
-                    ? props?.oracleiddata[0]?.secondToken
-                    : "DFS"
-                }
-                {...getOverrideProps(overrides, "TokenName40132816")}
-              ></Text>
-            </Flex>
-            <Text
-              fontFamily="ffCondExtraLight"
-              fontSize="18px"
-              fontWeight="700"
-              lineHeight="21.784090042114258px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              width="unset"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children={secondLiquidity ? `${secondLiquidity} K` : "0 K"}
-              {...getOverrideProps(overrides, "99,99M40132817")}
-            ></Text>
-          </Flex>
-        </Flex>
-        <Flex
-          gap="34px"
-          direction="column"
-          width="unset"
-          height="unset"
-          justifyContent="flex-start"
-          alignItems="flex-start"
-          overflow="hidden"
-          shrink="0"
-          alignSelf="stretch"
-          position="relative"
-          borderRadius="35px"
-          padding="47px 47px 47px 47px"
-          border="3px SOLID rgba(0,136,153,0.59)"
-          backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
-          {...getOverrideProps(overrides, "Frame 121")}
-        >
-          <Text
-            fontFamily="ffProBlack"
-            fontSize="31px"
-            fontWeight="00"
-            lineHeight="29.045454025268555px"
-            textAlign="left"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="ToTal Infomation"
-            {...getOverrideProps(overrides, "ToTal Tokens Locked40652644")}
-          ></Text>
-          <Flex
-            gap="15px"
-            direction="column"
-            width="unset"
-            height="unset"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 116")}
+            {...getOverrideProps(overrides, "Frame 114")}
           >
             <Text
               fontFamily="ffProBook"
               fontSize="21px"
               fontWeight="700"
               lineHeight="25.414772033691406px"
-              textAlign="center"
+              textAlign="left"
               display="block"
               direction="column"
               justifyContent="unset"
@@ -654,333 +818,147 @@ export default function SwapTop768px(props) {
               height="unset"
               gap="unset"
               alignItems="unset"
-              shrink="0"
+              grow="1"
+              shrink="1"
+              basis="0"
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="TVL"
-              {...getOverrideProps(overrides, "TVL")}
+              children={`${
+                oracleiddata[0]?.lastHarvest ? "Last Harvest" : "UpdatedAt"
+              }`}
+              {...getOverrideProps(overrides, "Fees 24H")}
             ></Text>
-            <Flex
-              gap="172px"
-              direction="row"
-              width="390px"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-end"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 11040132831")}
-            >
-              <Text
-                fontFamily="ffCondExtraLight"
-                fontSize="18px"
-                fontWeight="700"
-                color="rgba(234,0,50,0.45)"
-                lineHeight="21.784090042114258px"
-                textAlign="center"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                shrink="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.tvl
-                    ? `${
-                        props?.oracleiddata[0]?.tvl?.toString().slice(0, 10) /
-                        100
-                      } `
-                    : 0
-                }
-                {...getOverrideProps(overrides, "16.82%")}
-              ></Text>
-            </Flex>
           </Flex>
           <Flex
-            gap="15px"
-            direction="column"
-            width="unset"
+            gap="172px"
+            direction="row"
+            width="390px"
             height="unset"
             justifyContent="flex-start"
-            alignItems="flex-start"
+            alignItems="flex-end"
             shrink="0"
-            alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 117")}
+            {...getOverrideProps(overrides, "Frame 115")}
           >
-            <Flex
-              gap="172px"
-              direction="row"
-              width="390px"
+            <Text
+              fontFamily="ffCondExtraLight"
+              fontSize="18px"
+              fontWeight="700"
+              color="rgba(234,0,50,0.45)"
+              lineHeight="21.784090042114258px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
               height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-end"
-              shrink="0"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 112")}
-            >
-              <Text
-                fontFamily="ffProBook"
-                fontSize="21px"
-                fontWeight="700"
-                lineHeight="25.414772033691406px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children="Daily TVl Rate"
-                {...getOverrideProps(overrides, "Volume 24H")}
-              ></Text>
-            </Flex>
-
-            <Flex
-              gap="172px"
-              direction="row"
-              width="390px"
+              whiteSpace="pre-wrap"
+              children={
+                !oracleiddata[0]?.name?.includes("DFS")
+                  ? new Date(
+                      oracleiddata[0]?.lastHarvest * 1000
+                    ).toLocaleString()
+                  : lastTimeStamp
+              }
+              {...getOverrideProps(overrides, "$99.99M40132843")}
+            ></Text>
+          </Flex>
+        </Flex>
+        <Flex
+          gap="15px"
+          direction="column"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 118")}
+        >
+          <Flex
+            gap="172px"
+            direction="row"
+            width="390px"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-end"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "Frame 114")}
+          >
+            <Text
+              fontFamily="ffProBook"
+              fontSize="21px"
+              fontWeight="700"
+              lineHeight="25.414772033691406px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
               height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-end"
-              shrink="0"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 113")}
-            >
-              <Text
-                fontFamily="ffCondExtraLight"
-                fontSize="18px"
-                fontWeight="700"
-                color="rgba(234,0,50,0.45)"
-                lineHeight="21.784090042114258px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.dailyTvlRate
-                    ? `${
-                        Math.round(
-                          props?.oracleiddata[0]?.dailyTvlRate * 10000
-                        ) / 10000
-                      } %`
-                    : 0
-                }
-                {...getOverrideProps(overrides, "262.40%")}
-              ></Text>
-            </Flex>
+              whiteSpace="pre-wrap"
+              children="Fee"
+              {...getOverrideProps(overrides, "Fees 24H")}
+            ></Text>
           </Flex>
           <Flex
-            gap="15px"
-            direction="column"
-            width="unset"
+            gap="172px"
+            direction="row"
+            width="390px"
             height="unset"
             justifyContent="flex-start"
-            alignItems="flex-start"
+            alignItems="flex-end"
             shrink="0"
-            alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 118")}
+            {...getOverrideProps(overrides, "Frame 115")}
           >
-            <Flex
-              gap="172px"
-              direction="row"
-              width="390px"
+            <Text
+              fontFamily="ffCondExtraLight"
+              fontSize="18px"
+              fontWeight="700"
+              color="rgba(234,0,50,0.45)"
+              lineHeight="21.784090042114258px"
+              textAlign="left"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
               height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-end"
-              shrink="0"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 114")}
-            >
-              <Text
-                fontFamily="ffProBook"
-                fontSize="21px"
-                fontWeight="700"
-                lineHeight="25.414772033691406px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={`${
-                  props?.oracleiddata[0]?.lastHarvest
-                    ? "Last Harvest"
-                    : "UpdatedAt"
-                }`}
-                {...getOverrideProps(overrides, "Fees 24H")}
-              ></Text>
-            </Flex>
-            <Flex
-              gap="172px"
-              direction="row"
-              width="390px"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-end"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 115")}
-            >
-              <Text
-                fontFamily="ffCondExtraLight"
-                fontSize="18px"
-                fontWeight="700"
-                color="rgba(234,0,50,0.45)"
-                lineHeight="21.784090042114258px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.lastHarvest
-                    ? dateString
-                    : lastTimeStamp
-                }
-                {...getOverrideProps(overrides, "$99.99M40132843")}
-              ></Text>
-            </Flex>
-          </Flex>
-          <Flex
-            gap="15px"
-            direction="column"
-            width="unset"
-            height="unset"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 118")}
-          >
-            <Flex
-              gap="172px"
-              direction="row"
-              width="390px"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-end"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 114")}
-            >
-              <Text
-                fontFamily="ffProBook"
-                fontSize="21px"
-                fontWeight="700"
-                lineHeight="25.414772033691406px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children="Fee"
-                {...getOverrideProps(overrides, "Fees 24H")}
-              ></Text>
-            </Flex>
-            <Flex
-              gap="172px"
-              direction="row"
-              width="390px"
-              height="unset"
-              justifyContent="flex-start"
-              alignItems="flex-end"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame 115")}
-            >
-              <Text
-                fontFamily="ffCondExtraLight"
-                fontSize="18px"
-                fontWeight="700"
-                color="rgba(234,0,50,0.45)"
-                lineHeight="21.784090042114258px"
-                textAlign="left"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                grow="1"
-                shrink="1"
-                basis="0"
-                position="relative"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children={
-                  props?.oracleiddata[0]?.fee
-                    ? `${props?.oracleiddata[0]?.fee}%`
-                    : 0
-                }
-                {...getOverrideProps(overrides, "$99.99M40132843")}
-              ></Text>
-            </Flex>
+              whiteSpace="pre-wrap"
+              children={oracleiddata[0]?.fee ? `${oracleiddata[0]?.fee}%` : 0}
+              {...getOverrideProps(overrides, "$99.99M40132843")}
+            ></Text>
           </Flex>
         </Flex>
       </Flex>
-    </>
+    </Flex>
   );
 }

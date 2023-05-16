@@ -22,7 +22,7 @@ export default function ConnectCompo1024px(props) {
       position="relative"
       borderRadius="18px"
       padding="30px 295px 30px 295px"
-      backgroundImage="linear-gradient(-7deg, rgba(255,255,255,1), rgba(255,255,255,0.15))"
+      backgroundImage="linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))"
       {...getOverrideProps(overrides, "ConnectCompo1024px")}
       {...rest}
     >

@@ -25,7 +25,7 @@ const Accordion = () => {
           layout
           transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
         >
-          {items.map((item, idx) => (
+          {items?.map((item, idx) => (
             <AccodianItem key={`acco-${idx}`} />
           ))}
         </motion.ul>

@@ -2,11 +2,22 @@ import { Flex, Image } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { dexList, netList } from "../../api";
 import { motion } from "framer-motion";
-import { isLoadingThunk } from "../../modules/isLoading";
 import { useDispatch } from "react-redux";
+import { setIsLoading } from "../../modules/isLoading";
 
-const Netlist1024px = props => {
-  const { overrides, ...rest } = props;
+const Netlist1024px = (props) => {
+  const {
+    overrides,
+    item,
+    pageIndex,
+    filter,
+    setFilter,
+    setCurrentPagePoolList,
+    setTotalPages,
+    networkArray,
+    value,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -22,22 +33,23 @@ const Netlist1024px = props => {
         whileHover={{
           borderRadius: "13px",
           scale: 1.15,
-          backgroundColor: "rgba(235,069,074,0.85)",
+          backgroundColor: "#D0576B",
         }}
       >
         <Flex
           overflow="hidden"
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
-              const temp = await netList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              props.setFilter(props?.item);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(true));
+              const temp = await netList(item, pageIndex);
+
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading({ isLoading: false }));
             }
           }}
           gap="10px"
@@ -51,12 +63,15 @@ const Netlist1024px = props => {
           basis="0"
           alignSelf="stretch"
           position="relative"
-          borderRadius="15px"
+          borderRadius="13px"
+          backgroundColor={
+            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
+          }
           padding="10px 10px 10px 10px"
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/mainNet/${props?.item}.jpg`}
+            src={`/imgs/mainNet/${item}.jpg`}
             width="38px"
             height="38px"
             display="block"
@@ -76,8 +91,17 @@ const Netlist1024px = props => {
   );
 };
 
-const Dexlist1024px = props => {
-  const { overrides, ...rest } = props;
+const Dexlist1024px = (props) => {
+  const {
+    overrides,
+    item,
+    pageIndex,
+    setCurrentPagePoolList,
+    setTotalPages,
+    setFilter,
+    filter,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -87,7 +111,6 @@ const Dexlist1024px = props => {
           height: "unset",
           borderRadius: "35px",
           backgroundColor: "rgba(5,3,2,0.75)",
-
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           cursor: "pointer",
         }}
@@ -100,15 +123,16 @@ const Dexlist1024px = props => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
-              const temp = await dexList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setFilter(props?.item);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(true));
+              const temp = await dexList(item, pageIndex);
+
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -122,12 +146,13 @@ const Dexlist1024px = props => {
           basis="0"
           alignSelf="stretch"
           position="relative"
-          borderRadius="15px"
+          borderRadius="13px"
           padding="10px 10px 10px 10px"
+          backgroundColor={item == filter ? "rgba(0,125,122,1)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/platform/${props?.item}.jpg`}
+            src={`/imgs/platform/${item}.jpg`}
             width="38px"
             height="38px"
             display="block"
@@ -147,8 +172,17 @@ const Dexlist1024px = props => {
   );
 };
 
-const Netlist768px = props => {
-  const { overrides, ...rest } = props;
+const Netlist768px = (props) => {
+  const {
+    overrides,
+    item,
+    pageIndex,
+    setCurrentPagePoolList,
+    setTotalPages,
+    setFilter,
+    filter,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -170,15 +204,15 @@ const Netlist768px = props => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
-              const temp = await netList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              props.setFilter(props?.item);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(true));
+              const temp = await netList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              setFilter(item);
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -194,10 +228,13 @@ const Netlist768px = props => {
           position="relative"
           borderRadius="10px"
           padding="10px 10px 10px 10px"
+          backgroundColor={
+            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
+          }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/mainNet/${props?.item}.jpg`}
+            src={`/imgs/mainNet/${item}.jpg`}
             width="40px"
             height="40px"
             display="block"
@@ -217,8 +254,17 @@ const Netlist768px = props => {
   );
 };
 
-const Dexlist768px = props => {
-  const { overrides, ...rest } = props;
+const Dexlist768px = (props) => {
+  const {
+    overrides,
+    item,
+    setCurrentPagePoolList,
+    setTotalPages,
+    setFilter,
+    pageIndex,
+    filter,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -240,15 +286,15 @@ const Dexlist768px = props => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
-              const temp = await dexList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setFilter(props?.item);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(true));
+              const temp = await dexList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -264,10 +310,11 @@ const Dexlist768px = props => {
           position="relative"
           borderRadius="10px"
           padding="10px 10px 10px 10px"
+          backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/platform/${props?.item}.jpg`}
+            src={`/imgs/platform/${item}.jpg`}
             width="40px"
             height="40px"
             display="block"
@@ -287,8 +334,17 @@ const Dexlist768px = props => {
   );
 };
 
-const Netlist320px = props => {
-  const { overrides, ...rest } = props;
+const Netlist320px = (props) => {
+  const {
+    overrides,
+    item,
+    setCurrentPagePoolList,
+    setTotalPages,
+    setFilter,
+    pageIndex,
+    filter,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
   return (
     <>
@@ -310,15 +366,15 @@ const Netlist320px = props => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
-              const temp = await netList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setFilter(props?.item);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(true));
+              const temp = await netList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -332,12 +388,15 @@ const Netlist320px = props => {
           basis="0"
           alignSelf="stretch"
           position="relative"
-          borderRadius="15px"
+          borderRadius="13px"
           padding="10px 10px 10px 10px"
+          backgroundColor={
+            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
+          }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/mainNet/${props?.item}.jpg`}
+            src={`/imgs/mainNet/${item}.jpg`}
             width="38px"
             height="38px"
             display="block"
@@ -357,8 +416,17 @@ const Netlist320px = props => {
   );
 };
 
-const Dexlist320px = props => {
-  const { overrides, ...rest } = props;
+const Dexlist320px = (props) => {
+  const {
+    overrides,
+    item,
+    setCurrentPagePoolList,
+    setTotalPages,
+    setFilter,
+    pageIndex,
+    filter,
+    ...rest
+  } = props;
   const dispatch = useDispatch();
 
   return (
@@ -381,15 +449,15 @@ const Dexlist320px = props => {
         <Flex
           onClick={async () => {
             try {
-              dispatch(isLoadingThunk({ isLoading: true }));
-              const temp = await dexList(props?.item, props?.pageIndex);
-              props.setCurrentPagePoolList(temp.poolListData);
-              props.setFilter(props?.item);
-              props.setTotalPages(Math.ceil(temp.poolListDataLength / 10));
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(true));
+              const temp = await dexList(item, pageIndex);
+              setCurrentPagePoolList(temp.poolListData);
+              setFilter(item);
+              setTotalPages(Math.ceil(temp.poolListDataLength / 10));
+              dispatch(setIsLoading(false));
             } catch (error) {
               console.error(error);
-              dispatch(isLoadingThunk({ isLoading: false }));
+              dispatch(setIsLoading(false));
             }
           }}
           gap="10px"
@@ -403,12 +471,13 @@ const Dexlist320px = props => {
           basis="0"
           alignSelf="stretch"
           position="relative"
-          borderRadius="15px"
+          borderRadius="13px"
           padding="10px 10px 10px 10px"
+          backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
-            src={`/imgs/platform/${props?.item}.jpg`}
+            src={`/imgs/platform/${item}.jpg`}
             width="38px"
             height="38px"
             display="block"

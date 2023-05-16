@@ -7,56 +7,51 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Flex, Image, Loader, Text } from "@aws-amplify/ui-react";
 import MyPageList768px from "../components/myPageList/MyPageList768px";
-import { useLocation } from "react-router-dom";
-import { mypageList } from "../api/index";
 import logo from "./images/logo_new.png";
-import { useDispatch } from "react-redux";
-import { isLoadingThunk } from "../modules/isLoading";
 import { motion } from "framer-motion";
 import "../css/Font.css";
+import { useSelector } from "react-redux";
 
 export default function MyPageCompo768px(props) {
-  const { overrides, ...rest } = props;
-  const [myList, setMyList] = React.useState([]);
-  const [lpTokenValue, setLpTokenValue] = React.useState();
-  const [lpToken, setLpToken] = React.useState();
-  const [firstToken, setFirstToken] = React.useState();
-  const [secondToken, setSecondToken] = React.useState();
-  const [firstImgToken, setFirstImgToken] = React.useState();
-  const [secondImgToken, setSecondImgToken] = React.useState();
-  const dispatch = useDispatch();
-  const params = useLocation().search.replace("?", "");
-
-  const lpBalanceValue = parseInt((lpTokenValue / 10 ** 18) * 10000) / 10000;
-
-  const isLoadingTrue = () => {
-    dispatch(isLoadingThunk({ isLoading: true }));
+  const {
+    overrides,
+    myList,
+    getAutoCompoundStatusFunc,
+    autoCompoundStatus,
+    mypageLpListUp,
+    lpTokenValue,
+    lpToken,
+    firstToken,
+    secondToken,
+    firstImgToken,
+    secondImgToken,
+    setLpTokenValue,
+    setLpToken,
+    setFirstToken,
+    setSecondToken,
+    setFirstImgToken,
+    setSecondImgToken,
+    navigate,
+    isLoading2,
+    setIsLoading2,
+    ...rest
+  } = props;
+  const [isHovered, setIsHovered] = React.useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
   };
-  const isLoadingFalse = () => {
-    dispatch(isLoadingThunk({ isLoading: false }));
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
   };
 
-  const mypageLpListUp = async () => {
-    try {
-      dispatch(isLoadingThunk({ isLoading: true }));
-      const myLists = await mypageList(params);
-      setMyList(myLists);
-      setTimeout(() => {
-        dispatch(isLoadingThunk({ isLoading: false }));
-      }, 1500);
-    } catch (error) {
-      console.error(error);
-      dispatch(isLoadingThunk({ isLoading: false }));
-    }
-  };
-  React.useEffect(() => {
-    mypageLpListUp();
-  }, []);
-
+  const isLoading = useSelector(state => state.isLoading);
   return (
     <Flex
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       gap="31px"
       direction="column"
       width="unset"
@@ -98,28 +93,55 @@ export default function MyPageCompo768px(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Frame 14240773366")}
         >
-          <Text
-            fontFamily="ffProMedium"
-            fontSize={{ base: "21px", small: "24px", medium: "35px" }}
-            fontWeight="600"
-            lineHeight="42.35795211791992px"
-            textAlign="center"
-            display="block"
-            direction="column"
-            justifyContent="unset"
-            width="unset"
-            height="unset"
-            gap="unset"
-            alignItems="unset"
-            grow="1"
-            shrink="1"
-            basis="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
-            children="My Liquidity List"
-            {...getOverrideProps(overrides, "My Liquidity List")}
-          ></Text>
+          {isHovered ? (
+            <Text
+              color="#373C38"
+              fontFamily="ffProMedium"
+              fontSize={{ base: "21px", small: "24px", medium: "35px" }}
+              fontWeight="600"
+              lineHeight="42.35795211791992px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="My Liquidity List"
+              {...getOverrideProps(overrides, "My Liquidity List")}
+            ></Text>
+          ) : (
+            <Text
+              color="#F7EFE3"
+              fontFamily="ffProMedium"
+              fontSize={{ base: "21px", small: "24px", medium: "35px" }}
+              fontWeight="600"
+              lineHeight="42.35795211791992px"
+              textAlign="center"
+              display="block"
+              direction="column"
+              justifyContent="unset"
+              width="unset"
+              height="unset"
+              gap="unset"
+              alignItems="unset"
+              grow="1"
+              shrink="1"
+              basis="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              whiteSpace="pre-wrap"
+              children="My Liquidity List"
+              {...getOverrideProps(overrides, "My Liquidity List")}
+            ></Text>
+          )}
         </Flex>
       </Flex>
       <Flex
@@ -145,10 +167,10 @@ export default function MyPageCompo768px(props) {
             width: "71.4vw",
             height: "unset",
             borderRadius: "23px",
-            backgroundColor: "rgba(249,251,250,0.85)",
+            backgroundColor: "#F7EFE3",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             backgroundImage:
-              "linear-gradient(-7deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15))",
+              "linear-gradient(-7deg, #FDFCF5, rgba(246,247,248,0.15))",
           }}
           whileHover={{
             borderRadius: "55px",
@@ -170,7 +192,7 @@ export default function MyPageCompo768px(props) {
             {...getOverrideProps(overrides, "Frame 17340782541")}
           >
             <Flex
-              gap="23px"
+              gap={{ base: "11px", small: "23px" }}
               direction="column"
               width="unset"
               height="unset"
@@ -211,7 +233,7 @@ export default function MyPageCompo768px(props) {
                 >
                   <Text
                     fontFamily="ffProExtraLight"
-                    fontSize={{ base: "18px", small: "18px", medium: "25px" }}
+                    fontSize={{ base: "11px", small: "18px", medium: "25px" }}
                     fontWeight="600"
                     lineHeight="30.25568199157715px"
                     textAlign="center"
@@ -244,7 +266,7 @@ export default function MyPageCompo768px(props) {
                 justifyContent="center"
                 alignItems="center"
                 shrink="0"
-                alignSelf="stretch"
+                alignSelf={{ base: "center", small: "stretch" }}
                 position="relative"
                 padding="0px 0px 0px 0px"
                 {...getOverrideProps(overrides, "Frame 144")}
@@ -406,24 +428,34 @@ export default function MyPageCompo768px(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Frame 17140773334")}
         >
-          {myList?.map((item, idx) => (
-            <MyPageList768px
-              key={`MyPageList768px-2${idx}`}
-              pid={myList[idx]?.lpPidNumber}
-              item={item}
-              idx={idx}
-              setLpToken={setLpToken}
-              setLpTokenValue={setLpTokenValue}
-              setFirstToken={setFirstToken}
-              setSecondToken={setSecondToken}
-              setFirstImgToken={setFirstImgToken}
-              setSecondImgToken={setSecondImgToken}
-              lptokenvalue={lpTokenValue}
-              lptoken={lpToken}
-              mypagelplistup={mypageLpListUp}
-              lpBalanceValue={lpBalanceValue}
-            />
-          ))}
+          {isLoading2 ? (
+            <Flex minHeight="500px" alignItems="center">
+              <Loader width="80px" height="80px" />
+            </Flex>
+          ) : (
+            myList?.map((item, idx) => (
+              <MyPageList768px
+                key={`MyPageList768px-2${idx}`}
+                pid={myList[idx]?.lpPidNumber}
+                item={item}
+                idx={idx}
+                setLpToken={setLpToken}
+                setLpTokenValue={setLpTokenValue}
+                setFirstToken={setFirstToken}
+                setSecondToken={setSecondToken}
+                setFirstImgToken={setFirstImgToken}
+                setSecondImgToken={setSecondImgToken}
+                lpTokenValue={lpTokenValue}
+                lpToken={lpToken}
+                mypageLpListUp={mypageLpListUp}
+                getAutoCompoundStatusFunc={getAutoCompoundStatusFunc}
+                autoCompoundStatus={autoCompoundStatus}
+                navigate={navigate}
+                isLoading2={isLoading2}
+                setIsLoading2={setIsLoading2}
+              />
+            ))
+          )}
         </Flex>
       </Flex>
     </Flex>

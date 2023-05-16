@@ -1,47 +1,15 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-const promiseTime = (count) => {
-  return new Promise((resolve, reject) => {
-    try {
-      setTimeout(() => {
-        resolve(count);
-      }, 100);
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
-
-export const connectThunk = createAsyncThunk(
-  "connect/connectThunk",
-  async (connect) => {
-    return await promiseTime(connect);
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const connectSlice = createSlice({
   name: "connect",
-  initialState: { connect: false },
+  initialState: false,
   reducers: {
     setConnect: (state, action) => {
-      return action.payload.connect;
+      return action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(connectThunk.pending, (state, action) => {
-        state.connect = true;
-      })
-      .addCase(connectThunk.fulfilled, (state, action) => {
-        state.connect = action.payload;
-      })
-      .addCase(connectThunk.rejected, (state, action) => {
-        state.connect = undefined;
-      });
   },
 });
 
-export const action = connectSlice.actions;
-export const reducer = connectSlice.reducer;
+export const { setConnect } = connectSlice.actions;
 
-export default connectSlice;
+export default connectSlice.reducer;
