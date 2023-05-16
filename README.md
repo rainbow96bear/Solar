@@ -4,12 +4,23 @@
 
 ## :family: Members
 
+<br>
+
 - BackEnd(Leader) : [장정현](https://github.com/JJeonghyun)
+
 - FrontEnd : [최원겸](https://github.com/HGWA333)
+
 - Contract : [신상목](https://github.com/pippen11)
+
 - BackEnd : [이재혁](https://github.com/LeeJaeHyekk)
+
 - Contract : [김성진](https://github.com/rainbow96bear)
+
 - FrontEnd : [고우석](https://github.com/Koh-U-Seok)
+
+<br>
+
+- 배포 : [SolarProject](solar.jaeko.block7.errorcode.help)
 
 <br>
 
@@ -45,6 +56,11 @@ back 실행
 
 ```bash
 cd back
+
+# 배포
+npm run start
+
+# 개발
 npm run start:dev
 ```
 
@@ -110,7 +126,27 @@ npm run start:dev
 
 ## :trollface: Project Stack
 
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"/><img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white"/><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/><img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/><img src="https://img.shields.io/badge/Redux-764ABC?style=flat&logo=Redux&logoColor=white"/><img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=Node.js&logoColor=white"/><img src="https://img.shields.io/badge/mySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/><img src="https://img.shields.io/badge/git-F05032?style=flat&logo=Git&logoColor=white"/><img src="https://img.shields.io/badge/solidity-363636?style=flat&logo=solidity&logoColor=white"/><img src="https://img.shields.io/badge/axios-5A29E4?style=flat&logo=axios&logoColor=white"/><img src="https://img.shields.io/badge/amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white"/><img src="https://img.shields.io/badge/web3.js-F16822?style=flat&logo=web3.js&logoColor=white"/><img src="https://img.shields.io/badge/remix-000000?style=flat&logo=remix&logoColor=white"/><img src="https://img.shields.io/badge/typescript-3178C6?style=flat&logo=typescript&logoColor=white"/><img src="https://img.shields.io/badge/trello-0052CC?style=flat&logo=trello&logoColor=white"/><img src="https://img.shields.io/badge/awsamplify-FF9900?style=flat&logo=awsamplify&logoColor=white"/><img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white"/><img src="https://img.shields.io/badge/googlesheets-34A853?style=flat&logo=googlesheets&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
+<img src="https://img.shields.io/badge/Redux-764ABC?style=flat&logo=Redux&logoColor=white"/>
+<img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=Node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/Github-181717?style=flat&logo=Github&logoColor=white"/>
+<img src="https://img.shields.io/badge/mySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/>
+<img src="https://img.shields.io/badge/solidity-363636?style=flat&logo=solidity&logoColor=white"/>
+<img src="https://img.shields.io/badge/axios-5A29E4?style=flat&logo=axios&logoColor=white"/>
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white"/>
+<img src="https://img.shields.io/badge/web3.js-F16822?style=flat&logo=web3.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/figma-F24E1E?style=flat&logo=figma&logoColor=white"/>
+<img src="https://img.shields.io/badge/remix-000000?style=flat&logo=remix&logoColor=white"/>
+<img src="https://img.shields.io/badge/typescript-3178C6?style=flat&logo=typescript&logoColor=white"/>
+<img src="https://img.shields.io/badge/trello-0052CC?style=flat&logo=trello&logoColor=white"/>
+<img src="https://img.shields.io/badge/awsamplify-FF9900?style=flat&logo=awsamplify&logoColor=white"/>
+<img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white"/>
+<img src="https://img.shields.io/badge/googlesheets-34A853?style=flat&logo=googlesheets&logoColor=white"/>
+<img src="https://img.shields.io/badge/filezilla-BF0000?style=flat&logo=filezilla&logoColor=white"/>
+<img src="https://img.shields.io/badge/ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white"/>
 
 - Solidity(Smart Contract)
 - AWS(EC2 (싱가폴 리전))
