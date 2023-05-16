@@ -10,11 +10,11 @@ import "../../css/Font.css";
 import { useAccount } from "wagmi";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem1024 = (props) => {
+const Poolitem1024 = props => {
   const { overrides, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  const address2 = useSelector((state) => state.account);
+  const address2 = useSelector(state => state.account);
   const { address } = useAccount();
 
   const addressResult = address || address2;
@@ -534,11 +534,7 @@ const Poolitem1024 = (props) => {
               {addressResult ? (
                 <SwapCompo1440px props={props} />
               ) : (
-                <ConnectCompo1440px
-                  onClick={() => {
-                    dispatch(setConnect(true));
-                  }}
-                />
+                <ConnectCompo1440px />
               )}
             </motion.div>
           </SubWrap>
@@ -564,7 +560,4 @@ const SubWrap = styled(motion.div)`
   :last-child {
     border-radius: 0 0 20px 20px;
   }
-`;
-const Disble = styled.div`
-  display: hidden;
 `;

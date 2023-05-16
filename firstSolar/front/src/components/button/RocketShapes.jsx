@@ -11,12 +11,7 @@ export function RocketShapes({ isHover, isPress, mouseX, mouseY }) {
   const lightRotateY = useSmoothTransform(mouseX, spring, mouseToLightRotation);
 
   return (
-    <Canvas
-      style={{ position: "absolute", width: "100%", height: "100%" }}
-      shadows
-      dpr={[1, 2]}
-      resize={{ scroll: false, offsetSize: true }}
-    >
+    <Canvas shadows dpr={[1, 2]} resize={{ scroll: false, offsetSize: true }}>
       <Camera mouseX={mouseX} mouseY={mouseY} />
       <MotionConfig transition={transition}>
         <motion.group
@@ -33,7 +28,7 @@ export function RocketShapes({ isHover, isPress, mouseX, mouseY }) {
             hover: { z: isPress ? -0.9 : 0 },
           }}
         >
-          <Rocket position={[0.01, -1.23, 0]} scale={[0.47, 0.47, 0.47]} />
+          <Rocket position={[0.01, -1.23, 0]} />
         </motion.group>
       </MotionConfig>
     </Canvas>

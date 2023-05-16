@@ -33,7 +33,7 @@ export function MoonShapes({ isHover, isPress, mouseX, mouseY }) {
             hover: { z: isPress ? -0.9 : 0 },
           }}
         >
-          <Moon position={[0.01, -0.03, 0]} scale={[0.33, 0.33, 0.33]} />
+          <Moon position={[0.01, 0.03, 0]} scale={[0.33, 0.33, 0.33]} />
         </motion.group>
       </MotionConfig>
     </Canvas>

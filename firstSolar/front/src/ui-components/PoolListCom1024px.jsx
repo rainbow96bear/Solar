@@ -15,6 +15,7 @@ import {
 } from "../components/netdexlist/Netdexlist";
 
 import "../css/PoolList.css";
+import FooterContainer from "../components/footer/Container";
 
 export default function PoolListCom1024px(props) {
   const {
@@ -490,6 +491,7 @@ export default function PoolListCom1024px(props) {
 
       <LayoutGroup>
         <motion.div
+          style={{ height: " 219vh" }}
           layout
           initial={{ borderRadius: 25 }}
           transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
@@ -502,7 +504,6 @@ export default function PoolListCom1024px(props) {
                   gap="17px"
                   direction="column"
                   width="unset"
-                  height="unset"
                   justifyContent="center"
                   alignItems="center"
                   shrink="0"
@@ -513,7 +514,6 @@ export default function PoolListCom1024px(props) {
                   item={item}
                   length={currentPagePoolList.length}
                   idx={idx}
-                  last={idx == currentPagePoolList.length - 1 ? true : false}
                 />
               ))
           ) : sortAPY == "down" ? (
@@ -524,7 +524,6 @@ export default function PoolListCom1024px(props) {
                   gap="17px"
                   direction="column"
                   width="unset"
-                  height="unset"
                   justifyContent="center"
                   alignItems="center"
                   shrink="0"
@@ -535,7 +534,6 @@ export default function PoolListCom1024px(props) {
                   item={item}
                   length={currentPagePoolList.length}
                   idx={idx}
-                  last={idx == currentPagePoolList.length - 1 ? true : false}
                 />
               ))
           ) : sortTVL == "up" ? (
@@ -546,7 +544,6 @@ export default function PoolListCom1024px(props) {
                   gap="17px"
                   direction="column"
                   width="unset"
-                  height="unset"
                   justifyContent="center"
                   alignItems="center"
                   shrink="0"
@@ -557,7 +554,6 @@ export default function PoolListCom1024px(props) {
                   item={item}
                   length={currentPagePoolList.length}
                   idx={idx}
-                  last={idx == currentPagePoolList.length - 1 ? true : false}
                 />
               ))
           ) : sortTVL == "down" ? (
@@ -568,7 +564,6 @@ export default function PoolListCom1024px(props) {
                   gap="17px"
                   direction="column"
                   width="unset"
-                  height="unset"
                   justifyContent="center"
                   alignItems="center"
                   shrink="0"
@@ -579,30 +574,39 @@ export default function PoolListCom1024px(props) {
                   item={item}
                   length={currentPagePoolList.length}
                   idx={idx}
-                  last={idx == currentPagePoolList.length - 1 ? true : false}
                 />
               ))
           ) : (
             <></>
           )}
+          <Flex
+            width="100vw"
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            alignSelf="center"
+            padding="50px 0px 0px 0px"
+          >
+            <Pagination
+              width="100vw"
+              marginRight={{ medium: "0px", large: "240px" }}
+              color="red"
+              {...paginationProps}
+              onChange={pageNum => {
+                setPageIndex(pageNum);
+              }}
+              onNext={() => {
+                setPageIndex(pageIndex + 1);
+              }}
+              onPrevious={() => {
+                setPageIndex(pageIndex - 1);
+              }}
+            />
+
+            <FooterContainer />
+          </Flex>
         </motion.div>
       </LayoutGroup>
-
-      <Flex width="80vw" justifyContent="center" padding="30px 0px 0px 0px">
-        <Pagination
-          color="red"
-          {...paginationProps}
-          onChange={pageNum => {
-            setPageIndex(pageNum);
-          }}
-          onNext={() => {
-            setPageIndex(pageIndex + 1);
-          }}
-          onPrevious={() => {
-            setPageIndex(pageIndex - 1);
-          }}
-        />
-      </Flex>
     </Flex>
   );
 }
