@@ -127,7 +127,8 @@ npm run start:dev
 
 ## :trollface: Project Stack
 
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"/>
+<div>
+ <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"/>
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white"/>
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/>
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/>
@@ -136,6 +137,8 @@ npm run start:dev
 <img src="https://img.shields.io/badge/Github-181717?style=flat&logo=Github&logoColor=white"/>
 <img src="https://img.shields.io/badge/mySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/>
 <img src="https://img.shields.io/badge/solidity-363636?style=flat&logo=solidity&logoColor=white"/>
+</div>
+<div>
 <img src="https://img.shields.io/badge/axios-5A29E4?style=flat&logo=axios&logoColor=white"/>
 <img src="https://img.shields.io/badge/amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white"/>
 <img src="https://img.shields.io/badge/web3.js-F16822?style=flat&logo=web3.js&logoColor=white"/>
@@ -145,10 +148,13 @@ npm run start:dev
 <img src="https://img.shields.io/badge/trello-0052CC?style=flat&logo=trello&logoColor=white"/>
 <img src="https://img.shields.io/badge/awsamplify-FF9900?style=flat&logo=awsamplify&logoColor=white"/>
 <img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white"/>
+</div>
+<div>
 <img src="https://img.shields.io/badge/googlesheets-34A853?style=flat&logo=googlesheets&logoColor=white"/>
 <img src="https://img.shields.io/badge/filezilla-BF0000?style=flat&logo=filezilla&logoColor=white"/>
 <img src="https://img.shields.io/badge/ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white"/>
-
+</div>
+ 
 - Solidity(Smart Contract)
 - AWS(EC2 (싱가폴 리전))
 - React(Dapp Front-end UI 프레임워크)
