@@ -213,70 +213,63 @@ const MainContainer = () => {
         items={items}
         isLoading2={isLoading2}
       ></RankListCContainer>
-      {isLoading ? (
-        <Flex minHeight="500px" alignItems="center">
-          <Loader width="80px" height="80px" />
-        </Flex>
-      ) : (
-        <>
-          {isMobile && (
-            <PooListCom320px
-              mainNetList={mainNetList2}
-              mainNetList1={mainNetList1}
-              pageIndex={pageIndex}
-              setPageIndex={setPageIndex}
-              filter={filter}
-              setFilter={setFilter}
-              currentPagePoolList={currentPagePoolList}
-              setCurrentPagePoolList={setCurrentPagePoolList}
-              setTotalPages={setTotalPages}
-              networkArray={networkArray}
-              platformList={platformList2}
-              platformList1={platformList1}
-              paginationProps={paginationPropsMobile}
-            />
-          )}
-          {isTablet && (
-            <PooListCom768px
-              mainNetList={mainNetList2}
-              mainNetList1={mainNetList1}
-              pageIndex={pageIndex}
-              setPageIndex={setPageIndex}
-              filter={filter}
-              setFilter={setFilter}
-              currentPagePoolList={currentPagePoolList}
-              setCurrentPagePoolList={setCurrentPagePoolList}
-              setTotalPages={setTotalPages}
-              networkArray={networkArray}
-              platformList={platformList2}
-              platformList1={platformList1}
-              paginationProps={paginationProps}
-            />
-          )}
-          {isDesktop && (
-            <PoolListCom1024px
-              mainNetList={mainNetList}
-              pageIndex={pageIndex}
-              setPageIndex={setPageIndex}
-              filter={filter}
-              setFilter={setFilter}
-              currentPagePoolList={currentPagePoolList}
-              setCurrentPagePoolList={setCurrentPagePoolList}
-              setTotalPages={setTotalPages}
-              networkArray={networkArray}
-              platformList={platformList}
-              sortAPY={sortAPY}
-              setSortAPY={setSortAPY}
-              sortTVL={sortTVL}
-              setSortTVL={setSortTVL}
-              aesAPY={aesAPY}
-              aesTVL={aesTVL}
-              descAPY={descAPY}
-              descTVL={descTVL}
-              paginationProps={paginationProps}
-            />
-          )}
-        </>
+
+      {isMobile && (
+        <PooListCom320px
+          mainNetList={mainNetList2}
+          mainNetList1={mainNetList1}
+          pageIndex={pageIndex}
+          setPageIndex={setPageIndex}
+          filter={filter}
+          setFilter={setFilter}
+          currentPagePoolList={currentPagePoolList}
+          setCurrentPagePoolList={setCurrentPagePoolList}
+          setTotalPages={setTotalPages}
+          networkArray={networkArray}
+          platformList={platformList2}
+          platformList1={platformList1}
+          paginationProps={paginationPropsMobile}
+        />
+      )}
+      {isTablet && (
+        <PooListCom768px
+          mainNetList={mainNetList2}
+          mainNetList1={mainNetList1}
+          pageIndex={pageIndex}
+          setPageIndex={setPageIndex}
+          filter={filter}
+          setFilter={setFilter}
+          currentPagePoolList={currentPagePoolList}
+          setCurrentPagePoolList={setCurrentPagePoolList}
+          setTotalPages={setTotalPages}
+          networkArray={networkArray}
+          platformList={platformList2}
+          platformList1={platformList1}
+          paginationProps={paginationProps}
+        />
+      )}
+      {isDesktop && (
+        <PoolListCom1024px
+          mainNetList={mainNetList}
+          pageIndex={pageIndex}
+          setPageIndex={setPageIndex}
+          filter={filter}
+          setFilter={setFilter}
+          currentPagePoolList={currentPagePoolList}
+          setCurrentPagePoolList={setCurrentPagePoolList}
+          setTotalPages={setTotalPages}
+          networkArray={networkArray}
+          platformList={platformList}
+          sortAPY={sortAPY}
+          setSortAPY={setSortAPY}
+          sortTVL={sortTVL}
+          setSortTVL={setSortTVL}
+          aesAPY={aesAPY}
+          aesTVL={aesTVL}
+          descAPY={descAPY}
+          descTVL={descTVL}
+          paginationProps={paginationProps}
+        />
       )}
     </Main>
   );

@@ -17,7 +17,6 @@ export default function AddLiquidityTop320px(props) {
     oracleiddata,
     balance,
     lastTimeStamp,
-    tokenNumber,
     reducedNumber,
     ...rest
   } = props;

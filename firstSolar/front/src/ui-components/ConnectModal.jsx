@@ -123,7 +123,13 @@ export default function ConnectModal(props) {
         height="unset"
         justifyContent={{ base: "center", small: "flex-start" }}
         alignItems={{ base: "stretch", small: "stretch" }}
-        position="relative"
+        position="absolute"
+        left="50%"
+        top="50%"
+        style={{
+          transform: "translate(-50%,-50%)",
+          maxHeight: "calc(100vh - 40px)",
+        }}
         padding="0px 0px 0px 0px"
         boxShadow="4px 37px 27px rgba(0, 0, 0, 0.25)"
         borderRadius="35px"
@@ -581,13 +587,10 @@ const ModalCover = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
   position: fixed;
   left: 0%;
   top: 0%;
   right: 0%;
-  justify-content: center;
-  align-items: center;
   z-index: 88;
 
   .ConnectModal {
