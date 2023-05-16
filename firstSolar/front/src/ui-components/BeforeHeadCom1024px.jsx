@@ -164,6 +164,7 @@ export default function BeforeHeadCom1024px(props) {
           ) : (
             <div className="Header_connect">
               <Flex
+                marginTop="5px"
                 gap="10px"
                 direction="row"
                 width="133px"
@@ -175,9 +176,9 @@ export default function BeforeHeadCom1024px(props) {
                 left="85.64%"
                 right="1.37%"
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                backgroundColor="#D0576B"
                 borderRadius="45px"
                 padding="19px 11px 19px 11px"
-                backgroundImage="linear-gradient(-90deg, rgba(32,32,32,0.85), rgba(32,32,32,0.88))"
                 onClick={() => {
                   dispatch(setConnect(true));
                 }}
