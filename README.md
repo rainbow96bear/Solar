@@ -74,6 +74,7 @@ npm run start:dev
 - 각 메인넷들마다 Defi Dapp들이 존재하고 있다. 다만 너무 많은 Defi 사이트들이 있기에 사용자들 사이에서 더 좋은 APY을 제공하는 곳을 찾기에는 많은 어려움이 발생한다
 - 이에 우리들은 Dex Defi들의 API를 연동한 하나의 Dapp에서 통합적으로 Defi들은 Scan할 수 있는 사이트를 구축하여 메인넷별로 쉽게 관련 정보들은 찾을 수 있도록 한다
 - 추가적으로 Defi를 연동함에 따라 Deposit, Withdraw, Auto-Compounding vaults 시 일정 수수료를 Scan사이트에 지불하게 함으로써 사이트 운영이 지속적으로 원활하게 운영이 가능
+
 - Scan 사이트내에 자체 Token을 발행하여 Staking을 통한 보상을 Airdrop 해주는 기능으로 사용자들의 이용을 유도한다
 
  <br>
@@ -102,6 +103,7 @@ npm run start:dev
 - 메인넷 별 Deif 상품들에 대한 필터링 기능
 - 원하는 LP의 이름이나 CA를 검색해서 해당 LP들의 목록을 한눈에 볼 수있도록 하는 검색 기능
 
+
 <br>
 
 ---
@@ -117,6 +119,7 @@ npm run start:dev
 | Smart Contract               | Api를 통해 연결된 Defi 상품에 대해 Deposit을 하면 해당 pool의 스마트컨트랙을 불러오기 전에 scan 사이트의 스마트 컨트랙상에서 수수료 지불(지정된 Wallet으로 자동 전송)에 대한 컨트랙을 approve한 후 api를 통해 해당 pool의 스마트 컨트랙 진행 (Withdraw, Claim, Auto-compounding vaults 동일하게 처리)과 DFS 의 Airdrop 을 처리하는 스마트 컨트랙 .\*주의: 기본적으로 deposit을 할 때 Auto-compounding vaults 기능은 작동되게 설정해놓고 USER가 미작동을 선택하면 이에 대한 스마트 컨트랙은 진행되지 않게 해야 함. |
 | Token 발행 관련              | 테스트넷용 Token은 직접 발행<br> 메인넷용 BEP20 Token은 발행(토큰명: Defiscan , 심볼: DFS )하여 제공 예정.                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Staking and Swap             | DFS/USDT , DFS/ETH , DFS/BNB 3개의 pair로 LP(liquidity pool)토큰을 생성하여 이를 통해 DFS Airdrop과 Swap 시 나오는 수수료를 USER에게 제공 등                                                                                                                                                                                                                                                                                                                                                                      |
+
 
 <br>
 
@@ -147,6 +150,7 @@ npm run start:dev
 <img src="https://img.shields.io/badge/googlesheets-34A853?style=flat&logo=googlesheets&logoColor=white"/>
 <img src="https://img.shields.io/badge/filezilla-BF0000?style=flat&logo=filezilla&logoColor=white"/>
 <img src="https://img.shields.io/badge/ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white"/>
+
 
 - Solidity(Smart Contract)
 - AWS(EC2 (싱가폴 리전))
