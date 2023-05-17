@@ -14,6 +14,7 @@ import {
   Dexlist768px,
 } from "../components/netdexlist/Netdexlist";
 import { motion, LayoutGroup } from "framer-motion";
+import { useSelector } from "react-redux";
 
 export default function PooListCom768px(props) {
   const {
