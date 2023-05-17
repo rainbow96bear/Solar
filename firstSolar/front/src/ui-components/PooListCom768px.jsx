@@ -295,6 +295,9 @@ export default function PooListCom768px(props) {
                     key={`platformList768px-2${idx}`}
                     item={item}
                     setCurrentPagePoolList={setCurrentPagePoolList}
+                    setTotalPages={setTotalPages}
+                    setFilter={setFilter}
+                    pageIndex={pageIndex}
                     filter={filter}
                   />
                 ))}

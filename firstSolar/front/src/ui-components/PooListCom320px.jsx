@@ -264,6 +264,7 @@ export default function PooListCom320px(props) {
                     key={`Dexlist320px-1${idx}`}
                     item={item}
                     filter={filter}
+                    setFilter={setFilter}
                     setCurrentPagePoolList={setCurrentPagePoolList}
                     setTotalPages={setTotalPages}
                     pageIndex={pageIndex}

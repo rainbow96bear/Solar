@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Netlist1024px = props => {
+const Netlist1024px = (props) => {
   const {
     overrides,
     item,
@@ -91,7 +91,7 @@ const Netlist1024px = props => {
   );
 };
 
-const Dexlist1024px = props => {
+const Dexlist1024px = (props) => {
   const {
     overrides,
     item,
@@ -172,7 +172,7 @@ const Dexlist1024px = props => {
   );
 };
 
-const Netlist768px = props => {
+const Netlist768px = (props) => {
   const {
     overrides,
     item,
@@ -254,7 +254,7 @@ const Netlist768px = props => {
   );
 };
 
-const Dexlist768px = props => {
+const Dexlist768px = (props) => {
   const {
     overrides,
     item,
@@ -334,7 +334,7 @@ const Dexlist768px = props => {
   );
 };
 
-const Netlist320px = props => {
+const Netlist320px = (props) => {
   const {
     overrides,
     item,
@@ -416,7 +416,7 @@ const Netlist320px = props => {
   );
 };
 
-const Dexlist320px = props => {
+const Dexlist320px = (props) => {
   const {
     overrides,
     item,
