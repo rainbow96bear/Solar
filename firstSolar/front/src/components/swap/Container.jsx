@@ -26,6 +26,11 @@ import { setIsLoading } from "../../modules/isLoading";
 import { useWeb3 } from "../../modules/useWeb3";
 import { useWeb3T } from "../../modules/useWeb3Trust";
 import { useWeb3C } from "../../modules/useWeb3Coinbase";
+import QuestionModalTop from "../../ui-components/QuestionModalTop";
+import QuestionModalBottom from "../../ui-components/QuestionModalBottom";
+import SwapCompletedModal from "../../ui-components/SwapCompletedModal";
+import SwapFaildModal from "../../ui-components/SwapFaildModal";
+import LoadingCompo from "../../ui-components/LoadingCompo";
 
 const SwapContainer = () => {
   const params = useLocation().search.replace("?", "");
@@ -35,7 +40,7 @@ const SwapContainer = () => {
   const navigate = useNavigate();
 
   const { address } = useAccount();
-  const address2 = useSelector((state) => state.account);
+  const address2 = useSelector(state => state.account);
   const [userFirstBalance, setUserFirstBalance] = useState(0);
   const [userSecondBalance, setUserSecondBalance] = useState(0);
   const [textareaValue, setTextAreaValue] = useState("");
@@ -75,7 +80,7 @@ const SwapContainer = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-
+  const isLoading = useSelector(state => state.isLoading);
   const dispatch = useDispatch();
   const isDesktop = useMediaQuery({
     query: "(min-width:500px)",
@@ -252,14 +257,14 @@ const SwapContainer = () => {
     "Backspace", // 백스페이스
   ];
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     const keyCode = e.key;
     if (!allowedKeys.includes(keyCode)) {
       e.preventDefault();
     }
   };
 
-  const setPercentBalance = (percentNum) => {
+  const setPercentBalance = percentNum => {
     if (
       userFirstBalance == 0 &&
       userFirstBalance == undefined &&
@@ -270,7 +275,7 @@ const SwapContainer = () => {
     delayedFunction1(userFirstBalance * percentNum);
   };
 
-  const handleTextareaChange = (event) => {
+  const handleTextareaChange = event => {
     const value = event.target.value;
 
     const filteredValue = value.replace(/[^0-9.\b]/g, "");
@@ -313,7 +318,7 @@ const SwapContainer = () => {
     }, 1000);
   }
 
-  const delayedFunction2 = (num) => {
+  const delayedFunction2 = num => {
     try {
       if (secondSelectToken == "DFS") {
         setSecondAmountPrice(convertPrice.usdt * num);
@@ -499,6 +504,44 @@ const SwapContainer = () => {
               )}
             </AnimatePresence>
           </Flex>
+          {questionMark == 1 ? (
+            <QuestionModalTop
+              setQuestionMark={setQuestionMark}
+              secondselecttoken={secondSelectToken}
+              setFirstSelectToken={setFirstSelectToken}
+            ></QuestionModalTop>
+          ) : questionMark == 2 ? (
+            <QuestionModalBottom
+              setQuestionMark={setQuestionMark}
+              firstSelectToken={firstSelectToken}
+              setSecondSelectToken={setSecondSelectToken}
+            ></QuestionModalBottom>
+          ) : (
+            <></>
+          )}
+          {swapSuccessModalOpen && (
+            <LoadingModal>
+              <SwapCompletedModal
+                setSwapSuccessModalOpen={setSwapSuccessModalOpen}
+                firstSelectToken={firstSelectToken}
+                secondSelectToken={secondSelectToken}
+              />
+            </LoadingModal>
+          )}
+          {swapFailModalOpen && (
+            <LoadingModal>
+              <SwapFaildModal
+                setSwapFailModalOpen={setSwapFailModalOpen}
+                firstSelectToken={firstSelectToken}
+                secondSelectToken={secondSelectToken}
+              />
+            </LoadingModal>
+          )}
+          {isLoading && (
+            <LoadingModal>
+              <LoadingCompo />
+            </LoadingModal>
+          )}
         </Swap>
       )}
       {isMobile && (
@@ -638,4 +681,18 @@ const SubWrap = styled(motion.div)`
   :last-child {
     border-radius: 0 0 20px 20px;
   }
+`;
+
+const LoadingModal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999999999;
 `;
