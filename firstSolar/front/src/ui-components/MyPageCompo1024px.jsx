@@ -40,7 +40,7 @@ export default function MyPageCompo1024px(props) {
     ...rest
   } = props;
 
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector((state) => state.isLoading);
   const [isHovered, setIsHovered] = React.useState(false);
   const handleMouseEnter = () => {
     setIsHovered(true);

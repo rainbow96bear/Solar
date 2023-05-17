@@ -4,21 +4,25 @@ import { useEffect, useState } from "react";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { ConnectCompo1440px, SwapCompo1440px } from "../../ui-components";
-import { setConnect } from "../../modules/connect";
+
 import { useDispatch, useSelector } from "react-redux";
 import "../../css/Font.css";
 import { useAccount } from "wagmi";
-import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem1024 = props => {
-  const { overrides, ...rest } = props;
+const Poolitem1024 = (props) => {
+  const { overrides, currentPagePoolList, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
+  const [isDFS, setIsDFS] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  const address2 = useSelector(state => state.account);
+  const address2 = useSelector((state) => state.account);
   const { address } = useAccount();
 
   const addressResult = address || address2;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setIsDFS(props?.item?.oracleId.includes("DFS"));
+  }, [currentPagePoolList]);
 
   return (
     <>
@@ -37,11 +41,11 @@ const Poolitem1024 = props => {
             width: "89vw",
             height: "unset",
             borderRadius: "33px",
-            backgroundColor: "rgba(249, 250, 250, 1)",
+            backgroundColor: !isDFS && "rgba(249, 250, 250, 1)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            backgroundImage: props?.item?.oracleId.includes("DFS")
-              ? "linear-gradient(90deg,rgba(252,089,0,0.33) 0%,rgba(246,247,248,0.15) 20%)"
-              : "rgba(249, 250, 250, 1)",
+            backgroundImage:
+              isDFS &&
+              "linear-gradient(90deg,rgba(252,089,0,0.33) 0%,rgba(246,247,248,0.15) 20%)",
           }}
           whileHover={{
             borderRadius: "75px",

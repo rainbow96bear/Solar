@@ -527,6 +527,7 @@ export default function PoolListCom1024px(props) {
                     length={currentPagePoolList.length}
                     idx={idx}
                     last={idx == currentPagePoolList.length - 1 ? true : false}
+                    currentPagePoolList={currentPagePoolList}
                   />
                 ))
             ) : sortAPY == "down" ? (
@@ -549,6 +550,7 @@ export default function PoolListCom1024px(props) {
                     length={currentPagePoolList.length}
                     idx={idx}
                     last={idx == currentPagePoolList.length - 1 ? true : false}
+                    currentPagePoolList={currentPagePoolList}
                   />
                 ))
             ) : sortTVL == "up" ? (
@@ -571,6 +573,7 @@ export default function PoolListCom1024px(props) {
                     length={currentPagePoolList.length}
                     idx={idx}
                     last={idx == currentPagePoolList.length - 1 ? true : false}
+                    currentPagePoolList={currentPagePoolList}
                   />
                 ))
             ) : sortTVL == "down" ? (
@@ -593,6 +596,7 @@ export default function PoolListCom1024px(props) {
                     length={currentPagePoolList.length}
                     idx={idx}
                     last={idx == currentPagePoolList.length - 1 ? true : false}
+                    currentPagePoolList={currentPagePoolList}
                   />
                 ))
             ) : (

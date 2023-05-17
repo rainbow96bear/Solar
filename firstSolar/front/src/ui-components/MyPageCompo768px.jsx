@@ -47,7 +47,7 @@ export default function MyPageCompo768px(props) {
     setIsHovered(false);
   };
 
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector((state) => state.isLoading);
   return (
     <Flex
       onMouseEnter={handleMouseEnter}
