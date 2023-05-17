@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Netlist1024px = (props) => {
+const Netlist1024px = props => {
   const {
     overrides,
     item,
@@ -31,7 +31,7 @@ const Netlist1024px = (props) => {
           cursor: "pointer",
         }}
         whileHover={{
-          borderRadius: "13px",
+          borderRadius: "15px",
           scale: 1.15,
           backgroundColor: "#D0576B",
         }}
@@ -65,7 +65,7 @@ const Netlist1024px = (props) => {
           position="relative"
           borderRadius="13px"
           backgroundColor={
-            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
+            item == filter ? "rgba(235,069,074,1)" : "rgba(248,251,251,0.35)"
           }
           padding="10px 10px 10px 10px"
           {...getOverrideProps(overrides, "Frame 1939913188")}
@@ -91,7 +91,7 @@ const Netlist1024px = (props) => {
   );
 };
 
-const Dexlist1024px = (props) => {
+const Dexlist1024px = props => {
   const {
     overrides,
     item,
@@ -115,9 +115,9 @@ const Dexlist1024px = (props) => {
           cursor: "pointer",
         }}
         whileHover={{
-          borderRadius: "13px",
+          borderRadius: "15px",
           scale: 1.15,
-          backgroundColor: "rgba(0,125,122,0.85)",
+          backgroundColor: "rgba(0,125,122,1)",
         }}
       >
         <Flex
@@ -172,7 +172,7 @@ const Dexlist1024px = (props) => {
   );
 };
 
-const Netlist768px = (props) => {
+const Netlist768px = props => {
   const {
     overrides,
     item,
@@ -196,9 +196,9 @@ const Netlist768px = (props) => {
           cursor: "pointer",
         }}
         whileHover={{
-          borderRadius: "13px",
+          borderRadius: "15px",
           scale: 1.15,
-          backgroundColor: "rgba(235,069,074,0.85)",
+          backgroundColor: "rgba(235,069,074,1)",
         }}
       >
         <Flex
@@ -229,7 +229,7 @@ const Netlist768px = (props) => {
           borderRadius="10px"
           padding="10px 10px 10px 10px"
           backgroundColor={
-            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
+            item == filter ? "rgba(235,069,074,1)" : "rgba(248,251,251,0.35)"
           }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
@@ -254,7 +254,7 @@ const Netlist768px = (props) => {
   );
 };
 
-const Dexlist768px = (props) => {
+const Dexlist768px = props => {
   const {
     overrides,
     item,
@@ -278,9 +278,9 @@ const Dexlist768px = (props) => {
           cursor: "pointer",
         }}
         whileHover={{
-          borderRadius: "13px",
+          borderRadius: "15px",
           scale: 1.15,
-          backgroundColor: "rgba(0,125,122,0.85)",
+          backgroundColor: "rgba(0,125,122,1)",
         }}
       >
         <Flex
@@ -310,7 +310,7 @@ const Dexlist768px = (props) => {
           position="relative"
           borderRadius="10px"
           padding="10px 10px 10px 10px"
-          backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
+          backgroundColor={item == filter ? "rgba(0,125,122,1)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image
@@ -334,7 +334,7 @@ const Dexlist768px = (props) => {
   );
 };
 
-const Netlist320px = (props) => {
+const Netlist320px = props => {
   const {
     overrides,
     item,
@@ -358,9 +358,9 @@ const Netlist320px = (props) => {
           cursor: "pointer",
         }}
         whileHover={{
-          borderRadius: "13px",
+          borderRadius: "15px",
           scale: 1.15,
-          backgroundColor: "rgba(235,069,074,0.85)",
+          backgroundColor: "rgba(235,069,074,1)",
         }}
       >
         <Flex
@@ -391,7 +391,7 @@ const Netlist320px = (props) => {
           borderRadius="13px"
           padding="10px 10px 10px 10px"
           backgroundColor={
-            item == filter ? "rgba(235,069,074,0.85)" : "rgba(248,251,251,0.35)"
+            item == filter ? "rgba(235,069,074,1)" : "rgba(248,251,251,0.35)"
           }
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
@@ -416,7 +416,7 @@ const Netlist320px = (props) => {
   );
 };
 
-const Dexlist320px = (props) => {
+const Dexlist320px = props => {
   const {
     overrides,
     item,
@@ -441,9 +441,9 @@ const Dexlist320px = (props) => {
           cursor: "pointer",
         }}
         whileHover={{
-          borderRadius: "13px",
+          borderRadius: "15px",
           scale: 1.15,
-          backgroundColor: "rgba(0,125,122,0.85)",
+          backgroundColor: "rgba(0,125,122,1)",
         }}
       >
         <Flex
@@ -473,7 +473,7 @@ const Dexlist320px = (props) => {
           position="relative"
           borderRadius="13px"
           padding="10px 10px 10px 10px"
-          backgroundColor={item == filter ? "rgba(0,125,122,0.85)" : ""}
+          backgroundColor={item == filter ? "rgba(0,125,122,1)" : ""}
           {...getOverrideProps(overrides, "Frame 1939913188")}
         >
           <Image

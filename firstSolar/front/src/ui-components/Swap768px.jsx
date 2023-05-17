@@ -956,49 +956,11 @@ export default function Swap768px(props) {
           />
         </Button>
       </Flex>
-      {questionMark == 1 ? (
-        <QuestionModalTop
-          setQuestionMark={setQuestionMark}
-          secondselecttoken={secondSelectToken}
-          setFirstSelectToken={setFirstSelectToken}
-        ></QuestionModalTop>
-      ) : questionMark == 2 ? (
-        <QuestionModalBottom
-          setQuestionMark={setQuestionMark}
-          firstSelectToken={firstSelectToken}
-          setSecondSelectToken={setSecondSelectToken}
-        ></QuestionModalBottom>
-      ) : (
-        <></>
-      )}
-      {swapSuccessModalOpen && (
-        <LoadingModal>
-          <SwapCompletedModal
-            setSwapSuccessModalOpen={setSwapSuccessModalOpen}
-            firstSelectToken={firstSelectToken}
-            secondSelectToken={secondSelectToken}
-          />
-        </LoadingModal>
-      )}
-      {swapFailModalOpen && (
-        <LoadingModal>
-          <SwapFaildModal
-            setSwapFailModalOpen={setSwapFailModalOpen}
-            firstSelectToken={firstSelectToken}
-            secondSelectToken={secondSelectToken}
-          />
-        </LoadingModal>
-      )}
-      {isLoading && (
-        <LoadingModal>
-          <LoadingCompo />
-        </LoadingModal>
-      )}
     </Flex>
   );
 }
 
-const LoadingModal = styled.div`
+const d = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
