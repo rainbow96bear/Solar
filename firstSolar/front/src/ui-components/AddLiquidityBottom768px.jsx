@@ -6,14 +6,9 @@ import "../css/Font.css";
 
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import AddLiquidityCompletedModal from "./AddLiquidityCompletedModal";
-import AddLiquidityFaildModal from "./AddLiquidityFaildModal";
 import { useSelector } from "react-redux";
-import LoadingCompo from "./LoadingCompo";
 
 export default function AddLiquidityBottom768px(props) {
-  const isLoading = useSelector((state) => state.isLoading);
-
   const {
     overrides,
     addLiquidityPossibility,
@@ -493,7 +488,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -640,7 +635,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={(e) => {
+              onChange={e => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }
@@ -710,27 +705,6 @@ export default function AddLiquidityBottom768px(props) {
           </Flex>
         </motion.div>
       </Flex>
-      {addLiquiditySuccessModalOpen && (
-        <LoadingModal>
-          <AddLiquidityCompletedModal
-            setAddLiquiditySuccessModalOpen={setAddLiquiditySuccessModalOpen}
-            firstSelectToken={oracleiddata[0]?.firstToken}
-            secondSelectToken={oracleiddata[0]?.secondToken}
-          />
-        </LoadingModal>
-      )}
-      {addLiquidityFailModalOpen && (
-        <LoadingModal>
-          <AddLiquidityFaildModal
-            setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
-          />
-        </LoadingModal>
-      )}
-      {isLoading && (
-        <LoadingModal>
-          <LoadingCompo />
-        </LoadingModal>
-      )}
     </Flex>
   );
 }
