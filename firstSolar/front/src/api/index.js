@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const request = axios.create({
-  baseURL: "http://localhost:8080",
   header: {
     "content-type": "application/json",
   },
@@ -10,7 +9,7 @@ const request = axios.create({
 export const getMainPoolList = async (pageIndex) => {
   try {
     const result = (
-      await request.get("api/defi", { params: { pageIndex: pageIndex } })
+      await request.get("/api/defi", { params: { pageIndex: pageIndex } })
     ).data;
     const poolListData = result.poolListData;
     const pageSize = 10;
@@ -24,7 +23,7 @@ export const getMainPoolList = async (pageIndex) => {
 
 export const oracleIdList = async (_params) => {
   try {
-    const result = (await request.post("api/defi/detail", { id: _params }))
+    const result = (await request.post("/api/defi/detail", { id: _params }))
       .data;
     return result;
   } catch (error) {
@@ -45,7 +44,7 @@ export const getLogin = async (_account, _walletKind) => {
 
 export const logout = async (_walletKind, _account) => {
   try {
-    await request.post("api/user/logout", {
+    await request.post("/api/user/logout", {
       walletKind: _walletKind,
       address: _account,
     });
@@ -57,7 +56,7 @@ export const logout = async (_walletKind, _account) => {
 export const dexList = async (_item, pageIndex) => {
   try {
     const result = (
-      await request.post("api/defi/filter", {
+      await request.post("/api/defi/filter", {
         dex: _item,
         pageIndex: pageIndex,
       })
@@ -72,7 +71,7 @@ export const dexList = async (_item, pageIndex) => {
 export const netList = async (_item, pageIndex) => {
   try {
     const result = (
-      await request.post("api/defi/filter", { network: _item, pageIndex })
+      await request.post("/api/defi/filter", { network: _item, pageIndex })
     ).data;
 
     return result;
@@ -84,7 +83,7 @@ export const netList = async (_item, pageIndex) => {
 export const lpBalance = async (account, symbol) => {
   try {
     const result = (
-      await request.post("api/user/lpBalance", {
+      await request.post("/api/user/lpBalance", {
         account,
         symbol,
       })
@@ -97,7 +96,7 @@ export const lpBalance = async (account, symbol) => {
 
 export const firstSync = async () => {
   try {
-    const result = (await request.get("api/sync")).data;
+    const result = (await request.get("/api/sync")).data;
     return result;
   } catch (error) {
     console.error(error);
@@ -107,7 +106,7 @@ export const firstSync = async () => {
 export const mypageList = async (account) => {
   try {
     const result = (
-      await request.post("api/sync/mypage", {
+      await request.post("/api/sync/mypage", {
         account,
       })
     ).data;
@@ -119,7 +118,7 @@ export const mypageList = async (account) => {
 
 export const getConvertPrice = async (tokenKind) => {
   try {
-    const result = (await request.get("api/sync/datesync")).data;
+    const result = (await request.get("/api/sync/datesync")).data;
     if (tokenKind == "DFS") {
       const dfs = result.find((item) => item.tokenSlug === "dfs");
       return {
@@ -160,7 +159,7 @@ export const getConvertPrice = async (tokenKind) => {
 
 export const swapApprove = async (account, tokenName, amount, poolAddress) => {
   try {
-    const result = await request.post("api/swap/swapApprove", {
+    const result = await request.post("/api/swap/swapApprove", {
       account,
       tokenName,
       amount,
@@ -180,7 +179,7 @@ export const swapTransaction = async (
   convertToken
 ) => {
   try {
-    const result = await request.post("api/swap/swapTransaction", {
+    const result = await request.post("/api/swap/swapTransaction", {
       account,
       poolName,
       amount,
@@ -196,7 +195,7 @@ export const swapTransaction = async (
 export const swapBalance = async (userAddress, firstSelectToken) => {
   try {
     const result = (
-      await request.post("api/swap/swapBalance", {
+      await request.post("/api/swap/swapBalance", {
         account: userAddress,
       })
     ).data[0];
@@ -218,7 +217,7 @@ export const swapBalance = async (userAddress, firstSelectToken) => {
 export const approveDFS = async (account, approveDFSAmount, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/approveDFS", {
+      await request.post("/api/defi/approveDFS", {
         account,
         approveDFSAmount,
         lpSymbol,
@@ -237,7 +236,7 @@ export const approveOtherToken = async (
 ) => {
   try {
     const result = (
-      await request.post("api/defi/approveOtherToken", {
+      await request.post("/api/defi/approveOtherToken", {
         account,
         approveOtherAmount,
         lpSymbol,
@@ -252,7 +251,7 @@ export const approveOtherToken = async (
 export const addLiquidity = async (account, token1, token2, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/addLiquidity", {
+      await request.post("/api/defi/addLiquidity", {
         account,
         token1,
         token2,
@@ -268,7 +267,7 @@ export const addLiquidity = async (account, token1, token2, lpSymbol) => {
 export const updatePool = async (tokenAddress) => {
   try {
     const result = (
-      await request.post("api/defi/updatePool", {
+      await request.post("/api/defi/updatePool", {
         tokenAddress,
       })
     ).data;
@@ -281,7 +280,7 @@ export const updatePool = async (tokenAddress) => {
 export const approveLp = async (account, approveDepositAmount, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/approveLp", {
+      await request.post("/api/defi/approveLp", {
         account,
         approveDepositAmount,
         lpSymbol,
@@ -296,7 +295,7 @@ export const approveLp = async (account, approveDepositAmount, lpSymbol) => {
 export const deposit = async (account, depositAmount, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/deposit", {
+      await request.post("/api/defi/deposit", {
         account,
         depositAmount,
         lpSymbol,
@@ -311,7 +310,7 @@ export const deposit = async (account, depositAmount, lpSymbol) => {
 export const withDraw = async (account, withdrawAmount, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/withdraw", {
+      await request.post("/api/defi/withdraw", {
         account,
         withdrawAmount,
         lpSymbol,
@@ -326,7 +325,7 @@ export const withDraw = async (account, withdrawAmount, lpSymbol) => {
 export const getLPBalance = async (pid, account) => {
   try {
     const result = (
-      await request.post("api/defi/getLPBalance", {
+      await request.post("/api/defi/getLPBalance", {
         pid,
         account,
       })
@@ -340,7 +339,7 @@ export const getLPBalance = async (pid, account) => {
 export const removeLiquidity = async (account, removeAmount, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/removeLiquidity", {
+      await request.post("/api/defi/removeLiquidity", {
         account,
         removeAmount,
         lpSymbol,
@@ -355,7 +354,7 @@ export const removeLiquidity = async (account, removeAmount, lpSymbol) => {
 export const getSearch = async (search, pageIndex) => {
   try {
     const result = (
-      await request.post("api/defi/search", {
+      await request.post("/api/defi/search", {
         search,
         pageIndex,
       })
@@ -375,7 +374,7 @@ export const getSearch = async (search, pageIndex) => {
 export const setAutoCompound = async (account, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/setAutoCompound", {
+      await request.post("/api/defi/setAutoCompound", {
         account,
         lpSymbol,
       })
@@ -390,7 +389,7 @@ export const setAutoCompound = async (account, lpSymbol) => {
 export const getAutoCompound = async (account, lpSymbol) => {
   try {
     const result = (
-      await request.post("api/defi/getAutoCompound", {
+      await request.post("/api/defi/getAutoCompound", {
         account,
         lpSymbol,
       })
@@ -403,7 +402,7 @@ export const getAutoCompound = async (account, lpSymbol) => {
 
 export const rankList = async () => {
   try {
-    const result = (await request.get("api/defi/rank")).data;
+    const result = (await request.get("/api/defi/rank")).data;
 
     return result;
   } catch (error) {
