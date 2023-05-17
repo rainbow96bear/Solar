@@ -1,8 +1,7 @@
-import * as React from "react";
 import styled from "styled-components";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Image, Text } from "@aws-amplify/ui-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ConnectCompo320px, SwapCompo320px } from "../../ui-components";
 import { setConnect } from "../../modules/connect";
@@ -10,15 +9,21 @@ import { useDispatch } from "react-redux";
 import "../../css/Font.css";
 import { setIsLoading } from "../../modules/isLoading";
 
-const Poolitem320px = props => {
-  const { overrides, ...rest } = props;
+const Poolitem320px = (props) => {
+  const { overrides, currentPagePoolList, ...rest } = props;
   const [isOpen, setIsOpen] = useState(false);
+  const [isDFS, setIsDFS] = useState(false);
+
   const toggleOpen = () => setIsOpen(!isOpen);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (props?.last == true) dispatch(setIsLoading(false));
   }, []);
+
+  useEffect(() => {
+    setIsDFS(props?.item?.oracleId.includes("DFS"));
+  }, [currentPagePoolList]);
 
   return (
     <>
@@ -36,11 +41,11 @@ const Poolitem320px = props => {
             width: "89vw",
             height: "unset",
             borderRadius: "33px",
-            backgroundColor: "rgba(249,250,250,0.75)",
+            backgroundColor: !isDFS && "rgba(249,250,250,0.75)",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            backgroundImage: props?.item?.oracleId.includes("DFS")
-              ? "linear-gradient(180deg,rgba(252,089,0,0.33) 0%,rgba(246,247,248,0.15) 20%)"
-              : "",
+            backgroundImage:
+              isDFS &&
+              "linear-gradient(180deg,rgba(252,089,0,0.33) 0%,rgba(246,247,248,0.15) 20%)",
           }}
           whileHover={{
             borderRadius: "75px",

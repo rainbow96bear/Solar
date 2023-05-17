@@ -59,6 +59,10 @@ const LoggedinUser = (props) => {
     navigate("/");
   };
 
+  window.ethereum.on("accountsChanged", (accounts) => {
+    logoutMethod();
+  });
+
   return (
     <LoggedinUserCover ref={ref}>
       <motion.div

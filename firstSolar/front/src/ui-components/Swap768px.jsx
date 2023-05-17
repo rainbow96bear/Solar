@@ -49,7 +49,7 @@ export default function Swap768px(props) {
     rightPool,
     ...rest
   } = props;
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector((state) => state.isLoading);
 
   return (
     <Flex
@@ -482,7 +482,7 @@ export default function Swap768px(props) {
               labelHidden={false}
               variation="default"
               value={textareaValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -490,7 +490,7 @@ export default function Swap768px(props) {
                 handleTextareaChange(e);
                 delayedFunction1(e.target.value);
               }}
-              onKeyPress={e => {
+              onKeyPress={(e) => {
                 handleKeyPress(e);
               }}
               {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -897,7 +897,7 @@ export default function Swap768px(props) {
               value={secondAmountPrice ? secondAmountPrice : 0}
               disabled
               backgroundColor="transparent"
-              onKeyPress={e => {
+              onKeyPress={(e) => {
                 handleKeyPress(e);
               }}
               {...getOverrideProps(overrides, "TextAreaField40432770")}
@@ -956,49 +956,11 @@ export default function Swap768px(props) {
           />
         </Button>
       </Flex>
-      {questionMark == 1 ? (
-        <QuestionModalTop
-          setQuestionMark={setQuestionMark}
-          secondselecttoken={secondSelectToken}
-          setFirstSelectToken={setFirstSelectToken}
-        ></QuestionModalTop>
-      ) : questionMark == 2 ? (
-        <QuestionModalBottom
-          setQuestionMark={setQuestionMark}
-          firstSelectToken={firstSelectToken}
-          setSecondSelectToken={setSecondSelectToken}
-        ></QuestionModalBottom>
-      ) : (
-        <></>
-      )}
-      {swapSuccessModalOpen && (
-        <LoadingModal>
-          <SwapCompletedModal
-            setSwapSuccessModalOpen={setSwapSuccessModalOpen}
-            firstSelectToken={firstSelectToken}
-            secondSelectToken={secondSelectToken}
-          />
-        </LoadingModal>
-      )}
-      {swapFailModalOpen && (
-        <LoadingModal>
-          <SwapFaildModal
-            setSwapFailModalOpen={setSwapFailModalOpen}
-            firstSelectToken={firstSelectToken}
-            secondSelectToken={secondSelectToken}
-          />
-        </LoadingModal>
-      )}
-      {isLoading && (
-        <LoadingModal>
-          <LoadingCompo />
-        </LoadingModal>
-      )}
     </Flex>
   );
 }
 
-const LoadingModal = styled.div`
+const d = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);

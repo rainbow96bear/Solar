@@ -142,7 +142,7 @@ const MainContainer = () => {
             searchData,
             pageIndex
           );
-
+          oracleId();
           setCurrentPagePoolList(poolListData);
           setTotalPages(resultTotalPages);
           dispatch(setIsLoading(false));

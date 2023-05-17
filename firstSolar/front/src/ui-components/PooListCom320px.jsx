@@ -264,6 +264,7 @@ export default function PooListCom320px(props) {
                     key={`Dexlist320px-1${idx}`}
                     item={item}
                     filter={filter}
+                    setFilter={setFilter}
                     setCurrentPagePoolList={setCurrentPagePoolList}
                     setTotalPages={setTotalPages}
                     pageIndex={pageIndex}
@@ -331,6 +332,7 @@ export default function PooListCom320px(props) {
                   padding="0px 0px 0px 0px"
                   key={`PoolList320px-${idx}`}
                   item={item}
+                  currentPagePoolList={currentPagePoolList}
                 />
               ))}
             </motion.div>

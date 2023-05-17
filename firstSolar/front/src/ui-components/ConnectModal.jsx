@@ -50,7 +50,7 @@ export default function ConnectModal(props) {
       const [_account] = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      const data = await axios.post("http://localhost:8080/api/user/login", {
+      const data = await axios.post("/api/user/login", {
         account: _account,
         walletKind: "metamask",
       });

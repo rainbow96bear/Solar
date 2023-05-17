@@ -135,7 +135,7 @@ export default function SwapCompo1440px(props) {
           padding="19px 25px 19px 25px"
           {...getOverrideProps(overrides, "Connect40052821")}
         >
-          <Button
+          <Text
             border="0px"
             fontFamily="ffProMedium"
             fontSize="24px"
@@ -156,10 +156,9 @@ export default function SwapCompo1440px(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Add Liquidity"
-            disabled={false}
             backgroundColor="rgba(255,226,0,0.001)"
             {...getOverrideProps(overrides, "Add Liquidity")}
-          ></Button>
+          ></Text>
         </Flex>
       </motion.div>
     </Flex>

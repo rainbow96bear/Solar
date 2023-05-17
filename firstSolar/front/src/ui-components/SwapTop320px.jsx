@@ -122,7 +122,7 @@ export default function SwapTop320px(props) {
               children={
                 oracleiddata[0]?.firstToken
                   ? oracleiddata[0]?.firstToken
-                  : "DFS"
+                  : oracleiddata[0]?.assets[0]
               }
               {...getOverrideProps(overrides, "TokenName40162904")}
             ></Text>
@@ -180,7 +180,7 @@ export default function SwapTop320px(props) {
               children={
                 oracleiddata[0]?.secondToken
                   ? oracleiddata[0]?.secondToken
-                  : "DFS"
+                  : oracleiddata[0]?.assets[1]
               }
               {...getOverrideProps(overrides, "TokenName40162908")}
             ></Text>
@@ -332,9 +332,9 @@ export default function SwapTop320px(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={
-                  oracleiddata[0]?.firstToken
+                  oracleiddata[0]?.name?.includes("DFS")
                     ? oracleiddata[0]?.firstToken
-                    : "DFS"
+                    : oracleiddata[0]?.network
                 }
                 {...getOverrideProps(overrides, "TokenName40162855")}
               ></Text>
@@ -440,7 +440,7 @@ export default function SwapTop320px(props) {
                 children={
                   oracleiddata[0]?.secondToken
                     ? oracleiddata[0]?.secondToken
-                    : "DFS"
+                    : oracleiddata[0]?.platformId
                 }
                 {...getOverrideProps(overrides, "TokenName40162884")}
               ></Text>

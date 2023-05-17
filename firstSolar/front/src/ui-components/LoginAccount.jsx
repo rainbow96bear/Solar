@@ -64,6 +64,11 @@ export default function LoginAccount(props) {
     dispatch(setAccount(""));
     navigate("/");
   };
+
+  window.ethereum.on("accountsChanged", (accounts) => {
+    logoutMethod();
+  });
+
   return (
     <LoginAccountCover className="LoginAccountCover" ref={ref}>
       <motion.div

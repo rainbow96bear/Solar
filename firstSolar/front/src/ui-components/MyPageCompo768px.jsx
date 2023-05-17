@@ -47,7 +47,7 @@ export default function MyPageCompo768px(props) {
     setIsHovered(false);
   };
 
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector((state) => state.isLoading);
   return (
     <Flex
       onMouseEnter={handleMouseEnter}
@@ -119,7 +119,7 @@ export default function MyPageCompo768px(props) {
             ></Text>
           ) : (
             <Text
-              color="#F7EFE3"
+              color="#00A497"
               fontFamily="ffProMedium"
               fontSize={{ base: "21px", small: "24px", medium: "35px" }}
               fontWeight="600"

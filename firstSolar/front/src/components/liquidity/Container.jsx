@@ -26,6 +26,10 @@ import { useAccount } from "wagmi";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../../modules/isLoading";
 
+import LoadingCompo from "../../ui-components/LoadingCompo";
+import AddLiquidityCompletedModal from "../../ui-components/AddLiquidityCompletedModal";
+import AddLiquidityFaildModal from "../../ui-components/AddLiquidityFaildModal";
+
 const LiquidityContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [oracleId, setOracleId] = useState([]);
@@ -71,7 +75,7 @@ const LiquidityContainer = () => {
     useState(false);
   const [addLiquidityFailModalOpen, setAddLiquidityFailModalOpen] =
     useState(false);
-
+  const isLoading = useSelector((state) => state.isLoading);
   useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
@@ -223,7 +227,7 @@ const LiquidityContainer = () => {
             marginLeft="15px"
             gap={{
               small: "100px",
-              medium: "30px",
+              medium: "0px",
             }}
             direction={{
               small: "column",
@@ -278,6 +282,7 @@ const LiquidityContainer = () => {
                   >
                     <AddLiquidityBottom768px
                       style={{
+                        marginTop: "15px",
                         height: "unset",
                         borderRadius: "35px",
                         backgroundColor: "rgba(249,249,249,1)",
@@ -314,6 +319,30 @@ const LiquidityContainer = () => {
               )}
             </AnimatePresence>
           </Flex>
+
+          {addLiquiditySuccessModalOpen && (
+            <LoadingModal>
+              <AddLiquidityCompletedModal
+                setAddLiquiditySuccessModalOpen={
+                  setAddLiquiditySuccessModalOpen
+                }
+                firstSelectToken={oracleId[0]?.firstToken}
+                secondSelectToken={oracleId[0]?.secondToken}
+              />
+            </LoadingModal>
+          )}
+          {addLiquidityFailModalOpen && (
+            <LoadingModal>
+              <AddLiquidityFaildModal
+                setAddLiquidityFailModalOpen={setAddLiquidityFailModalOpen}
+              />
+            </LoadingModal>
+          )}
+          {isLoading && (
+            <LoadingModal>
+              <LoadingCompo />
+            </LoadingModal>
+          )}
         </Addliqud>
       )}
       {isMobile && (
@@ -442,4 +471,18 @@ const SubWrap = styled(motion.div)`
   :last-child {
     border-radius: 0 0 20px 20px;
   }
+`;
+
+const LoadingModal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  justify-content: center;
+  z-index: 999999999;
 `;

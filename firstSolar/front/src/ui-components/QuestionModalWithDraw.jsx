@@ -586,7 +586,9 @@ export default function QuestionModalWithDraw(props) {
                     padding="0px 0px 0px 0px"
                     whiteSpace="pre-wrap"
                     children={`Balance :${
-                      parseInt((lpBalance / 10 ** 18) * 10000) / 10000
+                      isNaN(lpBalance)
+                        ? 0
+                        : parseInt((lpBalance / 10 ** 18) * 10000) / 10000
                     }`}
                     {...getOverrideProps(overrides, "Balance : 040822813")}
                   ></Text>
