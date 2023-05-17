@@ -6,7 +6,6 @@ import "../css/Font.css";
 
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 
 export default function AddLiquidityBottom768px(props) {
   const {
@@ -488,7 +487,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={firstValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userFirstBalance) {
                   e.target.value = userFirstBalance;
                 }
@@ -635,7 +634,7 @@ export default function AddLiquidityBottom768px(props) {
               labelHidden={false}
               variation="default"
               value={secondValue}
-              onChange={e => {
+              onChange={(e) => {
                 if (+e.target.value > +userSecondBalance) {
                   e.target.value = userSecondBalance;
                 }

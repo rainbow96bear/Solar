@@ -14,7 +14,7 @@ export default function SwapTop768px(props) {
     lastTimeStamp,
     ...rest
   } = props;
-  console.log("oracleiddata : ", oracleiddata);
+
   return (
     <Flex
       gap="49px"

@@ -42,7 +42,7 @@ export default function PoolListCom1024px(props) {
     aesTVL,
     ...rest
   } = props;
-  console.log("currentPagePoolList : ", currentPagePoolList);
+
   const isLoading = useSelector((state) => state.isLoading);
   return (
     <Flex
