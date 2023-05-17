@@ -14,6 +14,7 @@ export default function SwapTop768px(props) {
     lastTimeStamp,
     ...rest
   } = props;
+  console.log("oracleiddata : ", oracleiddata);
   return (
     <Flex
       gap="49px"
@@ -216,7 +217,9 @@ export default function SwapTop768px(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children={
-                oracleiddata[0]?.network ? oracleiddata[0]?.network : "Solar"
+                oracleiddata[0]?.network
+                  ? oracleiddata[0]?.network
+                  : oracleiddata[0]?.assets[0]
               }
               {...getOverrideProps(overrides, "TokenName40162892")}
             ></Text>
@@ -274,7 +277,7 @@ export default function SwapTop768px(props) {
               children={
                 oracleiddata[0]?.platformId
                   ? oracleiddata[0]?.platformId
-                  : "Solar"
+                  : oracleiddata[0]?.assets[1]
               }
               {...getOverrideProps(overrides, "TokenName40162900")}
             ></Text>
@@ -429,7 +432,7 @@ export default function SwapTop768px(props) {
               children={
                 oracleiddata[0]?.name?.includes("DFS")
                   ? oracleiddata[0]?.firstToken
-                  : oracleiddata[0]?.assets[0]
+                  : oracleiddata[0]?.network
               }
               {...getOverrideProps(overrides, "TokenName40132808")}
             ></Text>
@@ -533,7 +536,7 @@ export default function SwapTop768px(props) {
               children={
                 oracleiddata[0]?.secondToken
                   ? oracleiddata[0]?.secondToken
-                  : oracleiddata[0]?.assets[1]
+                  : oracleiddata[0]?.platformId
               }
               {...getOverrideProps(overrides, "TokenName40132816")}
             ></Text>

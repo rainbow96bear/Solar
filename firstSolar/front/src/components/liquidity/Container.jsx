@@ -64,7 +64,7 @@ const LiquidityContainer = () => {
   const [secondValue, setSecondValue] = useState();
 
   const { address } = useAccount();
-  const address2 = useSelector(state => state.account);
+  const address2 = useSelector((state) => state.account);
 
   const [userFirstBalance, setUserFirstBalance] = useState(0);
   const [userSecondBalance, setUserSecondBalance] = useState(0);
@@ -75,7 +75,7 @@ const LiquidityContainer = () => {
     useState(false);
   const [addLiquidityFailModalOpen, setAddLiquidityFailModalOpen] =
     useState(false);
-  const isLoading = useSelector(state => state.isLoading);
+  const isLoading = useSelector((state) => state.isLoading);
   useEffect(() => {
     if (document.cookie) {
       if (document.cookie.split(":")[0] == "metamask") {
