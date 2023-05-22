@@ -1,0 +1,25 @@
+.connect:hover {
+  font-size: 49px;
+  align-self: center;
+  padding-left: 4.8px;
+  cursor: pointer;
+  color: rgba(0, 169, 191, 1) !important;
+  font-size: 55px !important;
+}
+
+.swap:hover {
+  font-size: 36px;
+  align-self: center;
+  padding-left: 4.8px;
+  cursor: pointer;
+  color: #f9f1c0 !important;
+  font-size: 55px !important;
+}
+.liqdity:hover {
+  font-size: 36px;
+  align-self: center;
+  padding-left: 4.8px;
+  cursor: pointer;
+  color: #fc5900 !important;
+  font-size: 55px !important;
+}
